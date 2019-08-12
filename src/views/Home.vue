@@ -5,28 +5,25 @@
       v-flex(xs12 md10)
         .headline.pb-4
           span(v-html='$t("home.info")')
-        p {{$t('home.rules.register')}}
-        p {{$t('home.rules.money')}}
-        p {{$t('home.rules.success')}}
+        p(v-html='$t("home.pitch")')
+        p(v-for='index in [1, 2, 3, 4, 5, 6, 7, 8]') {{$t(`home.ideas.${index}`)}}
+        p {{$t("home.action")}}
         
       v-flex.pt-4
-        vue-telegram-login(mode='callback'
-        telegram-login='mamkintrade_bot'
-        @callback='onTelegramAuth'
-        radius='3'
-        :userpic='false')
+        //- vue-telegram-login(mode='callback'
+        //- telegram-login='mamkintrade_bot'
+        //- @callback='onTelegramAuth'
+        //- radius='3'
+        //- :userpic='false')
         g-signin-button(:params='{ client_id: googleClientId }'
         @success='onGoogleSignInSuccess'
         @error='onGoogleSignInError') {{$t("home.google")}}
         fb-signin-button(:params='{ scope: "email", return_scopes: true}'
         @success='onFacebookSignInSuccess'
         @error='onFacebookSignInError') {{$t('home.facebook')}}
-        .vk-signin-button(@click.stop='vkDialog = true') {{$t('home.vk')}}
-        .api-signin-button(@click.stop='keyDialog = true') {{$t('home.key')}}
 
       v-flex.pt-4
         div(v-html='$t("support")')
-        div(v-html='$t("home.opensource")')
         .caption
           router-link(to='/privacy') {{ $t('home.privacy') }}
 </template>
@@ -50,27 +47,25 @@ declare const FB: any;
 })
 export default class Home extends Vue {
   get googleClientId() {
-    return "906458427314-vrgseuf6gsroa41l88005jqko24g8shs.apps.googleusercontent.com";
+    return "544897902503-4mfcmgifrm4ns7r3l6up0fmangedrpju.apps.googleusercontent.com";
   }
 
-  onFacebookSignInSuccess(response: any) {
-    FB.api("/me", async (dude: any) => {
-      try {
-        const user = await loginFacebook(response.authResponse.accessToken);
-        store.setUser(user);
-        this.$router.replace("app");
-      } catch (err) {
-        store.setSnackbar({
-          message: "errors.facebook",
-          color: "error",
-          active: true
-        });
-      }
-    });
+  async onFacebookSignInSuccess(response: any) {
+    try {
+      const user = await loginFacebook(response.authResponse.accessToken);
+      store.setUser(user);
+      this.$router.replace("app");
+    } catch (err) {
+      store.setSnackbar({
+        message: "errors.login.facebook",
+        color: "error",
+        active: true
+      });
+    }
   }
   onFacebookSignInError(error: Error) {
     store.setSnackbar({
-      message: "errors.facebook",
+      message: "errors.login.facebook",
       color: "error",
       active: true
     });

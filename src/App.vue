@@ -3,6 +3,7 @@
     cookie-law(theme='blood-orange'
     :buttonText='$t("cookie.button")'
     :message='$t("cookie.message")')
+    Snackbar
     Navbar
     v-content
       router-view
@@ -10,10 +11,11 @@
 
 <script lang="ts">
 import Navbar from "./components/Navbar.vue";
+import Snackbar from "./components/Snackbar.vue";
 import * as store from "./plugins/store";
 const CookieLaw = require("vue-cookie-law");
 
 export default {
-  components: { Navbar, CookieLaw }
+  components: { Navbar, CookieLaw, Snackbar }
 };
 </script>
