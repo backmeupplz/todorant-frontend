@@ -14,6 +14,13 @@
         v-list
           v-list-tile(v-for='locale in locales' @click='changeLanguage(locale.code)' :key="locale.code")
             v-list-tile-title {{locale.icon}}
+      // Logout
+      v-btn(v-if="$store.state.user"
+      flat
+      icon
+      color='grey'
+      @click='logout')
+        v-icon(small) exit_to_app
 </template>
 
 <script lang="ts">
@@ -43,6 +50,10 @@ export default class Navbar extends Vue {
     i18n.locale = locale;
     store.setLanguage(locale);
     document.title = i18n.t("title") as string;
+  }
+  logout() {
+    store.logout();
+    this.$router.replace("/");
   }
 }
 </script>

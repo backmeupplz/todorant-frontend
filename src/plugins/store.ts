@@ -87,3 +87,6 @@ export const setLanguage = (language: String) => {
 export const setDark = (dark: Boolean) => {
   store.commit('setDark', dark)
 }
+export const logout = () => {
+  store.commit('logout')
+}

@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../views/Home.vue'
+import Superpower from '../views/Superpower.vue'
 import { store } from './store'
 
 Vue.use(Router)
@@ -14,6 +15,14 @@ const router = new Router({
       name: 'home',
       component: Home,
     },
+    {
+      path: '/superpower',
+      name: 'superpower',
+      component: Superpower,
+      meta: {
+        requiresAuth: true,
+      },
+    },
   ],
 })
 
@@ -25,7 +34,7 @@ router.beforeEach((to, _, next) => {
     next('/')
   } else {
     if (to.path === '/' && user) {
-      next('/cabinet')
+      next('/superpower')
     } else {
       next()
     }
