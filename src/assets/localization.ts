@@ -1,6 +1,7 @@
 export const messages = {
   en: {
     title: 'Todorant',
+    shortTitle: 'ToDo',
     cookie: {
       button: 'Got it!',
       message:
@@ -37,9 +38,11 @@ export const messages = {
       internal: 'Internal server error',
     },
     close: 'Close',
+    notFound: 'Page not found',
   },
   ru: {
     title: 'Todorant',
+    shortTitle: 'ToDo',
     cookie: {
       button: 'Понятненько!',
       message:
@@ -77,5 +80,6 @@ export const messages = {
       internal: 'Внутренняя ошибка сервера',
     },
     close: 'Закрыть',
+    notFound: 'Страница не найдена',
   },
 }

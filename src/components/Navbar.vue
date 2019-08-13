@@ -2,8 +2,13 @@
   nav
     v-toolbar(flat app)
       // Title
-      v-toolbar-title.text-uppercase.grey--text
-        span {{$t('title')}}
+      router-link(:to='$store.state.user ? "/superpower" : "/"')
+        v-toolbar-title.text-uppercase.grey--text
+          v-tooltip(v-if='$store.state.user' bottom)
+            span.hidden-xs-only(slot='activator') {{$t('title')}}
+            span.hidden-sm-and-up(slot='activator') {{$t('shortTitle')}}
+            span {{$store.state.user.name}}, {{$store.state.user.email || $store.state.user.facebookId || $store.state.user.telegramId}}
+          span(v-else slot='activator') {{$t('title')}}
       v-spacer
       // Dark mode
       v-btn(flat icon color='grey' @click='toggleMode')

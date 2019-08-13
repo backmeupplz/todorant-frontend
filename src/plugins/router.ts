@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '../views/Home.vue'
 import Superpower from '../views/Superpower.vue'
+import NotFound from '../views/NotFound.vue'
 import { store } from './store'
 
 Vue.use(Router)
@@ -22,6 +23,11 @@ const router = new Router({
       meta: {
         requiresAuth: true,
       },
+    },
+    {
+      path: '*',
+      name: 'notFound',
+      component: NotFound,
     },
   ],
 })
