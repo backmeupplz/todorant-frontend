@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { User } from '../models/user'
 
-const base = 'http://localhost:1337'
+const base = process.env.API
 
 export async function loginFacebook(accessToken: string) {
   return (await axios.post(`${base}/login/facebook`, {
