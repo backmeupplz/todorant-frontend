@@ -56,19 +56,11 @@ export default class Home extends Vue {
       store.setUser(user);
       this.$router.replace("superpower");
     } catch (err) {
-      store.setSnackbar({
-        message: "errors.login.facebook",
-        color: "error",
-        active: true
-      });
+      store.setSnackbarError("errors.login.facebook");
     }
   }
   onFacebookSignInError(error: Error) {
-    store.setSnackbar({
-      message: "errors.login.facebook",
-      color: "error",
-      active: true
-    });
+    store.setSnackbarError("errors.login.facebook");
   }
   async onGoogleSignInSuccess(googleUser: any) {
     try {
@@ -76,19 +68,11 @@ export default class Home extends Vue {
       store.setUser(user);
       this.$router.replace("superpower");
     } catch (err) {
-      store.setSnackbar({
-        message: "errors.google",
-        color: "error",
-        active: true
-      });
+      store.setSnackbarError("errors.login.google");
     }
   }
   onGoogleSignInError(error: Error) {
-    store.setSnackbar({
-      message: "errors.google",
-      color: "error",
-      active: true
-    });
+    store.setSnackbarError("errors.login.google");
   }
   async onTelegramAuth(loginInfo: any) {
     try {
@@ -96,11 +80,7 @@ export default class Home extends Vue {
       store.setUser(user);
       this.$router.replace("superpower");
     } catch (err) {
-      store.setSnackbar({
-        message: "errors.telegram",
-        color: "error",
-        active: true
-      });
+      store.setSnackbarError("errors.login.telegram");
     }
   }
 }
