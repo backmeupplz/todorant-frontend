@@ -40,6 +40,15 @@ export const messages = {
     },
     close: 'Close',
     notFound: 'Page not found',
+    todo: {
+      create: {
+        title: 'Create a ToDo',
+        text: 'Text of the ToDo',
+        textHint: 'You can add a link to an email or a website',
+      },
+    },
+    cancel: 'Cancel',
+    save: 'Save',
   },
   ru: {
     title: 'Todorant',
@@ -83,5 +92,14 @@ export const messages = {
     },
     close: 'Закрыть',
     notFound: 'Страница не найдена',
+    todo: {
+      create: {
+        title: 'Создать задачу',
+        text: 'Текст задачи',
+        textHint: 'Сюда можно добавить ссылку на имеил или вебсайт',
+      },
+    },
+    cancel: 'Отменить',
+    save: 'Сохранить',
   },
 }
