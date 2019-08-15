@@ -15,6 +15,11 @@
     v-card
       v-card-title
         span.headline {{$t('todo.create.title')}}
+        v-spacer
+        v-tooltip(bottom :max-width='300')
+          template(v-slot:activator='{ on }')
+            v-icon(v-on='on') info
+          span {{$t('todo.create.tooltip')}}
       v-card-text
         v-container
           v-expansion-panels(multiple v-model='panel')
