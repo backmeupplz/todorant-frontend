@@ -1,27 +1,28 @@
 <template lang="pug">
   nav
-    v-toolbar(flat app)
+    v-app-bar(flat app)
       // Title
       router-link(:to='$store.state.user ? "/superpower" : "/"')
         v-toolbar-title.text-uppercase.grey--text
           v-tooltip(v-if='$store.state.user' bottom)
-            span.hidden-xs-only(slot='activator') {{$t('title')}}
-            span.hidden-sm-and-up(slot='activator') {{$t('shortTitle')}}
+            template(v-slot:activator='{ on }')
+              span(v-on='on') {{$t('title')}}
             span {{$store.state.user.name}}, {{$store.state.user.email || $store.state.user.facebookId || $store.state.user.telegramId}}
-          span(v-else slot='activator') {{$t('title')}}
+          span(v-else) {{$t('title')}}
       v-spacer
       // Dark mode
-      v-btn(flat icon color='grey' @click='toggleMode')
+      v-btn(text icon color='grey' @click='toggleMode')
         v-icon(small) brightness_2
       // Language picker
       v-menu(offset-y)
-        v-btn(flat icon slot='activator' color='grey') {{currentLocale.icon}}
+        template(v-slot:activator='{ on }')
+          v-btn(text icon color='grey' v-on='on') {{currentLocale.icon}}
         v-list
-          v-list-tile(v-for='locale in locales' @click='changeLanguage(locale.code)' :key="locale.code")
-            v-list-tile-title {{locale.icon}}
+          v-list-item(v-for='locale in locales' @click='changeLanguage(locale.code)' :key="locale.code")
+            v-list-item-title {{locale.icon}}
       // Logout
       v-btn(v-if="$store.state.user"
-      flat
+      text
       icon
       color='grey'
       @click='logout')

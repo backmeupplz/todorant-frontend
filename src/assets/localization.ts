@@ -1,23 +1,22 @@
 export const messages = {
   en: {
     title: 'Todorant',
-    shortTitle: 'ToDo',
     cookie: {
       button: 'Got it!',
       message:
         'This website uses cookies. We do not track you. But Facebook might.',
     },
     home: {
-      info: 'The only ToDo manager you need',
+      info: 'The only todo manager you need',
       pitch:
-        'Hello there! My name is Nikita and I believe I\'ve built the best ToDo manager based on the knowledge I gained after reading <a href="https://google.com">Willpower</a>, <a href="https://google.com">Getting Things Done</a> and <a href="https://google.com">Eat Your Frog</a> books. I\'ve understood the outlined ideas, simplified them, tested on my personal experience and implemented this simple software solution based on the ideas formulated below. Give it a try and your productivite will rise — or money back guaranteed.',
+        'Hello there! My name is Nikita and I believe I\'ve built the best todo manager based on the knowledge I gained after reading <a href="https://google.com">Willpower</a>, <a href="https://google.com">Getting Things Done</a> and <a href="https://google.com">Eat Your Frog</a> books. I\'ve understood the outlined ideas, simplified them, tested on my personal experience and implemented this simple software solution based on the ideas formulated below. Give it a try and your productivite will rise — or money back guaranteed.',
       ideas: {
         1: '🥰 Clean mind — your inbox is empty and you only ever work at one task at a time',
         2: "🐸 Eat your frogs first thing in the morning — it's the best time to work on unwanted tasks",
         3: '💃 Skip the current tasks — but only 3 times a week, 1 time a day',
         4: "🐸 Skip a task twice — and it's a frog",
         5: '☁ Task too high level? Break it down with one click',
-        6: "👀 No lost ToDo's — you always attach a day or a month to a created ToDo",
+        6: "👀 No lost todo's — you always attach a day or a month to a created todo",
         7: '1️⃣ First day of a month? Plan before you start working',
         8: '⏳ Task takes less then 2 minutes? Do it now and record',
       },
@@ -36,14 +35,14 @@ export const messages = {
         telegram: 'Could not login with Telegram',
       },
       internal: 'Internal server error',
-      loadTodos: 'COuld not fetch todos',
+      loadTodos: 'Could not fetch todos',
     },
     close: 'Close',
     notFound: 'Page not found',
     todo: {
       create: {
-        title: 'Create a ToDo',
-        text: 'Text of the ToDo',
+        title: 'Add todos',
+        text: 'Text of the todo',
         textHint: 'You can add a link to an email or a website',
       },
     },
@@ -52,7 +51,6 @@ export const messages = {
   },
   ru: {
     title: 'Todorant',
-    shortTitle: 'ToDo',
     cookie: {
       button: 'Понятненько!',
       message:
@@ -94,7 +92,7 @@ export const messages = {
     notFound: 'Страница не найдена',
     todo: {
       create: {
-        title: 'Создать задачу',
+        title: 'Добавить задачи',
         text: 'Текст задачи',
         textHint: 'Сюда можно добавить ссылку на имеил или вебсайт',
       },

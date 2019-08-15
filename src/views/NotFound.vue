@@ -1,6 +1,6 @@
 <template lang="pug">
   v-container.pa-4
-    v-layout.text-xs-center
+    v-layout.text-center
       v-flex(xs12)
         .headline
           span {{$t('notFound')}}
