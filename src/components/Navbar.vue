@@ -51,6 +51,7 @@ export default class Navbar extends Vue {
 
   toggleMode() {
     store.setDark(!store.dark());
+    (this.$vuetify.theme as any).dark = store.dark();
   }
   changeLanguage(locale: string) {
     i18n.locale = locale;
