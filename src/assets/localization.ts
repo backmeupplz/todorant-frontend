@@ -25,7 +25,6 @@ export const messages = {
       facebook: 'Login with Facebook',
       google: 'Login with Google',
       privacy: 'Privacy policy',
-      underDevelopment: 'This part is under development',
     },
     support:
       'Something isn\'t clear? Contact me at <a href="mailto:n@borodutch.com">n@borodutch.com</a>',
@@ -69,6 +68,7 @@ export const messages = {
     delete: 'Delete',
     current: 'Current',
     planning: 'Planning',
+    underDevelopment: 'This part is under development',
   },
   ru: {
     title: 'Todorant',
