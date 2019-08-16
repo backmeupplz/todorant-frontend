@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-app(:class='$vuetify.theme.dark ? "grey darken-4" : "grey lighten-4"')
+  v-app
     cookie-law(theme='blood-orange'
     :buttonText='$t("cookie.button")'
     :message='$t("cookie.message")')
@@ -19,6 +19,12 @@ export default {
   components: { Navbar, CookieLaw, Snackbar },
   created() {
     (this as any).$vuetify.theme.dark = store.dark();
+
+    store.setSnackbar({
+      message: "",
+      color: "error",
+      active: false
+    });
   }
 };
 </script>

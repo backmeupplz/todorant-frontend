@@ -1,10 +1,16 @@
 <template lang="pug">
-  v-container
-    v-layout(row wrap)
-      v-flex.pa-1(xs12)
-        TodoList
+  div
+    // Tabs
+    v-tabs(v-model='currentTab' :fixed-tabs='$vuetify.breakpoint.xsOnly' show-arrows)
+      v-tab {{$t('current')}}
+      v-tab {{$t('planning')}}
+      v-tabs-items(v-model='currentTab')
+        v-tab-item(:value='0')
+          span 0
+        v-tab-item(:value='1')
+          TodoList
+    // Add FAB
     AddTodo
-
 </template>
 
 <script lang="ts">
@@ -14,5 +20,7 @@ import TodoList from "../components/TodoList.vue";
 import AddTodo from "../components/AddTodo.vue";
 
 @Component({ components: { TodoList, AddTodo } })
-export default class Superpower extends Vue {}
+export default class Superpower extends Vue {
+  currentTab = 1;
+}
 </script>

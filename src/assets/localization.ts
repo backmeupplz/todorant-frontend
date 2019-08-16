@@ -36,6 +36,10 @@ export const messages = {
       },
       internal: 'Internal server error',
       loadTodos: 'Could not fetch todos',
+      todo: {
+        textLenght: 'Todos should have text',
+        dateOrMonth: 'Todos should have either date or month set',
+      },
     },
     close: 'Close',
     notFound: 'Page not found',
@@ -52,10 +56,18 @@ export const messages = {
         tooltip:
           'Tasks should always be: actionable ("Find best flights to Mexico" vs "Go to Mexico"); as small and exact as possible ("Dust the displays" vs "Clean the house").',
       },
+      list: {
+        completed: 'Show completed',
+      },
+      edit: {
+        title: 'Edit',
+      },
     },
     cancel: 'Cancel',
     save: 'Save',
     delete: 'Delete',
+    current: 'Current',
+    planning: 'Planning',
   },
   ru: {
     title: 'Todorant',
@@ -95,6 +107,10 @@ export const messages = {
       },
       internal: 'Внутренняя ошибка сервера',
       loadTodos: 'Не получилось загрузить задачи',
+      todo: {
+        textLenght: 'Задачи должны иметь текст',
+        dateOrMonth: 'Задачам нужно выставлять либо точную дату, либо месяц',
+      },
     },
     close: 'Закрыть',
     notFound: 'Страница не найдена',
@@ -111,9 +127,17 @@ export const messages = {
         tooltip:
           'Задачи должны быть: указывающими на следующее действие ("Найти лучшие билеты в Мексику на аггрегаторе билетов", а не "Полететь в Мексику"); наиболее маленькими и понятными ("Протереть дисплей", а не "Прибраться дома").',
       },
+      list: {
+        completed: 'Показать завершенные',
+      },
+      edit: {
+        title: 'Редактирование',
+      },
     },
     cancel: 'Отменить',
     save: 'Сохранить',
     delete: 'Удалить',
+    current: 'Текущее',
+    planning: 'Планирование',
   },
 }
