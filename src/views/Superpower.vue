@@ -5,8 +5,8 @@
       v-tab {{$t('current')}}
       v-tab {{$t('planning')}}
       v-tabs-items(v-model='currentTab')
-        v-tab-item(:value='0')
-          span 0
+        v-tab-item(:value='0').text-center
+          h1 {{$t('underDevelopment')}}
         v-tab-item(:value='1')
           TodoList
     // Add FAB

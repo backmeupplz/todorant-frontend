@@ -11,7 +11,7 @@
         v-list-item(v-for='(todo, j) in todoSection.todos' :key='j')
           v-list-item-content
             v-card.grey.darken-2
-              v-card-text {{todo.text}}
+              v-card-text {{todo.frog ? '🐸 ' : ''}}{{todo.text}}
               v-card-actions
                 v-spacer
                 v-btn(text icon @click='deleteTodo(todo)' :loading='deleting')

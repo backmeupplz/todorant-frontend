@@ -37,9 +37,9 @@
           type='month')
     v-row
       v-col(cols='12' md='6')
-        v-switch(:label='$t("todo.create.frog")')
+        v-switch(:label='$t("todo.create.frog")' v-model='todo.frog')
       v-col(cols='12' md='6')
-        v-switch(:label='$t("todo.create.completed")')
+        v-switch(:label='$t("todo.create.completed")' v-model='todo.completed')
     v-row
       slot
 </template>
