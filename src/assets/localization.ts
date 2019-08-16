@@ -55,6 +55,7 @@ export const messages = {
     },
     cancel: 'Cancel',
     save: 'Save',
+    delete: 'Delete',
   },
   ru: {
     title: 'Todorant',
@@ -113,5 +114,6 @@ export const messages = {
     },
     cancel: 'Отменить',
     save: 'Сохранить',
+    delete: 'Удалить',
   },
 }

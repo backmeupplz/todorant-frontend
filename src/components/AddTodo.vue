@@ -23,13 +23,23 @@
       v-card-text
         v-container
           v-expansion-panels(multiple v-model='panel')
-            TodoForm(v-for='(todo, i) in todos' :todo='todo'  :key='i')
+            TodoForm(v-for='(todo, i) in todos' :todo='todo' :key='i')
+              v-btn(v-if='todos.length > 1'
+              color='error'
+              text
+              @click='deleteTodo(i)') {{$t('delete')}}
       v-card-actions
         v-btn(color='blue' text @click='addTodo')
           v-icon add
         v-spacer
-        v-btn(color='error' text @click='dialog = false') {{$t('cancel')}}
-        v-btn(color='blue' text @click='dialog = false') {{$t('save')}}
+        v-btn(color='error'
+        text 
+        @click='dialog = false'
+        :disabled='loading') {{$t('cancel')}}
+        v-btn(color='blue'
+        text 
+        @click='save'
+        :loading='loading') {{$t('save')}}
 </template>
 
 <script lang="ts">
@@ -38,6 +48,8 @@ import Component from "vue-class-component";
 import { Watch } from "vue-property-decorator";
 import TodoForm from "./TodoForm.vue";
 import { Todo } from "../models/todo";
+import * as store from "../plugins/store";
+import * as api from "../utils/api";
 
 @Component({
   components: { TodoForm }
@@ -48,6 +60,8 @@ export default class AddTodo extends Vue {
   panel = [] as Number[];
 
   todos = [] as Partial<Todo>[];
+
+  loading = false;
 
   @Watch("dialog")
   onChildChanged(val: boolean, oldVal: boolean) {
@@ -64,6 +78,26 @@ export default class AddTodo extends Vue {
 
   addTodo() {
     this.todos.push({});
+  }
+
+  deleteTodo(i: number) {
+    this.todos.splice(i, 1);
+  }
+
+  async save() {
+    const user = store.user();
+    if (!user) {
+      return;
+    }
+    this.loading = true;
+    try {
+      await api.postTodos(user, this.todos);
+      this.dialog = false;
+    } catch (err) {
+      store.setSnackbarError(err.response.data);
+    } finally {
+      this.loading = false;
+    }
   }
 }
 </script>

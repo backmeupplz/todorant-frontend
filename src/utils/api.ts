@@ -21,6 +21,23 @@ export async function loginTelegram(loginInfo: any) {
   return (await axios.post(`${base}/login/telegram`, loginInfo)).data as User
 }
 
+export async function postTodos(user: User, todos: Partial<Todo>[]) {
+  return (await axios.post(
+    `${base}/todo`,
+    todos.map(todo => {
+      const todoCopy = { ...todo }
+      if (todo.date) {
+        todoCopy.monthAndYear = todo.date.substr(0, 7)
+        todoCopy.date = todo.date.substr(8)
+      }
+      return todoCopy
+    }),
+    {
+      headers: getHeaders(user),
+    }
+  )).data
+}
+
 export async function getTodos(user: User, completed: boolean = false) {
   return (await axios.get(`${base}/todo`, {
     headers: getHeaders(user),

@@ -30,7 +30,6 @@ export default class TodoList extends Vue {
     try {
       this.todos = await getTodos(user);
     } catch (err) {
-      console.log(err);
       store.setSnackbarError("errors.loadTodos");
     } finally {
       this.todosUpdating = false;
