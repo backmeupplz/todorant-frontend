@@ -10,11 +10,11 @@
         p {{$t("home.action")}}
         
       v-flex.pt-4
-        //- vue-telegram-login(mode='callback'
-        //- telegram-login='mamkintrade_bot'
-        //- @callback='onTelegramAuth'
-        //- radius='3'
-        //- :userpic='false')
+        vue-telegram-login(mode='callback'
+        telegram-login='mamkintrade_bot'
+        @callback='onTelegramAuth'
+        radius='3'
+        :userpic='false')
         g-signin-button(:params='{ client_id: googleClientId }'
         @success='onGoogleSignInSuccess'
         @error='onGoogleSignInError') {{$t("home.google")}}
