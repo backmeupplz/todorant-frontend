@@ -10,7 +10,7 @@
         v-subheader {{todoSection.title}}
         v-list-item(v-for='(todo, j) in todoSection.todos' :key='j')
           v-list-item-content
-            v-card.grey.darken-2
+            v-card.grey(:class="$vuetify.theme.dark ? 'darken-2' : 'lighten-4'")
               v-card-text {{todo.frog ? '🐸 ' : ''}}{{todo.text}}
               v-card-actions
                 v-spacer
