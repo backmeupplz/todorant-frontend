@@ -19,7 +19,7 @@
             :rules='dateAndMonthRules')
           v-date-picker(@input='dateMenu = false'
           v-model='todo.date'
-          :min='new Date(new Date().setDate(new Date().getDate()-1)).toISOString()')
+          :min='yesterdayFormatted')
       v-col(cols='12' md='6')
         v-menu(v-model='monthMenu')
           template(v-slot:activator='{ on }')
@@ -49,6 +49,7 @@ import Vue from "vue";
 import Component from "vue-class-component";
 import { Todo } from "../models/todo";
 import { i18n } from "../plugins/i18n";
+import moment from "moment";
 
 @Component({
   props: {
@@ -71,5 +72,11 @@ export default class TodoForm extends Vue {
       );
     }
   ];
+
+  get yesterdayFormatted() {
+    return moment(
+      new Date(new Date().setDate(new Date().getDate() - 1))
+    ).format();
+  }
 }
 </script>
