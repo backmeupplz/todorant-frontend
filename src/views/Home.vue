@@ -46,6 +46,12 @@ declare const FB: any;
   }
 })
 export default class Home extends Vue {
+  created() {
+    if (this.$route.query && this.$route.query.hash) {
+      this.onTelegramAuth(this.$route.query);
+    }
+  }
+
   get googleClientId() {
     return "544897902503-4mfcmgifrm4ns7r3l6up0fmangedrpju.apps.googleusercontent.com";
   }
