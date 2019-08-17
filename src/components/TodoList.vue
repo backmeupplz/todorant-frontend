@@ -14,11 +14,11 @@
               v-card-text {{todo.frog ? '🐸 ' : ''}}{{todo.text}}
               v-card-actions
                 v-spacer
-                v-btn(text icon @click='deleteTodo(todo)' :loading='deleting')
+                v-btn(text icon @click='deleteTodo(todo)' :loading='loading')
                   v-icon delete
-                v-btn(text icon @click='editTodo(todo)')
+                v-btn(text icon @click='editTodo(todo)' :loading='loading')
                   v-icon edit
-                v-btn(text icon @click='completeOrUndoTodo(todo)')
+                v-btn(text icon @click='completeOrUndoTodo(todo)' :loading='loading')
                   v-icon {{todo.completed ? 'repeat' : 'done'}}
     EditTodo(:todo='todoEdited' :cleanTodo='cleanTodo')
 </template>
@@ -48,7 +48,7 @@ export default class TodoList extends Vue {
   todoEdited: Partial<Todo> | null = null;
   todos = [] as TodoSection[];
 
-  deleting = false;
+  loading = false;
 
   @Watch("showCompleted")
   onCompletedChanged(val: boolean, oldVal: boolean) {
@@ -133,14 +133,14 @@ export default class TodoList extends Vue {
     if (!user) {
       return;
     }
-    this.deleting = true;
+    this.loading = true;
     try {
       await api.deleteTodo(user, todo);
       this.updateTodos();
     } catch (err) {
       store.setSnackbarError(err.response ? err.response.data : err.message);
     } finally {
-      this.deleting = false;
+      this.loading = false;
     }
   }
 
@@ -149,7 +149,7 @@ export default class TodoList extends Vue {
     if (!user) {
       return;
     }
-    this.deleting = true;
+    this.loading = true;
     try {
       if (todo.completed) {
         await api.undoTodo(user, todo);
@@ -160,7 +160,7 @@ export default class TodoList extends Vue {
     } catch (err) {
       store.setSnackbarError(err.response ? err.response.data : err.message);
     } finally {
-      this.deleting = false;
+      this.loading = false;
     }
   }
 
