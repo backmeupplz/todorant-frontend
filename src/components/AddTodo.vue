@@ -55,6 +55,7 @@ import TodoForm from "./TodoForm.vue";
 import { Todo } from "../models/todo";
 import * as store from "../plugins/store";
 import * as api from "../utils/api";
+import { serverBus } from "../main";
 
 @Component({
   components: { TodoForm }
@@ -115,6 +116,7 @@ export default class AddTodo extends Vue {
     try {
       await api.postTodos(user, this.todos);
       this.dialog = false;
+      serverBus.$emit("refreshRequested");
     } catch (err) {
       store.setSnackbarError(err.response.data);
     } finally {

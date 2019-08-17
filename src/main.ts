@@ -10,6 +10,8 @@ import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = true
 
+export const serverBus = new Vue()
+
 new Vue({
   router,
   store,

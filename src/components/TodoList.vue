@@ -32,6 +32,7 @@ import * as store from "../plugins/store";
 import EditTodo from "./EditTodo.vue";
 import { Watch } from "vue-property-decorator";
 import * as api from "../utils/api";
+import { serverBus } from "../main";
 
 interface TodoSection {
   title: string;
@@ -58,6 +59,12 @@ export default class TodoList extends Vue {
 
   mounted() {
     this.updateTodos();
+  }
+
+  created() {
+    serverBus.$on("refreshRequested", () => {
+      this.updateTodos();
+    });
   }
 
   todosUpdating = false;
