@@ -2,9 +2,9 @@
   v-container
     v-list(subheader)
       v-list-item
-        v-switch(v-model='showCompleted' :label='$t("todo.list.completed")' :loading='loading')
+        v-switch(v-model='showCompleted' :label='$t("todo.list.completed")' :loading='todosUpdating')
         v-spacer
-        v-btn(text icon :loading='loading' @click='updateTodos')
+        v-btn(text icon :loading='todosUpdating' @click='updateTodos')
           v-icon refresh
       div(v-for='(todoSection, i) in todos' :key='i')
         v-subheader {{todoSection.title}}
@@ -67,15 +67,16 @@ export default class TodoList extends Vue {
     });
   }
 
+  todosUpdating = false;
   async updateTodos() {
-    if (this.loading) {
+    if (this.todosUpdating) {
       return;
     }
     const user = store.user();
     if (!user) {
       return;
     }
-    this.loading = true;
+    this.todosUpdating = true;
     try {
       const fetchedTodos = await getTodos(user, this.showCompleted);
       const mappedTodos = fetchedTodos.reduce(
@@ -119,7 +120,7 @@ export default class TodoList extends Vue {
     } catch (err) {
       store.setSnackbarError("errors.loadTodos");
     } finally {
-      this.loading = false;
+      this.todosUpdating = false;
     }
   }
 
