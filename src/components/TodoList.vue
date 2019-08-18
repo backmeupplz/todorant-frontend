@@ -118,6 +118,9 @@ export default class TodoList extends Vue {
           return new Date(a.title) > new Date(b.title) ? 1 : -1;
         }
       });
+      if (this.showCompleted) {
+        this.todos.reverse();
+      }
     } catch (err) {
       store.setSnackbarError("errors.loadTodos");
     } finally {
