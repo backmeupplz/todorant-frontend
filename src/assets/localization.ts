@@ -61,8 +61,6 @@ export const messages = {
       },
       edit: {
         title: 'Edit',
-        text:
-          '🥳You did it! All the tasks for today are done, go get rest or maybe dance a little 💃',
       },
     },
     cancel: 'Cancel',
@@ -78,6 +76,8 @@ export const messages = {
       "Use skip when you don't want to work on the current task. Yo ucan skip once a day, up to three times a week. Frogs cannot be skipped. A task skipped twice becomes a frog.",
     clear: {
       congratulations: 'Congratulations!',
+      text:
+        '🥳You did it! All the tasks for today are done, go get rest or maybe dance a little 💃',
     },
   },
   ru: {
