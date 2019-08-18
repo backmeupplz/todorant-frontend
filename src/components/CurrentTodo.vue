@@ -15,7 +15,8 @@
       v-list-item
         v-list-item-content(v-if='!!todo')
           v-card.grey(:class="$vuetify.theme.dark ? 'darken-2' : 'lighten-4'")
-            v-card-text {{todo.frog ? '🐸 ' : ''}}{{todo.text}}
+            v-card-text
+              TodoText(:todo='todo')
             v-card-actions
               span.caption.grey--text.pl-2 {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
               v-spacer
@@ -48,12 +49,16 @@ import Component from "vue-class-component";
 import { Todo } from "../models/todo";
 import { getTodos, editTodo } from "../utils/api";
 import * as store from "../plugins/store";
-import EditTodo from "./EditTodo.vue";
+import TodoText from "./TodoText.vue";
 import { Watch } from "vue-property-decorator";
 import * as api from "../utils/api";
 import { serverBus } from "../main";
 
-@Component
+@Component({
+  components: {
+    TodoText
+  }
+})
 export default class CurrentTodo extends Vue {
   showCompleted = false;
   todo: Todo | null = null;

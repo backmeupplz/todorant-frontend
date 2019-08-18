@@ -11,7 +11,8 @@
         v-list-item(v-for='(todo, j) in todoSection.todos' :key='j')
           v-list-item-content
             v-card.grey(:class="$vuetify.theme.dark ? 'darken-2' : 'lighten-4'")
-              v-card-text {{todo.frog ? '🐸 ' : ''}}{{todo.text}}
+              v-card-text
+                TodoText(:todo='todo')
               v-card-actions
                 span.caption.grey--text.pl-2 {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
                 v-spacer
@@ -31,6 +32,7 @@ import { Todo } from "../models/todo";
 import { getTodos, editTodo } from "../utils/api";
 import * as store from "../plugins/store";
 import EditTodo from "./EditTodo.vue";
+import TodoText from "./TodoText.vue";
 import { Watch } from "vue-property-decorator";
 import * as api from "../utils/api";
 import { serverBus } from "../main";
@@ -42,6 +44,7 @@ interface TodoSection {
 
 @Component({
   components: {
+    TodoText,
     EditTodo
   }
 })
