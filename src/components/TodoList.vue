@@ -13,6 +13,7 @@
             v-card.grey(:class="$vuetify.theme.dark ? 'darken-2' : 'lighten-4'")
               v-card-text {{todo.frog ? '🐸 ' : ''}}{{todo.text}}
               v-card-actions
+                span.caption.grey--text.pl-2 {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
                 v-spacer
                 v-btn(text icon @click='deleteTodo(todo)' :loading='loading')
                   v-icon delete

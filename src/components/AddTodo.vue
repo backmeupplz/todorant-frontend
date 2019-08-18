@@ -69,6 +69,12 @@ export default class AddTodo extends Vue {
 
   loading = false;
 
+  created() {
+    serverBus.$on("addTodoRequested", () => {
+      this.dialog = true;
+    });
+  }
+
   @Watch("dialog")
   onDialogChanged(val: boolean, oldVal: boolean) {
     if (!oldVal && val) {

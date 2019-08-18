@@ -70,6 +70,16 @@ export async function completeTodo(user: User, todo: Todo) {
   )
 }
 
+export async function skipTodo(user: User, todo: Todo) {
+  return axios.put(
+    `${base}/todo/${todo._id}/skip`,
+    {},
+    {
+      headers: getHeaders(user),
+    }
+  )
+}
+
 export async function undoTodo(user: User, todo: Todo) {
   return axios.put(
     `${base}/todo/${todo._id}/undone`,
@@ -87,6 +97,22 @@ export async function getTodos(user: User, completed: boolean = false) {
       completed,
     },
   })).data as Todo[]
+}
+
+export async function getCurrentTodo(user: User) {
+  const now = new Date()
+  return (await axios.get(`${base}/todo/current`, {
+    headers: getHeaders(user),
+    params: {
+      date: `${now.getFullYear()}-${
+        now.getMonth() + 1 < 10 ? `0${now.getMonth() + 1}` : now.getMonth() + 1
+      }-${now.getDate() < 10 ? `0${now.getDate()}` : now.getDate()}`,
+    },
+  })).data as {
+    todosCount: number
+    incompleteTodosCount: number
+    todo?: Todo
+  }
 }
 
 function getHeaders(user: User) {

@@ -61,6 +61,8 @@ export const messages = {
       },
       edit: {
         title: 'Edit',
+        text:
+          '🥳You did it! All the tasks for today are done, go get rest or maybe dance a little 💃',
       },
     },
     cancel: 'Cancel',
@@ -69,6 +71,14 @@ export const messages = {
     current: 'Current',
     planning: 'Planning',
     underDevelopment: 'This part is under development',
+    created: 'Created',
+    breakdownInfo:
+      'Use breakdown when the current task is too broad. After you add all the subtasks, feel free to complete this task, you deserve it.',
+    skipInfo:
+      "Use skip when you don't want to work on the current task. Yo ucan skip once a day, up to three times a week. Frogs cannot be skipped. A task skipped twice becomes a frog.",
+    clear: {
+      congratulations: 'Congratulations!',
+    },
   },
   ru: {
     title: 'Todorant',
@@ -141,5 +151,15 @@ export const messages = {
     current: 'Текущее',
     planning: 'Планирование',
     underDevelopment: 'Раздел в разработке',
+    created: 'Создано',
+    breakdownInfo:
+      'Используйте разбивку, если текущая задача слишком широкая. После добавления всех подзадач, отметьте текущую задачу, как выполненную, вы это заслужили.',
+    skipInfo:
+      'Используйте пропуск, когда не хотите заниматься текущей задачей. Пропускать можно максимум раз в день, максимум три раза в неделю. Лягушек пропускать нельзя. Задача, пропущенная дважды, становится ляшугкой.',
+    clear: {
+      congratulations: 'Поздравляем!',
+      text:
+        '🥳Вы это сделали! Все задачи на сегодня выполнены, идите отдохните — ну или потанцуйте немного 💃',
+    },
   },
 }
