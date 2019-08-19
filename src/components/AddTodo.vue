@@ -104,6 +104,8 @@ export default class AddTodo extends Vue {
     if (!user) {
       return;
     }
+    this.panel = [];
+    this.todos.forEach((todo, i) => this.panel.push(i));
     if (!(this.$refs.form as any).validate()) {
       this.panel = [];
       this.todos.forEach((todo, i) => {
