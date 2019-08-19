@@ -92,6 +92,9 @@ export const setLanguage = (language: String) => {
   store.commit('setLanguage', language)
 }
 export const setDark = (dark: Boolean) => {
+  ;(document as any)
+    .querySelector('meta[name="theme-color"]')
+    .setAttribute('content', dark ? '#303030' : '#fafafa')
   store.commit('setDark', dark)
 }
 export const logout = () => {
