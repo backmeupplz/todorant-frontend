@@ -1,5 +1,8 @@
 <template lang="pug">
   nav
+    // Rules dialog
+    Rules(:dialog='rulesDialog' :close='closeRules')
+    // Navbarand app
     v-app-bar(flat app)
       // Title
       router-link(:to='$store.state.user ? "/superpower" : "/"')
@@ -10,6 +13,9 @@
             span {{$store.state.user.name}}, {{$store.state.user.email || $store.state.user.facebookId || $store.state.user.telegramId}}
           span(v-else) {{$t('title')}}
       v-spacer
+      // Rules
+      v-btn(text icon color='grey' @click='rulesDialog = true')
+        v-icon(small) assignment
       // Dark mode
       v-btn(text icon color='grey' @click='toggleMode')
         v-icon(small) brightness_2
@@ -35,9 +41,16 @@ import Component from "vue-class-component";
 import * as store from "../plugins/store";
 import { i18n } from "../plugins/i18n";
 import * as api from "../utils/api";
+import Rules from "./Rules.vue";
 
-@Component
+@Component({
+  components: {
+    Rules
+  }
+})
 export default class Navbar extends Vue {
+  rulesDialog = false;
+
   get locales() {
     return [{ icon: "🇺🇸", code: "en" }, { icon: "🇷🇺", code: "ru" }];
   }
@@ -61,6 +74,9 @@ export default class Navbar extends Vue {
   logout() {
     store.logout();
     this.$router.replace("/");
+  }
+  closeRules() {
+    this.rulesDialog = false;
   }
 }
 </script>
