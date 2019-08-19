@@ -105,19 +105,21 @@ export default class AddTodo extends Vue {
       return;
     }
     this.panel = [];
-    this.todos.forEach((todo, i) => this.panel.push(i));
+    this.todos.forEach((todo, i) => {
+      if (
+        !todo ||
+        !todo.text ||
+        !todo.text.trim() ||
+        (!todo.monthAndYear && !todo.date)
+      ) {
+        this.panel.push(i);
+      }
+    });
     if (!(this.$refs.form as any).validate()) {
-      this.panel = [];
-      this.todos.forEach((todo, i) => {
-        if (
-          !todo ||
-          !todo.text ||
-          !todo.text.trim() ||
-          (!todo.monthAndYear && !todo.date)
-        ) {
-          this.panel.push(i);
-        }
-      });
+      return;
+    }
+    if (this.panel.length) {
+      store.setSnackbarError("errors.invalidForm");
       return;
     }
     this.loading = true;
