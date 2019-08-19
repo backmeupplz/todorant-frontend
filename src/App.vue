@@ -19,7 +19,7 @@ export default {
   components: { Navbar, CookieLaw, Snackbar },
   created() {
     (this as any).$vuetify.theme.dark = store.dark();
-    (this.$router as any).meta["theme-color"] = "#db5945";
+    (this as any).$router.meta["theme-color"] = "#db5945";
     store.setSnackbar({
       message: "",
       color: "error",
