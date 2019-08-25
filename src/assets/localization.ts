@@ -27,7 +27,7 @@ export const messages = {
       privacy: 'Privacy policy',
     },
     support:
-      'Something isn\'t clear? Contact me at <a href="mailto:n@borodutch.com">n@borodutch.com</a>',
+      'Something isn\'t clear? Contact me at <a target="_blank" href="mailto:n@borodutch.com">n@borodutch.com</a>',
     errors: {
       login: {
         facebook: 'Could not login with Facebook',
@@ -93,7 +93,7 @@ export const messages = {
       premise:
         'Below are the main principles that you should follow to productively exploit all the features provided by Todorant. It is easy as 1-2-3, just with a few more steps.',
       rules: {
-        0: 'As soon as you get an actionable task (receive an email, phonecall, text, or if you see anything of interest that has to be put on your todo list) — create a todo for it right away. <b>Do not wait</b>, you <b>will</b> forget about it if you do not take it down. You can use <a href="https://t.me/todorant_bot">@todorant_bot</a> on Telegram to create todos quicker.',
+        0: 'As soon as you get an actionable task (receive an email, phonecall, text, or if you see anything of interest that has to be put on your todo list) — create a todo for it right away. <b>Do not wait</b>, you <b>will</b> forget about it if you do not take it down. You can use <a target="_blank" href="https://t.me/todorant_bot">@todorant_bot</a> on Telegram to create todos quicker.',
         1: 'Todos should <b>always</b> be actionable and as explicit as possible. If a task takes <b>less than 2 minutes</b>, then do it right away and record it as completed.',
         2: 'You either add a specific date or select a month while creating a todo. You cannot pick current month without selecting a specific date. This is done to relax your mind. If you trust the system and put everything that needs to be done on the correct date — you will encounter it at the right time. Huge amount of willpower is wasted on being constantly stressed about "that other thing that I need to deal with but I am not quite sure what it was". Learn to trust and relax.',
         3: 'First thing you do each month is planning ahead. You take all the tasks assigned to the current month and you sort them in the correct dates. It allows you to filter out outdated tasks and keep your mind in peace with, knowing exactly what you need to do this month.',
@@ -136,7 +136,7 @@ export const messages = {
       privacy: 'Политика конфиденциальности',
     },
     support:
-      'Что-то непонятно? Пишите мне на <a href="mailto:n@borodutch.com">n@borodutch.com</a>',
+      'Что-то непонятно? Пишите мне на <a target="_blank" href="mailto:n@borodutch.com">n@borodutch.com</a>',
     errors: {
       login: {
         facebook: 'Не получилось зайти через Фейсбук',
@@ -202,7 +202,7 @@ export const messages = {
       premise:
         'Ниже описаны основные принципы, которых вы должны придерживаться, чтобы максимально продуктивно пользоваться всеми функциями Тудуранта. Это просто, как 1-2-3, просто на несколько шагов побольше.',
       rules: {
-        0: 'Как только у вас появляется задача (получаете имеил, звонок, сообщение или просто видите что-то интересное что нужно добавить в ваш список задач) — сразу же создавайте задачу. <b>Не ждите</b>, вы <b>забудете</b> про эту задачу, если ее не запишите. Пользуйтесь Телеграм ботом <a href="https://t.me/todorant_bot">@todorant_bot</a> для быстрого создания задач.',
+        0: 'Как только у вас появляется задача (получаете имеил, звонок, сообщение или просто видите что-то интересное что нужно добавить в ваш список задач) — сразу же создавайте задачу. <b>Не ждите</b>, вы <b>забудете</b> про эту задачу, если ее не запишите. Пользуйтесь Телеграм ботом <a target="_blank" href="https://t.me/todorant_bot">@todorant_bot</a> для быстрого создания задач.',
         1: 'Задачи <b>всегда</b> должны быть призывом к действию и как можно более понятными. Если задача займет <b>меньше двух минут</b> — сделайте ее сразу и создайте в списке задач, как выполненную.',
         2: 'Во время создания задачи вы либо указываете точную дату, либо месяц. Вы не можете выбрать текущий месяц без определенной даты. Это сделано для того, чтобы расслабить вам мозг. Если вы доверяете системе и добавляете в нее все, что нужно, на правильные даты — то вы будете встречаться с задачами в правильное время. Огромное количество силы воли тратится зря на постоянный стресс в роде "той вещи, которую мне нужно сделать, но я точно не помню, что это за вещь". Научитесь доверять и расслабляться.',
         3: 'Первая вещь, которую вам нужно будет сделать в начале каждого месяца — это планирование. Вы берете все задачи на текущий месяц и расфасовываете их в нужные данные. Это позволяет вам отфильтровать задачи, которые более не актуальны и помогает вам оставаться в полном спокойствии, четко осознавая, что вам нужно будет делать в этом месяце.',
