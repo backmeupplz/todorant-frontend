@@ -20,7 +20,8 @@
           v-date-picker(@input='dateMenu = false'
           v-model='todo.date'
           :min='yesterdayFormatted'
-          :first-day-of-week='$store.state.language === "ru" ? 1 : 0')
+          :first-day-of-week='$store.state.language === "ru" ? 1 : 0'
+          :locale='$store.state.language')
       v-col(cols='12' md='6')
         v-menu(v-model='monthMenu')
           template(v-slot:activator='{ on }')
@@ -35,7 +36,8 @@
           v-date-picker(@input='monthMenu = false'
           v-model='todo.monthAndYear'
           :min='new Date(new Date().setMonth(new Date().getMonth()+1)).toISOString()'
-          type='month')
+          type='month'
+          :locale='$store.state.language')
     v-row
       v-col(cols='12' md='6')
         v-switch(:label='$t("todo.create.frog")' v-model='todo.frog')
