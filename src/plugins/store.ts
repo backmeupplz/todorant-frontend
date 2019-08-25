@@ -11,6 +11,7 @@ export interface State {
   snackbar: SnackbarState
   language?: String
   dark: Boolean
+  planning: Boolean
 }
 
 interface LocalizedError {
@@ -34,6 +35,7 @@ const storeOptions = {
     },
     language: undefined,
     dark: false,
+    planning: false,
   },
   mutations: {
     setUser(state: State, user: User) {
@@ -51,12 +53,16 @@ const storeOptions = {
     setDark(state: State, dark: Boolean) {
       state.dark = dark
     },
+    setPlanning(state: State, planning: Boolean) {
+      state.planning = planning
+    },
   },
   getters: {
     user: (state: State) => state.user,
     snackbar: (state: State) => state.snackbar,
     language: (state: State) => state.language,
     dark: (state: State) => state.dark,
+    planning: (state: State) => state.planning,
   },
   plugins: [createPersistedState()],
 }
@@ -70,6 +76,7 @@ export const user = () => getters.user as User | undefined
 export const snackbar = () => getters.snackbar as SnackbarState
 export const language = () => getters.language as string | undefined
 export const dark = () => getters.dark as boolean
+export const planning = () => getters.planning as boolean
 
 // Mutations
 export const setUser = (user: User) => {
@@ -96,6 +103,9 @@ export const setDark = (dark: Boolean) => {
     .querySelector('meta[name="theme-color"]')
     .setAttribute('content', dark ? '#303030' : '#fafafa')
   store.commit('setDark', dark)
+}
+export const setPlanning = (planning: Boolean) => {
+  store.commit('setPlanning', planning)
 }
 export const logout = () => {
   store.commit('logout')

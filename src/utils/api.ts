@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { User } from '../models/user'
 import { Todo } from '../models/todo'
+import * as store from '../plugins/store'
 
 const base = process.env.VUE_APP_API
 
@@ -91,6 +92,7 @@ export async function undoTodo(user: User, todo: Todo) {
 }
 
 export async function getTodos(user: User, completed: boolean = false) {
+  await updatePlanning(user)
   return (await axios.get(`${base}/todo`, {
     headers: getHeaders(user),
     params: {
@@ -100,6 +102,7 @@ export async function getTodos(user: User, completed: boolean = false) {
 }
 
 export async function getCurrentTodo(user: User) {
+  await updatePlanning(user)
   const now = new Date()
   return (await axios.get(`${base}/todo/current`, {
     headers: getHeaders(user),
@@ -113,6 +116,19 @@ export async function getCurrentTodo(user: User) {
     incompleteTodosCount: number
     todo?: Todo
   }
+}
+
+async function updatePlanning(user: User) {
+  const now = new Date()
+  const planning = (await axios.get(`${base}/todo/planning`, {
+    headers: getHeaders(user),
+    params: {
+      date: `${now.getFullYear()}-${
+        now.getMonth() + 1 < 10 ? `0${now.getMonth() + 1}` : now.getMonth() + 1
+      }-${now.getDate() < 10 ? `0${now.getDate()}` : now.getDate()}`,
+    },
+  })).data.planning as boolean
+  store.setPlanning(planning)
 }
 
 function getHeaders(user: User) {

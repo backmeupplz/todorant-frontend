@@ -1,12 +1,27 @@
 <template lang="pug">
   div
-    // Tabs
-    v-tabs(v-model='currentTab' :fixed-tabs='$vuetify.breakpoint.xsOnly' show-arrows)
+    // Tabs (panning = false)
+    v-tabs(v-if='!$store.state.planning'
+    v-model='currentTab'
+    :fixed-tabs='$vuetify.breakpoint.xsOnly'
+    show-arrows)
       v-tab {{$t('current')}}
       v-tab {{$t('planning')}}
       v-tabs-items(v-model='currentTab')
         v-tab-item(:value='0')
           CurrentTodo
+        v-tab-item(:value='1')
+          TodoList
+    // Tabs (planning = true)
+    v-tabs(v-else
+    :value='1'
+    :fixed-tabs='$vuetify.breakpoint.xsOnly'
+    show-arrows)
+      v-tab(disabled) {{$t('current')}}
+      v-tab {{$t('planning')}}
+      v-tabs-items(:value='1')
+        v-tab-item(:value='0')
+          .display-3.text-center ☁️
         v-tab-item(:value='1')
           TodoList
     // Add FAB

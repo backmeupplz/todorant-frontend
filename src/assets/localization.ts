@@ -63,6 +63,8 @@ export const messages = {
       edit: {
         title: 'Edit',
       },
+      planning:
+        'Looks like you have some planning to do! Please, redistribute the outstanding tasks below to unlock the "Current" tab and to to keep being productive. Cheers!',
     },
     cancel: 'Cancel',
     save: 'Save',
@@ -170,6 +172,8 @@ export const messages = {
       edit: {
         title: 'Редактирование',
       },
+      planning:
+        'Похоже, вам нужно заняться планированием! Пожалуйста, перераспределите оставшиеся задачи ниже для того, чтобы разблокировать секцию "Текущее", и для того, чтобы оставаться продуктивными. Удачи!',
     },
     cancel: 'Отменить',
     save: 'Сохранить',

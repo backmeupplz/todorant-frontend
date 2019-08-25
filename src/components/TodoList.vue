@@ -1,6 +1,9 @@
 <template lang="pug">
   v-container
     v-list(subheader)
+      v-list-item(v-if='$store.state.planning').pt-4
+        v-flex
+          v-alert(text color='info' icon='info') {{$t('todo.planning')}}
       v-list-item
         v-switch(v-model='showCompleted' :label='$t("todo.list.completed")' :loading='todosUpdating')
         v-spacer
@@ -10,10 +13,11 @@
         v-subheader {{todoSection.title}}
         v-list-item(v-for='(todo, j) in todoSection.todos' :key='j')
           v-list-item-content
-            v-card.grey(:class="$vuetify.theme.dark ? 'darken-2' : 'lighten-4'")
+            v-card(:class='cardClass(todo)')
               v-card-text
                 TodoText(:todo='todo')
               v-card-actions
+                v-icon(v-if='todoOutstanding(todo)') error_outline
                 span.caption.grey--text.pl-2 {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
                 v-spacer
                 v-btn(text icon @click='deleteTodo(todo)' :loading='loading')
@@ -173,6 +177,35 @@ export default class TodoList extends Vue {
   cleanTodo() {
     this.todoEdited = null;
     this.updateTodos();
+  }
+
+  cardClass(todo: Todo) {
+    const dark = store.dark();
+    const outstanding = this.todoOutstanding(todo);
+    return dark
+      ? outstanding
+        ? "blue darken-3"
+        : "grey darken-2"
+      : outstanding
+      ? "blue lighten-4"
+      : "grey lighten-4";
+  }
+
+  todoOutstanding(todo: Todo) {
+    const now = new Date();
+    const month =
+      now.getMonth() + 1 < 10
+        ? `0${now.getMonth() + 1}`
+        : `${now.getMonth() + 1}`;
+    const monthAndYear = `${now.getFullYear()}-${month}`;
+    const date = now.getDate();
+    if (!todo.date && todo.monthAndYear === monthAndYear) {
+      return true;
+    }
+    if (todo.monthAndYear === monthAndYear && +todo.date < date) {
+      return true;
+    }
+    return false;
   }
 }
 </script>
