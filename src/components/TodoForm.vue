@@ -19,7 +19,8 @@
             :rules='dateAndMonthRules')
           v-date-picker(@input='dateMenu = false'
           v-model='todo.date'
-          :min='yesterdayFormatted')
+          :min='yesterdayFormatted'
+          :first-day-of-week='$store.state.language === "ru" ? 1 : 0')
       v-col(cols='12' md='6')
         v-menu(v-model='monthMenu')
           template(v-slot:activator='{ on }')
