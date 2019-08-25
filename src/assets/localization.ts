@@ -81,6 +81,11 @@ export const messages = {
       text:
         '🥳You did it! All the tasks for today are done, go get rest or maybe dance a little 💃',
     },
+    empty: {
+      action: 'To infinity!',
+      text:
+        "You don't have any todos for today. If you want to work — add a new todo for today or take the todos from future days.",
+    },
     howto: {
       title: 'How to use Todorant?',
       premise:
@@ -182,6 +187,11 @@ export const messages = {
       congratulations: 'Поздравляем!',
       text:
         '🥳Вы это сделали! Все задачи на сегодня выполнены, идите отдохните — ну или потанцуйте немного 💃',
+    },
+    empty: {
+      action: 'Вперед!',
+      text:
+        'На сегодня у вас нет задач. Хотите поработать — добавьте новые задачи на сегодня или заберите задачи с других дней.',
     },
     howto: {
       title: 'Как пользоваться Тудурантом?',

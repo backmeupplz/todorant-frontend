@@ -37,10 +37,14 @@
                 span {{$t('breakdownInfo')}}
               v-btn(text icon @click='completeTodo' :loading='loading')
                 v-icon done
-        v-list-item-content(v-if='!todo && !loading && !todoUpdating').text-center.mt-4
+        v-list-item-content(v-if='!todo && !loading && !todoUpdating && todosCount > 0').text-center.mt-4
           span.display-3 🎉
           span.headline {{$t('clear.congratulations')}}
           span.body-1 {{$t('clear.text')}}
+        v-list-item-content(v-if='!todo && !loading && !todoUpdating && todosCount === 0').text-center.mt-4
+          span.display-3 🐝
+          span.headline {{$t('empty.action')}}
+          span.body-1 {{$t('empty.text')}}
 </template>
 
 <script lang="ts">
