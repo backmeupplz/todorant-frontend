@@ -92,7 +92,9 @@ export default class AddTodo extends Vue {
   }
 
   addTodo() {
-    this.todos.push({});
+    this.todos.push({
+      date: new Date().toISOString().substr(0, 10)
+    });
   }
 
   deleteTodo(i: number) {

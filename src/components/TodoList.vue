@@ -23,6 +23,7 @@
                 v-btn(text icon @click='completeOrUndoTodo(todo)' :loading='loading')
                   v-icon {{todo.completed ? 'repeat' : 'done'}}
     EditTodo(:todo='todoEdited' :cleanTodo='cleanTodo')
+    DeleteTodo(:todo='todoDeleted')
 </template>
 
 <script lang="ts">
@@ -32,6 +33,7 @@ import { Todo } from "../models/todo";
 import { getTodos, editTodo } from "../utils/api";
 import * as store from "../plugins/store";
 import EditTodo from "./EditTodo.vue";
+import DeleteTodo from "./DeleteTodo.vue";
 import TodoText from "./TodoText.vue";
 import { Watch } from "vue-property-decorator";
 import * as api from "../utils/api";
@@ -45,12 +47,14 @@ interface TodoSection {
 @Component({
   components: {
     TodoText,
-    EditTodo
+    EditTodo,
+    DeleteTodo
   }
 })
 export default class TodoList extends Vue {
   showCompleted = false;
   todoEdited: Partial<Todo> | null = null;
+  todoDeleted: Todo | null = null;
   todos = [] as TodoSection[];
 
   loading = false;
@@ -143,19 +147,7 @@ export default class TodoList extends Vue {
   }
 
   async deleteTodo(todo: Todo) {
-    const user = store.user();
-    if (!user) {
-      return;
-    }
-    this.loading = true;
-    try {
-      await api.deleteTodo(user, todo);
-      this.updateTodos();
-    } catch (err) {
-      store.setSnackbarError(err.response ? err.response.data : err.message);
-    } finally {
-      this.loading = false;
-    }
+    this.todoDeleted = { ...todo } as Todo;
   }
 
   async completeOrUndoTodo(todo: Todo) {
