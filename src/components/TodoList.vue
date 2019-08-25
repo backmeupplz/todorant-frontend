@@ -192,6 +192,9 @@ export default class TodoList extends Vue {
   }
 
   todoOutstanding(todo: Todo) {
+    if (todo.completed) {
+      return false;
+    }
     const now = new Date();
     const month =
       now.getMonth() + 1 < 10
