@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Home from '../views/Home.vue'
 import Superpower from '../views/Superpower.vue'
 import NotFound from '../views/NotFound.vue'
+import Privacy from '../views/Privacy.vue'
 import { store } from './store'
 
 Vue.use(Router)
@@ -15,6 +16,11 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: Home,
+    },
+    {
+      path: '/privacy',
+      name: 'privacy',
+      component: Privacy,
     },
     {
       path: '/superpower',
