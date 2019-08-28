@@ -105,6 +105,10 @@ export const messages = {
         9: 'If the current task is too high level, then break it down to a list of subtasks. As soon as you break it down, mark the task as completed.',
         10: 'Add as much relevant information about the todo as possible. Add links to specific emails (gmail on web allows you to do this), websites, notes (like evernote), documents (like dropbox), leave phone numbers or add any information you might need to complete the task. Todorant is not meant to be a point of reference for you — instead it should act as a catalogue of links to the reference information relevant to specific todos.',
       },
+      bonus: {
+        title: 'Bonus features',
+        0: 'User keyboard shortcuts when on desktop! You can (a)dd, (b)reakdown, switch to (c)urrent, mark as (d)one and switch to (p)lanning.',
+      },
     },
   },
   ru: {
@@ -213,6 +217,10 @@ export const messages = {
         8: 'Вам разрешено пропускать текущую задачу — но только 1 раз в день, 3 раза в неделю. Пропустите задачу дважды, и она становится лягушкой. Если вы не смогли выполнить задачу и вам пришлось ее перераспределить дважды — она становится лягушкой.',
         9: 'Если текущая задача слишком высокоуровневая, то разбейте ее на список подзадач. Как только вы разбили задачу на подзадачи, завершите текущую задачу.',
         10: 'Добавляйте настолько много важной информации в задачи, насколько сможете. Добавляйте ссылки на имейлы (gmail позволяет это делать), вебсайты, заметки (как evernote), документы (например, dropbox), оставляйте телефонные номера или добавляйте любую информацию, которая может быть важной для решения задачи. Тудурант не должен быть главным хранилищем и каталогом ваших данных, но местом, где ссылки на необходимые для задач данные, хранятся сразу с определенными задачами.',
+      },
+      bonus: {
+        title: 'Бонусные функции',
+        0: 'Пользуйтесь шортакатми на клавиатуре на десктопе! Вы можете (a) — добавить, (b) — разбить, переключиться на (c) — текущее, пометить как (d) — выполненное и переключиться на (p) — планирование.',
       },
     },
   },

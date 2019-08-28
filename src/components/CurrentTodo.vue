@@ -32,10 +32,21 @@
                 span {{$t('skipInfo')}}
               v-tooltip(:max-width='300' top)
                 template(v-slot:activator='{ on }')
-                  v-btn(text icon @click='addTodo' :loading='loading' v-on='on')
+                  v-btn(text
+                  icon
+                  @click='addTodo'
+                  :loading='loading'
+                  v-on='on'
+                  v-shortkey.once="['b']"
+                  @shortkey='addTodo')
                     v-icon list
                 span {{$t('breakdownInfo')}}
-              v-btn(text icon @click='completeTodo' :loading='loading')
+              v-btn(text
+              icon
+              @click='completeTodo'
+              :loading='loading'
+              v-shortkey.once="['d']"
+              @shortkey='completeTodo')
                 v-icon done
         v-list-item-content(v-if='!todo && !loading && !todoUpdating && todosCount > 0').text-center.mt-4
           span.display-3 🎉

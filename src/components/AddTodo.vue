@@ -10,7 +10,9 @@
       bottom
       right
       color='blue'
-      v-on="on")
+      v-on="on"
+      v-shortkey.once="['a']"
+      @shortkey='dialog=true')
         v-icon add
     v-form(ref='form')
       v-card
