@@ -94,8 +94,10 @@ export default class AddTodo extends Vue {
   }
 
   addTodo() {
+    const now = new Date();
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
     this.todos.push({
-      date: new Date().toISOString().substr(0, 10)
+      date: now.toISOString().substr(0, 10)
     });
   }
 

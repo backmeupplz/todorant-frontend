@@ -3,6 +3,7 @@ import axios from 'axios'
 import { User } from '../models/user'
 import { Todo } from '../models/todo'
 import * as store from '../plugins/store'
+import { TodoSection } from '../models/TodoSection'
 
 const base = process.env.VUE_APP_API
 
@@ -116,6 +117,14 @@ export async function getCurrentTodo(user: User) {
     incompleteTodosCount: number
     todo?: Todo
   }
+}
+
+export async function rearrangeTodos(user: User, todos: TodoSection[]) {
+  return axios.post(
+    `${base}/todo/rearrange`,
+    { todos },
+    { headers: getHeaders(user) }
+  )
 }
 
 async function updatePlanning(user: User) {

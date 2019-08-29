@@ -7,25 +7,34 @@
       v-list-item
         v-switch(v-model='showCompleted' :label='$t("todo.list.completed")' :loading='todosUpdating')
         v-spacer
-        v-btn(text icon :loading='todosUpdating' @click='updateTodos')
+        v-btn(v-if='!editable' icon :loading='todosUpdating' @click='editable = true')
+          v-icon edit
+        v-btn(v-if='!!editable' icon :loading='todosUpdating || loading' @click='doneEditing' color='green')
+          v-icon done
+        v-btn(icon :loading='todosUpdating' @click='updateTodos')
           v-icon refresh
       div(v-for='(todoSection, i) in todos' :key='i')
         v-subheader {{todoSection.title}}
-        v-list-item(v-for='(todo, j) in todoSection.todos' :key='j')
-          v-list-item-content
-            v-card(:class='cardClass(todo)')
-              v-card-text
-                TodoText(:todo='todo')
-              v-card-actions
-                v-icon(v-if='todoOutstanding(todo)') error_outline
-                span.caption.grey--text.pl-2 {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
-                v-spacer
-                v-btn(text icon @click='deleteTodo(todo)' :loading='loading')
-                  v-icon delete
-                v-btn(text icon @click='editTodo(todo)' :loading='loading')
-                  v-icon edit
-                v-btn(text icon @click='completeOrUndoTodo(todo)' :loading='loading')
-                  v-icon {{todo.completed ? 'repeat' : 'done'}}
+        draggable(v-model='todoSection.todos'
+        group='todo'
+        @start='drag=true'
+        @end='drag=false'
+        v-bind="dragOptions")
+          v-list-item(v-for='(todo, j) in todoSection.todos' :key='j')
+            v-list-item-content
+              v-card(:class='cardClass(todo)')
+                v-card-text
+                  TodoText(:todo='todo')
+                v-card-actions
+                  v-icon(v-if='todoOutstanding(todo)') error_outline
+                  span.caption.grey--text.pl-2 {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
+                  v-spacer
+                  v-btn(text icon @click='deleteTodo(todo)' :loading='loading')
+                    v-icon delete
+                  v-btn(text icon @click='editTodo(todo)' :loading='loading')
+                    v-icon edit
+                  v-btn(text icon @click='completeOrUndoTodo(todo)' :loading='loading')
+                    v-icon {{todo.completed ? 'repeat' : 'done'}}
     EditTodo(:todo='todoEdited' :cleanTodo='cleanTodo')
     DeleteTodo(:todo='todoDeleted')
 </template>
@@ -42,17 +51,15 @@ import TodoText from "./TodoText.vue";
 import { Watch } from "vue-property-decorator";
 import * as api from "../utils/api";
 import { serverBus } from "../main";
-
-interface TodoSection {
-  title: string;
-  todos: Todo[];
-}
+import draggable from "vuedraggable";
+import { TodoSection } from "../models/TodoSection";
 
 @Component({
   components: {
     TodoText,
     EditTodo,
-    DeleteTodo
+    DeleteTodo,
+    draggable
   }
 })
 export default class TodoList extends Vue {
@@ -62,6 +69,8 @@ export default class TodoList extends Vue {
   todos = [] as TodoSection[];
 
   loading = false;
+  drag = false;
+  editable = false;
 
   @Watch("showCompleted")
   onCompletedChanged(val: boolean, oldVal: boolean) {
@@ -209,6 +218,30 @@ export default class TodoList extends Vue {
       return true;
     }
     return false;
+  }
+
+  get dragOptions() {
+    return {
+      animation: 0,
+      disabled: !this.editable
+    };
+  }
+
+  async doneEditing() {
+    const user = store.user();
+    if (!user) {
+      return;
+    }
+    this.loading = true;
+    try {
+      await api.rearrangeTodos(user, this.todos);
+      await this.updateTodos();
+    } catch (err) {
+      store.setSnackbarError(err.response ? err.response.data : err.message);
+    } finally {
+      this.loading = false;
+      this.editable = false;
+    }
   }
 }
 </script>
