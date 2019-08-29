@@ -35,7 +35,7 @@ export function l(text: string) {
       type: 'link',
       url: match.url,
       value: `${parsedUrl.hostname}${
-        (parsedUrl.pathname || '/').substr(1) ? '/...' : ''
+        (parsedUrl.pathname || '/').substr(1) || parsedUrl.hash ? '/...' : ''
       }`,
     })
     endIndex = match.lastIndex
