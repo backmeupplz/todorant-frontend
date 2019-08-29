@@ -17,6 +17,7 @@
     "pug": "^2.0.3",
     "pug-plain-loader": "^1.0.0",
     "tlds": "^1.203.1",
+    "url": "^0.11.0",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-cookie-law": "^1.10.0",

@@ -1,3 +1,5 @@
+// Dependencies
+import * as url from 'url'
 import Linkify from 'linkify-it'
 const linkify = Linkify()
 linkify
@@ -26,10 +28,15 @@ export function l(text: string) {
         value: text.substr(endIndex, match.index - endIndex),
       })
     }
+    const parsedUrl = url.parse(
+      text.substr(match.index, match.lastIndex - match.index)
+    )
     elements.push({
       type: 'link',
       url: match.url,
-      value: text.substr(match.index, match.lastIndex - match.index),
+      value: `${parsedUrl.hostname}${
+        (parsedUrl.pathname || '/').substr(1) ? '/...' : ''
+      }`,
     })
     endIndex = match.lastIndex
   }
