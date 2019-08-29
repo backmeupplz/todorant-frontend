@@ -27,7 +27,10 @@
                   TodoText(:todo='todo')
                 v-card-actions
                   v-icon(v-if='todoOutstanding(todo)') error_outline
-                  span.caption.grey--text.pl-2 {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
+                  v-tooltip(:max-width='300' right)
+                    template(v-slot:activator='{ on }')
+                      span.caption.grey--text.pl-2(v-on='on') {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
+                    span {{todo._id}}
                   v-spacer
                   v-btn(text icon @click='deleteTodo(todo)' :loading='loading')
                     v-icon delete
