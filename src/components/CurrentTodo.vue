@@ -20,7 +20,7 @@
             v-card-actions
               span.caption.grey--text.pl-2 {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
               v-spacer
-              v-tooltip(:max-width='300' top)
+              v-tooltip(:max-width='300' top v-if='!todo.frog')
                 template(v-slot:activator='{ on }')
                   v-btn(text
                   icon
