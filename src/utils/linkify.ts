@@ -31,12 +31,17 @@ export function l(text: string) {
     const parsedUrl = url.parse(
       text.substr(match.index, match.lastIndex - match.index)
     )
+    console.log(parsedUrl)
     elements.push({
       type: 'link',
       url: match.url,
-      value: `${parsedUrl.hostname}${
-        (parsedUrl.pathname || '/').substr(1) || parsedUrl.hash ? '/...' : ''
-      }`,
+      value: parsedUrl.hostname
+        ? `${parsedUrl.hostname}${
+            (parsedUrl.pathname || '/').substr(1) || parsedUrl.hash
+              ? '/...'
+              : ''
+          }`
+        : parsedUrl.href,
     })
     endIndex = match.lastIndex
   }
