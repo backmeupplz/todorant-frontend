@@ -81,7 +81,7 @@ export const messages = {
     clear: {
       congratulations: 'Congratulations!',
       text:
-        '🥳You did it! All the tasks for today are done, go get rest or maybe dance a little 💃',
+        '🥳 You did it! All the tasks for today are done, go get rest or maybe dance a little 💃',
     },
     empty: {
       action: 'To infinity!',
@@ -194,7 +194,7 @@ export const messages = {
     clear: {
       congratulations: 'Поздравляем!',
       text:
-        '🥳Вы это сделали! Все задачи на сегодня выполнены, идите отдохните — ну или потанцуйте немного 💃',
+        '🥳 Вы это сделали! Все задачи на сегодня выполнены, идите отдохните — ну или потанцуйте немного 💃',
     },
     empty: {
       action: 'Вперед!',
