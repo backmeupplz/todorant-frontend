@@ -44,7 +44,7 @@ export function l(text: string) {
   const lastIndex = matches[matches.length - 1].lastIndex
   elements.push({
     type: 'text',
-    value: text.substr(lastIndex, text.length - (lastIndex + 1)),
+    value: text.substr(lastIndex, text.length - (lastIndex + 2)),
   })
   // Respond
   return elements
