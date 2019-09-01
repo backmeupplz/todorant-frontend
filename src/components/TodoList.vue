@@ -31,6 +31,7 @@
                     template(v-slot:activator='{ on }')
                       span.caption.grey--text.pl-2(v-on='on') {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
                     span {{todo._id}}
+                  span.caption.grey--text.pl-2(v-if='todo.skipped') ({{$t('skipped')}})
                   v-spacer
                   v-btn(text icon @click='deleteTodo(todo)' :loading='loading')
                     v-icon delete
