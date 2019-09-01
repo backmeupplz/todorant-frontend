@@ -57,6 +57,7 @@ import * as api from "../utils/api";
 import { serverBus } from "../main";
 import draggable from "vuedraggable";
 import { TodoSection } from "../models/TodoSection";
+import { isTodoOld } from "../utils/isTodoOld";
 
 @Component({
   components: {
@@ -208,20 +209,8 @@ export default class TodoList extends Vue {
     if (todo.completed) {
       return false;
     }
-    const now = new Date();
-    const month =
-      now.getMonth() + 1 < 10
-        ? `0${now.getMonth() + 1}`
-        : `${now.getMonth() + 1}`;
-    const monthAndYear = `${now.getFullYear()}-${month}`;
-    const date = now.getDate();
-    if (!todo.date && todo.monthAndYear === monthAndYear) {
-      return true;
-    }
-    if (todo.monthAndYear === monthAndYear && +todo.date < date) {
-      return true;
-    }
-    return false;
+    const today = api.getToday();
+    return isTodoOld(todo, today);
   }
 
   get dragOptions() {

@@ -41,7 +41,7 @@ export async function postTodos(user: User, todos: Partial<Todo>[]) {
 }
 
 export async function editTodo(user: User, todo: Todo) {
-  const todoCopy = { ...todo }
+  const todoCopy = { ...todo, today: getToday() }
   if (
     (todo.date && todo.date.length !== 2) ||
     (todo.monthAndYear && todo.monthAndYear.length !== 7)
@@ -128,13 +128,10 @@ export async function rearrangeTodos(user: User, todos: TodoSection[]) {
 }
 
 async function updatePlanning(user: User) {
-  const now = new Date()
   const planning = (await axios.get(`${base}/todo/planning`, {
     headers: getHeaders(user),
     params: {
-      date: `${now.getFullYear()}-${
-        now.getMonth() + 1 < 10 ? `0${now.getMonth() + 1}` : now.getMonth() + 1
-      }-${now.getDate() < 10 ? `0${now.getDate()}` : now.getDate()}`,
+      date: getToday(),
     },
   })).data.planning as boolean
   store.setPlanning(planning)
@@ -146,4 +143,11 @@ function getHeaders(user: User) {
   } else {
     return undefined
   }
+}
+
+export function getToday() {
+  const now = new Date()
+  return `${now.getFullYear()}-${
+    now.getMonth() + 1 < 10 ? `0${now.getMonth() + 1}` : now.getMonth() + 1
+  }-${now.getDate() < 10 ? `0${now.getDate()}` : now.getDate()}`
 }
