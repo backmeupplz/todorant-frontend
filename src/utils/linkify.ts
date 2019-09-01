@@ -31,7 +31,6 @@ export function l(text: string) {
     const parsedUrl = url.parse(
       text.substr(match.index, match.lastIndex - match.index)
     )
-    console.log(parsedUrl)
     elements.push({
       type: 'link',
       url: match.url,
