@@ -21,7 +21,7 @@
               span.caption.grey--text.pl-2 {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
               span.caption.grey--text.pl-2(v-if='todo.skipped') ({{$t('skipped')}})
               v-spacer
-              v-tooltip(:max-width='300' top v-if='!todo.frog')
+              v-tooltip(:max-width='300' top v-if='!todo.frog && !todo.skipped')
                 template(v-slot:activator='{ on }')
                   v-btn(text
                   icon
