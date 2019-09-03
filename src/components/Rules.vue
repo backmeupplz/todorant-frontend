@@ -17,7 +17,7 @@
           text 
           @click='close'
           v-shortkey.once="['esc']"
-          @shortkey='dialog=false') {{$t('cookie.button')}}
+          @shortkey='close') {{$t('cookie.button')}}
 </template>
 
 <script lang="ts">
