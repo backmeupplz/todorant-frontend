@@ -21,7 +21,9 @@
           v-btn(color='blue'
           text 
           @click='save'
-          :loading='loading') {{$t('save')}}
+          :loading='loading'
+          v-shortkey.once="['enter']"
+          @shortkey='save') {{$t('save')}}
 </template>
 
 <script lang="ts">
