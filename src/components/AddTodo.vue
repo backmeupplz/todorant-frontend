@@ -11,7 +11,7 @@
       right
       color='blue'
       v-on="on"
-      v-shortkey.once="['a', 'ф']"
+      v-shortkey.once="{ en: ['a'], ru: ['ф'] }"
       @shortkey='dialog=true')
         v-icon add
     v-form(ref='form')
