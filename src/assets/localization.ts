@@ -104,6 +104,7 @@ export const messages = {
         8: 'You are allowed to skip current task — but try to do so as rarely as possible. You cannot skip a frog. If you failed to complete a task and had to redistribute it twice, it becomes a frog.',
         9: 'If the current task is too high level, then break it down to a list of subtasks. As soon as you break it down, mark the task as completed.',
         10: 'Add as much relevant information about the todo as possible. Add links to specific emails (gmail on web allows you to do this), websites, notes (like evernote), documents (like dropbox), leave phone numbers or add any information you might need to complete the task. Todorant is not meant to be a point of reference for you — instead it should act as a catalogue of links to the reference information relevant to specific todos.',
+        11: 'Feel free to join our multi-language <a target="_blank" href="https://t.me/todorant_feedback">group</a> on Telegram to share experience and tricks on how to be more productive! Your feedback about the service — suggestions, wishes and complaints — are highly welcome.',
       },
       bonus: {
         title: 'Bonus features',
@@ -218,6 +219,7 @@ export const messages = {
         8: 'Вам разрешено пропускать текущую задачу — но делайте это как можно реже. Если вы не смогли выполнить задачу и вам пришлось ее перераспределить дважды — она становится лягушкой.',
         9: 'Если текущая задача слишком высокоуровневая, то разбейте ее на список подзадач. Как только вы разбили задачу на подзадачи, завершите текущую задачу.',
         10: 'Добавляйте настолько много важной информации в задачи, насколько сможете. Добавляйте ссылки на имейлы (gmail позволяет это делать), вебсайты, заметки (как evernote), документы (например, dropbox), оставляйте телефонные номера или добавляйте любую информацию, которая может быть важной для решения задачи. Тудурант не должен быть главным хранилищем и каталогом ваших данных, но местом, где ссылки на необходимые для задач данные, хранятся сразу с определенными задачами.',
+        11: 'Не стесняйтесь присоединяться к нашей <a target="_blank" href="https://t.me/todorant_feedback">группе</a> в Телеграме для обмена опытом о том, как становиться продуктивнее! Ваши отзывы о работе сервиса — предложения, пожелания и жалобы — крайне приветствуются.',
       },
       bonus: {
         title: 'Бонусные функции',
