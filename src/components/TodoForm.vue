@@ -35,7 +35,7 @@
             :rules='dateAndMonthRules')
           v-date-picker(@input='monthMenu = false'
           v-model='todo.monthAndYear'
-          :min='yesterdayFormatted'
+          :min='yesterdayFormattedForDatePicker'
           type='month'
           :locale='$store.state.language')
     v-row
@@ -80,6 +80,12 @@ export default class TodoForm extends Vue {
     return moment(
       new Date(new Date().setDate(new Date().getDate() - 1))
     ).format();
+  }
+
+  get yesterdayFormattedForDatePicker() {
+    const date = new Date(new Date().setDate(new Date().getDate() - 1));
+    date.setMonth(date.getMonth() + 1);
+    return moment(date).format();
   }
 }
 </script>
