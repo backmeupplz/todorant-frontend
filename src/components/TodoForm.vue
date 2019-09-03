@@ -4,7 +4,8 @@
     :label='$t("todo.create.text")'
     :hint='$t("todo.create.textHint")'
     :rules='textRules'
-    v-model='todo.text')
+    v-model='todo.text'
+    autofocus)
     v-row
       v-col(cols='12' md='6')
         v-menu(v-model='dateMenu')
