@@ -38,7 +38,7 @@
                   @click='addTodo'
                   :loading='loading'
                   v-on='on'
-                  v-shortkey.once="['b']"
+                  v-shortkey.once="['b', 'и']"
                   @shortkey='addTodo')
                     v-icon list
                 span {{$t('breakdownInfo')}}
@@ -46,7 +46,7 @@
               icon
               @click='completeTodo'
               :loading='loading'
-              v-shortkey.once="['d']"
+              v-shortkey.once="['d', 'в']"
               @shortkey='completeTodo')
                 v-icon done
         v-list-item-content(v-if='!todo && !loading && !todoUpdating && todosCount > 0').text-center.mt-4

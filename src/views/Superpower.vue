@@ -5,8 +5,8 @@
     v-model='currentTab'
     :fixed-tabs='$vuetify.breakpoint.xsOnly'
     show-arrows)
-      v-tab(v-shortkey.once="['c']" @shortkey='currentTab = 0') {{$t('current')}}
-      v-tab(v-shortkey.once="['p']" @shortkey='currentTab = 1') {{$t('planning')}}
+      v-tab(v-shortkey.once="['c', 'с']" @shortkey='currentTab = 0') {{$t('current')}}
+      v-tab(v-shortkey.once="['p', 'з']" @shortkey='currentTab = 1') {{$t('planning')}}
       v-tabs-items(v-model='currentTab')
         v-tab-item(:value='0')
           CurrentTodo
