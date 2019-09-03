@@ -35,7 +35,7 @@
             :rules='dateAndMonthRules')
           v-date-picker(@input='monthMenu = false'
           v-model='todo.monthAndYear'
-          :min='new Date(new Date().setMonth(new Date().getMonth()+1)).toISOString()'
+          :min='yesterdayFormatted'
           type='month'
           :locale='$store.state.language')
     v-row
