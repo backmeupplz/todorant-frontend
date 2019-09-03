@@ -15,7 +15,9 @@
         v-spacer
         v-btn(color='blue'
           text 
-          @click='close') {{$t('cookie.button')}}
+          @click='close'
+          v-shortkey.once="['esc']"
+          @shortkey='dialog=false') {{$t('cookie.button')}}
 </template>
 
 <script lang="ts">

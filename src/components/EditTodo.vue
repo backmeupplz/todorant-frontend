@@ -15,7 +15,9 @@
           v-btn(color='error'
           text 
           @click='cleanTodo()'
-          :disabled='loading') {{$t('cancel')}}
+          :disabled='loading'
+          v-shortkey.once="['esc']"
+          @shortkey='dialog=false') {{$t('cancel')}}
           v-btn(color='blue'
           text 
           @click='save'
