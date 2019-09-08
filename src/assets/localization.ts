@@ -9,9 +9,9 @@ export const messages = {
     home: {
       info: 'The only todo manager you need',
       pitch:
-        'Hello there! My name is Nikita and I believe I\'ve built the best todo manager based on the knowledge I gained after reading <a target="_blank" href="https://duckduckgo.com/?q=Willpower%3A+Rediscovering+the+Greatest+Human+Strength&atb=v179-1_k&ia=shopping">Willpower</a>, <a target="_blank" href="https://duckduckgo.com/?q=Getting+Things+Done%3A+The+Art+of+Stress-Free+Productivity&atb=v179-1_k&ia=shopping">Getting Things Done</a> and <a target="_blank" href="https://duckduckgo.com/?q=Eat+that+frog&atb=v179-1_k&ia=shopping">Eat That Frog</a> books. I\'ve understood the outlined ideas, simplified them, tested on my personal experience and implemented this simple software solution based on the ideas formulated below. Give it a try and your productivite will rise — or money back guaranteed.',
+        'Hello there! My name is Nikita and I believe I\'ve built the best todo manager based on the knowledge I gained after reading <a target="_blank" href="https://duckduckgo.com/?q=Willpower%3A+Rediscovering+the+Greatest+Human+Strength&atb=v179-1_k&ia=shopping">Willpower</a>, <a target="_blank" href="https://duckduckgo.com/?q=Getting+Things+Done%3A+The+Art+of+Stress-Free+Productivity&atb=v179-1_k&ia=shopping">Getting Things Done</a> and <a target="_blank" href="https://duckduckgo.com/?q=Eat+that+frog&atb=v179-1_k&ia=shopping">Eat That Frog</a> books. I\'ve understood the outlined ideas, simplified them, tested on my personal experience and implemented this simple software solution based on the ideas formulated below. Give it a try and your productivity will rise — or money back guaranteed.',
       ideas: {
-        1: '🥰 Clean mind — your inbox is empty and you only ever work at one task at a time',
+        1: '🥰 Clean mind — your inbox is empty and you only ever work on one task at a time',
         2: "🐸 Eat your frogs first thing in the morning — it's the best time to work on unwanted tasks",
         3: '💃 Skip the current task when you need it',
         4: "🐸 Fail to complete a task twice — and it's a frog",
