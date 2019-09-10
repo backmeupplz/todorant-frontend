@@ -9,9 +9,7 @@ linkify
   .add('#', {
     validate: (text, pos, self) => {
       const tail = text.slice(pos - 1)
-      const result = /[\u0000-\u007F\u0080-\u00FF\u0100-\u017F\u0180-\u024F\u0400-\u04FF\u0500-\u052F]+/u.exec(
-        tail
-      )
+      const result = /[\u0000-\u007F\u0400-\u04FF]+/u.exec(tail)
       return result ? result[0].length : 0
     },
   })
@@ -41,9 +39,7 @@ export function l(text: string) {
       text.substr(match.index, match.lastIndex - match.index)
     )
     elements.push({
-      type: /^#[\u0000-\u007F\u0080-\u00FF\u0100-\u017F\u0180-\u024F\u0400-\u04FF\u0500-\u052F]+$/u.test(
-        match.url
-      )
+      type: /^#[\u0000-\u007F\u0400-\u04FF]+$/u.test(match.url)
         ? 'hash'
         : 'link',
       url: match.url,
