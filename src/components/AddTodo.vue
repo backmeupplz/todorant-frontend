@@ -108,6 +108,7 @@ export default class AddTodo extends Vue {
     this.todos.push({
       date: now.toISOString().substr(0, 10)
     });
+    this.panel = [this.todos.length - 1];
   }
 
   deleteTodo(i: number) {
