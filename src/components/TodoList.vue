@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-container
+  v-container(style='maxWidth: 1000px;')
     v-list(subheader)
       v-list-item(v-if='$store.state.planning').pt-4
         v-flex

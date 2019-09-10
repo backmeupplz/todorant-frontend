@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-container
+  v-container(style='maxWidth: 1000px;')
     v-list
       v-list-item
         v-progress-linear(rounded
