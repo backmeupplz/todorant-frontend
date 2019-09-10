@@ -6,6 +6,13 @@ linkify
   .tlds(require('tlds'))
   .tlds('onion', true)
   .set({ fuzzyIP: true })
+  .add('#', {
+    validate: (text, pos, self) => {
+      const tail = text.slice(pos - 1)
+      const result = /\p{Letter}+/u.exec(tail)
+      return result ? result[0].length : 0
+    },
+  })
 
 export function l(text: string) {
   const matches = linkify.match(text) || []
