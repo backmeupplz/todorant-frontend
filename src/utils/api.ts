@@ -92,12 +92,17 @@ export async function undoTodo(user: User, todo: Todo) {
   )
 }
 
-export async function getTodos(user: User, completed: boolean = false) {
+export async function getTodos(
+  user: User,
+  completed: boolean = false,
+  hash?: string
+) {
   await updatePlanning(user)
   return (await axios.get(`${base}/todo`, {
     headers: getHeaders(user),
     params: {
       completed,
+      hash,
     },
   })).data as Todo[]
 }

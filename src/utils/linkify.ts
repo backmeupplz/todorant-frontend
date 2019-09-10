@@ -39,7 +39,7 @@ export function l(text: string) {
       text.substr(match.index, match.lastIndex - match.index)
     )
     elements.push({
-      type: 'link',
+      type: /^#\p{Letter}+$/u.test(match.url) ? 'hash' : 'link',
       url: match.url,
       value: parsedUrl.hostname
         ? `${parsedUrl.hostname}${

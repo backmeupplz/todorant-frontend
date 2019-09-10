@@ -104,7 +104,11 @@ export default class TodoList extends Vue {
     }
     this.todosUpdating = true;
     try {
-      const fetchedTodos = await getTodos(user, this.showCompleted);
+      const fetchedTodos = await getTodos(
+        user,
+        this.showCompleted,
+        this.$router.currentRoute.hash
+      );
       const mappedTodos = fetchedTodos.reduce(
         (prev, cur) => {
           if (cur.date) {

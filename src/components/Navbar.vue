@@ -5,7 +5,7 @@
     // Navbarand app
     v-app-bar(flat app)
       // Title
-      router-link(:to='$store.state.user ? "/superpower" : "/"')
+      a(@click='goHome')
         v-toolbar-title.text-uppercase.grey--text
           v-tooltip(v-if='$store.state.user' bottom)
             template(v-slot:activator='{ on }')
@@ -42,6 +42,7 @@ import * as store from "../plugins/store";
 import { i18n } from "../plugins/i18n";
 import * as api from "../utils/api";
 import Rules from "./Rules.vue";
+import { serverBus } from "../main";
 
 @Component({
   components: {
@@ -77,6 +78,14 @@ export default class Navbar extends Vue {
   }
   closeRules() {
     this.rulesDialog = false;
+  }
+  async goHome() {
+    try {
+      await this.$router.replace(store.user() ? "/superpower" : "/");
+      serverBus.$emit("refreshRequested");
+    } catch (err) {
+      // Do nothing
+    }
   }
 }
 </script>

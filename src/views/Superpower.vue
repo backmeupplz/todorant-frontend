@@ -41,6 +41,12 @@ import { serverBus } from "../main";
 export default class Superpower extends Vue {
   currentTab = 0;
 
+  mounted() {
+    if (this.$router.currentRoute.hash) {
+      this.currentTab = 1;
+    }
+  }
+
   @Watch("currentTab")
   currentTabChanged(val: any, oldVal: any) {
     if (val !== oldVal) {
