@@ -30,7 +30,7 @@
                 v-expansion-panel-header
                   span {{todo.text || $t('todo.create.placeholder')}}
                 v-expansion-panel-content
-                  TodoForm(:todo='todo')
+                  TodoForm(:todo='todo' :enterPressed='save' ref='todoForm')
                     v-btn(v-if='todos.length > 1'
                     color='error'
                     text
@@ -95,6 +95,11 @@ export default class AddTodo extends Vue {
     if (this.$refs.form) {
       (this.$refs.form as any).resetValidation();
     }
+    setTimeout(() => {
+      if (this.$refs.todoForm && (this.$refs.todoForm as any).length) {
+        (this.$refs.todoForm as any)[0].$refs.textInput.focus();
+      }
+    }, 500);
   }
 
   addTodo() {

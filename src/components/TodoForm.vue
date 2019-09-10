@@ -5,7 +5,9 @@
     :hint='$t("todo.create.textHint")'
     :rules='textRules'
     v-model='todo.text'
-    autofocus)
+    autofocus
+    v-on:keyup.enter="enter"
+    ref='textInput')
     v-row
       v-col(cols='12' md='6')
         v-menu(v-model='dateMenu')
@@ -57,7 +59,8 @@ import moment from "moment";
 
 @Component({
   props: {
-    todo: Object
+    todo: Object,
+    enterPressed: Function
   }
 })
 export default class TodoForm extends Vue {
@@ -87,6 +90,10 @@ export default class TodoForm extends Vue {
     const date = new Date(new Date().setDate(new Date().getDate() - 1));
     date.setMonth(date.getMonth() + 1);
     return moment(date).format();
+  }
+
+  enter() {
+    (this as any).enterPressed();
   }
 }
 </script>
