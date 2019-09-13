@@ -23,6 +23,36 @@ export async function loginTelegram(loginInfo: any) {
   return (await axios.post(`${base}/login/telegram`, loginInfo)).data as User
 }
 
+export async function mergeFacebook(user: User, accessToken: string) {
+  return (await axios.post(
+    `${base}/merge/facebook`,
+    {
+      accessToken,
+    },
+    {
+      headers: getHeaders(user),
+    }
+  )).data as User
+}
+
+export async function mergeGoogle(user: User, accessToken: string) {
+  return (await axios.post(
+    `${base}/merge/google`,
+    {
+      accessToken,
+    },
+    {
+      headers: getHeaders(user),
+    }
+  )).data as User
+}
+
+export async function mergeTelegram(user: User, loginInfo: any) {
+  return (await axios.post(`${base}/merge/telegram`, loginInfo, {
+    headers: getHeaders(user),
+  })).data as User
+}
+
 export async function postTodos(user: User, todos: Partial<Todo>[]) {
   return (await axios.post(
     `${base}/todo`,

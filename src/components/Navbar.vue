@@ -2,6 +2,8 @@
   nav
     // Rules dialog
     Rules(:dialog='rulesDialog' :close='closeRules')
+    // Merge dialog
+    Merge(:dialog='mergeDialog' :close='closeMerge')
     // Navbarand app
     v-app-bar(flat app)
       // Title
@@ -10,15 +12,13 @@
           v-tooltip(v-if='$store.state.user' bottom)
             template(v-slot:activator='{ on }')
               span(v-on='on') {{$t('title')}}
-            span {{$store.state.user.name}}, {{$store.state.user.email || $store.state.user.facebookId || $store.state.user.telegramId}}
+            p {{$store.state.user.name}}
+            p(v-for='identifier in identifiers') {{identifier}}
           span(v-else) {{$t('title')}}
       v-spacer
       // Rules
       v-btn(text icon color='grey' @click='rulesDialog = true')
         v-icon(small) assignment
-      // Dark mode
-      v-btn(text icon color='grey' @click='toggleMode')
-        v-icon(small) brightness_2
       // Language picker
       v-menu(offset-y)
         template(v-slot:activator='{ on }')
@@ -26,13 +26,23 @@
         v-list
           v-list-item(v-for='locale in locales' @click='changeLanguage(locale.code)' :key="locale.code")
             v-list-item-title {{locale.icon}}
-      // Logout
-      v-btn(v-if="$store.state.user"
-      text
-      icon
-      color='grey'
-      @click='logout')
-        v-icon(small) exit_to_app
+      // Extra
+      v-menu(offset-y)
+        template(v-slot:activator='{ on }')
+          v-btn(text icon color='grey' v-on='on')
+            v-icon(small) more_vert
+        v-list
+          // Dark mode
+          v-list-item(@click='toggleMode')
+            v-list-item-title {{$store.state.dark ? $t('menu.darkMode.on') : $t('menu.darkMode.off')}}
+          // Merge accounts
+          v-list-item(@click='mergeDialog = true' 
+          v-if='!!$store.state.user')
+            v-list-item-title {{$t('menu.merge')}}
+          // Logout
+          v-list-item(@click='logout'
+          v-if='!!$store.state.user')
+            v-list-item-title {{$t('menu.logout')}}
 </template>
 
 <script lang="ts">
@@ -42,15 +52,18 @@ import * as store from "../plugins/store";
 import { i18n } from "../plugins/i18n";
 import * as api from "../utils/api";
 import Rules from "./Rules.vue";
+import Merge from "./Merge.vue";
 import { serverBus } from "../main";
 
 @Component({
   components: {
-    Rules
+    Rules,
+    Merge
   }
 })
 export default class Navbar extends Vue {
   rulesDialog = false;
+  mergeDialog = false;
 
   get locales() {
     return [{ icon: "🇺🇸", code: "en" }, { icon: "🇷🇺", code: "ru" }];
@@ -61,6 +74,13 @@ export default class Navbar extends Vue {
         return locale;
       }
     }
+  }
+  get identifiers() {
+    const user = store.user();
+    if (!user) {
+      return "";
+    }
+    return [user.email, user.facebookId, user.telegramId].filter(v => !!v);
   }
 
   toggleMode() {
@@ -78,6 +98,9 @@ export default class Navbar extends Vue {
   }
   closeRules() {
     this.rulesDialog = false;
+  }
+  closeMerge() {
+    this.mergeDialog = false;
   }
   async goHome() {
     try {

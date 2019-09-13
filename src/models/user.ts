@@ -3,7 +3,6 @@ export interface User {
   email?: string
   facebookId?: string
   telegramId?: string
-  vkId?: string
 
   token?: string
 }

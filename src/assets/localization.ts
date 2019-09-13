@@ -26,6 +26,14 @@ export const messages = {
       google: 'Login with Google',
       privacy: 'Privacy policy',
     },
+    menu: {
+      darkMode: {
+        on: 'Dark mode: on',
+        off: 'Dark mode: off',
+      },
+      merge: 'Merge accounts',
+      logout: 'Logout',
+    },
     support:
       'Something isn\'t clear? Contact me at <a target="_blank" href="mailto:n@borodutch.com">n@borodutch.com</a>',
     errors: {
@@ -112,6 +120,14 @@ export const messages = {
       },
     },
     skipped: 'Skipped',
+    merge: {
+      title: 'Merge accounts',
+      description:
+        'You can merge multiple accounts (e.g. Facebook, Google, Telegram) here. Just login to the accounts with the buttons below and the accounts will be merged. Careful: it cannot be undonde and your account will receive all the todos from both accounts.',
+      done:
+        'All done! You can login though Google, Facebook and Telegram to this account. No more buttons left for you.',
+      confirm: 'Are you sure you want to merge {id} into this account?',
+    },
   },
   ru: {
     title: 'Todorant',
@@ -140,6 +156,14 @@ export const messages = {
       facebook: 'Войти через Фейсбук',
       google: 'Войти через Гугл',
       privacy: 'Политика конфиденциальности',
+    },
+    menu: {
+      darkMode: {
+        on: 'Темная тема: вкл',
+        off: 'Темная тема: выкл',
+      },
+      merge: 'Объединить аккаунты',
+      logout: 'Выйти',
     },
     support:
       'Что-то непонятно? Пишите мне на <a target="_blank" href="mailto:n@borodutch.com">n@borodutch.com</a>',
@@ -227,5 +251,13 @@ export const messages = {
       },
     },
     skipped: 'Пропущено',
+    merge: {
+      title: 'Объединить аккаунты',
+      description:
+        'Вы можете объединить разные аккаунты (например, Фейсбук, Гугл, Телеграм) здесь. Просто залогиньтесь в аккаунты, используя кнопки ниже и аккаунты будут объединены. Осторожно: это действие нельзя обратить и списки задач будут также объединены.',
+      done:
+        'Отлично! Вы теперь можете заходить в этот аккаунт через Гугл, Фейсбук и Телеграм. Кончились у нас кнопки для вас.',
+      confirm: 'Уверены, что хотите добавить {id} в этот аккаунт?',
+    },
   },
 }
