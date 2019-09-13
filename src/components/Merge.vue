@@ -6,8 +6,8 @@
     v-card
       v-card-title {{$t('merge.title')}}
       v-card-text
-        span {{$t('merge.description')}}
-        span(v-if='done') {{$t('merge.done')}}
+        p {{$t('merge.description')}}
+        p(v-if='done') {{$t('merge.done')}}
       v-layout(column justify-center align-center).text-center
         vue-telegram-login(mode='callback'
         telegram-login='todorant_bot'
