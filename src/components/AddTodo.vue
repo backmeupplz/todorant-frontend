@@ -32,7 +32,7 @@
                 v-expansion-panel-content
                   TodoForm(:todo='todo'
                   :enterPressed='save'
-                  :escapePressed='dialog = false'
+                  :escapePressed='escapePressed'
                   ref='todoForm')
                     v-btn(v-if='todos.length > 1'
                     color='error'
@@ -151,6 +151,10 @@ export default class AddTodo extends Vue {
     } finally {
       this.loading = false;
     }
+  }
+
+  escapePressed() {
+    this.dialog = false;
   }
 }
 </script>

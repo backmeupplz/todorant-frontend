@@ -12,7 +12,7 @@
             TodoForm(v-if='!!todo'
             :todo='todo'
             :enterPressed='save' 
-            :escapePressed='dialog = false')
+            :escapePressed='escapePressed')
         v-card-actions
           v-spacer
           v-btn(color='error'
@@ -80,6 +80,10 @@ export default class EditTodo extends Vue {
     } finally {
       this.loading = false;
     }
+  }
+
+  escapePressed() {
+    this.dialog = false;
   }
 }
 </script>
