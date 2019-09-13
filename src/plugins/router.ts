@@ -46,7 +46,7 @@ router.beforeEach((to, _, next) => {
     next('/')
   } else {
     if (to.path === '/' && user) {
-      next('/superpower')
+      next({ name: 'superpower', query: to.query })
     } else {
       next()
     }

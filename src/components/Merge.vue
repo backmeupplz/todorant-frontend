@@ -14,15 +14,15 @@
         @callback='onTelegramAuth'
         radius='3'
         :userpic='false'
-        v-if='!user.telegramId')
+        v-if='! user || !user.telegramId')
         g-signin-button(:params='{ client_id: googleClientId }'
         @success='onGoogleSignInSuccess'
         @error='onGoogleSignInError'
-        v-if='!user.email') {{$t("home.google")}}
+        v-if='!user || !user.email') {{$t("home.google")}}
         fb-signin-button(:params='{ scope: "email", return_scopes: true}'
         @success='onFacebookSignInSuccess'
         @error='onFacebookSignInError'
-        v-if='!user.facebookId') {{$t('home.facebook')}}
+        v-if='!user || !user.facebookId') {{$t('home.facebook')}}
       v-card-actions
         v-spacer
         v-btn(color='blue'
@@ -58,7 +58,7 @@ export default class Merge extends Vue {
     if (!user) {
       return false;
     }
-    return !!user.email && user.facebookId && user.telegramId;
+    return !!user.email && !!user.facebookId && !!user.telegramId;
   }
   get user() {
     const user = store.user();

@@ -46,13 +46,14 @@ export default class Superpower extends Vue {
 
   async created() {
     // Try telegram merge
-    if (this.$route.query && this.$route.query.hash) {
+    const query = this.$route.query;
+    if (query && query.hash) {
       const user = store.user();
       if (!user || user.telegramId) {
         return;
       }
       try {
-        const loginInfo = this.$route.query;
+        const loginInfo = query;
         if (
           !confirm(i18n.t("merge.confirm", {
             id: loginInfo.id
@@ -63,6 +64,8 @@ export default class Superpower extends Vue {
         await mergeTelegram(user, loginInfo);
       } catch (err) {
         store.setSnackbarError("errors.login.telegram");
+      } finally {
+        this.$router.replace("/superpower");
       }
     }
   }
@@ -71,8 +74,6 @@ export default class Superpower extends Vue {
     if (this.$router.currentRoute.hash) {
       this.currentTab = 1;
     }
-
-    // http://localhost:8080/?id=76104711&first_name=Nikita&last_name=K&username=borodutch&photo_url=https%3A%2F%2Ft.me%2Fi%2Fuserpic%2F320%2Fg1CvSJ-zoKbvIv7S3EFA6zDsutnjau7S1FGLuHc2z4U.jpg&auth_date=1568336084&hash=693e0a3813a09b014134d4abb1ccba431e4dd8a6855d021eba2b5b62382c140b
   }
 
   @Watch("currentTab")
