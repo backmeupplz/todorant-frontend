@@ -9,7 +9,10 @@
           span.headline {{$t('todo.edit.title')}}
         v-card-text
           v-container
-            TodoForm(v-if='!!todo' :todo='todo' :enterPressed='save')
+            TodoForm(v-if='!!todo'
+            :todo='todo'
+            :enterPressed='save' 
+            :escapePressed='dialog = false')
         v-card-actions
           v-spacer
           v-btn(color='error'

@@ -7,6 +7,7 @@
     v-model='todo.text'
     autofocus
     v-on:keyup.enter="enter"
+    v-on:keyup.esc="escape"
     ref='textInput')
     v-row
       v-col(cols='12' md='6')
@@ -60,7 +61,8 @@ import moment from "moment";
 @Component({
   props: {
     todo: Object,
-    enterPressed: Function
+    enterPressed: Function,
+    escapePressed: Function
   }
 })
 export default class TodoForm extends Vue {
@@ -94,6 +96,10 @@ export default class TodoForm extends Vue {
 
   enter() {
     (this as any).enterPressed();
+  }
+
+  escape() {
+    (this as any).escapePressed();
   }
 }
 </script>

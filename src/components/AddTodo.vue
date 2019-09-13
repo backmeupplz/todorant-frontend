@@ -30,7 +30,10 @@
                 v-expansion-panel-header
                   span {{todo.text || $t('todo.create.placeholder')}}
                 v-expansion-panel-content
-                  TodoForm(:todo='todo' :enterPressed='save' ref='todoForm')
+                  TodoForm(:todo='todo'
+                  :enterPressed='save'
+                  :escapePressed='dialog = false'
+                  ref='todoForm')
                     v-btn(v-if='todos.length > 1'
                     color='error'
                     text
