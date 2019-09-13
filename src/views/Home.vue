@@ -48,7 +48,9 @@ declare const FB: any;
 export default class Home extends Vue {
   created() {
     if (this.$route.query && this.$route.query.hash) {
-      this.onTelegramAuth(this.$route.query);
+      if (!store.user()) {
+        this.onTelegramAuth(this.$route.query);
+      }
     }
   }
 

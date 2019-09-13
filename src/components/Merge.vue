@@ -131,7 +131,7 @@ export default class Merge extends Vue {
       ) {
         return;
       }
-      const user = await mergeTelegram(this.user, loginInfo);
+      await mergeTelegram(this.user, loginInfo);
     } catch (err) {
       store.setSnackbarError("errors.login.telegram");
     } finally {

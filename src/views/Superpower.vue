@@ -36,15 +36,43 @@ import CurrentTodo from "../components/CurrentTodo.vue";
 import AddTodo from "../components/AddTodo.vue";
 import { Watch } from "vue-property-decorator";
 import { serverBus } from "../main";
+import * as store from "../plugins/store";
+import { i18n } from "../plugins/i18n";
+import { mergeTelegram } from "../utils/api";
 
 @Component({ components: { TodoList, AddTodo, CurrentTodo } })
 export default class Superpower extends Vue {
   currentTab = 0;
 
+  async created() {
+    // Try telegram merge
+    if (this.$route.query && this.$route.query.hash) {
+      const user = store.user();
+      if (!user || user.telegramId) {
+        return;
+      }
+      try {
+        const loginInfo = this.$route.query;
+        if (
+          !confirm(i18n.t("merge.confirm", {
+            id: loginInfo.id
+          }) as string)
+        ) {
+          return;
+        }
+        await mergeTelegram(user, loginInfo);
+      } catch (err) {
+        store.setSnackbarError("errors.login.telegram");
+      }
+    }
+  }
+
   mounted() {
     if (this.$router.currentRoute.hash) {
       this.currentTab = 1;
     }
+
+    // http://localhost:8080/?id=76104711&first_name=Nikita&last_name=K&username=borodutch&photo_url=https%3A%2F%2Ft.me%2Fi%2Fuserpic%2F320%2Fg1CvSJ-zoKbvIv7S3EFA6zDsutnjau7S1FGLuHc2z4U.jpg&auth_date=1568336084&hash=693e0a3813a09b014134d4abb1ccba431e4dd8a6855d021eba2b5b62382c140b
   }
 
   @Watch("currentTab")
