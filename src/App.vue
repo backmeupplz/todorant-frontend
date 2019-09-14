@@ -1,12 +1,13 @@
 <template lang="pug">
-  v-app
-    cookie-law(theme='blood-orange'
-    :buttonText='$t("cookie.button")'
-    :message='$t("cookie.message")')
-    Snackbar
-    Navbar
-    v-content
-      router-view
+  div(:style='style')
+    v-app(style='maxWidth: 1000px; margin: auto')
+      cookie-law(theme='blood-orange'
+      :buttonText='$t("cookie.button")'
+      :message='$t("cookie.message")')
+      Snackbar
+      Navbar
+      v-content
+        router-view
 </template>
 
 <script lang="ts">
@@ -17,6 +18,13 @@ const CookieLaw = require("vue-cookie-law");
 
 export default {
   components: { Navbar, CookieLaw, Snackbar },
+  computed: {
+    style: () => {
+      return {
+        "background-color": store.dark() ? "#303030" : "#fafafa"
+      };
+    }
+  },
   created() {
     (this as any).$vuetify.theme.dark = store.dark();
     (document as any)

@@ -5,7 +5,7 @@
     // Merge dialog
     Merge(:dialog='mergeDialog' :close='closeMerge')
     // Navbarand app
-    v-app-bar(flat app)
+    v-app-bar(flat app style='maxWidth: 1000px; margin: auto')
       // Title
       a(@click='goHome')
         v-toolbar-title.text-uppercase.grey--text
