@@ -22,6 +22,7 @@
     "vue-class-component": "^7.0.2",
     "vue-cookie-law": "^1.10.0",
     "vue-facebook-signin-button": "^1.0.1",
+    "vue-flag-icon": "^1.0.6",
     "vue-google-signin-button": "^1.0.2",
     "vue-i18n": "^8.11.1",
     "vue-property-decorator": "^8.1.1",

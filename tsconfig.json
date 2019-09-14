@@ -35,6 +35,7 @@
   "files": [
     "types/shims-tsx.d.ts",
     "types/shims-vue.d.ts",
-    "types/vuedraggable.d.ts"
+    "types/vuedraggable.d.ts",
+    "types/vue-flag-icon.d.ts"
   ]
 }

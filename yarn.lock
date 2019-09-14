@@ -2621,6 +2621,11 @@ find-up@^3.0.0:
   dependencies:
     locate-path "^3.0.0"
 
+flag-icon-css@^2.8.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/flag-icon-css/-/flag-icon-css-2.9.0.tgz#5793c15244e3c63ae36631478a758a3fc29c86be"
+  integrity sha512-SeHvGEB43XFPZiJz6lFFRGHfp+Db+s1qGiClW70cZauQVbPM42wImlNUEuXSXs94kPchz7xvoxP0QK1y6FxLfg==
+
 flush-write-stream@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/flush-write-stream/-/flush-write-stream-1.1.1.tgz#8dd7d873a1babc207d94ead0c2e0e44276ebf2e8"
@@ -6899,6 +6904,13 @@ vue-facebook-signin-button@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/vue-facebook-signin-button/-/vue-facebook-signin-button-1.0.1.tgz#c6aadb160821846f2d7767fb8e691e0b9e682028"
   integrity sha1-xqrbFgghhG8td2f7jmkeC55oICg=
+
+vue-flag-icon@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/vue-flag-icon/-/vue-flag-icon-1.0.6.tgz#0304fdfeebd982a6bf985c633c346ff3c6d2f9d7"
+  integrity sha1-AwT9/uvZgqa/mFxjPDRv88bS+dc=
+  dependencies:
+    flag-icon-css "^2.8.0"
 
 vue-google-signin-button@^1.0.2:
   version "1.0.4"

@@ -7,6 +7,7 @@ import { i18n } from './plugins/i18n'
 import './plugins/facebook'
 import './plugins/google'
 import './plugins/shortkey'
+import './plugins/vue-flag-icon'
 import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = true
