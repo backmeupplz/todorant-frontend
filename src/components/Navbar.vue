@@ -22,8 +22,7 @@
       // Language picker
       v-menu(offset-y)
         template(v-slot:activator='{ on }')
-          v-btn(text icon color='grey' v-on='on')
-            flag(:iso='currentLocale.icon')
+          v-btn(text icon color='grey' v-on='on') {{currentLocale.code}}
         v-list
           v-list-item(v-for='locale in locales' @click='changeLanguage(locale.code)' :key="locale.code")
             v-list-item-title 
