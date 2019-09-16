@@ -160,6 +160,7 @@ export const messages = {
       cancel: 'Cancel subscription',
       cancelConfirm: 'Are you sure you want to cancel your subscription?',
     },
+    moveUp: 'Move to today',
   },
   ru: {
     title: 'Todorant',
@@ -324,5 +325,6 @@ export const messages = {
       cancel: 'Отключить подписку',
       cancelConfirm: 'Вы уверены, что хотите отключить подписку?',
     },
+    moveUp: 'Перенести на сегодня',
   },
 }

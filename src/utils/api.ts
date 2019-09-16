@@ -204,3 +204,13 @@ export function getToday() {
     now.getMonth() + 1 < 10 ? `0${now.getMonth() + 1}` : now.getMonth() + 1
   }-${now.getDate() < 10 ? `0${now.getDate()}` : now.getDate()}`
 }
+
+export function getTomorrow() {
+  const tomorrow = new Date()
+  tomorrow.setDate(tomorrow.getDate() + 1)
+  return `${tomorrow.getFullYear()}-${
+    tomorrow.getMonth() + 1 < 10
+      ? `0${tomorrow.getMonth() + 1}`
+      : tomorrow.getMonth() + 1
+  }-${tomorrow.getDate() < 10 ? `0${tomorrow.getDate()}` : tomorrow.getDate()}`
+}

@@ -35,12 +35,23 @@
                     span {{todo._id}}
                   span.caption.grey--text.pl-2(v-if='todo.skipped') ({{$t('skipped')}})
                   v-spacer
-                  v-btn(text icon @click='deleteTodo(todo)' :loading='loading' v-if='!editable')
-                    v-icon delete
-                  v-btn(text icon @click='editTodo(todo)' :loading='loading' v-if='!editable')
-                    v-icon edit
-                  v-btn(text icon @click='completeOrUndoTodo(todo)' :loading='loading' v-if='!editable')
-                    v-icon {{todo.completed ? 'repeat' : 'done'}}
+                  v-tooltip(bottom v-if='todoInFuture(todo)')
+                    template(v-slot:activator='{ on }')
+                      v-btn(text
+                      small
+                      icon
+                      @click='moveTodoToToday(todo)'
+                      :loading='loading'
+                      v-if='!editable'
+                      v-on='on')
+                        v-icon(small) vertical_align_top
+                    span {{$t('moveUp')}}
+                  v-btn(text small icon @click='deleteTodo(todo)' :loading='loading' v-if='!editable')
+                    v-icon(small) delete
+                  v-btn(text small icon @click='editTodo(todo)' :loading='loading' v-if='!editable')
+                    v-icon(small) edit
+                  v-btn(text small icon @click='completeOrUndoTodo(todo)' :loading='loading' v-if='!editable')
+                    v-icon(small) {{todo.completed ? 'repeat' : 'done'}}
     EditTodo(:todo='todoEdited' :cleanTodo='cleanTodo')
     DeleteTodo(:todo='todoDeleted')
 </template>
@@ -93,6 +104,10 @@ export default class TodoList extends Vue {
     serverBus.$on("refreshRequested", () => {
       this.updateTodos();
     });
+  }
+
+  todoInFuture(todo: Todo) {
+    return !isTodoOld(todo, api.getTomorrow());
   }
 
   todosUpdating = false;
@@ -168,6 +183,27 @@ export default class TodoList extends Vue {
     propsTodo.date = `${propsTodo.monthAndYear}-${propsTodo.date}`;
     propsTodo.monthAndYear = undefined;
     this.todoEdited = propsTodo;
+  }
+
+  async moveTodoToToday(todo: Todo) {
+    const user = store.user();
+    if (!user) {
+      return;
+    }
+    this.loading = true;
+    try {
+      const today = api.getToday();
+      const monthAndYear = today.substr(0, 7);
+      const date = today.substr(8);
+      todo.monthAndYear = monthAndYear;
+      todo.date = date;
+      await api.editTodo(user, todo);
+      this.updateTodos();
+    } catch (err) {
+      store.setSnackbarError(err.response ? err.response.data : err.message);
+    } finally {
+      this.loading = false;
+    }
   }
 
   async deleteTodo(todo: Todo) {
