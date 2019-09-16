@@ -7,7 +7,8 @@ export const messages = {
         'This website uses cookies. We do not track you. But Facebook might.',
     },
     home: {
-      info: 'The only todo manager you need',
+      info:
+        'Use cognitive psychology to trick your brain into getting things done with the only To Do manager you will ever need',
       pitch:
         'Hello there! My name is Nikita and I believe I\'ve built the best todo manager based on the knowledge I gained after reading <a target="_blank" href="https://duckduckgo.com/?q=Willpower%3A+Rediscovering+the+Greatest+Human+Strength&atb=v179-1_k&ia=shopping">Willpower</a>, <a target="_blank" href="https://duckduckgo.com/?q=Getting+Things+Done%3A+The+Art+of+Stress-Free+Productivity&atb=v179-1_k&ia=shopping">Getting Things Done</a> and <a target="_blank" href="https://duckduckgo.com/?q=Eat+that+frog&atb=v179-1_k&ia=shopping">Eat That Frog</a> books. I\'ve understood the outlined ideas, simplified them, tested on my personal experience and implemented this simple software solution based on the ideas formulated below. Give it a try and your productivity will rise — or money back guaranteed.',
       ideas: {
@@ -170,8 +171,8 @@ export const messages = {
         'Этот вебсайт использует печеньки. Мы не следим за вами. Но Фейсбук, возможно, следит.',
     },
     home: {
-      info: 'Единственный менеджер задач, который вам нужен',
-
+      info:
+        'Используйте когнитивную психологию, чтобы завершать дела в единственном менеджере задач, который вам когда-либо будет нужен',
       pitch:
         'Привет! Меня зовут Никита, и я, похоже, создал лучший менеджер задач на основе знаний, которые я почерпнул из книг <a htarget="_blank" href="https://duckduckgo.com/?q=%D0%A1%D0%B8%D0%BB%D0%B0+%D0%B2%D0%BE%D0%BB%D0%B8.+%D0%92%D0%BE%D0%B7%D1%8C%D0%BC%D0%B8+%D1%81%D0%B2%D0%BE%D1%8E+%D0%B6%D0%B8%D0%B7%D0%BD%D1%8C+%D0%BF%D0%BE%D0%B4+%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D1%8C&atb=v179-1_k&ia=web">Willpower</a>, <a target="_blank" href="https://duckduckgo.com/?q=%D0%9A%D0%B0%D0%BA+%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B8%D0%B2%D0%B0%D1%82%D1%8C+%D0%B4%D0%B5%D0%BB%D0%B0+%D0%B2+%D0%BF%D0%BE%D1%80%D1%8F%D0%B4%D0%BA%D0%B5.+%D0%9F%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF%D1%8B+%D0%BF%D0%BE%D0%BB%D0%BD%D0%BE%D1%86%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9+%D0%B6%D0%B8%D0%B7%D0%BD%D0%B8+%D0%B1%D0%B5%D0%B7+%D1%81%D1%82%D1%80%D0%B5%D1%81%D1%81%D0%B0&atb=v179-1_k&ia=web">Getting Things Done</a> и <a target="_blank" href="https://duckduckgo.com/?q=%D0%9E%D1%81%D1%82%D0%B0%D0%B2%D1%8C%D1%82%D0%B5+%D0%B1%D1%80%D0%B5%D0%B7%D0%B3%D0%BB%D0%B8%D0%B2%D0%BE%D1%81%D1%82%D1%8C%2C+%D1%81%D1%8A%D0%B5%D1%88%D1%8C%D1%82%D0%B5+%D0%BB%D1%8F%D0%B3%D1%83%D1%88%D0%BA%D1%83&atb=v179-1_k">Eat That Frog</a>. Я разобрался в представленных идеях, упростил их, попробовал на себе и разработал этот вебсайт, основываясь на постулатах ниже. Попробуйте, и ваша продуктивность взлетит до небес — ну или я просто верну вам деньги.',
       ideas: {
