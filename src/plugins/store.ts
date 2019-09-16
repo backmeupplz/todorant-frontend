@@ -3,6 +3,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { User } from '../models/user'
 import createPersistedState from 'vuex-persistedstate'
+import { daysBetween } from '@/utils/daysBetween'
 
 Vue.use(Vuex)
 
@@ -11,7 +12,8 @@ export interface State {
   snackbar: SnackbarState
   language?: String
   dark: Boolean
-  planning: Boolean
+  userState: UserState
+  rulesShown: Boolean
 }
 
 interface LocalizedError {
@@ -25,6 +27,20 @@ interface SnackbarState {
   color: String
 }
 
+export enum SubscriptionStatus {
+  earlyAdopter = 'earlyAdopter',
+  active = 'active',
+  trial = 'trial',
+  inactive = 'inactive',
+}
+
+export interface UserState {
+  planning: Boolean
+  subscriptionStatus: SubscriptionStatus
+  createdAt: Date
+  subscriptionIdExists: Boolean
+}
+
 const storeOptions = {
   state: {
     user: undefined,
@@ -35,7 +51,13 @@ const storeOptions = {
     },
     language: undefined,
     dark: false,
-    planning: false,
+    userState: {
+      planning: false,
+      subscriptionStatus: SubscriptionStatus.inactive,
+      createdAt: new Date(),
+      subscriptionIdExists: false,
+    },
+    rulesShown: false,
   },
   mutations: {
     setUser(state: State, user: User) {
@@ -53,8 +75,11 @@ const storeOptions = {
     setDark(state: State, dark: Boolean) {
       state.dark = dark
     },
-    setPlanning(state: State, planning: Boolean) {
-      state.planning = planning
+    setUserState(state: State, userState: UserState) {
+      state.userState = userState
+    },
+    setRulesShown(state: State, rulesShown: Boolean) {
+      state.rulesShown = rulesShown
     },
   },
   getters: {
@@ -62,7 +87,8 @@ const storeOptions = {
     snackbar: (state: State) => state.snackbar,
     language: (state: State) => state.language,
     dark: (state: State) => state.dark,
-    planning: (state: State) => state.planning,
+    userState: (state: State) => state.userState,
+    rulesShown: (state: State) => state.rulesShown,
   },
   plugins: [createPersistedState()],
 }
@@ -76,7 +102,8 @@ export const user = () => getters.user as User | undefined
 export const snackbar = () => getters.snackbar as SnackbarState
 export const language = () => getters.language as string | undefined
 export const dark = () => getters.dark as boolean
-export const planning = () => getters.planning as boolean
+export const userState = () => getters.userState as UserState
+export const rulesShown = () => getters.rulesShown as Boolean
 
 // Mutations
 export const setUser = (user: User) => {
@@ -104,9 +131,19 @@ export const setDark = (dark: Boolean) => {
     .setAttribute('content', dark ? '#303030' : '#fafafa')
   store.commit('setDark', dark)
 }
-export const setPlanning = (planning: Boolean) => {
-  store.commit('setPlanning', planning)
+export const setUserState = (userState: UserState) => {
+  userState.createdAt = new Date(userState.createdAt)
+  if (
+    userState.subscriptionStatus === SubscriptionStatus.trial &&
+    daysBetween(userState.createdAt, new Date()) > 30
+  ) {
+    userState.subscriptionStatus = SubscriptionStatus.inactive
+  }
+  store.commit('setUserState', userState)
 }
 export const logout = () => {
   store.commit('logout')
+}
+export const setRulesShown = (rulesShown: Boolean) => {
+  store.commit('setRulesShown', rulesShown)
 }

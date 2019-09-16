@@ -4,6 +4,8 @@
     Rules(:dialog='rulesDialog' :close='closeRules')
     // Merge dialog
     Merge(:dialog='mergeDialog' :close='closeMerge')
+    // Subscription dialog
+    Subscription(:dialog='subscriptionDialog' :close='closeSubscription')
     // Navbarand app
     v-app-bar(flat app style='maxWidth: 1000px; margin: auto')
       // Title
@@ -40,6 +42,10 @@
           v-list-item(@click='mergeDialog = true' 
           v-if='!!$store.state.user')
             v-list-item-title {{$t('menu.merge')}}
+          // Subscription
+          v-list-item(@click='subscriptionDialog = true' 
+          v-if='!!$store.state.user')
+            v-list-item-title {{$t('subscription.title')}}
           // Logout
           v-list-item(@click='logout'
           v-if='!!$store.state.user')
@@ -54,17 +60,20 @@ import { i18n } from "../plugins/i18n";
 import * as api from "../utils/api";
 import Rules from "./Rules.vue";
 import Merge from "./Merge.vue";
+import Subscription from "./Subscription.vue";
 import { serverBus } from "../main";
 
 @Component({
   components: {
     Rules,
-    Merge
+    Merge,
+    Subscription
   }
 })
 export default class Navbar extends Vue {
   rulesDialog = false;
   mergeDialog = false;
+  subscriptionDialog = false;
 
   get locales() {
     return [{ icon: "us", code: "en" }, { icon: "ru", code: "ru" }];
@@ -84,6 +93,18 @@ export default class Navbar extends Vue {
     return [user.email, user.facebookId, user.telegramId].filter(v => !!v);
   }
 
+  created() {
+    serverBus.$on("subscriptionRequested", () => {
+      this.subscriptionDialog = true;
+    });
+  }
+  mounted() {
+    if (!store.rulesShown()) {
+      this.rulesDialog = true;
+      store.setRulesShown(true);
+    }
+  }
+
   toggleMode() {
     store.setDark(!store.dark());
     (this.$vuetify.theme as any).dark = store.dark();
@@ -95,6 +116,7 @@ export default class Navbar extends Vue {
   }
   logout() {
     store.logout();
+    (window as any).gapi.auth2.signOut();
     this.$router.replace("/");
   }
   closeRules() {
@@ -102,6 +124,9 @@ export default class Navbar extends Vue {
   }
   closeMerge() {
     this.mergeDialog = false;
+  }
+  closeSubscription() {
+    this.subscriptionDialog = false;
   }
   async goHome() {
     try {

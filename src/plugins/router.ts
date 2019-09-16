@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 import Superpower from '../views/Superpower.vue'
 import NotFound from '../views/NotFound.vue'
 import Privacy from '../views/Privacy.vue'
+import Payment from '../views/Payment.vue'
 import { store } from './store'
 
 Vue.use(Router)
@@ -26,6 +27,22 @@ const router = new Router({
       path: '/superpower',
       name: 'superpower',
       component: Superpower,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/payment_success',
+      name: 'payment_success',
+      component: Payment,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: '/payment_failure',
+      name: 'payment_failure',
+      component: Payment,
       meta: {
         requiresAuth: true,
       },

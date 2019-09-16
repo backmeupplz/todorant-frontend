@@ -1,59 +1,59 @@
 <template lang="pug">
-  v-dialog(v-model='dialog'
-  persistent
-  scrollable
-  max-width='600px')
-    template(v-slot:activator='{ on }')
-      v-btn(fixed
-      dark
-      fab
-      bottom
-      right
-      color='blue'
-      v-on="on"
-      v-shortkey.once="{ en: ['a'], ru: ['ф'] }"
-      @shortkey='dialog=true')
-        v-icon add
-    v-form(ref='form')
-      v-card
-        v-card-title
-          span.headline {{$t('todo.create.title')}}
-          v-spacer
-          v-tooltip(bottom :max-width='300')
-            template(v-slot:activator='{ on }')
-              v-icon(v-on='on') info
-            span {{$t('todo.create.tooltip')}}
-        v-card-text
-          v-container
-            v-expansion-panels(multiple v-model='panel')
-              v-expansion-panel(v-for='(todo, i) in todos' :key='i')
-                v-expansion-panel-header
-                  span {{todo.text || $t('todo.create.placeholder')}}
-                v-expansion-panel-content
-                  TodoForm(:todo='todo'
-                  :enterPressed='save'
-                  :escapePressed='escapePressed'
-                  ref='todoForm')
-                    v-btn(v-if='todos.length > 1'
-                    color='error'
-                    text
-                    @click='deleteTodo(i)') {{$t('delete')}}
-        v-card-actions
-          v-btn(color='blue' text @click='addTodo')
-            v-icon add
-          v-spacer
-          v-btn(color='error'
-          text 
-          @click='dialog = false'
-          :disabled='loading'
-          v-shortkey.once="['esc']"
-          @shortkey='dialog=false') {{$t('cancel')}}
-          v-btn(color='blue'
-          text 
-          @click='save'
-          :loading='loading'
-          v-shortkey.once="['enter']"
-          @shortkey='save') {{$t('save')}}
+  div
+    v-btn(fixed
+    dark
+    fab
+    bottom
+    right
+    color='blue'
+    @click='openDialog'
+    v-shortkey.once="{ en: ['a'], ru: ['ф'] }"
+    @shortkey='openDialog')
+      v-icon add
+    v-dialog(v-model='dialog'
+    persistent
+    scrollable
+    max-width='600px')
+      v-form(ref='form')
+        v-card
+          v-card-title
+            span.headline {{$t('todo.create.title')}}
+            v-spacer
+            v-tooltip(bottom :max-width='300')
+              template(v-slot:activator='{ on }')
+                v-icon(v-on='on') info
+              span {{$t('todo.create.tooltip')}}
+          v-card-text
+            v-container
+              v-expansion-panels(multiple v-model='panel')
+                v-expansion-panel(v-for='(todo, i) in todos' :key='i')
+                  v-expansion-panel-header
+                    span {{todo.text || $t('todo.create.placeholder')}}
+                  v-expansion-panel-content
+                    TodoForm(:todo='todo'
+                    :enterPressed='save'
+                    :escapePressed='escapePressed'
+                    ref='todoForm')
+                      v-btn(v-if='todos.length > 1'
+                      color='error'
+                      text
+                      @click='deleteTodo(i)') {{$t('delete')}}
+          v-card-actions
+            v-btn(color='blue' text @click='addTodo')
+              v-icon add
+            v-spacer
+            v-btn(color='error'
+            text 
+            @click='dialog = false'
+            :disabled='loading'
+            v-shortkey.once="['esc']"
+            @shortkey='dialog=false') {{$t('cancel')}}
+            v-btn(color='blue'
+            text 
+            @click='save'
+            :loading='loading'
+            v-shortkey.once="['enter']"
+            @shortkey='save') {{$t('save')}}
 </template>
 
 <script lang="ts">
@@ -88,6 +88,16 @@ export default class AddTodo extends Vue {
   onDialogChanged(val: boolean, oldVal: boolean) {
     if (!oldVal && val) {
       this.reset();
+    }
+  }
+
+  openDialog() {
+    if (
+      store.userState().subscriptionStatus === store.SubscriptionStatus.inactive
+    ) {
+      serverBus.$emit("subscriptionRequested");
+    } else {
+      this.dialog = true;
     }
   }
 

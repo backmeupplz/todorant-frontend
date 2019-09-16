@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     // Tabs (panning = false)
-    v-tabs(v-if='!$store.state.planning'
+    v-tabs(v-if='!$store.state.userState.planning'
     v-model='currentTab'
     :fixed-tabs='$vuetify.breakpoint.xsOnly'
     show-arrows)

@@ -127,7 +127,7 @@ export async function getTodos(
   completed: boolean = false,
   hash?: string
 ) {
-  await updatePlanning(user)
+  await updateState(user)
   return (await axios.get(`${base}/todo`, {
     headers: getHeaders(user),
     params: {
@@ -138,7 +138,7 @@ export async function getTodos(
 }
 
 export async function getCurrentTodo(user: User) {
-  await updatePlanning(user)
+  await updateState(user)
   const now = new Date()
   return (await axios.get(`${base}/todo/current`, {
     headers: getHeaders(user),
@@ -162,14 +162,32 @@ export async function rearrangeTodos(user: User, todos: TodoSection[]) {
   )
 }
 
-async function updatePlanning(user: User) {
-  const planning = (await axios.get(`${base}/todo/planning`, {
+export enum Plan {
+  monthly = 'monthly',
+  yearly = 'yearly',
+}
+export async function getPlanSession(user: User, plan: Plan) {
+  return (await axios.get(`${base}/subscription/session/${plan}`, {
+    headers: getHeaders(user),
+  })).data as {
+    session: string
+  }
+}
+
+export async function cancelSubscription(user: User) {
+  return axios.post(`${base}/subscription/cancel`, undefined, {
+    headers: getHeaders(user),
+  })
+}
+
+async function updateState(user: User) {
+  const userState = (await axios.get(`${base}/state`, {
     headers: getHeaders(user),
     params: {
       date: getToday(),
     },
-  })).data.planning as boolean
-  store.setPlanning(planning)
+  })).data as store.UserState
+  store.setUserState(userState)
 }
 
 function getHeaders(user: User) {

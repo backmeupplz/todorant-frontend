@@ -1,7 +1,7 @@
 <template lang="pug">
   v-container(style='maxWidth: 1000px;')
     v-list(subheader)
-      v-list-item(v-if='$store.state.planning').pt-4
+      v-list-item(v-if='$store.state.userState.planning').pt-4
         v-flex
           v-alert(text color='info' icon='info') {{$t('todo.planning')}}
       v-list-item
@@ -9,6 +9,8 @@
         v-spacer
         v-btn(v-if='!editable' icon :loading='todosUpdating' @click='editable = true')
           v-icon edit
+        v-btn(v-if='!!editable' icon :loading='todosUpdating || loading' @click='editable = false')
+          v-icon clear
         v-btn(v-if='!!editable' icon :loading='todosUpdating || loading' @click='doneEditing' color='green')
           v-icon done
         v-btn(icon :loading='todosUpdating' @click='updateTodos')
@@ -33,11 +35,11 @@
                     span {{todo._id}}
                   span.caption.grey--text.pl-2(v-if='todo.skipped') ({{$t('skipped')}})
                   v-spacer
-                  v-btn(text icon @click='deleteTodo(todo)' :loading='loading')
+                  v-btn(text icon @click='deleteTodo(todo)' :loading='loading' v-if='!editable')
                     v-icon delete
-                  v-btn(text icon @click='editTodo(todo)' :loading='loading')
+                  v-btn(text icon @click='editTodo(todo)' :loading='loading' v-if='!editable')
                     v-icon edit
-                  v-btn(text icon @click='completeOrUndoTodo(todo)' :loading='loading')
+                  v-btn(text icon @click='completeOrUndoTodo(todo)' :loading='loading' v-if='!editable')
                     v-icon {{todo.completed ? 'repeat' : 'done'}}
     EditTodo(:todo='todoEdited' :cleanTodo='cleanTodo')
     DeleteTodo(:todo='todoDeleted')

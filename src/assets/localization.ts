@@ -19,6 +19,7 @@ export const messages = {
         6: "👀 No lost todo's — you always attach a day or a month to a created todo",
         7: '1️⃣ First day of a month? Plan before you start working',
         8: '⏳ Task takes less then 2 minutes? Do it now and record',
+        9: '💰 Pricing is simple: first month for free and then $5/month for infinite productivity!',
       },
       action:
         'Ready to boost your productivity? 💪 Click a button bellow to start using Todorant!',
@@ -129,6 +130,36 @@ export const messages = {
         'All done! You can login though Google, Facebook and Telegram to this account. No more buttons left for you.',
       confirm: 'Are you sure you want to merge {id} into this account?',
     },
+    subscription: {
+      title: 'Subscription',
+      statusText: 'Subscription status: {status}',
+      earlyAdopter: 'Early adopter 🦄',
+      trial: 'Trial',
+      active: 'Active',
+      inactive: 'Inactive',
+      earlyAdopterDescription:
+        '👏👏 — this is me applauding you; you — the crazy ones who agreed to try out the instrument of ever increasing productivity, Todorant, among the first. One can say that you are the golden thousand, feedback of whom was shaping the Todorant from the very beginning. You have all the rights to use Todorant as much as you wish — you will never experience any limits, you have earned it. However, if you noticed that Todorant has drastically improved your life — you can still buy the subscription thus saying the best kind of "Thank you". You will never loose the "Early adopter 🦄" status — but will always be able to cancel the subscription. Thank you a lot for still using Todorant — and I will keep adding new features improving the product that positively affects all of us. Good luck!',
+      earlyAdopterBonus:
+        '🤗 Holy &*%$! Looks like either Todorant or I personally helped you enough that you purchased subscription even though you could use Todorant for free forever. I am deeply touched and happy to have a cup of coffee with you or just to chat a little. Feel free to reach me on Telegram (@borodutch) or by email — just click my name below. Thank you a lot! It is hard to imagine how important your contribution is!',
+      trialDescription:
+        '💪 Welcome to Todorant! You have 30 days after the registration to figure out whether Todorant works well for you. After 30 days will pass, you will still have access to the old tasks but will not be able to add new ones. It is perfectly fine to purchase subscription before 30 days end. I believe that using Todorant will bring you new heights in the personal productivity!',
+      activeDescription:
+        '🎉 Thank you a lot for supporting Todorant! I personally hope that Todorant has improved your life already and will keep making it better in future! You support allows me to work on Todorant daily and to add new features simplifying the work and freeing your time and your cognitive resources. Thank you a lot, again!',
+      inactiveDescription:
+        '🐝 It looks like your Todorant trial has come to the end. This is the awkward moment when you have to decide — whether Todorant has improved your life enough to spend money on it — and I have to navigate you towards the right decision. I am at the peak of my happines when I am able to bring value to the people; and if Todorant was able to make your life better, I will be more than thankful if you buy the subscription. It is just $5/month for the unlimited productivity and free mind. Every cent I earn on Todorant will be spent on improving the service. By supporting Todorant — you allow me, independent developer, to keep improving the product that benefits us all from day to day. Thank you a lot in advance!',
+      signature: 'Nikita Kolmogorov, Todorant creator',
+      daysLeft: '(days left: {daysLeft})',
+      5: '$5/month',
+      50: '$50/year',
+      success: 'You have successfuly subscribed!',
+      payment: {
+        success: '✅ You are all done! Enjoy unlimited Todorant experience 💪',
+        failure: '✋ Wait, something went wrong. Maybe you could retry? 😳',
+        back: 'Head back to productivity!',
+      },
+      cancel: 'Cancel subscription',
+      cancelConfirm: 'Are you sure you want to cancel your subscription?',
+    },
   },
   ru: {
     title: 'Todorant',
@@ -150,7 +181,8 @@ export const messages = {
         5: '☁ Слишком широкая задача? Разбейте ее на подзадачи одним кликом',
         6: '👀 Нет забытых задач — вы всегда добавляете день или месяц при создании задачи',
         7: '1️⃣ Первый день месяца? Планируйте перед началом работы',
-        8: '⏳Задача занимает меньше 2 минут? Сделайте ее и запишите',
+        8: '⏳ Задача занимает меньше 2 минут? Сделайте ее и запишите',
+        9: '💰 Цена простая: первый месяц бесплатно, а дальше $5/месяц за бесконечную продуктивность!',
       },
       action:
         'Готовы взорвать свою продуктивность? 💪 Жмите кнопку ниже, чтобы начать пользоваться Todorant!',
@@ -260,6 +292,37 @@ export const messages = {
       done:
         'Отлично! Вы теперь можете заходить в этот аккаунт через Гугл, Фейсбук и Телеграм. Кончились у нас кнопки для вас.',
       confirm: 'Уверены, что хотите добавить {id} в этот аккаунт?',
+    },
+    subscription: {
+      title: 'Подписка',
+      statusText: 'Статус подписки: {status}',
+      earlyAdopter: 'Ранний адоптер 🦄',
+      trial: 'Триал',
+      active: 'Активная',
+      inactive: 'Неактивная',
+      earlyAdopterDescription:
+        '👏👏 — это я хлопаю вам стоя; вы — безумцы, которые согласились попробовать инструмент повышения персональной продуктивности Тудурант одними из первых. Можно сказать, вы — золотая тысяча пользователей, на отзывах которых и создавался Тудурант. Вы имеете полное право пользоваться Тудурантом столько, сколько вам угодно — для этого аккаунта никогда не будет введено никаких ограничений, вы заслужили это. Однако если вы заметили, что Тудурант резко изменил вашу жизнь к лучшему — вы все еще можете приобрести подписку, тем самым сказав простое, но очень важное для меня лично: "Спасибо". Вы никогда не потеряете статус "Ранний адоптер 🦄" — а подписку сможете отменить в любой момент. Спасибо большое, что вы продолжаете пользоваться Тудурантом — а я продолжу добавлять приятные функции в этот инструмент, который делает каждого из нас лучше. Удачи!',
+      earlyAdopterBonus:
+        '🤗 Вот это да! Должно быть, либо Тудурант, либо я лично вам настолько помог, что, даже имея возможность пользоваться Тудурантом бесплатно, вы решили меня поддержать. Я поражен прямо в сердце и с удовольствием попью с вами кофе или просто поболтаю по душам. Пишите либо мне в телеграме (@borodutch), либо на почту — просто нажмите на мое имя ниже. Спасибо вам огромное! Сложно представить, насколько для меня важен ваш вклад!',
+      trialDescription:
+        '💪 Добро пожаловать в Тудурант! С момента регистрации у вас есть ровно 30 дней для того, чтобы опробовать систему и понять, подходит ли она вам. По истечении 30 дней вы все еще будете иметь доступ к существующим задачам, но не сможете добавлять новые. Если что, то никто не мешает вам оформить подписку до окончания триального периода в 30 дней. Я уверен, что вместе с Тудурантом вы сможете достичь новых высот в собственной продуктивности!',
+      activeDescription:
+        '🎉 Огромное спасибо за поддержку Тудуранта! Я лично надеюсь, что Тудурант достаточно изменил вашу жизнь и будет помогать ее улучшать изо дня в день в будущем! Ваша поддержка помогает мне заниматься Тудурантом на постоянной основе и добавлять новые функции, упрощающие работу и освобождающие вам время и когнитивные ресурсы. Спасибо вам еще раз!',
+      inactiveDescription:
+        '🐝 Похоже, ваш триал Тудуранта подошел к концу. Это тот самый неловкий момент, когда вам нужно сделать решение — настолько ли вам помог Тудурант, чтобы начать использовать его на постоянной основе; а мне нужно подтолкнуть вас в сторону правильного решения. Вершина моего счастья — это приносить пользу людям; а если Тудурант и вправду стал неотъемлемой частью вашей жизни, то я буду невероятно благодарен вам, если вы приобретете подписку. Всего $5/месяц — это цена бесконечной продуктивности и свободной головы. Каждый цент, который я получу с Тудуранта, я буду направлять на развитие этого сервиса. Поддержав Тудурант, вы лично поможете независимому разработчику ежедневно улучшать продукт, которым вы пользуетесь на постоянной основе. Заранее благодарю вас!',
+      signature: 'Никита Колмогоров, создатель Тудуранта',
+      daysLeft: '(осталось дней: {daysLeft})',
+      5: '$5/месяц',
+      50: '$50/год',
+      success: 'Подписка приобретена успешно!',
+      payment: {
+        success:
+          '✅ У вас получилось! Наслаждайтесь неограниченным Тудурантом 💪',
+        failure: '✋ Ох! Что-то пошло не так. Может, попробуете еще раз? 😳',
+        back: 'Вернуться к продуктивности!',
+      },
+      cancel: 'Отключить подписку',
+      cancelConfirm: 'Вы уверены, что хотите отключить подписку?',
     },
   },
 }

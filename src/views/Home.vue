@@ -6,7 +6,7 @@
         .headline.pb-4
           span(v-html='$t("home.info")')
         p(v-html='$t("home.pitch")')
-        p(v-for='index in [1, 2, 3, 4, 5, 6, 7, 8]') {{$t(`home.ideas.${index}`)}}
+        p(v-for='index in [1, 2, 3, 4, 5, 6, 7, 8, 9]') {{$t(`home.ideas.${index}`)}}
         p {{$t("home.action")}}
         
       v-flex.pt-4
