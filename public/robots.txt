@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /superpower
+Disallow: /payment_success
+Disallow: /payment_failure
