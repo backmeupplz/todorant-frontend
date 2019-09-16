@@ -116,7 +116,6 @@ export default class Navbar extends Vue {
   }
   logout() {
     store.logout();
-    (window as any).gapi.auth2.signOut();
     this.$router.replace("/");
   }
   closeRules() {
