@@ -8,8 +8,8 @@
     autofocus
     v-on:keyup.enter="enter"
     v-on:keyup.esc="escape"
-    ref='textInput')
-    v-row
+    ref='textInput').pb-4
+    v-row(no-gutters)
       v-col(cols='12' md='6')
         v-menu(v-model='dateMenu')
           template(v-slot:activator='{ on }')
@@ -42,7 +42,7 @@
           :min='yesterdayFormattedForDatePicker'
           type='month'
           :locale='$store.state.language')
-    v-row
+    v-row(no-gutters)
       v-col(cols='12' md='6')
         v-switch(:label='$t("todo.create.frog")' v-model='todo.frog')
       v-col(cols='12' md='6')
@@ -103,3 +103,10 @@ export default class TodoForm extends Vue {
   }
 }
 </script>
+
+<style>
+.v-input {
+  padding: 0;
+  margin: 0;
+}
+</style>
