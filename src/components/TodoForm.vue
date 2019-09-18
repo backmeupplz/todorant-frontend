@@ -18,13 +18,12 @@
             :label="$t('todo.create.date')"
             prepend-icon="event"
             v-on='on'
-            v-model='date'
+            v-model='todo.date'
             :disabled='!!todo.monthAndYear'
             :rules='dateAndMonthRules'
-            @click:prepend='setDateToToday'
             ref='dateInput')
           v-date-picker(@input='dateMenu = false'
-          v-model='date'
+          v-model='todo.date'
           :min='yesterdayFormatted'
           :first-day-of-week='$store.state.language === "ru" ? 1 : 0'
           :locale='$store.state.language')
@@ -71,13 +70,6 @@ export default class TodoForm extends Vue {
   dateMenu = false;
   monthMenu = false;
 
-  get date() {
-    return (this as any).todo.date;
-  }
-  set date(val: any) {
-    (this as any).todo.date = val;
-  }
-
   textRules = [
     (v: any) => !!(v || "").trim() || i18n.t("errors.todo.textLenght")
   ];
@@ -101,13 +93,6 @@ export default class TodoForm extends Vue {
     const date = new Date(new Date().setDate(new Date().getDate() - 1));
     date.setMonth(date.getMonth() + 1);
     return moment(date).format();
-  }
-
-  setDateToToday() {
-    const now = new Date();
-    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-    this.date = now.toISOString().substr(0, 10);
-    (this.$refs.dateInput as any).value = now.toISOString().substr(0, 10);
   }
 
   enter() {
