@@ -21,12 +21,17 @@
         group='todo'
         @start='drag=true'
         @end='drag=false'
-        v-bind="dragOptions")
+        v-bind="dragOptions"
+        handle='.handle')
           v-list-item(v-for='(todo, j) in todoSection.todos' :key='j')
             v-list-item-content
               v-card(:class='cardClass(todo)')
                 v-card-text
-                  TodoText(:todo='todo')
+                  v-row(no-gutters)
+                    v-col.handle(:cols='1' v-if='editable')
+                      v-icon menu
+                    v-col(:cols='editable ? 11 : 12')
+                      TodoText(:todo='todo')
                 v-card-actions
                   v-icon(v-if='todoOutstanding(todo)') error_outline
                   v-tooltip(:max-width='300' right)
@@ -281,3 +286,8 @@ export default class TodoList extends Vue {
 }
 </script>
 
+<style>
+.handle {
+  cursor: move;
+}
+</style>
