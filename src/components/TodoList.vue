@@ -101,6 +101,11 @@ export default class TodoList extends Vue {
     this.updateTodos();
   }
 
+  @Watch("editable")
+  onEditableChange(val: boolean, oldVal: boolean) {
+    store.setEditting(val);
+  }
+
   mounted() {
     this.updateTodos();
   }

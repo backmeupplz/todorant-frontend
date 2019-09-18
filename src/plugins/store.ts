@@ -14,6 +14,7 @@ export interface State {
   dark: Boolean
   userState: UserState
   rulesShown: Boolean
+  editting: Boolean
 }
 
 interface LocalizedError {
@@ -58,6 +59,7 @@ const storeOptions = {
       subscriptionIdExists: false,
     },
     rulesShown: false,
+    editting: false,
   },
   mutations: {
     setUser(state: State, user: User) {
@@ -81,6 +83,9 @@ const storeOptions = {
     setRulesShown(state: State, rulesShown: Boolean) {
       state.rulesShown = rulesShown
     },
+    setEditting(state: State, editting: Boolean) {
+      state.editting = editting
+    },
   },
   getters: {
     user: (state: State) => state.user,
@@ -89,6 +94,7 @@ const storeOptions = {
     dark: (state: State) => state.dark,
     userState: (state: State) => state.userState,
     rulesShown: (state: State) => state.rulesShown,
+    editting: (state: State) => state.editting,
   },
   plugins: [createPersistedState()],
 }
@@ -104,6 +110,7 @@ export const language = () => getters.language as string | undefined
 export const dark = () => getters.dark as boolean
 export const userState = () => getters.userState as UserState
 export const rulesShown = () => getters.rulesShown as Boolean
+export const editting = () => getters.editting as Boolean
 
 // Mutations
 export const setUser = (user: User) => {
@@ -146,4 +153,7 @@ export const logout = () => {
 }
 export const setRulesShown = (rulesShown: Boolean) => {
   store.commit('setRulesShown', rulesShown)
+}
+export const setEditting = (editting: Boolean) => {
+  store.commit('setEditting', editting)
 }

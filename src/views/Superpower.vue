@@ -25,7 +25,7 @@
         v-tab-item(:value='1')
           TodoList
     // Add FAB
-    AddTodo
+    AddTodo(v-if='!$store.state.editting')
 </template>
 
 <script lang="ts">
