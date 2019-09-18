@@ -35,11 +35,16 @@ export enum SubscriptionStatus {
   inactive = 'inactive',
 }
 
+export interface Settings {
+  showTodayOnAddTodo?: boolean
+}
+
 export interface UserState {
   planning: Boolean
   subscriptionStatus: SubscriptionStatus
   createdAt: Date
   subscriptionIdExists: Boolean
+  settings: Settings
 }
 
 const storeOptions = {
@@ -57,6 +62,7 @@ const storeOptions = {
       subscriptionStatus: SubscriptionStatus.inactive,
       createdAt: new Date(),
       subscriptionIdExists: false,
+      settings: {},
     },
     rulesShown: false,
     editting: false,

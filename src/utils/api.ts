@@ -180,6 +180,12 @@ export async function cancelSubscription(user: User) {
   })
 }
 
+export async function setSettings(user: User, settings: store.Settings) {
+  return axios.post(`${base}/settings`, settings, {
+    headers: getHeaders(user),
+  })
+}
+
 async function updateState(user: User) {
   const userState = (await axios.get(`${base}/state`, {
     headers: getHeaders(user),

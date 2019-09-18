@@ -6,6 +6,8 @@
     Merge(:dialog='mergeDialog' :close='closeMerge')
     // Subscription dialog
     Subscription(:dialog='subscriptionDialog' :close='closeSubscription')
+    // Settings dialog
+    Settings(:dialog='settingsDialog' :close='closeSettingsDialog')
     // Navbarand app
     v-app-bar(flat app style='maxWidth: 1000px; margin: auto')
       // Title
@@ -46,6 +48,10 @@
           v-list-item(@click='subscriptionDialog = true' 
           v-if='!!$store.state.user')
             v-list-item-title {{$t('subscription.title')}}
+          // Settings
+          v-list-item(@click='settingsDialog = true' 
+          v-if='!!$store.state.user')
+            v-list-item-title {{$t('settings.title')}}
           // Logout
           v-list-item(@click='logout'
           v-if='!!$store.state.user')
@@ -61,19 +67,22 @@ import * as api from "../utils/api";
 import Rules from "./Rules.vue";
 import Merge from "./Merge.vue";
 import Subscription from "./Subscription.vue";
+import Settings from "./Settings.vue";
 import { serverBus } from "../main";
 
 @Component({
   components: {
     Rules,
     Merge,
-    Subscription
+    Subscription,
+    Settings
   }
 })
 export default class Navbar extends Vue {
   rulesDialog = false;
   mergeDialog = false;
   subscriptionDialog = false;
+  settingsDialog = false;
 
   get locales() {
     return [{ icon: "us", code: "en" }, { icon: "ru", code: "ru" }];
@@ -126,6 +135,9 @@ export default class Navbar extends Vue {
   }
   closeSubscription() {
     this.subscriptionDialog = false;
+  }
+  closeSettingsDialog() {
+    this.settingsDialog = false;
   }
   async goHome() {
     try {

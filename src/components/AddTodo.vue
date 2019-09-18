@@ -116,7 +116,15 @@ export default class AddTodo extends Vue {
   }
 
   addTodo() {
-    this.todos.push({});
+    if (store.userState().settings.showTodayOnAddTodo) {
+      const now = new Date();
+      now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+      this.todos.push({
+        date: now.toISOString().substr(0, 10)
+      });
+    } else {
+      this.todos.push({});
+    }
     this.panel = [this.todos.length - 1];
   }
 

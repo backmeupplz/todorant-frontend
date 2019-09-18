@@ -163,6 +163,10 @@ export const messages = {
       cancelConfirm: 'Are you sure you want to cancel your subscription?',
     },
     moveUp: 'Move to today',
+    settings: {
+      title: 'Settings',
+      showTodayOnAddTodo: 'Default to today when creating a todo',
+    },
   },
   ru: {
     title: 'Todorant',
@@ -329,5 +333,10 @@ export const messages = {
       cancelConfirm: 'Вы уверены, что хотите отключить подписку?',
     },
     moveUp: 'Перенести на сегодня',
+    settings: {
+      title: 'Настройки',
+      showTodayOnAddTodo:
+        'Устанавливать сегодняшнюю дату автоматически при создании задачи',
+    },
   },
 }
