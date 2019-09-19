@@ -25,7 +25,7 @@
           v-date-picker(@input='dateMenu = false'
           v-model='todo.date'
           :min='yesterdayFormatted'
-          :first-day-of-week='$store.state.language === "ru" ? 1 : 0'
+          :first-day-of-week='firstDayOfWeek'
           :locale='$store.state.language')
       v-col(cols='12' md='6')
         v-menu(v-model='monthMenu')
@@ -82,6 +82,16 @@ export default class TodoForm extends Vue {
       );
     }
   ];
+
+  get firstDayOfWeek() {
+    const storeFirstDayOfWeek = this.$store.state.userState.settings
+      .firstDayOfWeek;
+    return storeFirstDayOfWeek === undefined
+      ? this.$store.state.language === "ru"
+        ? 1
+        : 0
+      : storeFirstDayOfWeek;
+  }
 
   get yesterdayFormatted() {
     return moment(

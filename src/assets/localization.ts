@@ -166,6 +166,16 @@ export const messages = {
     settings: {
       title: 'Settings',
       showTodayOnAddTodo: 'Default to today when creating a todo',
+      firstDayOfWeek: 'First day of the week',
+    },
+    weekdays: {
+      monday: 'Monday',
+      tuesday: 'Tuesday',
+      wednesday: 'Wednesday',
+      thursday: 'Thursday',
+      friday: 'Friday',
+      saturday: 'Saturday',
+      sunday: 'Sunday',
     },
   },
   ru: {
@@ -337,6 +347,16 @@ export const messages = {
       title: 'Настройки',
       showTodayOnAddTodo:
         'Устанавливать сегодняшнюю дату автоматически при создании задачи',
+      firstDayOfWeek: 'Первый день недели',
+    },
+    weekdays: {
+      monday: 'Понедельник',
+      tuesday: 'Вторник',
+      wednesday: 'Среда',
+      thursday: 'Четверг',
+      friday: 'Пятница',
+      saturday: 'Суббота',
+      sunday: 'Воскресенье',
     },
   },
 }

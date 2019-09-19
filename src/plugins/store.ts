@@ -37,6 +37,7 @@ export enum SubscriptionStatus {
 
 export interface Settings {
   showTodayOnAddTodo?: boolean
+  firstDayOfWeek?: number
 }
 
 export interface UserState {
