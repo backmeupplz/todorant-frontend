@@ -87,7 +87,7 @@ export const messages = {
     breakdownInfo:
       'Use breakdown when the current task is too broad. After you add all the subtasks, feel free to complete this task, you deserve it.',
     skipInfo:
-      "Use skip when you don't want to work on the current task. Yo ucan skip once a day, up to three times a week. Frogs cannot be skipped. A task skipped twice becomes a frog.",
+      "Use skip when you don't want to work on the current task. You can skip once a day, up to three times a week. Frogs cannot be skipped. A task skipped twice becomes a frog.",
     clear: {
       congratulations: 'Congratulations!',
       text:
