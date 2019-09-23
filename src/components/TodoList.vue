@@ -8,7 +8,7 @@
         v-switch(v-model='showCompleted' :label='$t("todo.list.completed")' :loading='todosUpdating')
         v-spacer
         v-btn(v-if='!editable' icon :loading='todosUpdating' @click='editable = true')
-          v-icon edit
+          v-icon reorder
         v-btn(v-if='!!editable' icon :loading='todosUpdating || loading' @click='editable = false')
           v-icon clear
         v-btn(v-if='!!editable' icon :loading='todosUpdating || loading' @click='doneEditing' color='green')

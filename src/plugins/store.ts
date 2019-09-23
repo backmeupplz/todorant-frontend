@@ -103,7 +103,11 @@ const storeOptions = {
     rulesShown: (state: State) => state.rulesShown,
     editting: (state: State) => state.editting,
   },
-  plugins: [createPersistedState()],
+  plugins: [
+    createPersistedState({
+      paths: ['user', 'language', 'dark', 'rulesShown'],
+    }),
+  ],
 }
 
 export const store = new Vuex.Store<State>(storeOptions)
