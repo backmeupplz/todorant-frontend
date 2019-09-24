@@ -16,7 +16,12 @@
         v-btn(icon :loading='todosUpdating' @click='updateTodos')
           v-icon refresh
       div(v-for='(todoSection, i) in todos' :key='i')
-        v-subheader {{todoSection.title}}
+        v-subheader
+          v-tooltip(right :max-width='300' v-if='todoSection.title.length === 10')
+            template(v-slot:activator='{ on }')
+              span(v-on='on') {{todoSection.title}}
+            span {{$t(`weekdays.${new Date(todoSection.title).getDay()}`)}}
+          span(v-else v-on='on') {{todoSection.title}}
         draggable(v-model='todoSection.todos'
         group='todo'
         @start='drag=true'

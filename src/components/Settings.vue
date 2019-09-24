@@ -43,36 +43,10 @@ import { i18n } from "../plugins/i18n";
 export default class Settings extends Vue {
   loading = false;
 
-  weekdays = [
-    {
-      text: i18n.t("weekdays.monday"),
-      value: 1
-    },
-    {
-      text: i18n.t("weekdays.tuesday"),
-      value: 2
-    },
-    {
-      text: i18n.t("weekdays.wednesday"),
-      value: 3
-    },
-    {
-      text: i18n.t("weekdays.thursday"),
-      value: 4
-    },
-    {
-      text: i18n.t("weekdays.friday"),
-      value: 5
-    },
-    {
-      text: i18n.t("weekdays.saturday"),
-      value: 6
-    },
-    {
-      text: i18n.t("weekdays.sunday"),
-      value: 0
-    }
-  ];
+  weekdays = [1, 2, 3, 4, 5, 6, 0].map(n => ({
+    text: i18n.t(`weekdays.${n}`),
+    value: n
+  }));
 
   get showTodayOnAddTodo() {
     return store.userState().settings.showTodayOnAddTodo || false;
