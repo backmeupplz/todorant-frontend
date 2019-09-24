@@ -167,6 +167,7 @@ export const messages = {
       title: 'Settings',
       showTodayOnAddTodo: 'Default to today when creating a todo',
       firstDayOfWeek: 'First day of the week',
+      newTodosGoFirst: 'New todos are added on top of the list',
     },
     weekdays: {
       1: 'Monday',
@@ -348,6 +349,7 @@ export const messages = {
       showTodayOnAddTodo:
         'Устанавливать сегодняшнюю дату автоматически при создании задачи',
       firstDayOfWeek: 'Первый день недели',
+      newTodosGoFirst: 'Новые задачи добавляются наверх списка',
     },
     weekdays: {
       1: 'Понедельник',

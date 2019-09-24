@@ -8,6 +8,8 @@
       v-card-text
         v-switch(:label='$t("settings.showTodayOnAddTodo")'
         v-model='showTodayOnAddTodo')
+        v-switch(:label='$t("settings.newTodosGoFirst")'
+        v-model='newTodosGoFirst')
         v-select(:items='weekdays'
         :label='$t("settings.firstDayOfWeek")'
         v-model='firstDayOfWeek')
@@ -66,6 +68,13 @@ export default class Settings extends Vue {
   }
   set firstDayOfWeek(val: number) {
     store.userState().settings.firstDayOfWeek = val;
+  }
+
+  get newTodosGoFirst() {
+    return this.$store.state.userState.settings.newTodosGoFirst;
+  }
+  set newTodosGoFirst(val: boolean) {
+    store.userState().settings.newTodosGoFirst = val;
   }
 
   async save() {
