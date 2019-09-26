@@ -17,10 +17,25 @@
         :userpic='false')
         g-signin-button(:params='{ client_id: googleClientId }'
         @success='onGoogleSignInSuccess'
-        @error='onGoogleSignInError') {{$t("home.google")}}
+        @error='onGoogleSignInError') {{$t('home.google')}}
         fb-signin-button(:params='{ scope: "email", return_scopes: true}'
         @success='onFacebookSignInSuccess'
         @error='onFacebookSignInError') {{$t('home.facebook')}}
+
+      v-flex.pt-4
+        .headline.pb-4 {{$t('home.feedback.title')}}
+        v-row.text-left
+          v-col(v-for='(review, i) in $t("home.feedback.reviews")' :key='i'
+          cols='12'
+          sm='6')
+            v-card
+              v-list-item.px-4.pt-3
+                v-list-item-avatar
+                  img(:src='`/avatars/${review.username}.jpg`')
+                v-list-item-content
+                  a(href='https://google.com') @{{review.username}}
+              v-card-text
+                p(v-for='(text, i) in review.text.split("\\n")') {{text}}
 
       v-flex.pt-4
         div(v-html='$t("support")')

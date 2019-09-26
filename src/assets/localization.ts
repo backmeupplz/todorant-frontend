@@ -27,6 +27,59 @@ export const messages = {
       facebook: 'Login with Facebook',
       google: 'Login with Google',
       privacy: 'Privacy policy',
+      feedback: {
+        title: 'What do the users say?',
+        reviews: [
+          {
+            name: 'Sergey Romanov',
+            username: 'Gendoor',
+            text: `Messages in the subscription part are cute :)
+
+Thank you for a simple and thriving for the ideal service. Turned out that it not only helps to be productive but also proactive. Little daily improvements confidently enhance life, and the free mind is constantly looking how to fill now emptied todo list so that it could feel the pleasure of completing tasks again and again — and it is a direct route towards improving everything surrounding me.
+            
+All in all, Todorant, no matter how simple at first glance, can become a faithful ally in any business. Thank you, Nikita, for unleashing the aspects of true productivity and sharing them with us in a convenient solution.
+            
+Thankful Todorant subscriber.`,
+          },
+          {
+            name: 'Dinislam Sad',
+            username: 'Azerzet',
+            text: `The main advantages that I, and I'm sure others, liked.
+1. Simple and convenient interface.
+2. Missed tasks automatically become frogs, and an option to make a task a frog initially.
+3. /done command is a must, and thank you for it, Nikita. I used Todoist, Wunderlist, Bitrix24. All of them are overcomplicated.
+4. Telegram bot.`,
+          },
+          {
+            name: 'Aleksei Kaut',
+            username: 'aleksei_kaut',
+            text: `After I created the first tasks and switched to the "Current" tab - I was surprised that I had only one task and that I needed to complete it before moving on. This idea with one task and concentration on it struck me, it seems obvious, but I couldn't use it before.
+
+I usually tracked tasks and ideas in Notes, what should be done soon, but I did not approach it as a system. I have been using the service for a couple of weeks, not very actively, but I think this is a very strong way to systemize the affairs and tasks.
+            
+Thank you for your work!`,
+          },
+          {
+            name: 'Anton',
+            username: 'mas1311',
+            text: `Tested Todorant. At first, I was skeptic (I tried a lot of planning services already), but I realized that it works effectively and is very easy to use.
+
+Plus, for reasons unknown to me, when all the tasks are completed for the day, strong satisfaction appear, which was absent in other planners (there was something like "well, that was everything... or not?").
+                      
+Thank you for your work!`,
+          },
+          {
+            name: 'Willsey Paslen',
+            username: 'WillseyPaslen',
+            text: `Thanks for the great service. Enough time has passed so that I can definitely say — it helps me. Thanks, Nikita 😁 And good luck with the app.`,
+          },
+          {
+            name: 'Игорь Малинкин',
+            username: 'sxe4kilo',
+            text: `I started to do at least something with Todorant, so my productivity went up from 0.`,
+          },
+        ],
+      },
     },
     menu: {
       darkMode: {
@@ -207,6 +260,59 @@ export const messages = {
       facebook: 'Войти через Фейсбук',
       google: 'Войти через Гугл',
       privacy: 'Политика конфиденциальности',
+      feedback: {
+        title: 'Что говорят пользователи?',
+        reviews: [
+          {
+            name: 'Sergey Romanov',
+            username: 'Gendoor',
+            text: `Милые сообщения в разделе подписки Тудуранта :)
+
+Благодарю за простой и стремящийся к идеальному сервис. Оказалось, что он помогает быть не только продуктивным, но и проактивным. Маленькие улучшения каждый день уверенно подтягивают за собой отстающие звенья, а свободный от задач разум постоянно ищет, чем бы заполнить опустевший список задач, чтобы снова и снова получать удовольствие от их выполнения и связанных с этим перемен — и это прямой путь к улучшению всего, что меня окружает. 
+            
+В общем, Тудурант, каким бы простым он ни казался на первый взгляд, способен стать верным соратником в любых делах. Спасибо, Никита, что осознал аспекты истинной продуктивности и поделился ими с нами в удобном решении.
+            
+Благодарный подписчик Тудуранта.`,
+          },
+          {
+            name: 'Dinislam Sad',
+            username: 'Azerzet',
+            text: `Главные плюсы, которые лично мне да и уверен остальным также понравились.
+1. Простой и удобный интерфейс.
+2. Пропущенные задачи автоматически становятся лягушками, и также возможность изначально отметить задачу "лягушкой".
+3. Категория /done это просто необходимость, и спасибо за это, Никита. Я юзал Тудуист, Вундерлист, Мои Дела. Все эти программы перегруженные слишком.
+4. Телеграм бот.`,
+          },
+          {
+            name: 'Aleksei Kaut',
+            username: 'aleksei_kaut',
+            text: `После того как создал первые задачи и переключился на вкладку "Текущие" — офигел от того, что передо мной только одна задача и что надо завершить ее перед тем как идти дальше. Эта идея с одной задачей и концентрацией на ней меня поразила, вроде очевидно, но раньше так не мог.
+
+Я обычно писал в Notes задачи и идеи, что нужно сделать в ближайшем времени, но не подходил к этому как к системе. Пользуюсь сервисом пару недель и не очень активно, но думаю это очень сильный подход к систематизации дел и задач.
+
+Спасибо за твою работу!`,
+          },
+          {
+            name: 'Anton',
+            username: 'mas1311',
+            text: `Протестировал тудурант. Сначала был скепсис (уж очень много перепробовал сервисов по планированию), но понял, что действительно эффективно работает и очень прост в использовании.
+
+Плюс, по неизвестной мне причине, когда выполняются все задачи на день появляется мощная гордость и удовлетворение, что отсутствовало в других планировщиках (там было что то в формате "ну вроде все.. или нет?"). 
+          
+Спасибо за твои работы!`,
+          },
+          {
+            name: 'Willsey Paslen',
+            username: 'WillseyPaslen',
+            text: `Спасибо за отличный сервис. Прошло достаточно времени, чтобы точно можно было сказать — мне он помогает. Спасибо, Никита 😁 И удачи с приложением.`,
+          },
+          {
+            name: 'Игорь Малинкин',
+            username: 'sxe4kilo',
+            text: `с Тударантом я хоть что-то начал делать, так что моя производительность поднялась с 0.`,
+          },
+        ],
+      },
     },
     menu: {
       darkMode: {
