@@ -74,9 +74,19 @@ Thank you for your work!`,
             text: `Thanks for the great service. Enough time has passed so that I can definitely say — it helps me. Thanks, Nikita 😁 And good luck with the app.`,
           },
           {
-            name: 'Игорь Малинкин',
+            name: 'Igor Malinkin',
             username: 'sxe4kilo',
             text: `I started to do at least something with Todorant, so my productivity went up from 0.`,
+          },
+          {
+            name: 'Vladimir Dubenko',
+            username: 'dubenko_v',
+            text: `Your service is awesome in terms of at least three things:
+1. Convenient — it is minimalistic!
+2. It instills a habit.
+3. Strange as it may seem, it doesn't force you to think rationally.
+            
+I'm irrational by nature, I can't just lead 1 project (I burn out quickly). My life is multitasking! 3 projects in parallel are easy, but 3 is not enough... 7 sounds more like it. And your service allows you to achieve this. It is the alternation of tasks that prevents the brain from burning out in one particular direction. And somehow, magically, it alternates tasks from one project to another.`,
           },
         ],
       },
@@ -310,6 +320,16 @@ Thank you for your work!`,
             name: 'Игорь Малинкин',
             username: 'sxe4kilo',
             text: `с Тударантом я хоть что-то начал делать, так что моя производительность поднялась с 0.`,
+          },
+          {
+            name: 'Владимир Дубенко',
+            username: 'dubenko_v',
+            text: `Твой сервис потрясный в плане, как минимум, трех вещей:
+1. Удобен — вот реально ничего лишнего!
+2. Прививает привычку, как ты там писал в каком-то из постов, прям с языка снял в тот момент: мы — это набор привычек.
+3. Как ни странно не заставляет рационально мыслить.
+            
+Я по своей натуре иррационален, я не могу просто вести 1 проект (я быстро выгораю). Я живу только многозадачностью! 3 проекта параллельно легко, но мало... 7 — вот это интересней. И твой сервис позволяет этого достигать. Именно чередование задач не дает возможности мозгу выгорать в одном конкретном направлении. А каким-то магическим образом чередует задачи с одной проекта на другой.`,
           },
         ],
       },
