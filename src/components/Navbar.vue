@@ -108,7 +108,7 @@ export default class Navbar extends Vue {
     });
   }
   mounted() {
-    if (!store.rulesShown()) {
+    if (!store.rulesShown() && store.user()) {
       this.rulesDialog = true;
       store.setRulesShown(true);
     }
