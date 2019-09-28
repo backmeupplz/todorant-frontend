@@ -10,11 +10,6 @@
         p {{$t("home.action")}}
         
       v-flex.pt-4
-        vue-telegram-login(mode='callback'
-        telegram-login='todorant_bot'
-        @callback='onTelegramAuth'
-        radius='3'
-        :userpic='false')
         g-signin-button(:params='{ client_id: googleClientId }'
         @success='onGoogleSignInSuccess'
         @error='onGoogleSignInError') {{$t('home.google')}}
@@ -22,6 +17,11 @@
         @success='onFacebookSignInSuccess'
         @error='onFacebookSignInError') {{$t('home.facebook')}}
         vue-apple-signin.signin-button
+        vue-telegram-login(mode='callback'
+        telegram-login='todorant_bot'
+        @callback='onTelegramAuth'
+        radius='3'
+        :userpic='false')
 
       v-flex.pt-4
         .headline.pb-4 {{$t('home.feedback.title')}}
