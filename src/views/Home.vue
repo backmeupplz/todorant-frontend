@@ -16,7 +16,7 @@
         fb-signin-button(:params='{ scope: "email", return_scopes: true}'
         @success='onFacebookSignInSuccess'
         @error='onFacebookSignInError') {{$t('home.facebook')}}
-        vue-apple-signin.signin-button
+        vue-apple-signin.signin-button.pb-2
         vue-telegram-login(mode='callback'
         telegram-login='todorant_bot'
         @callback='onTelegramAuth'
