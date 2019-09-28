@@ -21,6 +21,7 @@
         fb-signin-button(:params='{ scope: "email", return_scopes: true}'
         @success='onFacebookSignInSuccess'
         @error='onFacebookSignInError') {{$t('home.facebook')}}
+        vue-apple-signin.signin-button
 
       v-flex.pt-4
         .headline.pb-4 {{$t('home.feedback.title')}}
@@ -127,5 +128,10 @@ export default class Home extends Vue {
   border-radius: 3px;
   background-color: #ce5658;
   color: #fff;
+}
+.signin-button {
+  width: 210px;
+  height: 46px;
+  margin: auto;
 }
 </style>
