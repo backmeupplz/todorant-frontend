@@ -7,10 +7,10 @@
       v-card-title {{$t('howto.title')}}
       v-card-text
         ul
-          li(v-for='i in [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]' v-html='$t(`howto.rules.${i}`)')
+          li(v-for='rule in $t("howto.rules")' v-html='rule')
         .title.py-2 {{$t('howto.bonus.title')}}
         ul
-          li(v-for='i in [0]' v-html='$t(`howto.bonus.${i}`)')
+          li(v-for='rule in $t("howto.bonus.rules")' v-html='rule')
       v-card-actions
         v-spacer
         v-btn(color='blue'
