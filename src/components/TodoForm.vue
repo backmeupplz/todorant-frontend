@@ -26,7 +26,8 @@
           v-model='todo.date'
           :min='yesterdayFormatted'
           :first-day-of-week='firstDayOfWeek'
-          :locale='$store.state.language')
+          :locale='$store.state.language'
+          :show-current='todayFormatted')
       v-col(cols='12' md='6')
         v-menu(v-model='monthMenu')
           template(v-slot:activator='{ on }')
@@ -91,6 +92,10 @@ export default class TodoForm extends Vue {
         ? 1
         : 0
       : storeFirstDayOfWeek;
+  }
+
+  get todayFormatted() {
+    return moment(new Date()).format("YYYY-MM-DD");
   }
 
   get yesterdayFormatted() {
