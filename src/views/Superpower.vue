@@ -81,6 +81,7 @@ export default class Superpower extends Vue {
     if (val !== oldVal) {
       serverBus.$emit("refreshRequested");
     }
+    store.setEditting(false);
   }
 }
 </script>

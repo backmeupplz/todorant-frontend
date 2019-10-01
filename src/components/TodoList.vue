@@ -98,17 +98,17 @@ export default class TodoList extends Vue {
 
   loading = false;
   drag = false;
-  editable = false;
+  get editable() {
+    return store.editting();
+  }
+  set editable(value: Boolean) {
+    store.setEditting(value);
+  }
 
   @Watch("showCompleted")
   onCompletedChanged(val: boolean, oldVal: boolean) {
     if (val === oldVal) return;
     this.updateTodos();
-  }
-
-  @Watch("editable")
-  onEditableChange(val: boolean, oldVal: boolean) {
-    store.setEditting(val);
   }
 
   mounted() {
