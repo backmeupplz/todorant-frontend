@@ -80,7 +80,7 @@ import * as api from "../utils/api";
 import { serverBus } from "../main";
 import draggable from "vuedraggable";
 import { TodoSection } from "../models/TodoSection";
-import { isTodoOld } from "../utils/isTodoOld";
+import { isTodoOld, isDateTooOld } from "../utils/isTodoOld";
 
 @Component({
   components: {
@@ -169,15 +169,17 @@ export default class TodoList extends Vue {
           todos: mappedTodos[key]
         });
       }
+      const today = api.getToday();
       this.todos.sort((a, b) => {
-        // Months go to the end
-        if (a.title.length > b.title.length) {
+        if (isDateTooOld(a.title, today) && !isDateTooOld(b.title, today)) {
           return -1;
-        } else if (a.title.length < b.title.length) {
+        } else if (
+          !isDateTooOld(a.title, today) &&
+          isDateTooOld(b.title, today)
+        ) {
           return 1;
-        } else {
-          return new Date(a.title) > new Date(b.title) ? 1 : -1;
         }
+        return new Date(a.title) > new Date(b.title) ? 1 : -1;
       });
       if (this.showCompleted) {
         this.todos.reverse();
