@@ -88,6 +88,13 @@ Thank you for your work!`,
             
 I'm irrational by nature, I can't just lead 1 project (I burn out quickly). My life is multitasking! 3 projects in parallel are easy, but 3 is not enough... 7 sounds more like it. And your service allows you to achieve this. It is the alternation of tasks that prevents the brain from burning out in one particular direction. And somehow, magically, it alternates tasks from one project to another.`,
           },
+          {
+            name: 'Maksim Alekseyevich',
+            username: 'MMAradiology',
+            text: `I can't say that using Todorant changed my life. Can I say that this is a meaningful and very useful application/website? Yes, a thousand times yes.
+
+I like Todorant, it lets me free up my "operating memory" and allows me to think about solving problems, not about remembering them. As Nikita (the creator) correctly wrote — with constant and correct use, tasks that used to cast true biblical fear will stop appearing. And this will not happen because the complex tasks will stop coming. It will become clear to you (and to me, and everyone) that "the road will be overpowered by those walking", "the way to the thousand miles begins with one step".`,
+          },
         ],
       },
     },
@@ -335,6 +342,13 @@ I'm irrational by nature, I can't just lead 1 project (I burn out quickly). My l
 3. Как ни странно, не заставляет рационально мыслить.
             
 Я по своей натуре иррационален, я не могу просто вести 1 проект (я быстро выгораю). Я живу только многозадачностью! 3 проекта параллельно легко, но мало... 7 — вот это интересней. И твой сервис позволяет этого достигать. Именно чередование задач не дает возможности мозгу выгорать в одном конкретном направлении. А каким-то магическим образом чередует задачи с одного проекта на другой.`,
+          },
+          {
+            name: 'Maksim Alekseyevich',
+            username: 'MMAradiology',
+            text: `Сказать, что пользование Тудурантом изменило мою жизнь, я не могу. Сказать, что это значимое и очень полезное приложение/сайт? Да, хоть тысячу раз.
+
+Мне Тудурант нравится, и он позволяет освободить свою "операционную память", позволить себе мыслить над решением проблемы, а не над её запоминанием. Как правильно написал Никита (создатель) — при постоянном и правильном использовании перестанут появляться задачи, которые раньше внушали поистине библейский страх. И это будет происходит не из-за того, что перестают поступать сложные задачи. Тебе (и мне, и всем) станет понятно — "дорогу осилит идущий", "путь в тысячу ли начинается с одного шага".`,
           },
         ],
       },
