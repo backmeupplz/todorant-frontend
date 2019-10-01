@@ -16,7 +16,7 @@
         fb-signin-button(:params='{ scope: "email", return_scopes: true}'
         @success='onFacebookSignInSuccess'
         @error='onFacebookSignInError') {{$t('home.facebook')}}
-        vue-apple-signin.signin-button.pb-3
+        vue-apple-signin.signin-button
         vue-telegram-login(mode='callback'
         telegram-login='todorant_bot'
         @callback='onTelegramAuth'
@@ -47,7 +47,12 @@
 <script lang="ts">
 import Vue from "vue";
 import axios from "axios";
-import { loginFacebook, loginTelegram, loginGoogle } from "../utils/api";
+import {
+  loginFacebook,
+  loginTelegram,
+  loginGoogle,
+  loginApple
+} from "../utils/api";
 import * as store from "../plugins/store";
 import Component from "vue-class-component";
 import { i18n } from "../plugins/i18n";
@@ -66,6 +71,10 @@ export default class Home extends Vue {
     if (this.$route.query && this.$route.query.hash) {
       if (!store.user()) {
         this.onTelegramAuth(this.$route.query);
+      }
+    } else if (this.$route.query && this.$route.query.apple) {
+      if (!store.user()) {
+        this.onAppleAuth(JSON.parse(this.$route.query.apple as string));
       }
     }
   }
@@ -107,6 +116,15 @@ export default class Home extends Vue {
       store.setSnackbarError("errors.login.telegram");
     }
   }
+  async onAppleAuth(loginInfo: any) {
+    try {
+      const user = await loginApple(loginInfo);
+      store.setUser(user);
+      this.$router.replace("superpower");
+    } catch (err) {
+      store.setSnackbarError("errors.login.apple");
+    }
+  }
 }
 </script>
 
@@ -130,8 +148,11 @@ export default class Home extends Vue {
   color: #fff;
 }
 .signin-button {
-  width: 210px;
-  height: 46px;
-  margin: auto;
+  width: 239px;
+  height: 44px;
+  margin: 10px;
+  cursor: pointer;
+  display: block;
+  border-radius: 3px;
 }
 </style>

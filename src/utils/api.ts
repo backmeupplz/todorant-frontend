@@ -23,6 +23,10 @@ export async function loginTelegram(loginInfo: any) {
   return (await axios.post(`${base}/login/telegram`, loginInfo)).data as User
 }
 
+export async function loginApple(loginInfo: any) {
+  return (await axios.post(`${base}/login/apple`, loginInfo)).data as User
+}
+
 export async function mergeFacebook(user: User, accessToken: string) {
   return (await axios.post(
     `${base}/merge/facebook`,
