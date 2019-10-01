@@ -150,7 +150,7 @@ export default class Home extends Vue {
 .signin-button {
   width: 239px;
   height: 44px;
-  margin: 10px;
+  margin: auto;
   cursor: pointer;
   display: block;
   border-radius: 3px;
