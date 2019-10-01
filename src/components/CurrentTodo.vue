@@ -9,7 +9,7 @@
         :loading='todoUpdating')
           template(v-slot='{ value }')
             span.caption {{todosCount - incompleteTodosCount}}/{{todosCount}}
-        v-spacer
+        v-spacer.px-2
         v-btn(text icon :loading='todoUpdating' @click='updateTodo')
           v-icon refresh
       v-list-item
