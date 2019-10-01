@@ -17,7 +17,7 @@
         @success='onFacebookSignInSuccess'
         @error='onFacebookSignInError') {{$t('home.facebook')}}
         vue-apple-signin.signin-button
-        vue-telegram-login(mode='callback'
+        vue-telegram-login.py-4(mode='callback'
         telegram-login='todorant_bot'
         @callback='onTelegramAuth'
         radius='3'
