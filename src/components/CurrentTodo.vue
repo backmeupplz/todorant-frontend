@@ -21,7 +21,7 @@
               span.caption.grey--text.pl-2 {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
               span.caption.grey--text.pl-2(v-if='todo.skipped') ({{$t('skipped')}})
               v-spacer
-              v-tooltip(:max-width='300' top v-if='!todo.frog && !todo.skipped')
+              v-tooltip(:max-width='300' bottom v-if='!todo.frog && !todo.skipped')
                 template(v-slot:activator='{ on }')
                   v-btn(text
                   icon
@@ -31,7 +31,7 @@
                   v-if='incompleteTodosCount > 1')
                     v-icon arrow_right_alt
                 span {{$t('skipInfo')}}
-              v-tooltip(:max-width='300' top)
+              v-tooltip(:max-width='300' bottom)
                 template(v-slot:activator='{ on }')
                   v-btn(text
                   icon
