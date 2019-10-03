@@ -19,8 +19,8 @@ export const messages = {
         '☁ Task too high level? Break it down with one click',
         "👀 No lost todo's — you always attach a day or a month to a created todo",
         '1️⃣ First day of a month? Plan before you start working',
-        '⏳ Task takes less then 2 minutes? Do it now and record',
-        '💰 Pricing is simple: first month for free and then $5/month for infinite productivity!',
+        '⏳ Does a task take less than 2 minutes? Do it now and record',
+        '💰 Pricing is simple: the first month for free and then $5/month for infinite productivity!',
       ],
       action:
         'Ready to boost your productivity? 💪 Click a button bellow to start using Todorant!',
