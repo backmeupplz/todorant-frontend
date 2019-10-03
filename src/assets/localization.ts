@@ -27,6 +27,7 @@ export const messages = {
       facebook: 'Login with Facebook',
       google: 'Login with Google',
       privacy: 'Privacy policy',
+      appstores: 'Download the app',
       feedback: {
         title: 'What do the users say?',
         reviews: [
@@ -282,6 +283,7 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
       facebook: 'Войти через Фейсбук',
       google: 'Войти через Гугл',
       privacy: 'Политика конфиденциальности',
+      appstores: 'Загрузите приложение',
       feedback: {
         title: 'Что говорят пользователи?',
         reviews: [

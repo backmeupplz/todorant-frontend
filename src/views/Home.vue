@@ -23,6 +23,10 @@
         radius='3'
         :userpic='false')
 
+      .headline.pb-4 {{$t('home.appstores')}}
+      a(:href='$store.state.language === "en" ? "https://apps.apple.com/us/app/todorant/id1482078243" : "https://apps.apple.com/ru/app/todorant/id1482078243"')
+        v-img(width='150' height='50' aspect-ratio='1' :src='`/img/appstore_${$store.state.language}.svg`')
+
       v-flex.pt-4
         .headline.pb-4 {{$t('home.feedback.title')}}
         v-row.text-left
