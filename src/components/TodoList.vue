@@ -5,9 +5,12 @@
         v-flex
           v-alert(text color='info' icon='info') {{$t('todo.planning')}}
       v-list-item
-        v-switch(v-model='showCompleted' :label='$t("todo.list.completed")' :loading='todosUpdating')
+        v-switch(v-model='showCompleted'
+        :label='$t("todo.list.completed")'
+        :loading='todosUpdating'
+        :disabled='editable')
         v-spacer
-        v-btn(v-if='!editable' icon :loading='todosUpdating' @click='editable = true')
+        v-btn(v-if='!editable && !showCompleted' icon :loading='todosUpdating' @click='editable = true')
           v-icon format_list_numbered
         v-btn(v-if='!!editable' icon :loading='todosUpdating || loading' @click='editable = false')
           v-icon clear
