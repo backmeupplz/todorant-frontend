@@ -129,6 +129,8 @@ export async function undoTodo(user: User, todo: Todo) {
 export async function getTodos(
   user: User,
   completed: boolean = false,
+  skip: number,
+  limit: number,
   hash?: string
 ) {
   await updateState(user)
@@ -137,6 +139,8 @@ export async function getTodos(
     params: {
       completed,
       hash,
+      skip,
+      limit,
     },
   })).data as Todo[]
 }

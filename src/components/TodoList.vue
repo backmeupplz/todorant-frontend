@@ -13,7 +13,7 @@
           v-icon clear
         v-btn(v-if='!!editable' icon :loading='todosUpdating || loading' @click='doneEditing' color='green')
           v-icon done
-        v-btn(icon :loading='todosUpdating' @click='updateTodos')
+        v-btn(icon :loading='todosUpdating' @click='loadTodos')
           v-icon refresh
       div(v-for='(todoSection, i) in todos' :key='i')
         v-subheader
@@ -28,7 +28,9 @@
         @end='drag=false'
         v-bind="dragOptions"
         handle='.handle')
-          v-list-item(v-for='(todo, j) in todoSection.todos' :key='j')
+          v-list-item(v-for='(todo, j) in todoSection.todos'
+          :key='j'
+          v-observe-visibility='(isVisible, entry) => visibilityChanged(isVisible, entry, i, j)')
             v-list-item-content
               v-card(:class='cardClass(todo)')
                 v-card-text
@@ -62,6 +64,7 @@
                     v-icon(small) edit
                   v-btn(text small icon @click='completeOrUndoTodo(todo)' :loading='loading' v-if='!editable')
                     v-icon(small) {{todo.completed ? 'repeat' : 'done'}}
+      v-progress-linear(v-if='todosUpdating' :indeterminate='true')
     EditTodo(:todo='todoEdited' :cleanTodo='cleanTodo')
     DeleteTodo(:todo='todoDeleted')
 </template>
@@ -96,6 +99,8 @@ export default class TodoList extends Vue {
   todoDeleted: Todo | null = null;
   todos = [] as TodoSection[];
 
+  noMoreTodos = false;
+
   loading = false;
   drag = false;
   get editable() {
@@ -108,16 +113,16 @@ export default class TodoList extends Vue {
   @Watch("showCompleted")
   onCompletedChanged(val: boolean, oldVal: boolean) {
     if (val === oldVal) return;
-    this.updateTodos();
+    this.loadTodos();
   }
 
   mounted() {
-    this.updateTodos();
+    this.loadTodos();
   }
 
   created() {
     serverBus.$on("refreshRequested", () => {
-      this.updateTodos();
+      this.loadTodos();
     });
   }
 
@@ -126,7 +131,7 @@ export default class TodoList extends Vue {
   }
 
   todosUpdating = false;
-  async updateTodos() {
+  async loadTodos(fullUpdate = true, more = false) {
     if (this.todosUpdating) {
       return;
     }
@@ -139,9 +144,19 @@ export default class TodoList extends Vue {
       const fetchedTodos = await getTodos(
         user,
         this.showCompleted,
+        more ? this.todos.reduce((prev, cur) => prev + cur.todos.length, 0) : 0,
+        fullUpdate || more
+          ? 20
+          : this.todos.reduce((prev, cur) => prev + cur.todos.length, 0),
         this.$router.currentRoute.hash
       );
-      const mappedTodos = fetchedTodos.reduce(
+      this.noMoreTodos = fetchedTodos.length <= 0;
+      let allTodos = more
+        ? this.todos
+            .reduce((prev, cur) => prev.concat(cur.todos), [] as Todo[])
+            .concat(fetchedTodos)
+        : fetchedTodos;
+      const mappedTodos = allTodos.reduce(
         (prev, cur) => {
           if (cur.date) {
             const date = `${cur.monthAndYear}-${cur.date}`;
@@ -215,7 +230,7 @@ export default class TodoList extends Vue {
       todo.monthAndYear = monthAndYear;
       todo.date = date;
       await api.editTodo(user, todo);
-      this.updateTodos();
+      this.loadTodos(false);
     } catch (err) {
       store.setSnackbarError(err.response ? err.response.data : err.message);
     } finally {
@@ -239,7 +254,7 @@ export default class TodoList extends Vue {
       } else {
         await api.completeTodo(user, todo);
       }
-      this.updateTodos();
+      this.loadTodos(false);
     } catch (err) {
       store.setSnackbarError(err.response ? err.response.data : err.message);
     } finally {
@@ -249,7 +264,7 @@ export default class TodoList extends Vue {
 
   cleanTodo() {
     this.todoEdited = null;
-    this.updateTodos();
+    this.loadTodos(false);
   }
 
   cardClass(todo: Todo) {
@@ -287,13 +302,34 @@ export default class TodoList extends Vue {
     this.loading = true;
     try {
       await api.rearrangeTodos(user, this.todos);
-      await this.updateTodos();
+      await this.loadTodos(false);
     } catch (err) {
       store.setSnackbarError(err.response ? err.response.data : err.message);
     } finally {
       this.loading = false;
       this.editable = false;
     }
+  }
+
+  async visibilityChanged(
+    isVisible: Boolean,
+    entry: any,
+    sectionIndex: number,
+    rowIndex: number
+  ) {
+    if (!isVisible) {
+      return;
+    }
+    if (
+      sectionIndex < this.todos.length - 1 ||
+      rowIndex < this.todos[sectionIndex].todos.length - 1
+    ) {
+      return;
+    }
+    if (this.todosUpdating || this.loading || this.noMoreTodos) {
+      return;
+    }
+    this.loadTodos(false, true);
   }
 }
 </script>
