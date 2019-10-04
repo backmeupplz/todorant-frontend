@@ -21,7 +21,7 @@
             template(v-slot:activator='{ on }')
               span(v-on='on') {{todoSection.title}}
             span {{$t(`weekdays.${new Date(todoSection.title).getDay()}`)}}
-          span(v-else v-on='on') {{todoSection.title}}
+          span(v-else) {{todoSection.title}}
         draggable(v-model='todoSection.todos'
         group='todo'
         @start='drag=true'
