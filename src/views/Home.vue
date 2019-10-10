@@ -32,7 +32,7 @@
           v-img(width='170' height='74' aspect-ratio='1' :src='`/img/playstore_${$store.state.language}.png`')
 
       v-flex.pt-4
-        .headline.pb-4 {{$t('home.feedback.title')}}
+        .headline.py-4 {{$t('home.feedback.title')}}
         v-row.text-left
           v-col(v-for='(review, i) in $t("home.feedback.reviews")' :key='i'
           cols='12'
