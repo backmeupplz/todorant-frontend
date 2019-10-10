@@ -24,8 +24,12 @@
         :userpic='false')
 
       .headline.pb-4 {{$t('home.appstores')}}
-      a(:href='$store.state.language === "en" ? "https://apps.apple.com/us/app/todorant/id1482078243" : "https://apps.apple.com/ru/app/todorant/id1482078243"')
-        v-img(width='150' height='50' aspect-ratio='1' :src='`/img/appstore_${$store.state.language}.svg`')
+
+      v-row
+        a.pt-3(:href='$store.state.language === "en" ? "https://apps.apple.com/us/app/todorant/id1482078243" : "https://apps.apple.com/ru/app/todorant/id1482078243"')
+          v-img(width='150' height='50' aspect-ratio='1' :src='`/img/appstore_${$store.state.language}.svg`')
+        a.pl-1(href='https://play.google.com/store/apps/details?id=com.todorant.android')
+          v-img(width='170' height='74' aspect-ratio='1' :src='`/img/playstore_${$store.state.language}.png`')
 
       v-flex.pt-4
         .headline.pb-4 {{$t('home.feedback.title')}}
