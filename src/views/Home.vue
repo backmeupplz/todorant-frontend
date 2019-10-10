@@ -23,7 +23,7 @@
         radius='3'
         :userpic='false')
 
-      .headline.pb-4 {{$t('home.appstores')}}
+      .headline.py-4 {{$t('home.appstores')}}
 
       v-row
         a.pt-3(:href='$store.state.language === "en" ? "https://apps.apple.com/us/app/todorant/id1482078243" : "https://apps.apple.com/ru/app/todorant/id1482078243"')
