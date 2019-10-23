@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 import Superpower from '../views/Superpower.vue'
 import NotFound from '../views/NotFound.vue'
 import Privacy from '../views/Privacy.vue'
+import Terms from '../views/Terms.vue'
 import Payment from '../views/Payment.vue'
 import { store } from './store'
 
@@ -22,6 +23,11 @@ const router = new Router({
       path: '/privacy',
       name: 'privacy',
       component: Privacy,
+    },
+    {
+      path: '/terms',
+      name: 'terms',
+      component: Terms,
     },
     {
       path: '/superpower',
