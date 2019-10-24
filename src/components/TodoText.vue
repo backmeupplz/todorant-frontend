@@ -3,8 +3,13 @@
     span(v-if='!!todo.frog') 🐸
     span(v-for='element in linkifiedText')
       span(v-if='element.type === "text"') {{element.value}}
-      a(v-else-if='element.type === "link"' :href='element.url' target='_blank') {{element.value}}
-      a(v-else @click.prevent='hash(element.url)') {{element.value}}
+      a(v-else-if='element.type === "link"'
+      :href='element.url'
+      target='_blank'
+      :style='{color: $store.state.dark ? "#64B5F6" : "#1E88E5"}') {{element.value}}
+      a(v-else
+      @click.prevent='hash(element.url)'
+      :style='{color: $store.state.dark ? "#64B5F6" : "#1E88E5"}') {{element.value}}
 </template>
 
 <script lang="ts">
