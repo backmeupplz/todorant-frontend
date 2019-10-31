@@ -42,7 +42,7 @@
                 v-list-item-avatar
                   img(:src='`/avatars/${review.username}.jpg`')
                 v-list-item-content
-                  a(href='https://google.com') @{{review.username}}
+                  a(href=`https://t.me/${review.username}`) @{{review.username}}
               v-card-text
                 p(v-for='(text, i) in review.text.split("\\n")') {{text}}
 
