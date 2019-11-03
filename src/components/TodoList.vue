@@ -197,12 +197,6 @@ export default class TodoList extends Vue {
         ) {
           return 1;
         }
-        if (
-          a.title.substr(0, 7) === b.title.substr(0, 7) &&
-          a.title !== b.title
-        ) {
-          return a.title.length < b.title.length ? -1 : 1;
-        }
         return new Date(a.title) > new Date(b.title) ? 1 : -1;
       });
       if (this.showCompleted) {
