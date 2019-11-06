@@ -44,11 +44,11 @@
                       TodoText(:todo='todo')
                 v-card-actions
                   v-icon(v-if='todoOutstanding(todo)') error_outline
-                  v-tooltip(:max-width='300' right)
-                    template(v-slot:activator='{ on }')
-                      span.caption.grey--text.pl-2(v-on='on') {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
-                    span {{todo._id}}
-                  span.caption.grey--text.pl-2(v-if='todo.skipped') ({{$t('skipped')}})
+                  v-col(no-gutters)
+                    v-row
+                      span.caption.grey--text.pl-2 {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
+                    v-row
+                      span.caption.grey--text.pl-2(v-if='todo.skipped') ({{$t('skipped')}})
                   v-spacer
                   v-tooltip(bottom v-if='todoInFuture(todo)')
                     template(v-slot:activator='{ on }')
