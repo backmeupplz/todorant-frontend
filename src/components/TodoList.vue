@@ -4,8 +4,8 @@
       v-list-item(v-if='$store.state.userState.planning').pt-4
         v-flex
           v-alert(text color='info' icon='info') {{$t('todo.planning')}}
-      v-list-item
-        v-switch(v-model='showCompleted'
+      v-list-item.d-flex.align-center
+        v-switch.ma-0.pa-0(hide-details v-model='showCompleted'
         :label='$t("todo.list.completed")'
         :loading='todosUpdating'
         :disabled='editable')
