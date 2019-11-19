@@ -146,7 +146,7 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
         title: 'Edit',
       },
       planning:
-        'Looks like you have some planning to do! Please, redistribute the outstanding tasks below to unlock the "Current" tab and to to keep being productive. Cheers!',
+        'Looks like you have some planning to do! Please, redistribute the outstanding tasks below to unlock the "Current" tab and to keep being productive. Cheers!',
     },
     cancel: 'Cancel',
     save: 'Save',
