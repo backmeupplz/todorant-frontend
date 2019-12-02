@@ -36,4 +36,3 @@ export default class TodoText extends Vue {
   }
 }
 </script>
-

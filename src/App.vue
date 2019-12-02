@@ -38,3 +38,9 @@ export default {
   }
 };
 </script>
+
+<style>
+* {
+  user-select: text;
+}
+</style>
