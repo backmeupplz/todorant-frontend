@@ -23,7 +23,7 @@
           v-tooltip(right :max-width='300' v-if='todoSection.title.length === 10')
             template(v-slot:activator='{ on }')
               span(v-on='on') {{todoSection.title}}
-            span {{$t(`weekdays.${new Date(todoSection.title).getDay()}`)}}
+            span {{$t(`weekdays.${(new Date(todoSection.title).getDay() + 1) % 7}`)}}
           span(v-else) {{todoSection.title}}
         draggable(v-model='todoSection.todos'
         group='todo'
