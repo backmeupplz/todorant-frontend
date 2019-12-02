@@ -9,7 +9,7 @@ linkify
   .add('#', {
     validate: (text, pos, self) => {
       const tail = text.slice(pos - 1)
-      const result = /[\u0400-\u04FFa-zA-Z]+/.exec(tail)
+      const result = /[\u0400-\u04FFa-zA-Z_]+/.exec(tail)
       return result ? result[0].length : 0
     },
   })
