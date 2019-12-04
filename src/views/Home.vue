@@ -88,7 +88,7 @@ export default class Home extends Vue {
   }
 
   get googleClientId() {
-    return "544897902503-4mfcmgifrm4ns7r3l6up0fmangedrpju.apps.googleusercontent.com";
+    return "599005831909-krrl1m3k011n7qdrkv1voio9cgdv7a0t.apps.googleusercontent.com";
   }
 
   async onFacebookSignInSuccess(response: any) {
