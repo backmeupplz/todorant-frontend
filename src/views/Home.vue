@@ -104,6 +104,7 @@ export default class Home extends Vue {
     store.setSnackbarError("errors.login.facebook");
   }
   async onGoogleSignInSuccess(googleUser: any) {
+    console.log(googleUser, googleUser.getAuthResponse().id_token);
     try {
       const user = await loginGoogle(googleUser.getAuthResponse().id_token);
       store.setUser(user);
