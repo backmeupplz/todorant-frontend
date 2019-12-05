@@ -61,7 +61,7 @@ const storeOptions = {
     dark: false,
     userState: {
       planning: false,
-      subscriptionStatus: SubscriptionStatus.inactive,
+      subscriptionStatus: SubscriptionStatus.active,
       createdAt: new Date(),
       subscriptionIdExists: false,
       settings: {},
