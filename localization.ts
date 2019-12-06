@@ -37,9 +37,9 @@ export const messages = {
             text: `Messages in the subscription part are cute :)
 
 Thank you for a simple and thriving for the ideal service. Turned out that it not only helps to be productive but also proactive. Little daily improvements confidently enhance life, and the free mind is constantly looking how to fill now emptied todo list so that it could feel the pleasure of completing tasks again and again — and it is a direct route towards improving everything surrounding me.
-            
+
 All in all, Todorant, no matter how simple at first glance, can become a faithful ally in any business. Thank you, Nikita, for unleashing the aspects of true productivity and sharing them with us in a convenient solution.
-            
+
 Thankful Todorant subscriber.`,
           },
           {
@@ -57,7 +57,7 @@ Thankful Todorant subscriber.`,
             text: `After I created the first tasks and switched to the "Current" tab - I was surprised that I had only one task and that I needed to complete it before moving on. This idea with one task and concentration on it struck me, it seems obvious, but I couldn't use it before.
 
 I usually tracked tasks and ideas in Notes, what should be done soon, but I did not approach it as a system. I have been using the service for a couple of weeks, not very actively, but I think this is a very strong way to systemize the affairs and tasks.
-            
+
 Thank you for your work!`,
           },
           {
@@ -86,7 +86,7 @@ Thank you for your work!`,
 1. Convenient — it is minimalistic!
 2. It instills a habit.
 3. Strange as it may seem, it doesn't force you to think rationally.
-            
+
 I'm irrational by nature, I can't just lead 1 project (I burn out quickly). My life is multitasking! 3 projects in parallel are easy, but 3 is not enough... 7 sounds more like it. And your service allows you to achieve this. It is the alternation of tasks that prevents the brain from burning out in one particular direction. And somehow, magically, it alternates tasks from one project to another.`,
           },
           {
@@ -146,7 +146,7 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
         title: 'Edit',
       },
       planning:
-        'Looks like you have some planning to do! Please, redistribute the outstanding tasks below to unlock the "Current" tab and to keep being productive. Cheers!',
+        'Looks like you have some planning to do! Please, redistribute the outstanding tasks below to unlock the "Current" tab and to to keep being productive. Cheers!',
     },
     cancel: 'Cancel',
     save: 'Save',
@@ -292,10 +292,10 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
             username: 'Gendoor',
             text: `Милые сообщения в разделе подписки Тудуранта :)
 
-Благодарю за простой и стремящийся к идеальному сервис. Оказалось, что он помогает быть не только продуктивным, но и проактивным. Маленькие улучшения каждый день уверенно подтягивают за собой отстающие звенья, а свободный от задач разум постоянно ищет, чем бы заполнить опустевший список задач, чтобы снова и снова получать удовольствие от их выполнения и связанных с этим перемен — и это прямой путь к улучшению всего, что меня окружает. 
-            
+Благодарю за простой и стремящийся к идеальному сервис. Оказалось, что он помогает быть не только продуктивным, но и проактивным. Маленькие улучшения каждый день уверенно подтягивают за собой отстающие звенья, а свободный от задач разум постоянно ищет, чем бы заполнить опустевший список задач, чтобы снова и снова получать удовольствие от их выполнения и связанных с этим перемен — и это прямой путь к улучшению всего, что меня окружает.
+
 В общем, Тудурант, каким бы простым он ни казался на первый взгляд, способен стать верным соратником в любых делах. Спасибо, Никита, что осознал аспекты истинной продуктивности и поделился ими с нами в удобном решении.
-            
+
 Благодарный подписчик Тудуранта.`,
           },
           {
@@ -321,8 +321,8 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
             username: 'mas1311',
             text: `Протестировал тудурант. Сначала был скепсис (уж очень много перепробовал сервисов по планированию), но понял, что действительно эффективно работает и очень прост в использовании.
 
-Плюс, по неизвестной мне причине, когда выполняются все задачи на день появляется мощная гордость и удовлетворение, что отсутствовало в других планировщиках (там было что то в формате "ну вроде все.. или нет?"). 
-          
+Плюс, по неизвестной мне причине, когда выполняются все задачи на день появляется мощная гордость и удовлетворение, что отсутствовало в других планировщиках (там было что то в формате "ну вроде все.. или нет?").
+
 Спасибо за твои работы!`,
           },
           {
@@ -342,7 +342,7 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
 1. Удобен — вот реально ничего лишнего!
 2. Прививает привычку, как ты там писал в каком-то из постов, прям с языка снял в тот момент: мы — это набор привычек.
 3. Как ни странно, не заставляет рационально мыслить.
-            
+
 Я по своей натуре иррационален, я не могу просто вести 1 проект (я быстро выгораю). Я живу только многозадачностью! 3 проекта параллельно легко, но мало... 7 — вот это интересней. И твой сервис позволяет этого достигать. Именно чередование задач не дает возможности мозгу выгорать в одном конкретном направлении. А каким-то магическим образом чередует задачи с одного проекта на другой.`,
           },
           {

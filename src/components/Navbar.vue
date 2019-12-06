@@ -85,7 +85,11 @@ export default class Navbar extends Vue {
   settingsDialog = false;
 
   get locales() {
-    return [{ icon: "us", code: "en" }, { icon: "ru", code: "ru" }];
+    return [
+      { icon: "us", code: "en" },
+      { icon: "ru", code: "ru" },
+      { icon: "ua", code: "ua" }
+    ];
   }
   get currentLocale() {
     for (const locale of this.locales) {
