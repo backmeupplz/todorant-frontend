@@ -74,7 +74,7 @@ export default class AddTodo extends Vue {
 
   panel = [] as Number[];
 
-  todos = [] as Partial<Todo>[];
+  todos = [] as Partial<Todo & { goFirst: boolean }>[];
 
   loading = false;
 
@@ -120,10 +120,13 @@ export default class AddTodo extends Vue {
       const now = new Date();
       now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
       this.todos.push({
-        date: now.toISOString().substr(0, 10)
+        date: now.toISOString().substr(0, 10),
+        goFirst: store.userState().settings.newTodosGoFirst || false
       });
     } else {
-      this.todos.push({});
+      this.todos.push({
+        goFirst: store.userState().settings.newTodosGoFirst || false
+      });
     }
     this.panel = [this.todos.length - 1];
   }

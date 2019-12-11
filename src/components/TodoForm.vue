@@ -49,6 +49,8 @@
         v-switch(:label='$t("todo.create.frog")' v-model='todo.frog')
       v-col(cols='12' md='6')
         v-switch(:label='$t("todo.create.completed")' v-model='todo.completed')
+      v-col(cols='12' md='6')
+        v-switch(:label='$t("todo.create.goFirst")' v-model='todo.goFirst')
     v-row
       slot
 </template>

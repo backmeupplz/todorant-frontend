@@ -138,6 +138,7 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
         month: 'Or month',
         tooltip:
           'Tasks should always be: actionable ("Find best flights to Mexico" vs "Go to Mexico"); as small and exact as possible ("Dust the displays" vs "Clean the house").',
+        goFirst: 'Add on the top',
       },
       list: {
         completed: 'Show completed',
@@ -394,6 +395,7 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
         month: 'Или месяц',
         tooltip:
           'Задачи должны быть: указывающими на следующее действие ("Найти лучшие билеты в Мексику на агрегаторе билетов", а не "Полететь в Мексику"); наиболее маленькими и понятными ("Протереть дисплей", а не "Прибраться дома").',
+        goFirst: 'Добавить наверх',
       },
       list: {
         completed: 'Показать завершенные',
@@ -653,6 +655,7 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
         month: 'Або місяць',
         tooltip:
           'Завдання повинні бути: вказуючими на наступну дію ("Знайти найкращі квитки у Мексику на агрегаторі квитків", а не "Полетіти у Мексику"); найменшими і зрозумілими ("Протерти дісплей", а не "Прибратися вдома").',
+        goFirst: 'Add on the top',
       },
       list: {
         completed: 'Показати завершені',
