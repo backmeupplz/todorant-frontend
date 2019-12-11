@@ -5,12 +5,15 @@
         v-flex
           v-alert(text color='info' icon='info') {{$t('todo.planning')}}
       v-list-item.d-flex.align-center
-        v-switch.ma-0.pa-0(hide-details v-model='showCompleted'
+        v-switch.ma-0.pa-0(v-if='!calendarViewEnabled'
+        hide-details v-model='showCompleted'
         :label='$t("todo.list.completed")'
         :loading='todosUpdating'
         :disabled='editable')
         v-spacer
-        v-btn(v-if='!editable && !showCompleted' icon :loading='todosUpdating' @click='editable = true')
+        v-btn(v-if='!editable && !showCompleted' icon @click='toggleCalendar' :color='calendarViewEnabled ? "blue" : ""' :loading='todosUpdating || loading')
+          v-icon calendar_today
+        v-btn(v-if='!editable && !showCompleted && !calendarViewEnabled' icon :loading='todosUpdating' @click='editable = true')
           v-icon format_list_numbered
         v-btn(v-if='!!editable' icon :loading='todosUpdating || loading' @click='editable = false')
           v-icon clear
@@ -18,7 +21,11 @@
           v-icon done
         v-btn(icon :loading='todosUpdating' @click='loadTodos')
           v-icon refresh
-      div(v-for='(todoSection, i) in todos' :key='i')
+      v-list-item(v-if='calendarViewEnabled && todosUpdating' flex)
+        v-progress-linear(:indeterminate='true')
+      v-list-item(v-if='calendarViewEnabled' flex)
+        v-calendar(type='month' :events='events' :weekdays='weekdays' @click:event="editEvent")
+      div(v-else v-for='(todoSection, i) in todos' :key='i')
         v-subheader
           v-tooltip(right :max-width='300' v-if='todoSection.title.length === 10')
             template(v-slot:activator='{ on }')
@@ -67,7 +74,7 @@
                     v-icon(small) edit
                   v-btn(text small icon @click='completeOrUndoTodo(todo)' :loading='loading' v-if='!editable')
                     v-icon(small) {{todo.completed ? 'repeat' : 'done'}}
-      v-progress-linear(v-if='todosUpdating' :indeterminate='true')
+      v-progress-linear(v-if='todosUpdating && !calendarViewEnabled' :indeterminate='true')
     EditTodo(:todo='todoEdited' :cleanTodo='cleanTodo')
     DeleteTodo(:todo='todoDeleted')
 </template>
@@ -106,11 +113,34 @@ export default class TodoList extends Vue {
 
   loading = false;
   drag = false;
+
+  calendarViewEnabled = true;
+
   get editable() {
     return store.editting();
   }
   set editable(value: Boolean) {
     store.setEditting(value);
+  }
+
+  get events() {
+    return this.todos
+      .reduce(
+        (prev, cur) => prev.concat(cur.todos.filter(todo => !!todo.date)),
+        [] as Todo[]
+      )
+      .map(todo => ({
+        name: todo.text,
+        start: `${todo.monthAndYear}-${todo.date}`
+      }));
+  }
+  get weekdays() {
+    const firstDay = +this.$store.state.userState.settings.firstDayOfWeek;
+    const result = [firstDay];
+    for (let i = 1; i < 7; i++) {
+      result.push((firstDay + i) % 7);
+    }
+    return result;
   }
 
   @Watch("showCompleted")
@@ -151,7 +181,8 @@ export default class TodoList extends Vue {
         fullUpdate || more
           ? 20
           : this.todos.reduce((prev, cur) => prev + cur.todos.length, 0),
-        this.$router.currentRoute.hash
+        this.$router.currentRoute.hash,
+        this.calendarViewEnabled
       );
       this.noMoreTodos = fetchedTodos.length <= 0;
       let allTodos = more
@@ -206,6 +237,22 @@ export default class TodoList extends Vue {
       store.setSnackbarError("errors.loadTodos");
     } finally {
       this.todosUpdating = false;
+    }
+  }
+
+  editEvent(event: any) {
+    const flatTodos = this.todos.reduce(
+      (prev, cur) => prev.concat(cur.todos),
+      [] as Todo[]
+    );
+    for (const todo of flatTodos) {
+      if (
+        todo.text === event.event.name &&
+        todo.date === event.event.start.substr(8)
+      ) {
+        this.editTodo(todo);
+        return;
+      }
     }
   }
 
@@ -333,6 +380,11 @@ export default class TodoList extends Vue {
       return;
     }
     this.loadTodos(false, true);
+  }
+
+  toggleCalendar() {
+    this.calendarViewEnabled = !this.calendarViewEnabled;
+    this.loadTodos(true, false);
   }
 }
 </script>

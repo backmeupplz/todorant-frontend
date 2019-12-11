@@ -8,15 +8,19 @@ import { TodoSection } from '../models/TodoSection'
 const base = process.env.VUE_APP_API
 
 export async function loginFacebook(accessToken: string) {
-  return (await axios.post(`${base}/login/facebook`, {
-    accessToken,
-  })).data as User
+  return (
+    await axios.post(`${base}/login/facebook`, {
+      accessToken,
+    })
+  ).data as User
 }
 
 export async function loginGoogle(accessToken: string) {
-  return (await axios.post(`${base}/login/google`, {
-    accessToken,
-  })).data as User
+  return (
+    await axios.post(`${base}/login/google`, {
+      accessToken,
+    })
+  ).data as User
 }
 
 export async function loginTelegram(loginInfo: any) {
@@ -28,50 +32,58 @@ export async function loginApple(loginInfo: any) {
 }
 
 export async function mergeFacebook(user: User, accessToken: string) {
-  return (await axios.post(
-    `${base}/merge/facebook`,
-    {
-      accessToken,
-    },
-    {
-      headers: getHeaders(user),
-    }
-  )).data as User
+  return (
+    await axios.post(
+      `${base}/merge/facebook`,
+      {
+        accessToken,
+      },
+      {
+        headers: getHeaders(user),
+      }
+    )
+  ).data as User
 }
 
 export async function mergeGoogle(user: User, accessToken: string) {
-  return (await axios.post(
-    `${base}/merge/google`,
-    {
-      accessToken,
-    },
-    {
-      headers: getHeaders(user),
-    }
-  )).data as User
+  return (
+    await axios.post(
+      `${base}/merge/google`,
+      {
+        accessToken,
+      },
+      {
+        headers: getHeaders(user),
+      }
+    )
+  ).data as User
 }
 
 export async function mergeTelegram(user: User, loginInfo: any) {
-  return (await axios.post(`${base}/merge/telegram`, loginInfo, {
-    headers: getHeaders(user),
-  })).data as User
+  return (
+    await axios.post(`${base}/merge/telegram`, loginInfo, {
+      headers: getHeaders(user),
+    })
+  ).data as User
 }
 
 export async function postTodos(user: User, todos: Partial<Todo>[]) {
-  return (await axios.post(
-    `${base}/todo`,
-    todos.map(todo => {
-      const todoCopy = { ...todo }
-      if (todo.date) {
-        todoCopy.monthAndYear = todo.date.substr(0, 7)
-        todoCopy.date = todo.date.substr(8)
+  return (
+    await axios.post(
+      `${base}/todo`,
+      todos.map(todo => {
+        const todoCopy = { ...todo }
+        if (todo.date) {
+          todoCopy.monthAndYear = todo.date.substr(0, 7)
+          todoCopy.date = todo.date.substr(8)
+        }
+        return todoCopy
+      }),
+      {
+        headers: getHeaders(user),
       }
-      return todoCopy
-    }),
-    {
-      headers: getHeaders(user),
-    }
-  )).data
+    )
+  ).data
 }
 
 export async function editTodo(user: User, todo: Todo) {
@@ -131,31 +143,40 @@ export async function getTodos(
   completed: boolean = false,
   skip: number,
   limit: number,
-  hash?: string
+  hash?: string,
+  calendarView: boolean = false
 ) {
   await updateState(user)
-  return (await axios.get(`${base}/todo`, {
-    headers: getHeaders(user),
-    params: {
-      completed,
-      hash,
-      skip,
-      limit,
-    },
-  })).data as Todo[]
+  return (
+    await axios.get(`${base}/todo`, {
+      headers: getHeaders(user),
+      params: {
+        completed,
+        hash,
+        skip,
+        limit,
+        today: getToday(),
+        calendarView,
+      },
+    })
+  ).data as Todo[]
 }
 
 export async function getCurrentTodo(user: User) {
   await updateState(user)
   const now = new Date()
-  return (await axios.get(`${base}/todo/current`, {
-    headers: getHeaders(user),
-    params: {
-      date: `${now.getFullYear()}-${
-        now.getMonth() + 1 < 10 ? `0${now.getMonth() + 1}` : now.getMonth() + 1
-      }-${now.getDate() < 10 ? `0${now.getDate()}` : now.getDate()}`,
-    },
-  })).data as {
+  return (
+    await axios.get(`${base}/todo/current`, {
+      headers: getHeaders(user),
+      params: {
+        date: `${now.getFullYear()}-${
+          now.getMonth() + 1 < 10
+            ? `0${now.getMonth() + 1}`
+            : now.getMonth() + 1
+        }-${now.getDate() < 10 ? `0${now.getDate()}` : now.getDate()}`,
+      },
+    })
+  ).data as {
     todosCount: number
     incompleteTodosCount: number
     todo?: Todo
@@ -175,9 +196,11 @@ export enum Plan {
   yearly = 'yearly',
 }
 export async function getPlanSession(user: User, plan: Plan) {
-  return (await axios.get(`${base}/subscription/session/${plan}`, {
-    headers: getHeaders(user),
-  })).data as {
+  return (
+    await axios.get(`${base}/subscription/session/${plan}`, {
+      headers: getHeaders(user),
+    })
+  ).data as {
     session: string
   }
 }
@@ -195,12 +218,14 @@ export async function setSettings(user: User, settings: store.Settings) {
 }
 
 async function updateState(user: User) {
-  const userState = (await axios.get(`${base}/state`, {
-    headers: getHeaders(user),
-    params: {
-      date: getToday(),
-    },
-  })).data as store.UserState
+  const userState = (
+    await axios.get(`${base}/state`, {
+      headers: getHeaders(user),
+      params: {
+        date: getToday(),
+      },
+    })
+  ).data as store.UserState
   store.setUserState(userState)
 }
 
