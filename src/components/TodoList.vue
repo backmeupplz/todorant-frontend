@@ -24,7 +24,7 @@
       v-list-item(v-if='calendarViewEnabled && todosUpdating' flex)
         v-progress-linear(:indeterminate='true')
       v-list-item(v-if='calendarViewEnabled' flex)
-        v-calendar(type='month' :events='events' :weekdays='weekdays' @click:event="editEvent")
+        v-calendar(type='month' :events='events' :weekdays='weekdays' @click:event="editEvent" :event-more='false')
       div(v-else v-for='(todoSection, i) in todos' :key='i')
         v-subheader
           v-tooltip(right :max-width='300' v-if='todoSection.title.length === 10')
