@@ -114,7 +114,7 @@ export default class TodoList extends Vue {
   loading = false;
   drag = false;
 
-  calendarViewEnabled = true;
+  calendarViewEnabled = false;
 
   get editable() {
     return store.editting();
