@@ -34,7 +34,12 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import { reportGA } from "../utils/ga";
 
 @Component
-export default class Privacy extends Vue {}
+export default class Privacy extends Vue {
+  mounted() {
+    reportGA("privacy_viewed");
+  }
+}
 </script>

@@ -65,6 +65,7 @@ import { Todo } from "../models/todo";
 import * as store from "../plugins/store";
 import * as api from "../utils/api";
 import { serverBus } from "../main";
+import { reportGA } from "../utils/ga";
 
 @Component({
   components: { TodoForm }
@@ -82,6 +83,10 @@ export default class AddTodo extends Vue {
     serverBus.$on("addTodoRequested", () => {
       this.dialog = true;
     });
+  }
+
+  mounted() {
+    reportGA("add_todo_opened");
   }
 
   @Watch("dialog")
@@ -129,6 +134,8 @@ export default class AddTodo extends Vue {
       });
     }
     this.panel = [this.todos.length - 1];
+
+    reportGA("add_todo_add_more");
   }
 
   deleteTodo(i: number) {
@@ -163,8 +170,10 @@ export default class AddTodo extends Vue {
       await api.postTodos(user, this.todos);
       this.dialog = false;
       serverBus.$emit("refreshRequested");
+      reportGA("add_todo_success");
     } catch (err) {
       store.setSnackbarError(err.response.data);
+      reportGA("add_todo_error", { error: err.message });
     } finally {
       this.loading = false;
     }

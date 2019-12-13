@@ -41,6 +41,7 @@ import * as store from "../plugins/store";
 import { daysBetween } from "../utils/daysBetween";
 import * as api from "../utils/api";
 import { serverBus } from "../main";
+import { reportGA } from "../utils/ga";
 
 // Stripe object is global, declaring here for TS
 declare const Stripe: any;
@@ -55,6 +56,12 @@ const stripe = Stripe(process.env.VUE_APP_STRIPE);
 })
 export default class Subscription extends Vue {
   loading = false;
+
+  mounted() {
+    reportGA("subscription_viewed", {
+      status: store.userState().subscriptionStatus
+    });
+  }
 
   get subscriptionStatusText() {
     if (
@@ -98,8 +105,15 @@ export default class Subscription extends Vue {
         color: "success"
       });
       (this as any).close();
+      reportGA("subscription_success", {
+        status: store.userState().subscriptionStatus
+      });
     } catch (err) {
       store.setSnackbarError(err.message);
+      reportGA("subscription_purchase_error", {
+        status: store.userState().subscriptionStatus,
+        error: err.message
+      });
     } finally {
       this.loading = false;
     }
@@ -118,8 +132,15 @@ export default class Subscription extends Vue {
       const session = await api.cancelSubscription(user);
       (this as any).close();
       serverBus.$emit("refreshRequested");
+      reportGA("subscription_canceled", {
+        status: store.userState().subscriptionStatus
+      });
     } catch (err) {
       store.setSnackbarError(err.message);
+      reportGA("subscription_cancel_error", {
+        status: store.userState().subscriptionStatus,
+        error: err.message
+      });
     } finally {
       this.loading = false;
     }

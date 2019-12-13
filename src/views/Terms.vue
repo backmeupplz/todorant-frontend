@@ -33,7 +33,12 @@
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
+import { reportGA } from "../utils/ga";
 
 @Component
-export default class Terms extends Vue {}
+export default class Terms extends Vue {
+  mounted() {
+    reportGA("terms_viewed");
+  }
+}
 </script>

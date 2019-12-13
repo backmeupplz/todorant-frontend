@@ -26,9 +26,9 @@
       .headline.py-4 {{$t('home.appstores')}}
 
       v-row
-        a.pt-3(:href='$store.state.language === "en" ? "https://apps.apple.com/us/app/todorant/id1482078243" : "https://apps.apple.com/ru/app/todorant/id1482078243"')
+        a.pt-3(@click='open($store.state.language === "en" ? "https://apps.apple.com/us/app/todorant/id1482078243" : "https://apps.apple.com/ru/app/todorant/id1482078243")')
           v-img(width='150' height='50' aspect-ratio='1' :src='`/img/appstore_${$store.state.language}.svg`')
-        a.pl-1(href='https://play.google.com/store/apps/details?id=com.todorant.android')
+        a.pl-1(@click='open("https://play.google.com/store/apps/details?id=com.todorant.android")')
           v-img(width='170' height='74' aspect-ratio='1' :src='`/img/playstore_${$store.state.language}.png`')
 
       v-flex.pt-4
@@ -65,6 +65,7 @@ import * as store from "../plugins/store";
 import Component from "vue-class-component";
 import { i18n } from "../plugins/i18n";
 const { vueTelegramLogin } = require("vue-telegram-login");
+import { reportGA } from "../utils/ga";
 
 // FB object is global, declaring here for TS
 declare const FB: any;
@@ -87,6 +88,10 @@ export default class Home extends Vue {
     }
   }
 
+  mounted() {
+    reportGA("home_mounted");
+  }
+
   get googleClientId() {
     return "599005831909-krrl1m3k011n7qdrkv1voio9cgdv7a0t.apps.googleusercontent.com";
   }
@@ -96,33 +101,45 @@ export default class Home extends Vue {
       const user = await loginFacebook(response.authResponse.accessToken);
       store.setUser(user);
       this.$router.replace("superpower");
+      reportGA("login_success", { provider: "facebook" });
     } catch (err) {
+      console.error(err);
       store.setSnackbarError("errors.login.facebook");
+      reportGA("login_error", { provider: "facebook", error: err.message });
     }
   }
   onFacebookSignInError(error: Error) {
+    console.error(error);
     store.setSnackbarError("errors.login.facebook");
+    reportGA("login_error", { provider: "facebook", error: error.message });
   }
   async onGoogleSignInSuccess(googleUser: any) {
     try {
       const user = await loginGoogle(googleUser.getAuthResponse().id_token);
       store.setUser(user);
       this.$router.replace("superpower");
+      reportGA("login_success", { provider: "google" });
     } catch (err) {
+      console.error(err);
       store.setSnackbarError("errors.login.google");
+      reportGA("login_error", { provider: "google", error: err.message });
     }
   }
   onGoogleSignInError(error: Error) {
     console.error(error);
     store.setSnackbarError("errors.login.google");
+    reportGA("login_error", { provider: "google", error: error.message });
   }
   async onTelegramAuth(loginInfo: any) {
     try {
       const user = await loginTelegram(loginInfo);
       store.setUser(user);
       this.$router.replace("superpower");
+      reportGA("login_success", { provider: "telegram" });
     } catch (err) {
+      console.error(err);
       store.setSnackbarError("errors.login.telegram");
+      reportGA("login_error", { provider: "telegram", error: err.message });
     }
   }
   async onAppleAuth(loginInfo: any) {
@@ -130,9 +147,16 @@ export default class Home extends Vue {
       const user = await loginApple(loginInfo);
       store.setUser(user);
       this.$router.replace("superpower");
+      reportGA("login_success", { provider: "apple" });
     } catch (err) {
+      console.error(err);
       store.setSnackbarError("errors.login.apple");
+      reportGA("login_success", { provider: "apple" });
     }
+  }
+  open(link: string) {
+    reportGA("open_link", { link });
+    window.open(link, "_blank");
   }
 }
 </script>
