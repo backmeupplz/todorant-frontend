@@ -10,48 +10,132 @@
       rel="stylesheet"
     />
     <!-- Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
     <!-- Meta -->
     <title>Todorant</title>
-    <meta name="description" content="Use cognitive psychology to trick your brain into getting things done with the only To Do manager you will ever need">
-    <meta name="keywords" content="todo,to,do,todorant,lists,tasks">
+    <meta
+      name="description"
+      content="Use cognitive psychology to trick your brain into getting things done with the only To Do manager you will ever need"
+    />
+    <meta name="keywords" content="todo,to,do,todorant,lists,tasks" />
     <!-- Style -->
-    <style>body { background-color: #040404 }</style>
+    <style>
+      body {
+        background-color: #040404;
+      }
+      #loading-img {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+    </style>
     <!-- Google -->
     <script src="https://apis.google.com/js/api:client.js"></script>
     <!-- Apple -->
-    <script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
+    <script
+      type="text/javascript"
+      src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"
+    ></script>
     <!-- Stripe -->
     <script src="https://js.stripe.com/v3/"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154435371-1"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-154435371-1"
+    ></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
 
-      gtag('config', 'UA-154435371-1');
+      gtag('config', 'UA-154435371-1')
     </script>
 
-
     <!-- favicon -->
-    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/favicon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/favicon/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="/favicon/apple-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      href="/favicon/apple-icon-60x60.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="/favicon/apple-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="/favicon/apple-icon-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="/favicon/apple-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="/favicon/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="/favicon/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="/favicon/apple-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/apple-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/favicon/android-icon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="/favicon/favicon-96x96.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/favicon/manifest.json" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta
+      name="msapplication-TileImage"
+      content="/favicon/ms-icon-144x144.png"
+    />
+    <meta name="theme-color" content="#ffffff" />
   </head>
   <body>
     <script>
@@ -63,7 +147,6 @@
           version: 'v3.2',
         })
       }
-
       ;(function(d, s, id) {
         var js,
           fjs = d.getElementsByTagName(s)[0]
@@ -84,7 +167,14 @@
         >
       </font>
     </noscript>
-    <div id="app"><center><img src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.scratch.mit.edu%2Fget_image%2Fgallery%2F1115204_170x100.png&f=1" width="116" height="100"></img></center></div>
+    <div id="app">
+      <img
+        id="loading-img"
+        src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn2.scratch.mit.edu%2Fget_image%2Fgallery%2F1115204_170x100.png&f=1"
+        width="116"
+        height="100"
+      />
+    </div>
     <!-- built files will be auto injected -->
   </body>
 </html>
