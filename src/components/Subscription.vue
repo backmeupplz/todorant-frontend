@@ -57,12 +57,6 @@ const stripe = Stripe(process.env.VUE_APP_STRIPE);
 export default class Subscription extends Vue {
   loading = false;
 
-  mounted() {
-    reportGA("subscription_viewed", {
-      status: store.userState().subscriptionStatus
-    });
-  }
-
   get subscriptionStatusText() {
     if (
       store.userState().subscriptionStatus === store.SubscriptionStatus.trial &&

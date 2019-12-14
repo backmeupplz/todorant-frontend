@@ -45,7 +45,7 @@
           v-if='!!$store.state.user')
             v-list-item-title {{$t('menu.merge')}}
           // Subscription
-          v-list-item(@click='subscriptionDialog = true' 
+          v-list-item(@click='showSubscription' 
           v-if='!!$store.state.user')
             v-list-item-title {{$t('subscription.title')}}
           // Settings
@@ -69,6 +69,7 @@ import Merge from "./Merge.vue";
 import Subscription from "./Subscription.vue";
 import Settings from "./Settings.vue";
 import { serverBus } from "../main";
+import { reportGA } from "../utils/ga";
 
 @Component({
   components: {
@@ -109,6 +110,9 @@ export default class Navbar extends Vue {
   created() {
     serverBus.$on("subscriptionRequested", () => {
       this.subscriptionDialog = true;
+      reportGA("subscription_viewed", {
+        status: store.userState().subscriptionStatus
+      });
     });
   }
   mounted() {
@@ -150,6 +154,12 @@ export default class Navbar extends Vue {
     } catch (err) {
       // Do nothing
     }
+  }
+  showSubscription() {
+    reportGA("subscription_viewed", {
+      status: store.userState().subscriptionStatus
+    });
+    this.subscriptionDialog = true;
   }
 }
 </script>
