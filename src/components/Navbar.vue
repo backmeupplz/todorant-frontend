@@ -114,6 +114,9 @@ export default class Navbar extends Vue {
         status: store.userState().subscriptionStatus
       });
     });
+    serverBus.$on("rulesRequested", () => {
+      this.rulesDialog = true;
+    });
   }
   mounted() {
     if (!store.rulesShown() && store.user()) {
