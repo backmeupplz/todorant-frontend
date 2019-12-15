@@ -290,7 +290,7 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
     },
   },
   ru: {
-    title: 'Todorant',
+    title: 'Тудурант',
     cookie: {
       button: 'Понятненько!',
       message: 'Этот вебсайт использует печеньки.',

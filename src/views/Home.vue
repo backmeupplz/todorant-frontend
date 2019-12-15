@@ -29,7 +29,7 @@
               v-btn.primary(block @click='signinDialog = true') {{$t('home.signIn')}}
               p.caption.pa-2 {{$t('home.youAreRegistered')}}
           v-col(cols=12 sm=6)
-            v-img(src='img/iphone.png').d-flex.elevation-1
+            v-img(:src='this.pictures.iphone').d-flex.elevation-1
         v-row
           v-col
             p.display-1 {{$t('home.texts.level[0]')}}
@@ -37,7 +37,7 @@
             p {{$t('home.texts.level[2]')}}
         v-row
           v-col
-            v-img(src='img/desktop.png').d-flex.elevation-1
+            v-img(:src='pictures.desktop').d-flex.elevation-1
         v-row
           v-col
             p.display-1 {{$t('home.texts.winter[0]')}}
@@ -143,6 +143,21 @@ export default class Home extends Vue {
 
   mounted() {
     reportGA("home_mounted");
+  }
+
+  get pictures() {
+    return {
+      desktop: `img/desktop-${this.imageModifier}.png`,
+      iphone: `img/iphone-${this.imageModifier}.png`
+    };
+  }
+
+  get imageModifier() {
+    return `${i18n.locale}-${this.mode}`;
+  }
+
+  get mode() {
+    return store.dark() ? "dark" : "light";
   }
 
   get googleClientId() {
