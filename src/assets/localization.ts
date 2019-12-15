@@ -3,31 +3,64 @@ export const messages = {
     title: 'Todorant',
     cookie: {
       button: 'Got it!',
-      message:
-        'This website uses cookies. We do not track you. But Facebook might.',
+      message: 'This website uses cookies.',
     },
     home: {
-      info:
-        'Use cognitive psychology to trick your brain into getting things done with the only To Do manager you will ever need',
-      pitch:
-        'Hello there! My name is Nikita and I believe I\'ve built the best todo manager based on the knowledge I gained after reading <a target="_blank" href="https://duckduckgo.com/?q=Willpower%3A+Rediscovering+the+Greatest+Human+Strength&atb=v179-1_k&ia=shopping">Willpower</a>, <a target="_blank" href="https://duckduckgo.com/?q=Getting+Things+Done%3A+The+Art+of+Stress-Free+Productivity&atb=v179-1_k&ia=shopping">Getting Things Done</a> and <a target="_blank" href="https://duckduckgo.com/?q=Eat+that+frog&atb=v179-1_k&ia=shopping">Eat That Frog</a> books. I\'ve understood the outlined ideas, simplified them, tested on my personal experience and implemented this simple software solution based on the ideas formulated below. Give it a try and your productivity will rise — or money back guaranteed.',
-      ideas: [
-        '🥰 Clean mind — your inbox is empty and you only ever work on one task at a time',
-        "🐸 Eat your frogs first thing in the morning — it's the best time to work on unwanted tasks",
-        '💃 Skip the current task when you need it',
-        "🐸 Fail to complete a task twice — and it's a frog",
-        '☁ Task too high level? Break it down with one click',
-        "👀 No lost todo's — you always attach a day or a month to a created todo",
-        '1️⃣ First day of a month? Plan before you start working',
-        '⏳ Does a task take less than 2 minutes? Do it now and record',
-        '💰 Pricing is simple: the first month for free and then $5/month for infinite productivity!',
+      texts: {
+        level: [
+          'I was once like you',
+          'I spent hours and hours trying to get stuff done and it looked like nothing could help. New tasks kept coming and old ones kept piling up. There was no escape — none of the task managers worked, the only purpose they served was upsetting me with all these things I forgot and all the tasks I never finished.',
+          "While complicated and sophisticated tools with plenty of features can be useful to keep track of some tasks, cognitive psychology tells us that overwhelming our subconsciousness with all the hanging tasks that weren't accounted for can use up a major chunk of our brain that should otherwise be in charge of providing the happiness feeling.",
+        ],
+        winter: [
+          'The winter is coming',
+          "Even though the world population is happier than ever, personal productivity has recently took a hit. If we follow the same trend, we might find ourselves among the grey mass of generic humans who are no longer productive and cannot complete a single more or less difficult and complex task — simply because anxiety won't let us.",
+          'Number of people, who forget about important events with their significant others, who promise to do more than they can handle, who keep thinking about "that thing that I should check but I\'m not sure what" instead of getting things done is going to be on a rise very soon. You can also find yourselves among the mindless biological machines that only perform simple low-paid tasks if you don\'t take action.',
+        ],
+        contact: [
+          'Still got questions? Contact me directly at ',
+          '. Thank you.',
+        ],
+        solution: [
+          'But you have the solution',
+          'After making myself familiar with the books about cognitive science like "Eat That Frog", "Willpower", "Atomic Habbits" and "Getting Things Done", I developed a system that boosted my productivite by 10 times. I am now able to complete 10 times more tasks which leads to 10 times more projects launched with this simple system. I\'m sharing this solution with you in order to improve the environment I live in. If people around me thrive — my personal happiness increases as well.',
+          'Todorant is a plain vanilla todo list with one single catch. Every action and feature were carefully weighted and tested using cognitive phsychology. I have used the decades of studies and packed them into a single simple silver-bullet productivity tool. Todorant tricks your mind into doing more good actions and less bad actions. It builds you positive habits and gets rid of bad behaviour. So stop mindlessly writing down your tasks. Start using the system that works.',
+        ],
+        consequences: {
+          title: 'Consequences?',
+          points: [
+            'Your inbox will always be empty',
+            'Unwanted tasks (frogs) will be dealt with',
+            'No projects will stagnate',
+            'Your brain will naturally crave effectiveness',
+            'You will never forget anything',
+            'People will start admiring your productivity',
+          ],
+        },
+        deal: [
+          "What's the deal?",
+          "Todorant is more expensive than other todo solutions, yes. In fact, the industry standard is $3/month whereas Todorant has 30 days free trial (no credit card required) and then costs $5/month. Yes, Todorant has less features than it's competitors — but it is on purpose.",
+          "When others sell you a place to park your todos indefinitely, Todorant sells the methodology and ideology — Todorant sells getting stuff done, not mindlessly writing it down. Todorant isn't for everybody — it is crafted specifically for people who want to free their mind from pressing issues and finally start completing the projects. You can familiarize yourselves with the methodology by ",
+          'opening the rulebook',
+          ' on the top-right corner of this page.',
+        ],
+        personal: [
+          'What would I do?',
+          "I tried dozens of different todo list apps. If I had a chance to try Todorant before I implemented it — I would definitelly give it a try. It's free for the first 30 days — and it is just enough to try if the system works for me. And, damn, if it works and I get my stuff done — I'd pay whatever price to keep up the productivity streak. There are no strings attached — just login and try Todorant today. You can find the buttons below. Enough talking — time to boost the productivity levels!",
+        ],
+      },
+      youAreRegistered: '(you are already registered)',
+      headline: [
+        'Never forget a task.',
+        'Always get it done.',
+        'Live a happy life.',
+        'Powered by Todorant.',
       ],
-      action:
-        'Ready to boost your productivity? 💪 Click a button bellow to start using Todorant!',
+      signIn: 'Sign in',
+      lastSignIn: '(alright, this is the last button, sign in already)',
       facebook: 'Login with Facebook',
       google: 'Login with Google',
       privacy: 'Privacy policy',
-      appstores: 'Download the app',
       feedback: {
         title: 'What do the users say?',
         reviews: [
@@ -260,31 +293,61 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
     title: 'Todorant',
     cookie: {
       button: 'Понятненько!',
-      message:
-        'Этот вебсайт использует печеньки. Мы не следим за вами. Но Фейсбук, возможно, следит.',
+      message: 'Этот вебсайт использует печеньки.',
     },
     home: {
-      info:
-        'Используйте когнитивную психологию, чтобы завершать дела в единственном менеджере задач, который вам когда-либо будет нужен',
-      pitch:
-        'Привет! Меня зовут Никита, и я, похоже, создал лучший менеджер задач на основе знаний, которые я почерпнул из книг <a htarget="_blank" href="https://duckduckgo.com/?q=%D0%A1%D0%B8%D0%BB%D0%B0+%D0%B2%D0%BE%D0%BB%D0%B8.+%D0%92%D0%BE%D0%B7%D1%8C%D0%BC%D0%B8+%D1%81%D0%B2%D0%BE%D1%8E+%D0%B6%D0%B8%D0%B7%D0%BD%D1%8C+%D0%BF%D0%BE%D0%B4+%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D1%8C&atb=v179-1_k&ia=web">Willpower</a>, <a target="_blank" href="https://duckduckgo.com/?q=%D0%9A%D0%B0%D0%BA+%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B8%D0%B2%D0%B0%D1%82%D1%8C+%D0%B4%D0%B5%D0%BB%D0%B0+%D0%B2+%D0%BF%D0%BE%D1%80%D1%8F%D0%B4%D0%BA%D0%B5.+%D0%9F%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF%D1%8B+%D0%BF%D0%BE%D0%BB%D0%BD%D0%BE%D1%86%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9+%D0%B6%D0%B8%D0%B7%D0%BD%D0%B8+%D0%B1%D0%B5%D0%B7+%D1%81%D1%82%D1%80%D0%B5%D1%81%D1%81%D0%B0&atb=v179-1_k&ia=web">Getting Things Done</a> и <a target="_blank" href="https://duckduckgo.com/?q=%D0%9E%D1%81%D1%82%D0%B0%D0%B2%D1%8C%D1%82%D0%B5+%D0%B1%D1%80%D0%B5%D0%B7%D0%B3%D0%BB%D0%B8%D0%B2%D0%BE%D1%81%D1%82%D1%8C%2C+%D1%81%D1%8A%D0%B5%D1%88%D1%8C%D1%82%D0%B5+%D0%BB%D1%8F%D0%B3%D1%83%D1%88%D0%BA%D1%83&atb=v179-1_k">Eat That Frog</a>. Я разобрался в представленных идеях, упростил их, попробовал на себе и разработал этот вебсайт, основываясь на постулатах ниже. Попробуйте, и ваша продуктивность взлетит до небес — ну или я просто верну вам деньги.',
-      ideas: [
-        '🥰 Чистая голова — список входящих пуст, а вы работаете только над одной задачей за раз',
-        '🐸 Ешьте лягушек первым делом утром — это лучшее время для работы над неприятными задачами',
-        '💃 Пропускайте текущую задачу, когда необходимо',
-        '🐸 Провалите задачу дважды — и это лягушка',
-        '☁ Слишком широкая задача? Разбейте ее на подзадачи одним кликом',
-        '👀 Нет забытых задач — вы всегда добавляете день или месяц при создании задачи',
-        '1️⃣ Первый день месяца? Планируйте перед началом работы',
-        '⏳ Задача занимает меньше 2 минут? Сделайте ее и запишите',
-        '💰 Цена простая: первый месяц бесплатно, а дальше $5/месяц за бесконечную продуктивность!',
+      texts: {
+        level: [
+          'Однажды, я был как вы',
+          'Я часами старался завершить задачи, и ничего все равно не получалось. Новые задачи появлялись из ниоткуда, а старые продолжали наполнять собой бесконечные списки. Не было никакого выхода из ситуации — ни один из менеджеров задач не смог мне помочь, они лишь оказывали психологическое давление всеми вещами, про которые я забыл, и всеми задачами, которые я так и не закончил.',
+          'В то время, как сложные инструменты с множеством функций достаточно хорошо справляются с записью некоторых задач, когнитивная психология говорит, что перегрузка подсознания всеми подвешенными задачами, которые мы не записываем, может занимать большую часть мозга, ответственную за ощущение счастья.',
+        ],
+        winter: [
+          'Зима близко',
+          'Несмотря на то, что человечество сегодня счастливее, чем когда либо, личная продуктивность ухудшается. Если мы ничего не изменим, мы можем оказаться в ситуации среди серой массы средних людей, которые ничего не знают о продуктивности и не могут закончить даже одну маломальски сложную и комплексную задачу — просто потому, что на них давит психологическая тревога.',
+          'Количество людей, которые забывают про важные события с их супругами и партнерами, которые обещают сделать больше, чем на самом деле могут, которые постоянно думают о "той вещи, которую мне нужно проверить, но я точно не помню, что" — скоро зашкалит. Есть вероятность, что вы сами станете простой бездушной биологической машиной, которая сможет выполнять только простые низкооплачиваемые задачи, если вы не предпримите против этого действия.',
+        ],
+        contact: ['Остались вопросы? Напишите мне на ', '. Спасибо.'],
+        solution: [
+          'Но у вас есть решение',
+          'После того, как я ознакомился с трудами по поведенческой психологии в роде "Оставьте Брезгливость, Съешьте Лягушку!", "Сила Воли", "Атомные Привычки" и "Как Привести Дела в Порядок", я разработал собственную систему, которая подняла мою продуктивность в 10 раз. Теперь я выполняю в 10 раз больше задач и довожу в 10 раз больше проектов до запуска. Я делюсь этим решением с вами, чтобы улучшить собственное окружение. Если люди вокруг меня развиваются — мой уровень счастья поднимается пропорционально.',
+          'Тудурант — это самый простой список задач с единственным отличием. Каждое действие и каждая функция были аккуратно взвешены и протестированы с точки зрения когнитивной психологии. Я воспользовался десятилетиями исследований и упаковал их в один простой, но действенный инструмент. Тудурант обманывает ваш мозг, чтобы вы делали больше правильных — и меньше неправильных — действий. Он помогает развивать хорошие привычки и избавляться от вредных. Так что перестаньте бездумно записывать свои задачи. Пришло время начать использовать систему, которая работает.',
+        ],
+        consequences: {
+          title: 'Последствия использования?',
+          points: [
+            'Папка "входящие" всегда пустая',
+            'Неприятные задачи (лягушки) всегда выполняются',
+            'Все проекты развиваются',
+            'Ваш мозг сам хочет быть эффективным',
+            'Вы ничего не забываете',
+            'Люди восхищаются вашей продуктивностью',
+          ],
+        },
+        deal: [
+          'Какие условия?',
+          'Тудурант дороже других менеджеров задач, да. Вообще, стандартная цена по индустрии — $3/месяц, когда у Тудуранта 30 дней бесплатного использования, а после цена в $5/месяц. Да, у Тудуранта меньше функций, чем у конкурентов — но это сделано специально.',
+          'Когда другие просто предоставляют вам место, куда вы можете записать свои задачи и забыть про них, Тудурант дает вам силу идеологии и методологии — Тудурант заставляет вас завершать задачи, а не просто бездумно их записывать. Тудурант не для всех — он специально создан для людей, которые хотят освободить свою голову от постоянно надоедающих задач и которые хотят наконец уже начать завершать проекты. Вы можете ознакомиться с методологией, открыв ',
+          'список правил',
+          ' в правом верхнем углу этой страницы.',
+        ],
+        personal: [
+          'Что бы сделал я?',
+          'Я опробовал десятки разных менеджеров задач. Если бы я мог попробовать Тудурант до того, как я его разработал — то я бы точно дал ему шанс. Он бесплатен первые 30 дней — и этого времени как раз достаточно, чтоб понять, работает ли эта система для меня. И, тысяча чертей, если она работает и я завершаю все свои задачи — я бы заплатил любую цену, лишь бы продолжить этот поток продуктивности. Первые 30 дней от пользователей ничего не требуется — просто нужно зайти и начать пользоваться. Можете найти кнопки ниже. Хватит разглагольствовать — пришло время взрывать продуктивность!',
+        ],
+      },
+      youAreRegistered: '(вы уже зарегистрированы)',
+      headline: [
+        'Не забывайте задачи.',
+        'Всегда их выполняйте.',
+        'Живите полной жизнью.',
+        'С Тудурантом.',
       ],
-      action:
-        'Готовы взорвать свою продуктивность? 💪 Жмите кнопку ниже, чтобы начать пользоваться Todorant!',
+      signIn: 'Войти',
+      lastSignIn: '(хорошо, это последняя кнопка, войдите уже наконец)',
       facebook: 'Войти через Фейсбук',
       google: 'Войти через Гугл',
       privacy: 'Политика конфиденциальности',
-      appstores: 'Загрузите приложение',
       feedback: {
         title: 'Что говорят пользователи?',
         reviews: [
@@ -519,31 +582,64 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
     title: 'Todorant',
     cookie: {
       button: 'Зрозуміло!',
-      message:
-        'Цей вебсайт використовує кукі. Ми не слідкуємо за вами. А от Facebook, можливо, слідкує.',
+      message: 'Цей вебсайт використовує кукі.',
     },
     home: {
-      info:
-        'Використовуйте когнитивну психологію, щоб завершити справи у єдиному менеджері задач, який вам коли-небудь знадобиться',
-      pitch:
-        'Привіт! Мене звати Микита, і я, схоже, створив найкращий менеджер задач на основі знань, які почерпнув з книг <a htarget="_blank" href="https://duckduckgo.com/?q=%D0%A1%D0%B8%D0%BB%D0%B0+%D0%B2%D0%BE%D0%BB%D0%B8.+%D0%92%D0%BE%D0%B7%D1%8C%D0%BC%D0%B8+%D1%81%D0%B2%D0%BE%D1%8E+%D0%B6%D0%B8%D0%B7%D0%BD%D1%8C+%D0%BF%D0%BE%D0%B4+%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D1%8C&atb=v179-1_k&ia=web">Willpower</a>, <a target="_blank" href="https://duckduckgo.com/?q=%D0%9A%D0%B0%D0%BA+%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%B8%D0%B2%D0%B0%D1%82%D1%8C+%D0%B4%D0%B5%D0%BB%D0%B0+%D0%B2+%D0%BF%D0%BE%D1%80%D1%8F%D0%B4%D0%BA%D0%B5.+%D0%9F%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%BF%D1%8B+%D0%BF%D0%BE%D0%BB%D0%BD%D0%BE%D1%86%D0%B5%D0%BD%D0%BD%D0%BE%D0%B9+%D0%B6%D0%B8%D0%B7%D0%BD%D0%B8+%D0%B1%D0%B5%D0%B7+%D1%81%D1%82%D1%80%D0%B5%D1%81%D1%81%D0%B0&atb=v179-1_k&ia=web">Getting Things Done</a> и <a target="_blank" href="https://duckduckgo.com/?q=%D0%9E%D1%81%D1%82%D0%B0%D0%B2%D1%8C%D1%82%D0%B5+%D0%B1%D1%80%D0%B5%D0%B7%D0%B3%D0%BB%D0%B8%D0%B2%D0%BE%D1%81%D1%82%D1%8C%2C+%D1%81%D1%8A%D0%B5%D1%88%D1%8C%D1%82%D0%B5+%D0%BB%D1%8F%D0%B3%D1%83%D1%88%D0%BA%D1%83&atb=v179-1_k">Eat That Frog</a>. Я розібрався у представлених ідеях, спростив їх, спробував на собі та розробив цей вебсайт, грунтуючись на постулатах нижче. Спробуйте, і ваша продуктивність злетить до небес, або я просто поверну вам гроші.',
-      ideas: [
-        '🥰 Чиста голова — список вхідних пустий, а ви працюєте тільки над одним завданням за раз',
-        '🐸 Їжте жаб першою справою зранку — це найкращий час для роботи над неприємними завданнями',
-        '💃 Пропускайте поточне завдання, коли необхідно',
-        '🐸 Провалите завдання двічі — і це жаба',
-        '☁  Занадто широке завдання? Розбийте його на підзавдання одним кліком',
-        '👀 Немає забутих завдань — ви завжди додаєте день чи місяць при створенні завдання',
-        '1️⃣ Перший день місяця? Плануйте перед початком роботи',
-        '⏳ Завдання займає менше 2 хвилин? Зробіть його і запишіть',
-        '💰 Ціна проста: перший місяць задарма, а далі 5$/місяць за безкінечну продуктивність!',
+      texts: {
+        level: [
+          'I was once like you',
+          'I spent hours and hours trying to get stuff done and it looked like nothing could help. New tasks kept coming and old ones kept piling up. There was no escape — none of the task managers worked, the only purpose they served was upsetting me with all these things I forgot and all the tasks I never finished.',
+          "While complicated and sophisticated tools with plenty of features can be useful to keep track of some tasks, cognitive psychology tells us that overwhelming our subconsciousness with all the hanging tasks that weren't accounted for can use up a major chunk of our brain that should otherwise be in charge of providing the happiness feeling.",
+        ],
+        winter: [
+          'The winter is coming',
+          "Even though the world population is happier than ever, personal productivity has recently took a hit. If we follow the same trend, we might find ourselves among the grey mass of generic humans who are no longer productive and cannot complete a single more or less difficult and complex task — simply because anxiety won't let us.",
+          'Number of people, who forget about important events with their significant others, who promise to do more than they can handle, who keep thinking about "that thing that I should check but I\'m not sure what" instead of getting things done is going to be on a rise very soon. You can also find yourselves among the mindless biological machines that only perform simple low-paid tasks if you don\'t take action.',
+        ],
+        contact: [
+          'Still got questions? Contact me directly at ',
+          '. Thank you.',
+        ],
+        solution: [
+          'But you have the solution',
+          'After making myself familiar with the books about cognitive science like "Eat That Frog", "Willpower", "Atomic Habbits" and "Getting Things Done", I developed a system that boosted my productivite by 10 times. I am now able to complete 10 times more tasks which leads to 10 times more projects launched with this simple system. I\'m sharing this solution with you in order to improve the environment I live in. If people around me thrive — my personal happiness increases as well.',
+          'Todorant is a plain vanilla todo list with one single catch. Every action and feature were carefully weighted and tested using cognitive phsychology. I have used the decades of studies and packed them into a single simple silver-bullet productivity tool. Todorant tricks your mind into doing more good actions and less bad actions. It builds you positive habits and gets rid of bad behaviour. So stop mindlessly writing down your tasks. Start using the system that works.',
+        ],
+        consequences: {
+          title: 'Consequences?',
+          points: [
+            'Your inbox will always be empty',
+            'Unwanted tasks (frogs) will be dealt with',
+            'No projects will stagnate',
+            'Your brain will naturally crave effectiveness',
+            'You will never forget anything',
+            'People will start admiring your productivity',
+          ],
+        },
+        deal: [
+          "What's the deal?",
+          "Todorant is more expensive than other todo solutions, yes. In fact, the industry standard is $3/month whereas Todorant has 30 days free trial (no credit card required) and then costs $5/month. Yes, Todorant has less features than it's competitors — but it is on purpose.",
+          "When others sell you a place to park your todos indefinitely, Todorant sells the methodology and ideology — Todorant sells getting stuff done, not mindlessly writing it down. Todorant isn't for everybody — it is crafted specifically for people who want to free their mind from pressing issues and finally start completing the projects. You can familiarize yourselves with the methodology by ",
+          'opening the rulebook',
+          ' on the top-right corner of this page.',
+        ],
+        personal: [
+          'What would I do?',
+          "I tried dozens of different todo list apps. If I had a chance to try Todorant before I implemented it — I would definitelly give it a try. It's free for the first 30 days — and it is just enough to try if the system works for me. And, damn, if it works and I get my stuff done — I'd pay whatever price to keep up the productivity streak. There are no strings attached — just login and try Todorant today. You can find the buttons below. Enough talking — time to boost the productivity levels!",
+        ],
+      },
+      youAreRegistered: '(you are already registered)',
+      headline: [
+        'Never forget a task.',
+        'Always get it done.',
+        'Live a happy life.',
+        'Powered by Todorant.',
       ],
-      action:
-        'Готові підірвати свою продуктивність? 💪 Тисніть кнопку нижче, щоб почати користуватися Todorant!',
+      signIn: 'Sign in',
+      lastSignIn: '(alright, this is the last button, sign in already)',
       facebook: 'Увійти через Facebook',
       google: 'Увійти через Google',
       privacy: 'Політика конфеденційності',
-      appstores: 'Завантажте додаток',
       feedback: {
         title: 'Що кажуть користувачі?',
         reviews: [
