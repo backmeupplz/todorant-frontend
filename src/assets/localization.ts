@@ -14,8 +14,8 @@ export const messages = {
         ],
         winter: [
           'The winter is coming',
-          "Even though the world population is happier than ever, personal productivity has recently took a hit. If we follow the same trend, we might find ourselves among the grey mass of generic humans who are no longer productive and cannot complete a single more or less difficult and complex task — simply because anxiety won't let us.",
-          'Number of people, who forget about important events with their significant others, who promise to do more than they can handle, who keep thinking about "that thing that I should check but I\'m not sure what" instead of getting things done is going to be on a rise very soon. You can also find yourselves among the mindless biological machines that only perform simple low-paid tasks if you don\'t take action.',
+          "Even though the world population is happier than ever, personal productivity has recently taken a hit. If we follow the same trend, we might find ourselves among the grey mass of generic humans who are no longer productive and cannot complete a single more or less difficult and complex task — simply because anxiety won't let us.",
+          'The number of people, who forget about important events with their significant others, who promise to do more than they can handle, who keep thinking about "that thing that I should check but I\'m not sure what" instead of getting things done is going to be on a rise very soon. You can also find yourselves among the mindless biological machines that only perform simple low-paid tasks if you don\'t take action.',
         ],
         contact: [
           'Still got questions? Contact me directly at ',
@@ -23,8 +23,8 @@ export const messages = {
         ],
         solution: [
           'But you have the solution',
-          'After making myself familiar with the books about cognitive science like "Eat That Frog", "Willpower", "Atomic Habbits" and "Getting Things Done", I developed a system that boosted my productivite by 10 times. I am now able to complete 10 times more tasks which leads to 10 times more projects launched with this simple system. I\'m sharing this solution with you in order to improve the environment I live in. If people around me thrive — my personal happiness increases as well.',
-          'Todorant is a plain vanilla todo list with one single catch. Every action and feature were carefully weighted and tested using cognitive phsychology. I have used the decades of studies and packed them into a single simple silver-bullet productivity tool. Todorant tricks your mind into doing more good actions and less bad actions. It builds you positive habits and gets rid of bad behaviour. So stop mindlessly writing down your tasks. Start using the system that works.',
+          'After making myself familiar with the books about cognitive science like "Eat That Frog", "Willpower", "Atomic Habits" and "Getting Things Done", I developed a system that boosted my productivity by 10 times. I am now able to complete 10 times more tasks which leads to 10 times more projects launched with this simple system. I\'m sharing this solution with you in order to improve the environment I live in. If people around me thrive — my personal happiness increases as well.',
+          'Todorant is a plain vanilla todo list with one single catch. Every action and feature was carefully weighted and tested using cognitive psychology. I have used the decades of studies and packed them into a single simple silver-bullet productivity tool. Todorant tricks your mind into doing more good actions and less bad actions. It builds positive habits and gets rid of bad behaviour. So stop mindlessly writing down your tasks. Start using the system that works.',
         ],
         consequences: {
           title: 'Consequences?',
@@ -39,14 +39,14 @@ export const messages = {
         },
         deal: [
           "What's the deal?",
-          "Todorant is more expensive than other todo solutions, yes. In fact, the industry standard is $3/month whereas Todorant has 30 days free trial (no credit card required) and then costs $5/month. Yes, Todorant has less features than it's competitors — but it is on purpose.",
-          "When others sell you a place to park your todos indefinitely, Todorant sells the methodology and ideology — Todorant sells getting stuff done, not mindlessly writing it down. Todorant isn't for everybody — it is crafted specifically for people who want to free their mind from pressing issues and finally start completing the projects. You can familiarize yourselves with the methodology by ",
+          "Todorant is more expensive than other todo solutions, yes. The industry standard is $3/month whereas Todorant has 30 days free trial (no credit card required) and then costs $5/month. Yes, Todorant has fewer features than it's competitors — but it is on purpose.",
+          "When others sell you a place to park your todos indefinitely, Todorant sells the methodology and ideology — Todorant sells getting stuff done, not mindlessly writing it down. Todorant isn't for everybody — it is crafted specifically for people who want to free their minds from pressing issues and finally start completing the projects. You can familiarize yourself with the methodology by ",
           'opening the rulebook',
           ' on the top-right corner of this page.',
         ],
         personal: [
           'What would I do?',
-          "I tried dozens of different todo list apps. If I had a chance to try Todorant before I implemented it — I would definitelly give it a try. It's free for the first 30 days — and it is just enough to try if the system works for me. And, damn, if it works and I get my stuff done — I'd pay whatever price to keep up the productivity streak. There are no strings attached — just login and try Todorant today. You can find the buttons below. Enough talking — time to boost the productivity levels!",
+          "I tried dozens of different todo list apps. If I had a chance to try Todorant before I implemented it — I would give it a try. It's free for the first 30 days — and it is just enough to try if the system works for me. And, damn, if it works and I get my stuff done — I'd pay whatever price to keep up the productivity streak. There are no strings attached — just log in and try Todorant today. You can find the buttons below. Enough talking — time to boost productivity levels!",
         ],
       },
       youAreRegistered: '(you are already registered)',
@@ -593,8 +593,8 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
         ],
         winter: [
           'The winter is coming',
-          "Even though the world population is happier than ever, personal productivity has recently took a hit. If we follow the same trend, we might find ourselves among the grey mass of generic humans who are no longer productive and cannot complete a single more or less difficult and complex task — simply because anxiety won't let us.",
-          'Number of people, who forget about important events with their significant others, who promise to do more than they can handle, who keep thinking about "that thing that I should check but I\'m not sure what" instead of getting things done is going to be on a rise very soon. You can also find yourselves among the mindless biological machines that only perform simple low-paid tasks if you don\'t take action.',
+          "Even though the world population is happier than ever, personal productivity has recently taken a hit. If we follow the same trend, we might find ourselves among the grey mass of generic humans who are no longer productive and cannot complete a single more or less difficult and complex task — simply because anxiety won't let us.",
+          'The number of people, who forget about important events with their significant others, who promise to do more than they can handle, who keep thinking about "that thing that I should check but I\'m not sure what" instead of getting things done is going to be on a rise very soon. You can also find yourselves among the mindless biological machines that only perform simple low-paid tasks if you don\'t take action.',
         ],
         contact: [
           'Still got questions? Contact me directly at ',
@@ -602,8 +602,8 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
         ],
         solution: [
           'But you have the solution',
-          'After making myself familiar with the books about cognitive science like "Eat That Frog", "Willpower", "Atomic Habbits" and "Getting Things Done", I developed a system that boosted my productivite by 10 times. I am now able to complete 10 times more tasks which leads to 10 times more projects launched with this simple system. I\'m sharing this solution with you in order to improve the environment I live in. If people around me thrive — my personal happiness increases as well.',
-          'Todorant is a plain vanilla todo list with one single catch. Every action and feature were carefully weighted and tested using cognitive phsychology. I have used the decades of studies and packed them into a single simple silver-bullet productivity tool. Todorant tricks your mind into doing more good actions and less bad actions. It builds you positive habits and gets rid of bad behaviour. So stop mindlessly writing down your tasks. Start using the system that works.',
+          'After making myself familiar with the books about cognitive science like "Eat That Frog", "Willpower", "Atomic Habits" and "Getting Things Done", I developed a system that boosted my productivity by 10 times. I am now able to complete 10 times more tasks which leads to 10 times more projects launched with this simple system. I\'m sharing this solution with you in order to improve the environment I live in. If people around me thrive — my personal happiness increases as well.',
+          'Todorant is a plain vanilla todo list with one single catch. Every action and feature was carefully weighted and tested using cognitive psychology. I have used the decades of studies and packed them into a single simple silver-bullet productivity tool. Todorant tricks your mind into doing more good actions and less bad actions. It builds positive habits and gets rid of bad behaviour. So stop mindlessly writing down your tasks. Start using the system that works.',
         ],
         consequences: {
           title: 'Consequences?',
@@ -618,14 +618,14 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
         },
         deal: [
           "What's the deal?",
-          "Todorant is more expensive than other todo solutions, yes. In fact, the industry standard is $3/month whereas Todorant has 30 days free trial (no credit card required) and then costs $5/month. Yes, Todorant has less features than it's competitors — but it is on purpose.",
-          "When others sell you a place to park your todos indefinitely, Todorant sells the methodology and ideology — Todorant sells getting stuff done, not mindlessly writing it down. Todorant isn't for everybody — it is crafted specifically for people who want to free their mind from pressing issues and finally start completing the projects. You can familiarize yourselves with the methodology by ",
+          "Todorant is more expensive than other todo solutions, yes. The industry standard is $3/month whereas Todorant has 30 days free trial (no credit card required) and then costs $5/month. Yes, Todorant has fewer features than it's competitors — but it is on purpose.",
+          "When others sell you a place to park your todos indefinitely, Todorant sells the methodology and ideology — Todorant sells getting stuff done, not mindlessly writing it down. Todorant isn't for everybody — it is crafted specifically for people who want to free their minds from pressing issues and finally start completing the projects. You can familiarize yourself with the methodology by ",
           'opening the rulebook',
           ' on the top-right corner of this page.',
         ],
         personal: [
           'What would I do?',
-          "I tried dozens of different todo list apps. If I had a chance to try Todorant before I implemented it — I would definitelly give it a try. It's free for the first 30 days — and it is just enough to try if the system works for me. And, damn, if it works and I get my stuff done — I'd pay whatever price to keep up the productivity streak. There are no strings attached — just login and try Todorant today. You can find the buttons below. Enough talking — time to boost the productivity levels!",
+          "I tried dozens of different todo list apps. If I had a chance to try Todorant before I implemented it — I would give it a try. It's free for the first 30 days — and it is just enough to try if the system works for me. And, damn, if it works and I get my stuff done — I'd pay whatever price to keep up the productivity streak. There are no strings attached — just log in and try Todorant today. You can find the buttons below. Enough talking — time to boost productivity levels!",
         ],
       },
       youAreRegistered: '(you are already registered)',
