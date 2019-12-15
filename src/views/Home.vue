@@ -86,13 +86,18 @@
                   a(:href='`https://t.me/${review.username}`') @{{review.username}}
               v-card-text
                 p(v-for='(text, i) in review.text.split("\\n")') {{text}}
-        v-row
+        v-row.pt-4
           v-col(cols=0 sm=4)
           v-col(cols=12 sm=4)
             v-flex.text-center
               v-btn.primary(block @click='signinDialog = true') {{$t('home.signIn')}}
               p.caption.pa-2 {{$t('home.lastSignIn')}}
           v-col(cols=0 sm=4)
+        v-row.justify-center
+          a.pt-3(@click='open($store.state.language === "en" ? "https://apps.apple.com/us/app/todorant/id1482078243" : "https://apps.apple.com/ru/app/todorant/id1482078243")')
+            v-img(width='150' height='50' aspect-ratio='1' :src='`/img/appstore_${$store.state.language === "ua" ? "en" : $store.state.language}.svg`')
+          a.pl-1(@click='open("https://play.google.com/store/apps/details?id=com.todorant.android")')
+            v-img(width='170' height='74' aspect-ratio='1' :src='`/img/playstore_${$store.state.language === "ua" ? "en" : $store.state.language}.png`')
         v-row(no-gutters)
           v-col.text-center
             p.caption.ma-0
