@@ -131,7 +131,7 @@ declare const FB: any;
   }
 })
 export default class Home extends Vue {
-  signinDialog = true;
+  signinDialog = false;
 
   created() {
     if (this.$route.query && this.$route.query.hash) {
