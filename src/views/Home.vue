@@ -11,11 +11,12 @@
             @success='onGoogleSignInSuccess'
             @error='onGoogleSignInError') {{$t('home.google')}}
             vue-apple-signin.signin-button
-            vue-telegram-login(mode='callback'
-            telegram-login='todorant_bot'
-            @callback='onTelegramAuth'
-            radius='3'
-            :userpic='false')
+            .pt-2
+              vue-telegram-login(mode='callback'
+              telegram-login='todorant_bot'
+              @callback='onTelegramAuth'
+              radius='3'
+              :userpic='false')
     v-layout
       v-col
         v-row
