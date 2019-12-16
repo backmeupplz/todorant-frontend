@@ -43,15 +43,14 @@
           v-observe-visibility='(isVisible, entry) => visibilityChanged(isVisible, entry, i, j)')
             v-list-item-content
               v-card(:class='cardClass(todo)')
-                v-card-text
-                  v-row(no-gutters)
-                    v-col.handle(:cols='1' v-if='editable')
+                v-card-text(:class='!editable ? "px-3 pt-2 pb-0 ma-0" : ""')
+                  v-row(no-gutters).d-flex.flex-direction-row
+                    .handle.pr-3(v-if='editable')
                       v-icon menu
-                    v-col(:cols='editable ? 11 : 12')
-                      TodoText(:todo='todo')
-                v-card-actions
+                    TodoText(:todo='todo')
+                v-card-actions.pb-2.pt-2.ma-0(v-if='!editable')
                   v-icon(v-if='todoOutstanding(todo)') error_outline
-                  v-col(no-gutters)
+                  v-col(no-gutters).px-2.py-0.ma-0
                     v-row
                       span.caption.grey--text.pl-2 {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
                     v-row
