@@ -139,7 +139,14 @@ export default class TodoList extends Vue {
       }));
   }
   get weekdays() {
-    const firstDay = +this.$store.state.userState.settings.firstDayOfWeek;
+    const storeFirstDayOfWeek = this.$store.state.userState.settings
+      .firstDayOfWeek;
+    const firstDay =
+      storeFirstDayOfWeek === undefined
+        ? this.$store.state.language === "ru"
+          ? 1
+          : 0
+        : storeFirstDayOfWeek;
     const result = [firstDay];
     for (let i = 1; i < 7; i++) {
       result.push((firstDay + i) % 7);
