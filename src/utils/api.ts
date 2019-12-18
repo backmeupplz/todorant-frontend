@@ -229,6 +229,13 @@ async function updateState(user: User) {
   store.setUserState(userState)
 }
 
+export async function getReport(user: User) {
+  return (await axios.get(`${base}/report`, { headers: getHeaders(user) }))
+    .data as {
+    completedTodosMap: { [index: string]: number }
+  }
+}
+
 function getHeaders(user: User) {
   if (user.token) {
     return { token: user.token }

@@ -1,5 +1,8 @@
 export const messages = {
   en: {
+    report: {
+      title: 'Report',
+    },
     title: 'Todorant',
     cookie: {
       button: 'Got it!',
@@ -157,6 +160,8 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
         dateOrMonth: 'Todos should have either date or month set',
       },
       invalidForm: 'Please, fill in the required fields',
+      report: 'Could not load report',
+      addTodoOld: 'Cannot add todo in the past',
     },
     close: 'Close',
     notFound: 'Page not found',
@@ -291,6 +296,9 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
     },
   },
   ru: {
+    report: {
+      title: 'Отчет',
+    },
     title: 'Тудурант',
     cookie: {
       button: 'Понятненько!',
@@ -445,6 +453,8 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
         dateOrMonth: 'Задачам нужно выставлять либо точную дату, либо месяц',
       },
       invalidForm: 'Пожалуйста, заполните необходимые поля',
+      report: 'Не получилось загрузить отчет',
+      addTodoOld: 'Нельзя добавить задачу в прошлом',
     },
     close: 'Закрыть',
     notFound: 'Страница не найдена',
@@ -581,6 +591,9 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
     },
   },
   ua: {
+    report: {
+      title: 'Звіт',
+    },
     title: 'Todorant',
     cookie: {
       button: 'Зрозуміло!',
@@ -739,6 +752,8 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
           'Завданням необхідно виставляти або точний день, або місяць',
       },
       invalidForm: 'Будь ласка, заповніть необхідні поля',
+      report: 'Не вдалося завантажити звіт',
+      addTodoOld: 'Cannot add todo in the past',
     },
     close: 'Закрити',
     notFound: 'Сторінку не знайдено',

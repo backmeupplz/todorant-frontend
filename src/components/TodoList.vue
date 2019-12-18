@@ -24,7 +24,12 @@
       v-list-item(v-if='calendarViewEnabled && todosUpdating' flex)
         v-progress-linear(:indeterminate='true')
       v-list-item(v-if='calendarViewEnabled' flex)
-        v-calendar(type='month' :events='events' :weekdays='weekdays' @click:event="editEvent" :event-more='false')
+        v-calendar(type='month'
+        :events='events'
+        :weekdays='weekdays'
+        @click:date="addEvent"
+        @click:event="editEvent"
+        :event-more='false')
       div(v-else v-for='(todoSection, i) in todos' :key='i')
         v-subheader
           v-tooltip(right :max-width='300' v-if='todoSection.title.length === 10')
@@ -384,6 +389,15 @@ export default class TodoList extends Vue {
   toggleCalendar() {
     this.calendarViewEnabled = !this.calendarViewEnabled;
     this.loadTodos(true, false);
+  }
+
+  addEvent(params: any) {
+    const tooOld = isDateTooOld(params.date, api.getToday());
+    if (tooOld) {
+      store.setSnackbarError("errors.addTodoOld");
+      return;
+    }
+    serverBus.$emit("addTodoRequested", params.date);
   }
 }
 </script>

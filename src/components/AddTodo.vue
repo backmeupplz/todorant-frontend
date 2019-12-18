@@ -79,8 +79,13 @@ export default class AddTodo extends Vue {
 
   loading = false;
 
+  date = "";
+
   created() {
-    serverBus.$on("addTodoRequested", () => {
+    serverBus.$on("addTodoRequested", (date?: string) => {
+      if (date) {
+        this.date = date;
+      }
       this.dialog = true;
     });
   }
@@ -121,7 +126,13 @@ export default class AddTodo extends Vue {
   }
 
   addTodo() {
-    if (store.userState().settings.showTodayOnAddTodo) {
+    if (this.date) {
+      this.todos.push({
+        date: this.date,
+        goFirst: store.userState().settings.newTodosGoFirst || false
+      });
+      this.date = "";
+    } else if (store.userState().settings.showTodayOnAddTodo) {
       const now = new Date();
       now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
       this.todos.push({
