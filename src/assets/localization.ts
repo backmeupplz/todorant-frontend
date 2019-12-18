@@ -1,7 +1,12 @@
 export const messages = {
   en: {
+    noReport: {
+      title: 'No data yet',
+      text: 'Go on, complete your first todo and come back!',
+    },
     report: {
       title: 'Report',
+      tasksCompleted: 'Tasks completed',
     },
     title: 'Todorant',
     cookie: {
@@ -296,8 +301,13 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
     },
   },
   ru: {
+    noReport: {
+      title: 'Недостаточно данных',
+      text: 'Давайте, выполните свою первую задачу и возвращайтесь сюда!',
+    },
     report: {
       title: 'Отчет',
+      tasksCompleted: 'Задач завершено',
     },
     title: 'Тудурант',
     cookie: {
@@ -591,8 +601,14 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
     },
   },
   ua: {
+    noReport: {
+      title: 'Дані ще відсутні',
+      text:
+        'Так тримати, після завершення першого завдання тут з’являться дані.',
+    },
     report: {
       title: 'Звіт',
+      tasksCompleted: 'Задач завершено',
     },
     title: 'Todorant',
     cookie: {
