@@ -654,7 +654,7 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
       lastSignIn: '(добре, це остання кнопка, увійдіть нарешті)',
       facebook: 'Увійти через Facebook',
       google: 'Увійти через Google',
-      privacy: 'Політика конфеденційності',
+      privacy: 'Політика конфіденційності',
       appstores: 'Завантажити додаток',
       feedback: {
         title: 'Що кажуть користувачі?',
@@ -769,7 +769,7 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
         month: 'Або місяць',
         tooltip:
           'Завдання повинні бути: вказуючими на наступну дію ("Знайти найкращі квитки у Мексику на агрегаторі квитків", а не "Полетіти у Мексику"); найменшими і зрозумілими ("Протерти дісплей", а не "Прибратися вдома").',
-        goFirst: 'Add on the top',
+        goFirst: 'Додати зверху',
       },
       list: {
         completed: 'Показати завершені',
@@ -876,7 +876,7 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
       showTodayOnAddTodo:
         'Встановлювати сьогоднішню дату автоматично при створенні завдань',
       firstDayOfWeek: 'Перший день тижня',
-      newTodosGoFirst: 'Нові завдання додаються наверх списку',
+      newTodosGoFirst: 'Нові завдання додаються в верх списку',
     },
     weekdays: {
       1: 'Понеділок',
