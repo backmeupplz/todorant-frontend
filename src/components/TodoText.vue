@@ -1,6 +1,7 @@
 <template lang="pug">
   div
     span(v-if='!!todo.frog') 🐸 
+    span(v-if='!!todo.time') {{todo.time}} 
     span(v-for='element in linkifiedText')
       span(v-if='element.type === "text"') {{element.value}}
       a(v-else-if='element.type === "link"'

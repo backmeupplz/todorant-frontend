@@ -9,4 +9,5 @@ export interface Todo {
 
   monthAndYear: string
   date: string
+  time?: string
 }

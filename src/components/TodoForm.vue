@@ -11,7 +11,7 @@
     ref='textInput').pb-4
     v-row(no-gutters)
       v-col(cols='12' md='6')
-        v-menu(v-model='dateMenu')
+        v-menu(v-model='dateMenu' min-width=0)
           template(v-slot:activator='{ on }')
             v-text-field(clearable
             readonly
@@ -29,7 +29,7 @@
           :locale='$store.state.language'
           :show-current='todayFormatted')
       v-col(cols='12' md='6')
-        v-menu(v-model='monthMenu')
+        v-menu(v-model='monthMenu'  min-width=0)
           template(v-slot:activator='{ on }')
             v-text-field(clearable
             readonly
@@ -44,12 +44,27 @@
           :min='todayFormattedForDatePicker'
           type='month'
           :locale='$store.state.language')
+      v-col(cols='12' md='6')
+        v-menu(v-model='timeMenu' :close-on-content-click='false'  min-width=0)
+          template(v-slot:activator='{ on }')
+            v-text-field(clearable
+            readonly
+            :label="$t('todo.create.time')"
+            prepend-icon="access_time"
+            v-on='on'
+            v-model='todo.time')
+          v-card
+            v-card-text
+              v-time-picker.elevation-0(v-model='todo.time' format='24hr' :close-on-content-click="false")
+            v-card-actions
+              v-spacer
+              v-btn(text color='blue' @click='timeMenu = false') Close
     v-row(no-gutters)
       v-col(cols='12' md='6')
         v-switch(:label='$t("todo.create.frog")' v-model='todo.frog')
       v-col(cols='12' md='6')
         v-switch(:label='$t("todo.create.completed")' v-model='todo.completed')
-      v-col(cols='12' md='6')
+      v-col(v-if='!hideAddToTheTop' cols='12' md='6')
         v-switch(:label='$t("todo.create.goFirst")' v-model='todo.goFirst')
     v-row
       slot
@@ -66,12 +81,14 @@ import moment from "moment";
   props: {
     todo: Object,
     enterPressed: Function,
-    escapePressed: Function
+    escapePressed: Function,
+    hideAddToTheTop: Boolean
   }
 })
 export default class TodoForm extends Vue {
   dateMenu = false;
   monthMenu = false;
+  timeMenu = false;
 
   textRules = [
     (v: any) => !!(v || "").trim() || i18n.t("errors.todo.textLenght")

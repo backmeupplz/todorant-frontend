@@ -12,7 +12,8 @@
             TodoForm(v-if='!!todo'
             :todo='todo'
             :enterPressed='save' 
-            :escapePressed='escapePressed')
+            :escapePressed='escapePressed'
+            :hideAddToTheTop='true')
         v-card-actions
           v-spacer
           v-btn(color='error'
