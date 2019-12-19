@@ -21,17 +21,18 @@
               span.caption.grey--text.pl-2 {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
               span.caption.grey--text.pl-2(v-if='todo.skipped') ({{$t('skipped')}})
               v-spacer
-              v-tooltip(:max-width='300' bottom v-if='!todo.frog && !todo.skipped')
-                template(v-slot:activator='{ on }')
-                  v-btn(text
-                  icon
-                  @click='skipTodo'
-                  :loading='loading'
-                  v-on='on'
-                  v-if='incompleteTodosCount > 1')
-                    v-icon arrow_right_alt
-                span {{$t('skipInfo')}}
-              v-tooltip(:max-width='300' bottom)
+              v-btn.pa-4(text
+              icon
+              :loading='loading'
+              @click='deleteTodo')
+                v-icon delete
+              v-btn.ma-0(text
+              icon
+              @click='skipTodo'
+              :loading='loading'
+              v-if='incompleteTodosCount > 1 && !todo.frog && !todo.skipped')
+                v-icon arrow_right_alt
+              v-tooltip(:max-width='300' bottom).ml-4
                 template(v-slot:activator='{ on }')
                   v-btn(text
                   icon
@@ -42,7 +43,7 @@
                   @shortkey='addTodo')
                     v-icon list
                 span {{$t('breakdownInfo')}}
-              v-btn(text
+              v-btn.ma-0(text
               icon
               @click='completeTodo'
               :loading='loading'
@@ -57,6 +58,7 @@
           span.display-3 🐝
           span.headline {{$t('empty.action')}}
           span.body-1 {{$t('empty.text')}}
+    DeleteTodo(:todo='todoDeleted')
 </template>
 
 <script lang="ts">
@@ -66,13 +68,15 @@ import { Todo } from "../models/todo";
 import { getTodos, editTodo } from "../utils/api";
 import * as store from "../plugins/store";
 import TodoText from "./TodoText.vue";
+import DeleteTodo from "./DeleteTodo.vue";
 import { Watch } from "vue-property-decorator";
 import * as api from "../utils/api";
 import { serverBus } from "../main";
 
 @Component({
   components: {
-    TodoText
+    TodoText,
+    DeleteTodo
   }
 })
 export default class CurrentTodo extends Vue {
@@ -82,6 +86,8 @@ export default class CurrentTodo extends Vue {
   todosCount = 0;
 
   loading = false;
+
+  todoDeleted: Todo | null = null;
 
   get progress() {
     return this.todosCount === 0
@@ -141,6 +147,10 @@ export default class CurrentTodo extends Vue {
     } finally {
       this.loading = false;
     }
+  }
+
+  async deleteTodo() {
+    this.todoDeleted = this.todo ? { ...this.todo } : null;
   }
 
   addTodo() {
