@@ -5,7 +5,7 @@ export const messages = {
       text: 'Go on, complete your first todo and come back!',
     },
     report: {
-      title: 'Report',
+      title: 'Stats',
       tasksCompleted: 'Tasks completed',
     },
     title: 'Todorant',
