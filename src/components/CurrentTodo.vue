@@ -21,7 +21,7 @@
               span.caption.grey--text.pl-2 {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
               span.caption.grey--text.pl-2(v-if='todo.skipped') ({{$t('skipped')}})
               v-spacer
-              v-btn.pa-4(text
+              v-btn(text
               icon
               :loading='loading'
               @click='deleteTodo')
