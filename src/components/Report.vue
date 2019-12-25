@@ -38,7 +38,7 @@
           v-col
             p.display-1 {{$t('report.share')}}
         v-row(v-if='!url').justify-center
-          v-btn(color='blue' @click='share') {{$t('report.shareButton')}}
+          v-btn(color='primary' @click='share') {{$t('report.shareButton')}}
         div(v-else).pa-2
           v-row.justify-center.text-center
             p
@@ -88,25 +88,25 @@
           v-btn(color='primary' @click='goHome') {{$t('report.callButton')}}
 </template>
 <script lang="ts">
-import Vue from 'vue'
-import Component from 'vue-class-component'
-import * as api from '../utils/api'
-import * as store from '../plugins/store'
-import BarChart from './BarChart.vue'
-import { i18n } from '../plugins/i18n'
-import TwitterButton from 'vue-share-buttons/src/components/TwitterButton'
-import FacebookButton from 'vue-share-buttons/src/components/FacebookButton'
-import LinkedInButton from 'vue-share-buttons/src/components/LinkedInButton'
-import EmailButton from 'vue-share-buttons/src/components/EmailButton'
-import EvernoteButton from 'vue-share-buttons/src/components/EvernoteButton'
-import OdnoklassnikiButton from 'vue-share-buttons/src/components/OdnoklassnikiButton'
-import PinterestButton from 'vue-share-buttons/src/components/PinterestButton'
-import PocketButton from 'vue-share-buttons/src/components/PocketButton'
-import RedditButton from 'vue-share-buttons/src/components/RedditButton'
-import TelegramButton from 'vue-share-buttons/src/components/TelegramButton'
-import ViberButton from 'vue-share-buttons/src/components/ViberButton'
-import VkontakteButton from 'vue-share-buttons/src/components/VkontakteButton'
-import WhatsAppButton from 'vue-share-buttons/src/components/WhatsAppButton'
+import Vue from "vue";
+import Component from "vue-class-component";
+import * as api from "../utils/api";
+import * as store from "../plugins/store";
+import BarChart from "./BarChart.vue";
+import { i18n } from "../plugins/i18n";
+import TwitterButton from "vue-share-buttons/src/components/TwitterButton";
+import FacebookButton from "vue-share-buttons/src/components/FacebookButton";
+import LinkedInButton from "vue-share-buttons/src/components/LinkedInButton";
+import EmailButton from "vue-share-buttons/src/components/EmailButton";
+import EvernoteButton from "vue-share-buttons/src/components/EvernoteButton";
+import OdnoklassnikiButton from "vue-share-buttons/src/components/OdnoklassnikiButton";
+import PinterestButton from "vue-share-buttons/src/components/PinterestButton";
+import PocketButton from "vue-share-buttons/src/components/PocketButton";
+import RedditButton from "vue-share-buttons/src/components/RedditButton";
+import TelegramButton from "vue-share-buttons/src/components/TelegramButton";
+import ViberButton from "vue-share-buttons/src/components/ViberButton";
+import VkontakteButton from "vue-share-buttons/src/components/VkontakteButton";
+import WhatsAppButton from "vue-share-buttons/src/components/WhatsAppButton";
 
 @Component({
   components: {
@@ -123,146 +123,149 @@ import WhatsAppButton from 'vue-share-buttons/src/components/WhatsAppButton'
     TelegramButton,
     ViberButton,
     VkontakteButton,
-    WhatsAppButton,
+    WhatsAppButton
   },
   props: {
-    external: Boolean,
-  },
+    external: Boolean
+  }
 })
 export default class Report extends Vue {
-  loading = false
+  loading = false;
 
-  completedTodosData: object = {}
-  completedFrogsData: object = {}
+  completedTodosData: object = {};
+  completedFrogsData: object = {};
 
-  completedTodosCount = 0
-  completedFrogsCount = 0
+  completedTodosCount = 0;
+  completedFrogsCount = 0;
 
-  hashtag = ''
-  url = ''
+  hashtag = "";
+  url = "";
 
-  name = ''
+  name = "";
 
   chartOptions = {
     scales: {
       yAxes: [
         {
           ticks: {
-            beginAtZero: true,
-          },
-        },
-      ],
-    },
-  }
+            beginAtZero: true
+          }
+        }
+      ]
+    }
+  };
 
   mounted() {
-    this.refresh()
+    this.refresh();
   }
 
   visibilityChanged(isVisible: boolean) {
     if (isVisible) {
-      this.refresh()
+      this.refresh();
     }
   }
 
   convertData(data: any, title: string) {
     if (!Object.keys(data).length) {
-      return {}
+      return {};
     }
 
     const keys = Object.keys(data).sort((a, b) =>
       new Date(a) < new Date(b) ? -1 : 1
-    )
-    const firstDay = new Date(keys[0])
-    let i = firstDay
-    const days = []
+    );
+    const firstDay = new Date(keys[0]);
+    let i = firstDay;
+    const days = [];
     while (i < new Date()) {
-      days.push(i)
-      i = new Date(i.setDate(i.getDate() + 1))
+      days.push(i);
+      i = new Date(i.setDate(i.getDate() + 1));
     }
 
-    const daysToCompletedMap = keys.reduce((prev, cur) => {
-      prev[new Date(cur).toLocaleDateString()] = data[cur]
-      return prev
-    }, {} as any)
+    const daysToCompletedMap = keys.reduce(
+      (prev, cur) => {
+        prev[new Date(cur).toLocaleDateString()] = data[cur];
+        return prev;
+      },
+      {} as any
+    );
 
-    const labels = days.map(k => k.toLocaleDateString())
-    const completedData = labels.map(l => daysToCompletedMap[l])
+    const labels = days.map(k => k.toLocaleDateString());
+    const completedData = labels.map(l => daysToCompletedMap[l]);
 
     return {
       labels,
       datasets: [
         {
           label: i18n.t(title),
-          backgroundColor: '#f87979',
-          data: completedData,
-        },
-      ],
-    }
+          backgroundColor: "#f87979",
+          data: completedData
+        }
+      ]
+    };
   }
 
   async refresh() {
-    const user = store.user()
+    const user = store.user();
     if (!user && !this.$props.external) {
-      return
+      return;
     }
-    this.loading = true
+    this.loading = true;
     try {
-      let data: any
+      let data: any;
       if (this.$props.external) {
         const result = await api.getPublicReport(
           this.$router.currentRoute.params.pathMatch
-        )
-        data = result.meta
+        );
+        data = result.meta;
 
-        this.hashtag = result.hash || ''
-        this.name = result.user
+        this.hashtag = result.hash || "";
+        this.name = result.user;
       } else {
-        data = await api.getReport(user!, this.hashtag)
+        data = await api.getReport(user!, this.hashtag);
       }
       this.completedTodosData = this.convertData(
         data.completedTodosMap,
-        'report.tasksCompleted'
-      )
+        "report.tasksCompleted"
+      );
       this.completedFrogsData = this.convertData(
         data.completedFrogsMap,
-        'report.frogsCompleted'
-      )
+        "report.frogsCompleted"
+      );
       this.completedTodosCount = (Object.values(
         data.completedTodosMap
-      ) as number[]).reduce((prev, cur) => prev + cur, 0)
+      ) as number[]).reduce((prev, cur) => prev + cur, 0);
       this.completedFrogsCount = (Object.values(
         data.completedFrogsMap
-      ) as number[]).reduce((prev, cur) => prev + cur, 0)
-      this.url = ''
+      ) as number[]).reduce((prev, cur) => prev + cur, 0);
+      this.url = "";
     } catch (err) {
-      console.error(err)
-      store.setSnackbarError('errors.report')
+      console.error(err);
+      store.setSnackbarError("errors.report");
     } finally {
-      this.loading = false
+      this.loading = false;
     }
   }
 
   async share() {
-    const user = store.user()
+    const user = store.user();
     if (!user) {
-      return
+      return;
     }
-    this.loading = true
+    this.loading = true;
     try {
-      const shared = await api.getSharedReport(user, this.hashtag)
-      this.url = `https://todorant.com/report/${shared.uuid}`
+      const shared = await api.getSharedReport(user, this.hashtag);
+      this.url = `https://todorant.com/report/${shared.uuid}`;
     } catch (err) {
-      console.error(err)
-      store.setSnackbarError('errors.report')
+      console.error(err);
+      store.setSnackbarError("errors.report");
     } finally {
-      this.loading = false
+      this.loading = false;
     }
   }
 
   async goHome() {
     try {
-      await this.$router.replace(store.user() ? '/superpower' : '/')
+      await this.$router.replace(store.user() ? "/superpower" : "/");
     } catch (err) {
       // Do nothing
     }
