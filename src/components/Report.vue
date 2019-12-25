@@ -10,7 +10,7 @@
         clearable
         dense)
     v-row(v-else)
-      v-col.text-center
+      v-col.text-center(v-if='!!name')
         p.display-1 {{name}}, {{$t('report.title').toLowerCase()}}{{hashtag ? ` #${hashtag}` : ''}}
     v-row
       v-progress-linear(v-if='loading' indeterminate=true)
