@@ -241,7 +241,7 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
       bonus: {
         title: 'Bonus features',
         rules: [
-          'User keyboard shortcuts when on desktop! You can (a)dd, (b)reakdown, switch to (c)urrent, mark as (d)one and switch to (p)lanning.',
+          'User keyboard shortcuts when on desktop! You can (a)dd, (b)reakdown, switch to (c)urrent, mark as (d)one and switch to (p)lanning. To add an additional task slot while adding tasks, you can use Shift+A.',
         ],
       },
     },
@@ -540,7 +540,7 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
       bonus: {
         title: 'Бонусные функции',
         rules: [
-          'Пользуйтесь шорткатами на клавиатуре на десктопе! Вы можете (a) — добавить, (b) — разбить, переключиться на (c) — текущее, пометить как (d) — выполненное и переключиться на (p) — планирование.',
+          'Пользуйтесь шорткатами на клавиатуре на десктопе! Вы можете (a) — добавить, (b) — разбить, переключиться на (c) — текущее, пометить как (d) — выполненное и переключиться на (p) — планирование. Чтобы добавить дополнительную задачу, когда добавляете задачи, пользуйтесь Shift+A.',
         ],
       },
     },

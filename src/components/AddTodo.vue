@@ -39,7 +39,10 @@
                       text
                       @click='deleteTodo(i)') {{$t('delete')}}
           v-card-actions
-            v-btn(color='blue' text @click='addTodo')
+            v-btn(color='blue'
+            text @click='addTodo'
+            v-shortkey.once="{ en: ['shift', 'a'], ru: ['shift', 'ф'] }"
+            @shortkey='addTodo')
               v-icon add
             v-spacer
             v-btn(color='error'
