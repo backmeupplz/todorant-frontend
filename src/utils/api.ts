@@ -233,6 +233,7 @@ export async function getReport(user: User) {
   return (await axios.get(`${base}/report`, { headers: getHeaders(user) }))
     .data as {
     completedTodosMap: { [index: string]: number }
+    completedFrogsMap: { [index: string]: number }
   }
 }
 

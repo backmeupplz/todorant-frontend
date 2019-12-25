@@ -7,6 +7,7 @@ export const messages = {
     report: {
       title: 'Stats',
       tasksCompleted: 'Tasks completed',
+      frogsCompleted: 'Frogs completed',
     },
     title: 'Todorant',
     cookie: {
@@ -309,6 +310,7 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
     report: {
       title: 'Отчет',
       tasksCompleted: 'Задач завершено',
+      frogsCompleted: 'Лягушек завершено',
     },
     title: 'Тудурант',
     cookie: {
@@ -611,6 +613,7 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
     report: {
       title: 'Звіт',
       tasksCompleted: 'Задач завершено',
+      frogsCompleted: 'Жаби завершено',
     },
     title: 'Todorant',
     cookie: {
