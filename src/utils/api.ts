@@ -229,9 +229,12 @@ async function updateState(user: User) {
   store.setUserState(userState)
 }
 
-export async function getReport(user: User) {
-  return (await axios.get(`${base}/report`, { headers: getHeaders(user) }))
-    .data as {
+export async function getReport(user: User, hash: string) {
+  return (
+    await axios.get(`${base}/report${hash ? `?hash=${hash}` : ''}`, {
+      headers: getHeaders(user),
+    })
+  ).data as {
     completedTodosMap: { [index: string]: number }
     completedFrogsMap: { [index: string]: number }
   }

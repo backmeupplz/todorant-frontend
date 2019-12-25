@@ -1,18 +1,27 @@
 <template lang="pug">
-  v-container(style='maxWidth: 1000px;')
-    v-row(v-observe-visibility='visibilityChanged')
+  v-container(style='maxWidth: 1000px;' v-observe-visibility='visibilityChanged')
+    v-row(no-gutters)
+      v-col
+        v-text-field(v-model='hashtag'
+        label='Hashtag'
+        prefix='#'
+        :append-outer-icon="hashtag ? 'search' : 'refresh'"
+        @click:append-outer="refresh"
+        clearable
+        dense)
+    v-row
       v-progress-linear(v-if='loading' indeterminate=true)
       v-col(v-if='!loading && !Object.keys(completedTodosData).length').text-center.mt-4
         p.display-3 😳
         p.headline {{$t('noReport.title')}}
         p.body-1 {{$t('noReport.text')}}
-    v-row
+    v-row(v-if='Object.keys(completedTodosData).length')
       v-col(cols=12 sm=6)
-        v-card(v-if='Object.keys(completedTodosData).length')
+        v-card
           v-card-text
             bar-chart(:chartData="completedTodosData" :options='chartOptions').ma-4
       v-col(cols=12 sm=6)
-        v-card(v-if='Object.keys(completedFrogsData).length')
+        v-card
           v-card-text
             bar-chart(:chartData="completedFrogsData" :options='chartOptions').ma-4
 </template>
@@ -32,6 +41,8 @@ export default class Report extends Vue {
   completedTodosData: object = {};
   completedFrogsData: object = {};
 
+  hashtag = "";
+
   chartOptions = {
     scales: {
       yAxes: [
@@ -45,36 +56,12 @@ export default class Report extends Vue {
   };
 
   mounted() {
-    this.loadReport();
-  }
-
-  async loadReport() {
-    const user = store.user();
-    if (!user) {
-      return;
-    }
-    this.loading = true;
-    try {
-      const data = await api.getReport(user);
-      this.completedTodosData = this.convertData(
-        data.completedTodosMap,
-        "report.tasksCompleted"
-      );
-      this.completedFrogsData = this.convertData(
-        data.completedFrogsMap,
-        "report.frogsCompleted"
-      );
-    } catch (err) {
-      console.error(err);
-      store.setSnackbarError("errors.report");
-    } finally {
-      this.loading = false;
-    }
+    this.refresh();
   }
 
   visibilityChanged(isVisible: boolean) {
     if (isVisible) {
-      this.loadReport();
+      this.refresh();
     }
   }
 
@@ -115,6 +102,30 @@ export default class Report extends Vue {
         }
       ]
     };
+  }
+
+  async refresh() {
+    const user = store.user();
+    if (!user) {
+      return;
+    }
+    this.loading = true;
+    try {
+      const data = await api.getReport(user, this.hashtag);
+      this.completedTodosData = this.convertData(
+        data.completedTodosMap,
+        "report.tasksCompleted"
+      );
+      this.completedFrogsData = this.convertData(
+        data.completedFrogsMap,
+        "report.frogsCompleted"
+      );
+    } catch (err) {
+      console.error(err);
+      store.setSnackbarError("errors.report");
+    } finally {
+      this.loading = false;
+    }
   }
 }
 </script>
