@@ -240,6 +240,16 @@ export async function getReport(user: User, hash: string) {
   }
 }
 
+export async function getSharedReport(user: User, hash: string) {
+  return (
+    await axios.get(`${base}/report/share${hash ? `?hash=${hash}` : ''}`, {
+      headers: getHeaders(user),
+    })
+  ).data as {
+    uuid: string
+  }
+}
+
 function getHeaders(user: User) {
   if (user.token) {
     return { token: user.token }

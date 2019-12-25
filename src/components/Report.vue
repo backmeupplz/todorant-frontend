@@ -3,7 +3,7 @@
     v-row(no-gutters)
       v-col
         v-text-field(v-model='hashtag'
-        label='Hashtag'
+        :label='$t("report.hashtag")'
         prefix='#'
         :append-outer-icon="hashtag ? 'search' : 'refresh'"
         @click:append-outer="refresh"
@@ -15,17 +15,63 @@
         p.display-3 😳
         p.headline {{$t('noReport.title')}}
         p.body-1 {{$t('noReport.text')}}
-    v-row(v-if='Object.keys(completedTodosData).length')
-      v-col(cols=12 sm=6)
-        v-card
-          v-card-text
-            bar-chart(:chartData="completedTodosData" :options='chartOptions').ma-4
-      v-col(cols=12 sm=6)
-        v-card
-          v-card-text
-            bar-chart(:chartData="completedFrogsData" :options='chartOptions').ma-4
+    div.mb-4(v-if='Object.keys(completedTodosData).length')
+      v-row
+        v-col(cols=12 sm=6)
+          v-card
+            v-card-text
+              bar-chart(:chartData="completedTodosData" :options='chartOptions').ma-4
+        v-col(cols=12 sm=6)
+          v-card
+            v-card-text
+              bar-chart(:chartData="completedFrogsData" :options='chartOptions').ma-4
+      v-row.pt-4.text-center
+        v-col
+          p.display-1 {{$t('report.share')}}
+      v-row(v-if='!url').justify-center
+        v-btn(color='blue' @click='share') {{$t('report.shareButton')}}
+      div(v-else).pa-2
+        v-row.justify-center.text-center
+          p
+            | {{$t('report.url')}}: 
+            a(:href='url') {{localizedUrl}}
+        v-row.flex-row.justify-center
+          twitter-button.share-button--circle(btnText
+          :url="localizedUrl"
+          :description="$t('report.shareMessage')")
+          facebook-button.share-button--circle(btnText
+          :url="localizedUrl"
+          :description="$t('report.shareMessage')")
+          linked-in-button.share-button--circle(btnText
+          :url="localizedUrl"
+          :description="$t('report.shareMessage')")
+          email-button.share-button--circle(btnText
+          :url="localizedUrl")
+          evernote-button.share-button--circle(btnText
+          :url="localizedUrl"
+          :description="$t('report.shareMessage')")
+          odnoklassniki-button.share-button--circle(btnText
+          :url="localizedUrl"
+          :description="$t('report.shareMessage')")
+          pinterest-button.share-button--circle(btnText
+          :url="localizedUrl"
+          :description="$t('report.shareMessage')")
+          pocket-button.share-button--circle(btnText
+          :url="localizedUrl")
+          reddit-button.share-button--circle(btnText
+          :url="localizedUrl"
+          :title="$t('report.shareMessage')")
+          telegram-button.share-button--circle(btnText
+          :url="localizedUrl"
+          :description="$t('report.shareMessage')")
+          viber-button.share-button--circle(btnText
+          :url="localizedUrl")
+          whats-app-button.share-button--circle(btnText
+          :url="localizedUrl")
+          vkontakte-button.share-button--circle(btnText
+          :url="localizedUrl"
+          :description="$t('report.shareMessage')")
 </template>
-
 <script lang="ts">
 import Vue from "vue";
 import Component from "vue-class-component";
@@ -33,8 +79,38 @@ import * as api from "../utils/api";
 import * as store from "../plugins/store";
 import BarChart from "./BarChart.vue";
 import { i18n } from "../plugins/i18n";
+import TwitterButton from "vue-share-buttons/src/components/TwitterButton";
+import FacebookButton from "vue-share-buttons/src/components/FacebookButton";
+import LinkedInButton from "vue-share-buttons/src/components/LinkedInButton";
+import EmailButton from "vue-share-buttons/src/components/EmailButton";
+import EvernoteButton from "vue-share-buttons/src/components/EvernoteButton";
+import OdnoklassnikiButton from "vue-share-buttons/src/components/OdnoklassnikiButton";
+import PinterestButton from "vue-share-buttons/src/components/PinterestButton";
+import PocketButton from "vue-share-buttons/src/components/PocketButton";
+import RedditButton from "vue-share-buttons/src/components/RedditButton";
+import TelegramButton from "vue-share-buttons/src/components/TelegramButton";
+import ViberButton from "vue-share-buttons/src/components/ViberButton";
+import VkontakteButton from "vue-share-buttons/src/components/VkontakteButton";
+import WhatsAppButton from "vue-share-buttons/src/components/WhatsAppButton";
 
-@Component({ components: { BarChart } })
+@Component({
+  components: {
+    BarChart,
+    TwitterButton,
+    FacebookButton,
+    LinkedInButton,
+    EmailButton,
+    EvernoteButton,
+    OdnoklassnikiButton,
+    PinterestButton,
+    PocketButton,
+    RedditButton,
+    TelegramButton,
+    ViberButton,
+    VkontakteButton,
+    WhatsAppButton
+  }
+})
 export default class Report extends Vue {
   loading = false;
 
@@ -42,6 +118,11 @@ export default class Report extends Vue {
   completedFrogsData: object = {};
 
   hashtag = "";
+  url = "";
+
+  get localizedUrl() {
+    return `${this.url}/${i18n.locale}`;
+  }
 
   chartOptions = {
     scales: {
@@ -120,6 +201,24 @@ export default class Report extends Vue {
         data.completedFrogsMap,
         "report.frogsCompleted"
       );
+      this.url = "";
+    } catch (err) {
+      console.error(err);
+      store.setSnackbarError("errors.report");
+    } finally {
+      this.loading = false;
+    }
+  }
+
+  async share() {
+    const user = store.user();
+    if (!user) {
+      return;
+    }
+    this.loading = true;
+    try {
+      const shared = await api.getSharedReport(user, this.hashtag);
+      this.url = `https://todorant.com/report/${shared.uuid}`;
     } catch (err) {
       console.error(err);
       store.setSnackbarError("errors.report");
