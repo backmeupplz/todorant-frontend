@@ -19,6 +19,11 @@
         p.headline {{$t('noReport.title')}}
         p.body-1 {{$t('noReport.text')}}
     div.mb-4(v-if='Object.keys(completedTodosData).length')
+      v-row.text-center(no-gutters)
+        v-col(cols=12 sm=6).justify-center
+          p.headline {{$t('report.tasksCompleted')}}: {{completedTodosCount}}
+        v-col(cols=12 sm=6).justify-center
+          p.headline {{$t('report.frogsCompleted')}}: {{completedFrogsCount}}
       v-row
         v-col(cols=12 sm=6)
           v-card
@@ -102,7 +107,6 @@ import TelegramButton from 'vue-share-buttons/src/components/TelegramButton'
 import ViberButton from 'vue-share-buttons/src/components/ViberButton'
 import VkontakteButton from 'vue-share-buttons/src/components/VkontakteButton'
 import WhatsAppButton from 'vue-share-buttons/src/components/WhatsAppButton'
-import { Meta } from '../utils/decorators'
 
 @Component({
   components: {
@@ -149,43 +153,6 @@ export default class Report extends Vue {
         },
       ],
     },
-  }
-
-  @Meta
-  metaInfo() {
-    if (!this.$props.external) {
-      return {}
-    }
-    const name = this.name
-    if (!name) {
-      return {}
-    }
-    const reportTitle = (i18n.t('report.title') as string).toLowerCase()
-    const hashtag = this.hashtag ? ` #${this.hashtag}` : ''
-    const title = `${name}, ${reportTitle}${hashtag}`
-    const completedTodosCount = this.completedTodosCount
-    const completedFrogsCount = this.completedFrogsCount
-    return {
-      title,
-      meta: [
-        {
-          property: 'og:site_name',
-          content: title,
-        },
-        {
-          property: 'og:type',
-          content: 'website',
-        },
-        {
-          name: 'twitter:title',
-          content: title,
-        },
-        {
-          name: 'twitter:description',
-          content: `${name} completed ${completedTodosCount} including ${completedFrogsCount} frogs!`,
-        },
-      ],
-    }
   }
 
   mounted() {
