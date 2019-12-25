@@ -85,7 +85,7 @@
           v-col
             p.display-1 {{$t('report.call')}}
         v-row(v-if='!url').justify-center
-          v-btn(color='blue' @click='goHome') {{$t('report.callButton')}}
+          v-btn(color='primary' @click='goHome') {{$t('report.callButton')}}
 </template>
 <script lang="ts">
 import Vue from 'vue'
