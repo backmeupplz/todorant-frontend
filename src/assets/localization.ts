@@ -13,6 +13,8 @@ export const messages = {
       shareButton: 'Share',
       url: 'Permanent link to this report',
       shareMessage: 'Check out my productivity report from Todorant!',
+      call: 'Want to join?',
+      callButton: 'Join Todorant',
     },
     title: 'Todorant',
     cookie: {
@@ -321,6 +323,8 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
       shareButton: 'Поделиться',
       url: 'Постоянная ссылка на этот отчет',
       shareMessage: 'Посмотрите на мой отчет продуктивности в Тудуранте!',
+      call: 'Хотите присоединиться?',
+      callButton: 'Присоединиться к Тудуранту',
     },
     title: 'Тудурант',
     cookie: {
@@ -629,6 +633,8 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
       shareButton: 'Поділіться',
       url: 'Постійне посилання на цей звіт',
       shareMessage: 'Перегляньте мій звіт про продуктивність від Тудуранте!',
+      call: 'Хочете так само?',
+      callButton: 'Приєднатися до Тудуранту',
     },
     title: 'Todorant',
     cookie: {

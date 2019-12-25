@@ -8,6 +8,7 @@ import Privacy from '../views/Privacy.vue'
 import Terms from '../views/Terms.vue'
 import Payment from '../views/Payment.vue'
 import { store } from './store'
+import PublicReport from '../views/PublicReport.vue'
 
 Vue.use(Router)
 
@@ -54,8 +55,13 @@ const router = new Router({
       },
     },
     {
+      path: '/report/*',
+      name: 'public_report',
+      component: PublicReport,
+    },
+    {
       path: '*',
-      name: 'notFound',
+      name: 'not_found',
       component: NotFound,
     },
   ],

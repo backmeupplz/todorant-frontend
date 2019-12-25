@@ -240,6 +240,21 @@ export async function getReport(user: User, hash: string) {
   }
 }
 
+export async function getPublicReport(user: User, uuid: string) {
+  return (
+    await axios.get(`${base}/report/${uuid}`, {
+      headers: getHeaders(user),
+    })
+  ).data as {
+    meta: {
+      completedTodosMap: { [index: string]: number }
+      completedFrogsMap: { [index: string]: number }
+    }
+    user: string
+    hash?: string
+  }
+}
+
 export async function getSharedReport(user: User, hash: string) {
   return (
     await axios.get(`${base}/report/share${hash ? `?hash=${hash}` : ''}`, {

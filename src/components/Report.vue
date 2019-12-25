@@ -1,6 +1,6 @@
 <template lang="pug">
   v-container(style='maxWidth: 1000px;' v-observe-visibility='visibilityChanged')
-    v-row(no-gutters)
+    v-row(no-gutters v-if='!external')
       v-col
         v-text-field(v-model='hashtag'
         :label='$t("report.hashtag")'
@@ -9,6 +9,9 @@
         @click:append-outer="refresh"
         clearable
         dense)
+    v-row(v-else)
+      v-col.text-center
+        p.display-1 {{$t('report.title')}} {{name}}{{hashtag ? ` #${hashtag}` : ''}}
     v-row
       v-progress-linear(v-if='loading' indeterminate=true)
       v-col(v-if='!loading && !Object.keys(completedTodosData).length').text-center.mt-4
@@ -25,52 +28,59 @@
           v-card
             v-card-text
               bar-chart(:chartData="completedFrogsData" :options='chartOptions').ma-4
-      v-row.pt-4.text-center
-        v-col
-          p.display-1 {{$t('report.share')}}
-      v-row(v-if='!url').justify-center
-        v-btn(color='blue' @click='share') {{$t('report.shareButton')}}
-      div(v-else).pa-2
-        v-row.justify-center.text-center
-          p
-            | {{$t('report.url')}}: 
-            a(:href='url') {{localizedUrl}}
-        v-row.flex-row.justify-center
-          twitter-button.share-button--circle(btnText
-          :url="localizedUrl"
-          :description="$t('report.shareMessage')")
-          facebook-button.share-button--circle(btnText
-          :url="localizedUrl"
-          :description="$t('report.shareMessage')")
-          linked-in-button.share-button--circle(btnText
-          :url="localizedUrl"
-          :description="$t('report.shareMessage')")
-          email-button.share-button--circle(btnText
-          :url="localizedUrl")
-          evernote-button.share-button--circle(btnText
-          :url="localizedUrl"
-          :description="$t('report.shareMessage')")
-          odnoklassniki-button.share-button--circle(btnText
-          :url="localizedUrl"
-          :description="$t('report.shareMessage')")
-          pinterest-button.share-button--circle(btnText
-          :url="localizedUrl"
-          :description="$t('report.shareMessage')")
-          pocket-button.share-button--circle(btnText
-          :url="localizedUrl")
-          reddit-button.share-button--circle(btnText
-          :url="localizedUrl"
-          :title="$t('report.shareMessage')")
-          telegram-button.share-button--circle(btnText
-          :url="localizedUrl"
-          :description="$t('report.shareMessage')")
-          viber-button.share-button--circle(btnText
-          :url="localizedUrl")
-          whats-app-button.share-button--circle(btnText
-          :url="localizedUrl")
-          vkontakte-button.share-button--circle(btnText
-          :url="localizedUrl"
-          :description="$t('report.shareMessage')")
+      div(v-if='!external')
+        v-row.pt-4.text-center
+          v-col
+            p.display-1 {{$t('report.share')}}
+        v-row(v-if='!url').justify-center
+          v-btn(color='blue' @click='share') {{$t('report.shareButton')}}
+        div(v-else).pa-2
+          v-row.justify-center.text-center
+            p
+              | {{$t('report.url')}}: 
+              a(:href='url') {{url}}
+          v-row.flex-row.justify-center
+            twitter-button.share-button--circle(btnText
+            :url="url"
+            :description="$t('report.shareMessage')")
+            facebook-button.share-button--circle(btnText
+            :url="url"
+            :description="$t('report.shareMessage')")
+            linked-in-button.share-button--circle(btnText
+            :url="url"
+            :description="$t('report.shareMessage')")
+            email-button.share-button--circle(btnText
+            :url="url")
+            evernote-button.share-button--circle(btnText
+            :url="url"
+            :description="$t('report.shareMessage')")
+            odnoklassniki-button.share-button--circle(btnText
+            :url="url"
+            :description="$t('report.shareMessage')")
+            pinterest-button.share-button--circle(btnText
+            :url="url"
+            :description="$t('report.shareMessage')")
+            pocket-button.share-button--circle(btnText
+            :url="url")
+            reddit-button.share-button--circle(btnText
+            :url="url"
+            :title="$t('report.shareMessage')")
+            telegram-button.share-button--circle(btnText
+            :url="url"
+            :description="$t('report.shareMessage')")
+            viber-button.share-button--circle(btnText
+            :url="url")
+            whats-app-button.share-button--circle(btnText
+            :url="url")
+            vkontakte-button.share-button--circle(btnText
+            :url="url"
+            :description="$t('report.shareMessage')")
+      div(v-else)
+        v-row.pt-4.text-center
+          v-col
+            p.display-1 {{$t('report.call')}}
+        v-row(v-if='!url').justify-center
+          v-btn(color='blue' @click='goHome') {{$t('report.callButton')}}
 </template>
 <script lang="ts">
 import Vue from "vue";
@@ -109,6 +119,9 @@ import WhatsAppButton from "vue-share-buttons/src/components/WhatsAppButton";
     ViberButton,
     VkontakteButton,
     WhatsAppButton
+  },
+  props: {
+    external: Boolean
   }
 })
 export default class Report extends Vue {
@@ -120,9 +133,7 @@ export default class Report extends Vue {
   hashtag = "";
   url = "";
 
-  get localizedUrl() {
-    return `${this.url}/${i18n.locale}`;
-  }
+  name = "";
 
   chartOptions = {
     scales: {
@@ -192,7 +203,18 @@ export default class Report extends Vue {
     }
     this.loading = true;
     try {
-      const data = await api.getReport(user, this.hashtag);
+      let data: any;
+      if (this.$props.external) {
+        const result = await api.getPublicReport(
+          user,
+          this.$router.currentRoute.params.pathMatch
+        );
+        data = result.meta;
+        this.hashtag = result.hash || "";
+        this.name = result.user;
+      } else {
+        data = await api.getReport(user, this.hashtag);
+      }
       this.completedTodosData = this.convertData(
         data.completedTodosMap,
         "report.tasksCompleted"
@@ -224,6 +246,14 @@ export default class Report extends Vue {
       store.setSnackbarError("errors.report");
     } finally {
       this.loading = false;
+    }
+  }
+
+  async goHome() {
+    try {
+      await this.$router.replace(store.user() ? "/superpower" : "/");
+    } catch (err) {
+      // Do nothing
     }
   }
 }
