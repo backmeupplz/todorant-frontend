@@ -38,7 +38,7 @@
           v-row.justify-center.text-center
             p
               | {{$t('report.url')}}: 
-              a(:href='url') {{url}}
+              a(:href='url' target='_blank') {{url}}
           v-row.flex-row.justify-center
             twitter-button.share-button--circle(btnText
             :url="url"
