@@ -636,7 +636,7 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
       call: 'Хочете так само?',
       callButton: 'Приєднатися до Тудуранту',
     },
-    title: 'Todorant',
+    title: 'Тудурант',
     cookie: {
       button: 'Зрозуміло!',
       message: 'Цей вебсайт використовує кукі.',

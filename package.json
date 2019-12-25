@@ -29,6 +29,7 @@
     "vue-flag-icon": "^1.0.6",
     "vue-google-signin-button": "^1.0.2",
     "vue-i18n": "^8.15.0",
+    "vue-meta": "^2.3.1",
     "vue-observe-visibility": "^0.4.6",
     "vue-property-decorator": "^8.3.0",
     "vue-router": "^3.1.3",

@@ -1,8 +1,8 @@
-// Dependencies
 import Vue from 'vue'
 import './plugins/facebook'
 import './plugins/google'
 import './plugins/apple'
+import './plugins/vue-meta'
 import App from './App.vue'
 import router from './plugins/router'
 import { store } from './plugins/store'

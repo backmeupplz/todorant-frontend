@@ -9,6 +9,7 @@ import Terms from '../views/Terms.vue'
 import Payment from '../views/Payment.vue'
 import { store } from './store'
 import PublicReport from '../views/PublicReport.vue'
+import * as api from '../utils/api'
 
 Vue.use(Router)
 
