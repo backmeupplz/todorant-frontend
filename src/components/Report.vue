@@ -11,7 +11,7 @@
         dense)
     v-row(v-else)
       v-col.text-center
-        p.display-1 {{$t('report.title')}} {{name}}{{hashtag ? ` #${hashtag}` : ''}}
+        p.display-1 {{name}}, {{$t('report.title').toLowerCase()}}{{hashtag ? ` #${hashtag}` : ''}}
     v-row
       v-progress-linear(v-if='loading' indeterminate=true)
       v-col(v-if='!loading && !Object.keys(completedTodosData).length').text-center.mt-4
