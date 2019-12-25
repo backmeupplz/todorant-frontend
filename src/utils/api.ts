@@ -240,12 +240,8 @@ export async function getReport(user: User, hash: string) {
   }
 }
 
-export async function getPublicReport(user: User, uuid: string) {
-  return (
-    await axios.get(`${base}/report/${uuid}`, {
-      headers: getHeaders(user),
-    })
-  ).data as {
+export async function getPublicReport(uuid: string) {
+  return (await axios.get(`${base}/report/public/${uuid}`)).data as {
     meta: {
       completedTodosMap: { [index: string]: number }
       completedFrogsMap: { [index: string]: number }

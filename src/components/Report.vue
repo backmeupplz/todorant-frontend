@@ -198,7 +198,7 @@ export default class Report extends Vue {
 
   async refresh() {
     const user = store.user();
-    if (!user) {
+    if (!user && !this.$props.external) {
       return;
     }
     this.loading = true;
@@ -206,14 +206,13 @@ export default class Report extends Vue {
       let data: any;
       if (this.$props.external) {
         const result = await api.getPublicReport(
-          user,
           this.$router.currentRoute.params.pathMatch
         );
         data = result.meta;
         this.hashtag = result.hash || "";
         this.name = result.user;
       } else {
-        data = await api.getReport(user, this.hashtag);
+        data = await api.getReport(user!, this.hashtag);
       }
       this.completedTodosData = this.convertData(
         data.completedTodosMap,
