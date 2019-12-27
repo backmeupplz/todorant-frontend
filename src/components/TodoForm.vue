@@ -24,7 +24,7 @@
             ref='dateInput')
           v-date-picker(@input='dateMenu = false'
           v-model='todo.date'
-          :min='yesterdayFormatted'
+          :min='todayFormattedForExactDate'
           :first-day-of-week='firstDayOfWeek'
           :locale='$store.state.language'
           :show-current='todayFormatted')
@@ -44,7 +44,7 @@
           :min='todayFormattedForDatePicker'
           type='month'
           :locale='$store.state.language')
-      v-col(cols='12' md='6')
+      v-col(v-if='moreShown' cols='12' md='6')
         v-menu(v-model='timeMenu' :close-on-content-click='false'  min-width=0)
           template(v-slot:activator='{ on }')
             v-text-field(clearable
@@ -64,9 +64,11 @@
         v-switch(:label='$t("todo.create.frog")' v-model='todo.frog')
       v-col(cols='12' md='6')
         v-switch(:label='$t("todo.create.completed")' v-model='todo.completed')
-      v-col(v-if='!hideAddToTheTop' cols='12' md='6')
+      v-col(v-if='!hideAddToTheTop && moreShown' cols='12' md='6')
         v-switch(:label='$t("todo.create.goFirst")' v-model='todo.goFirst')
-    v-row
+    v-row.v-flex-row
+      v-btn(v-if='!moreShown' icon text color='default' @click='moreShown = !moreShown')
+        v-icon more_horiz
       slot
 </template>
 
@@ -89,6 +91,7 @@ export default class TodoForm extends Vue {
   dateMenu = false;
   monthMenu = false;
   timeMenu = false;
+  moreShown = false;
 
   textRules = [
     (v: any) => !!(v || "").trim() || i18n.t("errors.todo.textLenght")
@@ -117,10 +120,8 @@ export default class TodoForm extends Vue {
     return moment(new Date()).format("YYYY-MM-DD");
   }
 
-  get yesterdayFormatted() {
-    return moment(
-      new Date(new Date().setDate(new Date().getDate() - 1))
-    ).format();
+  get todayFormattedForExactDate() {
+    return moment(new Date(new Date().setDate(new Date().getDate()))).format();
   }
 
   get todayFormattedForDatePicker() {
