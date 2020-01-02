@@ -229,9 +229,19 @@ async function updateState(user: User) {
   store.setUserState(userState)
 }
 
-export async function getReport(user: User, hash: string) {
+export async function getReport(
+  user: User,
+  hash: string,
+  startDate: null | string,
+  endDate: null | string
+) {
   return (
-    await axios.get(`${base}/report${hash ? `?hash=${hash}` : ''}`, {
+    await axios.get(`${base}/report`, {
+      params: {
+        hash: hash || '',
+        startDate: startDate || undefined,
+        endDate: endDate || undefined,
+      },
       headers: getHeaders(user),
     })
   ).data as {

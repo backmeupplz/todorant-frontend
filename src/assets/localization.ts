@@ -15,6 +15,8 @@ export const messages = {
       shareMessage: 'Check out my productivity report from Todorant!',
       call: 'Want to join?',
       callButton: 'Join Todorant',
+      startDate: 'Start date',
+      endDate: 'End date',
     },
     title: 'Todorant',
     cookie: {
@@ -325,6 +327,8 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
       shareMessage: 'Посмотрите на мой отчет продуктивности в Тудуранте!',
       call: 'Хотите присоединиться?',
       callButton: 'Присоединиться к Тудуранту',
+      startDate: 'Дата начала',
+      endDate: 'Дата конца',
     },
     title: 'Тудурант',
     cookie: {
@@ -635,6 +639,8 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
       shareMessage: 'Перегляньте мій звіт про продуктивність від Тудуранте!',
       call: 'Хочете так само?',
       callButton: 'Приєднатися до Тудуранту',
+      startDate: 'Дата початку',
+      endDate: 'Дата закінчення',
     },
     title: 'Тудурант',
     cookie: {

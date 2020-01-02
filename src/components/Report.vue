@@ -1,7 +1,7 @@
 <template lang="pug">
   v-container(style='maxWidth: 1000px;' v-observe-visibility='visibilityChanged')
     v-row(no-gutters v-if='!external')
-      v-col
+      v-col(cols=12).d-flex.flex-row
         v-text-field(v-model='hashtag'
         :label='$t("report.hashtag")'
         prefix='#'
@@ -9,6 +9,36 @@
         @click:append-outer="refresh"
         clearable
         dense)
+        v-btn.ml-2(v-if='!more' icon @click='more = true')
+          v-icon more_horiz
+      v-col(v-if='more' cols=12 sm=6)
+        v-menu(v-model='startDateMenu' min-width=0)
+          template(v-slot:activator='{ on }')
+            v-text-field(clearable
+            readonly
+            :label="$t('report.startDate')"
+            prepend-icon="event"
+            v-on='on'
+            v-model='startDate')
+          v-date-picker(@input='startDateMenu = false'
+          v-model='startDate'
+          :first-day-of-week='firstDayOfWeek'
+          :locale='$store.state.language'
+          :show-current='todayFormatted')
+      v-col(v-if='more' cols=12 sm=6)
+        v-menu(v-model='endDateMenu' min-width=0)
+          template(v-slot:activator='{ on }')
+            v-text-field(clearable
+            readonly
+            :label="$t('report.endDate')"
+            prepend-icon="event"
+            v-on='on'
+            v-model='endDate')
+          v-date-picker(@input='endDateMenu = false'
+          v-model='endDate'
+          :first-day-of-week='firstDayOfWeek'
+          :locale='$store.state.language'
+          :show-current='todayFormatted')
     v-row(v-else)
       v-col.text-center(v-if='!!name')
         p.display-1 {{name}}, {{$t('report.title').toLowerCase()}}{{hashtag ? ` #${hashtag}` : ''}}
@@ -107,6 +137,7 @@ import TelegramButton from "vue-share-buttons/src/components/TelegramButton";
 import ViberButton from "vue-share-buttons/src/components/ViberButton";
 import VkontakteButton from "vue-share-buttons/src/components/VkontakteButton";
 import WhatsAppButton from "vue-share-buttons/src/components/WhatsAppButton";
+import moment from "moment";
 
 @Component({
   components: {
@@ -143,6 +174,14 @@ export default class Report extends Vue {
 
   name = "";
 
+  more = false;
+
+  startDateMenu = false;
+  startDate: null | string = null;
+
+  endDateMenu = false;
+  endDate: null | string = null;
+
   chartOptions = {
     scales: {
       yAxes: [
@@ -167,16 +206,25 @@ export default class Report extends Vue {
 
   convertData(data: any, title: string) {
     if (!Object.keys(data).length) {
-      return {};
+      return {
+        labels: [],
+        datasets: [
+          {
+            label: i18n.t(title),
+            backgroundColor: "#f87979",
+            data: []
+          }
+        ]
+      };
     }
 
     const keys = Object.keys(data).sort((a, b) =>
       new Date(a) < new Date(b) ? -1 : 1
     );
-    const firstDay = new Date(keys[0]);
+    const firstDay = new Date(this.startDate || keys[0]);
     let i = firstDay;
     const days = [];
-    while (i < new Date()) {
+    while (i < (this.endDate ? new Date(this.endDate) : new Date())) {
       days.push(i);
       i = new Date(i.setDate(i.getDate() + 1));
     }
@@ -221,7 +269,12 @@ export default class Report extends Vue {
         this.hashtag = result.hash || "";
         this.name = result.user;
       } else {
-        data = await api.getReport(user!, this.hashtag);
+        data = await api.getReport(
+          user!,
+          this.hashtag,
+          this.startDate,
+          this.endDate
+        );
       }
       this.completedTodosData = this.convertData(
         data.completedTodosMap,
@@ -269,6 +322,20 @@ export default class Report extends Vue {
     } catch (err) {
       // Do nothing
     }
+  }
+
+  get firstDayOfWeek() {
+    const storeFirstDayOfWeek = this.$store.state.userState.settings
+      .firstDayOfWeek;
+    return storeFirstDayOfWeek === undefined
+      ? this.$store.state.language === "ru"
+        ? 1
+        : 0
+      : storeFirstDayOfWeek;
+  }
+
+  get todayFormatted() {
+    return moment(new Date()).format("YYYY-MM-DD");
   }
 }
 </script>
