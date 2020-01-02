@@ -84,13 +84,21 @@ export default class AddTodo extends Vue {
 
   date = "";
 
+  todoToBreakdown: null | Todo = null;
+
   created() {
-    serverBus.$on("addTodoRequested", (date?: string) => {
-      if (date) {
-        this.date = date;
+    serverBus.$on(
+      "addTodoRequested",
+      (date?: string, todoToBreakdown?: Todo) => {
+        if (date) {
+          this.date = date;
+        }
+        if (todoToBreakdown) {
+          this.todoToBreakdown = todoToBreakdown;
+        }
+        this.dialog = true;
       }
-      this.dialog = true;
-    });
+    );
   }
 
   mounted() {
@@ -182,6 +190,11 @@ export default class AddTodo extends Vue {
     this.loading = true;
     try {
       await api.postTodos(user, this.todos);
+      if (this.todoToBreakdown) {
+        const tempTodo = this.todoToBreakdown;
+        this.todoToBreakdown = null;
+        await api.completeTodo(user, tempTodo);
+      }
       this.dialog = false;
       serverBus.$emit("refreshRequested");
       reportGA("add_todo_success");

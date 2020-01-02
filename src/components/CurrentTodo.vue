@@ -154,7 +154,7 @@ export default class CurrentTodo extends Vue {
   }
 
   addTodo() {
-    serverBus.$emit("addTodoRequested");
+    serverBus.$emit("addTodoRequested", undefined, this.todo);
   }
 
   async skipTodo() {
