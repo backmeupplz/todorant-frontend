@@ -9,3 +9,4 @@ import Component from "vue-class-component";
 
 @Component
 export default class MobileLoginSuccess extends Vue {}
+</script>
