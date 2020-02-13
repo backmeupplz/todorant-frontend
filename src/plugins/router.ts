@@ -7,9 +7,11 @@ import NotFound from '../views/NotFound.vue'
 import Privacy from '../views/Privacy.vue'
 import Terms from '../views/Terms.vue'
 import Payment from '../views/Payment.vue'
+import LoginTelegram from '../views/LoginTelegram.vue'
+import MobileLoginSuccess from '../views/MobileLoginSuccess.vue'
+import MobileLoginError from '../views/MobileLoginError.vue'
 import { store } from './store'
 import PublicReport from '../views/PublicReport.vue'
-import * as api from '../utils/api'
 
 Vue.use(Router)
 
@@ -30,6 +32,21 @@ const router = new Router({
       path: '/terms',
       name: 'terms',
       component: Terms,
+    },
+    {
+      path: '/mobile-login/telegram',
+      name: 'mobile_login_telegram',
+      component: LoginTelegram,
+    },
+    {
+      path: '/mobile_login_success',
+      name: 'mobile_login_success',
+      component: MobileLoginSuccess,
+    },
+    {
+      path: '/mobile_login_error',
+      name: 'mobile_login_error',
+      component: MobileLoginError,
     },
     {
       path: '/superpower',

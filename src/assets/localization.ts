@@ -1,5 +1,10 @@
 export const messages = {
   en: {
+    loginMobile: {
+      telegram: {
+        headline: 'Please login with Telegram by tapping the button below.',
+      },
+    },
     noReport: {
       title: 'No data yet',
       text: 'Go on, complete your first todo and come back!',
@@ -312,6 +317,11 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
     },
   },
   ru: {
+    loginMobile: {
+      telegram: {
+        headline: 'Пожалуйста, зайдите через Телеграм, нажав на кнопку ниже.',
+      },
+    },
     noReport: {
       title: 'Недостаточно данных',
       text: 'Давайте, выполните свою первую задачу и возвращайтесь сюда!',
@@ -623,6 +633,11 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
     },
   },
   ua: {
+    loginMobile: {
+      telegram: {
+        headline: 'Please login with Telegram by tapping the button below',
+      },
+    },
     noReport: {
       title: 'Дані ще відсутні',
       text:
