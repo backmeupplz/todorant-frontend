@@ -1,5 +1,6 @@
 <template lang="pug">
   div
+    span(v-if='debug') ({{todo.order}}) 
     span(v-if='!!todo.frog') 🐸 
     span(v-if='!!todo.time') {{todo.time}} 
     span(v-for='element in linkifiedText')
@@ -29,6 +30,10 @@ export default class TodoText extends Vue {
     const todo = (this as any).todo;
     if (!todo || !todo.text) return [];
     return l(todo.text);
+  }
+
+  get debug() {
+    return !!process.env.VUE_APP_DEV;
   }
 
   hash(hash: string) {

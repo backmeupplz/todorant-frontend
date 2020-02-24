@@ -30,7 +30,7 @@
               icon
               @click='skipTodo'
               :loading='loading'
-              v-if='incompleteTodosCount > 1 && !todo.frog && !todo.skipped')
+              v-if='incompleteTodosCount > 1 && !todo.frog')
                 v-icon arrow_right_alt
               v-tooltip(:max-width='300' bottom).ml-4
                 template(v-slot:activator='{ on }')
