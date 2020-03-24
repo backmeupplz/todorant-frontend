@@ -31,6 +31,17 @@ export async function loginApple(loginInfo: any) {
   return (await axios.post(`${base}/login/apple`, loginInfo)).data as User
 }
 
+export async function telegramLoginRequest(uuid: string, id?: string) {
+  return axios.post(`${base}/login/telegram_mobile`, { uuid, id })
+}
+
+export async function checkTelegramLoginRequest(uuid: string) {
+  return axios.post<{ allowed?: boolean; user: User }>(
+    `${base}/login/telegram_mobile_check`,
+    { uuid }
+  )
+}
+
 export async function mergeFacebook(user: User, accessToken: string) {
   return (
     await axios.post(

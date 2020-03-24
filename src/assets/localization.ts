@@ -2,7 +2,17 @@ export const messages = {
   en: {
     loginMobile: {
       telegram: {
-        headline: 'Please login with Telegram by tapping the button below.',
+        headline:
+          'Please login with Telegram by entering your Telegram ID in a field below and hitting the "Login" button. You can get your Telegram ID by sending <code>/id</code> to the <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>.',
+        id: '123456789',
+        idHint: 'Telegram ID',
+        loginButton: 'Login',
+        noCredentialsError: 'Please, provide a Telegram ID',
+        cannotSendMessageError:
+          'Could not send login request to the user. Please make sure that you started @todorant_bot and that the Telegram ID is correct.',
+        waiting:
+          'Waiting for the response in <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>...',
+        notAllowedError: 'Login request was rejected',
       },
     },
     noReport: {
@@ -319,7 +329,17 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
   ru: {
     loginMobile: {
       telegram: {
-        headline: 'Пожалуйста, зайдите через Телеграм, нажав на кнопку ниже.',
+        headline:
+          'Пожалуйста, зайдите через Телеграм, введя свой Телеграм ID в поле ниже и нажав "Войти". Вы можете узнать свой Телеграм ID, отправив <code>/id</code> в <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>.',
+        id: '123456789',
+        idHint: 'Телеграм ID',
+        loginButton: 'Войти',
+        noCredentialsError: 'Пожалуйста, укажите Телеграм ID',
+        cannotSendMessageError:
+          'Не получилось отправить запрос на логин пользователю. Пожалуйста, убедитесь, что вы начали чат с @todorant_bot и что Телеграм ID правильный.',
+        waiting:
+          'Ожидаем ответа в <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>...',
+        notAllowedError: 'Запрос на вход был отвергнут',
       },
     },
     noReport: {
@@ -635,7 +655,17 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
   ua: {
     loginMobile: {
       telegram: {
-        headline: 'Please login with Telegram by tapping the button below',
+        headline:
+          'Please login with Telegram by entering your Telegram ID in a field below and hitting the "Login" button. You can get your Telegram ID by sending <code>/id</code> to the <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>.',
+        id: '123456789',
+        idHint: 'Telegram ID',
+        loginButton: 'Login',
+        noCredentialsError: 'Please, provide a Telegram ID',
+        cannotSendMessageError:
+          'Could not send login request to the user. Please make sure that you started @todorant_bot and that the Telegram ID is correct.',
+        waiting:
+          'Waiting for the response in <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>...',
+        notAllowedError: 'Login request was rejected',
       },
     },
     noReport: {
