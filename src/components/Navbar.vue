@@ -15,10 +15,10 @@
         v-toolbar-title.text-uppercase.grey--text
           v-tooltip(v-if='$store.state.user' bottom)
             template(v-slot:activator='{ on }')
-              span(v-on='on') {{$t('title')}}
+              span(v-on='on') {{$t('title')}}{{hashSuffix}}
             p {{$store.state.user.name}}
             p(v-for='identifier in identifiers') {{identifier}}
-          span(v-else) {{$t('title')}}
+          span(v-else) {{$t('title')}}{{hashSuffix}}
       v-spacer
       // Rules
       v-btn(text icon color='grey' @click='rulesDialog = true')
@@ -106,6 +106,10 @@ export default class Navbar extends Vue {
     }
     return [user.email, user.facebookId, user.telegramId].filter(v => !!v);
   }
+  hashSuffix = "";
+  updateHashSuffix() {
+    this.hashSuffix = this.$router.currentRoute.hash;
+  }
 
   created() {
     serverBus.$on("subscriptionRequested", () => {
@@ -117,6 +121,7 @@ export default class Navbar extends Vue {
     serverBus.$on("rulesRequested", () => {
       this.rulesDialog = true;
     });
+    setInterval(this.updateHashSuffix, 1000);
   }
   mounted() {
     if (!store.rulesShown() && store.user()) {
