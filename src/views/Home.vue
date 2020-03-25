@@ -16,7 +16,6 @@
             @callback='onTelegramAuth'
             radius='3'
             :userpic='false')
-            v-btn(@click='debug') debug
     v-layout
       v-col
         v-row
@@ -133,14 +132,6 @@ declare const FB: any;
 })
 export default class Home extends Vue {
   signinDialog = false;
-
-  async debug() {
-    const user = await loginFacebook("");
-    store.setUser(user);
-    this.signinDialog = false;
-    this.$router.replace("superpower");
-    reportGA("login_success", { provider: "facebook" });
-  }
 
   created() {
     if (this.$route.query && this.$route.query.hash) {
