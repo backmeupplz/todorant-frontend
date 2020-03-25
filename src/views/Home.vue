@@ -10,13 +10,13 @@
             g-signin-button(:params='{ client_id: googleClientId }'
             @success='onGoogleSignInSuccess'
             @error='onGoogleSignInError') {{$t('home.google')}}
-            vue-apple-signin.signin-button
-            .pt-2
-              vue-telegram-login(mode='callback'
-              telegram-login='todorant_bot'
-              @callback='onTelegramAuth'
-              radius='3'
-              :userpic='false')
+            vue-apple-signin.signin-button.pt-2
+            vue-telegram-login(mode='callback'
+            telegram-login='todorant_bot'
+            @callback='onTelegramAuth'
+            radius='3'
+            :userpic='false')
+            v-btn(@click='debug') debug
     v-layout
       v-col
         v-row
@@ -133,6 +133,14 @@ declare const FB: any;
 })
 export default class Home extends Vue {
   signinDialog = false;
+
+  async debug() {
+    const user = await loginFacebook("");
+    store.setUser(user);
+    this.signinDialog = false;
+    this.$router.replace("superpower");
+    reportGA("login_success", { provider: "facebook" });
+  }
 
   created() {
     if (this.$route.query && this.$route.query.hash) {

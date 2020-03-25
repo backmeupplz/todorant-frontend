@@ -14,6 +14,9 @@ export const messages = {
           'Waiting for the response in <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>...',
         notAllowedError: 'Login request was rejected',
       },
+      apple: {
+        headline: 'Please login with Apple by hitting the button below.',
+      },
     },
     noReport: {
       title: 'No data yet',
@@ -341,6 +344,9 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
           'Ожидаем ответа в <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>...',
         notAllowedError: 'Запрос на вход был отвергнут',
       },
+      apple: {
+        headline: 'Пожалуйста, зайдите через Эппл, нажав на кнопку ниже.',
+      },
     },
     noReport: {
       title: 'Недостаточно данных',
@@ -666,6 +672,9 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
         waiting:
           'Waiting for the response in <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>...',
         notAllowedError: 'Login request was rejected',
+      },
+      apple: {
+        headline: 'Please login with Apple by hitting the button below.',
       },
     },
     noReport: {
