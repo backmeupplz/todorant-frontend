@@ -8,7 +8,6 @@ import Privacy from '../views/Privacy.vue'
 import Terms from '../views/Terms.vue'
 import Payment from '../views/Payment.vue'
 import LoginTelegram from '../views/LoginTelegram.vue'
-import LoginApple from '../views/LoginApple.vue'
 import MobileLoginSuccess from '../views/MobileLoginSuccess.vue'
 import MobileLoginError from '../views/MobileLoginError.vue'
 import { store } from './store'
@@ -38,11 +37,6 @@ const router = new Router({
       path: '/mobile-login/telegram',
       name: 'mobile_login_telegram',
       component: LoginTelegram,
-    },
-    {
-      path: '/mobile-login/apple',
-      name: 'mobile_login_apple',
-      component: LoginApple,
     },
     {
       path: '/mobile_login_success',
