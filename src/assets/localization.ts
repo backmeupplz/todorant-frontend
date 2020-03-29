@@ -318,6 +318,7 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
       showTodayOnAddTodo: 'Default to today when creating a todo',
       firstDayOfWeek: 'First day of the week',
       newTodosGoFirst: 'New todos are added on top of the list',
+      preserveOrderByTime: 'Preserve exact time order',
     },
     weekdays: {
       1: 'Monday',
@@ -647,6 +648,7 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
         'Устанавливать сегодняшнюю дату автоматически при создании задачи',
       firstDayOfWeek: 'Первый день недели',
       newTodosGoFirst: 'Новые задачи добавляются наверх списка',
+      preserveOrderByTime: 'Следить за порядком задач с точным временем',
     },
     weekdays: {
       1: 'Понедельник',
@@ -980,6 +982,7 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
         'Встановлювати сьогоднішню дату автоматично при створенні завдань',
       firstDayOfWeek: 'Перший день тижня',
       newTodosGoFirst: 'Нові завдання додаються в верх списку',
+      preserveOrderByTime: 'Preserve exact time order',
     },
     weekdays: {
       1: 'Понеділок',

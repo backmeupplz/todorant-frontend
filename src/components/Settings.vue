@@ -10,6 +10,8 @@
         v-model='showTodayOnAddTodo')
         v-switch(:label='$t("settings.newTodosGoFirst")'
         v-model='newTodosGoFirst')
+        v-switch(:label='$t("settings.preserveOrderByTime")'
+        v-model='preserveOrderByTime')
         v-select(:items='weekdays'
         :label='$t("settings.firstDayOfWeek")'
         v-model='firstDayOfWeek')
@@ -75,6 +77,13 @@ export default class Settings extends Vue {
   }
   set newTodosGoFirst(val: boolean) {
     store.userState().settings.newTodosGoFirst = val;
+  }
+
+  get preserveOrderByTime() {
+    return this.$store.state.userState.settings.preserveOrderByTime;
+  }
+  set preserveOrderByTime(val: boolean) {
+    store.userState().settings.preserveOrderByTime = val;
   }
 
   async save() {
