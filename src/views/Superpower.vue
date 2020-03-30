@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  div.pb-10
     // Tabs (panning = false)
     v-tabs(v-if='!$store.state.userState.planning'
     v-model='currentTab'
@@ -15,6 +15,8 @@
           TodoList
         v-tab-item(:value='2')
           Report
+        // Add FAB
+        AddTodo(v-if='!$store.state.editting' :currentTab='currentTab')
     // Tabs (planning = true)
     v-tabs(v-else
     :value='1'
@@ -30,8 +32,8 @@
           TodoList
         v-tab-item(:value='2')
           .display-3.text-center ☁️
-    // Add FAB
-    AddTodo(v-if='!$store.state.editting')
+        // Add FAB
+        AddTodo(v-if='!$store.state.editting' :currentTab='currentTab')
 </template>
 
 <script lang="ts">
@@ -62,9 +64,11 @@ export default class Superpower extends Vue {
       try {
         const loginInfo = query;
         if (
-          !confirm(i18n.t("merge.confirm", {
-            id: loginInfo.id
-          }) as string)
+          !confirm(
+            i18n.t("merge.confirm", {
+              id: loginInfo.id
+            }) as string
+          )
         ) {
           return;
         }

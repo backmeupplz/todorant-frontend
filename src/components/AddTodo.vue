@@ -1,6 +1,9 @@
 <template lang="pug">
   div
-    v-btn(fixed
+    v-btn(
+    :absolute="$vuetify.breakpoint.mdAndUp && currentTab == 0"
+    :fixed="$vuetify.breakpoint.smAndDown || currentTab != 0"
+    :class='($vuetify.breakpoint.mdAndUp && currentTab != 0) ? "rightPadding" : ""'
     dark
     fab
     bottom
@@ -71,7 +74,8 @@ import { serverBus } from "../main";
 import { reportGA } from "../utils/ga";
 
 @Component({
-  components: { TodoForm }
+  components: { TodoForm },
+  props: ["currentTab"]
 })
 export default class AddTodo extends Vue {
   dialog = false;
@@ -211,3 +215,10 @@ export default class AddTodo extends Vue {
   }
 }
 </script>
+
+<style lang="sass">
+@for $i from 1 through 50
+  @media screen and (min-width: (1000px + ($i * 100px))) and (max-width: 1100px + ($i * 100px))
+    .rightPadding
+      right: ((100 + ($i * 100)) / 2) !important
+</style>

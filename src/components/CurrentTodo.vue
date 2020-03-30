@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-container(style='maxWidth: 1000px;')
+  v-container(style='maxWidth: 1000px;' :class='$vuetify.breakpoint.mdAndUp ? "pb-8" : ""')
     v-list
       v-list-item
         v-progress-linear(rounded
