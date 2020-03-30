@@ -1,9 +1,9 @@
 <template lang="pug">
   div
     v-btn(
-    :absolute="$vuetify.breakpoint.mdAndUp && currentTab == 0"
-    :fixed="$vuetify.breakpoint.smAndDown || currentTab != 0"
-    :class='($vuetify.breakpoint.mdAndUp && currentTab != 0) ? "rightPadding" : ""'
+    :absolute="$vuetify.breakpoint.mdAndUp && (currentTab == 0 && !$store.state.userState.planning)"
+    :fixed="$vuetify.breakpoint.smAndDown || (currentTab != 0 || $store.state.userState.planning)"
+    :class='($vuetify.breakpoint.mdAndUp && (currentTab != 0 || $store.state.userState.planning)) ? "rightPadding" : ""'
     dark
     fab
     bottom
