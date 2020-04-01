@@ -108,7 +108,7 @@ export default class Navbar extends Vue {
   }
   hashSuffix = "";
   updateHashSuffix() {
-    this.hashSuffix = this.$router.currentRoute.hash;
+    this.hashSuffix = decodeURI(this.$router.currentRoute.hash);
   }
 
   created() {
