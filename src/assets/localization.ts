@@ -1,5 +1,10 @@
 export const messages = {
   en: {
+    supportAlert: {
+      title: 'Support',
+      text:
+        'If you have any questions or suggestions, feel free to <a href=mailto:todorant@borodutch.com">send me an email</a>, <a href="https://t.me/borodutch" target="_blank">contact me on Telegram</a> or <a href="https://t.me/todorant_feedback" target="_blank">join our Telegram community group</a>!',
+    },
     loginMobile: {
       telegram: {
         headline:
@@ -331,6 +336,11 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
     },
   },
   ru: {
+    supportAlert: {
+      title: 'Поддержка',
+      text:
+        'Если у вас есть какие-либо вопросы или предложения, <a href=mailto:todorant@borodutch.com">напишите мне имеил</a>, <a href="https://t.me/borodutch" target="_blank">в Телеграм</a> или <a href="https://t.me/todorant_feedback" target="_blank">присоединитесь к нашей групе сообщества в Телеграме</a>!',
+    },
     loginMobile: {
       telegram: {
         headline:
@@ -661,6 +671,11 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
     },
   },
   ua: {
+    supportAlert: {
+      title: 'Support',
+      text:
+        'If you have any questions or suggestions, feel free to <a href=mailto:todorant@borodutch.com">send me an email</a>, <a href="https://t.me/borodutch" target="_blank">contact me on Telegram</a> or <a href="https://t.me/todorant_feedback" target="_blank">join our Telegram community group</a>!',
+    },
     loginMobile: {
       telegram: {
         headline:

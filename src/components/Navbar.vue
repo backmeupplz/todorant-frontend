@@ -8,7 +8,9 @@
     Subscription(:dialog='subscriptionDialog' :close='closeSubscription')
     // Settings dialog
     Settings(:dialog='settingsDialog' :close='closeSettingsDialog')
-    // Navbarand app
+    // Support dialog
+    Support(:dialog='supportDialog' :close='closeSupportDialog')
+    // Navbar and app
     v-app-bar(flat app style='maxWidth: 1000px; margin: auto')
       // Title
       a(@click='goHome')
@@ -52,6 +54,10 @@
           v-list-item(@click='settingsDialog = true' 
           v-if='!!$store.state.user')
             v-list-item-title {{$t('settings.title')}}
+          // Support
+          v-list-item(@click='supportDialog = true' 
+          v-if='!!$store.state.user')
+            v-list-item-title {{$t('supportAlert.title')}}
           // Logout
           v-list-item(@click='logout'
           v-if='!!$store.state.user')
@@ -68,6 +74,7 @@ import Rules from "./Rules.vue";
 import Merge from "./Merge.vue";
 import Subscription from "./Subscription.vue";
 import Settings from "./Settings.vue";
+import Support from "./Support.vue";
 import { serverBus } from "../main";
 import { reportGA } from "../utils/ga";
 
@@ -76,7 +83,8 @@ import { reportGA } from "../utils/ga";
     Rules,
     Merge,
     Subscription,
-    Settings
+    Settings,
+    Support
   }
 })
 export default class Navbar extends Vue {
@@ -84,6 +92,7 @@ export default class Navbar extends Vue {
   mergeDialog = false;
   subscriptionDialog = false;
   settingsDialog = false;
+  supportDialog = false;
 
   get locales() {
     return [
@@ -154,6 +163,9 @@ export default class Navbar extends Vue {
   }
   closeSettingsDialog() {
     this.settingsDialog = false;
+  }
+  closeSupportDialog() {
+    this.supportDialog = false;
   }
   async goHome() {
     try {
