@@ -35,7 +35,7 @@
           v-tooltip(right :max-width='300' v-if='todoSection.title.length === 10')
             template(v-slot:activator='{ on }')
               span(v-on='on') {{todoSection.title}}
-            span {{$t(`weekdays.${(new Date(todoSection.title).getDay() + 1) % 7}`)}}
+            span {{$t(weekdayFromTitle(todoSection.title))}}
           span(v-else) {{todoSection.title}}
         draggable(v-model='todoSection.todos'
         group='todo'
@@ -154,6 +154,13 @@ export default class TodoList extends Vue {
     return result;
   }
 
+  weekdayFromTitle(title: string) {
+    const date = new Date(title);
+    return `weekdays.${(date.getDay() +
+      (date.getTimezoneOffset() > 0 ? 1 : 0)) %
+      7}`;
+  }
+
   @Watch("showCompleted")
   onCompletedChanged(val: boolean, oldVal: boolean) {
     if (val === oldVal) return;
@@ -201,27 +208,24 @@ export default class TodoList extends Vue {
             .reduce((prev, cur) => prev.concat(cur.todos), [] as Todo[])
             .concat(fetchedTodos)
         : fetchedTodos;
-      const mappedTodos = allTodos.reduce(
-        (prev, cur) => {
-          if (cur.date) {
-            const date = `${cur.monthAndYear}-${cur.date}`;
-            if (prev[date]) {
-              prev[date].push(cur);
-            } else {
-              prev[date] = [cur];
-            }
+      const mappedTodos = allTodos.reduce((prev, cur) => {
+        if (cur.date) {
+          const date = `${cur.monthAndYear}-${cur.date}`;
+          if (prev[date]) {
+            prev[date].push(cur);
           } else {
-            const month = cur.monthAndYear;
-            if (prev[month]) {
-              prev[month].push(cur);
-            } else {
-              prev[month] = [cur];
-            }
+            prev[date] = [cur];
           }
-          return prev;
-        },
-        {} as { [index: string]: Todo[] }
-      );
+        } else {
+          const month = cur.monthAndYear;
+          if (prev[month]) {
+            prev[month].push(cur);
+          } else {
+            prev[month] = [cur];
+          }
+        }
+        return prev;
+      }, {} as { [index: string]: Todo[] });
       this.todos = [] as TodoSection[];
       for (const key in mappedTodos) {
         this.todos.push({
