@@ -2,7 +2,7 @@
   v-dialog(v-model='dialog'
   scrollable
   max-width='600px'
-  persistent)
+  @click:outside='close')
     v-card
       v-card-title {{$t('subscription.title')}}
       v-card-text

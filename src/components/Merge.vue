@@ -2,7 +2,7 @@
   v-dialog(v-model='dialog'
   scrollable
   max-width='600px'
-  persistent)
+  @click:outside='close')
     v-card
       v-card-title {{$t('merge.title')}}
       v-card-text
@@ -78,9 +78,11 @@ export default class Merge extends Vue {
         return;
       }
       if (
-        !confirm(i18n.t("merge.confirm", {
-          id: response.authResponse.userID
-        }) as string)
+        !confirm(
+          i18n.t("merge.confirm", {
+            id: response.authResponse.userID
+          }) as string
+        )
       ) {
         return;
       }
@@ -102,9 +104,11 @@ export default class Merge extends Vue {
       }
       const email = googleUser.getBasicProfile().getEmail();
       if (
-        !confirm(i18n.t("merge.confirm", {
-          id: email
-        }) as string)
+        !confirm(
+          i18n.t("merge.confirm", {
+            id: email
+          }) as string
+        )
       ) {
         return;
       }
@@ -125,9 +129,11 @@ export default class Merge extends Vue {
         return;
       }
       if (
-        !confirm(i18n.t("merge.confirm", {
-          id: loginInfo.id
-        }) as string)
+        !confirm(
+          i18n.t("merge.confirm", {
+            id: loginInfo.id
+          }) as string
+        )
       ) {
         return;
       }
