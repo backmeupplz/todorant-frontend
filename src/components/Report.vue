@@ -229,13 +229,10 @@ export default class Report extends Vue {
       i = new Date(i.setDate(i.getDate() + 1));
     }
 
-    const daysToCompletedMap = keys.reduce(
-      (prev, cur) => {
-        prev[new Date(cur).toLocaleDateString()] = data[cur];
-        return prev;
-      },
-      {} as any
-    );
+    const daysToCompletedMap = keys.reduce((prev, cur) => {
+      prev[new Date(cur).toLocaleDateString()] = data[cur];
+      return prev;
+    }, {} as any);
 
     const labels = days.map(k => k.toLocaleDateString());
     const completedData = labels.map(l => daysToCompletedMap[l]);
@@ -277,18 +274,18 @@ export default class Report extends Vue {
         );
       }
       this.completedTodosData = this.convertData(
-        data.completedTodosMap,
+        data.completedTodosMap || {},
         "report.tasksCompleted"
       );
       this.completedFrogsData = this.convertData(
-        data.completedFrogsMap,
+        data.completedFrogsMap || {},
         "report.frogsCompleted"
       );
       this.completedTodosCount = (Object.values(
-        data.completedTodosMap
+        data.completedTodosMap || {}
       ) as number[]).reduce((prev, cur) => prev + cur, 0);
       this.completedFrogsCount = (Object.values(
-        data.completedFrogsMap
+        data.completedFrogsMap || {}
       ) as number[]).reduce((prev, cur) => prev + cur, 0);
       this.url = "";
     } catch (err) {
