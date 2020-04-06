@@ -18,7 +18,7 @@
           v-spacer
           v-btn(color='error'
           text 
-          @click='cleanTodo()'
+          @click='cleanTodo(false)'
           :disabled='loading'
           v-shortkey.once="['esc']"
           @shortkey='dialog=false') {{$t('cancel')}}

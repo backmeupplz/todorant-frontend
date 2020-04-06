@@ -327,9 +327,11 @@ export default class TodoList extends Vue {
     }
   }
 
-  cleanTodo() {
+  cleanTodo(needsReload = true) {
     this.todoEdited = null;
-    this.loadTodos(false);
+    if (needsReload) {
+      this.loadTodos(false);
+    }
   }
 
   cardClass(todo: Todo) {
