@@ -10,7 +10,7 @@
             g-signin-button(:params='{ client_id: googleClientId }'
             @success='onGoogleSignInSuccess'
             @error='onGoogleSignInError') {{$t('home.google')}}
-            vue-apple-signin.signin-button.pt-2
+            vue-apple-signin.signin-button.py-2
             vue-telegram-login(mode='callback'
             telegram-login='todorant_bot'
             @callback='onTelegramAuth'
