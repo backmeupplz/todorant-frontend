@@ -8,7 +8,7 @@ export const messages = {
     loginMobile: {
       telegram: {
         headline:
-          'Please login with Telegram by entering your Telegram ID in a field below and hitting the "Login" button. You can get your Telegram ID by sending <code>/id</code> to the <a href="https://tg.click/todorant_bot" target="_blank">@todorant_bot</a>.',
+          'Please login with Telegram by entering your Telegram ID in a field below and hitting the "Login" button. You can get your Telegram ID by sending <code>/id</code> to the <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>.',
         id: '123456789',
         idHint: 'Telegram ID',
         loginButton: 'Login',
@@ -16,7 +16,7 @@ export const messages = {
         cannotSendMessageError:
           'Could not send login request to the user. Please make sure that you started @todorant_bot and that the Telegram ID is correct.',
         waiting:
-          'Waiting for the response in <a href="https://tg.click/todorant_bot" target="_blank">@todorant_bot</a>...',
+          'Waiting for the response in <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>...',
         notAllowedError: 'Login request was rejected',
       },
       apple: {
@@ -265,7 +265,7 @@ Thank you a lot for Todorant!`,
       premise:
         'Below are the main principles that you should follow to productively exploit all the features provided by Todorant. It is easy as 1-2-3, just with a few more steps.',
       rules: [
-        'As soon as you get an actionable task (receive an email, phonecall, text, or if you see anything of interest that has to be put on your todo list) — create a todo for it right away. <b>Do not wait</b>, you <b>will</b> forget about it if you do not take it down. You can use <a target="_blank" href="https://tg.click/todorant_bot">@todorant_bot</a> on Telegram to create todos quicker.',
+        'As soon as you get an actionable task (receive an email, phonecall, text, or if you see anything of interest that has to be put on your todo list) — create a todo for it right away. <b>Do not wait</b>, you <b>will</b> forget about it if you do not take it down. You can use <a target="_blank" href="https://tlg.fyi/todorant_bot">@todorant_bot</a> on Telegram to create todos quicker.',
         'Todos should <b>always</b> be actionable and as explicit as possible. If a task takes <b>less than 2 minutes</b>, then do it right away and record it as completed.',
         'You either add a specific date or select a month while creating a todo. You cannot pick current month without selecting a specific date. This is done to relax your mind. If you trust the system and put everything that needs to be done on the correct date — you will encounter it at the right time. Huge amount of willpower is wasted on being constantly stressed about "that other thing that I need to deal with but I am not quite sure what it was". Learn to trust and relax.',
         'First thing you do each month is planning ahead. You take all the tasks assigned to the current month and you sort them in the correct dates. It allows you to filter out outdated tasks and keep your mind in peace with, knowing exactly what you need to do this month.',
@@ -276,7 +276,7 @@ Thank you a lot for Todorant!`,
         'You are allowed to skip current task — but try to do so as rarely as possible. You cannot skip a frog. If you failed to complete a task and had to redistribute it twice, it becomes a frog.',
         'If the current task is too high level, then break it down to a list of subtasks. As soon as you break it down, the task is marked as completed.',
         'Add as much relevant information about the todo as possible. Add links to specific emails (gmail on web allows you to do this), websites, notes (like evernote), documents (like dropbox), leave phone numbers or add any information you might need to complete the task. Todorant is not meant to be a point of reference for you — instead it should act as a catalogue of links to the reference information relevant to specific todos.',
-        'Feel free to join our multi-language <a target="_blank" href="https://tg.click/todorant_feedback">group</a> on Telegram to share experience and tricks on how to be more productive! Your feedback about the service — suggestions, wishes and complaints — are highly welcome.',
+        'Feel free to join our multi-language <a target="_blank" href="https://tlg.fyi/todorant_feedback">group</a> on Telegram to share experience and tricks on how to be more productive! Your feedback about the service — suggestions, wishes and complaints — are highly welcome.',
         'Use the edit mode (the list order icon on top) on the <b>Planning</b> page to change the task order. If you want to assign a task to a specific week, just assign it to Monday and reassign it during the planning phase on Monday morning.',
         'Todorant does not have and will never have repeating tasks — the only thing they do well causing anxiety by hanging over you as unfinished tasks. If you need to complete repeating tasks — add all of them manually, your brain will thank you for conscious tasks.',
         'Todorant does not have the concept of "Projects" as it has proven itself to be demotivating, some of the "folder" never get open. Projects "Fitness" and "Self-improvement" send their regards. Instead, use #hashtags.',
@@ -355,7 +355,7 @@ Thank you a lot for Todorant!`,
     loginMobile: {
       telegram: {
         headline:
-          'Пожалуйста, зайдите через Телеграм, введя свой Телеграм ID в поле ниже и нажав "Войти". Вы можете узнать свой Телеграм ID, отправив <code>/id</code> в <a href="https://tg.click/todorant_bot" target="_blank">@todorant_bot</a>.',
+          'Пожалуйста, зайдите через Телеграм, введя свой Телеграм ID в поле ниже и нажав "Войти". Вы можете узнать свой Телеграм ID, отправив <code>/id</code> в <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>.',
         id: '123456789',
         idHint: 'Телеграм ID',
         loginButton: 'Войти',
@@ -363,7 +363,7 @@ Thank you a lot for Todorant!`,
         cannotSendMessageError:
           'Не получилось отправить запрос на логин пользователю. Пожалуйста, убедитесь, что вы начали чат с @todorant_bot и что Телеграм ID правильный.',
         waiting:
-          'Ожидаем ответа в <a href="https://tg.click/todorant_bot" target="_blank">@todorant_bot</a>...',
+          'Ожидаем ответа в <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>...',
         notAllowedError: 'Запрос на вход был отвергнут',
       },
       apple: {
@@ -609,7 +609,7 @@ Thank you a lot for Todorant!`,
       premise:
         'Ниже описаны основные принципы, которых вы должны придерживаться, чтобы максимально продуктивно пользоваться всеми функциями Тудуранта. Это просто, как 1-2-3, просто на несколько шагов побольше.',
       rules: [
-        'Как только у вас появляется задача (получаете имеил, звонок, сообщение или просто видите что-то интересное что нужно добавить в ваш список задач) — сразу же создавайте задачу. <b>Не ждите</b>, вы <b>забудете</b> про эту задачу, если ее не запишете. Пользуйтесь Телеграм ботом <a target="_blank" href="https://tg.click/todorant_bot">@todorant_bot</a> для быстрого создания задач.',
+        'Как только у вас появляется задача (получаете имеил, звонок, сообщение или просто видите что-то интересное что нужно добавить в ваш список задач) — сразу же создавайте задачу. <b>Не ждите</b>, вы <b>забудете</b> про эту задачу, если ее не запишете. Пользуйтесь Телеграм ботом <a target="_blank" href="https://tlg.fyi/todorant_bot">@todorant_bot</a> для быстрого создания задач.',
         'Задачи <b>всегда</b> должны быть призывом к действию и как можно более понятными. Если задача займет <b>меньше двух минут</b> — сделайте ее сразу и создайте в списке задач, как выполненную.',
         'Во время создания задачи вы либо указываете точную дату, либо месяц. Вы не можете выбрать текущий месяц без определенной даты. Это сделано для того, чтобы расслабить вам мозг. Если вы доверяете системе и добавляете в нее все, что нужно, на правильные даты — то вы будете встречаться с задачами в правильное время. Огромное количество силы воли тратится зря на постоянный стресс вроде "той вещи, которую мне нужно сделать, но я точно не помню, что это за вещь". Научитесь доверять и расслабляться.',
         'Первая вещь, которую вам нужно будет сделать в начале каждого месяца — это планирование. Вы берете все задачи на текущий месяц и расфасовываете их в нужные даты. Это позволяет вам отфильтровать задачи, которые более не актуальны и помогает вам оставаться в полном спокойствии, четко осознавая, что вам нужно будет делать в этом месяце.',
@@ -620,7 +620,7 @@ Thank you a lot for Todorant!`,
         'Вам разрешено пропускать текущую задачу — но делайте это как можно реже. Если вы не смогли выполнить задачу и вам пришлось ее перераспределить дважды — она становится лягушкой.',
         'Если текущая задача слишком высокоуровневая, то разбейте ее на список подзадач. Как только вы разбили задачу на подзадачи, она отмечается, как завершенная.',
         'Добавляйте настолько много важной информации в задачи, насколько сможете. Добавляйте ссылки на имейлы (gmail позволяет это делать), вебсайты, заметки (как evernote), документы (например, dropbox), оставляйте телефонные номера или добавляйте любую информацию, которая может быть важной для решения задачи. Тудурант не должен быть главным хранилищем и каталогом ваших данных, но местом, где ссылки на необходимые для задач данные, хранятся сразу с определенными задачами.',
-        'Не стесняйтесь присоединяться к нашей <a target="_blank" href="https://tg.click/todorant_feedback">группе</a> в Телеграме для обмена опытом о том, как становиться продуктивнее! Ваши отзывы о работе сервиса — предложения, пожелания и жалобы — крайне приветствуются.',
+        'Не стесняйтесь присоединяться к нашей <a target="_blank" href="https://tlg.fyi/todorant_feedback">группе</a> в Телеграме для обмена опытом о том, как становиться продуктивнее! Ваши отзывы о работе сервиса — предложения, пожелания и жалобы — крайне приветствуются.',
         'Пользуйтесь режимом редактирования (иконка смены порядка сверху) на странице <b>Планирования</b> для изменения порядка задач. Если вы хотите создать задачу на определенную неделю — просто добавьте ее на понедельник и перераспределите во время планирования утром понедельника.',
         'В Тудуранте нет и никогда не будет автоматически повторяющихся задач — единственное, в чем они помогают — это создание атмосферы страха, накапливаясь невыполненным грузом. Если нужно внести повторяющуюся задачу — внесите ее вручную, ваш мозг скажет вам спасибо за осмысленную задачу.',
         'В Тудуранте нет концепта "Проекты", так как он показал себя демотивирующим, некоторые папки просто никогда не открываются. Проекты "Фитнес" и "Саморазвитие" передают привет. Вместо этого, используйте #хештеги.',
@@ -637,7 +637,7 @@ Thank you a lot for Todorant!`,
     merge: {
       title: 'Объединить аккаунты',
       description:
-        'Вы можете объединить разные аккаунты (например, Фейсбук, Гугл, Телеграм) здесь. Просто залогиньтесь в аккаунты, используя кнопки ниже и аккаунты будут объединены. Осторожно: это действие нельзя обратить, и списки задач будут также объединены. Возможно, если вы зашли из России без VPN, вы не видите кнопку Телеграма — тогда либо зайдите через VPN, либо обратитесь к <a target="_blank" href="https://tg.click/todorant_bot">@todorant_bot</a> в Телеграме и залогиньтесь через него.',
+        'Вы можете объединить разные аккаунты (например, Фейсбук, Гугл, Телеграм) здесь. Просто залогиньтесь в аккаунты, используя кнопки ниже и аккаунты будут объединены. Осторожно: это действие нельзя обратить, и списки задач будут также объединены. Возможно, если вы зашли из России без VPN, вы не видите кнопку Телеграма — тогда либо зайдите через VPN, либо обратитесь к <a target="_blank" href="https://tlg.fyi/todorant_bot">@todorant_bot</a> в Телеграме и залогиньтесь через него.',
       done:
         'Отлично! Вы теперь можете заходить в этот аккаунт через Гугл, Фейсбук и Телеграм. Кончились у нас кнопки для вас.',
       confirm: 'Уверены, что хотите добавить {id} в этот аккаунт?',
@@ -701,7 +701,7 @@ Thank you a lot for Todorant!`,
     loginMobile: {
       telegram: {
         headline:
-          'Please login with Telegram by entering your Telegram ID in a field below and hitting the "Login" button. You can get your Telegram ID by sending <code>/id</code> to the <a href="https://tg.click/todorant_bot" target="_blank">@todorant_bot</a>.',
+          'Please login with Telegram by entering your Telegram ID in a field below and hitting the "Login" button. You can get your Telegram ID by sending <code>/id</code> to the <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>.',
         id: '123456789',
         idHint: 'Telegram ID',
         loginButton: 'Login',
@@ -709,7 +709,7 @@ Thank you a lot for Todorant!`,
         cannotSendMessageError:
           'Could not send login request to the user. Please make sure that you started @todorant_bot and that the Telegram ID is correct.',
         waiting:
-          'Waiting for the response in <a href="https://tg.click/todorant_bot" target="_blank">@todorant_bot</a>...',
+          'Waiting for the response in <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>...',
         notAllowedError: 'Login request was rejected',
       },
       apple: {
@@ -960,7 +960,7 @@ Thank you a lot for Todorant!`,
       premise:
         'Нижче описано основні принципи, яких ви повинні притримуватися, щоб максимально продуктивно користуватися всіма функціями Тудуранту. Це просто, як 1-2-3, але на декілька кроків більше.',
       rules: [
-        'Як тільки у вас з\'являється завдання (отримуєте email, дзвінок, повідомлення чи просто бачите щось цікаве, що необхідно додати до вашого списку завдань) — одразу ж створюйте завдання. <b>Не чекайте</b>, ви <b>забудете</b> про це завдання, якщо його не запишите. Користуйтеся Telegram-ботом <a target="_blank" href="https://tg.click/todorant_bot">@todorant_bot</a> для швидкого створення завдань.',
+        'Як тільки у вас з\'являється завдання (отримуєте email, дзвінок, повідомлення чи просто бачите щось цікаве, що необхідно додати до вашого списку завдань) — одразу ж створюйте завдання. <b>Не чекайте</b>, ви <b>забудете</b> про це завдання, якщо його не запишите. Користуйтеся Telegram-ботом <a target="_blank" href="https://tlg.fyi/todorant_bot">@todorant_bot</a> для швидкого створення завдань.',
         'Завдання <b>завжди</b> повинні бути закликом до дії і як можна зрозумілішим. Якщо завдання займає <b>менше двох хвилин</b> — зробіть його одразу ж і додайте до списку завдань, як виконане.',
         'Під час створення завдання ви вказуєте або точну дату, або місяць. Ви не можете обрати поточний місяць без визначеної дати. Це зроблено для того, щоб розслабити ваш мозок. Якщо ви довіряєте системі та додаєте до неї все, що необхідно, на правильні дати, то ви будете зустрічатися з завданнями у правильний час. Величезна кількість сили волі витрачається даремно на постійний стрес на кшталт "тієї речі, яку мені необхідно зробити, але я не пам\'ятаю точно, що це за річ". Навчіться довіряти і розслаблятися.',
         'Перша річ, яку вам необхідно буде зробити на початку кожного місяцю — це планування. Ви берете всі завдання на поточний місяць і розподіляєте їх на необхідні дати. Це дозволяє вам відфільтрувати завдання, які більше не є актуальними і допомагає залишитися вам у повному спокої, чітко розуміючи, що вам необхідно буде зробити у цьому місяці.',
@@ -971,7 +971,7 @@ Thank you a lot for Todorant!`,
         'Вам дозволено пропускати поточне завдання — але робіть це якомога рідше. Якщо ви не впоралися з поточним завданням і вам довелося перерозподіляти його двічі — воно стає жабою.',
         'Якщо поточне завдання занадто високорівневе, то розбийте його на список підзавдань. Як тільки ви розбили завдання на підзавдання, закінчите поточне завдання.',
         'Додавайте настільки багато важливої інформації, наскільки можете. Додавайте посилання на email (Gmail дозволяє це зробити), вебсайти, нотатки (як Evernote), документи (наприклад, Dropbox), залишайте телефонні номери або додавайте будь-яку інформацію, яка може бути важливою для вирішення завдання. Тудурант не повинен бути головним сховищем ваших даних, але місцем, де посилання на необхідні для завдань дані, зберігаються одразу з визначеними завданнями.',
-        'Не соромтеся приєднуватися до нашої <a target="_blank" href="https://tg.click/todorant_feedback">групи</a> у Telegram для обміну досвідом про те, як ставати продуктивніше! Ваші відгуки про роботу сервісу, пропозиції і скарги вкрай вітаються.',
+        'Не соромтеся приєднуватися до нашої <a target="_blank" href="https://tlg.fyi/todorant_feedback">групи</a> у Telegram для обміну досвідом про те, як ставати продуктивніше! Ваші відгуки про роботу сервісу, пропозиції і скарги вкрай вітаються.',
         'У Тудуранті не можна зберегти завдання на визначений час — так і повинно бути. Замість цього, використовуйте режим редагування (іконка зміни порядку зверху) на сторінці <b>Планування</b> для зміни порядку списку завдань. Якщо ви бажаєте створити завдання на визначений тиждень — просто додайте її на понеділок і перерозподілить під час планування ранком понеділка.',
         'У Тудуранті немає і ніколи не буде автоматично повторюваних завдань — єдине, у чому вони допомагають — це створення атмосфери страху, накопичуючись невиконаним вантажем. Якщо необхідно внести повторюване завдання — внесіть його вручну, ваш мозок подякує вам за осмислине завдання.',
         'У Тудуранті немає концепту "Проекти", так як він показав себе демотивуючим, деякі теки ніколи не відкриваються. Проекти "Фітнес" і "Саморозвиток" передають привіт. Замість цього використовуйте #хетшеги.',
@@ -988,7 +988,7 @@ Thank you a lot for Todorant!`,
     merge: {
       title: "Об'єднати акаунти",
       description:
-        'Ви можете об\'єднати різні акаунти (наприклад, Facebook, Google, Telegam) тут. Просто залогиньтеся у акаунти, використовуйте кнопки нижче і акаунти буде об\'єднано. Обережно: це незворотня дія, і списки завдань також буде об\'єднано. Можливо, якщо ви зайшли з Росії без VPN, ви не бачите кнопку Telegram — тоді або зайдіть через VPN, або зверніться до <a target="_blank" href="https://tg.click/todorant_bot">@todorant_bot</a> у Телеграмі й залогиньтеся через нього.',
+        'Ви можете об\'єднати різні акаунти (наприклад, Facebook, Google, Telegam) тут. Просто залогиньтеся у акаунти, використовуйте кнопки нижче і акаунти буде об\'єднано. Обережно: це незворотня дія, і списки завдань також буде об\'єднано. Можливо, якщо ви зайшли з Росії без VPN, ви не бачите кнопку Telegram — тоді або зайдіть через VPN, або зверніться до <a target="_blank" href="https://tlg.fyi/todorant_bot">@todorant_bot</a> у Телеграмі й залогиньтеся через нього.',
       done:
         'Чудово! Тепер ви можете заходити у цей акаунт через Google, Facebook і Telegram. Закінчилися у нас кнопки для вас.',
       confirm: 'Впевнені, що бажаєте додати {id} у цей акаунт?',
