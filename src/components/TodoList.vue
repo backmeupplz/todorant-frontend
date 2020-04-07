@@ -84,113 +84,116 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { Todo } from "../models/todo";
-import { getTodos, editTodo } from "../utils/api";
-import * as store from "../plugins/store";
-import EditTodo from "./EditTodo.vue";
-import DeleteTodo from "./DeleteTodo.vue";
-import TodoText from "./TodoText.vue";
-import { Watch } from "vue-property-decorator";
-import * as api from "../utils/api";
-import { serverBus } from "../main";
-import draggable from "vuedraggable";
-import { TodoSection } from "../models/TodoSection";
-import { isTodoOld, isDateTooOld } from "../utils/isTodoOld";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { Todo } from '../models/todo'
+import { getTodos, editTodo } from '../utils/api'
+import * as store from '../plugins/store'
+import EditTodo from './EditTodo.vue'
+import DeleteTodo from './DeleteTodo.vue'
+import TodoText from './TodoText.vue'
+import { Watch } from 'vue-property-decorator'
+import * as api from '../utils/api'
+import { serverBus } from '../main'
+import draggable from 'vuedraggable'
+import { TodoSection } from '../models/TodoSection'
+import { isTodoOld, isDateTooOld } from '../utils/isTodoOld'
 
 @Component({
   components: {
     TodoText,
     EditTodo,
     DeleteTodo,
-    draggable
-  }
+    draggable,
+  },
 })
 export default class TodoList extends Vue {
-  showCompleted = false;
-  todoEdited: Partial<Todo> | null = null;
-  todoDeleted: Todo | null = null;
-  todos = [] as TodoSection[];
+  showCompleted = false
+  todoEdited: Partial<Todo> | null = null
+  todoDeleted: Todo | null = null
+  todos = [] as TodoSection[]
 
-  noMoreTodos = false;
+  noMoreTodos = false
 
-  loading = false;
-  drag = false;
+  loading = false
+  drag = false
 
-  calendarViewEnabled = false;
+  calendarViewEnabled = false
 
   get editable() {
-    return store.editting();
+    return store.editting()
   }
   set editable(value: Boolean) {
-    store.setEditting(value);
+    store.setEditting(value)
+    if (value === false) {
+      this.loadTodos()
+    }
   }
 
   get events() {
     return this.todos
       .reduce(
-        (prev, cur) => prev.concat(cur.todos.filter(todo => !!todo.date)),
+        (prev, cur) => prev.concat(cur.todos.filter((todo) => !!todo.date)),
         [] as Todo[]
       )
-      .map(todo => ({
+      .map((todo) => ({
         name: todo.text,
-        start: `${todo.monthAndYear}-${todo.date}`
-      }));
+        start: `${todo.monthAndYear}-${todo.date}`,
+      }))
   }
   get weekdays() {
     const storeFirstDayOfWeek = this.$store.state.userState.settings
-      .firstDayOfWeek;
+      .firstDayOfWeek
     const firstDay =
       storeFirstDayOfWeek === undefined
-        ? this.$store.state.language === "ru"
+        ? this.$store.state.language === 'ru'
           ? 1
           : 0
-        : storeFirstDayOfWeek;
-    const result = [firstDay];
+        : storeFirstDayOfWeek
+    const result = [firstDay]
     for (let i = 1; i < 7; i++) {
-      result.push((firstDay + i) % 7);
+      result.push((firstDay + i) % 7)
     }
-    return result;
+    return result
   }
 
   weekdayFromTitle(title: string) {
-    const date = new Date(title);
+    const date = new Date(title)
     return `weekdays.${(date.getDay() +
       (date.getTimezoneOffset() > 0 ? 1 : 0)) %
-      7}`;
+      7}`
   }
 
-  @Watch("showCompleted")
+  @Watch('showCompleted')
   onCompletedChanged(val: boolean, oldVal: boolean) {
-    if (val === oldVal) return;
-    this.loadTodos();
+    if (val === oldVal) return
+    this.loadTodos()
   }
 
   mounted() {
-    this.loadTodos();
+    this.loadTodos()
   }
 
   created() {
-    serverBus.$on("refreshRequested", () => {
-      this.loadTodos();
-    });
+    serverBus.$on('refreshRequested', () => {
+      this.loadTodos()
+    })
   }
 
   todoInFuture(todo: Todo) {
-    return !isTodoOld(todo, api.getTomorrow());
+    return !isTodoOld(todo, api.getTomorrow())
   }
 
-  todosUpdating = false;
+  todosUpdating = false
   async loadTodos(fullUpdate = true, more = false) {
     if (this.todosUpdating) {
-      return;
+      return
     }
-    const user = store.user();
+    const user = store.user()
     if (!user) {
-      return;
+      return
     }
-    this.todosUpdating = true;
+    this.todosUpdating = true
     try {
       const fetchedTodos = await getTodos(
         user,
@@ -201,57 +204,63 @@ export default class TodoList extends Vue {
           : this.todos.reduce((prev, cur) => prev + cur.todos.length, 0),
         this.$router.currentRoute.hash,
         this.calendarViewEnabled
-      );
-      this.noMoreTodos = fetchedTodos.length <= 0;
+      )
+      this.noMoreTodos = fetchedTodos.length <= 0
+      if (!fetchedTodos.length) {
+        return
+      }
       let allTodos = more
         ? this.todos
             .reduce((prev, cur) => prev.concat(cur.todos), [] as Todo[])
             .concat(fetchedTodos)
-        : fetchedTodos;
-      const mappedTodos = allTodos.reduce((prev, cur) => {
-        if (cur.date) {
-          const date = `${cur.monthAndYear}-${cur.date}`;
-          if (prev[date]) {
-            prev[date].push(cur);
+        : fetchedTodos
+      const mappedTodos = allTodos.reduce(
+        (prev, cur) => {
+          if (cur.date) {
+            const date = `${cur.monthAndYear}-${cur.date}`
+            if (prev[date]) {
+              prev[date].push(cur)
+            } else {
+              prev[date] = [cur]
+            }
           } else {
-            prev[date] = [cur];
+            const month = cur.monthAndYear
+            if (prev[month]) {
+              prev[month].push(cur)
+            } else {
+              prev[month] = [cur]
+            }
           }
-        } else {
-          const month = cur.monthAndYear;
-          if (prev[month]) {
-            prev[month].push(cur);
-          } else {
-            prev[month] = [cur];
-          }
-        }
-        return prev;
-      }, {} as { [index: string]: Todo[] });
-      this.todos = [] as TodoSection[];
+          return prev
+        },
+        {} as { [index: string]: Todo[] }
+      )
+      this.todos = [] as TodoSection[]
       for (const key in mappedTodos) {
         this.todos.push({
           title: key,
-          todos: mappedTodos[key]
-        });
+          todos: mappedTodos[key],
+        })
       }
-      const today = api.getToday();
+      const today = api.getToday()
       this.todos.sort((a, b) => {
         if (isDateTooOld(a.title, today) && !isDateTooOld(b.title, today)) {
-          return -1;
+          return -1
         } else if (
           !isDateTooOld(a.title, today) &&
           isDateTooOld(b.title, today)
         ) {
-          return 1;
+          return 1
         }
-        return new Date(a.title) > new Date(b.title) ? 1 : -1;
-      });
+        return new Date(a.title) > new Date(b.title) ? 1 : -1
+      })
       if (this.showCompleted) {
-        this.todos.reverse();
+        this.todos.reverse()
       }
     } catch (err) {
-      store.setSnackbarError("errors.loadTodos");
+      store.setSnackbarError('errors.loadTodos')
     } finally {
-      this.todosUpdating = false;
+      this.todosUpdating = false
     }
   }
 
@@ -259,122 +268,122 @@ export default class TodoList extends Vue {
     const flatTodos = this.todos.reduce(
       (prev, cur) => prev.concat(cur.todos),
       [] as Todo[]
-    );
+    )
     for (const todo of flatTodos) {
       if (
         todo.text === event.event.name &&
         todo.date === event.event.start.substr(8)
       ) {
-        this.editTodo(todo);
-        return;
+        this.editTodo(todo)
+        return
       }
     }
   }
 
   editTodo(todo: Todo) {
-    const propsTodo = { ...todo } as Partial<Todo>;
+    const propsTodo = { ...todo } as Partial<Todo>
     if (!propsTodo || !propsTodo.date) {
-      this.todoEdited = propsTodo;
-      return;
+      this.todoEdited = propsTodo
+      return
     }
-    propsTodo.date = `${propsTodo.monthAndYear}-${propsTodo.date}`;
-    propsTodo.monthAndYear = undefined;
-    this.todoEdited = propsTodo;
+    propsTodo.date = `${propsTodo.monthAndYear}-${propsTodo.date}`
+    propsTodo.monthAndYear = undefined
+    this.todoEdited = propsTodo
   }
 
   async moveTodoToToday(todo: Todo) {
-    const user = store.user();
+    const user = store.user()
     if (!user) {
-      return;
+      return
     }
-    this.loading = true;
+    this.loading = true
     try {
-      const today = api.getToday();
-      const monthAndYear = today.substr(0, 7);
-      const date = today.substr(8);
-      todo.monthAndYear = monthAndYear;
-      todo.date = date;
-      await api.editTodo(user, todo);
-      this.loadTodos(false);
+      const today = api.getToday()
+      const monthAndYear = today.substr(0, 7)
+      const date = today.substr(8)
+      todo.monthAndYear = monthAndYear
+      todo.date = date
+      await api.editTodo(user, todo)
+      this.loadTodos(false)
     } catch (err) {
-      store.setSnackbarError(err.response ? err.response.data : err.message);
+      store.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
-      this.loading = false;
+      this.loading = false
     }
   }
 
   async deleteTodo(todo: Todo) {
-    this.todoDeleted = { ...todo } as Todo;
+    this.todoDeleted = { ...todo } as Todo
   }
 
   async completeOrUndoTodo(todo: Todo) {
-    const user = store.user();
+    const user = store.user()
     if (!user) {
-      return;
+      return
     }
-    this.loading = true;
+    this.loading = true
     try {
       if (todo.completed) {
-        await api.undoTodo(user, todo);
+        await api.undoTodo(user, todo)
       } else {
-        await api.completeTodo(user, todo);
+        await api.completeTodo(user, todo)
       }
-      this.loadTodos(false);
+      this.loadTodos(false)
     } catch (err) {
-      store.setSnackbarError(err.response ? err.response.data : err.message);
+      store.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
-      this.loading = false;
+      this.loading = false
     }
   }
 
   cleanTodo(needsReload = true) {
-    this.todoEdited = null;
+    this.todoEdited = null
     if (needsReload) {
-      this.loadTodos(false);
+      this.loadTodos(false)
     }
   }
 
   cardClass(todo: Todo) {
-    const dark = store.dark();
-    const outstanding = this.todoOutstanding(todo);
+    const dark = store.dark()
+    const outstanding = this.todoOutstanding(todo)
     return dark
       ? outstanding
-        ? "blue darken-3"
-        : "grey darken-2"
+        ? 'blue darken-3'
+        : 'grey darken-2'
       : outstanding
-      ? "blue lighten-4"
-      : "grey lighten-4";
+      ? 'blue lighten-4'
+      : 'grey lighten-4'
   }
 
   todoOutstanding(todo: Todo) {
     if (todo.completed) {
-      return false;
+      return false
     }
-    const today = api.getToday();
-    return isTodoOld(todo, today);
+    const today = api.getToday()
+    return isTodoOld(todo, today)
   }
 
   get dragOptions() {
     return {
       animation: 0,
-      disabled: !this.editable
-    };
+      disabled: !this.editable,
+    }
   }
 
   async doneEditing() {
-    const user = store.user();
+    const user = store.user()
     if (!user) {
-      return;
+      return
     }
-    this.loading = true;
+    this.loading = true
     try {
-      await api.rearrangeTodos(user, this.todos);
-      await this.loadTodos(false);
+      await api.rearrangeTodos(user, this.todos)
+      await this.loadTodos(false)
     } catch (err) {
-      store.setSnackbarError(err.response ? err.response.data : err.message);
+      store.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
-      this.loading = false;
-      this.editable = false;
+      this.loading = false
+      this.editable = false
     }
   }
 
@@ -385,32 +394,32 @@ export default class TodoList extends Vue {
     rowIndex: number
   ) {
     if (!isVisible) {
-      return;
+      return
     }
     if (
       sectionIndex < this.todos.length - 1 ||
       rowIndex < this.todos[sectionIndex].todos.length - 1
     ) {
-      return;
+      return
     }
     if (this.todosUpdating || this.loading || this.noMoreTodos) {
-      return;
+      return
     }
-    this.loadTodos(false, true);
+    this.loadTodos(false, true)
   }
 
   toggleCalendar() {
-    this.calendarViewEnabled = !this.calendarViewEnabled;
-    this.loadTodos(true, false);
+    this.calendarViewEnabled = !this.calendarViewEnabled
+    this.loadTodos(true, false)
   }
 
   addEvent(params: any) {
-    const tooOld = isDateTooOld(params.date, api.getToday());
+    const tooOld = isDateTooOld(params.date, api.getToday())
     if (tooOld) {
-      store.setSnackbarError("errors.addTodoOld");
-      return;
+      store.setSnackbarError('errors.addTodoOld')
+      return
     }
-    serverBus.$emit("addTodoRequested", params.date);
+    serverBus.$emit('addTodoRequested', params.date)
   }
 }
 </script>
