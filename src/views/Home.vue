@@ -72,7 +72,7 @@
         v-row
           v-col
             p.display-1 {{$t('home.feedback.title')}}
-        v-row
+        v-flex(row justify-center)
           v-col(v-for='(review, i) in $t("home.feedback.reviews")'
           :key='i'
           cols='12'

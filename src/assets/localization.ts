@@ -171,6 +171,17 @@ I'm irrational by nature, I can't just lead 1 project (I burn out quickly). My l
 
 I like Todorant, it lets me free up my "operating memory" and allows me to think about solving problems, not about remembering them. As Nikita (the creator) correctly wrote — with constant and correct use, tasks that used to cast true biblical fear will stop appearing. And this will not happen because the complex tasks will stop coming. It will become clear to you (and to me, and everyone) that "the road will be overpowered by those walking", "the way to the thousand miles begins with one step".`,
           },
+          {
+            name: 'Kiku Reise',
+            username: 'Kiku_Reise',
+            text: `I've arranged my work, programming and hobby tasks. Even this review was written thanks to Todorant. Just one task, no complications. That's the whole point of the app — it helped me to concentrate without constantly shuffling my todos. 
+
+Of course, you can set tasks and forget about them, but for me it's easier to go back to a minimalistic application with one task, rather than to spend half a day looking for what task to work on now out of a hundred planned in Telegram or Notion.
+            
+I was especially pleased with the update with hashtags — now all stats are on the palm of my hand, I can track and share with friends how many tasks I have completed this month.
+            
+Thank you a lot for Todorant!`,
+          },
         ],
       },
     },
@@ -503,6 +514,17 @@ I like Todorant, it lets me free up my "operating memory" and allows me to think
             text: `Сказать, что пользование Тудурантом изменило мою жизнь, я не могу. Сказать, что это значимое и очень полезное приложение/сайт? Да, хоть тысячу раз.
 
 Мне Тудурант нравится, и он позволяет освободить свою "операционную память", позволить себе мыслить над решением проблемы, а не над её запоминанием. Как правильно написал Никита (создатель) — при постоянном и правильном использовании перестанут появляться задачи, которые раньше внушали поистине библейский страх. И это будет происходит не из-за того, что перестают поступать сложные задачи. Тебе (и мне, и всем) станет понятно — "дорогу осилит идущий", "путь в тысячу ли начинается с одного шага".`,
+          },
+          {
+            name: 'Kiku Reise',
+            username: 'Kiku_Reise',
+            text: `Я разгрузил свои задачи по работе, программированию и хобби. И даже этот отзыв написал благодаря фокусу от Тудуранта. Всего одна задача, никаких усложняющих приоритетов. В этом вся фишка сервиса — он помог мне сконцентрироваться, и не распыляясь поочередно выполнить таски. 
+
+            Конечно, можно проставить задачи и забить, но лично мне проще возвращаться к минималистичному приложению с одной задачкой, нежели пол дня искать в сохраненках Телеграма или Notion какую бы задачу сейчас выполнить из сотни запланированных.
+            
+            Особенно порадовало обновление с хештегами — теперь вся статистика как на ладони, могу трекать и делиться с друзьями сколько задач по разработке я выполнил в этом месяце.
+            
+            Большое спасибо за Тудурант!`,
           },
         ],
       },
