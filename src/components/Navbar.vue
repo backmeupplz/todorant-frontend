@@ -65,18 +65,18 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import * as store from "../plugins/store";
-import { i18n } from "../plugins/i18n";
-import * as api from "../utils/api";
-import Rules from "./Rules.vue";
-import Merge from "./Merge.vue";
-import Subscription from "./Subscription.vue";
-import Settings from "./Settings.vue";
-import Support from "./Support.vue";
-import { serverBus } from "../main";
-import { reportGA } from "../utils/ga";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import * as store from '../plugins/store'
+import { i18n } from '../plugins/i18n'
+import * as api from '../utils/api'
+import Rules from './Rules.vue'
+import Merge from './Merge.vue'
+import Subscription from './Subscription.vue'
+import Settings from './Settings.vue'
+import Support from './Support.vue'
+import { serverBus } from '../main'
+import { reportGA } from '../utils/ga'
 
 @Component({
   components: {
@@ -84,102 +84,107 @@ import { reportGA } from "../utils/ga";
     Merge,
     Subscription,
     Settings,
-    Support
-  }
+    Support,
+  },
 })
 export default class Navbar extends Vue {
-  rulesDialog = false;
-  mergeDialog = false;
-  subscriptionDialog = false;
-  settingsDialog = false;
-  supportDialog = false;
+  rulesDialog = false
+  mergeDialog = false
+  subscriptionDialog = false
+  settingsDialog = false
+  supportDialog = false
 
   get locales() {
     return [
-      { icon: "us", code: "en" },
-      { icon: "ru", code: "ru" },
-      { icon: "ua", code: "ua" }
-    ];
+      { icon: 'us', code: 'en' },
+      { icon: 'ru', code: 'ru' },
+      { icon: 'ua', code: 'ua' },
+    ]
   }
   get currentLocale() {
     for (const locale of this.locales) {
       if (locale.code === i18n.locale) {
-        return locale;
+        return locale
       }
     }
   }
   get identifiers() {
-    const user = store.user();
+    const user = store.user()
     if (!user) {
-      return "";
+      return ''
     }
-    return [user.email, user.facebookId, user.telegramId].filter(v => !!v);
+    return [
+      user.email,
+      user.facebookId,
+      user.telegramId,
+      user.appleSubId,
+    ].filter((v) => !!v)
   }
-  hashSuffix = "";
+  hashSuffix = ''
   updateHashSuffix() {
-    this.hashSuffix = decodeURI(this.$router.currentRoute.hash);
+    this.hashSuffix = decodeURI(this.$router.currentRoute.hash)
   }
 
   created() {
-    serverBus.$on("subscriptionRequested", () => {
-      this.subscriptionDialog = true;
-      reportGA("subscription_viewed", {
-        status: store.userState().subscriptionStatus
-      });
-    });
-    serverBus.$on("rulesRequested", () => {
-      this.rulesDialog = true;
-    });
-    setInterval(this.updateHashSuffix, 1000);
+    serverBus.$on('subscriptionRequested', () => {
+      this.subscriptionDialog = true
+      reportGA('subscription_viewed', {
+        status: store.userState().subscriptionStatus,
+      })
+    })
+    serverBus.$on('rulesRequested', () => {
+      this.rulesDialog = true
+    })
+    setInterval(this.updateHashSuffix, 1000)
   }
   mounted() {
     if (!store.rulesShown() && store.user()) {
-      this.rulesDialog = true;
-      store.setRulesShown(true);
+      this.rulesDialog = true
+      store.setRulesShown(true)
     }
   }
 
   toggleMode() {
-    store.setDark(!store.dark());
-    (this.$vuetify.theme as any).dark = store.dark();
+    store.setDark(!store.dark())
+    ;(this.$vuetify.theme as any).dark = store.dark()
   }
   changeLanguage(locale: string) {
-    i18n.locale = locale;
-    store.setLanguage(locale);
-    document.title = i18n.t("title") as string;
+    i18n.locale = locale
+    store.setLanguage(locale)
+    document.title = i18n.t('title') as string
   }
   logout() {
-    store.logout();
-    this.$router.replace("/");
+    store.logout()
+    this.$router.replace('/')
   }
   closeRules() {
-    this.rulesDialog = false;
+    this.rulesDialog = false
   }
   closeMerge() {
-    this.mergeDialog = false;
+    this.mergeDialog = false
   }
   closeSubscription() {
-    this.subscriptionDialog = false;
+    this.subscriptionDialog = false
   }
   closeSettingsDialog() {
-    this.settingsDialog = false;
+    this.settingsDialog = false
   }
   closeSupportDialog() {
-    this.supportDialog = false;
+    this.supportDialog = false
   }
   async goHome() {
     try {
-      await this.$router.replace(store.user() ? "/superpower" : "/");
-      serverBus.$emit("refreshRequested");
+      await this.$router.replace(store.user() ? '/superpower' : '/')
+      serverBus.$emit('refreshRequested')
     } catch (err) {
       // Do nothing
     }
   }
   showSubscription() {
-    reportGA("subscription_viewed", {
-      status: store.userState().subscriptionStatus
-    });
-    this.subscriptionDialog = true;
+    reportGA('subscription_viewed', {
+      status: store.userState().subscriptionStatus,
+    })
+    this.subscriptionDialog = true
   }
 }
 </script>
@@ -201,4 +206,3 @@ nav a:active {
   text-decoration: underline;
 }
 </style>
-
