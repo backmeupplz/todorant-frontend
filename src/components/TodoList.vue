@@ -211,7 +211,20 @@ export default class TodoList extends Vue {
       }
       let allTodos = more
         ? this.todos
-            .reduce((prev, cur) => prev.concat(cur.todos), [] as Todo[])
+            .reduce(
+              (prev, cur) =>
+                prev.concat(
+                  cur.todos.map((todo) => {
+                    todo.monthAndYear = cur.title.substr(0, 7)
+                    ;(todo as any).date =
+                      cur.title.length === 10
+                        ? cur.title.substr(8, 2)
+                        : undefined
+                    return todo
+                  })
+                ),
+              [] as Todo[]
+            )
             .concat(fetchedTodos)
         : fetchedTodos
       const mappedTodos = allTodos.reduce(
