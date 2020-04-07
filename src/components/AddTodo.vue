@@ -31,7 +31,9 @@
               v-expansion-panels(multiple v-model='panel')
                 v-expansion-panel(v-for='(todo, i) in todos' :key='i')
                   v-expansion-panel-header
-                    span {{todo.text || $t('todo.create.placeholder')}}
+                    v-flex.column
+                      span {{!panel.includes(i) ? `${todo.frog ? '🐸 ': ''}${todo.time ? `${todo.time} ` : ''}` : ''}}{{todo.text || $t('todo.create.placeholder')}}
+                      p.my-0.caption(v-if='!panel.includes(i) && todo.date') {{todo.date}}
                   v-expansion-panel-content
                     TodoForm(:todo='todo'
                     :enterPressed='save'
@@ -63,56 +65,56 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { Watch } from "vue-property-decorator";
-import TodoForm from "./TodoForm.vue";
-import { Todo } from "../models/todo";
-import * as store from "../plugins/store";
-import * as api from "../utils/api";
-import { serverBus } from "../main";
-import { reportGA } from "../utils/ga";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { Watch } from 'vue-property-decorator'
+import TodoForm from './TodoForm.vue'
+import { Todo } from '../models/todo'
+import * as store from '../plugins/store'
+import * as api from '../utils/api'
+import { serverBus } from '../main'
+import { reportGA } from '../utils/ga'
 
 @Component({
   components: { TodoForm },
-  props: ["currentTab"]
+  props: ['currentTab'],
 })
 export default class AddTodo extends Vue {
-  dialog = false;
+  dialog = false
 
-  panel = [] as Number[];
+  panel = [] as Number[]
 
-  todos = [] as Partial<Todo & { goFirst: boolean }>[];
+  todos = [] as Partial<Todo & { goFirst: boolean }>[]
 
-  loading = false;
+  loading = false
 
-  date = "";
+  date = ''
 
-  todoToBreakdown: null | Todo = null;
+  todoToBreakdown: null | Todo = null
 
   created() {
     serverBus.$on(
-      "addTodoRequested",
+      'addTodoRequested',
       (date?: string, todoToBreakdown?: Todo) => {
         if (date) {
-          this.date = date;
+          this.date = date
         }
         if (todoToBreakdown) {
-          this.todoToBreakdown = todoToBreakdown;
+          this.todoToBreakdown = todoToBreakdown
         }
-        this.dialog = true;
+        this.dialog = true
       }
-    );
+    )
   }
 
   mounted() {
-    reportGA("add_todo_opened");
+    reportGA('add_todo_opened')
   }
 
-  @Watch("dialog")
+  @Watch('dialog')
   onDialogChanged(val: boolean, oldVal: boolean) {
     if (!oldVal && val) {
-      this.reset();
+      this.reset()
     }
   }
 
@@ -120,60 +122,60 @@ export default class AddTodo extends Vue {
     if (
       store.userState().subscriptionStatus === store.SubscriptionStatus.inactive
     ) {
-      serverBus.$emit("subscriptionRequested");
+      serverBus.$emit('subscriptionRequested')
     } else {
-      this.dialog = true;
+      this.dialog = true
     }
   }
 
   reset() {
-    this.todos = [];
-    this.addTodo();
-    this.panel = [0];
+    this.todos = []
+    this.addTodo()
+    this.panel = [0]
     if (this.$refs.form) {
-      (this.$refs.form as any).resetValidation();
+      ;(this.$refs.form as any).resetValidation()
     }
     setTimeout(() => {
       if (this.$refs.todoForm && (this.$refs.todoForm as any).length) {
-        (this.$refs.todoForm as any)[0].$refs.textInput.focus();
+        ;(this.$refs.todoForm as any)[0].$refs.textInput.focus()
       }
-    }, 500);
+    }, 500)
   }
 
   addTodo() {
     if (this.date) {
       this.todos.push({
         date: this.date,
-        goFirst: store.userState().settings.newTodosGoFirst || false
-      });
-      this.date = "";
+        goFirst: store.userState().settings.newTodosGoFirst || false,
+      })
+      this.date = ''
     } else if (store.userState().settings.showTodayOnAddTodo) {
-      const now = new Date();
-      now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+      const now = new Date()
+      now.setMinutes(now.getMinutes() - now.getTimezoneOffset())
       this.todos.push({
         date: now.toISOString().substr(0, 10),
-        goFirst: store.userState().settings.newTodosGoFirst || false
-      });
+        goFirst: store.userState().settings.newTodosGoFirst || false,
+      })
     } else {
       this.todos.push({
-        goFirst: store.userState().settings.newTodosGoFirst || false
-      });
+        goFirst: store.userState().settings.newTodosGoFirst || false,
+      })
     }
-    this.panel = [this.todos.length - 1];
+    this.panel = [this.todos.length - 1]
 
-    reportGA("add_todo_add_more");
+    reportGA('add_todo_add_more')
   }
 
   deleteTodo(i: number) {
-    this.todos.splice(i, 1);
+    this.todos.splice(i, 1)
   }
 
   async save() {
-    const user = store.user();
+    const user = store.user()
     if (!user) {
-      return;
+      return
     }
-    this.panel = [];
+    this.panel = []
     this.todos.forEach((todo, i) => {
       if (
         !todo ||
@@ -181,37 +183,37 @@ export default class AddTodo extends Vue {
         !todo.text.trim() ||
         (!todo.monthAndYear && !todo.date)
       ) {
-        this.panel.push(i);
+        this.panel.push(i)
       }
-    });
+    })
     if (!(this.$refs.form as any).validate()) {
-      return;
+      return
     }
     if (this.panel.length) {
-      store.setSnackbarError("errors.invalidForm");
-      return;
+      store.setSnackbarError('errors.invalidForm')
+      return
     }
-    this.loading = true;
+    this.loading = true
     try {
-      await api.postTodos(user, this.todos);
+      await api.postTodos(user, this.todos)
       if (this.todoToBreakdown) {
-        const tempTodo = this.todoToBreakdown;
-        this.todoToBreakdown = null;
-        await api.completeTodo(user, tempTodo);
+        const tempTodo = this.todoToBreakdown
+        this.todoToBreakdown = null
+        await api.completeTodo(user, tempTodo)
       }
-      this.dialog = false;
-      serverBus.$emit("refreshRequested");
-      reportGA("add_todo_success");
+      this.dialog = false
+      serverBus.$emit('refreshRequested')
+      reportGA('add_todo_success')
     } catch (err) {
-      store.setSnackbarError(err.response.data);
-      reportGA("add_todo_error", { error: err.message });
+      store.setSnackbarError(err.response.data)
+      reportGA('add_todo_error', { error: err.message })
     } finally {
-      this.loading = false;
+      this.loading = false
     }
   }
 
   escapePressed() {
-    this.dialog = false;
+    this.dialog = false
   }
 }
 </script>
