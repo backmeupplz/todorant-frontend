@@ -12,6 +12,7 @@ import MobileLoginSuccess from '../views/MobileLoginSuccess.vue'
 import MobileLoginError from '../views/MobileLoginError.vue'
 import { store } from './store'
 import PublicReport from '../views/PublicReport.vue'
+import AppleFirefoxError from '../views/AppleFirefoxError.vue'
 
 Vue.use(Router)
 
@@ -76,6 +77,11 @@ const router = new Router({
       path: '/report/*',
       name: 'public_report',
       component: PublicReport,
+    },
+    {
+      path: '/apple_firefox_error',
+      name: 'apple_firefox_error',
+      component: AppleFirefoxError,
     },
     {
       path: '*',
