@@ -206,9 +206,6 @@ export default class TodoList extends Vue {
         this.calendarViewEnabled
       )
       this.noMoreTodos = fetchedTodos.length <= 0
-      if (!fetchedTodos.length) {
-        return
-      }
       let allTodos = more
         ? this.todos
             .reduce(
