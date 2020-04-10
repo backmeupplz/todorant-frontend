@@ -28,6 +28,7 @@
               span {{$t('todo.create.tooltip')}}
           v-card-text
             v-container
+              p(v-if='!!todoToBreakdown') {{todoToBreakdown.text}}
               v-expansion-panels(multiple v-model='panel')
                 v-expansion-panel(v-for='(todo, i) in todos' :key='i')
                   v-expansion-panel-header
