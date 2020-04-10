@@ -75,6 +75,7 @@ import * as store from '../plugins/store'
 import * as api from '../utils/api'
 import { serverBus } from '../main'
 import { reportGA } from '../utils/ga'
+import { linkify } from '../utils/linkify'
 
 @Component({
   components: { TodoForm },
@@ -144,10 +145,20 @@ export default class AddTodo extends Vue {
   }
 
   addTodo() {
+    let hashtags = [] as string[]
+    if (this.todoToBreakdown) {
+      const matches = linkify.match(this.todoToBreakdown.text) || []
+      hashtags = matches
+        .map((v) =>
+          /^#[\u0400-\u04FFa-zA-Z_0-9]+$/u.test(v.url) ? v.url : undefined
+        )
+        .filter((v) => !!v) as string[]
+    }
     if (this.date) {
       this.todos.push({
         date: this.date,
         goFirst: store.userState().settings.newTodosGoFirst || false,
+        text: hashtags.join(' '),
       })
       this.date = ''
     } else if (store.userState().settings.showTodayOnAddTodo) {
@@ -156,10 +167,12 @@ export default class AddTodo extends Vue {
       this.todos.push({
         date: now.toISOString().substr(0, 10),
         goFirst: store.userState().settings.newTodosGoFirst || false,
+        text: hashtags.join(' '),
       })
     } else {
       this.todos.push({
         goFirst: store.userState().settings.newTodosGoFirst || false,
+        text: hashtags.join(' '),
       })
     }
     this.panel = [this.todos.length - 1]
