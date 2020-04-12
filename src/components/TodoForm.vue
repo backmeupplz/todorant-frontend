@@ -55,7 +55,7 @@
             v-model='todo.time')
           v-card
             v-card-text
-              v-time-picker.elevation-0(v-model='todo.time' format='24hr' :close-on-content-click="false")
+              v-time-picker.elevation-0(v-model='todoTime' format='24hr' :close-on-content-click="false")
             v-card-actions
               v-spacer
               v-btn(text color='blue' @click='timeMenu = false') Close
@@ -73,11 +73,11 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { Todo } from "../models/todo";
-import { i18n } from "../plugins/i18n";
-import moment from "moment";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { Todo } from '../models/todo'
+import { i18n } from '../plugins/i18n'
+import moment from 'moment'
 
 @Component({
   props: {
@@ -88,54 +88,65 @@ import moment from "moment";
   }
 })
 export default class TodoForm extends Vue {
-  dateMenu = false;
-  monthMenu = false;
-  timeMenu = false;
-  moreShown = false;
+  dateMenu = false
+  monthMenu = false
+  timeMenu = false
+  moreShown = false
+
+  get todoTime() {
+    return this.$props.todo.time
+  }
+  set todoTime(newValue: any) {
+    this.$props.todo.time = newValue
+    console.log(this.$props.todo)
+    if (!this.$props.todo.date && !this.$props.todo.monthAndYear) {
+      this.$props.todo.date = new Date().toISOString().substr(0, 10)
+    }
+  }
 
   textRules = [
-    (v: any) => !!(v || "").trim() || i18n.t("errors.todo.textLenght")
-  ];
+    (v: any) => !!(v || '').trim() || i18n.t('errors.todo.textLenght')
+  ]
 
   dateAndMonthRules = [
     (v: any) => {
-      const todo = (this as any).todo as Partial<Todo>;
+      const todo = (this as any).todo as Partial<Todo>
       return (
-        !!todo.date || !!todo.monthAndYear || i18n.t("errors.todo.dateOrMonth")
-      );
+        !!todo.date || !!todo.monthAndYear || i18n.t('errors.todo.dateOrMonth')
+      )
     }
-  ];
+  ]
 
   get firstDayOfWeek() {
     const storeFirstDayOfWeek = this.$store.state.userState.settings
-      .firstDayOfWeek;
+      .firstDayOfWeek
     return storeFirstDayOfWeek === undefined
-      ? this.$store.state.language === "ru"
+      ? this.$store.state.language === 'ru'
         ? 1
         : 0
-      : storeFirstDayOfWeek;
+      : storeFirstDayOfWeek
   }
 
   get todayFormatted() {
-    return moment(new Date()).format("YYYY-MM-DD");
+    return moment(new Date()).format('YYYY-MM-DD')
   }
 
   get todayFormattedForExactDate() {
-    return moment(new Date(new Date().setDate(new Date().getDate()))).format();
+    return moment(new Date(new Date().setDate(new Date().getDate()))).format()
   }
 
   get todayFormattedForDatePicker() {
-    const date = new Date();
-    date.setMonth(date.getMonth() + 1);
-    return moment(date).format();
+    const date = new Date()
+    date.setMonth(date.getMonth() + 1)
+    return moment(date).format()
   }
 
   enter() {
-    (this as any).enterPressed();
+    ;(this as any).enterPressed()
   }
 
   escape() {
-    (this as any).escapePressed();
+    ;(this as any).escapePressed()
   }
 }
 </script>
