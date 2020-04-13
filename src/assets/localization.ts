@@ -3,7 +3,7 @@ export const messages = {
     supportAlert: {
       title: 'Support',
       text:
-        'If you have any questions or suggestions, feel free to <a href=mailto:todorant@borodutch.com">send me an email</a>, <a href="https://t.me/borodutch" target="_blank">contact me on Telegram</a> or <a href="https://t.me/todorant_feedback" target="_blank">join our Telegram community group</a>!',
+        'If you have any questions or suggestions, feel free to <a href=mailto:todorant@borodutch.com">send me an email</a>, <a href="https://t.me/borodutch" target="_blank">contact me on Telegram</a> or <a href="https://t.me/todorant_feedback" target="_blank">join our Telegram community group</a>!'
     },
     loginMobile: {
       telegram: {
@@ -17,15 +17,15 @@ export const messages = {
           'Could not send login request to the user. Please make sure that you started @todorant_bot and that the Telegram ID is correct.',
         waiting:
           'Waiting for the response in <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>...',
-        notAllowedError: 'Login request was rejected',
+        notAllowedError: 'Login request was rejected'
       },
       apple: {
-        headline: 'Please login with Apple by hitting the button below.',
-      },
+        headline: 'Please login with Apple by hitting the button below.'
+      }
     },
     noReport: {
       title: 'No data yet',
-      text: 'Go on, complete your first todo and come back!',
+      text: 'Go on, complete your first todo and come back!'
     },
     report: {
       title: 'Stats',
@@ -39,33 +39,33 @@ export const messages = {
       call: 'Want to join?',
       callButton: 'Join Todorant',
       startDate: 'Start date',
-      endDate: 'End date',
+      endDate: 'End date'
     },
     title: 'Todorant',
     cookie: {
       button: 'Got it!',
-      message: 'This website uses cookies.',
+      message: 'This website uses cookies.'
     },
     home: {
       texts: {
         level: [
           'I was once like you',
           'I spent hours and hours trying to get stuff done and it looked like nothing could help. New tasks kept coming and old ones kept piling up. There was no escape — none of the task managers worked, the only purpose they served was upsetting me with all these things I forgot and all the tasks I never finished.',
-          "While complicated and sophisticated tools with plenty of features can be useful to keep track of some tasks, cognitive psychology tells us that overwhelming our subconsciousness with all the hanging tasks that weren't accounted for can use up a major chunk of our brain that should otherwise be in charge of providing the happiness feeling.",
+          "While complicated and sophisticated tools with plenty of features can be useful to keep track of some tasks, cognitive psychology tells us that overwhelming our subconsciousness with all the hanging tasks that weren't accounted for can use up a major chunk of our brain that should otherwise be in charge of providing the happiness feeling."
         ],
         winter: [
           'The winter is coming',
           "Even though the world population is happier than ever, personal productivity has recently taken a hit. If we follow the same trend, we might find ourselves among the grey mass of generic humans who are no longer productive and cannot complete a single more or less difficult and complex task — simply because anxiety won't let us.",
-          'The number of people, who forget about important events with their significant others, who promise to do more than they can handle, who keep thinking about "that thing that I should check but I\'m not sure what" instead of getting things done is going to be on a rise very soon. You can also find yourselves among the mindless biological machines that only perform simple low-paid tasks if you don\'t take action.',
+          'The number of people, who forget about important events with their significant others, who promise to do more than they can handle, who keep thinking about "that thing that I should check but I\'m not sure what" instead of getting things done is going to be on a rise very soon. You can also find yourselves among the mindless biological machines that only perform simple low-paid tasks if you don\'t take action.'
         ],
         contact: [
           'Still got questions? Contact me directly at ',
-          '. Thank you.',
+          '. Thank you.'
         ],
         solution: [
           'But you have the solution',
           'After making myself familiar with the books about cognitive science like "Eat That Frog", "Willpower", "Atomic Habits" and "Getting Things Done", I developed a system that boosted my productivity by 10 times. I am now able to complete 10 times more tasks which leads to 10 times more projects launched with this simple system. I\'m sharing this solution with you in order to improve the environment I live in. If people around me thrive — my personal happiness increases as well.',
-          'Todorant is a plain vanilla todo list with one single catch. Every action and feature was carefully weighted and tested using cognitive psychology. I have used the decades of studies and packed them into a single simple silver-bullet productivity tool. Todorant tricks your mind into doing more good actions and less bad actions. It builds positive habits and gets rid of bad behaviour. So stop mindlessly writing down your tasks. Start using the system that works.',
+          'Todorant is a plain vanilla todo list with one single catch. Every action and feature was carefully weighted and tested using cognitive psychology. I have used the decades of studies and packed them into a single simple silver-bullet productivity tool. Todorant tricks your mind into doing more good actions and less bad actions. It builds positive habits and gets rid of bad behaviour. So stop mindlessly writing down your tasks. Start using the system that works.'
         ],
         consequences: {
           title: 'Consequences?',
@@ -75,27 +75,27 @@ export const messages = {
             'No projects will stagnate',
             'Your brain will naturally crave effectiveness',
             'You will never forget anything',
-            'People will start admiring your productivity',
-          ],
+            'People will start admiring your productivity'
+          ]
         },
         deal: [
           "What's the deal?",
           "Todorant is more expensive than other todo solutions, yes. The industry standard is $3/month whereas Todorant has 30 days free trial (no credit card required) and then costs $5/month. Yes, Todorant has fewer features than it's competitors — but it is on purpose.",
           "When others sell you a place to park your todos indefinitely, Todorant sells the methodology and ideology — Todorant sells getting stuff done, not mindlessly writing it down. Todorant isn't for everybody — it is crafted specifically for people who want to free their minds from pressing issues and finally start completing the projects. You can familiarize yourself with the methodology by ",
           'opening the rulebook',
-          ' on the top-right corner of this page.',
+          ' on the top-right corner of this page.'
         ],
         personal: [
           'What would I do?',
-          "I tried dozens of different todo list apps. If I had a chance to try Todorant before I implemented it — I would give it a try. It's free for the first 30 days — and it is just enough to try if the system works for me. And, damn, if it works and I get my stuff done — I'd pay whatever price to keep up the productivity streak. There are no strings attached — just log in and try Todorant today. You can find the buttons below. Enough talking — time to boost productivity levels!",
-        ],
+          "I tried dozens of different todo list apps. If I had a chance to try Todorant before I implemented it — I would give it a try. It's free for the first 30 days — and it is just enough to try if the system works for me. And, damn, if it works and I get my stuff done — I'd pay whatever price to keep up the productivity streak. There are no strings attached — just log in and try Todorant today. You can find the buttons below. Enough talking — time to boost productivity levels!"
+        ]
       },
       youAreRegistered: '(you are already registered)',
       headline: [
         'Never forget a task.',
         'Always get it done.',
         'Live a happy life.',
-        'Powered by Todorant.',
+        'Powered by Todorant.'
       ],
       signIn: 'Sign in',
       lastSignIn: '(alright, this is the last button, sign in already)',
@@ -115,7 +115,7 @@ Thank you for a simple and thriving for the ideal service. Turned out that it no
             
 All in all, Todorant, no matter how simple at first glance, can become a faithful ally in any business. Thank you, Nikita, for unleashing the aspects of true productivity and sharing them with us in a convenient solution.
             
-Thankful Todorant subscriber.`,
+Thankful Todorant subscriber.`
           },
           {
             name: 'Dinislam Sad',
@@ -124,7 +124,7 @@ Thankful Todorant subscriber.`,
 1. Simple and convenient interface.
 2. Missed tasks automatically become frogs, and an option to make a task a frog initially.
 3. /done command is a must, and thank you for it, Nikita. I used Todoist, Wunderlist, Bitrix24. All of them are overcomplicated.
-4. Telegram bot.`,
+4. Telegram bot.`
           },
           {
             name: 'Aleksei Kaut',
@@ -133,7 +133,7 @@ Thankful Todorant subscriber.`,
 
 I usually tracked tasks and ideas in Notes, what should be done soon, but I did not approach it as a system. I have been using the service for a couple of weeks, not very actively, but I think this is a very strong way to systemize the affairs and tasks.
             
-Thank you for your work!`,
+Thank you for your work!`
           },
           {
             name: 'Anton',
@@ -142,17 +142,17 @@ Thank you for your work!`,
 
 Plus, for reasons unknown to me, when all the tasks are completed for the day, strong satisfaction appear, which was absent in other planners (there was something like "well, that was everything... or not?").
                       
-Thank you for your work!`,
+Thank you for your work!`
           },
           {
             name: 'Willsey Paslen',
             username: 'WillseyPaslen',
-            text: `Thanks for the great service. Enough time has passed so that I can definitely say — it helps me. Thanks, Nikita 😁 And good luck with the app.`,
+            text: `Thanks for the great service. Enough time has passed so that I can definitely say — it helps me. Thanks, Nikita 😁 And good luck with the app.`
           },
           {
             name: 'Igor Malinkin',
             username: 'sxe4kilo',
-            text: `I started to do at least something with Todorant, so my productivity went up from 0.`,
+            text: `I started to do at least something with Todorant, so my productivity went up from 0.`
           },
           {
             name: 'Vladimir Dubenko',
@@ -162,14 +162,14 @@ Thank you for your work!`,
 2. It instills a habit.
 3. Strange as it may seem, it doesn't force you to think rationally.
             
-I'm irrational by nature, I can't just lead 1 project (I burn out quickly). My life is multitasking! 3 projects in parallel are easy, but 3 is not enough... 7 sounds more like it. And your service allows you to achieve this. It is the alternation of tasks that prevents the brain from burning out in one particular direction. And somehow, magically, it alternates tasks from one project to another.`,
+I'm irrational by nature, I can't just lead 1 project (I burn out quickly). My life is multitasking! 3 projects in parallel are easy, but 3 is not enough... 7 sounds more like it. And your service allows you to achieve this. It is the alternation of tasks that prevents the brain from burning out in one particular direction. And somehow, magically, it alternates tasks from one project to another.`
           },
           {
             name: 'Maksim Alekseyevich',
             username: 'MMAradiology',
             text: `I can't say that using Todorant changed my life. Can I say that this is a meaningful and very useful application/website? Yes, a thousand times yes.
 
-I like Todorant, it lets me free up my "operating memory" and allows me to think about solving problems, not about remembering them. As Nikita (the creator) correctly wrote — with constant and correct use, tasks that used to cast true biblical fear will stop appearing. And this will not happen because the complex tasks will stop coming. It will become clear to you (and to me, and everyone) that "the road will be overpowered by those walking", "the way to the thousand miles begins with one step".`,
+I like Todorant, it lets me free up my "operating memory" and allows me to think about solving problems, not about remembering them. As Nikita (the creator) correctly wrote — with constant and correct use, tasks that used to cast true biblical fear will stop appearing. And this will not happen because the complex tasks will stop coming. It will become clear to you (and to me, and everyone) that "the road will be overpowered by those walking", "the way to the thousand miles begins with one step".`
           },
           {
             name: 'Kiku Reise',
@@ -180,18 +180,18 @@ Of course, you can set tasks and forget about them, but for me it's easier to go
             
 I was especially pleased with the update with hashtags — now all stats are on the palm of my hand, I can track and share with friends how many tasks I have completed this month.
             
-Thank you a lot for Todorant!`,
-          },
-        ],
-      },
+Thank you a lot for Todorant!`
+          }
+        ]
+      }
     },
     menu: {
       darkMode: {
         on: 'Dark mode: on',
-        off: 'Dark mode: off',
+        off: 'Dark mode: off'
       },
       merge: 'Merge accounts',
-      logout: 'Logout',
+      logout: 'Logout'
     },
     support:
       'Something isn\'t clear? Contact me at <a target="_blank" href="mailto:n@borodutch.com">n@borodutch.com</a>',
@@ -200,18 +200,19 @@ Thank you a lot for Todorant!`,
         facebook: 'Could not login with Facebook',
         google: 'Could not login with Google',
         telegram: 'Could not login with Telegram',
-        apple: 'Could not login with Apple',
+        apple: 'Could not login with Apple'
       },
       internal: 'Internal server error',
       loadTodos: 'Could not fetch todos',
       todo: {
         textLenght: 'Todos should have text',
-        dateOrMonth: 'Todos should have either date or month set',
+        dateOrMonth: 'Todos should have either date or month set'
       },
       invalidForm: 'Please, fill in the required fields',
       report: 'Could not load report',
       addTodoOld: 'Cannot add todo in the past',
-      appleFirefox: 'Unfortunately, there is <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1628361">a bug</a> with Apple signin on Firefox. Until it is resolved, please, use other web browsers to login with Apple — and then merge it with other social accounts on Todorant. Sorry for the inconvenience.'
+      appleFirefox:
+        'Unfortunately, there is <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1628361">a bug</a> with Apple signin on Firefox. Until it is resolved, please, use other web browsers to login with Apple — and then merge it with other social accounts on Todorant. Sorry for the inconvenience.'
     },
     close: 'Close',
     notFound: 'Page not found',
@@ -228,16 +229,16 @@ Thank you a lot for Todorant!`,
         tooltip:
           'Tasks should always be: actionable ("Find best flights to Mexico" vs "Go to Mexico"); as small and exact as possible ("Dust the displays" vs "Clean the house").',
         goFirst: 'Add on the top',
-        time: 'Exact time',
+        time: 'Exact time'
       },
       list: {
-        completed: 'Show completed',
+        completed: 'Show completed'
       },
       edit: {
-        title: 'Edit',
+        title: 'Edit'
       },
       planning:
-        'Looks like you have some planning to do! Please, redistribute the outstanding tasks below to unlock the "Current" tab and to keep being productive. Cheers!',
+        'Looks like you have some planning to do! Please, redistribute the outstanding tasks below to unlock the "Current" tab and to keep being productive. Cheers!'
     },
     cancel: 'Cancel',
     save: 'Save',
@@ -254,12 +255,12 @@ Thank you a lot for Todorant!`,
     clear: {
       congratulations: 'Congratulations!',
       text:
-        '🥳 You did it! All the tasks for today are done, go get rest or maybe dance a little 💃',
+        '🥳 You did it! All the tasks for today are done, go get rest or maybe dance a little 💃'
     },
     empty: {
       action: 'To infinity!',
       text:
-        "You don't have any todos for today. If you want to work — add a new todo for today or take the todos from future days.",
+        "You don't have any todos for today. If you want to work — add a new todo for today or take the todos from future days."
     },
     howto: {
       title: 'How to use Todorant?',
@@ -281,14 +282,14 @@ Thank you a lot for Todorant!`,
         'Use the edit mode (the list order icon on top) on the <b>Planning</b> page to change the task order. If you want to assign a task to a specific week, just assign it to Monday and reassign it during the planning phase on Monday morning.',
         'Todorant does not have and will never have repeating tasks — the only thing they do well causing anxiety by hanging over you as unfinished tasks. If you need to complete repeating tasks — add all of them manually, your brain will thank you for conscious tasks.',
         'Todorant does not have the concept of "Projects" as it has proven itself to be demotivating, some of the "folder" never get open. Projects "Fitness" and "Self-improvement" send their regards. Instead, use #hashtags.',
-        'Skipped tasks will always appear at the bottom of the list, frogs will always appear on the top of the list. You can change order within frogs, usual tasks and skipped ones, but not between these groups.',
+        'Skipped tasks will always appear at the bottom of the list, frogs will always appear on the top of the list. You can change order within frogs, usual tasks and skipped ones, but not between these groups.'
       ],
       bonus: {
         title: 'Bonus features',
         rules: [
-          'User keyboard shortcuts when on desktop! You can (a)dd, (b)reakdown, switch to (c)urrent, mark as (d)one and switch to (p)lanning. To add an additional task slot while adding tasks, you can use Shift+A.',
-        ],
-      },
+          'User keyboard shortcuts when on desktop! You can (a)dd, (b)reakdown, switch to (c)urrent, mark as (d)one and switch to (p)lanning. To add an additional task slot while adding tasks, you can use Shift+A.'
+        ]
+      }
     },
     skipped: 'Skipped',
     merge: {
@@ -297,7 +298,7 @@ Thank you a lot for Todorant!`,
         'You can merge multiple accounts (e.g. Facebook, Google, Telegram) here. Just login to the accounts with the buttons below and the accounts will be merged. Careful: it cannot be undonde and your account will receive all the todos from both accounts.',
       done:
         'All done! You can login though Google, Facebook and Telegram to this account. No more buttons left for you.',
-      confirm: 'Are you sure you want to merge {id} into this account?',
+      confirm: 'Are you sure you want to merge {id} into this account?'
     },
     subscription: {
       title: 'Subscription',
@@ -324,10 +325,10 @@ Thank you a lot for Todorant!`,
       payment: {
         success: '✅ You are all done! Enjoy unlimited Todorant experience 💪',
         failure: '✋ Wait, something went wrong. Maybe you could retry? 😳',
-        back: 'Head back to productivity!',
+        back: 'Head back to productivity!'
       },
       cancel: 'Cancel subscription',
-      cancelConfirm: 'Are you sure you want to cancel your subscription?',
+      cancelConfirm: 'Are you sure you want to cancel your subscription?'
     },
     moveUp: 'Move to today',
     settings: {
@@ -335,7 +336,7 @@ Thank you a lot for Todorant!`,
       showTodayOnAddTodo: 'Default to today when creating a todo',
       firstDayOfWeek: 'First day of the week',
       newTodosGoFirst: 'New todos are added on top of the list',
-      preserveOrderByTime: 'Preserve exact time order',
+      preserveOrderByTime: 'Preserve exact time order'
     },
     weekdays: {
       1: 'Monday',
@@ -344,14 +345,14 @@ Thank you a lot for Todorant!`,
       4: 'Thursday',
       5: 'Friday',
       6: 'Saturday',
-      0: 'Sunday',
-    },
+      0: 'Sunday'
+    }
   },
   ru: {
     supportAlert: {
       title: 'Поддержка',
       text:
-        'Если у вас есть какие-либо вопросы или предложения, <a href=mailto:todorant@borodutch.com">напишите мне имеил</a>, <a href="https://t.me/borodutch" target="_blank">в Телеграм</a> или <a href="https://t.me/todorant_feedback" target="_blank">присоединитесь к нашей групе сообщества в Телеграме</a>!',
+        'Если у вас есть какие-либо вопросы или предложения, <a href=mailto:todorant@borodutch.com">напишите мне имеил</a>, <a href="https://t.me/borodutch" target="_blank">в Телеграм</a> или <a href="https://t.me/todorant_feedback" target="_blank">присоединитесь к нашей групе сообщества в Телеграме</a>!'
     },
     loginMobile: {
       telegram: {
@@ -365,15 +366,15 @@ Thank you a lot for Todorant!`,
           'Не получилось отправить запрос на логин пользователю. Пожалуйста, убедитесь, что вы начали чат с @todorant_bot и что Телеграм ID правильный.',
         waiting:
           'Ожидаем ответа в <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>...',
-        notAllowedError: 'Запрос на вход был отвергнут',
+        notAllowedError: 'Запрос на вход был отвергнут'
       },
       apple: {
-        headline: 'Пожалуйста, зайдите через Эппл, нажав на кнопку ниже.',
-      },
+        headline: 'Пожалуйста, зайдите через Эппл, нажав на кнопку ниже.'
+      }
     },
     noReport: {
       title: 'Недостаточно данных',
-      text: 'Давайте, выполните свою первую задачу и возвращайтесь сюда!',
+      text: 'Давайте, выполните свою первую задачу и возвращайтесь сюда!'
     },
     report: {
       title: 'Отчет',
@@ -387,30 +388,30 @@ Thank you a lot for Todorant!`,
       call: 'Хотите присоединиться?',
       callButton: 'Присоединиться к Тудуранту',
       startDate: 'Дата начала',
-      endDate: 'Дата конца',
+      endDate: 'Дата конца'
     },
     title: 'Тудурант',
     cookie: {
       button: 'Понятненько!',
-      message: 'Этот вебсайт использует печеньки.',
+      message: 'Этот вебсайт использует печеньки.'
     },
     home: {
       texts: {
         level: [
           'Однажды, я был как вы',
           'Я часами старался завершить задачи, и ничего все равно не получалось. Новые задачи появлялись из ниоткуда, а старые продолжали наполнять собой бесконечные списки. Не было никакого выхода из ситуации — ни один из менеджеров задач не смог мне помочь, они лишь оказывали психологическое давление всеми вещами, про которые я забыл, и всеми задачами, которые я так и не закончил.',
-          'В то время как сложные инструменты с множеством функций достаточно хорошо справляются с записью некоторых задач, когнитивная психология говорит, что перегрузка подсознания всеми подвешенными задачами, которые мы не записываем, может занимать большую часть мозга, ответственную за ощущение счастья.',
+          'В то время как сложные инструменты с множеством функций достаточно хорошо справляются с записью некоторых задач, когнитивная психология говорит, что перегрузка подсознания всеми подвешенными задачами, которые мы не записываем, может занимать большую часть мозга, ответственную за ощущение счастья.'
         ],
         winter: [
           'Зима близко',
           'Несмотря на то, что человечество сегодня счастливее, чем когда-либо, личная продуктивность ухудшается. Если мы ничего не изменим, мы можем оказаться в ситуации среди серой массы средних людей, которые ничего не знают о продуктивности и не могут закончить даже одну маломальски сложную и комплексную задачу — просто потому, что на них давит психологическая тревога.',
-          'Количество людей, которые забывают про важные события с их супругами и партнерами, которые обещают сделать больше, чем на самом деле могут, которые постоянно думают о "той вещи, которую мне нужно проверить, но я точно не помню, что" — скоро зашкалит. Есть вероятность, что вы сами станете простой бездушной биологической машиной, которая сможет выполнять только простые низкооплачиваемые задачи, если вы не предпримите против этого действия.',
+          'Количество людей, которые забывают про важные события с их супругами и партнерами, которые обещают сделать больше, чем на самом деле могут, которые постоянно думают о "той вещи, которую мне нужно проверить, но я точно не помню, что" — скоро зашкалит. Есть вероятность, что вы сами станете простой бездушной биологической машиной, которая сможет выполнять только простые низкооплачиваемые задачи, если вы не предпримите против этого действия.'
         ],
         contact: ['Остались вопросы? Напишите мне на ', '. Спасибо.'],
         solution: [
           'Но у вас есть решение',
           'После того, как я ознакомился с трудами по поведенческой психологии в роде "Оставьте Брезгливость, Съешьте Лягушку!", "Сила Воли", "Атомные Привычки" и "Как Привести Дела в Порядок", я разработал собственную систему, которая подняла мою продуктивность в 10 раз. Теперь я выполняю в 10 раз больше задач и довожу в 10 раз больше проектов до запуска. Я делюсь этим решением с вами, чтобы улучшить собственное окружение. Если люди вокруг меня развиваются — мой уровень счастья поднимается пропорционально.',
-          'Тудурант — это самый простой список задач с единственным отличием. Каждое действие и каждая функция были аккуратно взвешены и протестированы с точки зрения когнитивной психологии. Я воспользовался десятилетиями исследований и упаковал их в один простой, но действенный инструмент. Тудурант обманывает ваш мозг, чтобы вы делали больше правильных — и меньше неправильных — действий. Он помогает развивать хорошие привычки и избавляться от вредных. Так что перестаньте бездумно записывать свои задачи. Пришло время начать использовать систему, которая работает.',
+          'Тудурант — это самый простой список задач с единственным отличием. Каждое действие и каждая функция были аккуратно взвешены и протестированы с точки зрения когнитивной психологии. Я воспользовался десятилетиями исследований и упаковал их в один простой, но действенный инструмент. Тудурант обманывает ваш мозг, чтобы вы делали больше правильных — и меньше неправильных — действий. Он помогает развивать хорошие привычки и избавляться от вредных. Так что перестаньте бездумно записывать свои задачи. Пришло время начать использовать систему, которая работает.'
         ],
         consequences: {
           title: 'Последствия использования?',
@@ -420,27 +421,27 @@ Thank you a lot for Todorant!`,
             'Все проекты развиваются',
             'Ваш мозг сам хочет быть эффективным',
             'Вы ничего не забываете',
-            'Люди восхищаются вашей продуктивностью',
-          ],
+            'Люди восхищаются вашей продуктивностью'
+          ]
         },
         deal: [
           'Какие условия?',
           'Тудурант дороже других менеджеров задач, да. Вообще, стандартная цена по индустрии — $3/месяц, когда у Тудуранта 30 дней бесплатного использования, а после цена в $5/месяц. Да, у Тудуранта меньше функций, чем у конкурентов — но это сделано специально.',
           'Когда другие просто предоставляют вам место, куда вы можете записать свои задачи и забыть про них, Тудурант дает вам силу идеологии и методологии — Тудурант заставляет вас завершать задачи, а не просто бездумно их записывать. Тудурант не для всех — он специально создан для людей, которые хотят освободить свою голову от постоянно надоедающих задач и которые хотят наконец уже начать завершать проекты. Вы можете ознакомиться с методологией, открыв ',
           'список правил',
-          ' в правом верхнем углу этой страницы.',
+          ' в правом верхнем углу этой страницы.'
         ],
         personal: [
           'Что бы сделал я?',
-          'Я опробовал десятки разных менеджеров задач. Если бы я мог попробовать Тудурант до того, как я его разработал — то я бы точно дал ему шанс. Он бесплатен первые 30 дней — и этого времени как раз достаточно, чтоб понять, работает ли эта система для меня. И, тысяча чертей, если она работает и я завершаю все свои задачи — я бы заплатил любую цену, лишь бы продолжить этот поток продуктивности. Первые 30 дней от пользователей ничего не требуется — просто нужно зайти и начать пользоваться. Можете найти кнопки ниже. Хватит разглагольствовать — пришло время взрывать продуктивность!',
-        ],
+          'Я опробовал десятки разных менеджеров задач. Если бы я мог попробовать Тудурант до того, как я его разработал — то я бы точно дал ему шанс. Он бесплатен первые 30 дней — и этого времени как раз достаточно, чтоб понять, работает ли эта система для меня. И, тысяча чертей, если она работает и я завершаю все свои задачи — я бы заплатил любую цену, лишь бы продолжить этот поток продуктивности. Первые 30 дней от пользователей ничего не требуется — просто нужно зайти и начать пользоваться. Можете найти кнопки ниже. Хватит разглагольствовать — пришло время взрывать продуктивность!'
+        ]
       },
       youAreRegistered: '(вы уже зарегистрированы)',
       headline: [
         'Не забывайте задачи.',
         'Всегда их выполняйте.',
         'Живите полной жизнью.',
-        'С Тудурантом.',
+        'С Тудурантом.'
       ],
       signIn: 'Войти',
       lastSignIn: '(хорошо, это последняя кнопка, войдите уже наконец)',
@@ -460,7 +461,7 @@ Thank you a lot for Todorant!`,
             
 В общем, Тудурант, каким бы простым он ни казался на первый взгляд, способен стать верным соратником в любых делах. Спасибо, Никита, что осознал аспекты истинной продуктивности и поделился ими с нами в удобном решении.
             
-Благодарный подписчик Тудуранта.`,
+Благодарный подписчик Тудуранта.`
           },
           {
             name: 'Dinislam Sad',
@@ -469,7 +470,7 @@ Thank you a lot for Todorant!`,
 1. Простой и удобный интерфейс.
 2. Пропущенные задачи автоматически становятся лягушками, и также возможность изначально отметить задачу "лягушкой".
 3. Категория /done это просто необходимость, и спасибо за это, Никита. Я юзал Тудуист, Вундерлист, Мои Дела. Все эти программы перегруженные слишком.
-4. Телеграм бот.`,
+4. Телеграм бот.`
           },
           {
             name: 'Aleksei Kaut',
@@ -478,7 +479,7 @@ Thank you a lot for Todorant!`,
 
 Я обычно писал в Notes задачи и идеи, что нужно сделать в ближайшем времени, но не подходил к этому как к системе. Пользуюсь сервисом пару недель и не очень активно, но думаю это очень сильный подход к систематизации дел и задач.
 
-Спасибо за твою работу!`,
+Спасибо за твою работу!`
           },
           {
             name: 'Anton',
@@ -487,17 +488,17 @@ Thank you a lot for Todorant!`,
 
 Плюс, по неизвестной мне причине, когда выполняются все задачи на день появляется мощная гордость и удовлетворение, что отсутствовало в других планировщиках (там было что то в формате "ну вроде все.. или нет?"). 
           
-Спасибо за твои работы!`,
+Спасибо за твои работы!`
           },
           {
             name: 'Willsey Paslen',
             username: 'WillseyPaslen',
-            text: `Спасибо за отличный сервис. Прошло достаточно времени, чтобы точно можно было сказать — мне он помогает. Спасибо, Никита 😁 И удачи с приложением.`,
+            text: `Спасибо за отличный сервис. Прошло достаточно времени, чтобы точно можно было сказать — мне он помогает. Спасибо, Никита 😁 И удачи с приложением.`
           },
           {
             name: 'Игорь Малинкин',
             username: 'sxe4kilo',
-            text: `с Тударантом я хоть что-то начал делать, так что моя производительность поднялась с 0.`,
+            text: `с Тударантом я хоть что-то начал делать, так что моя производительность поднялась с 0.`
           },
           {
             name: 'Владимир Дубенко',
@@ -507,14 +508,14 @@ Thank you a lot for Todorant!`,
 2. Прививает привычку, как ты там писал в каком-то из постов, прям с языка снял в тот момент: мы — это набор привычек.
 3. Как ни странно, не заставляет рационально мыслить.
             
-Я по своей натуре иррационален, я не могу просто вести 1 проект (я быстро выгораю). Я живу только многозадачностью! 3 проекта параллельно легко, но мало... 7 — вот это интересней. И твой сервис позволяет этого достигать. Именно чередование задач не дает возможности мозгу выгорать в одном конкретном направлении. А каким-то магическим образом чередует задачи с одного проекта на другой.`,
+Я по своей натуре иррационален, я не могу просто вести 1 проект (я быстро выгораю). Я живу только многозадачностью! 3 проекта параллельно легко, но мало... 7 — вот это интересней. И твой сервис позволяет этого достигать. Именно чередование задач не дает возможности мозгу выгорать в одном конкретном направлении. А каким-то магическим образом чередует задачи с одного проекта на другой.`
           },
           {
             name: 'Maksim Alekseyevich',
             username: 'MMAradiology',
             text: `Сказать, что пользование Тудурантом изменило мою жизнь, я не могу. Сказать, что это значимое и очень полезное приложение/сайт? Да, хоть тысячу раз.
 
-Мне Тудурант нравится, и он позволяет освободить свою "операционную память", позволить себе мыслить над решением проблемы, а не над её запоминанием. Как правильно написал Никита (создатель) — при постоянном и правильном использовании перестанут появляться задачи, которые раньше внушали поистине библейский страх. И это будет происходит не из-за того, что перестают поступать сложные задачи. Тебе (и мне, и всем) станет понятно — "дорогу осилит идущий", "путь в тысячу ли начинается с одного шага".`,
+Мне Тудурант нравится, и он позволяет освободить свою "операционную память", позволить себе мыслить над решением проблемы, а не над её запоминанием. Как правильно написал Никита (создатель) — при постоянном и правильном использовании перестанут появляться задачи, которые раньше внушали поистине библейский страх. И это будет происходит не из-за того, что перестают поступать сложные задачи. Тебе (и мне, и всем) станет понятно — "дорогу осилит идущий", "путь в тысячу ли начинается с одного шага".`
           },
           {
             name: 'Kiku Reise',
@@ -525,18 +526,18 @@ Thank you a lot for Todorant!`,
             
             Особенно порадовало обновление с хештегами — теперь вся статистика как на ладони, могу трекать и делиться с друзьями сколько задач по разработке я выполнил в этом месяце.
             
-            Большое спасибо за Тудурант!`,
-          },
-        ],
-      },
+            Большое спасибо за Тудурант!`
+          }
+        ]
+      }
     },
     menu: {
       darkMode: {
         on: 'Темная тема: вкл',
-        off: 'Темная тема: выкл',
+        off: 'Темная тема: выкл'
       },
       merge: 'Объединить аккаунты',
-      logout: 'Выйти',
+      logout: 'Выйти'
     },
     support:
       'Что-то непонятно? Пишите мне на <a target="_blank" href="mailto:n@borodutch.com">n@borodutch.com</a>',
@@ -545,18 +546,19 @@ Thank you a lot for Todorant!`,
         facebook: 'Не получилось зайти через Фейсбук',
         google: 'Не получилось зайти через Гугл',
         telegram: 'Не получилось зайти через Телеграм',
-        apple: 'Не получилось зайти через Эпл',
+        apple: 'Не получилось зайти через Эпл'
       },
       internal: 'Внутренняя ошибка сервера',
       loadTodos: 'Не получилось загрузить задачи',
       todo: {
         textLenght: 'Задачи должны иметь текст',
-        dateOrMonth: 'Задачам нужно выставлять либо точную дату, либо месяц',
+        dateOrMonth: 'Задачам нужно выставлять либо точную дату, либо месяц'
       },
       invalidForm: 'Пожалуйста, заполните необходимые поля',
       report: 'Не получилось загрузить отчет',
       addTodoOld: 'Нельзя добавить задачу в прошлом',
-      appleFirefox: 'К сожалению, это <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1628361">баг</a> в Firefox. Пока его не поправят, пожалуйста, используйте другой браузер для логина через Эппл — а после объедините аккаунты с другими соцсетями в Тудуранте. Прошу прощения за неудобства.'
+      appleFirefox:
+        'К сожалению, это <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1628361">баг</a> в Firefox. Пока его не поправят, пожалуйста, используйте другой браузер для логина через Эппл — а после объедините аккаунты с другими соцсетями в Тудуранте. Прошу прощения за неудобства.'
     },
     close: 'Закрыть',
     notFound: 'Страница не найдена',
@@ -573,16 +575,16 @@ Thank you a lot for Todorant!`,
         tooltip:
           'Задачи должны быть: указывающими на следующее действие ("Найти лучшие билеты в Мексику на агрегаторе билетов", а не "Полететь в Мексику"); наиболее маленькими и понятными ("Протереть дисплей", а не "Прибраться дома").',
         goFirst: 'Добавить наверх',
-        time: 'Точное время',
+        time: 'Точное время'
       },
       list: {
-        completed: 'Показать завершенные',
+        completed: 'Показать завершенные'
       },
       edit: {
-        title: 'Редактирование',
+        title: 'Редактирование'
       },
       planning:
-        'Похоже, вам нужно заняться планированием! Пожалуйста, перераспределите оставшиеся задачи ниже для того, чтобы разблокировать секцию "Текущее", и для того, чтобы оставаться продуктивными. Удачи!',
+        'Похоже, вам нужно заняться планированием! Пожалуйста, перераспределите оставшиеся задачи ниже для того, чтобы разблокировать секцию "Текущее", и для того, чтобы оставаться продуктивными. Удачи!'
     },
     cancel: 'Отменить',
     save: 'Сохранить',
@@ -599,12 +601,12 @@ Thank you a lot for Todorant!`,
     clear: {
       congratulations: 'Поздравляем!',
       text:
-        '🥳 Вы это сделали! Все задачи на сегодня выполнены, идите отдохните — ну или потанцуйте немного 💃',
+        '🥳 Вы это сделали! Все задачи на сегодня выполнены, идите отдохните — ну или потанцуйте немного 💃'
     },
     empty: {
       action: 'Вперед!',
       text:
-        'На сегодня у вас нет задач. Хотите поработать — добавьте новые задачи на сегодня или заберите задачи с других дней.',
+        'На сегодня у вас нет задач. Хотите поработать — добавьте новые задачи на сегодня или заберите задачи с других дней.'
     },
     howto: {
       title: 'Как пользоваться Тудурантом?',
@@ -626,14 +628,14 @@ Thank you a lot for Todorant!`,
         'Пользуйтесь режимом редактирования (иконка смены порядка сверху) на странице <b>Планирования</b> для изменения порядка задач. Если вы хотите создать задачу на определенную неделю — просто добавьте ее на понедельник и перераспределите во время планирования утром понедельника.',
         'В Тудуранте нет и никогда не будет автоматически повторяющихся задач — единственное, в чем они помогают — это создание атмосферы страха, накапливаясь невыполненным грузом. Если нужно внести повторяющуюся задачу — внесите ее вручную, ваш мозг скажет вам спасибо за осмысленную задачу.',
         'В Тудуранте нет концепта "Проекты", так как он показал себя демотивирующим, некоторые папки просто никогда не открываются. Проекты "Фитнес" и "Саморазвитие" передают привет. Вместо этого, используйте #хештеги.',
-        'Пропущенные задачи всегда будут внизу списка, лягушки — вверху. Вы можете менять порядок задач внутри лягушек, обычных задач и пропущенных, но не между этими группами.',
+        'Пропущенные задачи всегда будут внизу списка, лягушки — вверху. Вы можете менять порядок задач внутри лягушек, обычных задач и пропущенных, но не между этими группами.'
       ],
       bonus: {
         title: 'Бонусные функции',
         rules: [
-          'Пользуйтесь шорткатами на клавиатуре на десктопе! Вы можете (a) — добавить, (b) — разбить, переключиться на (c) — текущее, пометить как (d) — выполненное и переключиться на (p) — планирование. Чтобы добавить дополнительную задачу, когда добавляете задачи, пользуйтесь Shift+A.',
-        ],
-      },
+          'Пользуйтесь шорткатами на клавиатуре на десктопе! Вы можете (a) — добавить, (b) — разбить, переключиться на (c) — текущее, пометить как (d) — выполненное и переключиться на (p) — планирование. Чтобы добавить дополнительную задачу, когда добавляете задачи, пользуйтесь Shift+A.'
+        ]
+      }
     },
     skipped: 'Пропущено',
     merge: {
@@ -642,7 +644,7 @@ Thank you a lot for Todorant!`,
         'Вы можете объединить разные аккаунты (например, Фейсбук, Гугл, Телеграм) здесь. Просто залогиньтесь в аккаунты, используя кнопки ниже и аккаунты будут объединены. Осторожно: это действие нельзя обратить, и списки задач будут также объединены. Возможно, если вы зашли из России без VPN, вы не видите кнопку Телеграма — тогда либо зайдите через VPN, либо обратитесь к <a target="_blank" href="https://tlg.fyi/todorant_bot">@todorant_bot</a> в Телеграме и залогиньтесь через него.',
       done:
         'Отлично! Вы теперь можете заходить в этот аккаунт через Гугл, Фейсбук и Телеграм. Кончились у нас кнопки для вас.',
-      confirm: 'Уверены, что хотите добавить {id} в этот аккаунт?',
+      confirm: 'Уверены, что хотите добавить {id} в этот аккаунт?'
     },
     subscription: {
       title: 'Подписка',
@@ -670,10 +672,10 @@ Thank you a lot for Todorant!`,
         success:
           '✅ У вас получилось! Наслаждайтесь неограниченным Тудурантом 💪',
         failure: '✋ Ох! Что-то пошло не так. Может, попробуете еще раз? 😳',
-        back: 'Вернуться к продуктивности!',
+        back: 'Вернуться к продуктивности!'
       },
       cancel: 'Отключить подписку',
-      cancelConfirm: 'Вы уверены, что хотите отключить подписку?',
+      cancelConfirm: 'Вы уверены, что хотите отключить подписку?'
     },
     moveUp: 'Перенести на сегодня',
     settings: {
@@ -682,7 +684,7 @@ Thank you a lot for Todorant!`,
         'Устанавливать сегодняшнюю дату автоматически при создании задачи',
       firstDayOfWeek: 'Первый день недели',
       newTodosGoFirst: 'Новые задачи добавляются наверх списка',
-      preserveOrderByTime: 'Следить за порядком задач с точным временем',
+      preserveOrderByTime: 'Следить за порядком задач с точным временем'
     },
     weekdays: {
       1: 'Понедельник',
@@ -691,14 +693,14 @@ Thank you a lot for Todorant!`,
       4: 'Четверг',
       5: 'Пятница',
       6: 'Суббота',
-      0: 'Воскресенье',
-    },
+      0: 'Воскресенье'
+    }
   },
   ua: {
     supportAlert: {
-      title: 'Support',
+      title: 'Підтримка',
       text:
-        'If you have any questions or suggestions, feel free to <a href=mailto:todorant@borodutch.com">send me an email</a>, <a href="https://t.me/borodutch" target="_blank">contact me on Telegram</a> or <a href="https://t.me/todorant_feedback" target="_blank">join our Telegram community group</a>!',
+        'If you have any questions or suggestions, feel free to <a href=mailto:todorant@borodutch.com">send me an email</a>, <a href="https://t.me/borodutch" target="_blank">contact me on Telegram</a> or <a href="https://t.me/todorant_feedback" target="_blank">join our Telegram community group</a>!'
     },
     loginMobile: {
       telegram: {
@@ -712,16 +714,16 @@ Thank you a lot for Todorant!`,
           'Could not send login request to the user. Please make sure that you started @todorant_bot and that the Telegram ID is correct.',
         waiting:
           'Waiting for the response in <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>...',
-        notAllowedError: 'Login request was rejected',
+        notAllowedError: 'Login request was rejected'
       },
       apple: {
-        headline: 'Please login with Apple by hitting the button below.',
-      },
+        headline: 'Please login with Apple by hitting the button below.'
+      }
     },
     noReport: {
       title: 'Дані ще відсутні',
       text:
-        'Так тримати, після завершення першого завдання тут з’являться дані.',
+        'Так тримати, після завершення першого завдання тут з’являться дані.'
     },
     report: {
       title: 'Звіт',
@@ -735,33 +737,33 @@ Thank you a lot for Todorant!`,
       call: 'Хочете так само?',
       callButton: 'Приєднатися до Тудуранту',
       startDate: 'Дата початку',
-      endDate: 'Дата закінчення',
+      endDate: 'Дата закінчення'
     },
     title: 'Тудурант',
     cookie: {
       button: 'Зрозуміло!',
-      message: 'Цей вебсайт використовує кукі.',
+      message: 'Цей вебсайт використовує кукі.'
     },
     home: {
       texts: {
         level: [
           'Колись я був такий як ви',
           'Я годинами намагався завершити завдання, але нічого все одно не виходило. Нові завдання з`являлися з нізвідки, а старі продовжували наповнювати собою нескінченні списки. Не було ніякого виходу з ситуації - жоден з менеджерів завдань не зміг мені допомогти, вони лише чинили психологічний тиск усіма речами, про які я забув, та всіма завданнями, які я так і не закінчив',
-          'У той час як складні інструменти з безліччю функцій досить добре справляються із записом деяких задач, когнітивна психологія говорить, що перевантаження підсвідомості усіма підвішеними задачами, які ми не записуємо, може займати велику частину мозку, відповідальну за відчуття щастя.',
+          'У той час як складні інструменти з безліччю функцій досить добре справляються із записом деяких задач, когнітивна психологія говорить, що перевантаження підсвідомості усіма підвішеними задачами, які ми не записуємо, може займати велику частину мозку, відповідальну за відчуття щастя.'
         ],
         winter: [
           'Зима близько',
           'Незважаючи на те, що людство сьогодні щасливіше, ніж будь-коли, особиста продуктивність погіршується. Якщо ми нічого не змінимо, ми можемо опинитися в ситуації серед сірої маси середніх людей, які нічого не знають про продуктивність і не можуть закінчити навіть одну маломальски складну і комплексну задачу - лише тому, що на них тисне психологічна тривога.',
-          'Кількість людей, які забувають про важливі події з їхніми дружинами і партнерами, які обіцяють зробити більше, ніж насправді можуть, які постійно думають про "ту рiч, яку мені потрібно перевірити, але я точно не пам\'ятаю, яку" - скоро зашкалить. Є ймовірність, що ви самі станете звичайною бездушною біологічною машиною, яка зможе виконувати тільки прості низькооплачувані завдання, якщо ви не зробите нічого проти цього.',
+          'Кількість людей, які забувають про важливі події з їхніми дружинами і партнерами, які обіцяють зробити більше, ніж насправді можуть, які постійно думають про "ту рiч, яку мені потрібно перевірити, але я точно не пам\'ятаю, яку" - скоро зашкалить. Є ймовірність, що ви самі станете звичайною бездушною біологічною машиною, яка зможе виконувати тільки прості низькооплачувані завдання, якщо ви не зробите нічого проти цього.'
         ],
         contact: [
           'Залишились запитання? Напишіть мені за адресою ',
-          '. Дякую.',
+          '. Дякую.'
         ],
         solution: [
           'Але у вас є рішення',
           'Після того, як я ознайомився з працями поведінкової психології у якості "Залиште Гидливість, З\'їжте Жабу!", "Сила Волі", "Атомні Звички" та "Як Привести Справи в Порядок", я розробив власну систему, яка підняла мою продуктивність в 10 разів. Тепер я виконую в 10 разів більше завдань і доводжу в 10 разів більше проектів до запуску. Я ділюся цим рішенням з Вами, щоб поліпшити власне оточення. Якщо люди навколо мене розвиваються - мій рівень щастя піднімається пропорційно.',
-          'Todorant - це найпростіший список завдань з єдиною відмінністю. Кожна дія і кожна функція були кропітливо зважені і протестовані з точки зору когнітивної психології. Я скористався десятиліттями досліджень та упакував їх єдиний простий, але дієвий інструмент. Todorant обманює ваш мозок, щоб ви робили більше правильних - і менше неправильних - дій. Він допомагає розвивати хороші звички і позбуватися від шкідливих. Так що досить бездумно записувати свої завдання. Прийшов час почати використовувати систему, яка працює',
+          'Todorant - це найпростіший список завдань з єдиною відмінністю. Кожна дія і кожна функція були кропітливо зважені і протестовані з точки зору когнітивної психології. Я скористався десятиліттями досліджень та упакував їх єдиний простий, але дієвий інструмент. Todorant обманює ваш мозок, щоб ви робили більше правильних - і менше неправильних - дій. Він допомагає розвивати хороші звички і позбуватися від шкідливих. Так що досить бездумно записувати свої завдання. Прийшов час почати використовувати систему, яка працює'
         ],
         consequences: {
           title: 'Наслідки використання?',
@@ -771,27 +773,27 @@ Thank you a lot for Todorant!`,
             'Всі проекти розвиваються',
             'Ваш мозок сам захоче бути ефективним',
             'Ви ніколи нічого не забудете',
-            'Люди будуть у захваті від вашої продуктивності',
-          ],
+            'Люди будуть у захваті від вашої продуктивності'
+          ]
         },
         deal: [
           'Які умови?',
           'Todorant - дорожче інших менеджерів завдань, так. Взагалі, стандартна ціна галузі - $ 3 / місяць, коли у Тудуранта 30 днів безкоштовного використання, а після ціна в $ 5 / місяць. Так, у Тудуранта менше функцій, ніж у конкурентів - але це зроблено спеціально.',
           'Коли інші просто надають вам місце, куди ви можете записати свої завдання і забути про них, Тудурант дає вам силу ідеології і методології - Тудурант змушує вас завершувати завдання, а не просто бездумно їх записувати. Тудурант не для всіх - він спеціально створений для людей, які хочуть звільнити свою голову від постійно набридаючих завдань і які хочуть нарешті вже почати завершувати проекти. Ви можете ознайомитися з методологією, відкривши ',
           'список правил',
-          ' в правому верхньому куті цієї сторінки.',
+          ' в правому верхньому куті цієї сторінки.'
         ],
         personal: [
           'Що б я зробив?',
-          'Я випробував десятки різних менеджерів задач. Якби я міг спробувати Тудурант до того, як я його розробив - то я б точно дав йому шанс. Він безкоштовний перші 30 днів - і цього часу досить, щоб зрозуміти, чи працює ця система для мене. Кажу вам, якщо вона працювала б і я завершувала б всі мої завдання - я б заплатив будь-яку ціну, аби продовжити цей потік продуктивності. Перші 30 днів від користувачів нічого не потрібно - лише потрібно увійти та почати користуватися. Можете знайти кнопки нижче. Досить просторікувати - прийшов час підривати продуктивність',
-        ],
+          'Я випробував десятки різних менеджерів задач. Якби я міг спробувати Тудурант до того, як я його розробив - то я б точно дав йому шанс. Він безкоштовний перші 30 днів - і цього часу досить, щоб зрозуміти, чи працює ця система для мене. Кажу вам, якщо вона працювала б і я завершувала б всі мої завдання - я б заплатив будь-яку ціну, аби продовжити цей потік продуктивності. Перші 30 днів від користувачів нічого не потрібно - лише потрібно увійти та почати користуватися. Можете знайти кнопки нижче. Досить просторікувати - прийшов час підривати продуктивність'
+        ]
       },
       youAreRegistered: '(вже є обліковий запис)',
       headline: [
         'Не забувайте завдання',
         'Завжди їх виконуйте.',
         'Живіть щасливим життям',
-        'Разом з Todorant.',
+        'Разом з Todorant.'
       ],
       signIn: 'Увійти',
       lastSignIn: '(добре, це остання кнопка, увійдіть нарешті)',
@@ -811,7 +813,7 @@ Thank you a lot for Todorant!`,
 
 Загалом, Тудурант, яким би простим він не здавався на перший погляд, здатен стати вірним соратником у будь-яких справах. Дякую, Микито, що усвідомив аспекти істинної продуктивності та поділився ними з нами у зручному рішенні.
 
-Вдячний підписник Тудуранту.`,
+Вдячний підписник Тудуранту.`
           },
           {
             name: 'Dinislam Sad',
@@ -820,7 +822,7 @@ Thank you a lot for Todorant!`,
 1. Простий і зручний інтерфейс.
 2. Пропущені завдання автоматично стають жабами, а також можливість спочатку відмітити завдання "жабою".
 3. Категорія /done це просто необхідність, і дякую за це, Микито. Я юзав Тудуіст, Вундерліст, Мої Справи. Всі ці програми занадто перевантажені.
-4. Телеграм-бот.`,
+4. Телеграм-бот.`
           },
           {
             name: 'Aleksei Kaut',
@@ -829,7 +831,7 @@ Thank you a lot for Todorant!`,
 
 Я зазвичай писав в Notes завдання та ідеї, що потрібно зробити найближчим часом, але не підходив до цього як до системи. Користуюся сервісом кілька тижнів і не дуже активно, але думаю, що це дуже сильний підхід до систематизації справ і завдань.
 
-Дякую за твою роботу!`,
+Дякую за твою роботу!`
           },
           {
             name: 'Anton',
@@ -838,17 +840,17 @@ Thank you a lot for Todorant!`,
 
 Плюс, за невідомою мені причини, коли виконуються всі завдання на день і з'являється потужна гордість і задоволення, що було відсутньо у інших сервісах планування (там було щось у форматі "ну здається все.. чи ні?").
 
-Дякую за твої роботи!`,
+Дякую за твої роботи!`
           },
           {
             name: 'Willsey Paslen',
             username: 'WillseyPaslen',
-            text: `Дякую за чудовий сервіс. Пройшло достатньо часу, щоб можна було точно сказати — мені від допомагає. Дякую, Микито😁. І удачі з додатком.`,
+            text: `Дякую за чудовий сервіс. Пройшло достатньо часу, щоб можна було точно сказати — мені від допомагає. Дякую, Микито😁. І удачі з додатком.`
           },
           {
             name: 'Ігор Малінкін',
             username: 'sxe4kilo',
-            text: `З Тудурантом я почав хоч щось робити, так що моя продуктивність піднялася з 0.`,
+            text: `З Тудурантом я почав хоч щось робити, так що моя продуктивність піднялася з 0.`
           },
           {
             name: 'Володимир Дубенко',
@@ -858,14 +860,14 @@ Thank you a lot for Todorant!`,
 2. Прищеплює звичку, як ти там писав у якомусь з постів, прям з язику зняв у той момент: ми — це набір звичок.
 3. Як не дивно, змушує раціонально мислити.
 
-Я за своєю натурою ірраціональний, я не можу просто вести 1 проект (я швидко вигоряю). Я живу тільки багатозадачністю! 3 проекти паралельно — легко, але мало... 7 — ось це вже цікавіше. І твій сервіс дозволяє цього досягати. Саме чергування завдань не дозволяє мозку вигоряти у одному конкретному напрямку. А якимось магічним чином чергує завдання з одного проекту на інший.`,
+Я за своєю натурою ірраціональний, я не можу просто вести 1 проект (я швидко вигоряю). Я живу тільки багатозадачністю! 3 проекти паралельно — легко, але мало... 7 — ось це вже цікавіше. І твій сервіс дозволяє цього досягати. Саме чергування завдань не дозволяє мозку вигоряти у одному конкретному напрямку. А якимось магічним чином чергує завдання з одного проекту на інший.`
           },
           {
             name: 'Maksim Alekseyevich',
             username: 'MMAradiology',
             text: `Сказати, що використання Тудуранту змінило моє життя, я не можу. Сказати, що це дуже значимий і корисний додаток/сайт? Так, хоч тисячу разів.
 
-Мені Тудурант подобається, і він дозволяє звільнити свою "операційну пам'ять", дозволити собі мислити над вирішенням проблеми, а не над її запам'ятовуванням. Як правильно писав Микита (творець) — при при постійному і правильному використанні перестануть з'являтися завдання, які раніше вселяли воістину біблійський страх. І це буде відбуватися не через те, що перестають поступати складні завдання. Тобі (і мені, і всім) стане зрозуміло — "дорогу здолає той, хто йде", "шлях в тисячу лі починається одного кроку".`,
+Мені Тудурант подобається, і він дозволяє звільнити свою "операційну пам'ять", дозволити собі мислити над вирішенням проблеми, а не над її запам'ятовуванням. Як правильно писав Микита (творець) — при при постійному і правильному використанні перестануть з'являтися завдання, які раніше вселяли воістину біблійський страх. І це буде відбуватися не через те, що перестають поступати складні завдання. Тобі (і мені, і всім) стане зрозуміло — "дорогу здолає той, хто йде", "шлях в тисячу лі починається одного кроку".`
           },
           {
             name: 'Kiku Reise',
@@ -876,18 +878,18 @@ Thank you a lot for Todorant!`,
 
 Особливо сподобалося оновлення з хештегами — тепер вся статистика як на долоні, можу трекать та ділитися з друзями скільки завдань з розробки я виконав у цьому місяці.
 
-Щиро дякую за Тудурант!`,
-          },
-        ],
-      },
+Щиро дякую за Тудурант!`
+          }
+        ]
+      }
     },
     menu: {
       darkMode: {
         on: 'Темна тема: увімк.',
-        off: 'Темна тема: вимк.',
+        off: 'Темна тема: вимк.'
       },
       merge: "Об'єднати акаунти",
-      logout: 'Вийти',
+      logout: 'Вийти'
     },
     support:
       'Щось незрозуміло? Пишіть мені на <a target="_blank" href="mailto:n@borodutch.com">n@borodutch.com</a>',
@@ -896,19 +898,20 @@ Thank you a lot for Todorant!`,
         facebook: 'Не вдалося зайти через Facebook',
         google: 'Не вдалося зайти через Google',
         telegram: 'Не вдалося зайти через Telegram',
-        apple: 'Не вдалося зайти через Apple',
+        apple: 'Не вдалося зайти через Apple'
       },
       internal: 'Внутрішня помилка серверу',
       loadTodos: 'Не вдалося завантажити завдання',
       todo: {
         textLenght: 'Завдання повинні мати текст',
         dateOrMonth:
-          'Завданням необхідно виставляти або точний день, або місяць',
+          'Завданням необхідно виставляти або точний день, або місяць'
       },
       invalidForm: 'Будь ласка, заповніть необхідні поля',
       report: 'Не вдалося завантажити звіт',
       addTodoOld: 'Cannot add todo in the past',
-      appleFirefox: 'Unfortunately, there is <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1628361">a bug</a> with Apple signin on Firefox. Until it is resolved, please, use other web browsers to login with Apple — and then merge it with other social accounts on Todorant. Sorry for the inconvenience.'
+      appleFirefox:
+        'Unfortunately, there is <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1628361">a bug</a> with Apple signin on Firefox. Until it is resolved, please, use other web browsers to login with Apple — and then merge it with other social accounts on Todorant. Sorry for the inconvenience.'
     },
     close: 'Закрити',
     notFound: 'Сторінку не знайдено',
@@ -925,16 +928,16 @@ Thank you a lot for Todorant!`,
         tooltip:
           'Завдання повинні бути: вказуючими на наступну дію ("Знайти найкращі квитки у Мексику на агрегаторі квитків", а не "Полетіти у Мексику"); найменшими і зрозумілими ("Протерти дісплей", а не "Прибратися вдома").',
         goFirst: 'Додати зверху',
-        time: 'Точний час',
+        time: 'Точний час'
       },
       list: {
-        completed: 'Показати завершені',
+        completed: 'Показати завершені'
       },
       edit: {
-        title: 'Редагування',
+        title: 'Редагування'
       },
       planning:
-        'Схоже, вам необхідно зайнятися плануванням! Будь ласка, перерозподілить залишені завдання нижче для того, щоб розблокувати секцію "Поточне", і для того, щоб залишатися продуктивними. Удачі!',
+        'Схоже, вам необхідно зайнятися плануванням! Будь ласка, перерозподілить залишені завдання нижче для того, щоб розблокувати секцію "Поточне", і для того, щоб залишатися продуктивними. Удачі!'
     },
     cancel: 'Скасувати',
     save: 'Зберегти',
@@ -951,12 +954,12 @@ Thank you a lot for Todorant!`,
     clear: {
       congratulations: 'Вітаємо!',
       text:
-        '🥳 Ви це зробили! Усі завдання на сьогодні виконані, йдіть відпочиньте — ну або потанцюйте трохи 💃',
+        '🥳 Ви це зробили! Усі завдання на сьогодні виконані, йдіть відпочиньте — ну або потанцюйте трохи 💃'
     },
     empty: {
       action: 'Уперед!',
       text:
-        'На сьогодні у вас немає завдань. Бажаєте попрацювати — додайте нові завдання на сьогодні або заберіть завдання з інших днів.',
+        'На сьогодні у вас немає завдань. Бажаєте попрацювати — додайте нові завдання на сьогодні або заберіть завдання з інших днів.'
     },
     howto: {
       title: 'Як користуватися Тудурантом?',
@@ -978,14 +981,14 @@ Thank you a lot for Todorant!`,
         'У Тудуранті не можна зберегти завдання на визначений час — так і повинно бути. Замість цього, використовуйте режим редагування (іконка зміни порядку зверху) на сторінці <b>Планування</b> для зміни порядку списку завдань. Якщо ви бажаєте створити завдання на визначений тиждень — просто додайте її на понеділок і перерозподілить під час планування ранком понеділка.',
         'У Тудуранті немає і ніколи не буде автоматично повторюваних завдань — єдине, у чому вони допомагають — це створення атмосфери страху, накопичуючись невиконаним вантажем. Якщо необхідно внести повторюване завдання — внесіть його вручну, ваш мозок подякує вам за осмислине завдання.',
         'У Тудуранті немає концепту "Проекти", так як він показав себе демотивуючим, деякі теки ніколи не відкриваються. Проекти "Фітнес" і "Саморозвиток" передають привіт. Замість цього використовуйте #хетшеги.',
-        'Пропущені завдання завжди будуть внизу списку, жаби — зверху. Ви можете міняти порядок завдань всередні жаб, звичайних і пропущених завдань, але не між цими групами.',
+        'Пропущені завдання завжди будуть внизу списку, жаби — зверху. Ви можете міняти порядок завдань всередні жаб, звичайних і пропущених завдань, але не між цими групами.'
       ],
       bonus: {
         title: 'Бонусні функції',
         rules: [
-          'Користуйтеся шорткатами на клавіатурі на десктопі! Ви можете (a) — додати, (b) — розбити, перемкнутися на (c) — поточне, відмітити як (d) — виконане і переключитися на (p) — планування.',
-        ],
-      },
+          'Користуйтеся шорткатами на клавіатурі на десктопі! Ви можете (a) — додати, (b) — розбити, перемкнутися на (c) — поточне, відмітити як (d) — виконане і переключитися на (p) — планування.'
+        ]
+      }
     },
     skipped: 'Пропущено',
     merge: {
@@ -994,7 +997,7 @@ Thank you a lot for Todorant!`,
         'Ви можете об\'єднати різні акаунти (наприклад, Facebook, Google, Telegam) тут. Просто залогиньтеся у акаунти, використовуйте кнопки нижче і акаунти буде об\'єднано. Обережно: це незворотня дія, і списки завдань також буде об\'єднано. Можливо, якщо ви зайшли з Росії без VPN, ви не бачите кнопку Telegram — тоді або зайдіть через VPN, або зверніться до <a target="_blank" href="https://tlg.fyi/todorant_bot">@todorant_bot</a> у Телеграмі й залогиньтеся через нього.',
       done:
         'Чудово! Тепер ви можете заходити у цей акаунт через Google, Facebook і Telegram. Закінчилися у нас кнопки для вас.',
-      confirm: 'Впевнені, що бажаєте додати {id} у цей акаунт?',
+      confirm: 'Впевнені, що бажаєте додати {id} у цей акаунт?'
     },
     subscription: {
       title: 'Підписка',
@@ -1012,7 +1015,7 @@ Thank you a lot for Todorant!`,
       activeDescription:
         '🎉 Велике вам дякую за підтримку Тудуранту! Я особисто сподіваюся, що Тудурант достатньо змінив ваше життя і буде допомагати його покращувати зо дня у день в майбутньому! Ваша підтримка допомагає мені займатися Тудурантом на постійній основі та додавати нові функції, які спрощують роботу і вивільняють вам час і когнітивні ресурси. Дякую вам ще раз!',
       inactiveDescription:
-        "🐝 Схоже, ваш тріал Тудуранту підійшов до кінця. Це той самий незручний момент, коли вам потрібно прийняти рішення — чи достатньо допоміг вам Тудурант, щоб почати використовувати його на постійній основі; а мені потрібно підштовхнути вас до правильного рішення. Вершина мого щастя — це приносити користь людям; а якщо Тудурант дійсно став невід'ємною частиною вашого життя, то я буду неймовірно вам вдячний, якщо ви придбаєте підписку. Усього $5/місяць — ось ціна безкінечної продуктивності та вільної голови. Кожен цент, який я отримаю з Тудуранту, я буду направляти на развиток цього сервісу. Підтримавши Тудурант, ви особисто допоможете незалежному розробнику щоденно покращувати продукт, яким ви користуєтеся на постійній основі. Заздалегідь дякую вам!",
+        "🐝 Схоже, ваш тріал Тудуранту підійшов до кінця. Це той самий незручний момент, коли вам потрібно прийняти рішення — чи достатньо допоміг вам Тудурант, щоб почати використовувати його на постійній основі; а мені потрібно підштовхнути вас до правильного рішення. Вершина мого щастя — це приносити користь людям; а якщо Тудурант дійсно став невід'ємною частиною вашого життя, то я буду неймовірно вам вдячний, якщо ви придбаєте підписку. Усього $5/місяць — ось ціна безкінечної продуктивності та вільної голови. Кожен цент, який я отримаю з Тудуранту, я буду направляти на розвиток цього сервісу. Підтримавши Тудурант, ви особисто допоможете незалежному розробнику щоденно покращувати продукт, яким ви користуєтеся на постійній основі. Заздалегідь дякую вам!",
       signature: 'Микита Колмогоров, творець Тудуранту',
       daysLeft: '(Залишилося днів: {daysLeft})',
       5: '$5/місяць',
@@ -1021,10 +1024,10 @@ Thank you a lot for Todorant!`,
       payment: {
         success: '✅ Вам вдалося! Насолоджуйтеся необмеженим Тудурантом 💪',
         failure: '✋ Йой! Щось пішло не так. Може, спопробуєте ще раз? 😳',
-        back: 'Повернутися до продуктивності!',
+        back: 'Повернутися до продуктивності!'
       },
       cancel: 'Скасувати підписку',
-      cancelConfirm: 'Ви впевнені, що бажаєте скасувати підписку?',
+      cancelConfirm: 'Ви впевнені, що бажаєте скасувати підписку?'
     },
     moveUp: 'Перенести на сьогодні',
     settings: {
@@ -1033,7 +1036,7 @@ Thank you a lot for Todorant!`,
         'Встановлювати сьогоднішню дату автоматично при створенні завдань',
       firstDayOfWeek: 'Перший день тижня',
       newTodosGoFirst: 'Нові завдання додаються в верх списку',
-      preserveOrderByTime: 'Preserve exact time order',
+      preserveOrderByTime: 'Preserve exact time order'
     },
     weekdays: {
       1: 'Понеділок',
@@ -1042,7 +1045,7 @@ Thank you a lot for Todorant!`,
       4: 'Четвер',
       5: "П'ятниця",
       6: 'Субота',
-      0: 'Неділя',
-    },
-  },
+      0: 'Неділя'
+    }
+  }
 }
