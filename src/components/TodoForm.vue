@@ -164,7 +164,6 @@ export default class TodoForm extends Vue {
 
   shiftDown() {
     this.shiftOn = true
-    this.checkEnter()
   }
 
   checkEnter() {
