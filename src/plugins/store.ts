@@ -15,6 +15,7 @@ export interface State {
   userState: UserState
   rulesShown: Boolean
   editting: Boolean
+  sockets: Sockets
 }
 
 interface LocalizedError {
@@ -32,7 +33,7 @@ export enum SubscriptionStatus {
   earlyAdopter = 'earlyAdopter',
   active = 'active',
   trial = 'trial',
-  inactive = 'inactive',
+  inactive = 'inactive'
 }
 
 export interface Settings {
@@ -50,13 +51,18 @@ export interface UserState {
   settings: Settings
 }
 
+interface Sockets {
+  authorized: Boolean
+  connected: Boolean
+}
+
 const storeOptions = {
   state: {
     user: undefined,
     snackbar: {
       message: '',
       active: false,
-      color: 'success',
+      color: 'success'
     },
     language: undefined,
     dark: false,
@@ -65,10 +71,14 @@ const storeOptions = {
       subscriptionStatus: SubscriptionStatus.active,
       createdAt: new Date(),
       subscriptionIdExists: false,
-      settings: {},
+      settings: {}
     },
     rulesShown: false,
     editting: false,
+    sockets: {
+      authorized: false,
+      connected: false
+    }
   },
   mutations: {
     setUser(state: State, user: User) {
@@ -95,6 +105,9 @@ const storeOptions = {
     setEditting(state: State, editting: Boolean) {
       state.editting = editting
     },
+    setSockets(state: State, sockets: Sockets) {
+      state.sockets = sockets
+    }
   },
   getters: {
     user: (state: State) => state.user,
@@ -104,12 +117,13 @@ const storeOptions = {
     userState: (state: State) => state.userState,
     rulesShown: (state: State) => state.rulesShown,
     editting: (state: State) => state.editting,
+    sockets: (state: State) => state.sockets
   },
   plugins: [
     createPersistedState({
-      paths: ['user', 'language', 'dark', 'rulesShown'],
-    }),
-  ],
+      paths: ['user', 'language', 'dark', 'rulesShown']
+    })
+  ]
 }
 
 export const store = new Vuex.Store<State>(storeOptions)
@@ -124,6 +138,7 @@ export const dark = () => getters.dark as boolean
 export const userState = () => getters.userState as UserState
 export const rulesShown = () => getters.rulesShown as Boolean
 export const editting = () => getters.editting as Boolean
+export const sockets = () => getters.sockets as Sockets
 
 // Mutations
 export const setUser = (user: User) => {
@@ -136,7 +151,7 @@ export const setSnackbarError = (message: String) => {
   setSnackbar({
     message,
     color: 'error',
-    active: true,
+    active: true
   })
 }
 export const hideSnackbar = () => {
@@ -169,4 +184,7 @@ export const setRulesShown = (rulesShown: Boolean) => {
 }
 export const setEditting = (editting: Boolean) => {
   store.commit('setEditting', editting)
+}
+export const setSockets = (sockets: Sockets) => {
+  store.commit('setSockets', sockets)
 }

@@ -77,6 +77,7 @@ import Settings from './Settings.vue'
 import Support from './Support.vue'
 import { serverBus } from '../main'
 import { reportGA } from '../utils/ga'
+import { sockets } from '../utils/sockets'
 
 @Component({
   components: {
@@ -84,8 +85,8 @@ import { reportGA } from '../utils/ga'
     Merge,
     Subscription,
     Settings,
-    Support,
-  },
+    Support
+  }
 })
 export default class Navbar extends Vue {
   rulesDialog = false
@@ -98,7 +99,7 @@ export default class Navbar extends Vue {
     return [
       { icon: 'us', code: 'en' },
       { icon: 'ru', code: 'ru' },
-      { icon: 'ua', code: 'ua' },
+      { icon: 'ua', code: 'ua' }
     ]
   }
   get currentLocale() {
@@ -117,8 +118,8 @@ export default class Navbar extends Vue {
       user.email,
       user.facebookId,
       user.telegramId,
-      user.appleSubId,
-    ].filter((v) => !!v)
+      user.appleSubId
+    ].filter(v => !!v)
   }
   hashSuffix = ''
   updateHashSuffix() {
@@ -129,7 +130,7 @@ export default class Navbar extends Vue {
     serverBus.$on('subscriptionRequested', () => {
       this.subscriptionDialog = true
       reportGA('subscription_viewed', {
-        status: store.userState().subscriptionStatus,
+        status: store.userState().subscriptionStatus
       })
     })
     serverBus.$on('rulesRequested', () => {
@@ -156,6 +157,7 @@ export default class Navbar extends Vue {
   logout() {
     store.logout()
     this.$router.replace('/')
+    sockets.logout()
   }
   closeRules() {
     this.rulesDialog = false
@@ -182,7 +184,7 @@ export default class Navbar extends Vue {
   }
   showSubscription() {
     reportGA('subscription_viewed', {
-      status: store.userState().subscriptionStatus,
+      status: store.userState().subscriptionStatus
     })
     this.subscriptionDialog = true
   }

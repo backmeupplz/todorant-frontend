@@ -20,12 +20,12 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { Watch } from "vue-property-decorator";
-import * as store from "../plugins/store";
-import * as api from "../utils/api";
-import { serverBus } from "../main";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { Watch } from 'vue-property-decorator'
+import * as store from '../plugins/store'
+import * as api from '../utils/api'
+import { serverBus } from '../main'
 
 @Component({
   props: {
@@ -33,28 +33,27 @@ import { serverBus } from "../main";
   }
 })
 export default class DeleteTodo extends Vue {
-  loading = false;
-  dialog = false;
+  loading = false
+  dialog = false
 
-  @Watch("todo")
+  @Watch('todo')
   onTodoChanged(val: boolean, oldVal: boolean) {
-    this.dialog = !!val;
+    this.dialog = !!val
   }
 
   async deleteTodo() {
-    const user = store.user();
+    const user = store.user()
     if (!user) {
-      return;
+      return
     }
-    this.loading = true;
+    this.loading = true
     try {
-      await api.deleteTodo(user, (this as any).todo);
-      serverBus.$emit("refreshRequested");
-      this.dialog = false;
+      await api.deleteTodo(user, (this as any).todo)
+      this.dialog = false
     } catch (err) {
-      store.setSnackbarError(err.response ? err.response.data : err.message);
+      store.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
-      this.loading = false;
+      this.loading = false
     }
   }
 }
