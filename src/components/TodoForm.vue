@@ -1,14 +1,20 @@
 <template lang="pug">
   div
-    v-text-field(clearable
+    v-textarea(clearable
     :label='$t("todo.create.text")'
     :hint='$t("todo.create.textHint")'
     :rules='textRules'
     v-model='todo.text'
     autofocus
-    v-on:keyup.enter="enter"
+    v-on:keyup.enter="enterUp"
+    v-on:keyup.shift.native="shiftUp"
+    v-on:keydown.enter="enterDown"
+    v-on:keydown.shift="shiftDown"
     v-on:keyup.esc="escape"
-    ref='textInput').pb-4
+    ref='textInput'
+    auto-grow
+    no-resize
+    rows='1').pb-4
     v-row(no-gutters)
       v-col(cols='12' md='6')
         v-menu(v-model='dateMenu' min-width=0)
@@ -141,8 +147,30 @@ export default class TodoForm extends Vue {
     return moment(date).format()
   }
 
-  enter() {
-    ;(this as any).enterPressed()
+  shiftOn = false
+  enterOn = false
+
+  enterUp() {
+    this.enterOn = false
+  }
+  enterDown() {
+    this.enterOn = true
+    this.checkEnter()
+  }
+
+  shiftUp() {
+    this.shiftOn = false
+  }
+
+  shiftDown() {
+    this.shiftOn = true
+    this.checkEnter()
+  }
+
+  checkEnter() {
+    if (this.shiftOn && this.enterOn) {
+      ;(this as any).enterPressed()
+    }
   }
 
   escape() {

@@ -61,7 +61,7 @@
             text 
             @click='save'
             :loading='loading'
-            v-shortkey.once="['enter']"
+            v-shortkey.once="['shift', 'enter']"
             @shortkey='save') {{$t('save')}}
 </template>
 
