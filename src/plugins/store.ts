@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { User } from '../models/user'
+import { Tag } from '../models/tag'
 import createPersistedState from 'vuex-persistedstate'
 import { daysBetween } from '@/utils/daysBetween'
 
@@ -16,6 +17,8 @@ export interface State {
   rulesShown: Boolean
   editting: Boolean
   sockets: Sockets
+  tags: Tag[]
+  tagColors: { [index: string]: string }
 }
 
 interface LocalizedError {
@@ -78,7 +81,9 @@ const storeOptions = {
     sockets: {
       authorized: false,
       connected: false
-    }
+    },
+    tags: [],
+    tagColors: {}
   },
   mutations: {
     setUser(state: State, user: User) {
@@ -107,6 +112,12 @@ const storeOptions = {
     },
     setSockets(state: State, sockets: Sockets) {
       state.sockets = sockets
+    },
+    setTags(state: State, tags: Tag[]) {
+      state.tags = tags
+    },
+    setTagColors(state: State, tagColors: { [index: string]: string }) {
+      state.tagColors = tagColors
     }
   },
   getters: {
@@ -117,7 +128,9 @@ const storeOptions = {
     userState: (state: State) => state.userState,
     rulesShown: (state: State) => state.rulesShown,
     editting: (state: State) => state.editting,
-    sockets: (state: State) => state.sockets
+    sockets: (state: State) => state.sockets,
+    tags: (state: State) => state.tags,
+    tagColors: (state: State) => state.tagColors
   },
   plugins: [
     createPersistedState({
@@ -139,6 +152,8 @@ export const userState = () => getters.userState as UserState
 export const rulesShown = () => getters.rulesShown as Boolean
 export const editting = () => getters.editting as Boolean
 export const sockets = () => getters.sockets as Sockets
+export const tags = () => getters.tags as Tag[]
+export const tagColors = () => getters.tagColors as { [index: string]: string }
 
 // Mutations
 export const setUser = (user: User) => {
@@ -187,4 +202,10 @@ export const setEditting = (editting: Boolean) => {
 }
 export const setSockets = (sockets: Sockets) => {
   store.commit('setSockets', sockets)
+}
+export const setTags = (tags: Tag[]) => {
+  store.commit('setTags', tags)
+}
+export const setTagColors = (tagColors: { [index: string]: string }) => {
+  store.commit('setTagColors', tagColors)
 }

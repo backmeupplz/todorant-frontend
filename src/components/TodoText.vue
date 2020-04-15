@@ -11,14 +11,15 @@
       :style='{color: $store.state.dark ? "#64B5F6" : "#1E88E5"}') {{element.value}}
       a(v-else
       @click.prevent='hash(element.url)'
-      :style='{color: $store.state.dark ? "#64B5F6" : "#1E88E5"}') {{element.value}}
+      :style='{color: colorForTag(element.value.substr(1))}') {{element.value}}
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { l } from "../utils/linkify";
-import { serverBus } from "../main";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { l } from '../utils/linkify'
+import { serverBus } from '../main'
+import * as store from '../plugins/store'
 
 @Component({
   props: {
@@ -26,19 +27,25 @@ import { serverBus } from "../main";
   }
 })
 export default class TodoText extends Vue {
+  colors = store.tagColors()
+
+  colorForTag(tag: string) {
+    return this.colors[tag] || (store.dark() ? '#64B5F6' : '#1E88E5')
+  }
+
   get linkifiedText() {
-    const todo = (this as any).todo;
-    if (!todo || !todo.text) return [];
-    return l(todo.text);
+    const todo = (this as any).todo
+    if (!todo || !todo.text) return []
+    return l(todo.text)
   }
 
   get debug() {
-    return !!process.env.VUE_APP_DEV;
+    return !!process.env.VUE_APP_DEV
   }
 
   hash(hash: string) {
-    location.hash = hash;
-    serverBus.$emit("refreshRequested");
+    location.hash = hash
+    serverBus.$emit('refreshRequested')
   }
 }
 </script>
