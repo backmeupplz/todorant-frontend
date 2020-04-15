@@ -108,6 +108,12 @@ export async function deleteTodo(user: User, todo: Todo) {
   })
 }
 
+export async function deleteTag(user: User, tag: Tag) {
+  return axios.delete(`${base}/tag/${tag._id}`, {
+    headers: getHeaders(user)
+  })
+}
+
 export async function completeTodo(user: User, todo: Todo) {
   return axios.put(
     `${base}/todo/${todo._id}/done`,
@@ -233,7 +239,7 @@ async function updateTags(user: User) {
       date: getToday()
     }
   })).data as Tag[]
-  store.setTags(tags)
+  store.setTags(tags.sort((a, b) => (a.tag < b.tag ? -1 : 1)))
   const tagColors = tags.reduce(
     (p, c) => {
       if (c.color) {

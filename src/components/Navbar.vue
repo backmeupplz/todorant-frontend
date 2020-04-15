@@ -8,6 +8,8 @@
     Subscription(:dialog='subscriptionDialog' :close='closeSubscription')
     // Settings dialog
     Settings(:dialog='settingsDialog' :close='closeSettingsDialog')
+    // Hashtags dialog
+    Hashtags(:dialog='hashtagsDialog' :close='closeHashtagsDialog')
     // Support dialog
     Support(:dialog='supportDialog' :close='closeSupportDialog')
     // Navbar and app
@@ -54,6 +56,10 @@
           v-list-item(@click='settingsDialog = true' 
           v-if='!!$store.state.user')
             v-list-item-title {{$t('settings.title')}}
+          // Hashtags
+          v-list-item(@click='hashtagsDialog = true' 
+          v-if='!!$store.state.user')
+            v-list-item-title {{$t('hashtags.title')}}
           // Support
           v-list-item(@click='supportDialog = true' 
           v-if='!!$store.state.user')
@@ -74,6 +80,7 @@ import Rules from './Rules.vue'
 import Merge from './Merge.vue'
 import Subscription from './Subscription.vue'
 import Settings from './Settings.vue'
+import Hashtags from './Hashtags.vue'
 import Support from './Support.vue'
 import { serverBus } from '../main'
 import { reportGA } from '../utils/ga'
@@ -85,7 +92,8 @@ import { sockets } from '../utils/sockets'
     Merge,
     Subscription,
     Settings,
-    Support
+    Support,
+    Hashtags
   }
 })
 export default class Navbar extends Vue {
@@ -94,6 +102,7 @@ export default class Navbar extends Vue {
   subscriptionDialog = false
   settingsDialog = false
   supportDialog = false
+  hashtagsDialog = false
 
   get locales() {
     return [
@@ -173,6 +182,9 @@ export default class Navbar extends Vue {
   }
   closeSupportDialog() {
     this.supportDialog = false
+  }
+  closeHashtagsDialog() {
+    this.hashtagsDialog = false
   }
   async goHome() {
     try {

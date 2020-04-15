@@ -1,5 +1,8 @@
 export const messages = {
   en: {
+    hashtags: {
+      title: 'Hashtags'
+    },
     supportAlert: {
       title: 'Support',
       text:
@@ -349,6 +352,9 @@ Thank you a lot for Todorant!`
     }
   },
   ru: {
+    hashtags: {
+      title: 'Хештеги'
+    },
     supportAlert: {
       title: 'Поддержка',
       text:
@@ -697,6 +703,9 @@ Thank you a lot for Todorant!`
     }
   },
   ua: {
+    hashtags: {
+      title: 'Хештеги'
+    },
     supportAlert: {
       title: 'Підтримка',
       text:
