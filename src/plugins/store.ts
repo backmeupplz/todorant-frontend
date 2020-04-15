@@ -4,7 +4,8 @@ import Vuex from 'vuex'
 import { User } from '../models/user'
 import { Tag } from '../models/tag'
 import createPersistedState from 'vuex-persistedstate'
-import { daysBetween } from '@/utils/daysBetween'
+import { daysBetween } from '../utils/daysBetween'
+import { setFavIcon } from '../utils/setFavIcon'
 
 Vue.use(Vuex)
 
@@ -179,6 +180,9 @@ export const setDark = (dark: Boolean) => {
   ;(document as any)
     .querySelector('meta[name="theme-color"]')
     .setAttribute('content', dark ? '#303030' : '#fafafa')
+
+  setFavIcon(dark)
+
   store.commit('setDark', dark)
 }
 export const setUserState = (userState: UserState) => {
