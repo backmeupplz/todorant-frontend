@@ -114,6 +114,18 @@ export async function deleteTag(user: User, tag: Tag) {
   })
 }
 
+export async function editTag(user: User, tag: Tag, color?: string) {
+  return axios.put(
+    `${base}/tag/${tag._id}`,
+    {
+      color: color || null
+    },
+    {
+      headers: getHeaders(user)
+    }
+  )
+}
+
 export async function completeTodo(user: User, todo: Todo) {
   return axios.put(
     `${base}/todo/${todo._id}/done`,
