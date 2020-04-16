@@ -1,13 +1,15 @@
 <template lang="pug">
   div(:style='style')
-    v-app(style='maxWidth: 1000px; margin: auto')
-      cookie-law(theme='blood-orange'
-      :buttonText='$t("cookie.button")'
-      :message='$t("cookie.message")')
-      Snackbar
-      Navbar
-      v-content
-        router-view
+    v-app
+      div(style='width: 100%' align='center')
+        div(style='maxWidth: 1000px;' align='justify')
+          cookie-law(theme='blood-orange'
+          :buttonText='$t("cookie.button")'
+          :message='$t("cookie.message")')
+          Snackbar
+          Navbar
+          v-content
+            router-view
 </template>
 
 <script lang="ts">
@@ -23,9 +25,9 @@ export default {
   computed: {
     style: () => {
       return {
-        'background-color': store.dark() ? '#303030' : '#fafafa'
+        'background-color': store.dark() ? '#303030' : '#fafafa',
       }
-    }
+    },
   },
   created() {
     ;(this as any).$vuetify.theme.dark = store.dark()
@@ -36,15 +38,15 @@ export default {
     store.setSnackbar({
       message: '',
       color: 'error',
-      active: false
+      active: false,
     })
   },
   metaInfo() {
     const title = i18n.t('title') as string
     return {
-      title
+      title,
     }
-  }
+  },
 }
 </script>
 
