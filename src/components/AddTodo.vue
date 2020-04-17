@@ -79,7 +79,7 @@ import { linkify } from '../utils/linkify'
 
 @Component({
   components: { TodoForm },
-  props: ['currentTab']
+  props: ['currentTab'],
 })
 export default class AddTodo extends Vue {
   dialog = false
@@ -149,16 +149,16 @@ export default class AddTodo extends Vue {
     if (this.todoToBreakdown) {
       const matches = linkify.match(this.todoToBreakdown.text) || []
       hashtags = matches
-        .map(v =>
+        .map((v) =>
           /^#[\u0400-\u04FFa-zA-Z_0-9]+$/u.test(v.url) ? v.url : undefined
         )
-        .filter(v => !!v) as string[]
+        .filter((v) => !!v) as string[]
     }
     if (this.date) {
       this.todos.push({
         date: this.date,
         goFirst: store.userState().settings.newTodosGoFirst || false,
-        text: hashtags.join(' ')
+        text: hashtags.join(' '),
       })
       this.date = ''
     } else if (store.userState().settings.showTodayOnAddTodo) {
@@ -167,12 +167,12 @@ export default class AddTodo extends Vue {
       this.todos.push({
         date: now.toISOString().substr(0, 10),
         goFirst: store.userState().settings.newTodosGoFirst || false,
-        text: hashtags.join(' ')
+        text: hashtags.join(' '),
       })
     } else {
       this.todos.push({
         goFirst: store.userState().settings.newTodosGoFirst || false,
-        text: hashtags.join(' ')
+        text: hashtags.join(' '),
       })
     }
     this.panel = [this.todos.length - 1]
@@ -209,7 +209,13 @@ export default class AddTodo extends Vue {
     }
     this.loading = true
     try {
-      await api.postTodos(user, this.todos)
+      await api.postTodos(
+        user,
+        this.todos.map((todo) => {
+          todo.text = todo.text!.trim()
+          return todo
+        })
+      )
       if (this.todoToBreakdown) {
         const tempTodo = this.todoToBreakdown
         this.todoToBreakdown = null

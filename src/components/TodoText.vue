@@ -23,8 +23,8 @@ import * as store from '../plugins/store'
 
 @Component({
   props: {
-    todo: Object
-  }
+    todo: Object,
+  },
 })
 export default class TodoText extends Vue {
   colors = store.tagColors()
@@ -49,3 +49,9 @@ export default class TodoText extends Vue {
   }
 }
 </script>
+
+<style scoped>
+span {
+  white-space: pre-wrap;
+}
+</style>
