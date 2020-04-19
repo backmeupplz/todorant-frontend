@@ -15,7 +15,7 @@
     auto-grow
     no-resize
     rows='1').pb-2
-    .mb-2
+    .mb-4(v-if='tags.length')
       v-btn(text
       small
       v-for='(tag, i) in tags'
