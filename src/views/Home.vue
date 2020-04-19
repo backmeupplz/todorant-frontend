@@ -94,9 +94,9 @@
           v-col(cols=0 sm=4)
         v-row.justify-center
           a.pt-3(@click='open($store.state.language === "en" ? "https://apps.apple.com/us/app/todorant/id1482078243" : "https://apps.apple.com/ru/app/todorant/id1482078243")')
-            v-img(width='150' height='50' aspect-ratio='1' :src='`/img/appstore_${$store.state.language === "ua" ? "en" : $store.state.language}.svg`')
+            v-img(width='150' height='50' aspect-ratio='1' :src='`/img/appstore_${$store.state.language === "ru" ? "ru" : "en"}.svg`')
           a.pl-1(@click='open("https://play.google.com/store/apps/details?id=com.todorant")')
-            v-img(width='170' height='74' aspect-ratio='1' :src='`/img/playstore_${$store.state.language === "ua" ? "en" : $store.state.language}.png`')
+            v-img(width='170' height='74' aspect-ratio='1' :src='`/img/playstore_${$store.state.language === "ru" ? "ru" : "en"}.png`')
         v-row(no-gutters)
           v-col.text-center
             p.caption.ma-0
@@ -107,135 +107,135 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import axios from "axios";
+import Vue from 'vue'
+import axios from 'axios'
 import {
   loginFacebook,
   loginTelegram,
   loginGoogle,
-  loginApple
-} from "../utils/api";
-import * as store from "../plugins/store";
-import Component from "vue-class-component";
-import { i18n } from "../plugins/i18n";
-const { vueTelegramLogin } = require("vue-telegram-login");
-import { reportGA } from "../utils/ga";
-import { serverBus } from "../main";
+  loginApple,
+} from '../utils/api'
+import * as store from '../plugins/store'
+import Component from 'vue-class-component'
+import { i18n } from '../plugins/i18n'
+const { vueTelegramLogin } = require('vue-telegram-login')
+import { reportGA } from '../utils/ga'
+import { serverBus } from '../main'
 
 // FB object is global, declaring here for TS
-declare const FB: any;
+declare const FB: any
 
 @Component({
   components: {
-    vueTelegramLogin
-  }
+    vueTelegramLogin,
+  },
 })
 export default class Home extends Vue {
-  signinDialog = false;
+  signinDialog = false
 
   created() {
     if (this.$route.query && this.$route.query.hash) {
       if (!store.user()) {
-        this.onTelegramAuth(this.$route.query);
+        this.onTelegramAuth(this.$route.query)
       }
     } else if (this.$route.query && this.$route.query.apple) {
       if (!store.user()) {
-        this.onAppleAuth(JSON.parse(this.$route.query.apple as string));
+        this.onAppleAuth(JSON.parse(this.$route.query.apple as string))
       }
     }
   }
 
   mounted() {
-    reportGA("home_mounted");
+    reportGA('home_mounted')
   }
 
   get pictures() {
     return {
       desktop: `img/desktop-${this.imageModifier}.png`,
-      iphone: `img/iphone-${this.imageModifier}.png`
-    };
+      iphone: `img/iphone-${this.imageModifier}.png`,
+    }
   }
 
   get imageModifier() {
-    return `${i18n.locale}-${this.mode}`;
+    return `${i18n.locale}-${this.mode}`
   }
 
   get mode() {
-    return store.dark() ? "dark" : "light";
+    return store.dark() ? 'dark' : 'light'
   }
 
   get googleClientId() {
-    return "599005831909-krrl1m3k011n7qdrkv1voio9cgdv7a0t.apps.googleusercontent.com";
+    return '599005831909-krrl1m3k011n7qdrkv1voio9cgdv7a0t.apps.googleusercontent.com'
   }
 
   async onFacebookSignInSuccess(response: any) {
     try {
-      const user = await loginFacebook(response.authResponse.accessToken);
-      store.setUser(user);
-      this.signinDialog = false;
-      this.$router.replace("superpower");
-      reportGA("login_success", { provider: "facebook" });
+      const user = await loginFacebook(response.authResponse.accessToken)
+      store.setUser(user)
+      this.signinDialog = false
+      this.$router.replace('superpower')
+      reportGA('login_success', { provider: 'facebook' })
     } catch (err) {
-      console.error(err);
-      store.setSnackbarError("errors.login.facebook");
-      reportGA("login_error", { provider: "facebook", error: err.message });
+      console.error(err)
+      store.setSnackbarError('errors.login.facebook')
+      reportGA('login_error', { provider: 'facebook', error: err.message })
     }
   }
   onFacebookSignInError(error: Error) {
-    console.error(error);
-    store.setSnackbarError("errors.login.facebook");
-    reportGA("login_error", { provider: "facebook", error: error.message });
+    console.error(error)
+    store.setSnackbarError('errors.login.facebook')
+    reportGA('login_error', { provider: 'facebook', error: error.message })
   }
   async onGoogleSignInSuccess(googleUser: any) {
     try {
-      const user = await loginGoogle(googleUser.getAuthResponse().id_token);
-      store.setUser(user);
-      this.signinDialog = false;
-      this.$router.replace("superpower");
-      reportGA("login_success", { provider: "google" });
+      const user = await loginGoogle(googleUser.getAuthResponse().id_token)
+      store.setUser(user)
+      this.signinDialog = false
+      this.$router.replace('superpower')
+      reportGA('login_success', { provider: 'google' })
     } catch (err) {
-      console.error(err);
-      store.setSnackbarError("errors.login.google");
-      reportGA("login_error", { provider: "google", error: err.message });
+      console.error(err)
+      store.setSnackbarError('errors.login.google')
+      reportGA('login_error', { provider: 'google', error: err.message })
     }
   }
   onGoogleSignInError(error: Error) {
-    console.error(error);
-    store.setSnackbarError("errors.login.google");
-    reportGA("login_error", { provider: "google", error: error.message });
+    console.error(error)
+    store.setSnackbarError('errors.login.google')
+    reportGA('login_error', { provider: 'google', error: error.message })
   }
   async onTelegramAuth(loginInfo: any) {
     try {
-      const user = await loginTelegram(loginInfo);
-      store.setUser(user);
-      this.signinDialog = false;
-      this.$router.replace("superpower");
-      reportGA("login_success", { provider: "telegram" });
+      const user = await loginTelegram(loginInfo)
+      store.setUser(user)
+      this.signinDialog = false
+      this.$router.replace('superpower')
+      reportGA('login_success', { provider: 'telegram' })
     } catch (err) {
-      console.error(err);
-      store.setSnackbarError("errors.login.telegram");
-      reportGA("login_error", { provider: "telegram", error: err.message });
+      console.error(err)
+      store.setSnackbarError('errors.login.telegram')
+      reportGA('login_error', { provider: 'telegram', error: err.message })
     }
   }
   async onAppleAuth(loginInfo: any) {
     try {
-      const user = await loginApple(loginInfo);
-      store.setUser(user);
-      this.signinDialog = false;
-      this.$router.replace("superpower");
-      reportGA("login_success", { provider: "apple" });
+      const user = await loginApple(loginInfo)
+      store.setUser(user)
+      this.signinDialog = false
+      this.$router.replace('superpower')
+      reportGA('login_success', { provider: 'apple' })
     } catch (err) {
-      console.error(err);
-      store.setSnackbarError("errors.login.apple");
-      reportGA("login_success", { provider: "apple" });
+      console.error(err)
+      store.setSnackbarError('errors.login.apple')
+      reportGA('login_success', { provider: 'apple' })
     }
   }
   open(link: string) {
-    reportGA("open_link", { link });
-    window.open(link, "_blank");
+    reportGA('open_link', { link })
+    window.open(link, '_blank')
   }
   openRules() {
-    serverBus.$emit("rulesRequested");
+    serverBus.$emit('rulesRequested')
   }
 }
 </script>
