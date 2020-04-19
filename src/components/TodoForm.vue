@@ -14,7 +14,14 @@
     ref='textInput'
     auto-grow
     no-resize
-    rows='1').pb-4
+    rows='1').pb-2
+    .mb-2
+      v-btn(text
+      small
+      v-for='(tag, i) in tags'
+      :key='i'
+      :color='colorForTag(tag)'
+      @click='tagSelected(tag)') {{'#'}}{{tag.tag}}
     v-row(no-gutters)
       v-col(cols='12' md='6')
         v-menu(v-model='dateMenu' min-width=0)
@@ -84,14 +91,16 @@ import Component from 'vue-class-component'
 import { Todo } from '../models/todo'
 import { i18n } from '../plugins/i18n'
 import moment from 'moment'
+import * as store from '../plugins/store'
+import { Tag } from '../models/tag'
 
 @Component({
   props: {
     todo: Object,
     enterPressed: Function,
     escapePressed: Function,
-    hideAddToTheTop: Boolean
-  }
+    hideAddToTheTop: Boolean,
+  },
 })
 export default class TodoForm extends Vue {
   dateMenu = false
@@ -110,8 +119,22 @@ export default class TodoForm extends Vue {
     }
   }
 
+  get tags() {
+    const emptyMatches = this.$props.todo.text.match(/#$/g) || []
+    if (emptyMatches.length) {
+      return store.tags()
+    }
+    const matches =
+      this.$props.todo.text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+$/g) || []
+    if (!matches.length) {
+      return []
+    }
+    const match = matches[0]
+    return store.tags().filter((tag) => tag.tag.includes(match.substr(1)))
+  }
+
   textRules = [
-    (v: any) => !!(v || '').trim() || i18n.t('errors.todo.textLenght')
+    (v: any) => !!(v || '').trim() || i18n.t('errors.todo.textLenght'),
   ]
 
   dateAndMonthRules = [
@@ -120,7 +143,7 @@ export default class TodoForm extends Vue {
       return (
         !!todo.date || !!todo.monthAndYear || i18n.t('errors.todo.dateOrMonth')
       )
-    }
+    },
   ]
 
   get firstDayOfWeek() {
@@ -174,6 +197,30 @@ export default class TodoForm extends Vue {
 
   escape() {
     ;(this as any).escapePressed()
+  }
+
+  colorForTag(tag: Tag) {
+    return tag.color || (store.dark() ? '#64B5F6' : '#1E88E5')
+  }
+
+  tagSelected(tag: Tag) {
+    const emptyMatches = this.$props.todo.text.match(/#$/g) || []
+    if (emptyMatches.length) {
+      this.$props.todo.text = `${this.$props.todo.text}${tag.tag} `
+      ;(this.$refs.textInput as any).focus()
+      return
+    }
+    const matches =
+      this.$props.todo.text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+$/g) || []
+    if (!matches.length) {
+      return
+    }
+    const match = matches[0]
+    this.$props.todo.text = `${this.$props.todo.text.substr(
+      0,
+      this.$props.todo.text.length - match.length
+    )}#${tag.tag} `
+    ;(this.$refs.textInput as any).focus()
   }
 }
 </script>
