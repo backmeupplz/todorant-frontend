@@ -93,7 +93,7 @@
               p.caption.pa-2 {{$t('home.lastSignIn')}}
           v-col(cols=0 sm=4)
         v-row.justify-center
-          a.pt-3(@click='open($store.state.language === "en" ? "https://apps.apple.com/us/app/todorant/id1482078243" : "https://apps.apple.com/ru/app/todorant/id1482078243")')
+          a.pt-3(@click='open($store.state.language === "ru" ? "https://apps.apple.com/ru/app/todorant/id1482078243" : "https://apps.apple.com/us/app/todorant/id1482078243")')
             v-img(width='150' height='50' aspect-ratio='1' :src='`/img/appstore_${$store.state.language === "ru" ? "ru" : "en"}.svg`')
           a.pl-1(@click='open("https://play.google.com/store/apps/details?id=com.todorant")')
             v-img(width='170' height='74' aspect-ratio='1' :src='`/img/playstore_${$store.state.language === "ru" ? "ru" : "en"}.png`')
