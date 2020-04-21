@@ -118,16 +118,15 @@ export default class TodoForm extends Vue {
   }
   set todoTime(newValue: any) {
     this.$props.todo.time = newValue
-    console.log(this.$props.todo)
     if (!this.$props.todo.date && !this.$props.todo.monthAndYear) {
       this.$props.todo.date = new Date().toISOString().substr(0, 10)
     }
   }
 
   get tags() {
-    if (!this.focused) {
-      return []
-    }
+    // if (!this.focused) {
+    //   return []
+    // }
     const emptyMatches = this.$props.todo.text.match(/#$/g) || []
     if (emptyMatches.length) {
       return store.tags()
