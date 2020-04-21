@@ -4,7 +4,7 @@
       v-list-item(v-if='$store.state.userState.planning').pt-4
         v-flex
           v-alert(text color='info' icon='info') {{$t('todo.planning')}}
-      v-list-item.d-flex.align-center
+      v-list-item.d-flex.align-center(style='position: sticky; top: 53; z-index: 2;' :style='{backgroundColor:$store.state.dark ? "#424242" : "#ffffff"}')
         v-switch.ma-0.pa-0(v-if='!calendarViewEnabled'
         hide-details v-model='showCompleted'
         :label='$t("todo.list.completed")'
