@@ -14,7 +14,9 @@
     ref='textInput'
     auto-grow
     no-resize
-    rows='1').pb-2
+    rows='1'
+    @focus='focused = true'
+    @blur='focused = false').pb-2
     .mb-4(v-if='tags.length')
       v-btn(text
       small
@@ -108,6 +110,8 @@ export default class TodoForm extends Vue {
   timeMenu = false
   moreShown = false
 
+  focused = false
+
   get todoTime() {
     return this.$props.todo.time
   }
@@ -120,6 +124,9 @@ export default class TodoForm extends Vue {
   }
 
   get tags() {
+    if (!this.focused) {
+      return []
+    }
     const emptyMatches = this.$props.todo.text.match(/#$/g) || []
     if (emptyMatches.length) {
       return store.tags()
