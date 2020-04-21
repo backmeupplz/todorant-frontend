@@ -118,6 +118,9 @@ export default class AddTodo extends Vue {
     if (!oldVal && val) {
       this.reset()
     }
+    if (oldVal && !val) {
+      this.todoToBreakdown = null
+    }
   }
 
   openDialog() {
