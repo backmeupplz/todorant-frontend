@@ -28,63 +28,95 @@
           :loading='loading'
           v-shortkey.once="['enter']"
           @shortkey='save') {{$t('save')}}
+    // Breakdown
+    BreakdownRequest(:dialog='breakdownRequestDialog'
+    :close='closeBreakdownRequestDialog'
+    :breakdown='breakdownRequest')
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { Watch } from "vue-property-decorator";
-import TodoForm from "./TodoForm.vue";
-import { Todo } from "../models/todo";
-import * as store from "../plugins/store";
-import * as api from "../utils/api";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { Watch } from 'vue-property-decorator'
+import TodoForm from './TodoForm.vue'
+import { Todo } from '../models/todo'
+import BreakdownRequest from './BreakdownRequest.vue'
+import * as store from '../plugins/store'
+import * as api from '../utils/api'
+import { serverBus } from '../main'
 
 @Component({
-  components: { TodoForm },
+  components: { TodoForm, BreakdownRequest },
   props: {
     todo: Object,
-    cleanTodo: Function
-  }
+    cleanTodo: Function,
+    requestBreakdown: Function,
+  },
 })
 export default class EditTodo extends Vue {
-  loading = false;
-  dialog = false;
+  loading = false
+  dialog = false
 
-  @Watch("todo")
-  onTodoChanged(val: boolean, oldVal: boolean) {
-    this.dialog = !!val;
+  breakdownRequestDialog = false
+
+  initialMonthAndYear = ''
+  initialDate = ''
+
+  @Watch('todo')
+  onTodoChanged(val: Todo, oldVal: Todo) {
+    this.dialog = !!val
     if (!oldVal && val) {
-      this.reset();
+      this.reset()
+      this.initialMonthAndYear = val.monthAndYear
+      this.initialDate = val.date
     }
   }
 
   reset() {
     if (this.$refs.form) {
-      (this.$refs.form as any).resetValidation();
+      ;(this.$refs.form as any).resetValidation()
     }
   }
 
   async save() {
-    const user = store.user();
+    const user = store.user()
     if (!user) {
-      return;
+      return
     }
     if (!(this.$refs.form as any).validate()) {
-      return;
+      return
     }
-    this.loading = true;
+    this.loading = true
     try {
-      await api.editTodo(user, (this as any).todo);
-      (this as any).cleanTodo();
+      if (
+        (this as any).todo.frogFails > 2 &&
+        (this.initialDate !== (this as any).todo.date ||
+          this.initialMonthAndYear !== (this as any).todo.monthAndYear)
+      ) {
+        this.breakdownRequestDialog = true
+        return
+      }
+      await api.editTodo(user, (this as any).todo)
+      ;(this as any).cleanTodo()
     } catch (err) {
-      store.setSnackbarError(err.response ? err.response.data : err.message);
+      store.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
-      this.loading = false;
+      this.loading = false
     }
   }
 
   escapePressed() {
-    this.dialog = false;
+    this.dialog = false
+  }
+
+  closeBreakdownRequestDialog() {
+    this.breakdownRequestDialog = false
+  }
+
+  breakdownRequest() {
+    this.breakdownRequestDialog = false
+    ;(this as any).cleanTodo()
+    serverBus.$emit('addTodoRequested', undefined, (this as any).todo)
   }
 }
 </script>

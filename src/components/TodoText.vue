@@ -1,6 +1,7 @@
 <template lang="pug">
   div(style='width: 100%')
     span(v-if='debug') ({{todo.order}}) 
+    span(v-if='debug') ({{todo.frogFails}}) 
     span(v-if='!!todo.frog') 🐸 
     span(v-if='!!todo.time') {{todo.time}} 
     span(v-for='element in linkifiedText')

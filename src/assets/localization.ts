@@ -1,5 +1,11 @@
 export const messages = {
   en: {
+    breakdown: {
+      request:
+        'Looks like you move this task way too much. Please break it down, you can no longer move it to another date. Believe me, it will help to compele the task!',
+      button: 'Breakdown',
+    },
+    warning: 'Warning',
     hashtags: {
       title: 'Hashtags',
     },
@@ -352,6 +358,12 @@ Thank you a lot for Todorant!`,
     },
   },
   ru: {
+    breakdown: {
+      request:
+        'Похоже, вы переносите эту задачу слишком часто. Пожалуйста, разбейте ее на более мелкие задачи, вы больше не можете ее переносить. Поверьте, это поможет вам завершить задачу!',
+      button: 'Разбить',
+    },
+    warning: 'Внимание',
     hashtags: {
       title: 'Хештеги',
     },
@@ -703,6 +715,12 @@ Thank you a lot for Todorant!`,
     },
   },
   ua: {
+    breakdown: {
+      request:
+        'Схоже, ви занадто сильно переміщуєте цю задачу. Будь ласка, зламайте його, ви більше не можете переміщувати його на іншу дату. Повірте, це допоможе виконати завдання!',
+      button: 'Розбити',
+    },
+    warning: 'Увага',
     hashtags: {
       title: 'Хештеги',
     },

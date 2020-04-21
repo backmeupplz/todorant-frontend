@@ -50,7 +50,7 @@
               v-card(:class='cardClass(todo)')
                 v-card-text(:class='!editable ? "px-3 pt-2 pb-0 ma-0" : ""')
                   v-row(no-gutters).d-flex.flex-direction-row
-                    .handle.pr-3(v-if='editable')
+                    .handle.pr-3(v-if='editable && todo.frogFails < 3')
                       v-icon menu
                     TodoText(:todo='todo')
                 v-card-actions.pb-2.pt-2.ma-0(v-if='!editable')
@@ -79,7 +79,7 @@
                   v-btn(text small icon @click='completeOrUndoTodo(todo)' :loading='loading' v-if='!editable')
                     v-icon(small) {{todo.completed ? 'repeat' : 'done'}}
       v-progress-linear(v-if='todosUpdating && !calendarViewEnabled' :indeterminate='true')
-    EditTodo(:todo='todoEdited' :cleanTodo='cleanTodo')
+    EditTodo(:todo='todoEdited' :cleanTodo='cleanTodo' :requestBreakdown='requestBreakdown')
     DeleteTodo(:todo='todoDeleted')
 </template>
 
@@ -430,6 +430,10 @@ export default class TodoList extends Vue {
       return
     }
     serverBus.$emit('addTodoRequested', params.date)
+  }
+
+  requestBreakdown(todo: Todo) {
+    console.warn(`Breakdown for ${todo.text}`)
   }
 }
 </script>
