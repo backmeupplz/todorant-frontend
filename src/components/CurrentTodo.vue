@@ -30,7 +30,7 @@
               icon
               @click='skipTodo'
               :loading='loading'
-              v-if='incompleteTodosCount > 1 && !todo.frog')
+              v-if='incompleteTodosCount > 1 && !todo.frog && !todo.time')
                 v-icon arrow_right_alt
               v-tooltip(:max-width='300' bottom).ml-4
                 template(v-slot:activator='{ on }')
@@ -62,32 +62,32 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { Todo } from "../models/todo";
-import { getTodos, editTodo } from "../utils/api";
-import * as store from "../plugins/store";
-import TodoText from "./TodoText.vue";
-import DeleteTodo from "./DeleteTodo.vue";
-import { Watch } from "vue-property-decorator";
-import * as api from "../utils/api";
-import { serverBus } from "../main";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { Todo } from '../models/todo'
+import { getTodos, editTodo } from '../utils/api'
+import * as store from '../plugins/store'
+import TodoText from './TodoText.vue'
+import DeleteTodo from './DeleteTodo.vue'
+import { Watch } from 'vue-property-decorator'
+import * as api from '../utils/api'
+import { serverBus } from '../main'
 
 @Component({
   components: {
     TodoText,
-    DeleteTodo
-  }
+    DeleteTodo,
+  },
 })
 export default class CurrentTodo extends Vue {
-  showCompleted = false;
-  todo: Todo | null = null;
-  incompleteTodosCount = 0;
-  todosCount = 0;
+  showCompleted = false
+  todo: Todo | null = null
+  incompleteTodosCount = 0
+  todosCount = 0
 
-  loading = false;
+  loading = false
 
-  todoDeleted: Todo | null = null;
+  todoDeleted: Todo | null = null
 
   get progress() {
     return this.todosCount === 0
@@ -95,86 +95,85 @@ export default class CurrentTodo extends Vue {
       : (
           ((this.todosCount - this.incompleteTodosCount) / this.todosCount) *
           100
-        ).toFixed(0);
+        ).toFixed(0)
   }
 
   mounted() {
-    this.updateTodo();
+    this.updateTodo()
   }
 
   created() {
-    serverBus.$on("refreshRequested", () => {
-      this.updateTodo();
-    });
+    serverBus.$on('refreshRequested', () => {
+      this.updateTodo()
+    })
   }
 
-  todoUpdating = false;
+  todoUpdating = false
   async updateTodo() {
     if (this.todoUpdating) {
-      return;
+      return
     }
-    const user = store.user();
+    const user = store.user()
     if (!user) {
-      return;
+      return
     }
-    this.todoUpdating = true;
+    this.todoUpdating = true
     try {
-      const fetched = await api.getCurrentTodo(user);
-      this.todo = fetched.todo || null;
-      this.incompleteTodosCount = fetched.incompleteTodosCount;
-      this.todosCount = fetched.todosCount;
+      const fetched = await api.getCurrentTodo(user)
+      this.todo = fetched.todo || null
+      this.incompleteTodosCount = fetched.incompleteTodosCount
+      this.todosCount = fetched.todosCount
     } catch (err) {
-      store.setSnackbarError("errors.loadTodos");
+      store.setSnackbarError('errors.loadTodos')
     } finally {
-      this.todoUpdating = false;
+      this.todoUpdating = false
     }
   }
 
   async completeTodo() {
-    const user = store.user();
+    const user = store.user()
     if (!user) {
-      return;
+      return
     }
     if (!this.todo) {
-      return;
+      return
     }
-    this.loading = true;
+    this.loading = true
     try {
-      await api.completeTodo(user, this.todo);
-      this.updateTodo();
+      await api.completeTodo(user, this.todo)
+      this.updateTodo()
     } catch (err) {
-      store.setSnackbarError(err.response ? err.response.data : err.message);
+      store.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
-      this.loading = false;
+      this.loading = false
     }
   }
 
   async deleteTodo() {
-    this.todoDeleted = this.todo ? { ...this.todo } : null;
+    this.todoDeleted = this.todo ? { ...this.todo } : null
   }
 
   addTodo() {
-    serverBus.$emit("addTodoRequested", undefined, this.todo);
+    serverBus.$emit('addTodoRequested', undefined, this.todo)
   }
 
   async skipTodo() {
-    const user = store.user();
+    const user = store.user()
     if (!user) {
-      return;
+      return
     }
     if (!this.todo) {
-      return;
+      return
     }
-    this.loading = true;
+    this.loading = true
     try {
-      await api.skipTodo(user, this.todo);
-      this.updateTodo();
+      await api.skipTodo(user, this.todo)
+      this.updateTodo()
     } catch (err) {
-      store.setSnackbarError(err.response ? err.response.data : err.message);
+      store.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
-      this.loading = false;
+      this.loading = false
     }
   }
 }
 </script>
-
