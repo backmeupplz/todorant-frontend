@@ -16,7 +16,8 @@
     no-resize
     rows='1'
     @focus='focused = true'
-    @blur='focused = false').pb-2
+    @blur='focused = false'
+    :class='tags.length ? "pb-2" : "pb-4"')
     .mb-4(v-if='tags.length')
       v-btn(text
       small
