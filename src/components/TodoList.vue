@@ -49,10 +49,10 @@
             v-list-item-content
               v-card(:class='cardClass(todo)')
                 v-card-text(:class='!editable ? "px-3 pt-2 pb-0 ma-0" : ""')
-                  v-row(no-gutters).d-flex.flex-direction-row
-                    .handle.pr-3(v-if='editable && todo.frogFails < 3')
+                  v-row(no-gutters)
+                    .handle.pr-3(v-if='editable && todo.frogFails < 3').red
                       v-icon menu
-                    TodoText(:todo='todo')
+                    TodoText(:todo='todo').blue
                 v-card-actions.pb-2.pt-2.ma-0(v-if='!editable')
                   v-icon(v-if='todoOutstanding(todo)') error_outline
                   v-col(no-gutters).px-2.py-0.ma-0
