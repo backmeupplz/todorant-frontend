@@ -29,7 +29,8 @@
         :weekdays='weekdays'
         @click:date="addEvent"
         @click:event="editEvent"
-        :event-more='false')
+        :event-more='false'
+        :locale='locale')
       div(v-else v-for='(todoSection, i) in todos' :key='i')
         v-subheader
           v-tooltip(right :max-width='300' v-if='todoSection.title.length === 10')
@@ -119,6 +120,10 @@ export default class TodoList extends Vue {
   drag = false
 
   calendarViewEnabled = false
+
+  get locale() {
+    return store.language() === 'ua' ? 'uk' : store.language()
+  }
 
   get editable() {
     return store.editting()
