@@ -31,75 +31,75 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import * as store from "../plugins/store";
-import * as api from "../utils/api";
-import { serverBus } from "../main";
-import { i18n } from "../plugins/i18n";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import * as store from '../plugins/store'
+import * as api from '../utils/api'
+import { serverBus } from '../main'
+import { i18n } from '../plugins/i18n'
 
 @Component({
   props: {
     dialog: Boolean,
-    close: Function
-  }
+    close: Function,
+  },
 })
 export default class Settings extends Vue {
-  loading = false;
+  loading = false
 
-  weekdays = [1, 2, 3, 4, 5, 6, 0].map(n => ({
+  weekdays = [1, 2, 3, 4, 5, 6, 0].map((n) => ({
     text: i18n.t(`weekdays.${n}`),
-    value: n
-  }));
+    value: n,
+  }))
 
   get showTodayOnAddTodo() {
-    return store.userState().settings.showTodayOnAddTodo || false;
+    return store.userState().settings.showTodayOnAddTodo || false
   }
   set showTodayOnAddTodo(val: boolean) {
-    store.userState().settings.showTodayOnAddTodo = val;
+    store.userState().settings.showTodayOnAddTodo = val
   }
 
   get firstDayOfWeek() {
     const storeFirstDayOfWeek = this.$store.state.userState.settings
-      .firstDayOfWeek;
+      .firstDayOfWeek
     return storeFirstDayOfWeek === undefined
-      ? this.$store.state.language === "ru"
-        ? 1
-        : 0
-      : storeFirstDayOfWeek;
+      ? this.$store.state.language === 'en'
+        ? 0
+        : 1
+      : storeFirstDayOfWeek
   }
   set firstDayOfWeek(val: number) {
-    store.userState().settings.firstDayOfWeek = val;
+    store.userState().settings.firstDayOfWeek = val
   }
 
   get newTodosGoFirst() {
-    return this.$store.state.userState.settings.newTodosGoFirst;
+    return this.$store.state.userState.settings.newTodosGoFirst
   }
   set newTodosGoFirst(val: boolean) {
-    store.userState().settings.newTodosGoFirst = val;
+    store.userState().settings.newTodosGoFirst = val
   }
 
   get preserveOrderByTime() {
-    return this.$store.state.userState.settings.preserveOrderByTime;
+    return this.$store.state.userState.settings.preserveOrderByTime
   }
   set preserveOrderByTime(val: boolean) {
-    store.userState().settings.preserveOrderByTime = val;
+    store.userState().settings.preserveOrderByTime = val
   }
 
   async save() {
-    const user = store.user();
+    const user = store.user()
     if (!user) {
-      return;
+      return
     }
-    this.loading = true;
+    this.loading = true
     try {
-      await api.setSettings(user, store.userState().settings);
-      serverBus.$emit("refreshRequested");
-      (this as any).close();
+      await api.setSettings(user, store.userState().settings)
+      serverBus.$emit('refreshRequested')
+      ;(this as any).close()
     } catch (err) {
-      store.setSnackbarError(err.response ? err.response.data : err.message);
+      store.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
-      this.loading = false;
+      this.loading = false
     }
   }
 }

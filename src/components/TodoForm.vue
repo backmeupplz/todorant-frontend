@@ -42,7 +42,7 @@
           v-model='todo.date'
           :min='todayFormattedForExactDate'
           :first-day-of-week='firstDayOfWeek'
-          :locale='$store.state.language'
+          :locale='locale'
           :show-current='todayFormatted')
       v-col(cols='12' md='6')
         v-menu(v-model='monthMenu'  min-width=0)
@@ -59,7 +59,7 @@
           v-model='todo.monthAndYear'
           :min='todayFormattedForDatePicker'
           type='month'
-          :locale='$store.state.language')
+          :locale='locale')
       v-col(v-if='moreShown' cols='12' md='6')
         v-menu(v-model='timeMenu' :close-on-content-click='false'  min-width=0)
           template(v-slot:activator='{ on }')
@@ -113,6 +113,10 @@ export default class TodoForm extends Vue {
 
   focused = false
 
+  get locale() {
+    return store.language() === 'ua' ? 'uk' : store.language()
+  }
+
   get todoTime() {
     return this.$props.todo.time
   }
@@ -160,9 +164,9 @@ export default class TodoForm extends Vue {
     const storeFirstDayOfWeek = this.$store.state.userState.settings
       .firstDayOfWeek
     return storeFirstDayOfWeek === undefined
-      ? this.$store.state.language === 'ru'
-        ? 1
-        : 0
+      ? this.$store.state.language === 'en'
+        ? 0
+        : 1
       : storeFirstDayOfWeek
   }
 
