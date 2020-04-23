@@ -137,7 +137,10 @@ export default class TodoForm extends Vue {
       return []
     }
     const match = matches[0]
-    return store.tags().filter((tag) => tag.tag.includes(match.substr(1)))
+    return store
+      .tags()
+      .filter((tag) => tag.tag.includes(match.substr(1)))
+      .filter((tag) => tag.tag !== match.substr(1))
   }
 
   textRules = [
