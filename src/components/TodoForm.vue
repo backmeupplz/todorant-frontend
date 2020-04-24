@@ -6,10 +6,7 @@
     :rules='textRules'
     v-model='todo.text'
     autofocus
-    v-on:keyup.enter="enterUp"
-    v-on:keyup.shift.native="shiftUp"
-    v-on:keydown.enter="enterDown"
-    v-on:keydown.shift="shiftDown"
+    v-on:keydown="enterDown"
     v-on:keyup.esc="escape"
     ref='textInput'
     auto-grow
@@ -184,28 +181,12 @@ export default class TodoForm extends Vue {
     return moment(date).format()
   }
 
-  shiftOn = false
-  enterOn = false
-
-  enterUp() {
-    this.enterOn = false
-  }
-  enterDown() {
-    this.enterOn = true
-    this.checkEnter()
-  }
-
-  shiftUp() {
-    this.shiftOn = false
-  }
-
-  shiftDown() {
-    this.shiftOn = true
-  }
-
-  checkEnter() {
-    if (this.shiftOn && this.enterOn) {
-      ;(this as any).enterPressed()
+  enterDown(evt: any) {
+    if (evt.keyCode == 13 && evt.shiftKey) {
+      if (evt.type == 'keydown') {
+        ;(this as any).enterPressed()
+      }
+      evt.preventDefault()
     }
   }
 
