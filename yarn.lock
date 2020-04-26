@@ -1731,6 +1731,11 @@ core-js@^2.4.0:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.10.tgz#8a5b8391f8cc7013da703411ce5b585706300d7f"
   integrity sha512-I39t74+4t+zau64EN1fE5v2W31Adtc/REhzWN+gWRRXg6WH5qAsZm62DHpQ1+Yhe4047T55jvzz7MUqF/dBBlA==
 
+core-js@^3.3.2:
+  version "3.6.5"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
+  integrity sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA==
+
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
@@ -7675,6 +7680,14 @@ vue-shortkey@^3.1.7:
   dependencies:
     custom-event-polyfill "^1.0.7"
     element-matches "^0.1.2"
+
+vue-simple-calendar@^4.3.2:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/vue-simple-calendar/-/vue-simple-calendar-4.3.2.tgz#17a89c85b736a97a98e04895369a23d84baa2a88"
+  integrity sha512-HVqBLZDjzTSi3ao8WOsfRxEudgIl5oqt3AKCvQrq4UVudthWvh7iPwuPiSn32ovF+PM1bE0rSH94Vmc27xkpug==
+  dependencies:
+    core-js "^3.3.2"
+    vue "^2.6.10"
 
 vue-style-loader@^4.1.0:
   version "4.1.2"

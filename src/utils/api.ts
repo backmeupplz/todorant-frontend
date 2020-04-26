@@ -168,7 +168,8 @@ export async function getTodos(
   skip: number,
   limit: number,
   hash?: string,
-  calendarView: boolean = false
+  calendarView: boolean = false,
+  period?: Date
 ) {
   await updateState(user)
   return (await axios.get(`${base}/todo`, {
@@ -178,7 +179,7 @@ export async function getTodos(
       hash,
       skip,
       limit,
-      today: getToday(),
+      today: period ? getStringFromDate(period) : getToday(),
       calendarView,
     },
   })).data as Todo[]
@@ -314,10 +315,13 @@ function getHeaders(user: User) {
 }
 
 export function getToday() {
-  const now = new Date()
-  return `${now.getFullYear()}-${
-    now.getMonth() + 1 < 10 ? `0${now.getMonth() + 1}` : now.getMonth() + 1
-  }-${now.getDate() < 10 ? `0${now.getDate()}` : now.getDate()}`
+  return getStringFromDate(new Date())
+}
+
+function getStringFromDate(date: Date) {
+  return `${date.getFullYear()}-${
+    date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
+  }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`
 }
 
 export function getTomorrow() {

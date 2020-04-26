@@ -13,7 +13,7 @@
         v-spacer
         v-btn(v-if='!editable && !showCompleted' icon @click='toggleCalendar' :color='calendarViewEnabled ? "blue" : ""' :loading='todosUpdating || loading')
           v-icon calendar_today
-        v-btn(v-if='!editable && !showCompleted && !calendarViewEnabled' icon :loading='todosUpdating' @click='editable = true')
+        v-btn(v-if='!editable && !showCompleted' icon :loading='todosUpdating' @click='editable = true')
           v-icon format_list_numbered
         v-btn(v-if='!!editable' icon :loading='todosUpdating || loading' @click='editable = false')
           v-icon clear
@@ -23,14 +23,27 @@
           v-icon refresh
       v-list-item(v-if='calendarViewEnabled && todosUpdating' flex)
         v-progress-linear(:indeterminate='true')
-      v-list-item(v-if='calendarViewEnabled' flex)
-        v-calendar(type='month'
-        :events='events'
-        :weekdays='weekdays'
-        @click:date="addEvent"
-        @click:event="editEvent"
-        :event-more='false'
-        :locale='locale')
+      v-list-item(v-if='calendarViewEnabled' flex :class='editable ? "editable" : "non-editable"')
+        calendar-view(:events='events'
+        :locale='locale'
+        :startingDayOfWeek='firstDayOfWeek'
+        :showDate='currentPeriod'
+        :class='$store.state.dark ? "dark" : "light"'
+        :enableDragDrop='editable'
+        @click-event="editEvent"
+        @drop-on-date='moveDate')
+          calendar-view-header(v-if='!editable'
+          slot="header"
+          slot-scope="{ headerProps }"
+          :header-props="headerProps"
+          @input='(date) => currentPeriod = date')   
+        //- v-calendar(type='month'
+        //- :events='events'
+        //- :weekdays='weekdays'
+        //- @click:date="addEvent"
+        //- @click:event="editEvent"
+        //- :event-more='false'
+        //- :locale='locale')
       div(v-else v-for='(todoSection, i) in todos' :key='i')
         v-subheader
           v-tooltip(right :max-width='300' v-if='todoSection.title.length === 10')
@@ -99,6 +112,8 @@ import { serverBus } from '../main'
 import draggable from 'vuedraggable'
 import { TodoSection } from '../models/TodoSection'
 import { isTodoOld, isDateTooOld } from '../utils/isTodoOld'
+import { CalendarView, CalendarViewHeader } from 'vue-simple-calendar'
+import moment from 'moment'
 
 @Component({
   components: {
@@ -106,6 +121,8 @@ import { isTodoOld, isDateTooOld } from '../utils/isTodoOld'
     EditTodo,
     DeleteTodo,
     draggable,
+    CalendarView,
+    CalendarViewHeader,
   },
 })
 export default class TodoList extends Vue {
@@ -114,12 +131,34 @@ export default class TodoList extends Vue {
   todoDeleted: Todo | null = null
   todos = [] as TodoSection[]
 
+  get events() {
+    return this.todos
+      .map((section) => {
+        return section.todos
+          .filter((todo) => !!todo.date)
+          .map((todo) => ({
+            id: todo._id,
+            title: todo.text,
+            startDate: section.title,
+          }))
+      })
+      .reduce((p, c) => p.concat(c), [])
+  }
+
   noMoreTodos = false
 
   loading = false
   drag = false
 
   calendarViewEnabled = false
+
+  currentPeriod = new Date()
+
+  @Watch('currentPeriod')
+  onCurrentPeriodChanged(val: boolean, oldVal: boolean) {
+    this.todos = []
+    this.loadTodos()
+  }
 
   get locale() {
     return store.language() === 'ua' ? 'uk' : store.language()
@@ -133,18 +172,6 @@ export default class TodoList extends Vue {
     if (value === false) {
       this.loadTodos()
     }
-  }
-
-  get events() {
-    return this.todos
-      .reduce(
-        (prev, cur) => prev.concat(cur.todos.filter((todo) => !!todo.date)),
-        [] as Todo[]
-      )
-      .map((todo) => ({
-        name: todo.text,
-        start: `${todo.monthAndYear}-${todo.date}`,
-      }))
   }
   get weekdays() {
     const storeFirstDayOfWeek = this.$store.state.userState.settings
@@ -208,7 +235,8 @@ export default class TodoList extends Vue {
           ? 20
           : this.todos.reduce((prev, cur) => prev + cur.todos.length, 0),
         this.$router.currentRoute.hash,
-        this.calendarViewEnabled
+        this.calendarViewEnabled,
+        this.calendarViewEnabled ? this.currentPeriod : undefined
       )
       this.noMoreTodos = fetchedTodos.length <= 0
       let allTodos = more
@@ -280,15 +308,15 @@ export default class TodoList extends Vue {
   }
 
   editEvent(event: any) {
+    if (this.editable) {
+      return
+    }
     const flatTodos = this.todos.reduce(
       (prev, cur) => prev.concat(cur.todos),
       [] as Todo[]
     )
     for (const todo of flatTodos) {
-      if (
-        todo.text === event.event.name &&
-        todo.date === event.event.start.substr(8)
-      ) {
+      if (todo._id === event.originalEvent.id) {
         this.editTodo(todo)
         return
       }
@@ -428,23 +456,156 @@ export default class TodoList extends Vue {
     this.loadTodos(true, false)
   }
 
-  addEvent(params: any) {
-    const tooOld = isDateTooOld(params.date, api.getToday())
-    if (tooOld) {
-      store.setSnackbarError('errors.addTodoOld')
-      return
-    }
-    serverBus.$emit('addTodoRequested', params.date)
-  }
-
   requestBreakdown(todo: Todo) {
     console.warn(`Breakdown for ${todo.text}`)
+  }
+
+  get firstDayOfWeek() {
+    const storeFirstDayOfWeek = this.$store.state.userState.settings
+      .firstDayOfWeek
+    return storeFirstDayOfWeek === undefined
+      ? this.$store.state.language === 'en'
+        ? 0
+        : 1
+      : storeFirstDayOfWeek
+  }
+
+  monthAndYearFromDate(date: Date) {
+    return `${date.getFullYear()}-${
+      date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
+    }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`
+  }
+
+  moveDate(event: any, date: Date) {
+    if (!this.editable) {
+      return
+    }
+    const newTitle = moment(date).format('YYYY-MM-DD')
+    if (isDateTooOld(newTitle, api.getToday())) {
+      return
+    }
+    for (const section of this.todos) {
+      for (const todo of section.todos) {
+        if (todo._id === event.originalEvent.id) {
+          if (newTitle !== section.title) {
+            // Remove from old section
+            section.todos = section.todos.filter((t) => t._id !== todo._id)
+            // Add to new section
+            let i = 0
+            for (const section of this.todos) {
+              if (section.title === newTitle) {
+                section.todos.push(todo)
+                Vue.set(this.todos, i, section)
+                return
+              }
+              i++
+            }
+            this.todos.push({
+              title: newTitle,
+              todos: [todo],
+            })
+            return
+          }
+        }
+      }
+    }
   }
 }
 </script>
 
 <style>
+/*
+  List view
+*/
+
 .handle {
+  cursor: move;
+}
+
+/* 
+  Calendar view
+*/
+
+/* Colors */
+
+.light .cv-header,
+.light .cv-header-day {
+  background-color: #fff;
+}
+
+.dark .cv-header,
+.dark .cv-header-day {
+  background-color: #424242;
+}
+
+.light .cv-header button {
+  color: rgba(0, 0, 0, 0.54);
+  border-width: 0;
+}
+.dark .cv-header button {
+  color: hsla(0, 0%, 100%, 0.6);
+}
+
+.light .cv-day.past {
+  background-color: #fafafa;
+}
+.light .cv-day.outsideOfMonth {
+  background-color: #f7f7f7;
+}
+.light .cv-day.today {
+  background-color: #ffe;
+}
+.dark .cv-day.past {
+  background-color: #636363;
+}
+.dark .cv-day.outsideOfMonth {
+  background-color: #2b2b2b;
+}
+.dark .cv-day.today {
+  background-color: #61553c;
+}
+
+.light .cv-event {
+  border-color: #e0e0f0;
+  background-color: #e7e7ff;
+}
+
+.dark .cv-event {
+  background-color: #7d7d88;
+}
+
+.dark .cv-day.draghover {
+  box-shadow: inset 0 0 0.2em 0.2em white;
+}
+.light .cv-day.draghover {
+  box-shadow: inset 0 0 0.2em 0.2em rgb(190, 190, 190);
+}
+
+/* Funcionality */
+
+.cv-week {
+  min-height: 8rem;
+}
+
+.cv-day {
+  display: flex;
+}
+
+.cv-header button {
+  border-width: 0;
+}
+
+.cv-event {
+  border-radius: 0.5em;
+  text-overflow: ellipsis;
+  border-width: 0;
+}
+
+.non-editable .cv-event {
+  cursor: pointer;
+}
+
+.editable .cv-event {
   cursor: move;
 }
 </style>

@@ -37,62 +37,60 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import TodoList from "../components/TodoList.vue";
-import CurrentTodo from "../components/CurrentTodo.vue";
-import Report from "../components/Report.vue";
-import AddTodo from "../components/AddTodo.vue";
-import { Watch } from "vue-property-decorator";
-import { serverBus } from "../main";
-import * as store from "../plugins/store";
-import { i18n } from "../plugins/i18n";
-import { mergeTelegram } from "../utils/api";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import TodoList from '../components/TodoList.vue'
+import CurrentTodo from '../components/CurrentTodo.vue'
+import Report from '../components/Report.vue'
+import AddTodo from '../components/AddTodo.vue'
+import { Watch } from 'vue-property-decorator'
+import { serverBus } from '../main'
+import * as store from '../plugins/store'
+import { i18n } from '../plugins/i18n'
+import { mergeTelegram } from '../utils/api'
 
 @Component({ components: { TodoList, AddTodo, CurrentTodo, Report } })
 export default class Superpower extends Vue {
-  currentTab = 0;
+  currentTab = 0
 
   async created() {
     // Try telegram merge
-    const query = this.$route.query;
+    const query = this.$route.query
     if (query && query.hash) {
-      const user = store.user();
+      const user = store.user()
       if (!user || user.telegramId) {
-        return;
+        return
       }
       try {
-        const loginInfo = query;
+        const loginInfo = query
         if (
-          !confirm(
-            i18n.t("merge.confirm", {
-              id: loginInfo.id
-            }) as string
-          )
+          !confirm(i18n.t('merge.confirm', {
+            id: loginInfo.id,
+          }) as string)
         ) {
-          return;
+          return
         }
-        await mergeTelegram(user, loginInfo);
+        await mergeTelegram(user, loginInfo)
       } catch (err) {
-        store.setSnackbarError("errors.login.telegram");
+        store.setSnackbarError('errors.login.telegram')
       } finally {
-        this.$router.replace("/superpower");
+        this.$router.replace('/superpower')
       }
     }
   }
 
   mounted() {
     if (this.$router.currentRoute.hash) {
-      this.currentTab = 1;
+      this.currentTab = 1
     }
   }
 
-  @Watch("currentTab")
+  @Watch('currentTab')
   currentTabChanged(val: any, oldVal: any) {
     if (val !== oldVal) {
-      serverBus.$emit("refreshRequested");
+      serverBus.$emit('refreshRequested')
     }
-    store.setEditting(false);
+    store.setEditting(false)
   }
 }
 </script>
