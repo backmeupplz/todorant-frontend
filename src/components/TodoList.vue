@@ -584,7 +584,7 @@ export default class TodoList extends Vue {
 /* Funcionality */
 
 .cv-week {
-  min-height: 8rem;
+  min-height: 8rem !important;
 }
 
 .cv-day {
