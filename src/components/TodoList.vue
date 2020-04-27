@@ -592,7 +592,7 @@ export default class TodoList extends Vue {
 }
 
 .cv-header button {
-  border-width: 0;
+  border-width: 0 !important;
 }
 
 .cv-event {
