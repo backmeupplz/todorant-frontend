@@ -15,6 +15,11 @@
             :escapePressed='escapePressed'
             :hideAddToTheTop='true')
         v-card-actions
+          v-btn(text
+          @click='deleteTodo'
+          :loading='loading'
+          color='error')
+            v-icon delete
           v-spacer
           v-btn(color='error'
           text 
@@ -51,6 +56,7 @@ import { serverBus } from '../main'
     todo: Object,
     cleanTodo: Function,
     requestBreakdown: Function,
+    requestDelete: Function,
   },
 })
 export default class EditTodo extends Vue {
@@ -103,6 +109,12 @@ export default class EditTodo extends Vue {
     } finally {
       this.loading = false
     }
+  }
+
+  async deleteTodo() {
+    const todo = this.$props.todo
+    ;(this as any).cleanTodo(false)
+    this.$props.requestDelete(todo)
   }
 
   escapePressed() {

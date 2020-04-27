@@ -36,14 +36,7 @@
           slot="header"
           slot-scope="{ headerProps }"
           :header-props="headerProps"
-          @input='(date) => currentPeriod = date')   
-        //- v-calendar(type='month'
-        //- :events='events'
-        //- :weekdays='weekdays'
-        //- @click:date="addEvent"
-        //- @click:event="editEvent"
-        //- :event-more='false'
-        //- :locale='locale')
+          @input='(date) => currentPeriod = date')
       div(v-else v-for='(todoSection, i) in todos' :key='i')
         v-subheader
           v-tooltip(right :max-width='300' v-if='todoSection.title.length === 10')
@@ -93,7 +86,8 @@
                   v-btn(text small icon @click='completeOrUndoTodo(todo)' :loading='loading' v-if='!editable')
                     v-icon(small) {{todo.completed ? 'repeat' : 'done'}}
       v-progress-linear(v-if='todosUpdating && !calendarViewEnabled' :indeterminate='true')
-    EditTodo(:todo='todoEdited' :cleanTodo='cleanTodo' :requestBreakdown='requestBreakdown')
+    EditTodo(:todo='todoEdited' :cleanTodo='cleanTodo' :requestBreakdown='requestBreakdown'
+    :requestDelete='requestDelete')
     DeleteTodo(:todo='todoDeleted')
 </template>
 
@@ -353,6 +347,10 @@ export default class TodoList extends Vue {
     } finally {
       this.loading = false
     }
+  }
+
+  requestDelete(todo: Todo) {
+    this.deleteTodo(todo)
   }
 
   async deleteTodo(todo: Todo) {

@@ -16,7 +16,9 @@
         text 
         @click='deleteTodo'
         :loading='loading'
-        :disabled='loading') {{$t('delete')}}
+        :disabled='loading'
+        v-shortkey.once="['enter']"
+        @shortkey='deleteTodo') {{$t('delete')}}
 </template>
 
 <script lang="ts">
@@ -29,8 +31,8 @@ import { serverBus } from '../main'
 
 @Component({
   props: {
-    todo: Object
-  }
+    todo: Object,
+  },
 })
 export default class DeleteTodo extends Vue {
   loading = false
