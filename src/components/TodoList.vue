@@ -4,7 +4,7 @@
       v-list-item(v-if='$store.state.userState.planning').pt-4
         v-flex
           v-alert(text color='info' icon='info') {{$t('todo.planning')}}
-      v-list-item.d-flex.align-center(style='position: sticky; top: 60; z-index: 2;' :style='{backgroundColor:$store.state.dark ? "#1e1e1e" : "#ffffff"}')
+      v-list-item.d-flex.align-center(:style='stickyHeaderStyle')
         v-switch.ma-0.pa-0(v-if='!calendarViewEnabled'
         hide-details v-model='showCompleted'
         :label='$t("todo.list.completed")'
@@ -37,54 +37,57 @@
           slot-scope="{ headerProps }"
           :header-props="headerProps"
           @input='(date) => currentPeriod = date')
-      div(v-else v-for='(todoSection, i) in todos' :key='i')
-        v-subheader
-          v-tooltip(right :max-width='300' v-if='todoSection.title.length === 10')
-            template(v-slot:activator='{ on }')
-              span(v-on='on') {{todoSection.title}}
-            span {{$t(weekdayFromTitle(todoSection.title))}}
-          span(v-else) {{todoSection.title}}
-        draggable(v-model='todoSection.todos'
-        group='todo'
-        @start='drag=true'
-        @end='drag=false'
-        v-bind="dragOptions"
-        handle='.handle')
-          v-list-item(v-for='(todo, j) in todoSection.todos'
-          :key='j'
-          v-observe-visibility='(isVisible, entry) => visibilityChanged(isVisible, entry, i, j)')
-            v-list-item-content
-              v-card(:class='cardClass(todo)')
-                v-card-text(:class='!editable ? "px-3 pt-2 pb-0 ma-0" : ""')
-                  v-row(no-gutters)
-                    .handle.pr-3(v-if='editable && todo.frogFails < 3')
-                      v-icon menu
-                    TodoText(:todo='todo')
-                v-card-actions.pb-2.pt-2.ma-0(v-if='!editable')
-                  v-icon(v-if='todoOutstanding(todo)') error_outline
-                  v-col(no-gutters).px-2.py-0.ma-0
-                    v-row
-                      span.caption.grey--text.pl-2 {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
-                    v-row
-                      span.caption.grey--text.pl-2(v-if='todo.skipped') ({{$t('skipped')}})
-                  v-spacer
-                  v-tooltip(bottom v-if='todoInFuture(todo)')
-                    template(v-slot:activator='{ on }')
-                      v-btn(text
-                      small
-                      icon
-                      @click='moveTodoToToday(todo)'
-                      :loading='loading'
-                      v-if='!editable'
-                      v-on='on')
-                        v-icon(small) vertical_align_top
-                    span {{$t('moveUp')}}
-                  v-btn(text small icon @click='deleteTodo(todo)' :loading='loading' v-if='!editable')
-                    v-icon(small) delete
-                  v-btn(text small icon @click='editTodo(todo)' :loading='loading' v-if='!editable')
-                    v-icon(small) edit
-                  v-btn(text small icon @click='completeOrUndoTodo(todo)' :loading='loading' v-if='!editable')
-                    v-icon(small) {{todo.completed ? 'repeat' : 'done'}}
+      v-expansion-panels(v-else flat multiple v-model='panels')
+        v-expansion-panel.my-0.py-0(v-for='(todoSection, i) in todos' :key='i')
+          v-expansion-panel-header.py-0.px-6(v-observe-visibility='(isVisible, entry) => headerVisibilityChanged(isVisible, entry, i)')
+            v-subheader.pa-0
+              v-tooltip(right :max-width='300' v-if='todoSection.title.length === 10')
+                template(v-slot:activator='{ on }')
+                  span(v-on='on') {{todoSection.title}}{{!panels.includes(i) ? ` (${todoSection.todos.length})` : ''}}
+                span {{$t(weekdayFromTitle(todoSection.title))}}{{!panels.includes(i) ? ` (${todoSection.todos.length})` : ''}}
+              span(v-else) {{todoSection.title}}
+          v-expansion-panel-content
+            draggable(v-model='todoSection.todos'
+            group='todo'
+            @start='drag=true'
+            @end='drag=false'
+            v-bind="dragOptions"
+            handle='.handle')
+              v-list-item(v-for='(todo, j) in todoSection.todos'
+              :key='j'
+              v-observe-visibility='(isVisible, entry) => visibilityChanged(isVisible, entry, i, j)').pa-0
+                v-list-item-content
+                  v-card(:class='cardClass(todo)')
+                    v-card-text(:class='!editable ? "px-3 pt-2 pb-0 ma-0" : ""')
+                      v-row(no-gutters)
+                        .handle.pr-3(v-if='editable && todo.frogFails < 3')
+                          v-icon menu
+                        TodoText(:todo='todo')
+                    v-card-actions.pb-2.pt-2.ma-0(v-if='!editable')
+                      v-icon(v-if='todoOutstanding(todo)') error_outline
+                      v-col(no-gutters).px-2.py-0.ma-0
+                        v-row
+                          span.caption.grey--text.pl-2 {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
+                        v-row
+                          span.caption.grey--text.pl-2(v-if='todo.skipped') ({{$t('skipped')}})
+                      v-spacer
+                      v-tooltip(bottom v-if='todoInFuture(todo)')
+                        template(v-slot:activator='{ on }')
+                          v-btn(text
+                          small
+                          icon
+                          @click='moveTodoToToday(todo)'
+                          :loading='loading'
+                          v-if='!editable'
+                          v-on='on')
+                            v-icon(small) vertical_align_top
+                        span {{$t('moveUp')}}
+                      v-btn(text small icon @click='deleteTodo(todo)' :loading='loading' v-if='!editable')
+                        v-icon(small) delete
+                      v-btn(text small icon @click='editTodo(todo)' :loading='loading' v-if='!editable')
+                        v-icon(small) edit
+                      v-btn(text small icon @click='completeOrUndoTodo(todo)' :loading='loading' v-if='!editable')
+                        v-icon(small) {{todo.completed ? 'repeat' : 'done'}}
       v-progress-linear(v-if='todosUpdating && !calendarViewEnabled' :indeterminate='true')
     EditTodo(:todo='todoEdited' :cleanTodo='cleanTodo' :requestBreakdown='requestBreakdown'
     :requestDelete='requestDelete')
@@ -125,6 +128,26 @@ export default class TodoList extends Vue {
   todoDeleted: Todo | null = null
   todos = [] as TodoSection[]
 
+  collapsedPanels = {} as { [index: string]: boolean }
+  get panels() {
+    const result = [] as number[]
+    this.todos.forEach((section, i) => {
+      if (!this.collapsedPanels[section.title]) {
+        result.push(i)
+      }
+    })
+    return result
+  }
+  set panels(panels: number[]) {
+    const result = {} as { [index: string]: boolean }
+    this.todos.forEach((section, i) => {
+      if (!panels.includes(i)) {
+        result[section.title] = true
+      }
+    })
+    this.collapsedPanels = result
+  }
+
   get events() {
     return this.todos
       .map((section) => {
@@ -147,6 +170,15 @@ export default class TodoList extends Vue {
   calendarViewEnabled = false
 
   currentPeriod = new Date()
+
+  get stickyHeaderStyle() {
+    return {
+      position: 'sticky',
+      top: this.$vuetify.breakpoint.smAndDown ? 53 : 60,
+      zIndex: 2,
+      backgroundColor: store.dark() ? '#1e1e1e' : '#ffffff',
+    }
+  }
 
   @Watch('currentPeriod')
   onCurrentPeriodChanged(val: boolean, oldVal: boolean) {
@@ -221,6 +253,7 @@ export default class TodoList extends Vue {
     }
     this.todosUpdating = true
     try {
+      const initialTodosLength = this.todos.length
       const fetchedTodos = await getTodos(
         user,
         this.showCompleted,
@@ -441,6 +474,26 @@ export default class TodoList extends Vue {
       sectionIndex < this.todos.length - 1 ||
       rowIndex < this.todos[sectionIndex].todos.length - 1
     ) {
+      return
+    }
+    if (this.todosUpdating || this.loading || this.noMoreTodos) {
+      return
+    }
+    this.loadTodos(false, true)
+  }
+
+  headerVisibilityChanged(
+    isVisible: Boolean,
+    entry: any,
+    sectionIndex: number
+  ) {
+    if (!isVisible) {
+      return
+    }
+    if (this.panels.includes(sectionIndex)) {
+      return
+    }
+    if (sectionIndex < this.todos.length - 1) {
       return
     }
     if (this.todosUpdating || this.loading || this.noMoreTodos) {
