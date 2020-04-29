@@ -171,8 +171,7 @@ export async function getTodos(
   calendarView: boolean = false,
   period?: Date
 ) {
-  await updateState(user)
-  return (await axios.get(`${base}/todo`, {
+  const data = (await axios.get(`${base}/todo`, {
     headers: getHeaders(user),
     params: {
       completed,
@@ -181,25 +180,30 @@ export async function getTodos(
       limit,
       today: period ? getStringFromDate(period) : getToday(),
       calendarView,
+      date: getToday(),
     },
-  })).data as Todo[]
+  })).data as { todos: Todo[]; state: store.UserState; tags: Tag[] }
+  store.setUserState(data.state)
+  setTags(data.tags)
+  return data.todos
 }
 
 export async function getCurrentTodo(user: User) {
-  await updateState(user)
-  const now = new Date()
-  return (await axios.get(`${base}/todo/current`, {
+  const data = (await axios.get(`${base}/todo/current`, {
     headers: getHeaders(user),
     params: {
-      date: `${now.getFullYear()}-${
-        now.getMonth() + 1 < 10 ? `0${now.getMonth() + 1}` : now.getMonth() + 1
-      }-${now.getDate() < 10 ? `0${now.getDate()}` : now.getDate()}`,
+      date: getToday(),
     },
   })).data as {
     todosCount: number
     incompleteTodosCount: number
     todo?: Todo
+    state: store.UserState
+    tags: Tag[]
   }
+  store.setUserState(data.state)
+  setTags(data.tags)
+  return data
 }
 
 export async function rearrangeTodos(user: User, todos: TodoSection[]) {
@@ -234,24 +238,7 @@ export async function setSettings(user: User, settings: store.Settings) {
   })
 }
 
-async function updateState(user: User) {
-  const userState = (await axios.get(`${base}/state`, {
-    headers: getHeaders(user),
-    params: {
-      date: getToday(),
-    },
-  })).data as store.UserState
-  store.setUserState(userState)
-  await updateTags(user)
-}
-
-async function updateTags(user: User) {
-  const tags = (await axios.get(`${base}/tag`, {
-    headers: getHeaders(user),
-    params: {
-      date: getToday(),
-    },
-  })).data as Tag[]
+function setTags(tags: Tag[]) {
   store.setTags(tags.sort((a, b) => (a.tag < b.tag ? -1 : 1)))
   const tagColors = tags.reduce(
     (p, c) => {
