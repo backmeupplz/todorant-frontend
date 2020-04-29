@@ -10,6 +10,7 @@ import { i18n } from './plugins/i18n'
 import './plugins/shortkey'
 import './plugins/vue-flag-icon'
 import './plugins/visibility'
+import './plugins/confetti'
 import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = true
@@ -21,7 +22,7 @@ new Vue({
   store,
   i18n,
   vuetify,
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount('#app')
 
 import './utils/sockets'

@@ -142,6 +142,7 @@ export default class CurrentTodo extends Vue {
     try {
       await api.completeTodo(user, this.todo)
       this.updateTodo()
+      this.tryConfetti()
     } catch (err) {
       store.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
@@ -174,6 +175,25 @@ export default class CurrentTodo extends Vue {
     } finally {
       this.loading = false
     }
+  }
+
+  animating = false
+  tryConfetti() {
+    const random = Math.floor(Math.random() * 5)
+    if (this.animating || random !== 0) {
+      return
+    }
+    this.animating = true
+    ;(this as any).$confetti.start({
+      particlesPerFrame: 0.85,
+      defaultType: 'heart',
+    })
+    setTimeout(() => {
+      ;(this as any).$confetti.stop()
+    }, 3000)
+    setTimeout(() => {
+      this.animating = false
+    }, 15000)
   }
 }
 </script>

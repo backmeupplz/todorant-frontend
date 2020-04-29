@@ -39,6 +39,7 @@
     "types/vue-flag-icon.d.ts",
     "types/vue-apple-signin.d.ts",
     "types/vue-share-buttons.d.ts",
-    "types/vue-simple-calendar.d.ts"
+    "types/vue-simple-calendar.d.ts",
+    "types/vue-confetti.d.ts"
   ]
 }

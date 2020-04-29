@@ -401,6 +401,7 @@ export default class TodoList extends Vue {
         await api.undoTodo(user, todo)
       } else {
         await api.completeTodo(user, todo)
+        this.tryConfetti()
       }
       this.loadTodos(false)
     } catch (err) {
@@ -561,6 +562,25 @@ export default class TodoList extends Vue {
       }
     }
   }
+
+  animating = false
+  tryConfetti() {
+    const random = Math.floor(Math.random() * 5)
+    if (this.animating || random !== 0) {
+      return
+    }
+    this.animating = true
+    ;(this as any).$confetti.start({
+      particlesPerFrame: 0.85,
+      defaultType: 'heart',
+    })
+    setTimeout(() => {
+      ;(this as any).$confetti.stop()
+    }, 3000)
+    setTimeout(() => {
+      this.animating = false
+    }, 15000)
+  }
 }
 </script>
 
@@ -658,5 +678,9 @@ export default class TodoList extends Vue {
 
 .editable .cv-event {
   cursor: move;
+}
+
+#confetti-canvas {
+  z-index: 1000 !important;
 }
 </style>
