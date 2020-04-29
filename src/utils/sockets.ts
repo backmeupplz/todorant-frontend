@@ -3,7 +3,7 @@ import SocketIO from 'socket.io-client'
 import * as store from '../plugins/store'
 
 const socketIO = SocketIO(
-  process.env.VUE_APP_DEV ? 'http://192.168.31.27:3000' : 'https://ws.todorant.com'
+  process.env.VUE_APP_DEV ? 'http://localhost:3000' : 'https://ws.todorant.com'
 )
 
 class SocketManager {
