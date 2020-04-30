@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  div(style='width: 100%;')
     span(v-if='debug') ({{todo.order}}) 
     span(v-if='debug') ({{todo.frogFails}}) 
     span(v-if='!!todo.frog') 🐸 
