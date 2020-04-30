@@ -1,4 +1,5 @@
 // Dependencies
+import { GoogleCalendarCredentials } from './../plugins/store'
 import axios from 'axios'
 import { User } from '../models/user'
 import { Todo } from '../models/todo'
@@ -291,6 +292,22 @@ export async function getSharedReport(user: User, hash: string) {
   )).data as {
     uuid: string
   }
+}
+
+export async function getCalendarAuthenticationURL(user: User) {
+  return (await axios.get(`${base}/google/calendarAuthenticationURL?web=true`, {
+    headers: getHeaders(user),
+  })).data as string
+}
+
+export async function authorizeGoogleCalendar(user: User, code: string) {
+  return (await axios.post(
+    `${base}/google/calendarAuthorize`,
+    { code, web: true },
+    {
+      headers: getHeaders(user),
+    }
+  )).data as GoogleCalendarCredentials
 }
 
 function getHeaders(user: User) {

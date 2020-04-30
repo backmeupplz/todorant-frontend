@@ -6,6 +6,7 @@
     v-card
       v-card-title {{$t('settings.title')}}
       v-card-text
+        v-subheader.pa-0 {{$t('settings.general')}}
         v-switch(:label='$t("settings.showTodayOnAddTodo")'
         v-model='showTodayOnAddTodo')
         v-switch(:label='$t("settings.newTodosGoFirst")'
@@ -15,6 +16,19 @@
         v-select(:items='weekdays'
         :label='$t("settings.firstDayOfWeek")'
         v-model='firstDayOfWeek')
+        v-subheader.pa-0 {{$t('settings.integrations')}}
+        .d-flex.justify-space-between
+          span {{$t('settings.googleCalendar')}}
+          v-btn(v-if='googleCalendarConnected()'
+          color='error'
+          text
+          :loading='loading'
+          @click='disconnectGoogleCalendar') {{$t('settings.connected')}}
+          v-btn(v-else
+          color='blue'
+          text
+          :loading='loading'
+          @click='connectGoogleCalendar') {{$t('settings.notConnected')}}
       v-card-actions
         v-spacer
         v-btn(color='error'
@@ -84,6 +98,48 @@ export default class Settings extends Vue {
   }
   set preserveOrderByTime(val: boolean) {
     store.userState().settings.preserveOrderByTime = val
+  }
+
+  googleCalendarConnected() {
+    return !!store.userState().settings.googleCalendarCredentials
+  }
+
+  async connectGoogleCalendar() {
+    const user = store.user()
+    if (!user) {
+      return
+    }
+    this.loading = true
+    try {
+      const url = await api.getCalendarAuthenticationURL(user)
+      window.location.href = url
+    } catch (err) {
+      store.setSnackbarError(err.response ? err.response.data : err.message)
+    } finally {
+      this.loading = false
+    }
+  }
+
+  async disconnectGoogleCalendar() {
+    if (!confirm(i18n.t('settings.disconnectConfirm') as string)) {
+      return
+    }
+    const user = store.user()
+    if (!user) {
+      return
+    }
+    this.loading = true
+    try {
+      const settings = store.userState().settings
+      settings.googleCalendarCredentials = undefined
+      await api.setSettings(user, settings)
+      serverBus.$emit('refreshRequested')
+      ;(this as any).close()
+    } catch (err) {
+      store.setSnackbarError(err.response ? err.response.data : err.message)
+    } finally {
+      this.loading = false
+    }
   }
 
   async save() {

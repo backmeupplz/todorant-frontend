@@ -37,7 +37,15 @@ export enum SubscriptionStatus {
   earlyAdopter = 'earlyAdopter',
   active = 'active',
   trial = 'trial',
-  inactive = 'inactive'
+  inactive = 'inactive',
+}
+
+export interface GoogleCalendarCredentials {
+  refresh_token?: string | null
+  expiry_date?: number | null
+  access_token?: string | null
+  token_type?: string | null
+  id_token?: string | null
 }
 
 export interface Settings {
@@ -45,6 +53,7 @@ export interface Settings {
   firstDayOfWeek?: number
   newTodosGoFirst?: boolean
   preserveOrderByTime?: boolean
+  googleCalendarCredentials?: GoogleCalendarCredentials
 }
 
 export interface UserState {
@@ -66,7 +75,7 @@ const storeOptions = {
     snackbar: {
       message: '',
       active: false,
-      color: 'success'
+      color: 'success',
     },
     language: undefined,
     dark: false,
@@ -75,16 +84,16 @@ const storeOptions = {
       subscriptionStatus: SubscriptionStatus.active,
       createdAt: new Date(),
       subscriptionIdExists: false,
-      settings: {}
+      settings: {},
     },
     rulesShown: false,
     editting: false,
     sockets: {
       authorized: false,
-      connected: false
+      connected: false,
     },
     tags: [],
-    tagColors: {}
+    tagColors: {},
   },
   mutations: {
     setUser(state: State, user: User) {
@@ -119,7 +128,7 @@ const storeOptions = {
     },
     setTagColors(state: State, tagColors: { [index: string]: string }) {
       state.tagColors = tagColors
-    }
+    },
   },
   getters: {
     user: (state: State) => state.user,
@@ -131,13 +140,13 @@ const storeOptions = {
     editting: (state: State) => state.editting,
     sockets: (state: State) => state.sockets,
     tags: (state: State) => state.tags,
-    tagColors: (state: State) => state.tagColors
+    tagColors: (state: State) => state.tagColors,
   },
   plugins: [
     createPersistedState({
-      paths: ['user', 'language', 'dark', 'rulesShown']
-    })
-  ]
+      paths: ['user', 'language', 'dark', 'rulesShown'],
+    }),
+  ],
 }
 
 export const store = new Vuex.Store<State>(storeOptions)
@@ -167,7 +176,7 @@ export const setSnackbarError = (message: String) => {
   setSnackbar({
     message,
     color: 'error',
-    active: true
+    active: true,
   })
 }
 export const hideSnackbar = () => {

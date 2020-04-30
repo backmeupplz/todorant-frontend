@@ -13,6 +13,7 @@ import MobileLoginError from '../views/MobileLoginError.vue'
 import { store } from './store'
 import PublicReport from '../views/PublicReport.vue'
 import AppleFirefoxError from '../views/AppleFirefoxError.vue'
+import GoogleCalendarSetup from '../views/GoogleCalendarSetup.vue'
 
 Vue.use(Router)
 
@@ -84,6 +85,11 @@ const router = new Router({
       component: AppleFirefoxError,
     },
     {
+      path: '/google_calendar_setup_web',
+      name: 'google_calendar_setup_web',
+      component: GoogleCalendarSetup,
+    },
+    {
       path: '*',
       name: 'not_found',
       component: NotFound,
@@ -92,7 +98,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, _, next) => {
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
   const user = store.state.user
 
   if (requiresAuth && !user) {
