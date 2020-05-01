@@ -10,6 +10,8 @@
     Settings(:dialog='settingsDialog' :close='closeSettingsDialog')
     // Hashtags dialog
     Hashtags(:dialog='hashtagsDialog' :close='closeHashtagsDialog')
+    // QR dialog
+    QRCode(:dialog='qrDialog' :close='closeQRDialog')
     // Support dialog
     Support(:dialog='supportDialog' :close='closeSupportDialog')
     // Navbar and app
@@ -60,6 +62,10 @@
           v-list-item(@click='hashtagsDialog = true' 
           v-if='!!$store.state.user')
             v-list-item-title {{$t('hashtags.title')}}
+          // QR
+          v-list-item(@click='qrDialog = true' 
+          v-if='!!$store.state.user')
+            v-list-item-title {{$t('qr.code')}}
           // Support
           v-list-item(@click='supportDialog = true' 
           v-if='!!$store.state.user')
@@ -81,6 +87,7 @@ import Merge from './Merge.vue'
 import Subscription from './Subscription.vue'
 import Settings from './Settings.vue'
 import Hashtags from './Hashtags.vue'
+import QRCode from './QRCode.vue'
 import Support from './Support.vue'
 import { serverBus } from '../main'
 import { reportGA } from '../utils/ga'
@@ -93,8 +100,9 @@ import { sockets } from '../utils/sockets'
     Subscription,
     Settings,
     Support,
-    Hashtags
-  }
+    Hashtags,
+    QRCode,
+  },
 })
 export default class Navbar extends Vue {
   rulesDialog = false
@@ -103,12 +111,13 @@ export default class Navbar extends Vue {
   settingsDialog = false
   supportDialog = false
   hashtagsDialog = false
+  qrDialog = false
 
   get locales() {
     return [
       { icon: 'us', code: 'en' },
       { icon: 'ru', code: 'ru' },
-      { icon: 'ua', code: 'ua' }
+      { icon: 'ua', code: 'ua' },
     ]
   }
   get currentLocale() {
@@ -127,8 +136,8 @@ export default class Navbar extends Vue {
       user.email,
       user.facebookId,
       user.telegramId,
-      user.appleSubId
-    ].filter(v => !!v)
+      user.appleSubId,
+    ].filter((v) => !!v)
   }
   hashSuffix = ''
   updateHashSuffix() {
@@ -139,7 +148,7 @@ export default class Navbar extends Vue {
     serverBus.$on('subscriptionRequested', () => {
       this.subscriptionDialog = true
       reportGA('subscription_viewed', {
-        status: store.userState().subscriptionStatus
+        status: store.userState().subscriptionStatus,
       })
     })
     serverBus.$on('rulesRequested', () => {
@@ -186,6 +195,9 @@ export default class Navbar extends Vue {
   closeHashtagsDialog() {
     this.hashtagsDialog = false
   }
+  closeQRDialog() {
+    this.qrDialog = false
+  }
   async goHome() {
     try {
       await this.$router.replace(store.user() ? '/superpower' : '/')
@@ -196,7 +208,7 @@ export default class Navbar extends Vue {
   }
   showSubscription() {
     reportGA('subscription_viewed', {
-      status: store.userState().subscriptionStatus
+      status: store.userState().subscriptionStatus,
     })
     this.subscriptionDialog = true
   }

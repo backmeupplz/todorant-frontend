@@ -1,5 +1,10 @@
 export const messages = {
   en: {
+    qr: {
+      code: 'QR code',
+      description:
+        'Use this QR code to login on mobile devices. This picture is a password, do not share it with anyone!',
+    },
     breakdown: {
       request:
         'Looks like you move this task way too much. Please break it down, you can no longer move it to another date. Believe me, it will help to compele the task!',
@@ -364,6 +369,11 @@ Thank you a lot for Todorant!`,
     },
   },
   ru: {
+    qr: {
+      code: 'QR код',
+      description:
+        'Используйте этот QR код, чтобы войти в вашу учетную запись на мобильных устройствах. Это изображение — пароль, никому его не передавайте!',
+    },
     breakdown: {
       request:
         'Похоже, вы переносите эту задачу слишком часто. Пожалуйста, разбейте ее на более мелкие задачи, вы больше не можете ее переносить. Поверьте, это поможет вам завершить задачу!',
@@ -727,6 +737,11 @@ Thank you a lot for Todorant!`,
     },
   },
   ua: {
+    qr: {
+      code: 'QR код',
+      description:
+        'Використовуйте цей QR код, щоб увійти до вашого профілю на мобільних пристроях. Це зображення - пароль, нікому його не передавайте!',
+    },
     breakdown: {
       request:
         'Схоже, ви занадто сильно переміщуєте цю задачу. Будь ласка, зламайте його, ви більше не можете переміщувати його на іншу дату. Повірте, це допоможе виконати завдання!',
