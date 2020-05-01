@@ -42,7 +42,7 @@ export default class QRCode extends Vue {
     if (!user) {
       return
     }
-    const userString = JSON.stringify(user)
+    const userString = user.token
     getSvgDataURL(userString, undefined, (err: any, url: string) => {
       if (err) {
         console.log(err)
