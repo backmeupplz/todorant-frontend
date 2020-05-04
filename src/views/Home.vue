@@ -8,7 +8,7 @@
             fb-signin-button(:params='{ scope: "email", return_scopes: true}'
             @success='onFacebookSignInSuccess'
             @error='onFacebookSignInError') {{$t('home.facebook')}}
-            v-btn.google-button(:v-google-signin-button='googleClientId'
+            v-btn.google-button(v-google-signin-button='googleClientId'
             block
             color='#FFFFFF')
               img.google-button-img(src='/img/google.svg' height='18dp' width='18dp')
@@ -198,7 +198,7 @@ export default class Home extends Vue {
     store.setSnackbarError('errors.login.facebook')
     reportGA('login_error', { provider: 'facebook', error: error.message })
   }
-  async OnGoogleAuthSuccess(googleUser: any) {
+  OnGoogleAuthSuccess = async (googleUser: any) => {
     try {
       const user = await loginGoogle(googleUser.getAuthResponse().id_token)
       store.setUser(user)
@@ -216,7 +216,7 @@ export default class Home extends Vue {
     store.setSnackbarError('errors.login.google')
     reportGA('login_error', { provider: 'google', error: error.message })
   }
-  async onTelegramAuth(loginInfo: any) {
+  onTelegramAuth = async (loginInfo: any) => {
     try {
       const user = await loginTelegram(loginInfo)
       store.setUser(user)
