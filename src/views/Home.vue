@@ -216,7 +216,7 @@ export default class Home extends Vue {
     store.setSnackbarError('errors.login.google')
     reportGA('login_error', { provider: 'google', error: error.message })
   }
-  onTelegramAuth = async (loginInfo: any) => {
+  async onTelegramAuth(loginInfo: any) {
     try {
       const user = await loginTelegram(loginInfo)
       store.setUser(user)
