@@ -7670,11 +7670,6 @@ vue-flag-icon@^1.0.6:
   dependencies:
     flag-icon-css "^2.8.0"
 
-vue-google-login@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/vue-google-login/-/vue-google-login-2.0.3.tgz#ca1d05a7b824ebf13e38aa8b82e79477ea4556d0"
-  integrity sha512-B2/2Vwwv/2g26UmLtOam8StAXGmE4OPoxaGG03y5HBYg1FciHSTVSMogmz5tUr6EsHhDd2Kny0LZPxgIrXVnjw==
-
 vue-google-signin-button-directive@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/vue-google-signin-button-directive/-/vue-google-signin-button-directive-1.0.3.tgz#5d4fb188e85be05596647cb3d719bda457c7f21d"
