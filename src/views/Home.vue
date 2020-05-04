@@ -200,6 +200,7 @@ export default class Home extends Vue {
   }
   OnGoogleAuthSuccess = async (googleUser: any) => {
     try {
+      console.log(googleUser)
       const user = await loginGoogle(googleUser.getAuthResponse().id_token)
       store.setUser(user)
       this.signinDialog = false
