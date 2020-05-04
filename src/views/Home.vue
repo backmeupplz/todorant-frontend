@@ -198,10 +198,9 @@ export default class Home extends Vue {
     store.setSnackbarError('errors.login.facebook')
     reportGA('login_error', { provider: 'facebook', error: error.message })
   }
-  OnGoogleAuthSuccess = async (googleUser: any) => {
+  OnGoogleAuthSuccess = async (token: any) => {
     try {
-      console.log(googleUser)
-      const user = await loginGoogle(googleUser.getAuthResponse().id_token)
+      const user = await loginGoogle(token)
       store.setUser(user)
       this.signinDialog = false
       this.$router.replace('superpower')
