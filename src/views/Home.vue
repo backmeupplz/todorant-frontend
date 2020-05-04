@@ -1,16 +1,15 @@
 <template lang="pug">
   .v-container.pa-4
-    v-dialog(v-model='signinDialog'
-    max-width="289")
+    v-dialog(v-model='signinDialog' max-width="289")
       v-card
         v-card-text.pt-4
           v-flex.text-center
             fb-signin-button(:params='{ scope: "email", return_scopes: true}'
             @success='onFacebookSignInSuccess'
             @error='onFacebookSignInError') {{$t('home.facebook')}}
-            GoogleLogin(:params='googleParams'
-            :onSuccess="onGoogleAuthSuccess"
-            :onFailure="onGoogleAuthFail") {{$t('home.google')}}
+            g-signin-button(:params='{ client_id: googleClientId }'
+            @success='onGoogleSignInSuccess'
+            @error='onGoogleSignInError') {{$t('home.google')}}
             vue-apple-signin.signin-button.pb-3
             vue-telegram-login(mode='callback'
             telegram-login='todorant_bot'
@@ -28,11 +27,6 @@
             v-flex.text-center
               v-btn.primary(block @click='signinDialog = true') {{$t('home.signIn')}}
               p.caption.pa-2 {{$t('home.youAreRegistered')}}
-            .d-flex.direction-row.justify-center
-              a.pt-3(@click='open($store.state.language === "ru" ? "https://apps.apple.com/ru/app/todorant/id1482078243" : "https://apps.apple.com/us/app/todorant/id1482078243")')
-                v-img(width='150' height='50' aspect-ratio='1' :src='`/img/appstore_${$store.state.language === "ru" ? "ru" : "en"}.svg`')
-              a.pl-1(@click='open("https://play.google.com/store/apps/details?id=com.todorant")')
-                v-img(width='170' height='74' aspect-ratio='1' :src='`/img/playstore_${$store.state.language === "ru" ? "ru" : "en"}.png`')
           v-col(cols=12 sm=6)
             v-img(:src='this.pictures.iphone').d-flex.elevation-1
         v-row
@@ -127,7 +121,6 @@ import { i18n } from '../plugins/i18n'
 const { vueTelegramLogin } = require('vue-telegram-login')
 import { reportGA } from '../utils/ga'
 import { serverBus } from '../main'
-import GoogleLogin from 'vue-google-login'
 
 // FB object is global, declaring here for TS
 declare const FB: any
@@ -135,7 +128,6 @@ declare const FB: any
 @Component({
   components: {
     vueTelegramLogin,
-    GoogleLogin,
   },
 })
 export default class Home extends Vue {
@@ -164,19 +156,16 @@ export default class Home extends Vue {
     }
   }
 
-  get googleParams() {
-    return {
-      client_id:
-        '599005831909-krrl1m3k011n7qdrkv1voio9cgdv7a0t.apps.googleusercontent.com',
-    }
-  }
-
   get imageModifier() {
     return `${i18n.locale}-${this.mode}`
   }
 
   get mode() {
     return store.dark() ? 'dark' : 'light'
+  }
+
+  get googleClientId() {
+    return '599005831909-krrl1m3k011n7qdrkv1voio9cgdv7a0t.apps.googleusercontent.com'
   }
 
   async onFacebookSignInSuccess(response: any) {
@@ -197,8 +186,7 @@ export default class Home extends Vue {
     store.setSnackbarError('errors.login.facebook')
     reportGA('login_error', { provider: 'facebook', error: error.message })
   }
-
-  async onGoogleAuthSuccess(googleUser: any) {
+  async onGoogleSignInSuccess(googleUser: any) {
     try {
       const user = await loginGoogle(googleUser.getAuthResponse().id_token)
       store.setUser(user)
@@ -211,7 +199,7 @@ export default class Home extends Vue {
       reportGA('login_error', { provider: 'google', error: err.message })
     }
   }
-  onGoogleAuthFail(error: Error) {
+  onGoogleSignInError(error: Error) {
     console.error(error)
     store.setSnackbarError('errors.login.google')
     reportGA('login_error', { provider: 'google', error: error.message })
@@ -253,11 +241,11 @@ export default class Home extends Vue {
 </script>
 
 <style>
-@font-face {
-  font-family: 'Roboto-Medium';
-  src: url(/fonts/Roboto-Medium.ttf) format('truetype');
-}
 .fb-signin-button {
+  margin: 10px 0px;
+  width: 239px;
+}
+.g-signin-button {
   margin: 10px 0px;
   width: 239px;
 }
@@ -267,26 +255,15 @@ export default class Home extends Vue {
   cursor: pointer;
   display: block;
   border-radius: 3px;
-  size: 14px;
-}
-.google-button {
-  background-color: white;
-  margin-bottom: 10px;
-  color: rgba(0, 0, 0, 0.54) !important;
-  size: 14px !important;
-  font-family: 'Roboto-Medium' !important;
-  flex-direction: row !important;
-  justify-content: flex-start !important;
-  padding-left: 8px !important;
-}
-.google-button-img {
-  margin-right: 24px !important;
 }
 @media only screen and (max-width: 960px) {
   .signin-button {
     margin: 10px auto 10px;
   }
   .fb-signin-button {
+    margin: 10px auto 10px;
+  }
+  .g-signin-button {
     margin: 10px auto 10px;
   }
 }

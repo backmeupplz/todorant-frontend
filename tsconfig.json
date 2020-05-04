@@ -41,7 +41,6 @@
     "types/vue-share-buttons.d.ts",
     "types/vue-simple-calendar.d.ts",
     "types/vue-confetti.d.ts",
-    "types/cnf-qrcode.d.ts",
-    "types/vue-google-login.d.ts"
+    "types/cnf-qrcode.d.ts"
   ]
 }
