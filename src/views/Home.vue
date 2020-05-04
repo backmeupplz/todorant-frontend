@@ -8,11 +8,9 @@
             fb-signin-button(:params='{ scope: "email", return_scopes: true}'
             @success='onFacebookSignInSuccess'
             @error='onFacebookSignInError') {{$t('home.facebook')}}
-            v-btn.google-button(v-google-signin-button='googleClientId'
-            block
-            color='#FFFFFF')
-              img.google-button-img(src='/img/google.svg' height='18dp' width='18dp')
-              span {{$t('home.google')}}
+            GoogleLogin(:params='googleParams'
+            :onSuccess="onGoogleAuthSuccess"
+            :onFailure="onGoogleAuthFail") {{$t('home.google')}}
             vue-apple-signin.signin-button.pb-3
             vue-telegram-login(mode='callback'
             telegram-login='todorant_bot'
@@ -129,7 +127,7 @@ import { i18n } from '../plugins/i18n'
 const { vueTelegramLogin } = require('vue-telegram-login')
 import { reportGA } from '../utils/ga'
 import { serverBus } from '../main'
-import GoogleSignInButton from 'vue-google-signin-button-directive'
+import GoogleLogin from 'vue-google-login'
 
 // FB object is global, declaring here for TS
 declare const FB: any
@@ -137,9 +135,7 @@ declare const FB: any
 @Component({
   components: {
     vueTelegramLogin,
-  },
-  directives: {
-    GoogleSignInButton,
+    GoogleLogin,
   },
 })
 export default class Home extends Vue {
@@ -168,16 +164,19 @@ export default class Home extends Vue {
     }
   }
 
+  get googleParams() {
+    return {
+      client_id:
+        '599005831909-krrl1m3k011n7qdrkv1voio9cgdv7a0t.apps.googleusercontent.com',
+    }
+  }
+
   get imageModifier() {
     return `${i18n.locale}-${this.mode}`
   }
 
   get mode() {
     return store.dark() ? 'dark' : 'light'
-  }
-
-  get googleClientId() {
-    return '599005831909-krrl1m3k011n7qdrkv1voio9cgdv7a0t.apps.googleusercontent.com'
   }
 
   async onFacebookSignInSuccess(response: any) {
@@ -198,7 +197,8 @@ export default class Home extends Vue {
     store.setSnackbarError('errors.login.facebook')
     reportGA('login_error', { provider: 'facebook', error: error.message })
   }
-  OnGoogleAuthSuccess = async (googleUser: any) => {
+
+  async onGoogleAuthSuccess(googleUser: any) {
     try {
       const user = await loginGoogle(googleUser.getAuthResponse().id_token)
       store.setUser(user)
@@ -211,7 +211,7 @@ export default class Home extends Vue {
       reportGA('login_error', { provider: 'google', error: err.message })
     }
   }
-  OnGoogleAuthFail(error: Error) {
+  onGoogleAuthFail(error: Error) {
     console.error(error)
     store.setSnackbarError('errors.login.google')
     reportGA('login_error', { provider: 'google', error: error.message })
