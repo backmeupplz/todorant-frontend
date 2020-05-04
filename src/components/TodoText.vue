@@ -1,5 +1,5 @@
 <template lang="pug">
-  div(style='width: 100%;')
+  div.flex-grow-1(style='max-width: 100%;')
     span(v-if='debug') ({{todo.order}}) 
     span(v-if='debug') ({{todo.frogFails}}) 
     span(v-if='!!todo.frog') 🐸 
