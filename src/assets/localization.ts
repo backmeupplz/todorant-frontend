@@ -262,8 +262,7 @@ Thank you a lot for Todorant!`,
     planning: 'Planning',
     underDevelopment: 'This part is under development',
     created: 'Created',
-    breakdownInfo:
-      'Use breakdown when the current task is too broad. After you add all the subtasks, feel free to complete this task, you deserve it.',
+    breakdownInfo: 'Use breakdown when the current task is too broad',
     skipInfo:
       "Use skip when you don't want to work on the current task. You can skip once a day, up to three times a week. Frogs cannot be skipped. A task skipped twice becomes a frog.",
     clear: {
@@ -629,8 +628,7 @@ Thank you a lot for Todorant!`,
     planning: 'Планирование',
     underDevelopment: 'Раздел в разработке',
     created: 'Создано',
-    breakdownInfo:
-      'Используйте разбивку, если текущая задача слишком широкая. После добавления всех подзадач, отметьте текущую задачу, как выполненную, вы это заслужили.',
+    breakdownInfo: 'Используйте разбивку, если текущая задача слишком широкая',
     skipInfo:
       'Используйте пропуск, когда не хотите заниматься текущей задачей. Пропускать можно максимум раз в день, максимум три раза в неделю. Лягушек пропускать нельзя. Задача, пропущенная дважды, становится лягушкой.',
     clear: {
@@ -1003,8 +1001,7 @@ Thank you a lot for Todorant!`,
     planning: 'Планування',
     underDevelopment: 'Розділ у розробці',
     created: 'Створено',
-    breakdownInfo:
-      'Використовуйте розбивку, якщо поточне завдання зашироке. Після додавання усіх підзавдань, відзначте поточне завдання як виконане, ви на це заслужили.',
+    breakdownInfo: 'Використовуйте розбивку, якщо поточне завдання зашироке',
     skipInfo:
       'Використовуйте пропуск, коли не бажаєте займатися поточним завданням. Пропускати можна максимум раз на день, максимум три рази на тиждень. Жаб пропускати не можна. Завдання, пропущене двічі, стає жабою.',
     clear: {

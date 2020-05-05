@@ -71,7 +71,7 @@
                         v-row
                           span.caption.grey--text.pl-2(v-if='todo.skipped') ({{$t('skipped')}})
                       v-spacer
-                      v-tooltip(bottom v-if='todoInFuture(todo)')
+                      v-tooltip.mx-0(bottom v-if='todoInFuture(todo)')
                         template(v-slot:activator='{ on }')
                           v-btn(text
                           small
@@ -82,11 +82,26 @@
                           v-on='on')
                             v-icon(small) vertical_align_top
                         span {{$t('moveUp')}}
-                      v-btn(text small icon @click='deleteTodo(todo)' :loading='loading' v-if='!editable')
+                      v-btn.mx-0(text small icon @click='deleteTodo(todo)' :loading='loading' v-if='!editable')
                         v-icon(small) delete
-                      v-btn(text small icon @click='editTodo(todo)' :loading='loading' v-if='!editable')
+                      v-btn.mx-0(text small icon @click='editTodo(todo)' :loading='loading' v-if='!editable')
                         v-icon(small) edit
-                      v-btn(text small icon @click='completeOrUndoTodo(todo)' :loading='loading' v-if='!editable')
+                      v-tooltip.mx-0(bottom v-if='!todo.completed')
+                        template(v-slot:activator='{ on }')
+                          v-btn(text
+                          icon
+                          :loading='loading'
+                          v-on='on'
+                          small
+                          @click='breakdownTodo(todo)')
+                            v-icon(small) list
+                        span {{$t('breakdownInfo')}}
+                      v-btn.mx-0(text
+                      small
+                      icon
+                      @click='completeOrUndoTodo(todo)'
+                      :loading='loading'
+                      v-if='!editable')
                         v-icon(small) {{todo.completed ? 'repeat' : 'done'}}
       v-progress-linear(v-if='todosUpdating && !calendarViewEnabled' :indeterminate='true')
     EditTodo(:todo='todoEdited' :cleanTodo='cleanTodo' :requestBreakdown='requestBreakdown'
@@ -580,6 +595,10 @@ export default class TodoList extends Vue {
     setTimeout(() => {
       this.animating = false
     }, 15000)
+  }
+
+  breakdownTodo(todo: Todo) {
+    serverBus.$emit('addTodoRequested', undefined, todo)
   }
 }
 </script>
