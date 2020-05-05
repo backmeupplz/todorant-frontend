@@ -22,7 +22,7 @@ export const messages = {
     loginMobile: {
       telegram: {
         headline:
-          'Please login with Telegram by entering your Telegram ID in a field below and hitting the "Login" button. You can get your Telegram ID by sending <code>/id</code> to the <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>.',
+          'Please login with Telegram by entering your Telegram ID in a field below and hitting the "Login" button. You can get your Telegram ID by sending <code>/id</code> to the <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>. Or you can just send <code>/qr</code> to <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a> and scan it in the QR login section!',
         id: '123456789',
         idHint: 'Telegram ID',
         loginButton: 'Login',
@@ -392,7 +392,7 @@ Thank you a lot for Todorant!`,
     loginMobile: {
       telegram: {
         headline:
-          'Пожалуйста, зайдите через Телеграм, введя свой Телеграм ID в поле ниже и нажав "Войти". Вы можете узнать свой Телеграм ID, отправив <code>/id</code> в <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>.',
+          'Пожалуйста, зайдите через Телеграм, введя свой Телеграм ID в поле ниже и нажав "Войти". Вы можете узнать свой Телеграм ID, отправив <code>/id</code> в <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>. Или вы можете отправить команду <code>/qr</code> в <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a> и просканировать его в секции логина через QR код!',
         id: '123456789',
         idHint: 'Телеграм ID',
         loginButton: 'Войти',
@@ -761,7 +761,7 @@ Thank you a lot for Todorant!`,
     loginMobile: {
       telegram: {
         headline:
-          'Please login with Telegram by entering your Telegram ID in a field below and hitting the "Login" button. You can get your Telegram ID by sending <code>/id</code> to the <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>.',
+          'Please login with Telegram by entering your Telegram ID in a field below and hitting the "Login" button. You can get your Telegram ID by sending <code>/id</code> to the <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>. Or you can just send <code>/qr</code> to <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a> and scan it in the QR login section!',
         id: '123456789',
         idHint: 'Telegram ID',
         loginButton: 'Login',
