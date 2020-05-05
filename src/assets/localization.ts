@@ -1,5 +1,6 @@
 export const messages = {
   en: {
+    search: 'Search',
     qr: {
       code: 'QR code',
       description:
@@ -369,6 +370,7 @@ Thank you a lot for Todorant!`,
     },
   },
   ru: {
+    search: 'Поиск',
     qr: {
       code: 'QR код',
       description:
@@ -737,6 +739,7 @@ Thank you a lot for Todorant!`,
     },
   },
   ua: {
+    search: 'Пошук',
     qr: {
       code: 'QR код',
       description:

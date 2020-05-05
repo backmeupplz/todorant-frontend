@@ -55,7 +55,6 @@ import { serverBus } from '../main'
   props: {
     todo: Object,
     cleanTodo: Function,
-    requestBreakdown: Function,
     requestDelete: Function,
   },
 })

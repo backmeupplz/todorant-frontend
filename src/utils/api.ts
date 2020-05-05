@@ -169,6 +169,7 @@ export async function getTodos(
   skip: number,
   limit: number,
   hash?: string,
+  queryString?: string,
   calendarView: boolean = false,
   period?: Date
 ) {
@@ -182,6 +183,7 @@ export async function getTodos(
       today: period ? getStringFromDate(period) : getToday(),
       calendarView,
       date: getToday(),
+      queryString,
     },
   })).data as { todos: Todo[]; state: store.UserState; tags: Tag[] }
   store.setUserState(data.state)

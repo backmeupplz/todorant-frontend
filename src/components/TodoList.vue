@@ -5,13 +5,22 @@
         v-flex
           v-alert(text color='info' icon='info') {{$t('todo.planning')}}
       v-list-item.d-flex.align-center(:style='stickyHeaderStyle')
-        v-switch.ma-0.pa-0(v-if='!calendarViewEnabled'
+        v-switch.ma-0.pa-0(v-if='!calendarViewEnabled && !search'
         hide-details v-model='showCompleted'
         :label='$t("todo.list.completed")'
         :loading='todosUpdating'
         :disabled='editable')
-        v-spacer
-        v-btn(v-if='!editable && !showCompleted' icon @click='toggleCalendar' :color='calendarViewEnabled ? "blue" : ""' :loading='todosUpdating || loading')
+        v-text-field.pt-2.mr-4(v-if='search'
+        v-model='queryString'
+        :label='$t("search")'
+        clearable
+        dense)
+        v-spacer(v-if='!search')
+        v-btn(v-if='!editable && !showCompleted && !search'
+        icon
+        @click='toggleCalendar'
+        :color='calendarViewEnabled ? "blue" : ""'
+        :loading='todosUpdating || loading')
           v-icon calendar_today
         v-btn(v-if='!editable && !showCompleted' icon :loading='todosUpdating' @click='editable = true')
           v-icon format_list_numbered
@@ -19,10 +28,17 @@
           v-icon clear
         v-btn(v-if='!!editable' icon :loading='todosUpdating || loading' @click='doneEditing' color='green')
           v-icon done
+        v-btn(v-if='!editable && !showCompleted && !calendarViewEnabled'
+        icon
+        :loading='todosUpdating || loading'
+        @click='searchTouched'
+        :color='search ? "blue" : ""')
+          v-icon search
         v-btn(icon :loading='todosUpdating' @click='loadTodos')
           v-icon refresh
       v-list-item(v-if='calendarViewEnabled && todosUpdating' flex)
         v-progress-linear(:indeterminate='true')
+      // Content
       v-list-item(v-if='calendarViewEnabled' flex :class='editable ? "editable" : "non-editable"')
         calendar-view(:events='events'
         :locale='locale'
@@ -104,7 +120,8 @@
                       v-if='!editable')
                         v-icon(small) {{todo.completed ? 'repeat' : 'done'}}
       v-progress-linear(v-if='todosUpdating && !calendarViewEnabled' :indeterminate='true')
-    EditTodo(:todo='todoEdited' :cleanTodo='cleanTodo' :requestBreakdown='requestBreakdown'
+    EditTodo(:todo='todoEdited'
+    :cleanTodo='cleanTodo'
     :requestDelete='requestDelete')
     DeleteTodo(:todo='todoDeleted')
 </template>
@@ -126,6 +143,8 @@ import { TodoSection } from '../models/TodoSection'
 import { isTodoOld, isDateTooOld } from '../utils/isTodoOld'
 import { CalendarView, CalendarViewHeader } from 'vue-simple-calendar'
 import moment from 'moment'
+import { debounce } from 'lodash'
+import { v4 as uuid } from 'uuid'
 
 @Component({
   components: {
@@ -181,6 +200,17 @@ export default class TodoList extends Vue {
 
   loading = false
   drag = false
+
+  search = false
+  queryString = ''
+
+  @Watch('queryString')
+  onQuerryStringChanged() {
+    this.todosUpdating = true
+    debounce(async () => {
+      await this.loadTodos()
+    }, 500)()
+  }
 
   calendarViewEnabled = false
 
@@ -258,10 +288,10 @@ export default class TodoList extends Vue {
   }
 
   todosUpdating = false
+  loadingUUID = ''
   async loadTodos(fullUpdate = true, more = false) {
-    if (this.todosUpdating) {
-      return
-    }
+    const currentLoadingUUID = uuid()
+    this.loadingUUID = currentLoadingUUID
     const user = store.user()
     if (!user) {
       return
@@ -277,6 +307,7 @@ export default class TodoList extends Vue {
           ? 20
           : this.todos.reduce((prev, cur) => prev + cur.todos.length, 0),
         this.$router.currentRoute.hash,
+        this.queryString,
         this.calendarViewEnabled,
         this.calendarViewEnabled ? this.currentPeriod : undefined
       )
@@ -320,6 +351,9 @@ export default class TodoList extends Vue {
         },
         {} as { [index: string]: Todo[] }
       )
+      if (this.loadingUUID !== currentLoadingUUID) {
+        return
+      }
       this.todos = [] as TodoSection[]
       for (const key in mappedTodos) {
         this.todos.push({
@@ -345,7 +379,9 @@ export default class TodoList extends Vue {
     } catch (err) {
       store.setSnackbarError('errors.loadTodos')
     } finally {
-      this.todosUpdating = false
+      if (this.loadingUUID === currentLoadingUUID) {
+        this.todosUpdating = false
+      }
     }
   }
 
@@ -523,10 +559,6 @@ export default class TodoList extends Vue {
     this.loadTodos(true, false)
   }
 
-  requestBreakdown(todo: Todo) {
-    console.warn(`Breakdown for ${todo.text}`)
-  }
-
   get firstDayOfWeek() {
     const storeFirstDayOfWeek = this.$store.state.userState.settings
       .firstDayOfWeek
@@ -599,6 +631,11 @@ export default class TodoList extends Vue {
 
   breakdownTodo(todo: Todo) {
     serverBus.$emit('addTodoRequested', undefined, todo)
+  }
+
+  searchTouched() {
+    this.search = !this.search
+    this.queryString = ''
   }
 }
 </script>
