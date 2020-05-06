@@ -33,7 +33,7 @@
                 v-expansion-panel(v-for='(todo, i) in todos' :key='i')
                   v-expansion-panel-header
                     v-flex.column
-                      span {{!panel.includes(i) ? `${todo.frog ? '🐸 ': ''}${todo.time ? `${todo.time} ` : ''}` : ''}}{{todo.text || $t('todo.create.placeholder')}}
+                      span {{!panel.includes(i) ? `${todo.frog ? '🐸 ': ''}${todo.time ? `${todo.time} ` : ''}` : ''}}{{panel.includes(i) || !todo.text ? $t('todo.create.placeholder'): todo.text}}
                       p.my-0.caption(v-if='!panel.includes(i) && todo.date') {{todo.date}}
                   v-expansion-panel-content
                     TodoForm(:todo='todo'
