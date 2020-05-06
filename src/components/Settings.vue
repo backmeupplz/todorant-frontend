@@ -29,6 +29,9 @@
           text
           :loading='loading'
           @click='connectGoogleCalendar') {{$t('settings.notConnected')}}
+        v-subheader.pa-0 {{$t('settings.account')}}
+        .d-flex.flex-column
+          span(v-for='identifier in identifiers') {{identifier}}
       v-card-actions
         v-spacer
         v-btn(color='error'
@@ -65,6 +68,19 @@ export default class Settings extends Vue {
     text: i18n.t(`weekdays.${n}`),
     value: n,
   }))
+
+  get identifiers() {
+    const user = store.user()
+    if (!user) {
+      return ''
+    }
+    return [
+      user.email,
+      user.facebookId,
+      user.telegramId,
+      user.appleSubId,
+    ].filter((v) => !!v)
+  }
 
   get showTodayOnAddTodo() {
     return store.userState().settings.showTodayOnAddTodo || false

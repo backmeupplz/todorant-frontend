@@ -5,7 +5,7 @@
         v-flex
           v-alert(text color='info' icon='info') {{$t('todo.planning')}}
       v-list-item.d-flex.align-center(:style='stickyHeaderStyle')
-        v-switch.ma-0.pa-0(v-if='!calendarViewEnabled && !search'
+        v-switch.ma-0.pa-0(v-if='!calendarViewEnabled && !search && !hash'
         hide-details v-model='showCompleted'
         :label='$t("todo.list.completed")'
         :loading='todosUpdating'
@@ -15,6 +15,13 @@
         :label='$t("search")'
         clearable
         dense)
+        div(v-if='!!hash')
+          v-btn.mr-2(:loading='todosUpdating || loading'
+          @click='goHome'
+          small
+          icon)
+            v-icon(small) clear
+          span {{hash}}
         v-spacer(v-if='!search')
         v-btn(v-if='!editable && !showCompleted && !search'
         icon
@@ -204,6 +211,8 @@ export default class TodoList extends Vue {
   search = false
   queryString = ''
 
+  hash = ''
+
   @Watch('queryString')
   onQuerryStringChanged() {
     this.todosUpdating = true
@@ -281,6 +290,13 @@ export default class TodoList extends Vue {
     serverBus.$on('refreshRequested', () => {
       this.loadTodos()
     })
+    serverBus.$on('cleanHash', () => {
+      this.hash = ''
+    })
+    this.hash = decodeURI(this.$router.currentRoute.hash)
+    window.onhashchange = () => {
+      this.hash = decodeURI(this.$router.currentRoute.hash)
+    }
   }
 
   todoInFuture(todo: Todo) {
@@ -636,6 +652,16 @@ export default class TodoList extends Vue {
   searchTouched() {
     this.search = !this.search
     this.queryString = ''
+  }
+
+  async goHome() {
+    try {
+      this.hash = ''
+      await this.$router.replace(store.user() ? '/superpower' : '/')
+      serverBus.$emit('refreshRequested')
+    } catch (err) {
+      // Do nothing
+    }
   }
 }
 </script>

@@ -19,13 +19,7 @@
       // Title
       a(@click='goHome')
         v-toolbar-title.text-uppercase.grey--text
-          v-tooltip(v-if='$store.state.user' bottom)
-            template(v-slot:activator='{ on }')
-              img(v-else src="/img/logo.png" :height='24' :width='101')
-              span(v-on='on') {{$t('title')}}{{hashSuffix}}
-            p {{$store.state.user.name}}
-            p(v-for='identifier in identifiers') {{identifier}}
-          img(v-else src="/img/logo.png" :height='24' :width='101')
+          img(src="/img/logo.png" :height='24' :width='101')
       v-spacer
       // Rules
       v-btn(text icon color='grey' @click='rulesDialog = true')
@@ -128,22 +122,6 @@ export default class Navbar extends Vue {
       }
     }
   }
-  get identifiers() {
-    const user = store.user()
-    if (!user) {
-      return ''
-    }
-    return [
-      user.email,
-      user.facebookId,
-      user.telegramId,
-      user.appleSubId,
-    ].filter((v) => !!v)
-  }
-  hashSuffix = ''
-  updateHashSuffix() {
-    this.hashSuffix = decodeURI(this.$router.currentRoute.hash)
-  }
 
   created() {
     serverBus.$on('subscriptionRequested', () => {
@@ -155,7 +133,6 @@ export default class Navbar extends Vue {
     serverBus.$on('rulesRequested', () => {
       this.rulesDialog = true
     })
-    setInterval(this.updateHashSuffix, 1000)
   }
   mounted() {
     if (!store.rulesShown() && store.user()) {
@@ -202,6 +179,7 @@ export default class Navbar extends Vue {
   async goHome() {
     try {
       await this.$router.replace(store.user() ? '/superpower' : '/')
+      serverBus.$emit('cleanHash')
       serverBus.$emit('refreshRequested')
     } catch (err) {
       // Do nothing
@@ -215,21 +193,3 @@ export default class Navbar extends Vue {
   }
 }
 </script>
-
-<style>
-nav a:link {
-  text-decoration: none;
-}
-
-nav a:visited {
-  text-decoration: none;
-}
-
-nav a:hover {
-  text-decoration: underline;
-}
-
-nav a:active {
-  text-decoration: underline;
-}
-</style>
