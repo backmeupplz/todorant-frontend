@@ -218,7 +218,7 @@ export default class TodoList extends Vue {
     this.todosUpdating = true
     debounce(async () => {
       await this.loadTodos()
-    }, 500)()
+    }, 1500)()
   }
 
   calendarViewEnabled = false
