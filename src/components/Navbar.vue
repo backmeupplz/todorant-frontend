@@ -21,10 +21,11 @@
         v-toolbar-title.text-uppercase.grey--text
           v-tooltip(v-if='$store.state.user' bottom)
             template(v-slot:activator='{ on }')
+              img(v-else src="/img/logo.png" :height='24' :width='101')
               span(v-on='on') {{$t('title')}}{{hashSuffix}}
             p {{$store.state.user.name}}
             p(v-for='identifier in identifiers') {{identifier}}
-          span(v-else) {{$t('title')}}{{hashSuffix}}
+          img(v-else src="/img/logo.png" :height='24' :width='101')
       v-spacer
       // Rules
       v-btn(text icon color='grey' @click='rulesDialog = true')
