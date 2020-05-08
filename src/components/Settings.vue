@@ -17,7 +17,7 @@
         :label='$t("settings.firstDayOfWeek")'
         v-model='firstDayOfWeek')
         v-subheader.pa-0 {{$t('settings.integrations')}}
-        .d-flex.justify-space-between
+        .d-flex.justify-space-between.align-center
           span {{$t('settings.googleCalendar')}}
           v-btn(v-if='googleCalendarConnected()'
           color='error'
@@ -25,10 +25,11 @@
           :loading='loading'
           @click='disconnectGoogleCalendar') {{$t('settings.connected')}}
           v-btn(v-else
-          color='blue'
-          text
           :loading='loading'
-          @click='connectGoogleCalendar') {{$t('settings.notConnected')}}
+          @click='connectGoogleCalendar'
+          color='#FFFFFF')
+            img.google-button-img(src='/img/google.svg' height='18dp' width='18dp')
+            span.google-button-text {{$t('settings.notConnected')}}
         v-subheader.pa-0 {{$t('settings.account')}}
         .d-flex.flex-column
           span(v-for='identifier in identifiers') {{identifier}}
@@ -176,3 +177,12 @@ export default class Settings extends Vue {
   }
 }
 </script>
+
+<style>
+.google-button-img {
+  margin-right: 24px !important;
+}
+.google-button-text {
+  color: rgba(0, 0, 0, 0.54) !important;
+}
+</style>
