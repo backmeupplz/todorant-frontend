@@ -16,10 +16,10 @@
         v-list-item-content(v-if='!!todo')
           v-card.grey(:class="$vuetify.theme.dark ? 'darken-2' : 'lighten-4'")
             v-card-text
-              TodoText(:todo='todo')
+              TodoText(:todo='todo' :text='text' :errorDecrypting='errorDecrypting')
             v-card-actions
-              span.caption.grey--text.pl-2 {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
-              span.caption.grey--text.pl-2(v-if='todo.skipped') ({{$t('skipped')}})
+              v-icon(small).grey--text.pl-2(v-if='todo.encrypted') vpn_key
+              v-icon(small).grey--text.pl-2(v-if='todo.skipped') arrow_forward
               v-spacer
               v-btn(text
               icon
@@ -72,6 +72,8 @@ import DeleteTodo from './DeleteTodo.vue'
 import { Watch } from 'vue-property-decorator'
 import * as api from '../utils/api'
 import { serverBus } from '../main'
+import { decrypt } from '../utils/encryption'
+import { i18n } from '../plugins/i18n'
 
 @Component({
   components: {
@@ -88,6 +90,22 @@ export default class CurrentTodo extends Vue {
   loading = false
 
   todoDeleted: Todo | null = null
+
+  get text() {
+    if (this.todo?.encrypted) {
+      return decrypt(this.todo?.text, true) || i18n.t('encryption.errorDecrypting')
+    } else {
+      return this.todo?.text
+    }
+  }
+
+  get errorDecrypting() {
+    if (this.todo?.encrypted) {
+      return !decrypt(this.todo?.text, true)
+    } else {
+      return false
+    }
+  }
 
   get progress() {
     return this.todosCount === 0

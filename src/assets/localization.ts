@@ -1,5 +1,19 @@
 export const messages = {
   en: {
+    encryption: {
+      title: 'Security',
+      info:
+        'Use this section with the utmost caution! Encryption will not work unless you add a password. There will be two types of tasks: encrypted and unencrypted. All new tasks will be encrypted. Old todos can be converted to be encrypted with the button below. If you loose the password there will be no way to recover tasks.',
+      switch: 'Encrypt todos',
+      password: 'Password',
+      encryptAllButton: 'Encrypt all',
+      decryptAllButton: 'Decrypt all',
+      confirm:
+        'Are you sure you want to encrypt the todos with this password? You will be able to decrypt todos later with the same password. If you loose the password, you will not be able to decrypt todos!',
+      disableConfirm:
+        'Are you sure you want to remove the key and disable the encryption? This will not decrypt the tasks that are encrypted.',
+      errorDecrypting: 'Wrong decryption password',
+    },
     search: 'Search',
     qr: {
       code: 'QR code',
@@ -371,6 +385,20 @@ Thank you a lot for Todorant!`,
     },
   },
   ru: {
+    encryption: {
+      title: 'Безопасность',
+      info:
+        'Используйте эту секцию с максимальной осторожностью! Шифрование не будет работать, если вы не введете пароль. Дальше будет два типа задач: зашифрованные и незашифрованные. Все новые задачи будут зашифрованными. Старые задачи можно будет зашифровать, нажав на кнопку ниже. Если вы потеряете пароль, восстановить задачи будет невозможно.',
+      switch: 'Шифровать задачи',
+      password: 'Пароль',
+      encryptAllButton: 'Зашифровать все',
+      decryptAllButton: 'Расшифровать все',
+      confirm:
+        'Уверены, что хотите шифровать все задачи паролем? Вы сможете расшифровать задачи этим же паролем. Если вы потеряете пароль, у вас не получится расшифровать задачи!',
+      disableConfirm:
+        'Уверены, что хотите убрать пароль и выключить шифрование? Это действие не расшифрует зашифрованные задачи.',
+      errorDecrypting: 'Неправильный пароль расшифровки',
+    },
     search: 'Поиск',
     qr: {
       code: 'QR код',
@@ -741,6 +769,20 @@ Thank you a lot for Todorant!`,
     },
   },
   ua: {
+    encryption: {
+      title: 'Безпеку',
+      info:
+        'Використовуйте цю секцію з максимальною обережністю! Шифрування не працюватиме, якщо ви не введете пароль. Далі буде два типи завдань: зашифровані та незашифровані. Всі нові завдання будуть зашифрованими. Старі завдання можна буде зашифрувати, натиснувши на кнопку нижче. Якщо ви втратите пароль, відновити завдання буде неможливо.',
+      switch: 'Шифрувати завдання',
+      password: 'Пароль',
+      encryptAllButton: 'Зашифрувати всі',
+      decryptAllButton: 'Розшифрувати всі',
+      confirm:
+        'Впевнені, що хочете шифрувати всі завдання паролем? Ви зможете розшифрувати завдання цим же паролем. Якщо ви втратите пароль, у вас не вийде розшифрувати завдання!',
+      disableConfirm:
+        'Впевнені, що хочете прибрати пароль і вимкнути шифрування? Це дія не розшифрує зашифровані завдання.',
+      errorDecrypting: 'Неправильний пароль розшифровки',
+    },
     search: 'Пошук',
     qr: {
       code: 'QR код',

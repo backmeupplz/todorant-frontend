@@ -20,6 +20,7 @@ export interface State {
   sockets: Sockets
   tags: Tag[]
   tagColors: { [index: string]: string }
+  password?: String
 }
 
 interface LocalizedError {
@@ -94,6 +95,7 @@ const storeOptions = {
     },
     tags: [],
     tagColors: {},
+    password: undefined,
   },
   mutations: {
     setUser(state: State, user: User) {
@@ -129,6 +131,9 @@ const storeOptions = {
     setTagColors(state: State, tagColors: { [index: string]: string }) {
       state.tagColors = tagColors
     },
+    setPassword(state: State, password: string | undefined) {
+      state.password = password
+    },
   },
   getters: {
     user: (state: State) => state.user,
@@ -141,10 +146,11 @@ const storeOptions = {
     sockets: (state: State) => state.sockets,
     tags: (state: State) => state.tags,
     tagColors: (state: State) => state.tagColors,
+    password: (state: State) => state.password,
   },
   plugins: [
     createPersistedState({
-      paths: ['user', 'language', 'dark', 'rulesShown'],
+      paths: ['user', 'language', 'dark', 'rulesShown', 'password'],
     }),
   ],
 }
@@ -164,6 +170,7 @@ export const editting = () => getters.editting as Boolean
 export const sockets = () => getters.sockets as Sockets
 export const tags = () => getters.tags as Tag[]
 export const tagColors = () => getters.tagColors as { [index: string]: string }
+export const password = () => getters.password as string | undefined
 
 // Mutations
 export const setUser = (user: User) => {
@@ -221,4 +228,7 @@ export const setTags = (tags: Tag[]) => {
 }
 export const setTagColors = (tagColors: { [index: string]: string }) => {
   store.commit('setTagColors', tagColors)
+}
+export const setPassword = (password: string | undefined) => {
+  store.commit('setPassword', password)
 }

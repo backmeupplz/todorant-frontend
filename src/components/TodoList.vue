@@ -85,14 +85,13 @@
                       v-row(no-gutters)
                         .handle.pr-3(v-if='editable && todo.frogFails < 3')
                           v-icon menu
-                        TodoText(:todo='todo')
+                        TodoText(:todo='todo' :text='text(todo)' :errorDecrypting='errorDecrypting(todo)')
                     v-card-actions.pb-2.pt-2.ma-0(v-if='!editable')
                       v-icon(v-if='todoOutstanding(todo)') error_outline
                       v-col(no-gutters).px-2.py-0.ma-0
                         v-row
-                          span.caption.grey--text.pl-2 {{$t('created')}} {{todo.createdAt.substr(0, 10)}}
-                        v-row
-                          span.caption.grey--text.pl-2(v-if='todo.skipped') ({{$t('skipped')}})
+                          v-icon(small).grey--text.pl-2(v-if='todo.encrypted') vpn_key
+                          v-icon(small).grey--text.pl-2(v-if='todo.skipped') arrow_forward
                       v-spacer
                       v-tooltip.mx-0(bottom v-if='todoInFuture(todo)')
                         template(v-slot:activator='{ on }')
@@ -152,6 +151,8 @@ import { CalendarView, CalendarViewHeader } from 'vue-simple-calendar'
 import moment from 'moment'
 import { debounce } from 'lodash'
 import { v4 as uuid } from 'uuid'
+import { decrypt } from '../utils/encryption'
+import { i18n } from '../plugins/i18n'
 
 @Component({
   components: {
@@ -661,6 +662,22 @@ export default class TodoList extends Vue {
       serverBus.$emit('refreshRequested')
     } catch (err) {
       // Do nothing
+    }
+  }
+
+  text(todo: Todo) {
+    if (todo.encrypted) {
+      return decrypt(todo.text, true) || i18n.t('encryption.errorDecrypting')
+    } else {
+      return todo.text
+    }
+  }
+
+  errorDecrypting(todo: Todo) {
+    if (todo.encrypted) {
+      return !decrypt(todo.text, true)
+    } else {
+      return false
     }
   }
 }

@@ -76,6 +76,7 @@ import * as api from '../utils/api'
 import { serverBus } from '../main'
 import { reportGA } from '../utils/ga'
 import { linkify } from '../utils/linkify'
+import { encrypt } from '../utils/encryption'
 
 @Component({
   components: { TodoForm },
@@ -215,8 +216,13 @@ export default class AddTodo extends Vue {
       await api.postTodos(
         user,
         this.todos.map((todo) => {
-          todo.text = todo.text!.trim()
-          return todo
+          const iTodo = { ...todo }
+          iTodo.text = iTodo.text!.trim()
+          if (!!store.password()) {
+            iTodo.encrypted = true
+            iTodo.text = encrypt(iTodo.text)
+          }
+          return iTodo
         })
       )
       if (this.todoToBreakdown) {

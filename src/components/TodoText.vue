@@ -4,7 +4,7 @@
     span(v-if='debug') ({{todo.frogFails}}) 
     span(v-if='!!todo.frog') 🐸 
     span(v-if='!!todo.time') {{todo.time}} 
-    span(v-for='element in linkifiedText')
+    span(v-for='element in linkifiedText' :class='errorDecrypting ? "grey--text" : ""')
       span(v-if='element.type === "text"') {{element.value}}
       a(v-else-if='element.type === "link"'
       :href='element.url'
@@ -25,6 +25,8 @@ import * as store from '../plugins/store'
 @Component({
   props: {
     todo: Object,
+    text: String,
+    errorDecrypting: Boolean,
   },
 })
 export default class TodoText extends Vue {
@@ -35,9 +37,8 @@ export default class TodoText extends Vue {
   }
 
   get linkifiedText() {
-    const todo = (this as any).todo
-    if (!todo || !todo.text) return []
-    return l(todo.text)
+    if (!this.$props.text) return []
+    return l(this.$props.text)
   }
 
   get debug() {

@@ -7,13 +7,15 @@
     // Subscription dialog
     Subscription(:dialog='subscriptionDialog' :close='closeSubscription')
     // Settings dialog
-    Settings(:dialog='settingsDialog' :close='closeSettingsDialog')
+    Settings(:dialog='settingsDialog' :close='closeSettingsDialog' :openEncryption='openEncryption')
     // Hashtags dialog
     Hashtags(:dialog='hashtagsDialog' :close='closeHashtagsDialog')
     // QR dialog
     QRCode(:dialog='qrDialog' :close='closeQRDialog')
     // Support dialog
     Support(:dialog='supportDialog' :close='closeSupportDialog')
+    // Encryption dialog
+    Encryption(:dialog='encryptionDialog' :close='closeEncryptionDialog')
     // Navbar and app
     v-app-bar(flat app style='maxWidth: 1000px; margin: auto')
       // Title
@@ -84,6 +86,7 @@ import Settings from './Settings.vue'
 import Hashtags from './Hashtags.vue'
 import QRCode from './QRCode.vue'
 import Support from './Support.vue'
+import Encryption from './Encryption.vue'
 import { serverBus } from '../main'
 import { reportGA } from '../utils/ga'
 import { sockets } from '../utils/sockets'
@@ -97,6 +100,7 @@ import { sockets } from '../utils/sockets'
     Support,
     Hashtags,
     QRCode,
+    Encryption,
   },
 })
 export default class Navbar extends Vue {
@@ -107,6 +111,7 @@ export default class Navbar extends Vue {
   supportDialog = false
   hashtagsDialog = false
   qrDialog = false
+  encryptionDialog = true
 
   get locales() {
     return [
@@ -175,6 +180,12 @@ export default class Navbar extends Vue {
   }
   closeQRDialog() {
     this.qrDialog = false
+  }
+  closeEncryptionDialog() {
+    this.encryptionDialog = false
+  }
+  openEncryption() {
+    this.encryptionDialog = true
   }
   async goHome() {
     try {

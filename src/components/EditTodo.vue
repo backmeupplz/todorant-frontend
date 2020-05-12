@@ -7,6 +7,8 @@
       v-card
         v-card-title
           span.headline {{$t('todo.edit.title')}}
+          v-spacer
+          v-icon(small).grey--text.pl-2(v-if='todo && todo.encrypted') vpn_key
         v-card-text
           v-container
             TodoForm(v-if='!!todo'

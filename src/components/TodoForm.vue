@@ -4,7 +4,7 @@
     :label='$t("todo.create.text")'
     :hint='$t("todo.create.textHint")'
     :rules='textRules'
-    v-model='todo.text'
+    v-model='text'
     autofocus
     v-on:keydown="enterDown"
     v-on:keyup.esc="escape"
@@ -14,7 +14,8 @@
     rows='1'
     @focus='focused = true'
     @blur='focused = false'
-    :class='tags.length ? "pb-2" : "pb-4"')
+    :class='tags.length ? "pb-2" : "pb-4"'
+    :disabled='todo && todo.encrypted && (errorDecrypting(todo) || !$store.state.password)')
     .mb-4(v-if='tags.length')
       v-btn(text
       small
@@ -93,6 +94,7 @@ import { i18n } from '../plugins/i18n'
 import moment from 'moment'
 import * as store from '../plugins/store'
 import { Tag } from '../models/tag'
+import { decrypt, encrypt } from '../utils/encryption'
 
 @Component({
   props: {
@@ -124,10 +126,33 @@ export default class TodoForm extends Vue {
     }
   }
 
+  get text() {
+    if (this.$props.todo.encrypted) {
+      return (
+        decrypt(this.$props.todo.text, true) ||
+        (i18n.t('encryption.errorDecrypting') as string)
+      )
+    } else {
+      return this.$props.todo.text
+    }
+  }
+  set text(newText: string) {
+    if (this.$props.todo.encrypted) {
+      this.$props.todo.text = encrypt(newText)
+    } else {
+      this.$props.todo.text = newText
+    }
+  }
+
+  errorDecrypting(todo: Todo) {
+    if (todo.encrypted) {
+      return !decrypt(todo.text, true)
+    } else {
+      return false
+    }
+  }
+
   get tags() {
-    // if (!this.focused) {
-    //   return []
-    // }
     const emptyMatches = this.$props.todo.text.match(/#$/g) || []
     if (emptyMatches.length) {
       return store.tags()

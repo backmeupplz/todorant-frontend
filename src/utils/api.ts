@@ -1,3 +1,4 @@
+import { password } from './../plugins/store'
 // Dependencies
 import { GoogleCalendarCredentials } from './../plugins/store'
 import axios from 'axios'
@@ -79,6 +80,7 @@ export async function postTodos(user: User, todos: Partial<Todo>[]) {
         todoCopy.monthAndYear = todo.date.substr(0, 7)
         todoCopy.date = todo.date.substr(8)
       }
+      todoCopy.encrypted = !!store.password()
       return todoCopy
     }),
     {
@@ -314,7 +316,8 @@ export async function authorizeGoogleCalendar(user: User, code: string) {
 
 function getHeaders(user: User) {
   if (user.token) {
-    return { token: user.token }
+    const password = store.password()
+    return password ? { token: user.token, password } : { token: user.token }
   } else {
     return undefined
   }

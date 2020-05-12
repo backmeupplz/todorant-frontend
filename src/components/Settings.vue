@@ -34,6 +34,9 @@
         .d-flex.flex-column
           span(v-for='identifier in identifiers') {{identifier}}
       v-card-actions
+        v-btn(color='blue'
+        text
+        @click='encryptionTouched') {{$t('encryption.title')}}
         v-spacer
         v-btn(color='error'
           text 
@@ -60,6 +63,7 @@ import { i18n } from '../plugins/i18n'
   props: {
     dialog: Boolean,
     close: Function,
+    openEncryption: Function,
   },
 })
 export default class Settings extends Vue {
@@ -174,6 +178,11 @@ export default class Settings extends Vue {
     } finally {
       this.loading = false
     }
+  }
+
+  encryptionTouched() {
+    this.$props.openEncryption()
+    this.$props.close()
   }
 }
 </script>
