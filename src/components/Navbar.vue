@@ -111,7 +111,7 @@ export default class Navbar extends Vue {
   supportDialog = false
   hashtagsDialog = false
   qrDialog = false
-  encryptionDialog = true
+  encryptionDialog = false
 
   get locales() {
     return [
