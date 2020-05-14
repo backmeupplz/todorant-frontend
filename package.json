@@ -5,21 +5,23 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "distribute": "vue-cli-service serve --mode development"
+    "distribute": "vue-cli-service serve --mode development",
+    "upload-translations": "node scripts/upload.js",
+    "download-translations": "node scripts/download.js && yarn prettier --single-quote --no-semi --write ./src/assets/localization.ts"
   },
   "dependencies": {
     "@types/chart.js": "^2.9.6",
+    "@types/crypto-js": "^3.1.45",
     "@types/linkify-it": "^2.1.0",
     "@types/lodash": "^4.14.150",
     "@types/moment": "^2.13.0",
     "@types/node": "^12.12.6",
     "@types/socket.io-client": "^1.4.32",
     "@types/uuid": "^7.0.2",
-    "@types/crypto-js": "^3.1.45",
     "axios": "^0.19.0",
-    "crypto-js": "^3.3.0",
     "chart.js": "^2.9.3",
     "cnf-qrcode": "^1.0.13",
+    "crypto-js": "^3.3.0",
     "linkify-it": "^2.2.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
@@ -56,10 +58,12 @@
   "devDependencies": {
     "@vue/cli-plugin-typescript": "^4.0.5",
     "@vue/cli-service": "^4.0.5",
+    "flat": "^5.0.0",
     "sass": "^1.23.3",
     "sass-loader": "^8.0.0",
     "typescript": "^3.7.2",
-    "vue-template-compiler": "^2.5.21"
+    "vue-template-compiler": "^2.5.21",
+    "prettier": "^2.0.5"
   },
   "postcss": {
     "plugins": {
