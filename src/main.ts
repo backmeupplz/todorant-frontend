@@ -11,6 +11,7 @@ import './plugins/shortkey'
 import './plugins/vue-flag-icon'
 import './plugins/visibility'
 import './plugins/confetti'
+import './plugins/vue-clipboard2'
 import vuetify from './plugins/vuetify'
 
 Vue.config.productionTip = true

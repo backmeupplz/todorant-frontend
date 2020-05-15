@@ -28,7 +28,13 @@
               span {{$t('todo.create.tooltip')}}
           v-card-text
             v-container
-              p(v-if='!!todoToBreakdown' :class='isEncryptionWrong(todoToBreakdown) ? "grey--text" : ""') {{textForTodo(todoToBreakdown)}}
+              .d-flex.justify-space-between
+                p(v-if='!!todoToBreakdown' :class='isEncryptionWrong(todoToBreakdown) ? "grey--text" : ""') {{textForTodo(todoToBreakdown)}}
+                v-btn(
+                  icon
+                  v-clipboard:copy="!todoToBreakdown ? 'no-todo' : textForTodo(todoToBreakdown)"
+                )
+                  v-icon(small) assignment
               v-expansion-panels(multiple v-model='panel')
                 v-expansion-panel(v-for='(todo, i) in todos' :key='i')
                   v-expansion-panel-header
