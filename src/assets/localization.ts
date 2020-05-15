@@ -352,13 +352,13 @@ export const messages = {
       account: 'Аккаунт',
     },
     weekdays: [
+      'Воскресенье',
       'Понедельник',
       'Вторник',
       'Среда',
       'Четверг',
       'Пятница',
       'Суббота',
-      'Воскресенье',
     ],
   },
   en: {
@@ -715,13 +715,13 @@ export const messages = {
       account: 'Account',
     },
     weekdays: [
+      'Sunday',
       'Monday',
       'Tuesday',
       'Wednesday',
       'Thursday',
       'Friday',
       'Saturday',
-      'Sunday',
     ],
   },
   ua: {
@@ -1080,13 +1080,13 @@ export const messages = {
       account: 'Обліковий запис',
     },
     weekdays: [
+      'Неділя',
       'Понеділок',
       'Вівторок',
       'Середа',
       'Четвер',
       "П'ятниця",
       'Субота',
-      'Неділя',
     ],
   },
 }
