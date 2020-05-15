@@ -31,6 +31,7 @@
               .d-flex.justify-space-between
                 p(v-if='!!todoToBreakdown' :class='isEncryptionWrong(todoToBreakdown) ? "grey--text" : ""') {{textForTodo(todoToBreakdown)}}
                 v-btn(
+                  v-if='!!todoToBreakdown' 
                   icon
                   v-clipboard:copy="!todoToBreakdown ? 'no-todo' : textForTodo(todoToBreakdown)"
                 )
