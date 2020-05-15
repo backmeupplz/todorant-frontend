@@ -28,7 +28,7 @@
               span {{$t('todo.create.tooltip')}}
           v-card-text
             v-container
-              p(v-if='!!todoToBreakdown') {{todoToBreakdown.text}}
+              p(v-if='!!todoToBreakdown' :class='isEncryptionWrong(todoToBreakdown) ? "grey--text" : ""') {{textForTodo(todoToBreakdown)}}
               v-expansion-panels(multiple v-model='panel')
                 v-expansion-panel(v-for='(todo, i) in todos' :key='i')
                   v-expansion-panel-header
@@ -76,7 +76,8 @@ import * as api from '../utils/api'
 import { serverBus } from '../main'
 import { reportGA } from '../utils/ga'
 import { linkify } from '../utils/linkify'
-import { encrypt } from '../utils/encryption'
+import { encrypt, decrypt } from '../utils/encryption'
+import { i18n } from '../plugins/i18n'
 
 @Component({
   components: { TodoForm },
@@ -242,6 +243,22 @@ export default class AddTodo extends Vue {
 
   escapePressed() {
     this.dialog = false
+  }
+
+  textForTodo(todo: Todo) {
+    if (todo.encrypted) {
+      return decrypt(todo.text, true) || i18n.t('encryption.errorDecrypting')
+    } else {
+      return todo.text
+    }
+  }
+
+  isEncryptionWrong(todo: Todo) {
+    if (todo.encrypted) {
+      return !decrypt(todo.text, true)
+    } else {
+      return false
+    }
   }
 }
 </script>

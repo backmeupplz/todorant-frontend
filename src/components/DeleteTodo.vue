@@ -4,7 +4,7 @@
   scrollable
   max-width='600px')
     v-card
-      v-card-text.pt-4 {{$t('deleteHeadline', { name: todo ? todo.text : '' } )}}
+      v-card-text.pt-4 {{$t('deleteHeadline', { name: todo ? textForTodo(todo) : '' } )}}
       v-card-actions
         v-spacer
         v-btn(color='blue'
@@ -28,6 +28,9 @@ import { Watch } from 'vue-property-decorator'
 import * as store from '../plugins/store'
 import * as api from '../utils/api'
 import { serverBus } from '../main'
+import { Todo } from '../models/todo'
+import { decrypt } from '../utils/encryption'
+import { i18n } from '../plugins/i18n'
 
 @Component({
   props: {
@@ -56,6 +59,14 @@ export default class DeleteTodo extends Vue {
       store.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
       this.loading = false
+    }
+  }
+
+  textForTodo(todo: Todo) {
+    if (todo.encrypted) {
+      return decrypt(todo.text, true) || i18n.t('encryption.errorDecrypting')
+    } else {
+      return todo.text
     }
   }
 }
