@@ -1089,4 +1089,367 @@ export const messages = {
       'Субота',
     ],
   },
+  es: {
+    breakdown: {
+      request:
+        'Parece que has pospuesto demasiado esta tarea. Por favor desglósala, ya no puedes posponerla a otra fecha. ¡Creéme, te ayudará a completarla!',
+      button: 'Desglosar',
+    },
+    warning: 'Advertencia',
+    hashtags: {
+      title: 'Hashtags',
+    },
+    supportAlert: {
+      title: 'Soporte',
+      text:
+        'Si tienes dudas o sugerencias, siéntete libre de <a href=mailto:todorant@borodutch.com">enviarme un email</a>, <a href="https://t.me/borodutch" target="_blank">contactarme en Telegram</a> o <a href="https://t.me/todorant_feedback" target="_blank">unirte a nuestra comunidad en Telegram</a>.',
+    },
+    loginMobile: {
+      telegram: {
+        headline:
+          'Por favor inicia sesión con Telegram introduciendo tu ID de Telegram en el campo que se encuentra debajo y haciendo clic en el botón de "Iniciar sesión". Puedes obtener tu ID de Telegram enviando <code>/id</code> al bot <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>.',
+        id: '123456789',
+        idHint: 'ID de Telegram',
+        loginButton: 'Iniciar sesión',
+        noCredentialsError: 'Por favor, introduce una ID de Telegram',
+        cannotSendMessageError:
+          'No se pudo enviar la solicitud de inicio de sesión al usuario. Asegúrate de haber iniciado @todorant_bot y de que la ID de Telegram sea correcta.',
+        waiting:
+          'Esperando la respuesta en <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>...',
+        notAllowedError: 'El inicio de sesión fue rechazado',
+      },
+      apple: {
+        headline:
+          'Por favor inicia sesión con Apple haciendo clic en el botón de debajo.',
+      },
+    },
+    noReport: {
+      title: 'Sin datos todavía',
+      text: 'Vamos, ¡completa tu primer tarea y vuelve!',
+    },
+    report: {
+      title: 'Estadísticas',
+      tasksCompleted: 'Tareas completadas',
+      frogsCompleted: 'Sapos completados',
+      share: '¡Compartir este reporte!',
+      hashtag: 'Hashtag',
+      shareButton: 'Compartir',
+      url: 'Enlace permanente a este reporte',
+      shareMessage:
+        '¡Echa un vistazo a mi reporte de productividad en Todorant!',
+      call: '¿Deseas unirte?',
+      callButton: 'Unirse a Todorant',
+      startDate: 'Fecha de inicio',
+      endDate: 'Fecha de finalización',
+    },
+    title: 'Todorant',
+    cookie: {
+      button: '¡Entendido!',
+      message: 'Este sitio web utiliza cookies.',
+    },
+    home: {
+      texts: {
+        level: [
+          'Alguna vez fui como tú',
+          'Pasé horas y horas tratando de hacer las cosas y parecía que nada podría ayudar. Nuevas tareas seguían llegando y las viejas seguían acumulándose. No había escapatoria: ninguno de las apps administradoras de tareas funcionó, lo único que lograron fue molestarme con todas las cosas que olvidé y todas las tareas que nunca terminé.',
+          'Si bien las herramientas complicadas y sofisticadas con muchas funciones pueden ser útiles para realizar un seguimiento de algunas tareas, la psicología cognitiva nos dice que abrumar nuestra subconsciencia con todas las tareas que no se completaron puede usar una gran parte de nuestro cerebro que de lo contrario podría estar a cargo de proporcionar el sentimiento de felicidad.',
+        ],
+        winter: [
+          'El invierno está llegando',
+          'A pesar de que la población mundial es más feliz que nunca, la productividad personal se ha visto afectada recientemente. Si seguimos la misma tendencia, podríamos encontrarnos entre la masa gris de humanos genéricos que ya no son productivos y no pueden completar una sola tarea más o menos difícil y compleja, simplemente porque la ansiedad no nos deja.',
+          'El número de personas que se olvidan de los eventos importantes con sus seres queridos, que prometen hacer más de lo que pueden manejar, que siguen pensando en "lo que debería verificar pero no estoy seguro de qué" en lugar de hacer las cosas, va a estar en aumento muy pronto. También puedes encontrarte entre las máquinas biológicas inconscientes que sólo realizan tareas simples con salarios bajos si no tomas medidas.',
+        ],
+        contact: [
+          '¿Sigues teniendo preguntas? Contáctame directamente en ',
+          '. Gracias.',
+        ],
+        solution: [
+          'Pero tú tienes la solución',
+          'Después de familiarizarme con libros acerca de ciencia cognitiva como "Eat That Frog", "Willpower", "Atomic Habits" y "Getting Things Done", desarrollé un sistema que impulsó mi productividad 10 veces. Ahora soy capaz de completar 10 veces más tareas que llevan a 10 veces más proyectos lanzados con este simple sistema. Comparto esta solución contigo para mejorar el entorno en el que vivo. Si las personas a mi alrededor prosperan, mi felicidad personal también aumenta.',
+          'Todorant es una simple lista de tareas con una sola captura. Cada acción y característica fue cuidadosamente ponderada y probada usando psicología cognitiva. He usado décadas de estudios y los he empaquetado en una única y simple herramienta de productividad. Todorant engaña a tu mente para que haga más acciones buenas y menos acciones malas. Desarrolla hábitos positivos y elimina hábitos negativos. Así que deja de escribir tus tareas sin pensar. Comienza a usar el sistema que funciona.',
+        ],
+        consequences: {
+          title: '¿Consecuencias?',
+          points: [
+            'Tu bandeja de entrada siempre estará vacía',
+            'Completarás las tareas fastidiosas (sapos)',
+            'Ningún proyecto se estancará',
+            'Tu cerebro anhelará la efectividad de manera natural',
+            'Nunca olvidarás nada',
+            'La gente comenzará a admirar tu productividad',
+          ],
+        },
+        deal: [
+          '¿Cuál es el trato?',
+          'Todorant es más caro que otras soluciones de gestión de tareas, sí. El estándar de la industria es de $3/mes mientras que Todorant tiene 30 días de prueba gratis (no se requiere tarjeta de crrédito) y después cuesta $5/mes. Sí, Todorant tiene menos funcionalidades que sus competidores: es a propósito.',
+          'Mientras otros te venden un lugar donde estacionar indefinidamente tus tareas, Todorant te ofrece la metodología y la ideología: Todorant ofrece conseguir hacer las cosas, no solo escribirlas inconscientemente. Todorant no es para todos: está diseñado específicamente para aquellas personas que quieren liberar su mente de las presiones y finalmente empezar a completar sus proyectos. Puedes familiarizarte con la metodologíaYou can familiarize yourself with the methodology ',
+          'abriendo el libro de reglas',
+          ' en la esquina superior derecha de esta página.',
+        ],
+        personal: [
+          '¿Qué debería hacer?',
+          'Probé docenas de apps para gestión de tareas diferentes. Si tuviera la oportunidad de probar Todorant antes de implementarlo, lo probaría. Es gratis durante los primeros 30 días, y es suficiente para probar si el sistema funciona para mí. Y, maldita sea, si funciona y logro hacer mis cosas, pagaría cualquier precio para mantener la racha de productividad. No hay condiciones, solo inicia sesión y prueba Todorant hoy. Puedes encontrar los botones a continuación. Basta de hablar: ¡es hora de aumentar los niveles de productividad!',
+        ],
+      },
+      youAreRegistered: '(ya estás registrado)',
+      headline: [
+        'Nunca olvides una tarea.',
+        'Siempre consigue completarla.',
+        'Vive una vida feliz.',
+        'Impulsado por Todorant.',
+      ],
+      signIn: 'Registrarse',
+      lastSignIn: '(de acuerdo, este es el último botón, regístrate ya)',
+      facebook: 'Registrarse con Facebook',
+      google: 'Registrarse con Google',
+      privacy: 'Política de privacidad',
+      appstores: 'Descargar la app',
+      feedback: {
+        title: '¿Qué dicen los usuarios?',
+        reviews: [
+          {
+            name: 'Sergey Romanov',
+            username: 'Gendoor',
+            text: `Los mensajes en la parte de la suscripción son lindos :)
+
+Gracias por un servicio simple y próspero por el servicio ideal. Resultó que no sólo ayuda a ser productivo sino también proactivo. Pequeñas mejoras diarias mejoran la vida con confianza, y la mente libre está constantemente buscando cómo llenar la lista de tareas vacía para que pueda sentir el placer de completar tareas una y otra vez, y es una ruta directa hacia la mejora de todo lo que me rodea.
+
+Con todo, no importa cuán simple sea a primera vista Todorant, puede convertirse en un aliado fiel en cualquier negocio. Gracias, Nikita, por desatar los aspectos de la verdadera productividad y compartirlos con nosotros en una solución conveniente.
+
+Un agradecido suscriptor de  Todorant.`,
+          },
+          {
+            name: 'Dinislam Sad',
+            username: 'Azerzet',
+            text: `Las principales ventajas que a mí (y estoy seguro que también a otros) me gustaron.
+1. Interfaz simple y conveniente.
+2. Las tareas pospuestas se vuelven sapos automáticamente y existe la opción de marcar una tarea como sapo desde el inicio.
+3. El comando /done era algo obligado, y gracias por ello, Nikita. Yo usé Todoist, Wunderlist, Bitrix24. Todos eran demasiado complicados.
+4. Bot de Telegram.`,
+          },
+          {
+            name: 'Aleksei Kaut',
+            username: 'aleksei_kaut',
+            text: `Después de que creé las primeras tareas y cambié a la pestaña "Actual" me sorprendí de que tenía solamente una tarea y de que necesitaba completarla antes de continuar. Esta idea de una sola tarea a la vez y plena concentración en ella me pareció sorprendente, parece obvio, pero no podía usarla antes.
+  
+            Usualmente rastreaba tareas e ideas en Notas, lo que debería hacerse pronto, pero no lo enfoqué como un sistema. He estado utilizando el servicio durante un par de semanas, no de manera muy activa, pero creo que esta es una forma muy sólida de sistematizar los asuntos y las tareas.
+  
+  ¡Gracias por tu trabajo!`,
+          },
+          {
+            name: 'Anton',
+            username: 'mas1311',
+            text: `Probé Todorant. Al inicio estaba escéptico (ya he probado muchos servicios de planeación de tareas), pero me di cuenta de que trabaja muy efectivamente y de que es muy fácil de usar.
+  
+  Además, por razones desconocidas para mí, cuando todas las tareas del día están completadas aparece una fuerte satisfacción, la cual estaba ausente en otros planificadores (había una sensación como de "bueno, eso fue todo... ¿o no?").
+  
+  ¡Gracias por tu trabajo!`,
+          },
+          {
+            name: 'Willsey Paslen',
+            username: 'WillseyPaslen',
+            text: `Gracias por el estupendo servicio. Suficiente tiempo ha pasado, así que ahora puedo decir definitivamente: me funciona. Gracias, Nikita 😁 y buena suerte con la app.`,
+          },
+          {
+            name: 'Igor Malinkin',
+            username: 'sxe4kilo',
+            text: `Comencé al fin a hacer algo con Todorant, así que mi productividad subió desde 0.`,
+          },
+          {
+            name: 'Vladimir Dubenko',
+            username: 'dubenko_v',
+            text: `Tu servicio es increíble en términos de al menos tres cosas:
+    1. Conveniente:¡es minimalista!
+    2. Inculca un hábito.
+  3. Aunque parezca extraño, no te obliga a pensar racionalmente.
+            
+Soy irracional por naturaleza, Simplemente no puedo dirigir un proyecto (me agoto rápidamente). ¡Mi vida es la multitarea! 3 proyectos al mismo tiempo son fáciles, pero 3 no es suficiente... 7 suena mucho mejor. Y tu servicio permite conseguir esto. Es la alternancia de tareas la que previene que el cerebro se fatigue en una dirección particular. Y, de alguna manera mágica, alterna tareas de un proyecto y otro.`,
+          },
+          {
+            name: 'Maksim Alekseyevich',
+            username: 'MMAradiology',
+            text: `No puedo decir que mi vida haya cambiado usando Todorant. ¿Puedo decir que esta es una aplicación/página web significativa y muy útil? Sí, mil veces sí.
+  
+  Me gusta Todorant, me permite liberar mi "memoria de operación" y me permite concentrarme en resolver problemas, no en recordarlos. Como dijo correctamente Nikita (el creador): con uso constante y correcto, las tareas que solían causar verdadero terror bíblico dejarán de aparecer. Y esto no sucederá porque las tareas complejas dejen de llegar. Será claro para ti (y para mí, y para todos) que "el camino será dominado por aquellos caminando", "el camino de las mil millas comienza con un paso".`,
+          },
+          {
+            name: 'Kiku Reise',
+            username: 'Kiku_Reise',
+            text: `He ordenado mis tareas del trabajo, de programación y de mis pasatiempos. Incluso esta opinión fue escrita gracias a Todorant. Solamente una tarea, sin complicaciones. Ese es todo el punto de la app: me ayudó a concentrarme sin tener que estar evadiendo mis tareas constantemente. 
+  
+  Por supuesto, puedes definir tareas y olvidarte de ellas, pero para mí es más simple abrir de nuevo una aplicación minimalista con una sola tarea que gastar medio día buscando en qué tarea trabajar ahora de cientos planeadas en Telegram o Notion.
+            
+Estuve especialmente complacido con la actualización que trajo los hashtags: ahora todas las estadísticas están en la palma de mi mano, puedo rastrear y compartir con mis amigos cuántas tareas he completado este mes.
+            
+¡Muchas gracias por!`,
+          },
+        ],
+      },
+    },
+    menu: {
+      darkMode: {
+        on: 'Modo oscuro: encendido',
+        off: 'Modo oscuro: apagado',
+      },
+      merge: 'Combinar cuentas',
+      logout: 'Cerrar sesión',
+    },
+    support:
+      '¿Algo no está claro? Contáctame en <a target="_blank" href="mailto:n@borodutch.com">n@borodutch.com</a>',
+    errors: {
+      login: {
+        facebook: 'No se pudo iniciar sesión con Facebook',
+        google: 'No se pudo iniciar sesión con Google',
+        telegram: 'No se pudo iniciar sesión con Telegram',
+        apple: 'No se pudo iniciar sesión con Apple',
+      },
+      internal: 'Error interno del servidor',
+      loadTodos: 'No se pudo extraer las tareas',
+      todo: {
+        textLenght: 'Las tareas deberían tener texto',
+        dateOrMonth:
+          'Las tareas deben estar asignadas a una fecha o mes específico',
+      },
+      invalidForm: 'Por favor, completa los campos requeridos',
+      report: 'No se pudo cargar el reporte',
+      addTodoOld: 'No se puede agregar una tarea al pasado',
+      appleFirefox:
+        'Desafortunadamente hay <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1628361">un bug</a> con el inicio de sesión en Apple desde Firefox. Hasta que lo solucionen, por favor, usa otro navegador para iniciar sesión con Apple, y después une tu sesión con otras cuentas sociales en Todorant. Una disculpa por la inconveniencia.',
+    },
+    close: 'Cerrar',
+    notFound: 'Página no encontrada',
+    todo: {
+      create: {
+        title: 'Agregar tareas',
+        text: 'Texto de la tarea',
+        textHint: 'Puedes agregar un enlace a un email o a un sitio web',
+        placeholder: 'Tarea',
+        frog: '¡Es un sapo!',
+        completed: 'Completada',
+        date: 'Día exacto',
+        month: 'O mes',
+        tooltip:
+          'Las tareas siempre deberían ser: accionables ("Encontrar los mejores vuelos a México" en vez de  "Ir a México"); tan pequeñas y tan exactas como sea posible ("Desempolvar el monitor" en vez de "Limpiar la casa").',
+        goFirst: 'Agregar hasta arriba',
+        time: 'Tiempo exacto',
+      },
+      list: {
+        completed: 'Mostrar completadas',
+      },
+      edit: {
+        title: 'Editar',
+      },
+      planning:
+        '¡Parece que tienes un poco de planeación que hacer! Por favor, redistribuye las tareas de abajo para desbloquear la pestaña "Actual" y para seguir siendo productivo. ¡Ánimo!',
+    },
+    cancel: 'Cancelar',
+    save: 'Guardar',
+    delete: 'Borrar',
+    deleteHeadline: '¿Estás seguro de que quieres borrar "{name}"?',
+    current: 'Actual',
+    planning: 'Planeación',
+    underDevelopment: 'Esta sección está bajo desarrollo',
+    created: 'Creada',
+    breakdownInfo:
+      'Usa el desglose cuando la tarea actual es demasiado amplia. Después de que agregues todas las subtareas, siéntete libre de completar esta tarea, te lo mereces.',
+    skipInfo:
+      'Usa posponer cuando no quieras trabajar en la tarea actual. Puedes posponer una vez al día, hasta tres veces en una semana. Los sapos no se pueden posponer. Una tarea pospuesta dos veces se convierte en un sapo.',
+    clear: {
+      congratulations: '¡Felicidades!',
+      text:
+        '🥳 ¡Lo hiciste! Todas las tareas de hoy están terminadas, ve a descansar o quizás a bailar un poco 💃',
+    },
+    empty: {
+      action: '¡Al infinito!',
+      text:
+        'No tienes ninguna tarea para hoy. Si quieres trabajar, agrega una nueva tarea para hoy o adelanta las tareas planeadas para días futuros.',
+    },
+    howto: {
+      title: '¿Cómo usar Todorant?',
+      premise:
+        'Debajo se encuentran los principios básicos que deberías seguir para explotar productivamente todas las características proporcionadas por Todorant. Es tan fácil como contar 1-2-3, solamente con unos pocos pasos más.',
+      rules: [
+        'Tan pronto como recibas una tarea accionable (recibir un email, llamada de teléfono, mensaje de texto, o si ves algo interesante que tenga que estar en tu lista de tareas), crea una tarea para ello en ese instante. <b>No esperes</b>, en caso contrario <b>te olvidarás</b> de ello. Puedes usar el bot <a target="_blank" href="https://tlg.fyi/todorant_bot">@todorant_bot</a> en Telegram para crear tareas rápidamente.',
+        'Las tareas deberían <b>siempre</b> ser accionables y tan explícitas como sea posible. Si una tarea toma <b>menos de 2 minutos</b>, entonces hazla de inmediato y regístrala como completada.',
+        'Cuando crees una tarea asígnale una fecha específica o un mes específico. No puedes elegir el mes actual sin elegir una fecha específica. Esto se hace así para relajar tu mente. Si confías en el sistema y pones todas tus tareas en la fecha correcta, te las encontrarás después en el momento adecuado. Una enorme cantidad de fuerza de voluntad se desperdicia en estar constantemente estresado acerca de "esa otra cosa que tenía que hacer, pero que no estoy seguro de qué era". Aprende a confiar y relajarte.',
+        'Lo primero que debes hacer cada mes es planear por adelantado. Toma todas las tareas asignadas al mes actual y ordénalas en las fechas correctas. Esto te permite filtrar las tareas desactualizadas y mantener tu mente en paz, sabiendo exactamente lo que necesitas hacer este mes.',
+        'Lo primero que debes hacer cada mañana es planificar tu día. Echa un vistazo a la sección de <b>Planificación</b>. ¿Puedes ocuparte de todo? Distribuye las tareas que no puedan ser completadas hoy. Redistribuye cualquier tarea que haya quedado pendiente de días pasados.',
+        'A no ser que se trate de una emergencia, <b>no</b> mires la sección de planeación después de que hayas terminado de planificar. Es mucho mejor psicológicamente si te concentras únicamente en una tarea, así que mantén tus ojos en la sección <b>Actual</b>. Confía en el sistema, él recuerda todo. Haz tu trabajo y relaja tu mente.',
+        'La sección <b>Actual</b> contiene solamente una tarea: en la que tienes que concentrarte, nada más. Puedes tener más de una tarea al día, la cantidad total de tareas y una barra de progreso se muestran para tu conveniencia. No tienes permitido brincar entre tareas: deberías ocuparte de cada tarea linealmente, una por una.',
+        'Los sapos son un tipo especial de tareas: aquellas de las que no te quieres ocupar. Usualmente son las tareas que se posponen durante meses e incluso años. Todorant se asegura de que te ocupes de los sapos a primera hora del día. En las mañanas tu reserva de fuerza de voluntad es lo suficientemente grande para que te ocupes de incluso las tareas más fastidiosas. Y cuando finalmente te ocupaste de un sapo recibes justo la cantidad de felicidad necesaria para estar sonriendo durante todo el día. Te sientes orgulloso de ti mismo cuando te ocupas de los sapos.',
+        'Tienes permitido posponer la tarea actual, pero trata de hacerlo lo más raramente posible. No puedes posponer un sapo. Si fallaste en completar una tarea y tuviste que posponerla en dos ocasiones, se convierte en un sapo.',
+        'Si la tarea actual es demasiado complicada, entonces desglósala en una lista de subtareas. En cuanto la desgloses, la tarea será marcada como completada.',
+        'Agrega toda la información relevante acerca de la tarea como sea posible. Agrega enlaces a emails específicos (Gmail en la web permite hacer esto), sitios web, notas (como Evernote), documentos (como Dropbox), anota números de teléfono o añade tanta información como necesites para completar la tarea. Todorant no está pensado para ser un punto de referencia para ti: debería actuar como un catalogo de enlaces a la información relevante para tareas específicas.',
+        'Siéntete libre de unirte a nuestro <a target="_blank" href="https://tlg.fyi/todorant_feedback">grupo</a> multilingüe en Telegram para compartir experiencia y trucos sobre cómo ser más productivo. Tus comentarios sobre el servicio: sugerencias, deseos y quejas son muy bienvenidos.',
+        'Usa el modo de edición (el ícono de orden de lista en la parte superior) en la página de <b>Planificación</b> para cambiar el orden de las tareas. Si deseas asignar una tarea a una semana específica, simplemente asígnala al lunes correspondiente y reasígnala durante la fase de planificación ese lunes por la mañana.',
+        'Todorant no tiene y nunca tendrá la función de programar tareas repetitivas, lo único que hacen bien es causar ansiedad al colgarse de ti como tareas inacabadas. Si necesitas completar tareas repetitivas, agrégalas manualmente, tu cerebro te agradecerá el trabajo consciente.',
+        'Todorant no tiene el concepto de "Proyectos", ya que ha demostrado ser desmotivador, algunas de las "carpetas" nunca se abren. Los proyectos "Hacer ejercicio" y "Superación personal" envían sus saludos. En su lugar, usa #hashtags.',
+        'Las tareas pospuestas siempre aparecerán al final de la lista, los sapos siempre aparecerán en la parte superior de la lista. Puedes cambiar el orden entre los sapos, entre las tareas regulares o entre las pospuestas, pero nunca entre grupos.',
+      ],
+      bonus: {
+        title: 'Características adicionales',
+        rules: [
+          '¡Usa atajos de teclado cuando estés en pc! Puedes agregar (a), desglosar (b), cambiar a la pestaña Actual (c), marcar como completada (d) y cambiar a la pestaña Planeación (p). Para agregar un espacio de tarea adicional mientras agregas tareas, puedes usar Shift + A.',
+        ],
+      },
+    },
+    skipped: 'Pospuesta',
+    merge: {
+      title: 'Combinar cuentas',
+      description:
+        'Puedes combinar múltiples cuentas (por ejemplo: Facebook, Google, Telegram) aquí. Simplemente inicia sesión en cada cuenta con los botones de debajo y se combinarán. Ten cuidado: esta acción no se puede deshacer y tu cuenta recibirá todas las tareas de ambas cuentas.',
+      done:
+        '¡Todo listo! Puedes iniciar sesión a través de Google, Facebook y Telegram en esta cuenta. No quedan más botones para ti.',
+      confirm: '¿Estás seguro de que deseas combinar {id} con esta cuenta?',
+    },
+    subscription: {
+      title: 'Suscripción',
+      statusText: 'Estatus de la suscripción: {status}',
+      earlyAdopter: 'Primer adoptante 🦄',
+      trial: 'Prueba',
+      active: 'Activa',
+      inactive: 'Inactiva',
+      earlyAdopterDescription:
+        '👏👏 — este soy yo aplaudiéndoles; ustedes — los locos que aceptaron probar el instrumento de productividad cada vez mayor, Todorant, entre los primeros. Se puede decir que ustedes son el millar dorado, de quienes su retroalimentación ha estado formando Todorant desde el principio. Tienen todos los derechos para usar Todorant tanto como lo deseen: nunca experimentarán ningún límite, se lo han ganado. Sin embargo, si notaron que Todorant ha mejorado drásticamente su vida, aún pueden comprar la suscripción y decir el mejor tipo de "Gracias". Nunca perderán el estado  "Primer adoptante 🦄 ", pero siempre podrán cancelar la suscripción. Muchas gracias por seguir usando Todorant, seguiré agregando nuevas funciones para mejorar el producto que nos afecta positivamente a todos. ¡Buena suerte!',
+      earlyAdopterBonus:
+        '🤗 ¡Diablos! Parece que o Todorant o yo personalmente te hemos ayudado lo suficiente como para que hayas comprado la suscripción, aunque puedas usar Todorant de forma gratuita para siempre. Estoy profundamente conmovido y feliz de tomar una taza de café contigo o simplemente de conversar un poco. No dudes en comunicarte conmigo por Telegram (@borodutch) o por correo electrónico; simplemente haz clic en mi nombre a continuación. ¡Muchas gracias! ¡Es difícil imaginar cuán importante es tu contribución!',
+      trialDescription:
+        '💪 ¡Bienvenido a Todorant! Tienes 30 días después del registro para decidir si Todorant funciona bien para ti. Después de que pasen 30 días, aún tendrás acceso a las tareas anteriores, pero no podrás agregar otras nuevas. Está perfectamente bien comprar una suscripción antes de que finalicen los 30 días. ¡Creo que usar Todorant te traerá a nuevas alturas en la productividad personal!',
+      activeDescription:
+        '🎉 ¡Muchas gracias por apoyar Todorant! ¡Personalmente espero que Todorant haya mejorado tu vida y que la siga mejorando en el futuro! Tu apoyo me permite trabajar en Todorant diariamente y agregar nuevas funciones que simplifican el trabajo y liberan tu tiempo y tus recursos cognitivos. De nuevo, ¡muchas gracias!',
+      inactiveDescription:
+        '🐝 Parece que tu prueba de Todorant ha llegado al final. Este es el momento incómodo en el que tienes que decidir si Todorant ha mejorado tu vida lo suficiente como para invertir dinero en el sistema, y yo tengo que guiarte hacia la decisión correcta. Estoy en la cima de la felicidad cuando puedo aportar valor a la gente; y si Todorant pudo mejorar tu vida, estaré más que agradecido si compras la suscripción. La productividad ilimitada y la mente libre solo cuestan $5/mes. Cada centavo que gane en Todorant se gastará en mejorar el servicio. Al apoyar a Todorant usted me permite a mí, un desarrollador independiente, seguir mejorando el producto que nos beneficia a todos día a día. ¡Muchas gracias por adelantado!',
+      signature: 'Nikita Kolmogorov, creador de Todorant',
+      daysLeft: '(días restantes: {daysLeft})',
+      '5dollars': '$5/mes',
+      '50dollars': '$50/año',
+      success: '¡Te has suscrito exitosamente!',
+      payment: {
+        success:
+          '✅ ¡Eso es todo! Disfruta de la experiencia de Todorant ilimitada 💪',
+        failure: '✋ Espera, algo salió mal. ¿Puedes reintentarlo? 😳',
+        back: '¡De vuelta a la productividad!',
+      },
+      cancel: 'Cancelar suscripción',
+      cancelConfirm: '¿Estás seguro de que quieres cancelar tu suscripción?',
+    },
+    moveUp: 'Mover al día de hoy',
+    settings: {
+      title: 'Ajustes',
+      showTodayOnAddTodo: 'Establecer el día de hoy como predeterminado',
+      firstDayOfWeek: 'Primer día de la semana',
+      newTodosGoFirst:
+        'Las tareas nuevas se agregan en la parte superior de la lista',
+      preserveOrderByTime: 'Conservar el orden exacto por tiempo',
+    },
+    weekdays: [
+      'Lunes',
+      'Martes',
+      'Miércoles',
+      'Jueves',
+      'Viernes',
+      'Sábado',
+      'Domingo',
+    ],
+  },
 }
