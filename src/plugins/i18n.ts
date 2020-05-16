@@ -28,5 +28,6 @@ function getNavigatorLanguage() {
 
 export const i18n = new VueI18n({
   locale: getNavigatorLanguage(),
+  fallbackLocale: 'en',
   messages,
 })
