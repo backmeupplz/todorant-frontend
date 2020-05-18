@@ -55,7 +55,7 @@
           :min='todayFormattedForDatePicker'
           type='month'
           :locale='locale')
-      v-col(v-if='moreShown' cols='12' md='6')
+      v-col(v-if='moreShown || todo.time' cols='12' md='6')
         v-menu(v-model='timeMenu' :close-on-content-click='false'  min-width=0)
           template(v-slot:activator='{ on }')
             v-text-field(clearable
@@ -75,10 +75,10 @@
         v-switch(:label='$t("todo.create.frog")' v-model='todo.frog')
       v-col(cols='12' md='6')
         v-switch(:label='$t("todo.create.completed")' v-model='todo.completed')
-      v-col(v-if='!hideAddToTheTop && moreShown' cols='12' md='6')
+      v-col(v-if='!hideAddToTheTop && (moreShown || todo.time)' cols='12' md='6')
         v-switch(:label='$t("todo.create.goFirst")' v-model='todo.goFirst')
     v-row.v-flex-row
-      v-btn(v-if='!moreShown' icon text color='default' @click='moreShown = !moreShown')
+      v-btn(v-if='!moreShown && !todo.time' icon text color='default' @click='moreShown = !moreShown')
         v-icon more_horiz
       slot
 </template>
@@ -92,6 +92,7 @@ import moment from 'moment'
 import * as store from '../plugins/store'
 import { Tag } from '../models/tag'
 import { decrypt, encrypt } from '../utils/encryption'
+import { Watch } from 'vue-property-decorator'
 
 @Component({
   props: {
