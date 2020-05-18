@@ -33,11 +33,9 @@
             prepend-icon="event"
             v-on='on'
             v-model='todo.date'
-            :disabled='!!todo.monthAndYear'
-            :rules='dateAndMonthRules'
-            ref='dateInput')
+            :rules='dateAndMonthRules')
           v-date-picker(@input='dateMenu = false'
-          v-model='todo.date'
+          v-model='date'
           :min='todayFormattedForExactDate'
           :first-day-of-week='firstDayOfWeek'
           :locale='locale'
@@ -51,10 +49,9 @@
             prepend-icon="event"
             v-on='on'
             v-model='todo.monthAndYear'
-            :disabled='!!todo.date'
             :rules='dateAndMonthRules')
           v-date-picker(@input='monthMenu = false'
-          v-model='todo.monthAndYear'
+          v-model='monthAndYear'
           :min='todayFormattedForDatePicker'
           type='month'
           :locale='locale')
@@ -142,6 +139,22 @@ export default class TodoForm extends Vue {
     } else {
       this.$props.todo.text = newText
     }
+  }
+
+  get date() {
+    return this.$props.todo.date
+  }
+  set date(newDate: any) {
+    this.$props.todo.monthAndYear = undefined
+    this.$props.todo.date = newDate
+  }
+
+  get monthAndYear() {
+    return this.$props.todo.monthAndYear
+  }
+  set monthAndYear(newMonthAndYear: any) {
+    this.$props.todo.date = undefined
+    this.$props.todo.monthAndYear = newMonthAndYear
   }
 
   errorDecrypting(todo: Todo) {
