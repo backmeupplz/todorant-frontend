@@ -197,7 +197,7 @@ export default class TodoList extends Vue {
           .filter((todo) => !!todo.date)
           .map((todo) => ({
             id: todo._id,
-            title: todo.text,
+            title: this.text(todo),
             startDate: section.title,
           }))
       })
@@ -272,9 +272,9 @@ export default class TodoList extends Vue {
 
   weekdayFromTitle(title: string) {
     const date = new Date(title)
-    return `weekdays.${(date.getDay() +
-      (date.getTimezoneOffset() > 0 ? 1 : 0)) %
-      7}`
+    return `weekdays.${
+      (date.getDay() + (date.getTimezoneOffset() > 0 ? 1 : 0)) % 7
+    }`
   }
 
   @Watch('showCompleted')
@@ -347,27 +347,24 @@ export default class TodoList extends Vue {
             )
             .concat(fetchedTodos)
         : fetchedTodos
-      const mappedTodos = allTodos.reduce(
-        (prev, cur) => {
-          if (cur.date) {
-            const date = `${cur.monthAndYear}-${cur.date}`
-            if (prev[date]) {
-              prev[date].push(cur)
-            } else {
-              prev[date] = [cur]
-            }
+      const mappedTodos = allTodos.reduce((prev, cur) => {
+        if (cur.date) {
+          const date = `${cur.monthAndYear}-${cur.date}`
+          if (prev[date]) {
+            prev[date].push(cur)
           } else {
-            const month = cur.monthAndYear
-            if (prev[month]) {
-              prev[month].push(cur)
-            } else {
-              prev[month] = [cur]
-            }
+            prev[date] = [cur]
           }
-          return prev
-        },
-        {} as { [index: string]: Todo[] }
-      )
+        } else {
+          const month = cur.monthAndYear
+          if (prev[month]) {
+            prev[month].push(cur)
+          } else {
+            prev[month] = [cur]
+          }
+        }
+        return prev
+      }, {} as { [index: string]: Todo[] })
       if (this.loadingUUID !== currentLoadingUUID) {
         return
       }
