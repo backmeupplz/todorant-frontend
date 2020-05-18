@@ -1,5 +1,7 @@
 export const messages = {
   ru: {
+    emptyHashtags:
+      'Список хештегов пока что пуст. Добавьте свою первую задачу с #хештегом, чтобы добавить сюда первую позицию!',
     encryption: {
       title: 'Шифрование',
       info:
@@ -362,6 +364,8 @@ export const messages = {
     ],
   },
   en: {
+    emptyHashtags:
+      'Hashtag list is empty for now. Create your first task with a #hashtag to add the first hashtag here!',
     encryption: {
       title: 'Encryption',
       info:
@@ -725,6 +729,8 @@ export const messages = {
     ],
   },
   ua: {
+    emptyHashtags:
+      'Список хештегів поки що порожній. Додайте свою першу задачу з #хештегом, щоб додати сюди першу позицію! ',
     encryption: {
       title: 'Шифрування',
       info:
@@ -1090,6 +1096,8 @@ export const messages = {
     ],
   },
   es: {
+    emptyHashtags:
+      'La lista de Hashtag está vacía por ahora. ¡Crea tu primera tarea con un #hashtag para añadir el primer hashtag aquí!',
     breakdown: {
       request:
         'Parece que has pospuesto demasiado esta tarea. Por favor desglósala, ya no puedes posponerla a otra fecha. ¡Creéme, te ayudará a completarla!',

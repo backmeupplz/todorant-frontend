@@ -6,6 +6,7 @@
     v-card
       v-card-title {{$t('hashtags.title')}} {{editedColor}}
       v-card-text
+        p(v-if='!$store.state.tags.length') {{$t("emptyHashtags")}}
         v-card.mb-2(v-for='(tag, i) in $store.state.tags' :key='i')
           .d-flex.direction-row.align-center
             v-card-text(:style='{color: colorForTag(tag, i)}') {{'#'}}{{tag.tag}}
@@ -70,8 +71,8 @@ import { Tag } from '../models/tag'
 @Component({
   props: {
     dialog: Boolean,
-    close: Function
-  }
+    close: Function,
+  },
 })
 export default class Hashtags extends Vue {
   colors = store.tagColors()
