@@ -67,8 +67,7 @@ export default class Snackbar extends Vue {
       if (this.version !== version) {
         this.refreshActive = true
       }
-      console.log('checked', this.version, version)
-    }, 10 * 1000)
+    }, 60 * 1000)
   }
 
   reload() {
