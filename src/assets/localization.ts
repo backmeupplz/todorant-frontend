@@ -1,5 +1,8 @@
 export const messages = {
   ru: {
+    refreshRequest:
+      'Доступна новая версия Тудуранта. Пожалуйста, обновите страницу, чтобы получить новые блестящие функции 🦄',
+    refresh: 'Обновить',
     emptyHashtags:
       'Список хештегов пока что пуст. Добавьте свою первую задачу с #хештегом, чтобы добавить сюда первую позицию!',
     encryption: {
@@ -355,6 +358,9 @@ export const messages = {
     ],
   },
   en: {
+    refreshRequest:
+      'There is a new version of Todorant available. Please refresh the page to get the new shiny stuff 🦄',
+    refresh: 'Refresh',
     emptyHashtags:
       'Hashtag list is empty for now. Create your first task with a #hashtag to add the first hashtag here!',
     encryption: {
@@ -720,6 +726,9 @@ export const messages = {
     ],
   },
   ua: {
+    refreshRequest:
+      'Доступна нова версія Тудуранта. Будь ласка, поновіть сторінку, щоб отримати нові блискучі функції 🦄',
+    refresh: 'Оновити',
     emptyHashtags:
       'Список хештегів поки що порожній. Додайте свою першу задачу з #хештегом, щоб додати сюди першу позицію! ',
     encryption: {
@@ -1078,6 +1087,9 @@ export const messages = {
     ],
   },
   it: {
+    refreshRequest:
+      'È disponibile una nuova versione di Todorant. Si prega di aggiornare la pagina per ottenere il nuovo materiale lucido 🦄',
+    refresh: 'Aggiorna',
     emptyHashtags:
       "L'elenco degli hashtag è vuoto per ora. Create il vostro primo compito con un #hashtag per aggiungere il primo hashtag qui!",
     encryption: {
@@ -1172,6 +1184,9 @@ export const messages = {
     skipped: 'Saltato',
   },
   es: {
+    refreshRequest:
+      'Hay una nueva versión de Todorant disponible. Por favor, refresque la página para obtener el nuevo material brillante 🦄',
+    refresh: 'Actualizar',
     emptyHashtags:
       'La lista de Hashtag está vacía por ahora. ¡Crea tu primera tarea con un #hashtag para añadir el primer hashtag aquí!',
     breakdown: {

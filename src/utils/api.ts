@@ -11,15 +11,19 @@ import { TodoSection } from '../models/TodoSection'
 const base = process.env.VUE_APP_API
 
 export async function loginFacebook(accessToken: string) {
-  return (await axios.post(`${base}/login/facebook`, {
-    accessToken,
-  })).data as User
+  return (
+    await axios.post(`${base}/login/facebook`, {
+      accessToken,
+    })
+  ).data as User
 }
 
 export async function loginGoogle(accessToken: string) {
-  return (await axios.post(`${base}/login/google`, {
-    accessToken,
-  })).data as User
+  return (
+    await axios.post(`${base}/login/google`, {
+      accessToken,
+    })
+  ).data as User
 }
 
 export async function loginTelegram(loginInfo: any) {
@@ -42,51 +46,59 @@ export async function checkTelegramLoginRequest(uuid: string) {
 }
 
 export async function mergeFacebook(user: User, accessToken: string) {
-  return (await axios.post(
-    `${base}/merge/facebook`,
-    {
-      accessToken,
-    },
-    {
-      headers: getHeaders(user),
-    }
-  )).data as User
+  return (
+    await axios.post(
+      `${base}/merge/facebook`,
+      {
+        accessToken,
+      },
+      {
+        headers: getHeaders(user),
+      }
+    )
+  ).data as User
 }
 
 export async function mergeGoogle(user: User, accessToken: string) {
-  return (await axios.post(
-    `${base}/merge/google`,
-    {
-      accessToken,
-    },
-    {
-      headers: getHeaders(user),
-    }
-  )).data as User
+  return (
+    await axios.post(
+      `${base}/merge/google`,
+      {
+        accessToken,
+      },
+      {
+        headers: getHeaders(user),
+      }
+    )
+  ).data as User
 }
 
 export async function mergeTelegram(user: User, loginInfo: any) {
-  return (await axios.post(`${base}/merge/telegram`, loginInfo, {
-    headers: getHeaders(user),
-  })).data as User
+  return (
+    await axios.post(`${base}/merge/telegram`, loginInfo, {
+      headers: getHeaders(user),
+    })
+  ).data as User
 }
 
 export async function postTodos(user: User, todos: Partial<Todo>[]) {
-  return (await axios.post(
-    `${base}/todo`,
-    todos.map((todo) => {
-      const todoCopy = { ...todo }
-      if (todo.date) {
-        todoCopy.monthAndYear = todo.date.substr(0, 7)
-        todoCopy.date = todo.date.substr(8)
+  return (
+    await axios.post(
+      `${base}/todo`,
+      todos.map((todo) => {
+        const todoCopy = { ...todo }
+        if (todo.date) {
+          todoCopy.monthAndYear = todo.date.substr(0, 7)
+          todoCopy.date = todo.date.substr(8)
+        }
+        todoCopy.encrypted = !!store.password()
+        return todoCopy
+      }),
+      {
+        headers: getHeaders(user),
       }
-      todoCopy.encrypted = !!store.password()
-      return todoCopy
-    }),
-    {
-      headers: getHeaders(user),
-    }
-  )).data
+    )
+  ).data
 }
 
 export async function editTodo(user: User, todo: Todo) {
@@ -160,9 +172,11 @@ export async function undoTodo(user: User, todo: Todo) {
 }
 
 export async function getTags(user: User) {
-  return (await axios.get(`${base}/tag`, {
-    headers: getHeaders(user),
-  })).data as Todo[]
+  return (
+    await axios.get(`${base}/tag`, {
+      headers: getHeaders(user),
+    })
+  ).data as Todo[]
 }
 
 export async function getTodos(
@@ -175,31 +189,35 @@ export async function getTodos(
   calendarView: boolean = false,
   period?: Date
 ) {
-  const data = (await axios.get(`${base}/todo`, {
-    headers: getHeaders(user),
-    params: {
-      completed,
-      hash,
-      skip,
-      limit,
-      today: period ? getStringFromDate(period) : getToday(),
-      calendarView,
-      date: getToday(),
-      queryString,
-    },
-  })).data as { todos: Todo[]; state: store.UserState; tags: Tag[] }
+  const data = (
+    await axios.get(`${base}/todo`, {
+      headers: getHeaders(user),
+      params: {
+        completed,
+        hash,
+        skip,
+        limit,
+        today: period ? getStringFromDate(period) : getToday(),
+        calendarView,
+        date: getToday(),
+        queryString,
+      },
+    })
+  ).data as { todos: Todo[]; state: store.UserState; tags: Tag[] }
   store.setUserState(data.state)
   setTags(data.tags)
   return data.todos
 }
 
 export async function getCurrentTodo(user: User) {
-  const data = (await axios.get(`${base}/todo/current`, {
-    headers: getHeaders(user),
-    params: {
-      date: getToday(),
-    },
-  })).data as {
+  const data = (
+    await axios.get(`${base}/todo/current`, {
+      headers: getHeaders(user),
+      params: {
+        date: getToday(),
+      },
+    })
+  ).data as {
     todosCount: number
     incompleteTodosCount: number
     todo?: Todo
@@ -224,9 +242,11 @@ export enum Plan {
   yearly = 'yearly',
 }
 export async function getPlanSession(user: User, plan: Plan) {
-  return (await axios.get(`${base}/subscription/session/${plan}`, {
-    headers: getHeaders(user),
-  })).data as {
+  return (
+    await axios.get(`${base}/subscription/session/${plan}`, {
+      headers: getHeaders(user),
+    })
+  ).data as {
     session: string
   }
 }
@@ -245,15 +265,12 @@ export async function setSettings(user: User, settings: store.Settings) {
 
 function setTags(tags: Tag[]) {
   store.setTags(tags.sort((a, b) => (a.tag < b.tag ? -1 : 1)))
-  const tagColors = tags.reduce(
-    (p, c) => {
-      if (c.color) {
-        p[c.tag] = c.color
-      }
-      return p
-    },
-    {} as { [index: string]: string }
-  )
+  const tagColors = tags.reduce((p, c) => {
+    if (c.color) {
+      p[c.tag] = c.color
+    }
+    return p
+  }, {} as { [index: string]: string })
   store.setTagColors(tagColors)
 }
 
@@ -263,14 +280,16 @@ export async function getReport(
   startDate: null | string,
   endDate: null | string
 ) {
-  return (await axios.get(`${base}/report`, {
-    params: {
-      hash: hash || '',
-      startDate: startDate || undefined,
-      endDate: endDate || undefined,
-    },
-    headers: getHeaders(user),
-  })).data as {
+  return (
+    await axios.get(`${base}/report`, {
+      params: {
+        hash: hash || '',
+        startDate: startDate || undefined,
+        endDate: endDate || undefined,
+      },
+      headers: getHeaders(user),
+    })
+  ).data as {
     completedTodosMap: { [index: string]: number }
     completedFrogsMap: { [index: string]: number }
   }
@@ -288,30 +307,33 @@ export async function getPublicReport(uuid: string) {
 }
 
 export async function getSharedReport(user: User, hash: string) {
-  return (await axios.get(
-    `${base}/report/share${hash ? `?hash=${hash}` : ''}`,
-    {
+  return (
+    await axios.get(`${base}/report/share${hash ? `?hash=${hash}` : ''}`, {
       headers: getHeaders(user),
-    }
-  )).data as {
+    })
+  ).data as {
     uuid: string
   }
 }
 
 export async function getCalendarAuthenticationURL(user: User) {
-  return (await axios.get(`${base}/google/calendarAuthenticationURL?web=true`, {
-    headers: getHeaders(user),
-  })).data as string
+  return (
+    await axios.get(`${base}/google/calendarAuthenticationURL?web=true`, {
+      headers: getHeaders(user),
+    })
+  ).data as string
 }
 
 export async function authorizeGoogleCalendar(user: User, code: string) {
-  return (await axios.post(
-    `${base}/google/calendarAuthorize`,
-    { code, web: true },
-    {
-      headers: getHeaders(user),
-    }
-  )).data as GoogleCalendarCredentials
+  return (
+    await axios.post(
+      `${base}/google/calendarAuthorize`,
+      { code, web: true },
+      {
+        headers: getHeaders(user),
+      }
+    )
+  ).data as GoogleCalendarCredentials
 }
 
 function getHeaders(user: User) {
@@ -341,4 +363,9 @@ export function getTomorrow() {
       ? `0${tomorrow.getMonth() + 1}`
       : tomorrow.getMonth() + 1
   }-${tomorrow.getDate() < 10 ? `0${tomorrow.getDate()}` : tomorrow.getDate()}`
+}
+
+export async function getVersion() {
+  return (await axios.get(`${process.env.VUE_APP_WEBSITE}/version.json`)).data
+    .version as string
 }
