@@ -1,10 +1,5 @@
 export const messages = {
   ru: {
-    refreshRequest:
-      'Доступна новая версия Тудуранта. Пожалуйста, обновите страницу, чтобы получить новые блестящие функции 🦄',
-    refresh: 'Обновить',
-    emptyHashtags:
-      'Список хештегов пока что пуст. Добавьте свою первую задачу с #хештегом, чтобы добавить сюда первую позицию!',
     encryption: {
       title: 'Шифрование',
       info:
@@ -356,13 +351,13 @@ export const messages = {
       'Пятница',
       'Суббота',
     ],
+    emptyHashtags:
+      'Список хештегов пока что пуст. Добавьте свою первую задачу с #хештегом, чтобы добавить сюда первую позицию!',
+    refreshRequest:
+      'Доступна новая версия Тудуранта. Пожалуйста, обновите страницу, чтобы получить новые блестящие функции 🦄',
+    refresh: 'Обновить',
   },
   en: {
-    refreshRequest:
-      'There is a new version of Todorant available. Please refresh the page to get the new shiny stuff 🦄',
-    refresh: 'Refresh',
-    emptyHashtags:
-      'Hashtag list is empty for now. Create your first task with a #hashtag to add the first hashtag here!',
     encryption: {
       title: 'Encryption',
       info:
@@ -724,13 +719,13 @@ export const messages = {
       'Friday',
       'Saturday',
     ],
+    emptyHashtags:
+      'Hashtag list is empty for now. Create your first task with a #hashtag to add the first hashtag here!',
+    refreshRequest:
+      'There is a new version of Todorant available. Please refresh the page to get the new shiny stuff 🦄',
+    refresh: 'Refresh',
   },
   ua: {
-    refreshRequest:
-      'Доступна нова версія Тудуранта. Будь ласка, поновіть сторінку, щоб отримати нові блискучі функції 🦄',
-    refresh: 'Оновити',
-    emptyHashtags:
-      'Список хештегів поки що порожній. Додайте свою першу задачу з #хештегом, щоб додати сюди першу позицію! ',
     encryption: {
       title: 'Шифрування',
       info:
@@ -1085,13 +1080,13 @@ export const messages = {
       "П'ятниця",
       'Субота',
     ],
+    emptyHashtags:
+      'Список хештегів поки що порожній. Додайте свою першу задачу з #хештегом, щоб додати сюди першу позицію! ',
+    refreshRequest:
+      'Доступна нова версія Тудуранта. Будь ласка, поновіть сторінку, щоб отримати нові блискучі функції 🦄',
+    refresh: 'Оновити',
   },
   it: {
-    refreshRequest:
-      'È disponibile una nuova versione di Todorant. Si prega di aggiornare la pagina per ottenere il nuovo materiale lucido 🦄',
-    refresh: 'Aggiorna',
-    emptyHashtags:
-      "L'elenco degli hashtag è vuoto per ora. Create il vostro primo compito con un #hashtag per aggiungere il primo hashtag qui!",
     encryption: {
       title: 'Crittografia',
       info:
@@ -1173,7 +1168,26 @@ export const messages = {
           "Spendevo ore ed ore a provar a fare qualcosa ed era come se niente potesse aiutarmi.\nNuovi compiti arrivavano e quelli vecchi si accumulavano. Non c'era via di fuga -- nessun task manager funzionava, la loro unica funzione era quella di ricordarmi di tutte le cose che mi ero dimenticato di fare e di quelle attività che avevo iniziato ma mai finito.",
           'Mentre strumenti complicati e sofisticati con molte funzioni possono essere utili per tenere traccia di alcuni compiti, la psicologia cognitiva ci dice che travolgendo il nostro subconscio con tutti i compiti sospesi ancora da completare possono esaurire una parte importante del nostro cervello che dovrebbe invece essere responsabile di procurare la sensazione di felicità.',
         ],
-        winter: ["L'inverno sta arrivando"],
+        winter: [
+          "L'inverno sta arrivando",
+          "Anche se nel mondo la popolazione è più felice che mai, la produttività personale ha recentemente subito un duro colpo. Se seguiamo la stessa tendenza, potremmo trovarci tra la massa grigia di umani generici che non sono più produttivi e non riescono a completare un singolo compito più o meno difficile e complesso — semplicemente perché l'ansia non ce lo permette.",
+          'Il numero di persone che dimenticano eventi importanti con altri significativi, che promettono molto più di quel che riescono a gestire, che continuano a pensare a "quella cosa che dovrei fare ma non ricordo cos\'è" invece di fare ciò che va fatto, presto aumenterà ancora. Presto, potrete ritrovarvi ad essere soltanto degli insensati automi biologici che svolgono lavori sottopagati, se non iniziate ad agire.',
+        ],
+        contact: ['Hai ancora domande? Contattami direttamente a', '. Grazie.'],
+        solution: [
+          'Ma hai la soluzione',
+          'Dopo aver familiarizzato con libri sulla scienza cognitiva come "Eat That Frog", "Willpower", "Atomic Habits" e "Getting Things Done", ho sviluppato un sistema che ha potenziato la mia produttività di 10 volte. Sono ora capace di completare 10 volte più compiti coi quali ho lanciato 10 volte più progetti di quanto facevo prima solo con questo semplice sistema. Condivido questa soluzione con te in modo da migliorare lo sviluppo del sistema in cui vivo. Più le persone attorno a me hanno successo, più anche la mia felicità può crescere.',
+          'Todorant è una semplice lista di cose da fare ma con un singolo obiettivo. Ogni azione e funzione è attentamente pesata e testata usando la psicologia cognitiva. Ho preso decine di studi e li ho condensati in un semplice "proiettile d\'argento", uno strumento efficace per la produttività. Todorant aggira la tua mente per fare più azioni buone e meno negative. Crea abitudini positive e tiene a bada l\'indolenza.\nQuindi, smetti di fare liste insensate di compiti. Inizia a usare un sistema che funziona.',
+        ],
+        consequences: {
+          title: 'Conseguenze?',
+          points: [
+            'La tua casella di posta sarà sempre vuota',
+            'Compiti scomodi (rane) saranno affrontati e superati.',
+            'Nessun progetto ristagnerà',
+            "Il tuo cervello desidererà naturalmente l'efficenza",
+          ],
+        },
       },
     },
     cancel: 'Annulla',
@@ -1182,13 +1196,13 @@ export const messages = {
     current: 'Corrente',
     planning: 'Pianificazione',
     skipped: 'Saltato',
+    emptyHashtags:
+      "L'elenco degli hashtag è vuoto per ora. Create il vostro primo compito con un #hashtag per aggiungere il primo hashtag qui!",
+    refreshRequest:
+      'È disponibile una nuova versione di Todorant. Si prega di aggiornare la pagina per ottenere il nuovo materiale lucido 🦄',
+    refresh: 'Aggiorna',
   },
   es: {
-    refreshRequest:
-      'Hay una nueva versión de Todorant disponible. Por favor, refresque la página para obtener el nuevo material brillante 🦄',
-    refresh: 'Actualizar',
-    emptyHashtags:
-      'La lista de Hashtag está vacía por ahora. ¡Crea tu primera tarea con un #hashtag para añadir el primer hashtag aquí!',
     breakdown: {
       request:
         'Parece que has pospuesto demasiado esta tarea. Por favor desglósala, ya no puedes posponerla a otra fecha. ¡Creéme, te ayudará a completarla!',
@@ -1519,5 +1533,10 @@ export const messages = {
       'Sábado',
       'Domingo',
     ],
+    emptyHashtags:
+      'La lista de Hashtag está vacía por ahora. ¡Crea tu primera tarea con un #hashtag para añadir el primer hashtag aquí!',
+    refreshRequest:
+      'Hay una nueva versión de Todorant disponible. Por favor, refresque la página para obtener el nuevo material brillante 🦄',
+    refresh: 'Actualizar',
   },
 }
