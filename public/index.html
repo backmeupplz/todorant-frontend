@@ -142,7 +142,7 @@
   </head>
   <body>
     <script>
-      window.fbAsyncInit = function() {
+      window.fbAsyncInit = function () {
         FB.init({
           appId: '640750769753434',
           cookie: true,
@@ -150,7 +150,7 @@
           version: 'v3.2',
         })
       }
-      ;(function(d, s, id) {
+      ;(function (d, s, id) {
         var js,
           fjs = d.getElementsByTagName(s)[0]
         if (d.getElementById(id)) {
@@ -161,6 +161,24 @@
         js.src = 'https://connect.facebook.net/en_US/sdk.js'
         fjs.parentNode.insertBefore(js, fjs)
       })(document, 'script', 'facebook-jssdk')
+    </script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.5/firebase-remote-config.js"></script>
+    <script>
+      var firebaseConfig = {
+        apiKey: 'AIzaSyD9TFO750NsPGpvJsGqo4ICOZjZaTf97zA',
+        authDomain: 'todorant-e99c2.firebaseapp.com',
+        databaseURL: 'https://todorant-e99c2.firebaseio.com',
+        projectId: 'todorant-e99c2',
+        storageBucket: 'todorant-e99c2.appspot.com',
+        messagingSenderId: '989382323327',
+        appId: '1:989382323327:web:c39ca628a7a6f918eae34a',
+        measurementId: 'G-HSTNQ80T29',
+      }
+      firebase.initializeApp(firebaseConfig)
+      firebase.analytics()
     </script>
     <noscript>
       <font color="white">
