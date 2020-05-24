@@ -6,6 +6,7 @@ import { Tag } from '../models/tag'
 import createPersistedState from 'vuex-persistedstate'
 import { daysBetween } from '../utils/daysBetween'
 import { setFavIcon } from '../utils/setFavIcon'
+import { setUserProperty } from '@/utils/logEvent'
 
 Vue.use(Vuex)
 
@@ -21,6 +22,8 @@ export interface State {
   tags: Tag[]
   tagColors: { [index: string]: string }
   password?: String
+
+  landingABTestGroup: Number
 }
 
 interface LocalizedError {
@@ -96,6 +99,7 @@ const storeOptions = {
     tags: [],
     tagColors: {},
     password: undefined,
+    landingABTestGroup: Math.floor(Math.random() * 2),
   },
   mutations: {
     setUser(state: State, user: User) {
@@ -108,9 +112,11 @@ const storeOptions = {
       state.snackbar = snackbar
     },
     setLanguage(state: State, language: String) {
+      setUserProperty('language', language)
       state.language = language
     },
     setDark(state: State, dark: Boolean) {
+      setUserProperty('darkMode', dark)
       state.dark = dark
     },
     setUserState(state: State, userState: UserState) {
@@ -134,6 +140,9 @@ const storeOptions = {
     setPassword(state: State, password: string | undefined) {
       state.password = password
     },
+    setLandingABTestGroup(state: State, landingABTestGroup: number) {
+      state.landingABTestGroup = landingABTestGroup
+    },
   },
   getters: {
     user: (state: State) => state.user,
@@ -147,10 +156,18 @@ const storeOptions = {
     tags: (state: State) => state.tags,
     tagColors: (state: State) => state.tagColors,
     password: (state: State) => state.password,
+    landingABTestGroup: (state: State) => state.landingABTestGroup,
   },
   plugins: [
     createPersistedState({
-      paths: ['user', 'language', 'dark', 'rulesShown', 'password'],
+      paths: [
+        'user',
+        'language',
+        'dark',
+        'rulesShown',
+        'password',
+        'landingABTestGroup',
+      ],
     }),
   ],
 }
@@ -171,6 +188,7 @@ export const sockets = () => getters.sockets as Sockets
 export const tags = () => getters.tags as Tag[]
 export const tagColors = () => getters.tagColors as { [index: string]: string }
 export const password = () => getters.password as string | undefined
+export const landingABTestGroup = () => getters.landingABTestGroup as number
 
 // Mutations
 export const setUser = (user: User) => {
