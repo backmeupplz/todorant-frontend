@@ -44,7 +44,7 @@
             p {{$t('home.texts.level[2]')}}
         v-row
           v-col
-            v-img(:src='pictures.desktop').d-flex.elevation-1
+            v-img(:src='pictures.web').d-flex.elevation-1
         v-row
           v-col
             p.display-1 {{$t('home.texts.winter[0]')}}
@@ -91,7 +91,7 @@
                   img(:src='`/avatars/${review.username}.jpg`')
                 v-list-item-content
                   a(:href='`https://t.me/${review.username}`') @{{review.username}}
-              v-card-text
+              v-card-text.text-left
                 p(v-for='(text, i) in review.text.split("\\n")') {{text}}
         v-row.pt-4
           v-col(cols=0 sm=4)
@@ -162,30 +162,43 @@ export default class Home extends Vue {
   }
 
   get pictures() {
-    console.log(i18n.locale)
     return {
-      desktop: `img/desktop-${this.imageModifier}.png`,
       iphone: `img/screenshots/ios/${this.languageImageTag('ios')}-1Current${
         store.dark() ? 'Dark' : ''
       }.png.png`,
       android: `img/screenshots/android/${this.languageImageTag(
         'android'
       )}-2Planning${store.dark() ? 'Dark' : ''}.png`,
+      web: `img/screenshots/web/${this.languageImageTag('web')}${
+        store.dark() ? '-dark' : ''
+      }.png`,
     }
   }
 
   languageImageTag(platform: string) {
     switch (i18n.locale) {
       case 'en':
-        return 'en-US'
+        return platform === 'web' ? 'en' : 'en-US'
       case 'ru':
-        return platform === 'android' ? 'ru-RU' : 'ru'
+        return platform === 'web'
+          ? 'ru'
+          : platform === 'android'
+          ? 'ru-RU'
+          : 'ru'
       case 'ua':
-        return 'uk'
+        return platform === 'web' ? 'ua' : 'uk'
       case 'es':
-        return platform === 'android' ? 'es' : 'es-ES'
+        return platform === 'web'
+          ? 'es'
+          : platform === 'android'
+          ? 'es'
+          : 'es-ES'
       case 'it':
-        return platform === 'android' ? 'it-IT' : 'it'
+        return platform === 'web'
+          ? 'it'
+          : platform === 'android'
+          ? 'it-IT'
+          : 'it'
     }
     return 'en-US'
   }
