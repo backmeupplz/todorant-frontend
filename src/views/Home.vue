@@ -22,7 +22,7 @@
     v-layout
       v-col
         v-row
-          v-col(cols=12 sm=6 :class='["xs", "sm"].includes(this.$vuetify.breakpoint.name) ? "text-center": ""')
+          v-col(cols=12 sm=6 :class='["xs", "sm"].includes(this.$vuetify.breakpoint.name) ? "text-center": "text-left"')
             p.my-1.display-1 {{$t('home.headline[0]')}}
             p.my-1.display-1 {{$t('home.headline[1]')}}
             p.mt-1.display-1 {{$t('home.headline[2]')}}
@@ -31,10 +31,10 @@
               v-btn.primary(block @click='signinDialog = true') {{$t('home.signIn')}}
               p.caption.pa-2 {{$t('home.youAreRegistered')}}
             .d-flex.direction-row.justify-center
-              a.pt-3(@click='open($store.state.language === "ru" ? "https://apps.apple.com/ru/app/todorant/id1482078243" : "https://apps.apple.com/us/app/todorant/id1482078243")')
-                v-img(width='150' height='50' aspect-ratio='1' :src='`/img/appstore_${$store.state.language === "ru" ? "ru" : "en"}.svg`')
+              a.pt-3(@click='open(`https://apps.apple.com/${appstoreLanguage}/app/todorant/id1482078243`)')
+                v-img(width='150' height='50' aspect-ratio='1' :src='appStoreButton')
               a.pl-1(@click='open("https://play.google.com/store/apps/details?id=com.todorant")')
-                v-img(width='170' height='74' aspect-ratio='1' :src='`/img/playstore_${$store.state.language === "ru" ? "ru" : "en"}.png`')
+                v-img(width='170' height='74' aspect-ratio='1' :src='playStoreButton')
           v-col(cols=12 sm=6)
             v-img(:src='this.pictures.iphone').d-flex.elevation-1
         v-row
@@ -106,9 +106,9 @@
           v-col(cols=0 sm=4)
         v-row.justify-center
           a.pt-3(@click='open($store.state.language === "ru" ? "https://apps.apple.com/ru/app/todorant/id1482078243" : "https://apps.apple.com/us/app/todorant/id1482078243")')
-            v-img(width='150' height='50' aspect-ratio='1' :src='`/img/appstore_${$store.state.language === "ru" ? "ru" : "en"}.svg`')
+            v-img(width='150' height='50' aspect-ratio='1' :src='appStoreButton')
           a.pl-1(@click='open("https://play.google.com/store/apps/details?id=com.todorant")')
-            v-img(width='170' height='74' aspect-ratio='1' :src='`/img/playstore_${$store.state.language === "ru" ? "ru" : "en"}.png`')
+            v-img(width='170' height='74' aspect-ratio='1' :src='playStoreButton')
         v-row(no-gutters)
           v-col.text-center
             p.caption.ma-0
@@ -177,6 +177,26 @@ export default class Home extends Vue {
         store.dark() ? '-dark' : ''
       }.png`,
     }
+  }
+
+  get appStoreButton() {
+    return `/img/appstore/${store.language()}.svg`
+  }
+
+  get playStoreButton() {
+    return `/img/playstore/${store.language()}.svg`
+  }
+
+  get appstoreLanguage() {
+    switch (i18n.locale) {
+      case 'en':
+        return 'us'
+      case 'ua':
+        return 'us'
+      default:
+        break
+    }
+    return i18n.locale
   }
 
   languageImageTag(platform: string) {
