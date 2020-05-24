@@ -88,9 +88,13 @@
             v-card
               v-list-item.px-4.pt-3
                 v-list-item-avatar
-                  img(:src='`/avatars/${review.username}.jpg`')
+                  img(
+                    :src='`/avatars/${review.username || $t("home.feedback.reviews", "en")[i].username}.jpg`'
+                  )
                 v-list-item-content
-                  a(:href='`https://t.me/${review.username}`') @{{review.username}}
+                  a(
+                    :href='`https://t.me/${review.username || $t("home.feedback.reviews", "en")[i].username}`'
+                  ) @{{review.username || $t("home.feedback.reviews", "en")[i].username}}
               v-card-text.text-left
                 p(v-for='(text, i) in review.text.split("\\n")') {{text}}
         v-row.pt-4

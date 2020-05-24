@@ -380,7 +380,7 @@ export const messages = {
     },
     breakdown: {
       request:
-        'Looks like you move this task way too much. Please break it down, you can no longer move it to another date. Believe me, it will help to compele the task!',
+        'Looks like you move this task way too much. Please break it down, you can no longer move it to another date. Believe me, it will help to complete the task!',
       button: 'Breakdown',
     },
     warning: 'Warning',
@@ -1081,7 +1081,7 @@ export const messages = {
       'Субота',
     ],
     emptyHashtags:
-      'Список хештегів поки що порожній. Додайте свою першу задачу з #хештегом, щоб додати сюди першу позицію! ',
+      'Список хештегів поки що порожній. Додайте свою першу задачу з #хештегом, щоб додати сюди першу позицію!',
     refreshRequest:
       'Доступна нова версія Тудуранта. Будь ласка, поновіть сторінку, щоб отримати нові блискучі функції 🦄',
     refresh: 'Оновити',
