@@ -55,7 +55,7 @@
             p {{$t('home.texts.solution[2]')}}
         v-row
           v-col(cols=12 sm=6)
-            v-img(src='img/android.jpg').d-flex.elevation-1
+            v-img(:src='this.pictures.android').d-flex.elevation-1
           v-col(cols=12 sm=6)
             p.display-1 {{$t('home.texts.consequences.title')}}
             ul
@@ -162,10 +162,32 @@ export default class Home extends Vue {
   }
 
   get pictures() {
+    console.log(i18n.locale)
     return {
       desktop: `img/desktop-${this.imageModifier}.png`,
-      iphone: `img/iphone-${this.imageModifier}.png`,
+      iphone: `img/screenshots/ios/${this.languageImageTag('ios')}-1Current${
+        store.dark() ? 'Dark' : ''
+      }.png.png`,
+      android: `img/screenshots/android/${this.languageImageTag(
+        'android'
+      )}-2Planning${store.dark() ? 'Dark' : ''}.png`,
     }
+  }
+
+  languageImageTag(platform: string) {
+    switch (i18n.locale) {
+      case 'en':
+        return 'en-US'
+      case 'ru':
+        return platform === 'android' ? 'ru-RU' : 'ru'
+      case 'ua':
+        return 'uk'
+      case 'es':
+        return platform === 'android' ? 'es' : 'es-ES'
+      case 'it':
+        return platform === 'android' ? 'it-IT' : 'it'
+    }
+    return 'en-US'
   }
 
   get imageModifier() {
