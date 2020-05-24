@@ -32,14 +32,14 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { reportGA } from "../utils/ga";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { logEvent } from '../utils/logEvent'
 
 @Component
 export default class Privacy extends Vue {
   mounted() {
-    reportGA("privacy_viewed");
+    logEvent('privacy_viewed')
   }
 }
 </script>

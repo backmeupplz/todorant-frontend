@@ -41,7 +41,7 @@ import * as store from '../plugins/store'
 import { daysBetween } from '../utils/daysBetween'
 import * as api from '../utils/api'
 import { serverBus } from '../main'
-import { reportGA } from '../utils/ga'
+import { logEvent } from '../utils/logEvent'
 
 // Stripe object is global, declaring here for TS
 declare const Stripe: any
@@ -99,12 +99,12 @@ export default class Subscription extends Vue {
         color: 'success',
       })
       ;(this as any).close()
-      reportGA('subscription_success', {
+      logEvent('subscription_success', {
         status: store.userState().subscriptionStatus,
       })
     } catch (err) {
       store.setSnackbarError(err.message)
-      reportGA('subscription_purchase_error', {
+      logEvent('subscription_purchase_error', {
         status: store.userState().subscriptionStatus,
         error: err.message,
       })
@@ -126,12 +126,12 @@ export default class Subscription extends Vue {
       const session = await api.cancelSubscription(user)
       ;(this as any).close()
       serverBus.$emit('refreshRequested')
-      reportGA('subscription_canceled', {
+      logEvent('subscription_canceled', {
         status: store.userState().subscriptionStatus,
       })
     } catch (err) {
       store.setSnackbarError(err.message)
-      reportGA('subscription_cancel_error', {
+      logEvent('subscription_cancel_error', {
         status: store.userState().subscriptionStatus,
         error: err.message,
       })

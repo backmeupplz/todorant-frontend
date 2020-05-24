@@ -127,7 +127,7 @@ import * as store from '../plugins/store'
 import Component from 'vue-class-component'
 import { i18n } from '../plugins/i18n'
 const { vueTelegramLogin } = require('vue-telegram-login')
-import { reportGA } from '../utils/ga'
+import { logEvent } from '../utils/logEvent'
 import { serverBus } from '../main'
 import GoogleSignInButton from 'vue-google-signin-button-directive'
 
@@ -158,7 +158,7 @@ export default class Home extends Vue {
   }
 
   mounted() {
-    reportGA('home_mounted')
+    logEvent('home_mounted')
   }
 
   get pictures() {
@@ -186,17 +186,17 @@ export default class Home extends Vue {
       store.setUser(user)
       this.signinDialog = false
       this.$router.replace('superpower')
-      reportGA('login_success', { provider: 'facebook' })
+      logEvent('login_success', { provider: 'facebook' })
     } catch (err) {
       console.error(err)
       store.setSnackbarError('errors.login.facebook')
-      reportGA('login_error', { provider: 'facebook', error: err.message })
+      logEvent('login_error', { provider: 'facebook', error: err.message })
     }
   }
   onFacebookSignInError(error: Error) {
     console.error(error)
     store.setSnackbarError('errors.login.facebook')
-    reportGA('login_error', { provider: 'facebook', error: error.message })
+    logEvent('login_error', { provider: 'facebook', error: error.message })
   }
   async OnGoogleAuthSuccess(token: any) {
     try {
@@ -204,17 +204,17 @@ export default class Home extends Vue {
       store.setUser(user)
       this.signinDialog = false
       this.$router.replace('superpower')
-      reportGA('login_success', { provider: 'google' })
+      logEvent('login_success', { provider: 'google' })
     } catch (err) {
       console.error(err)
       store.setSnackbarError('errors.login.google')
-      reportGA('login_error', { provider: 'google', error: err.message })
+      logEvent('login_error', { provider: 'google', error: err.message })
     }
   }
   OnGoogleAuthFail(error: Error) {
     console.error(error)
     store.setSnackbarError('errors.login.google')
-    reportGA('login_error', { provider: 'google', error: error.message })
+    logEvent('login_error', { provider: 'google', error: error.message })
   }
   async onTelegramAuth(loginInfo: any) {
     try {
@@ -222,11 +222,11 @@ export default class Home extends Vue {
       store.setUser(user)
       this.signinDialog = false
       this.$router.replace('superpower')
-      reportGA('login_success', { provider: 'telegram' })
+      logEvent('login_success', { provider: 'telegram' })
     } catch (err) {
       console.error(err)
       store.setSnackbarError('errors.login.telegram')
-      reportGA('login_error', { provider: 'telegram', error: err.message })
+      logEvent('login_error', { provider: 'telegram', error: err.message })
     }
   }
   async onAppleAuth(loginInfo: any) {
@@ -235,15 +235,15 @@ export default class Home extends Vue {
       store.setUser(user)
       this.signinDialog = false
       this.$router.replace('superpower')
-      reportGA('login_success', { provider: 'apple' })
+      logEvent('login_success', { provider: 'apple' })
     } catch (err) {
       console.error(err)
       store.setSnackbarError('errors.login.apple')
-      reportGA('login_success', { provider: 'apple' })
+      logEvent('login_success', { provider: 'apple' })
     }
   }
   open(link: string) {
-    reportGA('open_link', { link })
+    logEvent('open_link', { link })
     window.open(link, '_blank')
   }
   openRules() {

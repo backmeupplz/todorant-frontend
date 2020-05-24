@@ -7,21 +7,19 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { i18n } from "../plugins/i18n";
-import { reportGA } from "../utils/ga";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { i18n } from '../plugins/i18n'
+import { logEvent } from '../utils/logEvent'
 
 @Component
 export default class Home extends Vue {
   mounted() {
-    reportGA("payment", {
-      success: this.$router.currentRoute.path.includes("success")
-    });
+    logEvent(`payment_${this.$router.currentRoute.path.includes('success')}`)
   }
 
   get success() {
-    return this.$router.currentRoute.path.includes("success");
+    return this.$router.currentRoute.path.includes('success')
   }
 }
 </script>

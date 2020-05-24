@@ -88,7 +88,7 @@ import QRCode from './QRCode.vue'
 import Support from './Support.vue'
 import Encryption from './Encryption.vue'
 import { serverBus } from '../main'
-import { reportGA } from '../utils/ga'
+import { logEvent } from '../utils/logEvent'
 import { sockets } from '../utils/sockets'
 
 @Component({
@@ -133,7 +133,7 @@ export default class Navbar extends Vue {
   created() {
     serverBus.$on('subscriptionRequested', () => {
       this.subscriptionDialog = true
-      reportGA('subscription_viewed', {
+      logEvent('subscription_viewed', {
         status: store.userState().subscriptionStatus,
       })
     })
@@ -199,7 +199,7 @@ export default class Navbar extends Vue {
     }
   }
   showSubscription() {
-    reportGA('subscription_viewed', {
+    logEvent('subscription_viewed', {
       status: store.userState().subscriptionStatus,
     })
     this.subscriptionDialog = true

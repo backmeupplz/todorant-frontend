@@ -5,7 +5,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { reportGA } from '../utils/ga'
+import { logEvent } from '../utils/logEvent'
 import Report from '../components/Report.vue'
 
 @Component({
@@ -13,7 +13,7 @@ import Report from '../components/Report.vue'
 })
 export default class PublicReport extends Vue {
   mounted() {
-    reportGA('public_report_viewed')
+    logEvent('public_report_viewed')
   }
 }
 </script>

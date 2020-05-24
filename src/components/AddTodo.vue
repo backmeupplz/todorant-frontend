@@ -81,7 +81,7 @@ import { Todo } from '../models/todo'
 import * as store from '../plugins/store'
 import * as api from '../utils/api'
 import { serverBus } from '../main'
-import { reportGA } from '../utils/ga'
+import { logEvent } from '../utils/logEvent'
 import { linkify } from '../utils/linkify'
 import { encrypt, decrypt } from '../utils/encryption'
 import { i18n } from '../plugins/i18n'
@@ -119,7 +119,7 @@ export default class AddTodo extends Vue {
   }
 
   mounted() {
-    reportGA('add_todo_opened')
+    logEvent('add_todo_opened')
   }
 
   @Watch('dialog')
@@ -189,7 +189,7 @@ export default class AddTodo extends Vue {
     }
     this.panel = [this.todos.length - 1]
 
-    reportGA('add_todo_add_more')
+    logEvent('add_todo_add_more')
   }
 
   deleteTodo(i: number) {
@@ -239,10 +239,10 @@ export default class AddTodo extends Vue {
         await api.completeTodo(user, tempTodo)
       }
       this.dialog = false
-      reportGA('add_todo_success')
+      logEvent('add_todo_success')
     } catch (err) {
       store.setSnackbarError(err.response.data)
-      reportGA('add_todo_error', { error: err.message })
+      logEvent('add_todo_error', { error: err.message })
     } finally {
       this.loading = false
     }

@@ -31,14 +31,14 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
-import { reportGA } from "../utils/ga";
+import Vue from 'vue'
+import Component from 'vue-class-component'
+import { logEvent } from '../utils/logEvent'
 
 @Component
 export default class Terms extends Vue {
   mounted() {
-    reportGA("terms_viewed");
+    logEvent('terms_viewed')
   }
 }
 </script>
