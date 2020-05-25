@@ -180,15 +180,17 @@ export default class Home extends Vue {
   }
 
   get appStoreButton() {
-    return `/img/appstore/${store.language()}.svg`
+    return `/img/appstore/${store.language() || 'en'}.svg`
   }
 
   get playStoreButton() {
-    return `/img/playstore/${store.language()}.svg`
+    return `/img/playstore/${store.language() || 'en'}.svg`
   }
 
   get appstoreLanguage() {
     switch (i18n.locale) {
+      case undefined:
+        return 'us'
       case 'en':
         return 'us'
       case 'ua':
@@ -201,6 +203,8 @@ export default class Home extends Vue {
 
   languageImageTag(platform: string) {
     switch (i18n.locale) {
+      case undefined:
+        return platform === 'web' ? 'en' : 'en-US'
       case 'en':
         return platform === 'web' ? 'en' : 'en-US'
       case 'ru':
@@ -228,7 +232,7 @@ export default class Home extends Vue {
   }
 
   get imageModifier() {
-    return `${i18n.locale}-${this.mode}`
+    return `${i18n.locale || 'en'}-${this.mode}`
   }
 
   get mode() {
