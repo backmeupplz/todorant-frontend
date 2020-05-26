@@ -7,17 +7,26 @@
       v-card-title {{$t('settings.title')}}
       v-card-text
         v-subheader.pa-0 {{$t('settings.general')}}
-        v-switch(:label='$t("settings.showTodayOnAddTodo")'
-        v-model='showTodayOnAddTodo')
-        v-switch(:label='$t("settings.newTodosGoFirst")'
-        v-model='newTodosGoFirst')
-        v-switch(:label='$t("settings.preserveOrderByTime")'
-        v-model='preserveOrderByTime')
-        v-select(:items='weekdays'
-        :label='$t("settings.firstDayOfWeek")'
-        v-model='firstDayOfWeek')
+        v-switch.ma-0.pa-0(
+          :label='$t("settings.showTodayOnAddTodo")'
+          v-model='showTodayOnAddTodo'
+        )
+        v-switch.ma-0.pa-0(
+          :label='$t("settings.newTodosGoFirst")'       v-model='newTodosGoFirst'
+        )
+        v-switch.ma-0.pa-0(
+          :label='$t("settings.preserveOrderByTime")'
+          v-model='preserveOrderByTime'
+        )
+        v-divider
+        v-select.mt-4(
+          :items='weekdays'
+          :label='$t("settings.firstDayOfWeek")'
+          v-model='firstDayOfWeek'
+        )
+        v-divider
         v-subheader.pa-0 {{$t('settings.integrations')}}
-        .d-flex.justify-space-between.align-center
+        .d-flex.justify-space-between.align-center.mb-2
           span {{$t('settings.googleCalendar')}}
           v-btn(v-if='googleCalendarConnected()'
           color='error'
@@ -30,6 +39,7 @@
           color='#FFFFFF')
             img.google-button-img(src='/img/google.svg' height='18dp' width='18dp')
             span.google-button-text {{$t('settings.notConnected')}}
+        v-divider
         v-subheader.pa-0 {{$t('settings.account')}}
         .d-flex.flex-column
           span(v-for='identifier in identifiers') {{identifier}}

@@ -23,9 +23,6 @@
         v-toolbar-title.text-uppercase.grey--text
           img(src="/img/logo.png" :height='24' :width='101')
       v-spacer
-      // Rules
-      v-btn(text icon color='grey' @click='rulesDialog = true')
-        v-icon(small) assignment
       // Language picker
       v-menu(offset-y)
         template(v-slot:activator='{ on }')
@@ -34,11 +31,18 @@
           v-list-item(v-for='locale in locales' @click='changeLanguage(locale.code)' :key="locale.code")
             v-list-item-title 
               flag(:iso='locale.icon')
+      // Rules
+      v-btn.pl-6(
+        icon
+        color='grey'
+        @click='rulesDialog = true'
+      )
+        v-icon info_outlined
       // Extra
       v-menu(offset-y)
         template(v-slot:activator='{ on }')
           v-btn(text icon color='grey' v-on='on')
-            v-icon(small) more_vert
+            v-icon more_vert
         v-list
           // Dark mode
           v-list-item(@click='toggleMode')
