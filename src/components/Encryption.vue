@@ -16,7 +16,14 @@
             :label="$t('encryption.password')"
             v-model='password'
             :rules='passwordRules'
-            ref='dateInput'
+            :type='show ? "text" : "password"'
+            @click:append="show = !show")
+          v-row(no-gutters)
+            v-text-field(:append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+            clearable
+            :label="$t('encryption.repeatPassword')"
+            v-model='passwordRepeat'
+            :rules='passwordRules'
             :type='show ? "text" : "password"'
             @click:append="show = !show")
           //- v-row(no-gutters v-if='!dirty')
@@ -61,6 +68,7 @@ import { serverBus } from '../main'
 export default class Encryption extends Vue {
   encryptionOn = false
   password = ''
+  passwordRepeat = ''
   show = false
 
   passwordRules = [(v: any) => !!v]
@@ -69,6 +77,7 @@ export default class Encryption extends Vue {
 
   mounted() {
     this.password = store.password() || ''
+    this.passwordRepeat = store.password() || ''
     this.encryptionOn = !!this.password
   }
 
@@ -84,11 +93,12 @@ export default class Encryption extends Vue {
   }
   get saveble() {
     return (
-      (!this.encryptionOn && !!store.password()) ||
-      (!!this.password && !store.password()) ||
-      (!!this.password &&
-        !!store.password() &&
-        this.password !== store.password())
+      this.password === this.passwordRepeat &&
+      ((!this.encryptionOn && !!store.password()) ||
+        (!!this.password && !store.password()) ||
+        (!!this.password &&
+          !!store.password() &&
+          this.password !== store.password()))
     )
   }
 

@@ -28,6 +28,7 @@ export const messages = {
         'Используйте эту секцию с максимальной осторожностью! Шифрование не будет работать, если вы не введете пароль. Дальше будет два типа задач: зашифрованные и незашифрованные. Все новые задачи будут зашифрованными. Старые задачи можно будет зашифровать, нажав на кнопку ниже. Если вы потеряете пароль, восстановить задачи будет невозможно.',
       switch: 'Шифровать задачи',
       password: 'Пароль',
+      repeatPassword: 'Повторите пароль',
       encryptAllButton: 'Зашифровать все',
       decryptAllButton: 'Расшифровать все',
       confirm:
@@ -408,6 +409,7 @@ export const messages = {
         'Use this section with the utmost caution! Encryption will not work unless you add a password. There will be two types of tasks: encrypted and unencrypted. All new tasks will be encrypted. Old todos can be converted to be encrypted with the button below. If you loose the password there will be no way to recover tasks.',
       switch: 'Encrypt todos',
       password: 'Password',
+      repeatPassword: 'Repeat password',
       encryptAllButton: 'Encrypt all',
       decryptAllButton: 'Decrypt all',
       confirm:
@@ -798,6 +800,7 @@ export const messages = {
         'Використовуйте цю секцію з максимальною обережністю! Шифрування не працюватиме, якщо ви не введете пароль. Далі буде два типи задач: зашифровані та незашифровані. Всі нові задачі будуть зашифрованими. Старі задачі можна буде зашифрувати, натиснувши на кнопку нижче. Якщо ви втратите пароль, відновити задачі буде неможливо.',
       switch: 'Шифрувати задачi',
       password: 'Пароль',
+      repeatPassword: 'Повторіть пароль',
       encryptAllButton: 'Зашифрувати всі',
       decryptAllButton: 'Розшифрувати всі',
       confirm:
@@ -1181,6 +1184,7 @@ export const messages = {
         'Usa questa sezione con la massima cautela! La crittografia non funzionerà se non si aggiunge una password. Esistono due tipi di attività: crittografate e non crittografate. Tutte le nuove attività saranno crittografate. I vecchi compiti possono essere convertiti per essere crittografati con il pulsante in basso. Se perdi la password non ci sarà modo di recuperare le attività.',
       switch: 'Attività criptate',
       password: 'Password',
+      repeatPassword: 'Ripetere la password',
       encryptAllButton: 'Cripta tutto',
       decryptAllButton: 'Decrepita tutto',
       confirm:
