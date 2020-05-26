@@ -21,62 +21,104 @@
             :userpic='false')
     v-layout
       v-col
-        v-row
-          v-col(cols=12 sm=6 :class='["xs", "sm"].includes(this.$vuetify.breakpoint.name) ? "text-center": "text-left"')
-            p.my-1.display-1 {{$t('home.headline[0]')}}
-            p.my-1.display-1 {{$t('home.headline[1]')}}
-            p.mt-1.display-1 {{$t('home.headline[2]')}}
-            p.title {{$t('home.headline[3]')}}
-            v-flex.text-center
-              v-btn.primary(block @click='signinDialog = true') {{$t('home.signIn')}}
-              p.caption.pa-2 {{$t('home.youAreRegistered')}}
-            .d-flex.direction-row.justify-center
-              a.pt-3(@click='open(`https://apps.apple.com/${appstoreLanguage}/app/todorant/id1482078243`)')
-                v-img(width='150' height='50' aspect-ratio='1' :src='appStoreButton')
-              a.pl-1(@click='open("https://play.google.com/store/apps/details?id=com.todorant")')
-                v-img(width='170' height='74' aspect-ratio='1' :src='playStoreButton')
-          v-col(cols=12 sm=6)
-            v-img(:src='this.pictures.iphone').d-flex.elevation-1
-        v-row
-          v-col
-            p.display-1 {{$t('home.texts.level[0]')}}
-            p {{$t('home.texts.level[1]')}}
-            p {{$t('home.texts.level[2]')}}
-        v-row
-          v-col
-            v-img(:src='pictures.web').d-flex.elevation-1
-        v-row
-          v-col
-            p.display-1 {{$t('home.texts.winter[0]')}}
-            p {{$t('home.texts.winter[1]')}}
-            p {{$t('home.texts.winter[2]')}}
-            p.display-1 {{$t('home.texts.solution[0]')}}
-            p {{$t('home.texts.solution[1]')}}
-            p {{$t('home.texts.solution[2]')}}
-        v-row
-          v-col(cols=12 sm=6)
-            v-img(:src='this.pictures.android').d-flex.elevation-1
-          v-col(cols=12 sm=6)
-            p.display-1 {{$t('home.texts.consequences.title')}}
-            ul
-              li(v-for='text in $t("home.texts.consequences.points")') {{text}}
-        v-row
-          v-col
-            p.display-1 {{$t("home.texts.deal[0]")}}
-            p {{$t("home.texts.deal[1]")}}
-            p
-              | {{$t("home.texts.deal[2]")}}
-              a(@click='openRules') {{$t("home.texts.deal[3]")}}
-              | {{$t("home.texts.deal[4]")}}
-            p.display-1 {{$t("home.texts.personal[0]")}}
-            p {{$t("home.texts.personal[1]")}}
-        v-row
-          v-col(cols=0 sm=4)
-          v-col(cols=12 sm=4)
-            v-flex.text-center
-              v-btn.primary(block  @click='signinDialog = true') {{$t('home.signIn')}}
-              p.caption.pa-2 {{$t('home.youAreRegistered')}}
-          v-col(cols=0 sm=4)
+        div(v-if='$store.state.landingABTestGroup === 1')
+          v-row
+            v-col(cols=12 sm=6 :class='["xs", "sm"].includes(this.$vuetify.breakpoint.name) ? "text-center": "text-left"')
+              p.my-1.display-1 {{$t('homeShort.headline')}}
+              p.my-1.display-1 {{$t('homeShort.headline2')}}
+              ul.my-4
+                li.title {{$t('homeShort.feature1')}}
+                li.title {{$t('homeShort.feature2')}}
+                li.title {{$t('homeShort.feature3')}}
+                li.title {{$t('homeShort.feature4')}}
+              v-flex.text-center
+                v-btn.primary(block @click='signinDialog = true') {{$t('home.signIn')}}
+                p.caption.pa-2 {{$t('home.youAreRegistered')}}
+              .d-flex.direction-row.justify-center
+                a.pt-3(@click='open(`https://apps.apple.com/${appstoreLanguage}/app/todorant/id1482078243`)')
+                  v-img(width='150' height='50' aspect-ratio='1' :src='appStoreButton')
+                a.pl-1(@click='open("https://play.google.com/store/apps/details?id=com.todorant")')
+                  v-img(width='170' height='74' aspect-ratio='1' :src='playStoreButton')
+            v-col(cols=12 sm=6)
+              v-img(:src='this.pictures.iphone').d-flex.elevation-1
+          v-row.text-left
+            v-col(cols=12 sm=6)
+              p.display-1 {{$t('homeShort.differenceTitle')}}
+              p {{$t('homeShort.differenceText1')}}
+              p {{$t('homeShort.differenceText2')}}
+              p {{$t('homeShort.differenceText3')}}
+            v-col(cols=12 sm=6)
+              p.display-1 {{$t('homeShort.dealTitle')}}
+              p {{$t('homeShort.dealText1')}}
+              p {{$t('homeShort.dealText2')}}
+              p {{$t('homeShort.dealText3')}}
+          v-row
+            v-col(cols=0 sm=4)
+            v-col(cols=12 sm=4)
+              v-flex.text-center
+                v-btn.primary(block  @click='signinDialog = true') {{$t('home.signIn')}}
+                p.caption.pa-2 {{$t('home.youAreRegistered')}}
+            v-col(cols=0 sm=4)
+          v-row.mb-4
+            v-col
+              v-img(:src='pictures.web').d-flex.elevation-1
+        div(v-else)
+          v-row
+            v-col(cols=12 sm=6 :class='["xs", "sm"].includes(this.$vuetify.breakpoint.name) ? "text-center": "text-left"')
+              p.my-1.display-1 {{$t('home.headline[0]')}}
+              p.my-1.display-1 {{$t('home.headline[1]')}}
+              p.mt-1.display-1 {{$t('home.headline[2]')}}
+              p.title {{$t('home.headline[3]')}}
+              v-flex.text-center
+                v-btn.primary(block @click='signinDialog = true') {{$t('home.signIn')}}
+                p.caption.pa-2 {{$t('home.youAreRegistered')}}
+              .d-flex.direction-row.justify-center
+                a.pt-3(@click='open(`https://apps.apple.com/${appstoreLanguage}/app/todorant/id1482078243`)')
+                  v-img(width='150' height='50' aspect-ratio='1' :src='appStoreButton')
+                a.pl-1(@click='open("https://play.google.com/store/apps/details?id=com.todorant")')
+                  v-img(width='170' height='74' aspect-ratio='1' :src='playStoreButton')
+            v-col(cols=12 sm=6)
+              v-img(:src='this.pictures.iphone').d-flex.elevation-1
+          v-row
+            v-col
+              p.display-1 {{$t('home.texts.level[0]')}}
+              p {{$t('home.texts.level[1]')}}
+              p {{$t('home.texts.level[2]')}}
+          v-row
+            v-col
+              v-img(:src='pictures.web').d-flex.elevation-1
+          v-row
+            v-col
+              p.display-1 {{$t('home.texts.winter[0]')}}
+              p {{$t('home.texts.winter[1]')}}
+              p {{$t('home.texts.winter[2]')}}
+              p.display-1 {{$t('home.texts.solution[0]')}}
+              p {{$t('home.texts.solution[1]')}}
+              p {{$t('home.texts.solution[2]')}}
+          v-row
+            v-col(cols=12 sm=6)
+              v-img(:src='this.pictures.android').d-flex.elevation-1
+            v-col(cols=12 sm=6)
+              p.display-1 {{$t('home.texts.consequences.title')}}
+              ul
+                li(v-for='text in $t("home.texts.consequences.points")') {{text}}
+          v-row
+            v-col
+              p.display-1 {{$t("home.texts.deal[0]")}}
+              p {{$t("home.texts.deal[1]")}}
+              p
+                | {{$t("home.texts.deal[2]")}}
+                a(@click='openRules') {{$t("home.texts.deal[3]")}}
+                | {{$t("home.texts.deal[4]")}}
+              p.display-1 {{$t("home.texts.personal[0]")}}
+              p {{$t("home.texts.personal[1]")}}
+          v-row
+            v-col(cols=0 sm=4)
+            v-col(cols=12 sm=4)
+              v-flex.text-center
+                v-btn.primary(block  @click='signinDialog = true') {{$t('home.signIn')}}
+                p.caption.pa-2 {{$t('home.youAreRegistered')}}
+            v-col(cols=0 sm=4)
         v-row
           v-col
             p.display-1 {{$t('home.feedback.title')}}
