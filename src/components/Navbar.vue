@@ -1,7 +1,9 @@
 <template lang="pug">
   nav
     // Rules dialog
-    Rules(:dialog='rulesDialog' :close='closeRules')
+    Rules(:dialog='rulesDialog' :close='closeRules' :openWelcome='openWelcome')
+    // Welcome dialog
+    Welcome(:dialog='welcomeDialog' :close='closeWelcome' :openRules='openRules')
     // Merge dialog
     Merge(:dialog='mergeDialog' :close='closeMerge')
     // Subscription dialog
@@ -84,6 +86,7 @@ import * as store from '../plugins/store'
 import { i18n } from '../plugins/i18n'
 import * as api from '../utils/api'
 import Rules from './Rules.vue'
+import Welcome from './Welcome.vue'
 import Merge from './Merge.vue'
 import Subscription from './Subscription.vue'
 import Settings from './Settings.vue'
@@ -105,10 +108,12 @@ import { sockets } from '../utils/sockets'
     Hashtags,
     QRCode,
     Encryption,
+    Welcome,
   },
 })
 export default class Navbar extends Vue {
   rulesDialog = false
+  welcomeDialog = false
   mergeDialog = false
   subscriptionDialog = false
   settingsDialog = false
@@ -144,12 +149,12 @@ export default class Navbar extends Vue {
     serverBus.$on('rulesRequested', () => {
       this.rulesDialog = true
     })
-  }
-  mounted() {
-    if (!store.rulesShown() && store.user()) {
-      this.rulesDialog = true
-      store.setRulesShown(true)
-    }
+    serverBus.$on('login', () => {
+      if (!store.rulesShown()) {
+        this.welcomeDialog = true
+        store.setRulesShown(true)
+      }
+    })
   }
 
   toggleMode() {
@@ -166,8 +171,17 @@ export default class Navbar extends Vue {
     this.$router.replace('/')
     sockets.logout()
   }
+  openRules() {
+    this.rulesDialog = true
+  }
   closeRules() {
     this.rulesDialog = false
+  }
+  openWelcome() {
+    this.welcomeDialog = true
+  }
+  closeWelcome() {
+    this.welcomeDialog = false
   }
   closeMerge() {
     this.mergeDialog = false

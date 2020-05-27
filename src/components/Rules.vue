@@ -12,23 +12,37 @@
         ul
           li(v-for='rule in $t("howto.bonus.rules")' v-html='rule')
       v-card-actions
+        v-btn(
+          v-if='!!$store.state.user'
+          color='blue'
+          text 
+          @click='openWelcomeDialog'
+        ) {{$t('introButton')}}
         v-spacer
-        v-btn(color='blue'
+        v-btn(
+          color='blue'
           text 
           @click='close'
           v-shortkey.once="['esc']"
-          @shortkey='close') {{$t('cookie.button')}}
+          @shortkey='close'
+        ) {{$t('cookie.button')}}
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import Component from "vue-class-component";
+import Vue from 'vue'
+import Component from 'vue-class-component'
 
 @Component({
   props: {
     dialog: Boolean,
-    close: Function
-  }
+    close: Function,
+    openWelcome: Function,
+  },
 })
-export default class Rules extends Vue {}
+export default class Rules extends Vue {
+  openWelcomeDialog() {
+    this.$props.close()
+    this.$props.openWelcome()
+  }
+}
 </script>

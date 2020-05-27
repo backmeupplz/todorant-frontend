@@ -292,6 +292,7 @@ export default class Home extends Vue {
       this.signinDialog = false
       this.$router.replace('superpower')
       logEvent('login_success', { provider: 'facebook' })
+      serverBus.$emit('login')
     } catch (err) {
       console.error(err)
       store.setSnackbarError('errors.login.facebook')
@@ -310,6 +311,7 @@ export default class Home extends Vue {
       this.signinDialog = false
       this.$router.replace('superpower')
       logEvent('login_success', { provider: 'google' })
+      serverBus.$emit('login')
     } catch (err) {
       console.error(err)
       store.setSnackbarError('errors.login.google')
@@ -328,6 +330,7 @@ export default class Home extends Vue {
       this.signinDialog = false
       this.$router.replace('superpower')
       logEvent('login_success', { provider: 'telegram' })
+      serverBus.$emit('login')
     } catch (err) {
       console.error(err)
       store.setSnackbarError('errors.login.telegram')
@@ -341,6 +344,7 @@ export default class Home extends Vue {
       this.signinDialog = false
       this.$router.replace('superpower')
       logEvent('login_success', { provider: 'apple' })
+      serverBus.$emit('login')
     } catch (err) {
       console.error(err)
       store.setSnackbarError('errors.login.apple')

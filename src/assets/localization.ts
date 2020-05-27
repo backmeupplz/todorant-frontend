@@ -1,34 +1,11 @@
 export const messages = {
   ru: {
-    homeShort: {
-      headline: 'Системы продуктивности не работают.',
-      headline2: 'Тудурант работает.',
-      feature1: 'Фокусируйтесь на одной задаче за раз',
-      feature2: 'Добавляйте дату или месяц каждой задаче',
-      feature3: 'Делайте неприятные задачи (лягушки) в начале дня',
-      feature4: 'Держите папку "входящие" пустой',
-      differenceTitle: 'В чем отличие Тудуранта?',
-      differenceText1:
-        'Все остальные инструменты продуктивности фокусируются на хранении, организации и автоматизации бесконечных списков задач. Тудурант фокусируется на том, что важно: он заставляет вас завершать задачи.',
-      differenceText2:
-        'Тудурант использует тактики наказаний и похвалы для поддержания хороших привычек и отказа от плохого поведения. Он воздействует на примитивную часть мозга и прививает зависимость к выполнению задач по тем же принципам, по которым работает привыкание к сахару.',
-      differenceText3:
-        'Я прочитал более 20 книг про продуктивность и попробовал все методологии из них. Когда я провалил буквально каждую из систем продуктивности, я разбил их на составляющие, собрал из разбитых частей одну большую методологию и упростил результат. Это то, как был создан Тудурант.',
-      dealTitle: 'Что требуется от вас?',
-      dealText1:
-        'Тудурант бесплатен первые 30 дней использования, после — примерно $5 в месяц. Это дороже, чем у конкурентов, потому что Тудурант реально работает. Если вы не получите $5 в эквиваленте продуктивности за первые 30 дней — ничего страшного, просто перестаньте пользоваться Тудурантом.',
-      dealText2:
-        'Вам нужно лишь начать пользоваться Тудурантом. Вам не нужно давать никакую информацию типа номера кредитной карты до окончания бесплатного периода пользования. Вам даже не нужно создавать аккаунт, если вы начнете пользоваться мобильными приложениями!',
-      dealText3:
-        'Единственное исключение — это если вы создадите аккаунт с девайса от Apple. Apple заставили Тудурант просить пользователей начать бесплатную подписку на iOS до того, как люди могут начать пользоваться сервисом. Чтобы обойти это ограничение, сначала создайте аккаунт здесь, на сайте — а потом зайдите в этот аккаунт через iOS приложение.',
-    },
     encryption: {
       title: 'Шифрование',
       info:
         'Используйте эту секцию с максимальной осторожностью! Шифрование не будет работать, если вы не введете пароль. Дальше будет два типа задач: зашифрованные и незашифрованные. Все новые задачи будут зашифрованными. Старые задачи можно будет зашифровать, нажав на кнопку ниже. Если вы потеряете пароль, восстановить задачи будет невозможно.',
       switch: 'Шифровать задачи',
       password: 'Пароль',
-      repeatPassword: 'Повторите пароль',
       encryptAllButton: 'Зашифровать все',
       decryptAllButton: 'Расшифровать все',
       confirm:
@@ -36,6 +13,7 @@ export const messages = {
       disableConfirm:
         'Уверены, что хотите убрать пароль и выключить шифрование? Это действие не расшифрует зашифрованные задачи.',
       errorDecrypting: 'Неправильный пароль расшифровки',
+      repeatPassword: 'Повторите пароль',
     },
     search: 'Поиск',
     qr: {
@@ -374,42 +352,54 @@ export const messages = {
       'Пятница',
       'Суббота',
     ],
+    introTitle: 'Добро пожаловать!',
+    introButton: 'Вступительное сообщение',
+    intro1:
+      'Буду краток: вы хотите улучшить вашу продуктивность. Тудурант поможет вам с этим. Но учтите, что Тудурант — это не очередной список задач — это система, которой нужно следовать, это стиль жизни, это привычка.',
+    intro2:
+      'Прочтение пункта "Как использовать Тудурант" в настройках может помочь, но это совсем необязательно. Тудурант поможет вам, ограничив ваши действия — он заставит ваш мозг получать удовольствие от завершения задач.',
+    intro3:
+      'Если у вас появятся какие-либо вопросы о функциях на каком-либо экране, сначала нажмите на кнопку "i" справа вверху. Не знаете, что делает какая-либо кнопка? Жмите "i"!',
+    intro4:
+      'Тудурант бесплатен первый месяц, а потом стоит примерно $5/месяц. Причина, по которой Тудурант может выглядеть дорогим — это то, что вы не покупаете очередной менеджер задач, а подписываетесь на систему, которая заставляет вас наконец-то эти задачи выполнять. Другие приложения закидывают вас функциями и настройками — Тудурант же заставляет вас наконец-то начать выполнять задачи и добиваться целей! В конце концов, попробуйте Тудурант первые 30 дней и оплатите подписку, если вы получите больше $5 пользы.',
+    intro5:
+      'Я приветствую вас на вашем пути продуктивности, да начнется же новая эра вашей жизни!',
+    introBack: 'Поехали!',
     emptyHashtags:
       'Список хештегов пока что пуст. Добавьте свою первую задачу с #хештегом, чтобы добавить сюда первую позицию!',
     refreshRequest:
       'Доступна новая версия Тудуранта. Пожалуйста, обновите страницу, чтобы получить новые блестящие функции 🦄',
     refresh: 'Обновить',
+    homeShort: {
+      headline: 'Системы продуктивности не работают.',
+      headline2: 'Тудурант работает.',
+      feature1: 'Фокусируйтесь на одной задаче за раз',
+      feature2: 'Добавляйте дату или месяц каждой задаче',
+      feature3: 'Делайте неприятные задачи (лягушки) в начале дня',
+      feature4: 'Держите папку "входящие" пустой',
+      differenceTitle: 'В чем отличие Тудуранта?',
+      differenceText1:
+        'Все остальные инструменты продуктивности фокусируются на хранении, организации и автоматизации бесконечных списков задач. Тудурант фокусируется на том, что важно: он заставляет вас завершать задачи.',
+      differenceText2:
+        'Тудурант использует тактики наказаний и похвалы для поддержания хороших привычек и отказа от плохого поведения. Он воздействует на примитивную часть мозга и прививает зависимость к выполнению задач по тем же принципам, по которым работает привыкание к сахару.',
+      differenceText3:
+        'Я прочитал более 20 книг про продуктивность и попробовал все методологии из них. Когда я провалил буквально каждую из систем продуктивности, я разбил их на составляющие, собрал из разбитых частей одну большую методологию и упростил результат. Это то, как был создан Тудурант.',
+      dealTitle: 'Что требуется от вас?',
+      dealText1:
+        'Тудурант бесплатен первые 30 дней использования, после — примерно $5 в месяц. Это дороже, чем у конкурентов, потому что Тудурант реально работает. Если вы не получите $5 в эквиваленте продуктивности за первые 30 дней — ничего страшного, просто перестаньте пользоваться Тудурантом.',
+      dealText2:
+        'Вам нужно лишь начать пользоваться Тудурантом. Вам не нужно давать никакую информацию типа номера кредитной карты до окончания бесплатного периода пользования. Вам даже не нужно создавать аккаунт, если вы начнете пользоваться мобильными приложениями!',
+      dealText3:
+        'Единственное исключение — это если вы создадите аккаунт с девайса от Apple. Apple заставили Тудурант просить пользователей начать бесплатную подписку на iOS до того, как люди могут начать пользоваться сервисом. Чтобы обойти это ограничение, сначала создайте аккаунт здесь, на сайте — а потом зайдите в этот аккаунт через iOS приложение.',
+    },
   },
   en: {
-    homeShort: {
-      headline: 'Productivity systems fail.',
-      headline2: 'Todorant works.',
-      feature1: 'Focus on one task at a time',
-      feature2: 'Always add a date or a month to a task',
-      feature3: 'Complete unpleasant tasks (frogs) first',
-      feature4: 'Keep your inbox empty',
-      differenceTitle: "What's the difference?",
-      differenceText1:
-        'All other productivity apps focus on storing, organizing and automating endless lists of tasks. Todorant focuses on the only thing that matters: it makes you complete the tasks.',
-      differenceText2:
-        'Todorant uses a carefully crafted set of limits and praise to punish bad behaviour and support good habits. It affects the primitive part of the brain to make it crave completing todos like people crave sugar.',
-      differenceText3:
-        "I've read and tried 20+ productivity books and methodologies. When all of them failed one by one I combined their components and simplified the result. This is how Todorant was created.",
-      dealTitle: "What's the deal?",
-      dealText1:
-        "Todorant is free for the first 30 days and then it is $5/month. It is more expensive than competitors because it works. If you don't get $5 worth of productivity in the first 30 days of the free trial, you are welcome not to continue to use Todorant.",
-      dealText2:
-        "No strings attached. You don't need to give us any information like a credit card at all before your trial ends. You don't even need an account if you install the mobile apps!",
-      dealText3:
-        'The only exception is if you signup on iOS, Apple has forced us to make you commit to a free trial before you can use the app. The way to avoid this limit is to create an account here, on the website, and then log in on the iOS app.',
-    },
     encryption: {
       title: 'Encryption',
       info:
         'Use this section with the utmost caution! Encryption will not work unless you add a password. There will be two types of tasks: encrypted and unencrypted. All new tasks will be encrypted. Old todos can be converted to be encrypted with the button below. If you loose the password there will be no way to recover tasks.',
       switch: 'Encrypt todos',
       password: 'Password',
-      repeatPassword: 'Repeat password',
       encryptAllButton: 'Encrypt all',
       decryptAllButton: 'Decrypt all',
       confirm:
@@ -417,6 +407,7 @@ export const messages = {
       disableConfirm:
         'Are you sure you want to remove the key and disable the encryption? This will not decrypt the tasks that are encrypted.',
       errorDecrypting: 'Wrong decryption password',
+      repeatPassword: 'Repeat password',
     },
     search: 'Search',
     qr: {
@@ -765,42 +756,54 @@ export const messages = {
       'Friday',
       'Saturday',
     ],
+    introTitle: 'Welcome!',
+    introButton: 'Intro message',
+    intro1:
+      "Let's keep it short: you want to improve your productivity. Todorant can help you. But Todorant is not another task list — it is a system that needs to be followed, it is a lifestyle, it is a habit.",
+    intro2:
+      'Reading through the "How to use Todorant" section in the settings will help you to get the most out of Todorant, but it is not necessary. Todorant will help you by limiting your actions — it will train your brain to get satisfaction from completing the tasks.',
+    intro3:
+      'If you have questions about something on a screen, first tap the "i" button on the top right of the screen. Not sure what a button does? Tap "i"!',
+    intro4:
+      "Todorant is free for the first 30 days and then $5/month. The reason it may appear a bit pricy is that you are not paying for a yet another todo app, you are purchasing productivity — the whole system that doesn't make you sink in settings and functions, but makes you complete the tasks! After all, try Todorant for 30 days for free and upgrade if you get more than $5 of value from it.",
+    intro5:
+      'I welcome you to the productivity journey, let the new era of your life begin!',
+    introBack: "Let's go!",
     emptyHashtags:
       'Hashtag list is empty for now. Create your first task with a #hashtag to add the first hashtag here!',
     refreshRequest:
       'There is a new version of Todorant available. Please refresh the page to get the new shiny stuff 🦄',
     refresh: 'Refresh',
+    homeShort: {
+      headline: 'Productivity systems fail.',
+      headline2: 'Todorant works.',
+      feature1: 'Focus on one task at a time',
+      feature2: 'Always add a date or a month to a task',
+      feature3: 'Complete unpleasant tasks (frogs) first',
+      feature4: 'Keep your inbox empty',
+      differenceTitle: "What's the difference?",
+      differenceText1:
+        'All other productivity apps focus on storing, organizing and automating endless lists of tasks. Todorant focuses on the only thing that matters: it makes you complete the tasks.',
+      differenceText2:
+        'Todorant uses a carefully crafted set of limits and praise to punish bad behaviour and support good habits. It affects the primitive part of the brain to make it crave completing todos like people crave sugar.',
+      differenceText3:
+        "I've read and tried 20+ productivity books and methodologies. When all of them failed one by one I combined their components and simplified the result. This is how Todorant was created.",
+      dealTitle: "What's the deal?",
+      dealText1:
+        "Todorant is free for the first 30 days and then it is $5/month. It is more expensive than competitors because it works. If you don't get $5 worth of productivity in the first 30 days of the free trial, you are welcome not to continue to use Todorant.",
+      dealText2:
+        "No strings attached. You don't need to give us any information like a credit card at all before your trial ends. You don't even need an account if you install the mobile apps!",
+      dealText3:
+        'The only exception is if you signup on iOS, Apple has forced us to make you commit to a free trial before you can use the app. The way to avoid this limit is to create an account here, on the website, and then log in on the iOS app.',
+    },
   },
   ua: {
-    homeShort: {
-      headline: 'Системи продуктивності не працюють.',
-      headline2: 'Тудурант працює.',
-      feature1: 'Фокусуйтеся на одному завданню за раз',
-      feature2: 'Додавайте дату або місяць кожного завдання',
-      feature3: 'Робіть неприємні завдання (жаби) на початку дня',
-      feature4: 'Тримайте папку "вхідні" порожній',
-      differenceTitle: 'У чому відмінність Тудуранта?',
-      differenceText1:
-        'Всі інші інструменти продуктивності фокусуються на зберіганні, організації та автоматизації нескінченних списків завдань. Тудурант фокусується на тому, що важливо: він змушує вас завершувати завдання.',
-      differenceText2:
-        'Тудурант використовує тактики покарань і похвали для підтримки хороших звичок і відмови від поганої поведінки. Він впливає на примітивну частина мозку і прищеплює залежність до виконання завдань за тими ж принципами, за якими працює звикання до цукру.',
-      differenceText3:
-        'Я прочитав більше 20 книг про продуктивність і спробував все методології з них. Коли я провалив буквально кожну з систем продуктивності, я розбив їх на складові, зібрав з розбитих частин одну велику методологію і спростив результат. Це те, як був створений Тудурант.',
-      dealTitle: 'Що потрібно від вас?',
-      dealText1:
-        'Тудурант безкоштовний перші 30 днів використання, після — приблизно $5 в місяць. Це дорожче, ніж у конкурентів, тому що Тудурант реально працює. Якщо ви не отримаєте $5 в еквіваленті продуктивності за перші 30 днів — нічого страшного, просто перестаньте користуватися Тудурантом.',
-      dealText2:
-        'Вам потрібно лише почати користуватися Тудурантом. Вам не потрібно давати жодної інформації типу номера кредитної карти до закінчення безкоштовного періоду користування. Вам навіть не потрібно створювати аккаунт, якщо ви почнете користуватися мобільними додатками!',
-      dealText3:
-        'Єдиний виняток — це якщо ви створите аккаунт з девайса від Apple. Apple змусили Тудурант просити користувачів почати безкоштовну передплату на iOS до того, як люди можуть почати користуватися сервісом. Щоб обійти це обмеження, спочатку створіть акаунт тут, на сайті — а потім зайдіть в цей акаунт через iOS додаток.',
-    },
     encryption: {
       title: 'Шифрування',
       info:
         'Використовуйте цю секцію з максимальною обережністю! Шифрування не працюватиме, якщо ви не введете пароль. Далі буде два типи задач: зашифровані та незашифровані. Всі нові задачі будуть зашифрованими. Старі задачі можна буде зашифрувати, натиснувши на кнопку нижче. Якщо ви втратите пароль, відновити задачі буде неможливо.',
       switch: 'Шифрувати задачi',
       password: 'Пароль',
-      repeatPassword: 'Повторіть пароль',
       encryptAllButton: 'Зашифрувати всі',
       decryptAllButton: 'Розшифрувати всі',
       confirm:
@@ -808,6 +811,7 @@ export const messages = {
       disableConfirm:
         'Впевнені, що хочете прибрати пароль і вимкнути шифрування? Це дія не розшифрує зашифровані задачі.',
       errorDecrypting: 'Неправильний пароль розшифровки',
+      repeatPassword: 'Повторіть пароль',
     },
     search: 'Пошук',
     qr: {
@@ -1149,42 +1153,54 @@ export const messages = {
       "П'ятниця",
       'Субота',
     ],
+    introTitle: 'Ласкаво просимо!',
+    introButton: 'Вступне повідомлення',
+    intro1:
+      'Най буде коротко: Ви хочете підвищити свою плідність. Todorant може вам допомогти. Але Todorant — це не інший список завдань — це система, якої потрібно дотримуватися, це спосіб життя, це звичка.',
+    intro2:
+      'Прочитавши розділ "Як користуватися Todorant" у налаштуваннях, Ви зможете щонайкраще користуватися Todorant, але це не обов\'язково. Todorant допоможе Вам, обмежуючи Ваші дії — він навчатиме ваш мозок отримувати задоволення від виконання завдань.',
+    intro3:
+      'Якщо у Вас є питання щодо чогось на екрані, спочатку торкніться кнопки "i" у верхньому правом кутку екрана. Не знаєте, що робить кнопка?',
+    intro4:
+      'Торкніться "i"! Тудурант безкоштовний перший місяць, а потім коштує приблизно $5/місяць. Причина, через яку Тудурант може виглядати дорогим — це те, що ви не купуєте черговий менеджер завдань, а підписуєтеся на систему, яка змушує вас нарешті ці завдання виконувати. Інші додатки закидають вас функціями та налаштуваннями — Тудурант натомість змушує вас нарешті почати виконувати завдання і досягати цілей! Зрештою, спробуйте Тудурант перші 30 днів та оплатіть підписку, якщо ви отримаєте більше $5 користі.',
+    intro5:
+      'Я вітаю вас на вашому шляху продуктивності, так почнеться ж нова ера вашому житті!',
+    introBack: 'Ходімо!',
     emptyHashtags:
       'Список хештегів поки що порожній. Додайте свою першу задачу з #хештегом, щоб додати сюди першу позицію!',
     refreshRequest:
       'Доступна нова версія Тудуранта. Будь ласка, поновіть сторінку, щоб отримати нові блискучі функції 🦄',
     refresh: 'Оновити',
+    homeShort: {
+      headline: 'Системи продуктивності не працюють.',
+      headline2: 'Тудурант працює.',
+      feature1: 'Фокусуйтеся на одному завданню за раз',
+      feature2: 'Додавайте дату або місяць кожного завдання',
+      feature3: 'Робіть неприємні завдання (жаби) на початку дня',
+      feature4: 'Тримайте папку "вхідні" порожній',
+      differenceTitle: 'У чому відмінність Тудуранта?',
+      differenceText1:
+        'Всі інші інструменти продуктивності фокусуються на зберіганні, організації та автоматизації нескінченних списків завдань. Тудурант фокусується на тому, що важливо: він змушує вас завершувати завдання.',
+      differenceText2:
+        'Тудурант використовує тактики покарань і похвали для підтримки хороших звичок і відмови від поганої поведінки. Він впливає на примітивну частина мозку і прищеплює залежність до виконання завдань за тими ж принципами, за якими працює звикання до цукру.',
+      differenceText3:
+        'Я прочитав більше 20 книг про продуктивність і спробував все методології з них. Коли я провалив буквально кожну з систем продуктивності, я розбив їх на складові, зібрав з розбитих частин одну велику методологію і спростив результат. Це те, як був створений Тудурант.',
+      dealTitle: 'Що потрібно від вас?',
+      dealText1:
+        'Тудурант безкоштовний перші 30 днів використання, після — приблизно $5 в місяць. Це дорожче, ніж у конкурентів, тому що Тудурант реально працює. Якщо ви не отримаєте $5 в еквіваленті продуктивності за перші 30 днів — нічого страшного, просто перестаньте користуватися Тудурантом.',
+      dealText2:
+        'Вам потрібно лише почати користуватися Тудурантом. Вам не потрібно давати жодної інформації типу номера кредитної карти до закінчення безкоштовного періоду користування. Вам навіть не потрібно створювати аккаунт, якщо ви почнете користуватися мобільними додатками!',
+      dealText3:
+        'Єдиний виняток — це якщо ви створите аккаунт з девайса від Apple. Apple змусили Тудурант просити користувачів почати безкоштовну передплату на iOS до того, як люди можуть почати користуватися сервісом. Щоб обійти це обмеження, спочатку створіть акаунт тут, на сайті — а потім зайдіть в цей акаунт через iOS додаток.',
+    },
   },
   it: {
-    homeShort: {
-      headline: 'I sistemi di produttività falliscono.',
-      headline2: 'Todorant funziona.',
-      feature1: 'Concentrarsi su un compito alla volta',
-      feature2: "Aggiungere sempre una data o un mese a un'attività",
-      feature3: 'Completare prima i compiti sgradevoli',
-      feature4: 'Tieni vuota la tua casella di posta in arrivo',
-      differenceTitle: 'Qual è la differenza?',
-      differenceText1:
-        "Tutte le altre app per la produttività si concentrano sull'archiviazione, l'organizzazione e l'automazione di liste infinite di attività. Todorant si concentra sull'unica cosa che conta: ti fa completare i compiti.",
-      differenceText2:
-        'Todorant usa una serie di limiti e di elogi accuratamente studiati per punire i cattivi comportamenti e sostenere le buone abitudini. Colpisce la parte primitiva del cervello per fargli desiderare di completare i todos come le persone desiderano lo zucchero.',
-      differenceText3:
-        'Ho letto e provato più di 20 libri e metodologie di produttività. Quando tutti hanno fallito uno ad uno ho combinato i loro componenti e semplificato il risultato. È così che è stato creato il Todorant.',
-      dealTitle: 'Qual è il motivo?',
-      dealText1:
-        'Il Todorant è gratuito per i primi 30 giorni e poi è di 5 dollari al mese. È più costoso della concorrenza perché funziona. Se non ottenete 5 dollari di produttività nei primi 30 giorni della prova gratuita, siete invitati a non continuare a usare il Todorant.',
-      dealText2:
-        'Nessun vincolo. Non è necessario che ci fornisca alcuna informazione, come una carta di credito, prima della fine della prova. Non avete nemmeno bisogno di un account se installate le app mobili!',
-      dealText3:
-        "L'unica eccezione è che se ti iscrivi su iOS, Apple ci ha obbligato a farti fare una prova gratuita prima che tu possa usare l'app. Il modo per evitare questo limite è quello di creare un account qui, sul sito web, e poi accedere all'app per iOS",
-    },
     encryption: {
       title: 'Crittografia',
       info:
         'Usa questa sezione con la massima cautela! La crittografia non funzionerà se non si aggiunge una password. Esistono due tipi di attività: crittografate e non crittografate. Tutte le nuove attività saranno crittografate. I vecchi compiti possono essere convertiti per essere crittografati con il pulsante in basso. Se perdi la password non ci sarà modo di recuperare le attività.',
       switch: 'Attività criptate',
       password: 'Password',
-      repeatPassword: 'Ripetere la password',
       encryptAllButton: 'Cripta tutto',
       decryptAllButton: 'Decrepita tutto',
       confirm:
@@ -1192,6 +1208,7 @@ export const messages = {
       disableConfirm:
         'Sei sicuro di voler rimuovere la password e disabilitare la crittografia? Questo non decripterà le attività che sono state criptate.',
       errorDecrypting: 'Password di decriptazione errata',
+      repeatPassword: 'Ripetere la password',
     },
     search: 'Ricerca',
     qr: {
@@ -1288,35 +1305,48 @@ export const messages = {
     current: 'Corrente',
     planning: 'Pianificazione',
     skipped: 'Saltato',
+    introTitle: 'Benvenuto!',
+    introButton: 'Messaggio di benvenuto',
+    intro1:
+      "Facciamola breve: volete migliorare la vostra produttività. Todorant può aiutarvi. Ma Todorant non è un'altra lista di compiti — è un sistema da seguire, è uno stile di vita, è un'abitudine.",
+    intro2:
+      'Leggere la sezione "Come usare Todorant" nelle impostazioni vi aiuterà ad ottenere il massimo dal Todorant, ma non è necessario. Todorant vi aiuterà a limitare le vostre azioni — allenerà il vostro cervello per ottenere soddisfazione dal completamento dei compiti.',
+    intro3:
+      'Se avete domande su qualcosa su una schermata, toccate prima il tasto "i" in alto a sinistra dello schermo. Non siete sicuri di cosa fa un pulsante? Toccate "i"!',
+    intro4:
+      "Todorant è gratuito per i primi 30 giorni, poi saranno 5 dollari al mese. Il motivo per cui può sembrare un po' caro è che non state pagando per un'altra app da fare, state acquistando la produttività — l'intero sistema che non vi fa sprofondare nelle impostazioni e nelle funzioni, ma vi fa completare i compiti! Dopo tutto, provate Todorant per 30 giorni gratuitamente e aggiornate se ottenete più di 5 dollari di valore dal suo utilizzo.",
+    intro5:
+      'Vi do il benvenuto nel viaggio della produttività, che la nuova era della vostra vita abbia inizio!',
+    introBack: 'Andiamo!',
     emptyHashtags:
       "L'elenco degli hashtag è vuoto per ora. Create il vostro primo compito con un #hashtag per aggiungere il primo hashtag qui!",
     refreshRequest:
       'È disponibile una nuova versione di Todorant. Si prega di aggiornare la pagina per ottenere il nuovo materiale lucido 🦄',
     refresh: 'Aggiorna',
+    homeShort: {
+      headline: 'I sistemi di produttività falliscono.',
+      headline2: 'Todorant funziona.',
+      feature1: 'Concentrarsi su un compito alla volta',
+      feature2: "Aggiungere sempre una data o un mese a un'attività",
+      feature3: 'Completare prima i compiti sgradevoli',
+      feature4: 'Tieni vuota la tua casella di posta in arrivo',
+      differenceTitle: 'Qual è la differenza?',
+      differenceText1:
+        "Tutte le altre app per la produttività si concentrano sull'archiviazione, l'organizzazione e l'automazione di liste infinite di attività. Todorant si concentra sull'unica cosa che conta: ti fa completare i compiti.",
+      differenceText2:
+        'Todorant usa una serie di limiti e di elogi accuratamente studiati per punire i cattivi comportamenti e sostenere le buone abitudini. Colpisce la parte primitiva del cervello per fargli desiderare di completare i todos come le persone desiderano lo zucchero.',
+      differenceText3:
+        'Ho letto e provato più di 20 libri e metodologie di produttività. Quando tutti hanno fallito uno ad uno ho combinato i loro componenti e semplificato il risultato. È così che è stato creato il Todorant.',
+      dealTitle: 'Qual è il motivo?',
+      dealText1:
+        'Il Todorant è gratuito per i primi 30 giorni e poi è di 5 dollari al mese. È più costoso della concorrenza perché funziona. Se non ottenete 5 dollari di produttività nei primi 30 giorni della prova gratuita, siete invitati a non continuare a usare il Todorant.',
+      dealText2:
+        'Nessun vincolo. Non è necessario che ci fornisca alcuna informazione, come una carta di credito, prima della fine della prova. Non avete nemmeno bisogno di un account se installate le app mobili!',
+      dealText3:
+        "L'unica eccezione è che se ti iscrivi su iOS, Apple ci ha obbligato a farti fare una prova gratuita prima che tu possa usare l'app. Il modo per evitare questo limite è quello di creare un account qui, sul sito web, e poi accedere all'app per iOS",
+    },
   },
   es: {
-    homeShort: {
-      headline: 'Los sistemas de productividad fallan.',
-      headline2: 'Todorant funciona.',
-      feature1: 'Enfoque en una tarea a la vez',
-      feature2: 'Siempre añadir una fecha o un mes a una tarea',
-      feature3: 'Completar primero las tareas desagradables',
-      feature4: 'Mantenga su bandeja de entrada vacía',
-      differenceTitle: '¿Cuál es la diferencia?',
-      differenceText1:
-        'Todas las demás aplicaciones de productividad se centran en almacenar, organizar y automatizar listas interminables de tareas. Todorant se centra en lo único que importa: te hace completar las tareas.',
-      differenceText2:
-        'Todorant utiliza un conjunto cuidadosamente elaborado de límites y elogios para castigar el mal comportamiento y apoyar los buenos hábitos. Afecta a la parte primitiva del cerebro para hacer que ansíe completar todos como la gente ansía el azúcar.',
-      differenceText3:
-        'He leído y probado más de 20 libros y metodologías de productividad. Cuando todos ellos fallaron uno por uno combiné sus componentes y simplifiqué el resultado. Así es como se creó Todorant.',
-      dealTitle: '¿Cuál es el trato?',
-      dealText1:
-        'El Todorant es gratis durante los primeros 30 días y luego son 5 dólares al mes. Es más caro que los competidores porque funciona. Si no obtienes 5 dólares de productividad en los primeros 30 días de la prueba gratuita, eres bienvenido a no seguir usando Todorant.',
-      dealText2:
-        'Sin condiciones. No necesita darnos ninguna información, como una tarjeta de crédito, antes de que termine la prueba. Ni siquiera necesitas una cuenta si instalas las aplicaciones móviles!',
-      dealText3:
-        'La única excepción es si te registras en iOS, Apple nos ha obligado a hacerte una prueba gratuita antes de que puedas usar la aplicación. La manera de evitar este límite es crear una cuenta aquí, en el sitio web, y luego iniciar sesión en la aplicación iOS.',
-    },
     breakdown: {
       request:
         'Parece que has pospuesto demasiado esta tarea. Por favor desglósala, ya no puedes posponerla a otra fecha. ¡Creéme, te ayudará a completarla!',
@@ -1647,10 +1677,45 @@ export const messages = {
       'Sábado',
       'Domingo',
     ],
+    introTitle: '¡Bienvenido!',
+    introButton: 'Mensaje de introducción',
+    intro1:
+      'En pocas palabras: deseas mejorar tu productividad. Todorant puede ayudarte. Todorant no es otra lista de tareas más: es un sistema que debe seguirse, es un estilo de vida, es un hábito.',
+    intro2:
+      'Leer la sección "Cómo usar Todorant" en la configuración te ayudará a aprovechar al máximo Todorant, pero no es necesario. Todorant te ayudará al limitar tus acciones: entrenará tu cerebro para obtener satisfacción al completar las tareas.',
+    intro3:
+      'Si tienes dudas acerca de algo que ves en pantalla, primero haz clic en el botón "i" que se encuentra en la parte superior izquierda. ¿No estás seguro de qué hace un botón? ¡Presiona "i"!',
+    intro4:
+      'Todorant es gratis los primeros 30 días y después cuesta $5/mes. La razón por la que el precio puede parecer un poco elevado es que no estás pagando por una aplicación más de tareas, estás pagando productividad: el sistema completo que no te ahoga en funciones y configuraciones, ¡sino que te hace completar las tareas! Después de todo, prueba Todorant gratis por 30 días y actualiza si el valor que obtienes por usarlo supera los $5 de la suscripción.',
+    intro5:
+      'Te doy la bienvenida al viaje de la productividad, ¡que comience una nueva etapa en tu vida!',
+    introBack: '¡Vamos!',
     emptyHashtags:
       'La lista de Hashtag está vacía por ahora. ¡Crea tu primera tarea con un #hashtag para añadir el primer hashtag aquí!',
     refreshRequest:
       'Hay una nueva versión de Todorant disponible. Por favor, refresque la página para obtener el nuevo material brillante 🦄',
     refresh: 'Actualizar',
+    homeShort: {
+      headline: 'Los sistemas de productividad fallan.',
+      headline2: 'Todorant funciona.',
+      feature1: 'Enfoque en una tarea a la vez',
+      feature2: 'Siempre añadir una fecha o un mes a una tarea',
+      feature3: 'Completar primero las tareas desagradables',
+      feature4: 'Mantenga su bandeja de entrada vacía',
+      differenceTitle: '¿Cuál es la diferencia?',
+      differenceText1:
+        'Todas las demás aplicaciones de productividad se centran en almacenar, organizar y automatizar listas interminables de tareas. Todorant se centra en lo único que importa: te hace completar las tareas.',
+      differenceText2:
+        'Todorant utiliza un conjunto cuidadosamente elaborado de límites y elogios para castigar el mal comportamiento y apoyar los buenos hábitos. Afecta a la parte primitiva del cerebro para hacer que ansíe completar todos como la gente ansía el azúcar.',
+      differenceText3:
+        'He leído y probado más de 20 libros y metodologías de productividad. Cuando todos ellos fallaron uno por uno combiné sus componentes y simplifiqué el resultado. Así es como se creó Todorant.',
+      dealTitle: '¿Cuál es el trato?',
+      dealText1:
+        'El Todorant es gratis durante los primeros 30 días y luego son 5 dólares al mes. Es más caro que los competidores porque funciona. Si no obtienes 5 dólares de productividad en los primeros 30 días de la prueba gratuita, eres bienvenido a no seguir usando Todorant.',
+      dealText2:
+        'Sin condiciones. No necesita darnos ninguna información, como una tarjeta de crédito, antes de que termine la prueba. Ni siquiera necesitas una cuenta si instalas las aplicaciones móviles!',
+      dealText3:
+        'La única excepción es si te registras en iOS, Apple nos ha obligado a hacerte una prueba gratuita antes de que puedas usar la aplicación. La manera de evitar este límite es crear una cuenta aquí, en el sitio web, y luego iniciar sesión en la aplicación iOS.',
+    },
   },
 }
