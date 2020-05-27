@@ -41,6 +41,8 @@ export default {
       color: 'error',
       active: false,
     })
+  },
+  mounted() {
     setUserProperty('landingABTestGroup', store.landingABTestGroup())
   },
   metaInfo() {
