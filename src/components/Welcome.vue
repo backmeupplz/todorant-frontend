@@ -12,6 +12,14 @@
         p {{$t('intro2')}}
         p {{$t('intro4')}}
         p {{$t('intro5')}}
+        iframe(
+          v-if='!$store.state.language || $store.state.language === "en"'
+          style="width: 100%; min-height: 300px"
+          src='https://www.youtube-nocookie.com/embed/EHI8gCtHTII'
+          frameborder='0'
+          allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+          allowfullscreen=''
+        )
       v-card-actions
         v-btn(
           color='blue'
