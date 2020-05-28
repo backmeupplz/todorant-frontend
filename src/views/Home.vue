@@ -40,7 +40,18 @@
                 a.pl-1(@click='open("https://play.google.com/store/apps/details?id=com.todorant")')
                   v-img(width='170' height='74' aspect-ratio='1' :src='playStoreButton')
             v-col(cols=12 sm=6)
-              v-img(:src='this.pictures.iphone').d-flex.elevation-1
+              v-img(
+                v-if='$store.state.language && $store.state.language !== "en"'
+                :src='this.pictures.iphone'
+              ).d-flex.elevation-1
+              iframe(
+                v-else
+                style="width: 100%; height: 100%; min-height: 300px"
+                src='https://www.youtube-nocookie.com/embed/EHI8gCtHTII'
+                frameborder='0'
+                allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+                allowfullscreen=''
+              )
           v-row.text-left
             v-col(cols=12 sm=6)
               p.display-1 {{$t('homeShort.differenceTitle')}}
@@ -78,7 +89,18 @@
                 a.pl-1(@click='open("https://play.google.com/store/apps/details?id=com.todorant")')
                   v-img(width='170' height='74' aspect-ratio='1' :src='playStoreButton')
             v-col(cols=12 sm=6)
-              v-img(:src='this.pictures.iphone').d-flex.elevation-1
+              v-img(
+                v-if='$store.state.language && $store.state.language !== "en"'
+                :src='this.pictures.iphone'
+              ).d-flex.elevation-1
+              iframe(
+                v-else
+                style="width: 100%; height: 100%; min-height: 300px"
+                src='https://www.youtube-nocookie.com/embed/EHI8gCtHTII'
+                frameborder='0'
+                allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+                allowfullscreen=''
+              )
           v-row
             v-col
               p.display-1 {{$t('home.texts.level[0]')}}
