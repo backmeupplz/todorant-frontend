@@ -41,9 +41,17 @@
                   v-img(width='170' height='74' aspect-ratio='1' :src='playStoreButton')
             v-col(cols=12 sm=6)
               v-img(
-                v-if='$store.state.language && $store.state.language !== "en"'
+                v-if='$store.state.language && $store.state.language !== "en" && $store.state.language !== "ru"'
                 :src='this.pictures.iphone'
               ).d-flex.elevation-1
+              iframe(
+                v-else-if='$store.state.language && $store.state.language === "ru"'
+                style="width: 100%; height: 100%; min-height: 300px"
+                src='https://www.youtube-nocookie.com/embed/VWs4GFr9blI'
+                frameborder='0'
+                allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+                allowfullscreen=''
+              )
               iframe(
                 v-else
                 style="width: 100%; height: 100%; min-height: 300px"
@@ -90,9 +98,17 @@
                   v-img(width='170' height='74' aspect-ratio='1' :src='playStoreButton')
             v-col(cols=12 sm=6)
               v-img(
-                v-if='$store.state.language && $store.state.language !== "en"'
+                v-if='$store.state.language && $store.state.language !== "en" && $store.state.language !== "ru"'
                 :src='this.pictures.iphone'
               ).d-flex.elevation-1
+              iframe(
+                v-else-if='$store.state.language && $store.state.language === "ru"'
+                style="width: 100%; height: 100%; min-height: 300px"
+                src='https://www.youtube-nocookie.com/embed/VWs4GFr9blI'
+                frameborder='0'
+                allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+                allowfullscreen=''
+              )
               iframe(
                 v-else
                 style="width: 100%; height: 100%; min-height: 300px"

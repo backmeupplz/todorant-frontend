@@ -20,6 +20,14 @@
           allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
           allowfullscreen=''
         )
+        iframe(
+          v-else-if='$store.state.language === "ru"'
+          style="width: 100%; min-height: 300px"
+          src='https://www.youtube-nocookie.com/embed/VWs4GFr9blI'
+          frameborder='0'
+          allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+          allowfullscreen=''
+        )
       v-card-actions
         v-btn(
           color='blue'
