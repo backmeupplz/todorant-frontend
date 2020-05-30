@@ -6,7 +6,7 @@ import { Tag } from '../models/tag'
 import createPersistedState from 'vuex-persistedstate'
 import { daysBetween } from '../utils/daysBetween'
 import { setFavIcon } from '../utils/setFavIcon'
-import { setUserProperty } from '@/utils/logEvent'
+import { setUserProperty } from '../utils/logEvent'
 
 Vue.use(Vuex)
 
@@ -142,6 +142,7 @@ const storeOptions = {
     },
     setLandingABTestGroup(state: State, landingABTestGroup: number) {
       state.landingABTestGroup = landingABTestGroup
+      setUserProperty('landingABTestGroup', landingABTestGroup)
     },
   },
   getters: {
@@ -250,3 +251,7 @@ export const setTagColors = (tagColors: { [index: string]: string }) => {
 export const setPassword = (password: string | undefined) => {
   store.commit('setPassword', password)
 }
+
+setUserProperty('landingABTestGroup', landingABTestGroup())
+setUserProperty('language', language())
+setUserProperty('darkMode', dark())

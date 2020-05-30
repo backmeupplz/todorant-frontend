@@ -18,7 +18,6 @@ import Snackbar from './components/Snackbar.vue'
 import * as store from './plugins/store'
 import { i18n } from './plugins/i18n'
 import { setFavIcon } from './utils/setFavIcon'
-import { setUserProperty } from './utils/logEvent'
 const CookieLaw = require('vue-cookie-law')
 
 export default {
@@ -41,9 +40,6 @@ export default {
       color: 'error',
       active: false,
     })
-  },
-  mounted() {
-    setUserProperty('landingABTestGroup', store.landingABTestGroup())
   },
   metaInfo() {
     const title = i18n.t('title') as string
