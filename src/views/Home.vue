@@ -1,24 +1,34 @@
 <template lang="pug">
   .v-container.pa-4
-    v-dialog(v-model='signinDialog'
-    max-width="289")
+    v-dialog(
+      v-model='signinDialog'
+      max-width='600'
+    )
       v-card
-        v-card-text.pt-4
-          v-flex.text-center
-            fb-signin-button(:params='{ scope: "email", return_scopes: true}'
+        v-card-text.pt-4.d-flex.flex-column.justify-center.align-center
+          fb-signin-button(
+            :params='{ scope: "email", return_scopes: true}'
             @success='onFacebookSignInSuccess'
-            @error='onFacebookSignInError') {{$t('home.facebook')}}
-            v-btn.google-button(v-google-signin-button='googleClientId'
-            block
-            color='#FFFFFF')
-              img.google-button-img(src='/img/google.svg' height='18dp' width='18dp')
-              span {{$t('home.google')}}
-            vue-apple-signin.signin-button.pb-3
-            vue-telegram-login(mode='callback'
+            @error='onFacebookSignInError'
+          ) {{$t('home.facebook')}}
+          v-btn.google-button(
+            v-google-signin-button='googleClientId'
+            color='#FFFFFF'
+          )
+            img.google-button-img(
+              src='/img/google.svg'
+              height='18dp'
+              width='18dp'
+            )
+            span {{$t('home.google')}}
+          vue-apple-signin.signin-button.pb-3
+          vue-telegram-login(
+            mode='callback'
             telegram-login='todorant_bot'
             @callback='onTelegramAuth'
             radius='3'
-            :userpic='false')
+            :userpic='false'
+          )
     v-layout
       v-col
         div(v-if='$store.state.landingABTestGroup === 1')
@@ -227,7 +237,7 @@ declare const FB: any
   },
 })
 export default class Home extends Vue {
-  signinDialog = false
+  signinDialog = true
 
   created() {
     if (this.$route.query && this.$route.query.hash) {
