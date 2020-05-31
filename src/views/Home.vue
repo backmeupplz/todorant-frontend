@@ -239,6 +239,19 @@ declare const FB: any
 export default class Home extends Vue {
   signinDialog = false
 
+  async debug() {
+    try {
+      const user = await loginFacebook('')
+      store.setUser(user)
+      this.signinDialog = false
+      this.$router.replace('superpower')
+      serverBus.$emit('login')
+    } catch (err) {
+      console.error(err)
+      store.setSnackbarError('errors.login.facebook')
+    }
+  }
+
   created() {
     if (this.$route.query && this.$route.query.hash) {
       if (!store.user()) {
