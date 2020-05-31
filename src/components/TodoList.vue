@@ -48,13 +48,13 @@
       // Content
       v-list-item(v-if='calendarViewEnabled' flex :class='editable ? "editable" : "non-editable"')
         calendar-view(
-          :events='events'
+          :items='events'
           :locale='locale'
           :startingDayOfWeek='firstDayOfWeek'
           :showDate='currentPeriod'
           :class='$store.state.dark ? "dark" : "light"'
           :enableDragDrop='editable'
-          @click-event="editEvent"
+          @click-item="editEvent"
           @drop-on-date='moveDate'
           :weekStyles='weekStyles'
         )
@@ -162,7 +162,7 @@ import {
   CalendarView,
   CalendarViewHeader,
 } from '@borodutch/vue-simple-calendar'
-import moment from 'moment'
+import moment, { LocaleSpecification, Moment } from 'moment'
 import { debounce } from 'lodash'
 import { v4 as uuid } from 'uuid'
 import { decrypt } from '../utils/encryption'
@@ -216,6 +216,28 @@ export default class TodoList extends Vue {
           }))
       })
       .reduce((p, c) => p.concat(c), [])
+  }
+
+  get numberOfEventsPerWeek() {
+    const weeksMap = this.events.reduce((prev, cur) => {
+      const week = this.weekForDate(moment(cur.startDate))
+      if (prev[week]) {
+        prev[week][cur.startDate] = (prev[week][cur.startDate] || 0) + 1
+      } else {
+        prev[week] = {}
+        prev[week][cur.startDate] = 1
+      }
+      return prev
+    }, {} as { [index: number]: { [index: string]: number } })
+    const result = {} as { [index: number]: number }
+    for (const key in weeksMap) {
+      const weeks = weeksMap[key]
+      result[key] = Object.keys(weeks).reduce((p, c) => {
+        return weeks[c] > p ? weeks[c] : p
+      }, 0)
+    }
+
+    return result
   }
 
   noMoreTodos = false
@@ -285,26 +307,17 @@ export default class TodoList extends Vue {
   }
 
   get weekStyles() {
-    return [
-      {
-        'min-height': '8rem',
-      },
-      {
-        'min-height': '8rem',
-      },
-      {
-        'min-height': '8rem',
-      },
-      {
-        'min-height': '8rem',
-      },
-      {
-        'min-height': '8rem',
-      },
-      {
-        'min-height': '8rem',
-      },
-    ]
+    return [0, 1, 2, 3, 4].map((v) => ({
+      'min-height': this.heightForWeek(v),
+    }))
+  }
+
+  heightForWeek(i: number) {
+    const thisMonth = moment(this.currentPeriod).startOf('month')
+    const currentWeek = this.weekForDate(thisMonth)
+    const numberOfEvents = this.numberOfEventsPerWeek[currentWeek + i] || 1
+    const sizeOfPosition = 1.5
+    return `${sizeOfPosition * (numberOfEvents + 1)}rem`
   }
 
   weekdayFromTitle(title: string) {
@@ -445,7 +458,7 @@ export default class TodoList extends Vue {
       [] as Todo[]
     )
     for (const todo of flatTodos) {
-      if (todo._id === event.originalEvent.id) {
+      if (todo._id === event.id) {
         this.editTodo(todo)
         return
       }
@@ -636,7 +649,7 @@ export default class TodoList extends Vue {
     }
     for (const section of this.todos) {
       for (const todo of section.todos) {
-        if (todo._id === event.originalEvent.id) {
+        if (todo._id === event.id) {
           if (newTitle !== section.title) {
             // Remove from old section
             section.todos = section.todos.filter((t) => t._id !== todo._id)
@@ -714,6 +727,18 @@ export default class TodoList extends Vue {
       return false
     }
   }
+
+  weekForDate(date: Moment) {
+    const locale = moment.locale()
+    moment.locale(locale, {
+      week: {
+        dow: this.firstDayOfWeek,
+      },
+    } as LocaleSpecification)
+    const week = date.week()
+    moment.locale(locale)
+    return week
+  }
 }
 </script>
 
@@ -769,12 +794,12 @@ export default class TodoList extends Vue {
   background-color: #61553c;
 }
 
-.light .cv-event {
+.light .cv-item {
   border-color: #e0e0f0;
   background-color: #e7e7ff;
 }
 
-.dark .cv-event {
+.dark .cv-item {
   background-color: #7d7d88;
 }
 
@@ -795,17 +820,17 @@ export default class TodoList extends Vue {
   border-width: 0 !important;
 }
 
-.cv-event {
+.cv-item {
   border-radius: 0.5em;
   text-overflow: ellipsis;
   border-width: 0;
 }
 
-.non-editable .cv-event {
+.non-editable .cv-item {
   cursor: pointer;
 }
 
-.editable .cv-event {
+.editable .cv-item {
   cursor: move;
 }
 
