@@ -68,7 +68,7 @@
             text 
             @click='save'
             :loading='loading'
-            v-shortkey.once="['shift', 'enter']"
+            v-shortkey.once="['enter']"
             @shortkey='save') {{$t('save')}}
 </template>
 
@@ -124,9 +124,7 @@ export default class AddTodo extends Vue {
 
   @Watch('dialog')
   onDialogChanged(val: boolean, oldVal: boolean) {
-    if (!oldVal && val) {
-      this.reset()
-    }
+    this.reset()
     if (oldVal && !val) {
       this.todoToBreakdown = null
     }

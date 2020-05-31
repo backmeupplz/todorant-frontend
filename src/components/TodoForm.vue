@@ -221,7 +221,7 @@ export default class TodoForm extends Vue {
   }
 
   enterDown(evt: any) {
-    if (evt.keyCode == 13 && evt.shiftKey) {
+    if (evt.keyCode == 13 && !evt.shiftKey) {
       if (evt.type == 'keydown') {
         ;(this as any).enterPressed()
       }
