@@ -258,7 +258,7 @@ export default class TodoList extends Vue {
     }, 1500)()
   }
 
-  calendarViewEnabled = true
+  calendarViewEnabled = false
 
   currentPeriod = new Date()
 

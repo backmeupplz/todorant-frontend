@@ -51,7 +51,7 @@ import { mergeTelegram } from '../utils/api'
 
 @Component({ components: { TodoList, AddTodo, CurrentTodo, Report } })
 export default class Superpower extends Vue {
-  currentTab = 1
+  currentTab = 0
 
   async created() {
     // Try telegram merge
