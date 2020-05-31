@@ -51,7 +51,7 @@ import { mergeTelegram } from '../utils/api'
 
 @Component({ components: { TodoList, AddTodo, CurrentTodo, Report } })
 export default class Superpower extends Vue {
-  currentTab = 0
+  currentTab = 1
 
   async created() {
     // Try telegram merge
@@ -64,9 +64,11 @@ export default class Superpower extends Vue {
       try {
         const loginInfo = query
         if (
-          !confirm(i18n.t('merge.confirm', {
-            id: loginInfo.id,
-          }) as string)
+          !confirm(
+            i18n.t('merge.confirm', {
+              id: loginInfo.id,
+            }) as string
+          )
         ) {
           return
         }

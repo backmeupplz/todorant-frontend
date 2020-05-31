@@ -33,6 +33,14 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@borodutch/vue-simple-calendar@4.4.2":
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/@borodutch/vue-simple-calendar/-/vue-simple-calendar-4.4.2.tgz#8ef546bf705c2f35e81eb41c183adcffc1a2b3af"
+  integrity sha512-GmbX3NJGwvMyO3XY9AZ1+Q6v192J/ikInHla/g3BQUWtJgXxvbHfFA//ANZAMVsLbauDy2xvtO0w90ELg7CCFQ==
+  dependencies:
+    core-js "^3.6.5"
+    vue "^2.6.11"
+
 "@hapi/address@2.x.x":
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.2.tgz#1c794cd6dbf2354d1eb1ef10e0303f573e1c7222"
@@ -1786,7 +1794,7 @@ core-js@^2.6.5:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.11.tgz#38831469f9922bded8ee21c9dc46985e0399308c"
   integrity sha512-5wjnpaT/3dV+XB4borEsnAYQchn00XSgTAWKDkEqv+K8KevjbzmofK6hfJ9TZIlpj2N0xQpazy7PiRQiWHqzWg==
 
-core-js@^3.3.2:
+core-js@^3.6.5:
   version "3.6.5"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
   integrity sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA==
@@ -7825,14 +7833,6 @@ vue-shortkey@^3.1.7:
     custom-event-polyfill "^1.0.7"
     element-matches "^0.1.2"
 
-vue-simple-calendar@^4.3.2:
-  version "4.3.2"
-  resolved "https://registry.yarnpkg.com/vue-simple-calendar/-/vue-simple-calendar-4.3.2.tgz#17a89c85b736a97a98e04895369a23d84baa2a88"
-  integrity sha512-HVqBLZDjzTSi3ao8WOsfRxEudgIl5oqt3AKCvQrq4UVudthWvh7iPwuPiSn32ovF+PM1bE0rSH94Vmc27xkpug==
-  dependencies:
-    core-js "^3.3.2"
-    vue "^2.6.10"
-
 vue-style-loader@^4.1.0:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/vue-style-loader/-/vue-style-loader-4.1.2.tgz#dedf349806f25ceb4e64f3ad7c0a44fba735fcf8"
@@ -7864,7 +7864,7 @@ vue@^2.6.10:
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha512-ImThpeNU9HbdZL3utgMCq0oiMzAkt1mcgy3/E6zWC/G6AaQoeuFdsl9nDhTDU3X1R6FK7nsIUuRACVcjI+A2GQ==
 
-vue@^2.6.6:
+vue@^2.6.11, vue@^2.6.6:
   version "2.6.11"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==

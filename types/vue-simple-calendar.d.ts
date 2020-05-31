@@ -1,1 +1,1 @@
-declare module 'vue-simple-calendar'
+declare module '@borodutch/vue-simple-calendar'

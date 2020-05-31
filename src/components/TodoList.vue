@@ -47,19 +47,24 @@
         v-progress-linear(:indeterminate='true')
       // Content
       v-list-item(v-if='calendarViewEnabled' flex :class='editable ? "editable" : "non-editable"')
-        calendar-view(:events='events'
-        :locale='locale'
-        :startingDayOfWeek='firstDayOfWeek'
-        :showDate='currentPeriod'
-        :class='$store.state.dark ? "dark" : "light"'
-        :enableDragDrop='editable'
-        @click-event="editEvent"
-        @drop-on-date='moveDate')
-          calendar-view-header(v-if='!editable'
-          slot="header"
-          slot-scope="{ headerProps }"
-          :header-props="headerProps"
-          @input='(date) => currentPeriod = date')
+        calendar-view(
+          :events='events'
+          :locale='locale'
+          :startingDayOfWeek='firstDayOfWeek'
+          :showDate='currentPeriod'
+          :class='$store.state.dark ? "dark" : "light"'
+          :enableDragDrop='editable'
+          @click-event="editEvent"
+          @drop-on-date='moveDate'
+          :weekStyles='weekStyles'
+        )
+          calendar-view-header(
+            v-if='!editable'
+            slot="header"
+            slot-scope="{ headerProps }"
+            :header-props="headerProps"
+            @input='(date) => currentPeriod = date'
+          )
       v-expansion-panels(v-else flat multiple v-model='panels')
         v-expansion-panel.my-0.py-0(v-for='(todoSection, i) in todos' :key='i')
           v-expansion-panel-header.py-0.px-6(v-observe-visibility='(isVisible, entry) => headerVisibilityChanged(isVisible, entry, i)')
@@ -90,8 +95,14 @@
                       v-icon(v-if='todoOutstanding(todo)') error_outline
                       v-col(no-gutters).px-2.py-0.ma-0
                         v-row
-                          v-icon(small).grey--text.pl-2(v-if='todo.encrypted') vpn_key
-                          v-icon(small).grey--text.pl-2(v-if='todo.skipped') arrow_forward
+                          v-icon.grey--text.pl-2(
+                            v-if='todo.encrypted'
+                            small
+                          ) vpn_key
+                          v-icon.grey--text.pl-2(
+                            v-if='todo.skipped'
+                            small
+                          ) arrow_forward
                       v-spacer
                       v-tooltip.mx-0(bottom v-if='todoInFuture(todo)')
                         template(v-slot:activator='{ on }')
@@ -147,7 +158,10 @@ import { serverBus } from '../main'
 import draggable from 'vuedraggable'
 import { TodoSection } from '../models/TodoSection'
 import { isTodoOld, isDateTooOld } from '../utils/isTodoOld'
-import { CalendarView, CalendarViewHeader } from 'vue-simple-calendar'
+import {
+  CalendarView,
+  CalendarViewHeader,
+} from '@borodutch/vue-simple-calendar'
 import moment from 'moment'
 import { debounce } from 'lodash'
 import { v4 as uuid } from 'uuid'
@@ -222,7 +236,7 @@ export default class TodoList extends Vue {
     }, 1500)()
   }
 
-  calendarViewEnabled = false
+  calendarViewEnabled = true
 
   currentPeriod = new Date()
 
@@ -268,6 +282,29 @@ export default class TodoList extends Vue {
       result.push((firstDay + i) % 7)
     }
     return result
+  }
+
+  get weekStyles() {
+    return [
+      {
+        'min-height': '8rem',
+      },
+      {
+        'min-height': '8rem',
+      },
+      {
+        'min-height': '8rem',
+      },
+      {
+        'min-height': '8rem',
+      },
+      {
+        'min-height': '8rem',
+      },
+      {
+        'min-height': '8rem',
+      },
+    ]
   }
 
   weekdayFromTitle(title: string) {
@@ -749,10 +786,6 @@ export default class TodoList extends Vue {
 }
 
 /* Funcionality */
-
-.cv-week {
-  min-height: 8rem !important;
-}
 
 .cv-day {
   display: flex;
