@@ -6,7 +6,7 @@
     :rules='textRules'
     v-model='text'
     autofocus
-    v-on:keydown="enterDown"
+    v-on:keydown="keyDown"
     v-on:keyup.esc="escape"
     ref='textInput'
     auto-grow
@@ -99,6 +99,7 @@ import { Watch } from 'vue-property-decorator'
     todo: Object,
     enterPressed: Function,
     escapePressed: Function,
+    addTodo: Function,
     hideAddToTheTop: Boolean,
   },
 })
@@ -220,10 +221,19 @@ export default class TodoForm extends Vue {
     return moment(date).format()
   }
 
-  enterDown(evt: any) {
-    if (evt.keyCode == 13 && !evt.shiftKey) {
-      if (evt.type == 'keydown') {
+  keyDown(evt: any) {
+    if (!evt.keyCode) {
+      return
+    }
+    if (evt.keyCode === 13 && !evt.shiftKey) {
+      if (evt.type === 'keydown') {
         ;(this as any).enterPressed()
+      }
+      evt.preventDefault()
+    }
+    if (evt.keyCode === 65 && evt.ctrlKey) {
+      if (evt.type === 'keydown') {
+        ;(this as any).addTodo()
       }
       evt.preventDefault()
     }

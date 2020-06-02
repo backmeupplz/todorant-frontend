@@ -43,18 +43,23 @@
                       span {{!panel.includes(i) ? `${todo.frog ? '🐸 ': ''}${todo.time ? `${todo.time} ` : ''}` : ''}}{{panel.includes(i) || !todo.text ? $t('todo.create.placeholder'): todo.text}}
                       p.my-0.caption(v-if='!panel.includes(i) && todo.date') {{todo.date}}
                   v-expansion-panel-content
-                    TodoForm(:todo='todo'
-                    :enterPressed='save'
-                    :escapePressed='escapePressed'
-                    ref='todoForm')
-                      v-btn(v-if='todos.length > 1'
-                      color='error'
-                      text
-                      @click='deleteTodo(i)') {{$t('delete')}}
+                    TodoForm(
+                      :todo='todo'
+                      :enterPressed='save'
+                      :escapePressed='escapePressed'
+                      :addTodo='addTodo'
+                      ref='todoForm'
+                    )
+                      v-btn(
+                        v-if='todos.length > 1'
+                        color='error'
+                        text
+                        @click='deleteTodo(i)'
+                      ) {{$t('delete')}}
           v-card-actions
             v-btn(color='blue'
             text @click='addTodo'
-            v-shortkey.once="{ en: ['shift', 'a'], ru: ['shift', 'ф'] }"
+            v-shortkey.once="{ en: ['ctrl', 'a'], ru: ['ctrl', 'ф'] }"
             @shortkey='addTodo')
               v-icon add
             v-spacer
