@@ -56,7 +56,7 @@
               ).d-flex.elevation-1
               iframe(
                 v-else-if='$store.state.language && $store.state.language === "ru"'
-                style="width: 100%; height: 100%; min-height: 300px"
+                :style="youtubeStyle"
                 src='https://www.youtube-nocookie.com/embed/VWs4GFr9blI'
                 frameborder='0'
                 allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
@@ -64,7 +64,7 @@
               )
               iframe(
                 v-else
-                style="width: 100%; height: 100%; min-height: 300px"
+                :style="youtubeStyle"
                 src='https://www.youtube-nocookie.com/embed/EHI8gCtHTII'
                 frameborder='0'
                 allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
@@ -113,7 +113,7 @@
               ).d-flex.elevation-1
               iframe(
                 v-else-if='$store.state.language && $store.state.language === "ru"'
-                style="width: 100%; height: 100%; min-height: 300px"
+                :style="youtubeStyle"
                 src='https://www.youtube-nocookie.com/embed/VWs4GFr9blI'
                 frameborder='0'
                 allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
@@ -121,7 +121,7 @@
               )
               iframe(
                 v-else
-                style="width: 100%; height: 100%; min-height: 300px"
+                :style="youtubeStyle"
                 src='https://www.youtube-nocookie.com/embed/EHI8gCtHTII'
                 frameborder='0'
                 allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
@@ -266,6 +266,13 @@ export default class Home extends Vue {
 
   mounted() {
     logEvent('home_mounted')
+  }
+
+  youtubeStyle = {
+    width: '100%',
+    height: '100%',
+    minHeight: '300px',
+    maxHeight: '400px',
   }
 
   get pictures() {
