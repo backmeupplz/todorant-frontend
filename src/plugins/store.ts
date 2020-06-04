@@ -205,6 +205,13 @@ export const setSnackbarError = (message: String) => {
     active: true,
   })
 }
+export const setSnackbarSuccess = (message: String) => {
+  setSnackbar({
+    message,
+    color: 'success',
+    active: true,
+  })
+}
 export const hideSnackbar = () => {
   store.commit('setSnackbar', { ...store.state.snackbar, active: false })
 }

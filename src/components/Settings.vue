@@ -28,21 +28,31 @@
         v-subheader.pa-0 {{$t('settings.integrations')}}
         .d-flex.justify-space-between.align-center.mb-2
           span {{$t('settings.googleCalendar')}}
-          v-btn(v-if='googleCalendarConnected()'
-          color='error'
-          text
-          :loading='loading'
-          @click='disconnectGoogleCalendar') {{$t('settings.connected')}}
-          v-btn(v-else
-          :loading='loading'
-          @click='connectGoogleCalendar'
-          color='#FFFFFF')
-            img.google-button-img(src='/img/google.svg' height='18dp' width='18dp')
+          v-btn(
+            v-if='googleCalendarConnected()'
+            color='error'
+            text
+            :loading='loading'
+            @click='disconnectGoogleCalendar'
+          ) {{$t('settings.connected')}}
+          v-btn(
+            v-else
+            :loading='loading'
+            @click='connectGoogleCalendar'
+            color='#FFFFFF'
+          )
+            img.google-button-img(
+              src='/img/google.svg'
+              height='18dp'
+              width='18dp'
+            )
             span.google-button-text {{$t('settings.notConnected')}}
         v-divider
         v-subheader.pa-0 {{$t('settings.account')}}
         .d-flex.flex-column
-          span(v-for='identifier in identifiers') {{identifier}}
+          span(
+            v-for='identifier in identifiers'
+          ) {{identifier}}
       v-card-actions.d-flex.flex-column(
         v-if='this.$vuetify.breakpoint.xsOnly'
       )
@@ -196,6 +206,7 @@ export default class Settings extends Vue {
       await api.setSettings(user, settings)
       serverBus.$emit('refreshRequested')
       ;(this as any).close()
+      store.setSnackbarSuccess(i18n.t('googleCalendarDisableSuccess') as string)
     } catch (err) {
       store.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {

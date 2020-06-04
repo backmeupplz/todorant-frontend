@@ -8,6 +8,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import * as store from '../plugins/store'
 import * as api from '../utils/api'
+import { i18n } from '../plugins/i18n'
 
 @Component
 export default class GoogleCalendarSetup extends Vue {
@@ -30,6 +31,9 @@ export default class GoogleCalendarSetup extends Vue {
         settings.googleCalendarCredentials = googleCredentials
         await api.setSettings(user, settings)
         this.$router.replace('/superpower')
+        store.setSnackbarSuccess(
+          i18n.t('googleCalendarEnableSuccess') as string
+        )
       } catch (err) {
         this.$router.replace('/superpower')
         store.setSnackbarError(err.response ? err.response.data : err.message)

@@ -392,6 +392,8 @@ export const messages = {
       dealText3:
         'Единственное исключение — это если вы создадите аккаунт с девайса от Apple. Apple заставили Тудурант просить пользователей начать бесплатную подписку на iOS до того, как люди могут начать пользоваться сервисом. Чтобы обойти это ограничение, сначала создайте аккаунт здесь, на сайте — а потом зайдите в этот аккаунт через iOS приложение.',
     },
+    googleCalendarDisableSuccess: 'Гугл Календарь успешно отключен',
+    googleCalendarEnableSuccess: 'Гугл Календарь успешно подключен',
   },
   en: {
     encryption: {
@@ -796,6 +798,8 @@ export const messages = {
       dealText3:
         'The only exception is if you signup on iOS, Apple has forced us to make you commit to a free trial before you can use the app. The way to avoid this limit is to create an account here, on the website, and then log in on the iOS app.',
     },
+    googleCalendarDisableSuccess: 'Google Calendar disabled',
+    googleCalendarEnableSuccess: 'Google Calendar enabled',
   },
   ua: {
     encryption: {
@@ -1193,6 +1197,8 @@ export const messages = {
       dealText3:
         'Єдиний виняток — це якщо ви створите аккаунт з девайса від Apple. Apple змусили Тудурант просити користувачів почати безкоштовну передплату на iOS до того, як люди можуть почати користуватися сервісом. Щоб обійти це обмеження, спочатку створіть акаунт тут, на сайті — а потім зайдіть в цей акаунт через iOS додаток.',
     },
+    googleCalendarDisableSuccess: 'Гугл Календар успішно відключений',
+    googleCalendarEnableSuccess: 'Гугл Календар успішно підключений',
   },
   it: {
     encryption: {
@@ -1345,6 +1351,8 @@ export const messages = {
       dealText3:
         "L'unica eccezione è che se ti iscrivi su iOS, Apple ci ha obbligato a farti fare una prova gratuita prima che tu possa usare l'app. Il modo per evitare questo limite è quello di creare un account qui, sul sito web, e poi accedere all'app per iOS",
     },
+    googleCalendarDisableSuccess: 'Google Calendar disabilitato',
+    googleCalendarEnableSuccess: 'Google Calendar abilitato',
   },
   es: {
     breakdown: {
@@ -1717,5 +1725,7 @@ export const messages = {
       dealText3:
         'La única excepción es si te registras en iOS, Apple nos ha obligado a hacerte una prueba gratuita antes de que puedas usar la aplicación. La manera de evitar este límite es crear una cuenta aquí, en el sitio web, y luego iniciar sesión en la aplicación iOS.',
     },
+    googleCalendarDisableSuccess: 'Google Calendar desactivado',
+    googleCalendarEnableSuccess: 'Google Calendar activado',
   },
 }
