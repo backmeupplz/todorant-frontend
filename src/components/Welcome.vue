@@ -28,7 +28,21 @@
           allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
           allowfullscreen=''
         )
-      v-card-actions
+      v-card-actions.d-flex.flex-column(v-if='this.$vuetify.breakpoint.xsOnly')
+        v-btn(
+          block
+          color='blue'
+          text 
+          @click='openRulesDialog'
+        ) {{$t('howto.title')}}
+        v-btn(
+          color='blue'
+          text 
+          @click='close'
+          v-shortkey.once="['esc']"
+          @shortkey='close'
+        ) {{$t('introBack')}}
+      v-card-actions(v-else)
         v-btn(
           color='blue'
           text 

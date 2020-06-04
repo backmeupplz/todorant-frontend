@@ -43,22 +43,52 @@
         v-subheader.pa-0 {{$t('settings.account')}}
         .d-flex.flex-column
           span(v-for='identifier in identifiers') {{identifier}}
-      v-card-actions
-        v-btn(color='blue'
-        text
-        @click='encryptionTouched') {{$t('encryption.title')}}
+      v-card-actions.d-flex.flex-column(
+        v-if='this.$vuetify.breakpoint.xsOnly'
+      )
+        v-btn(
+          color='blue'
+          text
+          @click='encryptionTouched'
+        ) {{$t('encryption.title')}}
         v-spacer
-        v-btn(color='error'
+        v-btn(
+          color='error'
           text 
           @click='close'
           v-shortkey.once="['esc']"
           @shortkey='close'
-          :loading='loading') {{$t('close')}}
-        v-btn(color='blue'
+          :loading='loading'
+        ) {{$t('close')}}
+        v-btn(
+          color='blue'
           text 
           @click='save'
           @shortkey='close'
-          :loading='loading') {{$t('save')}}
+          :loading='loading'
+        ) {{$t('save')}}
+      v-card-actions(v-else)
+        v-btn(
+          color='blue'
+          text
+          @click='encryptionTouched'
+        ) {{$t('encryption.title')}}
+        v-spacer
+        v-btn(
+          color='error'
+          text 
+          @click='close'
+          v-shortkey.once="['esc']"
+          @shortkey='close'
+          :loading='loading'
+        ) {{$t('close')}}
+        v-btn(
+          color='blue'
+          text 
+          @click='save'
+          @shortkey='close'
+          :loading='loading'
+        ) {{$t('save')}}
 </template>
 
 <script lang="ts">

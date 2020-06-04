@@ -11,7 +11,22 @@
         .title.py-2 {{$t('howto.bonus.title')}}
         ul
           li(v-for='rule in $t("howto.bonus.rules")' v-html='rule')
-      v-card-actions
+      v-card-actions.d-flex.flex-column(v-if='this.$vuetify.breakpoint.xsOnly')
+        v-btn(
+          v-if='!!$store.state.user'
+          color='blue'
+          text 
+          @click='openWelcomeDialog'
+        ) {{$t('introButton')}}
+        v-spacer
+        v-btn(
+          color='blue'
+          text 
+          @click='close'
+          v-shortkey.once="['esc']"
+          @shortkey='close'
+        ) {{$t('cookie.button')}}
+      v-card-actions(v-else)
         v-btn(
           v-if='!!$store.state.user'
           color='blue'

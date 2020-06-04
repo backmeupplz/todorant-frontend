@@ -18,19 +18,41 @@
           v-btn.ma-2(color='primary'
           :loading='loading'
           @click='redirectToPurchase("yearly")') {{$t('subscription.50dollars')}}
-      v-card-actions
-        v-spacer
-        v-btn(v-if='$store.state.userState.subscriptionIdExists'
-        text
-        color='error'
-        :loading='loading'
-        @click='cancelSubscription') {{$t('subscription.cancel')}}
-        v-btn(color='blue'
+      v-card-actions.d-flex.flex-column(
+        v-if='this.$vuetify.breakpoint.xsOnly'
+      )
+        v-btn(
+          v-if='$store.state.userState.subscriptionIdExists'
+          text
+          color='error'
+          :loading='loading'
+          @click='cancelSubscription'
+        ) {{$t('subscription.cancel')}}
+        v-btn(
+          color='blue'
           text 
           @click='close'
           v-shortkey.once="['esc']"
           @shortkey='close'
-          :loading='loading') {{$t('close')}}
+          :loading='loading'
+        ) {{$t('close')}}
+      v-card-actions(v-else)
+        v-spacer
+        v-btn(
+          v-if='$store.state.userState.subscriptionIdExists'
+          text
+          color='error'
+          :loading='loading'
+          @click='cancelSubscription'
+        ) {{$t('subscription.cancel')}}
+        v-btn(
+          color='blue'
+          text 
+          @click='close'
+          v-shortkey.once="['esc']"
+          @shortkey='close'
+          :loading='loading'
+        ) {{$t('close')}}
 </template>
 
 <script lang="ts">
