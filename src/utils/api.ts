@@ -171,14 +171,6 @@ export async function undoTodo(user: User, todo: Todo) {
   )
 }
 
-export async function getTags(user: User) {
-  return (
-    await axios.get(`${base}/tag`, {
-      headers: getHeaders(user),
-    })
-  ).data as Todo[]
-}
-
 export async function getTodos(
   user: User,
   completed: boolean = false,
@@ -204,6 +196,7 @@ export async function getTodos(
       },
     })
   ).data as { todos: Todo[]; state: store.UserState; tags: Tag[] }
+  console.log(data.tags.map((t) => `${t.tag} ${t.numberOfUses}`))
   store.setUserState(data.state)
   setTags(data.tags)
   return data.todos
@@ -264,7 +257,17 @@ export async function setSettings(user: User, settings: store.Settings) {
 }
 
 function setTags(tags: Tag[]) {
-  store.setTags(tags.sort((a, b) => (a.tag < b.tag ? -1 : 1)))
+  store.setTags(
+    tags.sort((a, b) => {
+      return a.numberOfUses !== b.numberOfUses
+        ? a.numberOfUses > b.numberOfUses
+          ? -1
+          : 1
+        : a.tag < b.tag
+        ? -1
+        : 1
+    })
+  )
   const tagColors = tags.reduce((p, c) => {
     if (c.color) {
       p[c.tag] = c.color
