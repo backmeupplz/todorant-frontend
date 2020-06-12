@@ -283,7 +283,7 @@ export const messages = {
       bonus: {
         title: 'Бонусные функции',
         rules: [
-          'Пользуйтесь шорткатами на клавиатуре на десктопе! Вы можете (a) — добавить, (b) — разбить, переключиться на (c) — текущее, пометить как (d) — выполненное и переключиться на (p) — планирование. Чтобы добавить дополнительную задачу, когда добавляете задачи, пользуйтесь Shift+A.',
+          'Пользуйтесь шорткатами на клавиатуре на десктопе! Вы можете (a) — добавить, (b) — разбить, переключиться на (c) — текущее, пометить как (d) — выполненное и переключиться на (p) — планирование. Чтобы добавить дополнительную задачу, когда добавляете задачи, пользуйтесь Ctrl+Shift+A.',
         ],
       },
     },
@@ -691,7 +691,7 @@ export const messages = {
       bonus: {
         title: 'Bonus features',
         rules: [
-          'User keyboard shortcuts when on desktop! You can (a)dd, (b)reakdown, switch to (c)urrent, mark as (d)one and switch to (p)lanning. To add an additional task slot while adding tasks, you can use Shift+A.',
+          'User keyboard shortcuts when on desktop! You can (a)dd, (b)reakdown, switch to (c)urrent, mark as (d)one and switch to (p)lanning. To add an additional task slot while adding tasks, you can use Ctrl+Shift+A.',
         ],
       },
     },
@@ -1602,7 +1602,7 @@ export const messages = {
       bonus: {
         title: 'Recursos bônus',
         rules: [
-          'Use Atalhos de teclado quando estiver no desktop! Você pode (a) adicionar, (b) decompor, (c) alternar para atual, (d) marcar como feito e alternar para (p)lanejamento. Para adicionar uma tarefa adicional ao adicionar tarefas, você pode usar Shift + A.',
+          'Use Atalhos de teclado quando estiver no desktop! Você pode (a) adicionar, (b) decompor, (c) alternar para atual, (d) marcar como feito e alternar para (p)lanejamento. Para adicionar uma tarefa adicional ao adicionar tarefas, você pode usar Ctrl+Shift+A.',
         ],
       },
     },
@@ -1983,7 +1983,7 @@ export const messages = {
       bonus: {
         title: 'Características adicionales',
         rules: [
-          '¡Usa atajos de teclado cuando estés en pc! Puedes agregar (a), desglosar (b), cambiar a la pestaña Actual (c), marcar como completada (d) y cambiar a la pestaña Planeación (p). Para agregar un espacio de tarea adicional mientras agregas tareas, puedes usar Shift + A.',
+          '¡Usa atajos de teclado cuando estés en pc! Puedes agregar (a), desglosar (b), cambiar a la pestaña Actual (c), marcar como completada (d) y cambiar a la pestaña Planeación (p). Para agregar un espacio de tarea adicional mientras agregas tareas, puedes usar Ctrl+Shift+A.',
         ],
       },
     },
