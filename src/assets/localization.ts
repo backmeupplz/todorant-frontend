@@ -33,7 +33,7 @@ export const messages = {
     supportAlert: {
       title: 'Поддержка',
       text:
-        'Если у вас есть какие-либо вопросы или предложения, <a href=mailto:todorant@borodutch.com">напишите мне имеил</a>, <a href="https://t.me/borodutch" target="_blank">в Телеграм</a> или <a href="https://t.me/todorant_feedback" target="_blank">присоединитесь к нашей групе сообщества в Телеграме</a>!',
+        'Если у вас есть какие-либо вопросы или предложения, <a href="mailto:todorant@borodutch.com">напишите мне имеил</a>, <a href="https://t.me/borodutch" target="_blank">в Телеграм</a> или <a href="https://t.me/todorant_feedback" target="_blank">присоединитесь к нашей групе сообщества в Телеграме</a>!',
     },
     loginMobile: {
       telegram: {
@@ -429,7 +429,7 @@ export const messages = {
     supportAlert: {
       title: 'Support',
       text:
-        'If you have any questions or suggestions, feel free to <a href=mailto:todorant@borodutch.com">send me an email</a>, <a href="https://t.me/borodutch" target="_blank">contact me on Telegram</a> or <a href="https://t.me/todorant_feedback" target="_blank">join our Telegram community group</a>!',
+        'If you have any questions or suggestions, feel free to <a href="mailto:todorant@borodutch.com">send me an email</a>, <a href="https://t.me/borodutch" target="_blank">contact me on Telegram</a> or <a href="https://t.me/todorant_feedback" target="_blank">join our Telegram community group</a>!',
     },
     loginMobile: {
       telegram: {
@@ -835,7 +835,7 @@ export const messages = {
     supportAlert: {
       title: 'Підтримка',
       text:
-        'Якщо у вас є якісь питання або пропозиції, <a href=mailto:todorant@borodutch.com">напишіть мені на імейл</a>, <a href="https://t.me/borodutch" target="_blank">в Телеграм</a> або <a href="https://t.me/todorant_feedback" target="_blank">приєднуйтесь до нашої групи в Телеграмі</a>!',
+        'Якщо у вас є якісь питання або пропозиції, <a href="mailto:todorant@borodutch.com">напишіть мені на імейл</a>, <a href="https://t.me/borodutch" target="_blank">в Телеграм</a> або <a href="https://t.me/todorant_feedback" target="_blank">приєднуйтесь до нашої групи в Телеграмі</a>!',
     },
     loginMobile: {
       telegram: {
@@ -1234,7 +1234,7 @@ export const messages = {
     supportAlert: {
       title: 'Supporto',
       text:
-        'Se hai delle domande o dei suggerimenti, sentiti libero di <a href=mailto:todorant@borodutch.com">mandarmi un\'email</a>, <a href="https://t.me/borodutch" target="_blank">scrivermi su Telegram</a> oppure <a href="https://t.me/todorant_feedback" target="_blank">entrare nel gruppo Telegram della nostra community</a>!',
+        'Se hai delle domande o dei suggerimenti, sentiti libero di <a href="mailto:todorant@borodutch.com">mandarmi un\'email</a>, <a href="https://t.me/borodutch" target="_blank">scrivermi su Telegram</a> oppure <a href="https://t.me/todorant_feedback" target="_blank">entrare nel gruppo Telegram della nostra community</a>!',
     },
     loginMobile: {
       telegram: {
@@ -1354,6 +1354,366 @@ export const messages = {
     googleCalendarDisableSuccess: 'Google Calendar disabilitato',
     googleCalendarEnableSuccess: 'Google Calendar abilitato',
   },
+  'pt-BR': {
+    encryption: {
+      title: 'Criptografia',
+      info:
+        'Use esta seção com o máximo cuidado! A criptografia não funcionará, a menos que você adicione uma senha. Haverá dois tipos de tarefas: criptografadas e não criptografadas. Todas as novas tarefas serão criptografadas. Todos as antigas podem ser convertidas para criptografadas com o botão abaixo. Se você perder a senha, não haverá como recuperar as tarefas.',
+      switch: 'Encriptar tarefas',
+      password: 'Senha',
+      encryptAllButton: 'Encriptar tudo',
+      decryptAllButton: 'Descriptografar tudo',
+      confirm:
+        'Tem certeza de que deseja criptografar as tarefas com esta senha? Você poderá descriptografar todos mais tarde com a mesma senha. Se você perder a senha, não poderá descriptografar as tarefas!',
+      disableConfirm:
+        'Tem certeza de que deseja remover a chave e desativar a criptografia? Isso não descriptografará as tarefas criptografadas.',
+      errorDecrypting: 'Senha de descriptografia incorreta',
+      repeatPassword: 'Repita a senha',
+    },
+    search: 'Procurar',
+    qr: {
+      code: 'QR code',
+      description:
+        'Use este QR Code para fazer login em dispositivos móveis. Esta imagem é uma senha, não a compartilhe com ninguém!',
+    },
+    breakdown: {
+      request:
+        'Parece que você está movendo muito essa tarefa. Por favor, divida-o, pois você não poderá mais movê-lo para outra data. Acredite, isso ajudará a você concluir a tarefa!',
+      button: 'Decompor',
+    },
+    warning: 'Cuidado',
+    hashtags: {
+      title: 'Hashtags',
+    },
+    supportAlert: {
+      title: 'Ajuda',
+      text:
+        'Se você tem qualquer dúvida ou sugestão, sinta-se a vontade para <a href="mailto:todorant@borodutch.com">enviar-me um email</a>, <a href="https://t.me/borodutch" target="_blank">contact me on Telegram</a> ou<a href="https://t.me/todorant_feedback" target="_blank">entrar na nossa comunidade no Telegram</a>!',
+    },
+    loginMobile: {
+      telegram: {
+        headline:
+          'Faça o login no Telegram digitando seu Telegram ID no campo abaixo e clicando no botão "Login". Você pode obter seu Telegram ID enviando<code>/id</code> para o <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>. Ou você pode simplesmente enviar <code>/qr</code> para <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a> e scan isto na seção de QR Login!',
+        noCredentialsError: 'Por favor, forneça um ID Telegram',
+        cannotSendMessageError:
+          'Não foi possível enviar a solicitação de login para o usuário. Verifique se você iniciou o @todorant_bot e se o ID do Telegram está correto.',
+        waiting:
+          'Aguardando a resposta em<a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>...',
+        notAllowedError: 'Login foi rejeitado',
+      },
+      apple: {
+        headline: 'Faça o login na Apple clicando no botão abaixo.',
+      },
+    },
+    noReport: {
+      title: 'Nenhum dado ainda',
+      text: 'Vá em frente, complete o seu primeiro trabalho e volte aqui!',
+    },
+    report: {
+      title: 'Estatísticas',
+      tasksCompleted: 'Tarefas completadas',
+      frogsCompleted: 'Sapos completados',
+      share: 'Compartilhe este relatório',
+      hashtag: 'Hashtag',
+      shareButton: 'Compartilhar',
+      url: 'Link permanente para este relatório',
+      shareMessage: 'Confira meu relatório de produtividade do Todorant!',
+      call: 'Quer se juntar?',
+      callButton: 'Junte-se a Todorant',
+      startDate: 'Data inicial',
+      endDate: 'Data final',
+    },
+    cookie: {
+      button: 'Entendi!',
+      message: 'Este website usa cookies.\n\n',
+    },
+    home: {
+      texts: {
+        level: [
+          'Eu já fui como você',
+          'Passei horas e horas tentando fazer as coisas e parecia que nada poderia ajudar. Novas tarefas continuavam chegando e antigas continuavam se acumulando. Não havia como escapar — nenhum dos gerenciadores de tarefas funcionavam. O único propósito a que serviam era me perturbar com todas essas coisas que esqueci e todas as tarefas que nunca terminei.',
+          'Embora ferramentas complicadas e sofisticadas, com muitos recursos, possam ser úteis para acompanhar algumas tarefas, a psicologia cognitiva nos diz que sobrecarregar nosso subconsciente com todas as tarefas pendentes que não foram contabilizadas pode usar uma grande parte do cérebro que, de outra forma, deveria ser responsável por proporcionar o sentimento de felicidade.',
+        ],
+        winter: [
+          'O inverno está chegando',
+          'Embora a população mundial esteja mais feliz do que nunca, a produtividade pessoal sofreu recentemente um impacto. Se seguirmos a mesma tendência, poderemos nos encontrar entre a massa cinzenta de humanos genéricos que não são mais produtivos e não conseguem concluir uma única tarefa mais ou menos difícil e complexa — simplesmente porque a ansiedade não nos deixa.',
+          'O número de pessoas que se esquecem de eventos importantes com outras pessoas importantes, que prometem fazer mais do que podem aguentar, que ficam pensando "naquilo que eu deveria verificar, mas não tenho certeza do que" em vez de fazer finalizar as tarefas vai subir muito em breve. Você também pode se encontrar entre as máquinas biológicas irracionais que só executam tarefas simples e mal pagas se você não agir.',
+        ],
+        contact: [
+          'Ainda tem perguntas? Entre em contato comigo diretamente em',
+          '. Muito Obrigado.',
+        ],
+        solution: [
+          'Mas você tem a solução',
+          'Depois de me familiarizar com os livros sobre ciência cognitiva, como "Eat That Frog", "Willpower", "Atomic Habits" e "Getting Things Done", desenvolvi um sistema que aumentou minha produtividade em 10 vezes. Agora, consigo concluir 10 vezes mais tarefas, o que leva a 10 vezes mais projetos lançados com este sistema simples. Estou compartilhando esta solução com você para melhorar o ambiente em que vivo. Se as pessoas ao meu redor prosperarem — minha felicidade pessoal também aumentará.',
+          'Todorant é uma lista simples de tarefas comuns com uma única pegada. Todas as ações e recursos foram cuidadosamente ponderados e testados usando a psicologia cognitiva. Eu usei as décadas de estudos e as agrupei em uma única ferramenta simples e milagrosa de produtividade. Todorant "engana" sua mente para fazer mais ações boas e menos ações ruins. Ele cria hábitos positivos e se livra do mau comportamento. Portanto, pare de escrever suas tarefas sem pensar. Comece a usar um sistema que realmente funciona.',
+        ],
+        consequences: {
+          title: 'Consequências?',
+          points: [
+            'Sua caixa de entrada sempre estará vazia',
+            'Tarefas indesejadas (sapos) serão tratadas',
+            'Nenhum projeto estagnará',
+            'Seu cérebro desejará naturalmente almejar a eficiência',
+            'Você nunca esquecerá nada',
+            'As pessoas vão começar a admirar sua produtividade',
+          ],
+        },
+        deal: [
+          'Qual é o problema?',
+          'Todorant é mais caro que outras soluções de tarefas, sim. O padrão da indústria é de US $ 3/mês, enquanto a Todorant tem 30 dias de avaliação gratuita (sem necessidade de cartão de crédito) e custa US $ 5/mês.\nSim, Todorant tem menos recursos do que seus concorrentes — mas é de propósito.',
+          'Enquanto outros lhe vendem um lugar para dispor todos os seus itens indefinidamente, Todorant vende a metodologia e a ideologia — Todorant vende fazer as coisas, e não despreocupadamente anotá-las. Todorant não é para todos — é criado especificamente para pessoas que desejam libertar suas mentes de questões urgentes e finalmente começar a concluir os projetos. Você pode se familiarizar com a metodologia',
+          'abrindo o livro de regras',
+          'no canto superior direito desta página.',
+        ],
+        personal: [
+          'O que eu faria?',
+          'Eu tentei dezenas de aplicativos de lista de tarefas. Se eu tivesse a chance de experimentar o Todorant antes de implementá-lo — tentaria. É gratuito nos primeiros 30 dias — isto é o suficiente para verificar se o sistema funciona para mim. E, caramba, se funcionar e eu fizer minhas coisas — pagaria qualquer preço para manter o ritmo de produtividade. Não há restrições — basta fazer login e experimentar o Todorant hoje. Você pode encontrar os botões abaixo. Chega de conversa — tempo para impulsionar os níveis de produtividade!',
+        ],
+      },
+      youAreRegistered: '(você já esta registrado)',
+      headline: [
+        'Nunca mais esqueça uma tarefa.',
+        'Sempre faça isso.',
+        'Viva uma vida feliz.',
+        'Desenvolvido por Todorant.',
+      ],
+      signIn: 'Acessar',
+      lastSignIn: '(tudo bem, este é o último botão, faça login)',
+      facebook: 'Conecte-se com Facebook',
+      google: 'Conecte-se com Google',
+      privacy: 'Política de Privacidade',
+      appstores: 'Baixe o aplicativo',
+      feedback: {
+        title: 'O que os usuários dizem?',
+        reviews: [
+          null,
+          null,
+          null,
+          null,
+          null,
+          {
+            text:
+              'Comecei a fazer pelo menos alguma coisa com Todorant, por isso a minha produtividade subiu de 0.',
+          },
+        ],
+      },
+    },
+    menu: {
+      darkMode: {
+        on: 'Modo escuro: ativado',
+        off: 'Modo escuro: desativado',
+      },
+      merge: 'Mesclar contas',
+      logout: 'Sair',
+    },
+    support:
+      'Algo não está claro? Entre em contato comigo em<a target="_blank" href="mailto:n@borodutch.com">n@borodutch.com</a>',
+    errors: {
+      login: {
+        facebook: 'Não foi possível conectar com Facebook',
+        google: 'Não foi possível conectar com Google',
+        telegram: 'Não foi possível conectar com Telegram',
+        apple: 'Não foi possível conectar com Apple',
+      },
+      internal: 'Erro do Servidor Interno',
+      loadTodos: 'Não foi possível buscar as tarefas',
+      todo: {
+        textLenght: 'As tarefas devem ter texto',
+        dateOrMonth: 'Tarefas devem ter data ou mês definidos',
+      },
+      invalidForm: 'Por favor, preencha os campos obrigatórios',
+      report: 'Não foi possível carregar o relatório',
+      addTodoOld: 'Não é possível adicionar tarefas no passado',
+      appleFirefox:
+        'Infelizmente, existe <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1628361"> um bug </a> com o login da Apple no Firefox. Até que seja resolvido, use outros navegadores da Web para fazer login na Apple — e depois mescle com outras contas sociais no Todorant. Desculpe pela inconveniência.',
+    },
+    close: 'Fechar',
+    notFound: 'Página não encontrada',
+    todo: {
+      create: {
+        title: 'Adicionar tarefas',
+        text: 'Texto da tarefa',
+        textHint: 'Você pode adicionar um link para um email ou site',
+        placeholder: 'Tarefa',
+        frog: 'Isto é um sapo!',
+        completed: 'Concluído',
+        date: 'Dia exato',
+        month: 'Ou mês',
+        tooltip:
+          'As tarefas devem sempre ser: praticáveis ("Encontre os melhores voos para o México" vs "Vá para o México"); o mais pequeno e exato possível ("Tire o pó dos monitores" vs "Limpe a casa").',
+        goFirst: 'Adicione no topo',
+        time: 'Tempo exato',
+      },
+      list: {
+        completed: 'Mostrar concluído',
+      },
+      edit: {
+        title: 'Editar',
+      },
+      planning:
+        'Parece que você tem algum planejamento a fazer! Redistribua as tarefas pendentes abaixo para desbloquear a guia "Atual" e continuar sendo produtivo. Felicidades!',
+    },
+    cancel: 'Cancelar',
+    save: 'Salvar',
+    delete: 'Apagar',
+    deleteHeadline: 'Tem certeza de que deseja excluir "{name}"?',
+    current: 'Atual',
+    planning: 'Planejamento',
+    underDevelopment: 'Esta parte está em desenvolvimento',
+    created: 'Criada',
+    breakdownInfo:
+      'Use a função decompor quando a tarefa atual for muito extensa',
+    skipInfo:
+      'Use pular quando não quiser trabalhar na tarefa atual. Você pode pular uma vez por dia, até três vezes por semana. Sapos não podem ser pulados. Uma tarefa pulada duas vezes se torna um sapo.',
+    clear: {
+      congratulations: 'Parabéns!',
+      text:
+        '🥳 Você conseguiu! Todas as tarefas de hoje estão concluídas, vá descansar. Ou talvez dançar um pouco 💃',
+    },
+    empty: {
+      action: 'Ao infinito!',
+      text:
+        'Você não tem tarefas por hoje. Se você quiser trabalhar — adicione uma nova tarefa pra hoje ou pegue tarefas de dias futuros.',
+    },
+    howto: {
+      title: 'Como usar Todorant?',
+      premise:
+        'Abaixo estão os principais princípios que você deve seguir para explorar produtivamente todos os recursos fornecidos pela Todorant. É fácil como 1-2-3... Apenas com mais algumas etapas.',
+      rules: [
+        'Assim que você receber uma tarefa (receber um e-mail, uma chamada telefônica, um texto ou se vir algo de interesse que deve ser colocado na sua lista de tarefas) — crie uma tarefa para ela imediatamente. <b> Não espere </b>, você <b> irá </b> esquecê-lo se não o fizer. Você pode usar <a target="_blank" href="https://tlg.fyi/todorant_bot"> @todorant_bot </a> no Telegram para criar tarefas mais rapidamente.',
+        'Tarefas devem <b> sempre </b> ser praticáveis e o mais explícito possível. Se uma tarefa demorar <b> menos de 2 minutos </b>, faça-a imediatamente e registre-a como concluída.',
+        'Você pode tanto adicionar uma data específica ou selecionar um mês ao criar uma tarefa. Você não pode escolher o mês atual sem selecionar uma data específica. Isso é feito para relaxar sua mente. Se você confia no sistema e coloca tudo o que precisa ser feito na data correta — você o encontrará no momento certo. Uma quantidade enorme de força de vontade é desperdiçada ao ser constantemente estressado com "aquela outra coisa com a qual preciso lidar, mas não tenho muita certeza do que era". Aprenda a confiar e relaxar.',
+        'A primeira coisa que você faz a cada mês é planejar com antecedência. Você pega todas as tarefas atribuídas ao mês atual e as classifica nas datas corretas. Te permite filtrar tarefas desatualizadas e manter sua mente em paz, sabendo exatamente o que você precisa fazer este mês.',
+        'A primeira coisa que você faz pela manhã é planejar o seu dia. Dê uma olhada na sua seção <b> Planejamento </b>. Você pode lidar com tudo? Distribua tarefas que não podem ser tratadas hoje. Redistribua todas as tarefas deixadas por fazer dos dias anteriores.',
+        'A menos que seja uma emergência, <b> não </b> analise a seção de planejamento após concluído o planejamento. Será psicologicamente melhor se você se concentrar apenas em uma tarefa, então fique de olho na seção <b> Atual </b>. Confie no sistema, ele se lembra de tudo. Faça seu trabalho e relaxe sua mente.',
+        'A seção <b>Atual</b> contém apenas uma tarefa na qual você precisa se concentrar — nada mais. Você pode ter mais de uma tarefa por dia, a quantidade de tarefas e a barra de progresso são exibidas para sua conveniência. Você não tem permissão para alternar entre tarefas — você deve lidar com todas as tarefas linearmente, uma por uma.',
+        'Sapos são tipos especiais de tarefas com as quais você geralmente não deseja lidar. Geralmente são as tarefas deixadas para trás por meses e até anos. Todorant garante que você lide com os sapos todos os dias. De manhã, sua reserva de força de vontade é grande o suficiente para lidar com as tarefas mais ultrajantes. E depois que você finalmente lida com um sapo — você recebe felicidade suficiente para sorrir durante todo o dia. Você se sente orgulhoso quando lida com sapos.',
+        'Você tem permissão para pular a tarefa atual — mas tente fazê-lo o mais raramente possível. Você não pode pular um sapo. Se você não conseguir concluir uma tarefa e teve que redistribuí-la duas vezes, ela se tornará um sapo.',
+        'Se a tarefa atual for de nível muito alto, divida-a em uma lista de subtarefas. Assim que você a divide, a tarefa é marcada como concluída.',
+        'Adicione o máximo possível de informações relevantes para a tarefa. Adicione links a e-mails específicos (o Gmail Web permite fazer isso), sites, anotações (como o evernote), documentos (como o dropbox), deixe números de telefone ou adicione as informações necessárias para concluir a tarefa. Todorant não deve ser um ponto de referência para você — em vez disso, ele deve atuar como um catálogo de links para as informações de referência relevantes para todos específicos.',
+        'Sinta-se à vontade para participar do nosso grupo <a target="_blank" href="https://tlg.fyi/todorant_feedback"> </a> no Telegram para compartilhar experiências e truques sobre como ser mais produtivo! Seus comentários sobre o serviço — sugestões, desejos e reclamações — são muito bem-vindos.',
+        'Use o modo de edição (o ícone de "ordenar" na parte superior) na página <b> Planejamento </b> para alterar a ordem das tarefas. Se você deseja atribuir uma tarefa a uma semana específica, atribua-a à segunda-feira e atribua-a novamente durante a fase de planejamento na segunda-feira de manhã.',
+        'Todorant não tem e nunca terá tarefas repetidas — a única coisa que elas causam bem é gerar ansiedade ao pairar sobre você como tarefas inacabadas. Se você precisar concluir tarefas repetidas — adicione todas elas manualmente, seu cérebro agradecerá por tarefas conscientes.',
+        'Todorant não tem o conceito de "Projetos", pois provou ser desmotivador. Algumas das "pastas" nunca se abrem. Os projetos "Atividades Físicas" e "Auto-aperfeiçoamento" mandam alô. Em vez disso, use #hashtags.',
+        'Os sapos sempre aparecerão no topo da lista.',
+        'Todorant não tem notificações sobre as próximas tarefas com a hora exata definida. No entanto, sinta-se à vontade para usar a integração do Google Agenda para que o Google possa incomodá-lo com notificações, nunca o Todorant.',
+      ],
+      bonus: {
+        title: 'Recursos bônus',
+        rules: [
+          'Use Atalhos de teclado quando estiver no desktop! Você pode (a) adicionar, (b) decompor, (c) alternar para atual, (d) marcar como feito e alternar para (p)lanejamento. Para adicionar uma tarefa adicional ao adicionar tarefas, você pode usar Shift + A.',
+        ],
+      },
+    },
+    skipped: 'Pular',
+    merge: {
+      title: 'Mesclar contas',
+      description:
+        'Você pode mesclar várias contas (por exemplo, Facebook, Google, Telegram) aqui. Basta acessar as contas com os botões abaixo e as contas serão mescladas. Cuidado: isto não pode ser desfeito e sua conta receberá todos os itens de todas as outras contas.',
+      done:
+        'Tudo feito! Você pode fazer login através do Google, Facebook e Telegram nesta conta. Não há mais botões para você.',
+      confirm: 'Tem certeza de que deseja mesclar {id} a esta conta?',
+    },
+    subscription: {
+      title: 'Inscrição',
+      statusText: 'Status da inscrição: {status}',
+      earlyAdopter: 'Early adopter 🦄',
+      trial: 'Trial',
+      active: 'Ativo',
+      inactive: 'Inativo',
+      earlyAdopterDescription:
+        '👏👏 — este sou eu aplaudindo vocês; vocês — os loucos que concordaram em experimentar o instrumento para aumentar a produtividade entre os primeiros, o Todorant. Pode-se dizer que você é "um em um milhão", cujo feedback moldou o Todorant desde o início. Você tem todos os direitos para usar o Todorant o quanto desejar — você nunca experimentará nenhum limite, você o conquistou. No entanto, se você notou que o Todorant melhorou drasticamente sua vida — você ainda pode comprar a assinatura, dizendo o melhor tipo de "obrigado". Você nunca perderá o status "Early adopter 🦄" — mas sempre poderá cancelar a assinatura. Muito obrigado por ainda usar o Todorant — e continuarei adicionando novos recursos para melhorar o produto que afeta positivamente todos nós. Boa sorte!',
+      earlyAdopterBonus:
+        '🤗 Santo & *% $! Parece que Todorant ou eu pessoalmente o ajudamos o suficiente para que você tenha adquirido uma assinatura, mesmo que você possa usá-lo gratuitamente para sempre. Estou profundamente emocionado e feliz por tomar uma xícara de café com você ou apenas para conversar um pouco. Sinta-se à vontade para me contactar no Telegram (@borodutch) ou por e-mail — basta clicar no meu nome abaixo. Muito obrigado! É difícil mensurar o quão importante é a sua contribuição!',
+      trialDescription:
+        '💪 Bem-vindo ao Todorant! Você tem 30 dias após o registro para descobrir se o Todorant funciona bem para você. Após 30 dias, você ainda terá acesso às tarefas antigas, mas não poderá adicionar novas. É muito melhor se você comprar uma assinatura antes do final de 30 dias. Acredito que o uso da Todorant trará outro nível na sua produtividade pessoal!',
+      activeDescription:
+        '🎉 Muito obrigado por apoiar a Todorant! Pessoalmente, espero que a Todorant já tenha melhorado sua vida e continue melhorando no futuro! Seu suporte me permite trabalhar diariamente com Todorant e adicionar novos recursos, simplificando o trabalho e liberando seu tempo e recursos cognitivos. Muito obrigado novamente!',
+      inactiveDescription:
+        'Parece que seu período de testes com Todorant chegou ao fim. Este é o momento embaraçoso em que você precisa decidir — se Todorant melhorou sua vida o suficiente para gastar dinheiro com isso — e eu tenho que levá-lo para a decisão certa. Estou no auge da minha satisfação quando sou capaz de agregar valor às pessoas; e se Todorant puder melhorar sua vida, ficarei mais do que agradecido se você comprar a assinatura. São apenas US $ 5 / mês para produtividade ilimitada e mente livre. Cada centavo que ganhar com Todorant será gasto na melhoria do serviço. Ao apoiar a Todorant — você me permite, independente do desenvolvedor, continuar melhorando o produto que nos beneficia todos os dias. Muito obrigado antecipadamente!',
+      signature: 'Nikita Kolmogorov, criadro do Todorant',
+      daysLeft: '(dias restantes: {daysLeft})',
+      '5dollars': '$5/mês',
+      '50dollars': '$50/ano',
+      success: 'Você se inscreveu com sucesso!',
+      payment: {
+        success:
+          '✅ Você está pronto! Desfrute de uma experiência ilimitada com Todorant 💪',
+        failure:
+          '✋ Espere, algo deu errado. Talvez você possa tentar novamente? 😳',
+        back: 'Volte para a produtividade!',
+      },
+      cancel: 'Cancelar assinatura',
+      cancelConfirm: 'Tem certeza de que deseja cancelar sua assinatura?',
+    },
+    moveUp: 'Mover para hoje',
+    settings: {
+      title: 'Definições',
+      showTodayOnAddTodo: 'O padrão é hoje ao criar uma tarefa',
+      firstDayOfWeek: 'Primeiro dia da semana',
+      newTodosGoFirst: 'Novas tarefas são adicionadas no topo da lista',
+      preserveOrderByTime: 'Preservar a hora exata',
+      general: 'Geral',
+      integrations: 'Integrações',
+      connected: 'Conectado',
+      notConnected: 'Não conectado',
+      googleCalendar: 'Google Agenda',
+      disconnectConfirm: 'Tem certeza de que deseja desconectar este serviço?',
+      account: 'Conta',
+    },
+    weekdays: [
+      'Domingo',
+      'Segunda-feira',
+      'Terça-feira',
+      'Quarta-feira',
+      'Quinta-feira',
+      'Sexta-feira',
+      'Sábado',
+    ],
+    introTitle: 'Bem vindo!',
+    introButton: 'Mensagem de introdução',
+    intro1:
+      'Vamos resumir: você quer melhorar sua produtividade. Todorant pode ajudá-lo. Mas Todorant não é outra lista de tarefas — é um sistema que precisa ser seguido, é um estilo de vida, é um hábito.',
+    intro2:
+      'A leitura da seção "Como usar o Todorant" nas configurações ajudará você a tirar o máximo proveito do Todorant, mas isso não é necessário. Todorant o ajudará limitando suas ações — ele treinará seu cérebro para obter satisfação ao concluir as tarefas.',
+    intro3:
+      'Se você tiver dúvidas sobre algo na tela, toque primeiro no botão "i" no canto superior esquerdo da tela. Não sabe o que um botão faz? Toque em "i"!',
+    intro4:
+      'Todorant é gratuito nos primeiros 30 dias e depois custará US $5/mês. A razão pela qual isso pode parecer um pouco caro é que você não está pagando por outro aplicativo, está comprando produtividade — todo um sistema que não faz você afundar em configurações e funções, mas faz você concluir as tarefas! Então, experimente o Todorant por 30 dias gratuitamente e faça o upgrade se você receber mais de US$ 5 em benefícios.',
+    intro5:
+      'Sejam bem-vindos à jornada de produtividade. Que comece a nova era da sua vida!',
+    introBack: 'Vamos lá!',
+    emptyHashtags:
+      'A lista de hashtags está vazia por enquanto. Crie sua primeira tarefa com uma #hashtag para adicionar a primeira hashtag aqui!',
+    refreshRequest:
+      'Existe uma nova versão do Todorant disponível. Atualize a página para novas e brilhantes funcionalidades 🦄',
+    refresh: 'Atualizar',
+    homeShort: {
+      headline: 'Falha nos sistemas de produtividade.',
+      headline2: 'Todorant funciona.',
+      feature1: 'Concentre-se em uma tarefa de cada vez',
+      feature2: 'Sempre adicione uma data ou um mês a uma tarefa',
+      feature3: 'Complete tarefas desagradáveis (sapos) primeiro',
+      feature4: 'Mantenha sua caixa de entrada vazia',
+      differenceTitle: 'Qual é a diferença?',
+      differenceText1:
+        'Todos os outros aplicativos de produtividade se concentram em armazenar, organizar e automatizar infinitas listas de tarefas. Todorant se concentra na única coisa que importa: faz você concluir as tarefas.',
+      differenceText2:
+        'Todorant usa um conjunto cuidadosamente elaborado de limites e elogios para punir o mau comportamento e apoiar os bons hábitos. Afeta a parte primitiva do cérebro, fazendo com que anseie por completar todos, como as pessoas anseiam por açúcar.',
+      differenceText3:
+        'Eu li e experimentei mais de 20 livros e metodologias de produtividade. Quando todos falharam um por um, combinei seus componentes e simplifiquei o resultado. Foi assim que o Todorant foi criado.',
+      dealTitle: 'Qual é o problema?',
+      dealText1:
+        'Todorant é gratuito nos primeiros 30 dias e custa US $ 5/mês. É mais caro que os concorrentes porque funciona.\nSe você não obtiver US$ 5 em produtividade nos primeiros 30 dias da avaliação gratuita, será convidado a não continuar usando o Todorant.',
+      dealText2:
+        'Sem condições ocultas. Você não precisa nos fornecer nenhuma informação como um cartão de crédito antes do término do teste. Você nem precisa de uma conta se instalar os aplicativos móveis!',
+      dealText3:
+        'A única exceção é que, se você se inscrever no iOS, a Apple nos forçará a fazer você se comprometer com uma avaliação gratuita antes de poder usar o aplicativo. A maneira de evitar esse limite é criar uma conta aqui, no site, e depois fazer login no aplicativo iOS.',
+    },
+    googleCalendarDisableSuccess: 'Google Agenda desativado',
+    googleCalendarEnableSuccess: 'Google Agenda ativado',
+  },
   es: {
     breakdown: {
       request:
@@ -1367,7 +1727,7 @@ export const messages = {
     supportAlert: {
       title: 'Soporte',
       text:
-        'Si tienes dudas o sugerencias, siéntete libre de <a href=mailto:todorant@borodutch.com">enviarme un email</a>, <a href="https://t.me/borodutch" target="_blank">contactarme en Telegram</a> o <a href="https://t.me/todorant_feedback" target="_blank">unirte a nuestra comunidad en Telegram</a>.',
+        'Si tienes dudas o sugerencias, siéntete libre de <a href="mailto:todorant@borodutch.com">enviarme un email</a>, <a href="https://t.me/borodutch" target="_blank">contactarme en Telegram</a> o <a href="https://t.me/todorant_feedback" target="_blank">unirte a nuestra comunidad en Telegram</a>.',
     },
     loginMobile: {
       telegram: {
