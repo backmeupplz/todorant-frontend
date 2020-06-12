@@ -231,7 +231,7 @@ export default class TodoForm extends Vue {
       }
       evt.preventDefault()
     }
-    if (evt.keyCode === 65 && evt.ctrlKey) {
+    if (evt.keyCode === 65 && evt.ctrlKey && evt.shiftKey) {
       if (evt.type === 'keydown') {
         ;(this as any).addTodo()
       }

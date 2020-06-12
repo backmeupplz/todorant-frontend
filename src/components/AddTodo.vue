@@ -59,7 +59,7 @@
           v-card-actions
             v-btn(color='blue'
             text @click='addTodo'
-            v-shortkey.once="{ en: ['ctrl', 'a'], ru: ['ctrl', 'ф'] }"
+            v-shortkey.once="{ en: ['ctrl', 'shift', 'a'], ru: ['ctrl', 'shift', 'ф'] }"
             @shortkey='addTodo')
               v-icon add
             v-spacer
