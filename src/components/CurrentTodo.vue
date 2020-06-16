@@ -74,7 +74,7 @@ import * as api from '../utils/api'
 import { serverBus } from '../main'
 import { decrypt } from '../utils/encryption'
 import { i18n } from '../plugins/i18n'
-import { playSound } from "../utils/helper"
+import { playSound } from '../utils/helper'
 @Component({
   components: {
     TodoText,
