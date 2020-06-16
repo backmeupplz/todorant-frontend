@@ -74,7 +74,7 @@ import * as api from '../utils/api'
 import { serverBus } from '../main'
 import { decrypt } from '../utils/encryption'
 import { i18n } from '../plugins/i18n'
-
+import { playSound } from "../utils/helper"
 @Component({
   components: {
     TodoText,
@@ -159,6 +159,7 @@ export default class CurrentTodo extends Vue {
     this.loading = true
     try {
       await api.completeTodo(user, this.todo)
+      await playSound('audio/task_done.mp3')
       this.updateTodo()
       this.tryConfetti()
     } catch (err) {
