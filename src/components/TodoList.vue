@@ -167,6 +167,7 @@ import { debounce } from 'lodash'
 import { v4 as uuid } from 'uuid'
 import { decrypt } from '../utils/encryption'
 import { i18n } from '../plugins/i18n'
+import { playSound, Sounds } from '../utils/helper'
 
 @Component({
   components: {
@@ -516,6 +517,11 @@ export default class TodoList extends Vue {
         await api.undoTodo(user, todo)
       } else {
         await api.completeTodo(user, todo)
+        if (todo.frog) {
+          await playSound(Sounds.frogDone)
+        } else {
+          await playSound(Sounds.taskDone)
+        }
         this.tryConfetti()
       }
       this.loadTodos(false)
