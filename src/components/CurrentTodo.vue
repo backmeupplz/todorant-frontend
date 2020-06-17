@@ -74,7 +74,7 @@ import * as api from '../utils/api'
 import { serverBus } from '../main'
 import { decrypt } from '../utils/encryption'
 import { i18n } from '../plugins/i18n'
-import { playSound } from '../utils/helper'
+import { playSound, Sounds } from '../utils/helper'
 @Component({
   components: {
     TodoText,
@@ -148,6 +148,10 @@ export default class CurrentTodo extends Vue {
     }
   }
 
+  async completeDay() {
+    await playSound(Sounds.dayDone)
+  }
+
   async completeTodo() {
     const user = store.user()
     if (!user) {
@@ -159,7 +163,11 @@ export default class CurrentTodo extends Vue {
     this.loading = true
     try {
       await api.completeTodo(user, this.todo)
-      await playSound('audio/task_done.mp3')
+      if (this.todo.frog) {
+        await playSound(Sounds.frogDone)
+      } else {
+        await playSound(Sounds.taskDone)
+      }
       this.updateTodo()
       this.tryConfetti()
     } catch (err) {
