@@ -148,10 +148,6 @@ export default class CurrentTodo extends Vue {
     }
   }
 
-  async completeDay() {
-    await playSound(Sounds.dayDone)
-  }
-
   async completeTodo() {
     const user = store.user()
     if (!user) {
