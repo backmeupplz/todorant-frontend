@@ -1,5 +1,6 @@
 export async function playSound(audioName: string) {
   const audioFile = new Audio(audioName)
+  audioFile.volume = 0.3
   return audioFile.play()
 }
 

@@ -74,7 +74,8 @@ import * as api from '../utils/api'
 import { serverBus } from '../main'
 import { decrypt } from '../utils/encryption'
 import { i18n } from '../plugins/i18n'
-import { playSound, Sounds } from '../utils/helper'
+import { playSound, Sounds } from '../utils/sounds'
+
 @Component({
   components: {
     TodoText,
@@ -93,7 +94,9 @@ export default class CurrentTodo extends Vue {
 
   get text() {
     if (this.todo?.encrypted) {
-      return decrypt(this.todo?.text, true) || i18n.t('encryption.errorDecrypting')
+      return (
+        decrypt(this.todo?.text, true) || i18n.t('encryption.errorDecrypting')
+      )
     } else {
       return this.todo?.text
     }
