@@ -163,11 +163,13 @@ export default class AddTodo extends Vue {
     let hashtags = [] as string[]
     if (this.todoToBreakdown) {
       const matches = linkify.match(this.todoToBreakdown.text) || []
-      hashtags = matches
-        .map((v) =>
-          /^#[\u0400-\u04FFa-zA-Z_0-9]+$/u.test(v.url) ? v.url : undefined
-        )
-        .filter((v) => !!v) as string[]
+      if (store.userState().settings.duplicateTagInBreakdown) {
+        hashtags = matches
+          .map((v) =>
+            /^#[\u0400-\u04FFa-zA-Z_0-9]+$/u.test(v.url) ? v.url : undefined
+          )
+          .filter((v) => !!v) as string[]
+      }
     }
     if (this.date) {
       this.todos.push({

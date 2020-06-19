@@ -19,6 +19,10 @@
           v-model='preserveOrderByTime'
         )
         v-switch.ma-0.pa-0(
+          :label='$t("settings.duplicateTagInBreakdown")'
+          v-model='duplicateTagInBreakdown'
+        )
+        v-switch.ma-0.pa-0(
           :label='$t("soundEffects")'
           v-model='soundEffects'
         )
@@ -173,6 +177,14 @@ export default class Settings extends Vue {
   }
   set preserveOrderByTime(val: boolean) {
     store.userState().settings.preserveOrderByTime = val
+  }
+
+  get duplicateTagInBreakdown() {
+    return this.$store.state.userState.settings.duplicateTagInBreakdown
+  }
+
+  set duplicateTagInBreakdown(val: boolean) {
+    store.userState().settings.duplicateTagInBreakdown = val
   }
 
   get soundEffects() {
