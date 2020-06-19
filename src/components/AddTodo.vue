@@ -162,7 +162,11 @@ export default class AddTodo extends Vue {
   addTodo() {
     let hashtags = [] as string[]
     if (this.todoToBreakdown) {
-      const matches = linkify.match(this.todoToBreakdown.text) || []
+      let text = this.todoToBreakdown.text
+      if (this.todoToBreakdown.encrypted) {
+        text = decrypt(this.todoToBreakdown.text, true) || ''
+      }
+      const matches = linkify.match(text) || []
       if (store.userState().settings.duplicateTagInBreakdown) {
         hashtags = matches
           .map((v) =>
