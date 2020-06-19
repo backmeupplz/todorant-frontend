@@ -58,6 +58,7 @@ export interface Settings {
   newTodosGoFirst?: boolean
   preserveOrderByTime?: boolean
   googleCalendarCredentials?: GoogleCalendarCredentials
+  duplicateTagInBreakdown?: boolean
 }
 
 export interface UserState {
