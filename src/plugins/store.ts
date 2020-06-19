@@ -22,6 +22,7 @@ export interface State {
   tags: Tag[]
   tagColors: { [index: string]: string }
   password?: String
+  audioEnabled: Boolean
 
   landingABTestGroup: Number
 }
@@ -101,6 +102,7 @@ const storeOptions = {
     tagColors: {},
     password: undefined,
     landingABTestGroup: Math.floor(Math.random() * 2),
+    audioEnabled: true,
   },
   mutations: {
     setUser(state: State, user: User) {
@@ -145,6 +147,9 @@ const storeOptions = {
       state.landingABTestGroup = landingABTestGroup
       setUserProperty('landingABTestGroup', landingABTestGroup)
     },
+    setAudioEnabled(state: State, audioEnabled: boolean) {
+      state.audioEnabled = audioEnabled
+    },
   },
   getters: {
     user: (state: State) => state.user,
@@ -159,6 +164,7 @@ const storeOptions = {
     tagColors: (state: State) => state.tagColors,
     password: (state: State) => state.password,
     landingABTestGroup: (state: State) => state.landingABTestGroup,
+    audioEnabled: (state: State) => state.audioEnabled,
   },
   plugins: [
     createPersistedState({
@@ -169,6 +175,7 @@ const storeOptions = {
         'rulesShown',
         'password',
         'landingABTestGroup',
+        'audioEnabled',
       ],
     }),
   ],
@@ -191,6 +198,7 @@ export const tags = () => getters.tags as Tag[]
 export const tagColors = () => getters.tagColors as { [index: string]: string }
 export const password = () => getters.password as string | undefined
 export const landingABTestGroup = () => getters.landingABTestGroup as number
+export const audioEnabled = () => getters.audioEnabled as boolean
 
 // Mutations
 export const setUser = (user: User) => {
@@ -258,6 +266,9 @@ export const setTagColors = (tagColors: { [index: string]: string }) => {
 }
 export const setPassword = (password: string | undefined) => {
   store.commit('setPassword', password)
+}
+export const setAudioEnabled = (audioEnabled: boolean) => {
+  store.commit('setAudioEnabled', audioEnabled)
 }
 
 setUserProperty('landingABTestGroup', landingABTestGroup())

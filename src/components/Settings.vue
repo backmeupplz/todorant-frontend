@@ -22,6 +22,10 @@
           :label='$t("settings.duplicateTagInBreakdown")'
           v-model='duplicateTagInBreakdown'
         )
+        v-switch.ma-0.pa-0(
+          :label='$t("soundEffects")'
+          v-model='soundEffects'
+        )
         v-divider
         v-select.mt-4(
           :items='weekdays'
@@ -181,6 +185,13 @@ export default class Settings extends Vue {
 
   set duplicateTagInBreakdown(val: boolean) {
     store.userState().settings.duplicateTagInBreakdown = val
+  }
+
+  get soundEffects() {
+    return this.$store.state.audioEnabled
+  }
+  set soundEffects(val: boolean) {
+    store.setAudioEnabled(val)
   }
 
   googleCalendarConnected() {

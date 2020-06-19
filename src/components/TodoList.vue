@@ -167,7 +167,7 @@ import { debounce } from 'lodash'
 import { v4 as uuid } from 'uuid'
 import { decrypt } from '../utils/encryption'
 import { i18n } from '../plugins/i18n'
-import { playSound, Sounds } from '../utils/helper'
+import { playSound, Sounds } from '../utils/sounds'
 
 @Component({
   components: {
