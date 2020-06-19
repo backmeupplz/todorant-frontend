@@ -18,6 +18,10 @@
           :label='$t("settings.preserveOrderByTime")'
           v-model='preserveOrderByTime'
         )
+        v-switch.ma-0.pa-0(
+          :label='$t("settings.duplicateTagInBreakdown")'
+          v-model='duplicateTagInBreakdown'
+        )
         v-divider
         v-select.mt-4(
           :items='weekdays'
@@ -169,6 +173,14 @@ export default class Settings extends Vue {
   }
   set preserveOrderByTime(val: boolean) {
     store.userState().settings.preserveOrderByTime = val
+  }
+
+  get duplicateTagInBreakdown() {
+    return this.$store.state.userState.settings.duplicateTagInBreakdown
+  }
+
+  set duplicateTagInBreakdown(val: boolean) {
+    store.userState().settings.duplicateTagInBreakdown = val
   }
 
   googleCalendarConnected() {
