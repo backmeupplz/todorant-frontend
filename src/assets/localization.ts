@@ -365,6 +365,7 @@ export const messages = {
     intro5:
       'Я приветствую вас на вашем пути продуктивности, да начнется же новая эра вашей жизни!',
     introBack: 'Поехали!',
+    soundEffects: 'Звуковые эффекты',
     emptyHashtags:
       'Список хештегов пока что пуст. Добавьте свою первую задачу с #хештегом, чтобы добавить сюда первую позицию!',
     refreshRequest:
@@ -771,6 +772,7 @@ export const messages = {
     intro5:
       'I welcome you to the productivity journey, let the new era of your life begin!',
     introBack: "Let's go!",
+    soundEffects: 'Sound effects',
     emptyHashtags:
       'Hashtag list is empty for now. Create your first task with a #hashtag to add the first hashtag here!',
     refreshRequest:
@@ -1170,6 +1172,7 @@ export const messages = {
     intro5:
       'Я вітаю вас на вашому шляху продуктивності, так почнеться ж нова ера вашому житті!',
     introBack: 'Ходімо!',
+    soundEffects: 'Звукові ефекти',
     emptyHashtags:
       'Список хештегів поки що порожній. Додайте свою першу задачу з #хештегом, щоб додати сюди першу позицію!',
     refreshRequest:
@@ -1324,6 +1327,7 @@ export const messages = {
     intro5:
       'Vi do il benvenuto nel viaggio della produttività, che la nuova era della vostra vita abbia inizio!',
     introBack: 'Andiamo!',
+    soundEffects: 'Effetti sonori',
     emptyHashtags:
       "L'elenco degli hashtag è vuoto per ora. Create il vostro primo compito con un #hashtag per aggiungere il primo hashtag qui!",
     refreshRequest:
@@ -1684,6 +1688,7 @@ export const messages = {
     intro5:
       'Sejam bem-vindos à jornada de produtividade. Que comece a nova era da sua vida!',
     introBack: 'Vamos lá!',
+    soundEffects: 'Efeitos sonoros',
     emptyHashtags:
       'A lista de hashtags está vazia por enquanto. Crie sua primeira tarefa com uma #hashtag para adicionar a primeira hashtag aqui!',
     refreshRequest:

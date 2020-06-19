@@ -18,6 +18,10 @@
           :label='$t("settings.preserveOrderByTime")'
           v-model='preserveOrderByTime'
         )
+        v-switch.ma-0.pa-0(
+          :label='$t("soundEffects")'
+          v-model='soundEffects'
+        )
         v-divider
         v-select.mt-4(
           :items='weekdays'
@@ -169,6 +173,13 @@ export default class Settings extends Vue {
   }
   set preserveOrderByTime(val: boolean) {
     store.userState().settings.preserveOrderByTime = val
+  }
+
+  get soundEffects() {
+    return this.$store.state.audioEnabled
+  }
+  set soundEffects(val: boolean) {
+    store.setAudioEnabled(val)
   }
 
   googleCalendarConnected() {

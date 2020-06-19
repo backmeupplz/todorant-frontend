@@ -1,4 +1,9 @@
+import * as store from '../plugins/store'
+
 export async function playSound(audioName: string) {
+  if (!store.audioEnabled()) {
+    return
+  }
   const audioFile = new Audio(audioName)
   audioFile.volume = 0.3
   return audioFile.play()
