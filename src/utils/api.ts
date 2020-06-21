@@ -223,9 +223,10 @@ export async function getCurrentTodo(user: User) {
 }
 
 export async function getTodosForExport(user: User) {
-  return await axios.get(`${base}/data`, {
+  const response = await axios.get(`${base}/data`, {
     headers: getHeaders(user),
   })
+  return response.data
 }
 
 export async function rearrangeTodos(user: User, todos: TodoSection[]) {

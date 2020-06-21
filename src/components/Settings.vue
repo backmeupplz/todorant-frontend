@@ -122,9 +122,9 @@ import * as api from '../utils/api'
 import { serverBus } from '../main'
 import { i18n } from '../plugins/i18n'
 import { getTodos, getTodosForExport } from '../utils/api'
-import { downloadBlob } from '../utils/download'
 import axios from 'axios'
 import { User } from '../models/user'
+import { saveAs } from 'file-saver'
 
 @Component({
   props: {
@@ -273,11 +273,9 @@ export default class Settings extends Vue {
     if (!user) {
       return
     }
-    const fileData = await getTodosForExport(user)
-    if (!fileData) {
-      return
-    }
-    downloadBlob(fileData.data, 'todo.txt')
+    const file: string = await getTodosForExport(user)
+    const blob = new Blob([file])
+    saveAs(blob, 'todo.txt')
   }
 }
 </script>
