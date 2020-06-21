@@ -63,6 +63,7 @@
           ) {{identifier}}
           v-btn(
             text
+            :loading='loading'
             @click='saveExportedTodos'
             color='blue'
           ) {{$t('settings.export')}}
@@ -273,9 +274,16 @@ export default class Settings extends Vue {
     if (!user) {
       return
     }
-    const file: string = await getTodosForExport(user)
-    const blob = new Blob([file])
-    saveAs(blob, 'todo.txt')
+    this.loading = true
+    try {
+      const file: string = await getTodosForExport(user)
+      const blob = new Blob([file])
+      saveAs(blob, 'todo.txt')
+    } catch (err) {
+      store.setSnackbarError(err.response ? err.response.data : err.message)
+    } finally {
+      this.loading = false
+    }
   }
 }
 </script>
