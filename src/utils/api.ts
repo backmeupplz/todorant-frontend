@@ -223,15 +223,10 @@ export async function getCurrentTodo(user: User) {
   return data
 }
 
-export async function exportTodos(user: User) {
-  return await axios.get(`${base}/data/`, {
+export async function getTodosForExport(user: User) {
+  return await axios.get(`${base}/data`, {
     headers: getHeaders(user),
   })
-}
-
-export async function generateTodosBlob(todos: BlobPart) {
-  const data = new Blob([todos])
-  saveAs(data, 'text.txt')
 }
 
 export async function rearrangeTodos(user: User, todos: TodoSection[]) {

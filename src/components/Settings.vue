@@ -65,7 +65,7 @@
             text
             @click='saveExportedTodos'
             color='blue'
-          ) {{$t('Экспорт туду')}}
+          ) {{$t('settings.export')}}
       v-card-actions.d-flex.flex-column(
         v-if='this.$vuetify.breakpoint.xsOnly'
       )
@@ -121,8 +121,8 @@ import * as store from '../plugins/store'
 import * as api from '../utils/api'
 import { serverBus } from '../main'
 import { i18n } from '../plugins/i18n'
-import { getTodos } from '../utils/api'
-import { exportTodos, generateTodosBlob } from '../utils/api'
+import { getTodos, getTodosForExport } from '../utils/api'
+import { downloadBlob } from '../utils/download'
 import axios from 'axios'
 import { User } from '../models/user'
 
@@ -270,18 +270,14 @@ export default class Settings extends Vue {
 
   async saveExportedTodos() {
     const user = store.user()
-
     if (!user) {
       return
     }
-
-    const fileData = await exportTodos(user)
-
+    const fileData = await getTodosForExport(user)
     if (!fileData) {
       return
     }
-
-    const downloadData = await generateTodosBlob(fileData.data)
+    downloadBlob(fileData.data, 'todo.txt')
   }
 }
 </script>
