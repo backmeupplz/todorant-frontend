@@ -63,7 +63,7 @@
           ) {{identifier}}
           v-btn(
             text
-            @click='exportTodo'
+            @click='saveExportedTodos'
             color='blue'
           ) {{$t('Экспорт туду')}}
       v-card-actions.d-flex.flex-column(
@@ -122,6 +122,9 @@ import * as api from '../utils/api'
 import { serverBus } from '../main'
 import { i18n } from '../plugins/i18n'
 import { getTodos } from '../utils/api'
+import { exportTodos, generateTodosBlob } from '../utils/api'
+import axios from 'axios'
+import { User } from '../models/user'
 
 @Component({
   props: {
@@ -265,55 +268,20 @@ export default class Settings extends Vue {
     this.$props.close()
   }
 
-  async exportTodo() {
+  async saveExportedTodos() {
     const user = store.user()
-    const allTodos = [
-      ...(await getTodos(user!, true, 0, 10000)),
-      ...(await getTodos(user!, false, 0, 100000)),
-    ]
 
-    for (let todo of allTodos) {
-      const date = 'due:2020-04'
-      let priority = String.fromCharCode(65 + todo.order)
-      let frog: string = ''
-      let hashtagsArray: string[] = []
-      let textArray: string[] = []
-
-      if (todo.frog) {
-        frog = `@frog`
-        priority = 'A'
-      }
-
-      if (todo.text.includes('#')) {
-        const words = todo.text.split(' ')
-        words.forEach((word) => {
-          if (word.match(/^#[\u0400-\u04FFa-zA-Z_0-9]+$/)) {
-            word = word.replace('#', '')
-            hashtagsArray.push(`+${word}`)
-          } else {
-            textArray.push(word)
-          }
-        })
-      } else {
-        textArray.push(todo.text)
-      }
-
-      const hashtagsString = hashtagsArray.join(' ') || ''
-      const textString = textArray.join(' ') || ''
-
-      if (!textString) {
-        continue
-      }
-
-      if (todo.completed) {
-        let done = 'x'
-        console.log(`${done} ${textString} ${hashtagsString}${frog} ${date}`)
-      } else {
-        console.log(
-          `(${priority}) ${textString} ${hashtagsString}${frog} ${date}`
-        )
-      }
+    if (!user) {
+      return
     }
+
+    const fileData = await exportTodos(user)
+
+    if (!fileData) {
+      return
+    }
+
+    const downloadData = await generateTodosBlob(fileData.data)
   }
 }
 </script>

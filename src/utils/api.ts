@@ -7,6 +7,7 @@ import { Todo } from '../models/todo'
 import { Tag } from '../models/tag'
 import * as store from '../plugins/store'
 import { TodoSection } from '../models/TodoSection'
+import { saveAs } from 'file-saver'
 
 const base = process.env.VUE_APP_API
 
@@ -220,6 +221,17 @@ export async function getCurrentTodo(user: User) {
   store.setUserState(data.state)
   setTags(data.tags)
   return data
+}
+
+export async function exportTodos(user: User) {
+  return await axios.get(`${base}/data/`, {
+    headers: getHeaders(user),
+  })
+}
+
+export async function generateTodosBlob(todos: BlobPart) {
+  const data = new Blob([todos])
+  saveAs(data, 'text.txt')
 }
 
 export async function rearrangeTodos(user: User, todos: TodoSection[]) {
