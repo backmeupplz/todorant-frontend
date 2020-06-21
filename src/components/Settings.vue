@@ -61,6 +61,12 @@
           span(
             v-for='identifier in identifiers'
           ) {{identifier}}
+          v-btn(
+            text
+            :loading='loading'
+            @click='saveExportedTodos'
+            color='blue'
+          ) {{$t('settings.export')}}
       v-card-actions.d-flex.flex-column(
         v-if='this.$vuetify.breakpoint.xsOnly'
       )
@@ -116,6 +122,10 @@ import * as store from '../plugins/store'
 import * as api from '../utils/api'
 import { serverBus } from '../main'
 import { i18n } from '../plugins/i18n'
+import { getTodos, getTodosForExport } from '../utils/api'
+import axios from 'axios'
+import { User } from '../models/user'
+import { saveAs } from 'file-saver'
 
 @Component({
   props: {
@@ -257,6 +267,23 @@ export default class Settings extends Vue {
   encryptionTouched() {
     this.$props.openEncryption()
     this.$props.close()
+  }
+
+  async saveExportedTodos() {
+    const user = store.user()
+    if (!user) {
+      return
+    }
+    this.loading = true
+    try {
+      const file = await getTodosForExport(user)
+      const blob = new Blob([file])
+      saveAs(blob, 'todo.txt')
+    } catch (err) {
+      store.setSnackbarError(err.response ? err.response.data : err.message)
+    } finally {
+      this.loading = false
+    }
   }
 }
 </script>

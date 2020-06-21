@@ -222,6 +222,13 @@ export async function getCurrentTodo(user: User) {
   return data
 }
 
+export async function getTodosForExport(user: User) {
+  const response = await axios.get(`${base}/data`, {
+    headers: getHeaders(user),
+  })
+  return response.data as string
+}
+
 export async function rearrangeTodos(user: User, todos: TodoSection[]) {
   return axios.post(
     `${base}/todo/rearrange`,
