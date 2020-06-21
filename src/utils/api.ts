@@ -7,7 +7,6 @@ import { Todo } from '../models/todo'
 import { Tag } from '../models/tag'
 import * as store from '../plugins/store'
 import { TodoSection } from '../models/TodoSection'
-import { saveAs } from 'file-saver'
 
 const base = process.env.VUE_APP_API
 
