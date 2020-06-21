@@ -276,7 +276,7 @@ export default class Settings extends Vue {
     }
     this.loading = true
     try {
-      const file: string = await getTodosForExport(user)
+      const file = await getTodosForExport(user)
       const blob = new Blob([file])
       saveAs(blob, 'todo.txt')
     } catch (err) {

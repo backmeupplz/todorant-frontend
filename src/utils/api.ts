@@ -226,7 +226,7 @@ export async function getTodosForExport(user: User) {
   const response = await axios.get(`${base}/data`, {
     headers: getHeaders(user),
   })
-  return response.data
+  return response.data as string
 }
 
 export async function rearrangeTodos(user: User, todos: TodoSection[]) {
