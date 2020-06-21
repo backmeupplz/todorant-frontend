@@ -61,21 +61,22 @@
           span(
             v-for='identifier in identifiers'
           ) {{identifier}}
+        v-divider.my-2
+        .d-flex.flex-column.align-start
           v-btn(
             text
             :loading='loading'
             @click='saveExportedTodos'
             color='blue'
           ) {{$t('settings.export')}}
+          v-btn(
+            color='blue'
+            text
+            @click='encryptionTouched'
+          ) {{$t('encryption.title')}}
       v-card-actions.d-flex.flex-column(
         v-if='this.$vuetify.breakpoint.xsOnly'
       )
-        v-btn(
-          color='blue'
-          text
-          @click='encryptionTouched'
-        ) {{$t('encryption.title')}}
-        v-spacer
         v-btn(
           color='error'
           text 
@@ -92,11 +93,6 @@
           :loading='loading'
         ) {{$t('save')}}
       v-card-actions(v-else)
-        v-btn(
-          color='blue'
-          text
-          @click='encryptionTouched'
-        ) {{$t('encryption.title')}}
         v-spacer
         v-btn(
           color='error'
