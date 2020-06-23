@@ -318,7 +318,10 @@ export default class TodoList extends Vue {
     const currentWeek = this.weekForDate(thisMonth)
     const numberOfEvents = this.numberOfEventsPerWeek[currentWeek + i] || 1
     const sizeOfPosition = 1.5
-    return `${sizeOfPosition * (numberOfEvents + 1)}rem`
+    const borderHeight = 0.4 * (numberOfEvents + 1)
+    return `calc(${
+      sizeOfPosition * (numberOfEvents + 1)
+    }rem + ${borderHeight}px)`
   }
 
   weekdayFromTitle(title: string) {
