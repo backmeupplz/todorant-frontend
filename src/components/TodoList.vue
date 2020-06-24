@@ -1,52 +1,131 @@
 <template lang="pug">
   v-container(style='maxWidth: 1000px;')
     v-list(subheader)
-      v-list-item(v-if='$store.state.userState.planning').pt-4
+      v-list-item.pt-4(
+        v-if='$store.state.userState.planning'
+      )
         v-flex
-          v-alert(text color='info' icon='info') {{$t('todo.planning')}}
-      v-list-item.d-flex.align-center(:style='stickyHeaderStyle')
-        v-switch.ma-0.pa-0(v-if='!calendarViewEnabled && !search && !hash'
-        hide-details v-model='showCompleted'
-        :label='$t("todo.list.completed")'
-        :loading='todosUpdating'
-        :disabled='editable')
-        v-text-field.pt-2.mr-4(v-if='search'
-        v-model='queryString'
-        :label='$t("search")'
-        clearable
-        dense)
+          v-alert(
+            text
+            color='info'
+            icon='info'
+          ) {{$t('todo.planning')}}
+      v-list-item.d-flex.align-center(
+        :style='stickyHeaderStyle'
+      )
+        v-switch.ma-0.pa-0(
+          v-if='!calendarViewEnabled && !search && !hash'
+          hide-details v-model='showCompleted'
+          :label='$t("todo.list.completed")'
+          :loading='todosUpdating'
+          :disabled='editable'
+        )
+        v-text-field.pt-2.mr-4(
+          v-if='search'
+          v-model='queryString'
+          :label='$t("search")'
+          clearable
+          dense
+        )
         div(v-if='!!hash')
-          v-btn.mr-2(:loading='todosUpdating || loading'
-          @click='goHome'
-          small
-          icon)
+          v-btn.mr-2(
+            :loading='todosUpdating || loading'
+            @click='goHome'
+            small
+            icon
+          )
             v-icon(small) clear
           span {{hash}}
         v-spacer(v-if='!search')
-        v-btn(v-if='!editable && !showCompleted && !search'
-        icon
-        @click='toggleCalendar'
-        :color='calendarViewEnabled ? "blue" : ""'
-        :loading='todosUpdating || loading')
+        v-btn(
+          v-if='!editable && !showCompleted && !search && !spreadEnabled'
+          icon
+          @click='toggleCalendar'
+          :color='calendarViewEnabled ? "blue" : ""'
+          :loading='todosUpdating || loading'
+        )
           v-icon calendar_today
-        v-btn(v-if='!editable && !showCompleted' icon :loading='todosUpdating' @click='editable = true')
+        v-tooltip(
+          bottom
+          :max-width='300'
+          v-if='calendarViewEnabled && !editable && !spreadEnabled'
+        )
+          template(v-slot:activator='{ on }')
+            v-btn(
+              @click='spreadEnabled = true'
+              icon
+              :loading='todosUpdating || loading'
+            )
+              v-icon(v-on='on') call_split
+          span {{$t('spread.hint')}}
+        v-btn(
+          v-if='!editable && !showCompleted && !spreadEnabled'
+          icon
+          :loading='todosUpdating'
+          @click='editable = true'
+        )
           v-icon format_list_numbered
-        v-btn(v-if='!!editable' icon :loading='todosUpdating || loading' @click='editable = false')
+        v-btn(
+          v-if='!!editable || !!spreadEnabled'
+          icon
+          :loading='todosUpdating || loading'
+          @click='crossPressed'
+        )
           v-icon clear
-        v-btn(v-if='!!editable' icon :loading='todosUpdating || loading' @click='doneEditing' color='green')
+        v-btn(
+          v-if='!!editable || !!spreadEnabled'
+          icon
+          :loading='todosUpdating || loading'
+          @click='donePressed'
+          color='green'
+        )
           v-icon done
-        v-btn(v-if='!editable && !showCompleted && !calendarViewEnabled'
-        icon
-        :loading='todosUpdating || loading'
-        @click='searchTouched'
-        :color='search ? "blue" : ""')
+        v-btn(
+          v-if='!editable && !showCompleted && !calendarViewEnabled'
+          icon
+          :loading='todosUpdating || loading'
+          @click='searchTouched'
+          :color='search ? "blue" : ""'
+        )
           v-icon search
-        v-btn(icon :loading='todosUpdating' @click='loadTodos')
+        v-btn(
+          icon
+          :loading='todosUpdating'
+          @click='loadTodos'
+        )
           v-icon refresh
-      v-list-item(v-if='calendarViewEnabled && todosUpdating' flex)
+      v-list-item(
+        v-if='calendarViewEnabled && todosUpdating'
+        flex
+      )
         v-progress-linear(:indeterminate='true')
       // Content
-      v-list-item(v-if='calendarViewEnabled' flex :class='editable ? "editable" : "non-editable"')
+      // Spread
+      v-list-item.my-2(v-if='spreadEnabled')
+        .d-flex.direction-row.align-center.flex-wrap
+          span.mx-1 {{$t('spread.spreading')}}
+          v-chip.mx-1(
+            v-if='!spreadTasks.length'
+          ) {{$t('spread.chooseTasks')}}
+          v-chip.mx-1.my-1(
+            v-else
+            v-for='task in spreadTasks'
+            :key='task._id'
+            close
+            @click:close="removeSpreadTask(task)"
+          ) {{text(task, true)}}
+          span.mx-1 {{$t('spread.between')}}
+          v-chip.mx-1(
+            v-if='!spreadDates.length'
+          ) {{$t('spread.chooseDates')}}
+          v-chip.mx-1.my-1(
+            v-else
+            v-for='(date, i) in spreadDates'
+            :key='i'
+            close
+            @click:close="removeSpreadDate(date)"
+          ) {{date}}
+      v-list-item(v-if='calendarViewEnabled' flex :class='calendarClass')
         calendar-view(
           :items='events'
           :locale='locale'
@@ -55,35 +134,54 @@
           :class='$store.state.dark ? "dark" : "light"'
           :enableDragDrop='editable'
           @click-item="editEvent"
+          @click-date="clickDate"
           @drop-on-date='moveDate'
           :weekStyles='weekStyles'
         )
           calendar-view-header(
-            v-if='!editable'
+            v-if='!editable && !spreadEnabled'
             slot="header"
             slot-scope="{ headerProps }"
             :header-props="headerProps"
             @input='(date) => currentPeriod = date'
           )
-      v-expansion-panels(v-else flat multiple v-model='panels')
-        v-expansion-panel.my-0.py-0(v-for='(todoSection, i) in todos' :key='i')
-          v-expansion-panel-header.py-0.px-6(v-observe-visibility='(isVisible, entry) => headerVisibilityChanged(isVisible, entry, i)')
+      v-expansion-panels(
+        v-else
+        flat
+        multiple
+        v-model='panels'
+      )
+        v-expansion-panel.my-0.py-0(
+          v-for='(todoSection, i) in todos'
+          :key='i'
+        )
+          v-expansion-panel-header.py-0.px-6(
+            v-observe-visibility='(isVisible, entry) => headerVisibilityChanged(isVisible, entry, i)'
+          )
             v-subheader.pa-0
-              v-tooltip(right :max-width='300' v-if='todoSection.title.length === 10')
+              v-tooltip(
+                right
+                :max-width='300'
+                v-if='todoSection.title.length === 10'
+              )
                 template(v-slot:activator='{ on }')
                   span(v-on='on') {{todoSection.title}}{{!panels.includes(i) ? ` (${todoSection.todos.length})` : ''}}
                 span {{$t(weekdayFromTitle(todoSection.title))}}{{!panels.includes(i) ? ` (${todoSection.todos.length})` : ''}}
               span(v-else) {{todoSection.title}}
           v-expansion-panel-content
-            draggable(v-model='todoSection.todos'
-            group='todo'
-            @start='drag=true'
-            @end='drag=false'
-            v-bind="dragOptions"
-            handle='.handle')
-              v-list-item(v-for='(todo, j) in todoSection.todos'
-              :key='j'
-              v-observe-visibility='(isVisible, entry) => visibilityChanged(isVisible, entry, i, j)').pa-0
+            draggable(
+              v-model='todoSection.todos'
+              group='todo'
+              @start='drag=true'
+              @end='drag=false'
+              v-bind="dragOptions"
+              handle='.handle'
+            )
+              v-list-item.pa-0(
+                v-for='(todo, j) in todoSection.todos'
+                :key='j'
+                v-observe-visibility='(isVisible, entry) => visibilityChanged(isVisible, entry, i, j)'
+              )
                 v-list-item-content
                   v-card(:class='cardClass(todo)')
                     v-card-text(:class='!editable ? "px-3 pt-2 pb-0 ma-0" : ""')
@@ -205,11 +303,31 @@ export default class TodoList extends Vue {
     this.collapsedPanels = result
   }
 
+  get calendarClass() {
+    let classString = ''
+    if (this.editable) {
+      classString = `${classString} editable`
+    } else {
+      classString = `${classString} non-editable`
+    }
+    if (this.spreadEnabled) {
+      classString = `${classString} spreadable`
+    }
+    return classString
+  }
+
   get events() {
+    let spreadEvents = [] as string[]
+    if (this.spreadEnabled) {
+      spreadEvents = this.spreadTasks.map((t) => t._id)
+    }
     return this.todos
       .map((section) => {
         return section.todos
           .filter((todo) => !!todo.date)
+          .filter(
+            (todo) => !this.spreadEnabled || !spreadEvents.includes(todo._id)
+          )
           .map((todo) => ({
             id: todo._id,
             title: this.text(todo),
@@ -463,7 +581,13 @@ export default class TodoList extends Vue {
     )
     for (const todo of flatTodos) {
       if (todo._id === event.id) {
-        this.editTodo(todo)
+        if (this.spreadEnabled) {
+          if (!this.spreadTasks.map((t) => t._id).includes(todo._id)) {
+            this.spreadTasks.push(todo)
+          }
+        } else {
+          this.editTodo(todo)
+        }
         return
       }
     }
@@ -721,12 +845,19 @@ export default class TodoList extends Vue {
     }
   }
 
-  text(todo: Todo) {
+  text(todo: Todo, short = false) {
+    let text = ''
     if (todo.encrypted) {
-      return decrypt(todo.text, true) || i18n.t('encryption.errorDecrypting')
+      text =
+        decrypt(todo.text, true) ||
+        (i18n.t('encryption.errorDecrypting') as string)
     } else {
-      return todo.text
+      text = todo.text
     }
+    if (short && text && text.length > 15) {
+      text = `${text.substr(0, 15)}...`
+    }
+    return text
   }
 
   errorDecrypting(todo: Todo) {
@@ -747,6 +878,103 @@ export default class TodoList extends Vue {
     const week = date.week()
     moment.locale(locale)
     return week
+  }
+
+  spreadEnabled = false
+  spreadTasks = [] as Todo[]
+  spreadDates = [] as string[]
+
+  crossPressed() {
+    if (this.editable) {
+      this.editable = false
+    } else {
+      this.spreadEnabled = false
+      this.spreadTasks = []
+      this.spreadDates = []
+    }
+  }
+
+  async donePressed() {
+    if (this.editable) {
+      this.doneEditing()
+    } else {
+      const user = store.user()
+      if (!user) {
+        return
+      }
+      this.loading = true
+
+      const spreadTodos = {} as { [index: string]: Todo[] }
+      for (const title of this.spreadDates) {
+        spreadTodos[title] = []
+      }
+      let i = 0
+      for (const todo of this.spreadTasks) {
+        spreadTodos[this.spreadDates[i]].push(todo)
+
+        i++
+        if (i >= this.spreadDates.length) {
+          i = 0
+        }
+      }
+
+      const allMovedTodosIds = this.spreadTasks.map((t) => t._id)
+
+      try {
+        for (const section of this.todos) {
+          // Remove moved todos
+          section.todos = section.todos.filter(
+            (t) => !allMovedTodosIds.includes(t._id)
+          )
+          // Re-add mobed todos
+          if (spreadTodos[section.title]) {
+            section.todos = section.todos.concat(spreadTodos[section.title])
+          }
+        }
+        // Account for the unexisting todo sections
+        const titles = this.todos.map((s) => s.title)
+        for (const title in spreadTodos) {
+          if (!titles.includes(title)) {
+            this.todos.push({
+              title,
+              todos: spreadTodos[title],
+            })
+          }
+        }
+        // Save
+        await api.rearrangeTodos(user, this.todos)
+        await this.loadTodos(false)
+      } catch (err) {
+        store.setSnackbarError(err.response ? err.response.data : err.message)
+      } finally {
+        this.loading = false
+        this.spreadEnabled = false
+        this.spreadTasks = []
+        this.spreadDates = []
+      }
+    }
+  }
+
+  removeSpreadTask(task: Todo) {
+    this.spreadTasks = this.spreadTasks.filter((t) => t._id !== task._id)
+  }
+
+  removeSpreadDate(date: string) {
+    this.spreadDates = this.spreadDates.filter((d) => d !== date)
+  }
+
+  clickDate(day: Date) {
+    if (!this.spreadDates) {
+      return
+    }
+    const today = api.getToday()
+    const dateString = api.getStringFromDate(day)
+    if (isDateTooOld(dateString, today)) {
+      return
+    }
+    if (!this.spreadDates.includes(dateString)) {
+      this.spreadDates.push(dateString)
+    }
   }
 }
 </script>
@@ -841,6 +1069,10 @@ export default class TodoList extends Vue {
 
 .editable .cv-item {
   cursor: move;
+}
+
+.spreadable .cv-day {
+  cursor: pointer;
 }
 
 #confetti-canvas {

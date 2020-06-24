@@ -1,4 +1,3 @@
-import { password } from './../plugins/store'
 // Dependencies
 import { GoogleCalendarCredentials } from './../plugins/store'
 import axios from 'axios'
@@ -196,7 +195,6 @@ export async function getTodos(
       },
     })
   ).data as { todos: Todo[]; state: store.UserState; tags: Tag[] }
-  console.log(data.tags.map((t) => `${t.tag} ${t.numberOfUses}`))
   store.setUserState(data.state)
   setTags(data.tags)
   return data.todos
@@ -359,7 +357,7 @@ export function getToday() {
   return getStringFromDate(new Date())
 }
 
-function getStringFromDate(date: Date) {
+export function getStringFromDate(date: Date) {
   return `${date.getFullYear()}-${
     date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
   }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`

@@ -1,5 +1,13 @@
 export const messages = {
   ru: {
+    spread: {
+      hint:
+        'Выберите задачи для распределения, выберите дни для распределения, нажмите на кнопку, и выбранные задачи распределятся ровным слоем по выбранным датам',
+      spreading: 'Распределяем',
+      chooseTasks: 'Нажмите на задачи для распределения',
+      between: 'между',
+      chooseDates: 'Нажмите на даты для распределения',
+    },
     encryption: {
       title: 'Шифрование',
       info:
@@ -399,6 +407,14 @@ export const messages = {
     googleCalendarEnableSuccess: 'Гугл Календарь успешно подключен',
   },
   en: {
+    spread: {
+      hint:
+        'Choose tasks to spread, choose dates to spread over, press a button and see how selected tasks spread evenly between the selected dates',
+      spreading: 'Spreading',
+      chooseTasks: 'Click on the tasks to spread',
+      between: 'between',
+      chooseDates: 'Click on the dates to spread over',
+    },
     encryption: {
       title: 'Encryption',
       info:
