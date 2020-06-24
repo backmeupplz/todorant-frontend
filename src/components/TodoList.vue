@@ -235,9 +235,11 @@
                       v-if='!editable')
                         v-icon(small) {{todo.completed ? 'repeat' : 'done'}}
       v-progress-linear(v-if='todosUpdating && !calendarViewEnabled' :indeterminate='true')
-    EditTodo(:todo='todoEdited'
-    :cleanTodo='cleanTodo'
-    :requestDelete='requestDelete')
+    EditTodo(
+      :todo='todoEdited'
+      :cleanTodo='cleanTodo'
+      :requestDelete='requestDelete'
+    )
     DeleteTodo(:todo='todoDeleted')
 </template>
 
