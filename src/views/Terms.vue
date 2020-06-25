@@ -27,6 +27,9 @@
     h2 8. Governing Law
     p
       | Any claim related to Todorant's Website shall be governed by the laws of ca without regards to its conflict of law provisions.
+    h2 9. Encryption
+    p
+      | In case if the user enables encryption, there is no way to decrypt the data without the password specified by the user.
     router-link(to='/') Back to main page
 </template>
 
