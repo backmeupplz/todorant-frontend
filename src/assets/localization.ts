@@ -1,13 +1,5 @@
 export const messages = {
   ru: {
-    spread: {
-      hint:
-        'Выберите задачи для распределения, выберите дни для распределения, нажмите на кнопку, и выбранные задачи распределятся ровным слоем по выбранным датам',
-      spreading: 'Распределяем',
-      chooseTasks: 'Нажмите на задачи для распределения',
-      between: 'между',
-      chooseDates: 'Нажмите на даты для распределения',
-    },
     encryption: {
       title: 'Шифрование',
       info:
@@ -343,15 +335,15 @@ export const messages = {
       firstDayOfWeek: 'Первый день недели',
       newTodosGoFirst: 'Новые задачи добавляются в начало списка',
       preserveOrderByTime: 'Следить за порядком задач с точным временем',
-      duplicateTagInBreakdown: 'Копировать хештеги при разбивке',
       general: 'Общее',
       integrations: 'Интеграции',
       connected: 'Подключено',
       notConnected: 'Не подключено',
       googleCalendar: 'Google Calendar',
-      export: 'Экспорт данных',
       disconnectConfirm: 'Уверены, что хотите отключить этот сервис?',
       account: 'Аккаунт',
+      duplicateTagInBreakdown: 'Копировать хештеги при разбивке',
+      export: 'Экспорт данных',
       hotkeys: 'Горячие клавиши',
     },
     weekdays: [
@@ -382,6 +374,59 @@ export const messages = {
     refreshRequest:
       'Доступна новая версия Тудуранта. Пожалуйста, обновите страницу, чтобы получить новые блестящие функции 🦄',
     refresh: 'Обновить',
+    heroProfileTitle: 'Профиль героя',
+    infoHero:
+      'Это ваш профиль — профиль героя! Завершайте задачи и зарабатывайте очки, чтобы выбивать все более и более высокие ранги!\n\nВы не увидите полный список рангов, пока не добьетесь самого высокого! Помните: единственный способ добраться до самого верхнего ранга — это ежедневная цепочка из маленьких шажков.',
+    rank: '🔥 Ваш ранг 🔥',
+    'rank-1Title': 'Существо бесконечности темной материи 😈',
+    'rank-1Description':
+      'Вы достигли ранга, которого ни один смертный еще не достигал! Поздравляю, вот ваш тортик: 🍰. В этот раз, это не ложь.',
+    rank0Title: 'Сабзиро −273.15 °C 🥶',
+    rank0Description: 'Было бы еще холоднее, если бы могло.',
+    rank5Title: 'В значит Вродуктивность 👺',
+    rank5Description:
+      'Помните дети, если вы уронили продуктивность на пол менее, чем на 5 секунд, то все должно быть нормально!',
+    rank13Title: 'Веселый Фредди 😱',
+    rank13Description:
+      'Вы знаете, что сегодня за день. Сегодня Джейсон печет вам торт. Такой день теперь каждый день.',
+    rank42Title: 'Рыбак 🐬',
+    rank42Description: 'Всего хорошего, и спасибо за рыбу!',
+    rank69Title: 'Найс мастер! 😝',
+    rank69Description: 'Самое клевое число из чисел. Точка.',
+    rank85Title: 'Марк-85 🦄',
+    rank85Description: 'Можно сказать, ваша продуктивность сделана из железа.',
+    rank100Title: '100% пользователь силы ⚡️',
+    rank100Description:
+      '100 за спиной, бесконечность впереди! Выполняйте задачи каждый день, это того стоит!',
+    rank221Title: 'Шерлок 😎',
+    rank221Description: 'Вы разгадали секрет продуктивности. Молодец!',
+    rank256Title: 'Счастливый сантехник 👾',
+    rank256Description:
+      '8 бит продуктивности спустя вы все еще вспоминаете тепловые и ламповые игры на Денди.',
+    rank300Title: 'Спартанец 💪',
+    rank300Description:
+      'Очистите ваши мысли, упростите свои рутины, проведите следующие 100 очков как настоящий спартанец!',
+    rank404Title: '❓❓❓',
+    rank404Description: 'Ранг не найден.',
+    rank777Title: 'Удачливый грандмастер! 🍀',
+    rank777Description:
+      'На этом ранге вы будете всего лишь 23 очка. Сделайте так, чтобы вами можно было гордиться. Сегодня ваш счастливый день!',
+    rank800Title: 'T-800 🤖',
+    rank800Description:
+      'Вы просто терминатор мерзких лягух. Идите, уничтожьте пару!',
+    rank1337Title: '3L1T3 🧑‍💻',
+    rank1337Description:
+      'Хакинг продуктивности начат... Хакирование в процессе...',
+    rank1338Title: '3L1T3 (хакнуто) 🧑‍💻',
+    rank1338Description: 'Продуктивность хакнута успешно!',
+    rank2048Title: 'Мастер шахмат ♔',
+    rank2048Description:
+      'Вы предпочитаете продуктивность разным бессмысленным играм, которые просто убивают время, правда? ПРАВДА?',
+    rank9000Title: 'Овер 9000 силы 🏋️',
+    rank9000Description: 'Вы поднимаете задачи, как будто они ничего не весят!',
+    rank12800Title: 'Доктор Манхэттен ⚛',
+    rank12800Description:
+      'Вы разбиваете задачи, как будто расщипляете атомы. Продолжайте быть офигенными!',
     homeShort: {
       headline: 'Системы продуктивности не работают.',
       headline2: 'Тудурант работает.',
@@ -406,16 +451,19 @@ export const messages = {
     },
     googleCalendarDisableSuccess: 'Гугл Календарь успешно отключен',
     googleCalendarEnableSuccess: 'Гугл Календарь успешно подключен',
-  },
-  en: {
     spread: {
       hint:
-        'Choose tasks to spread, choose dates to spread over, press a button and see how selected tasks spread evenly between the selected dates',
-      spreading: 'Spreading',
-      chooseTasks: 'Click on the tasks to spread',
-      between: 'between',
-      chooseDates: 'Click on the dates to spread over',
+        'Выберите задачи для распределения, выберите дни для распределения, нажмите на кнопку, и выбранные задачи распределятся ровным слоем по выбранным датам',
+      spreading: 'Распределяем',
+      chooseTasks: 'Нажмите на задачи для распределения',
+      between: 'между',
+      chooseDates: 'Нажмите на даты для распределения',
     },
+    level: 'Уровень',
+    points: 'очков',
+    pointsTillNextLevel: 'очков до следующего уровня',
+  },
+  en: {
     encryption: {
       title: 'Encryption',
       info:
@@ -760,16 +808,16 @@ export const messages = {
       showTodayOnAddTodo: 'Default to today when creating a todo',
       firstDayOfWeek: 'First day of the week',
       newTodosGoFirst: 'New todos are added on top of the list',
-      duplicateTagInBreakdown: 'Copy hashtags during breakdown',
       preserveOrderByTime: 'Preserve exact time order',
       general: 'General',
       integrations: 'Integrations',
       connected: 'Connected',
       notConnected: 'Not connected',
       googleCalendar: 'Google Calendar',
-      export: 'Export data',
       disconnectConfirm: 'Are you sure you want to disconnect this service?',
       account: 'Account',
+      duplicateTagInBreakdown: 'Copy hashtags during breakdown',
+      export: 'Export data',
       hotkeys: 'Hotkeys',
     },
     weekdays: [
@@ -800,6 +848,58 @@ export const messages = {
     refreshRequest:
       'There is a new version of Todorant available. Please refresh the page to get the new shiny stuff 🦄',
     refresh: 'Refresh',
+    heroProfileTitle: 'Hero profile',
+    infoHero:
+      "This is the profile page of you — the hero! Complete tasks and earn points to achieve higher and higher ranks!\n\nYou won't know the whole list of ranks until you achieve the highest! Remember: the only way to get to the top is through the everyday sequence of small steps.",
+    rank: '🔥 Your rank 🔥',
+    'rank-1Title': 'Dark matter infinity being 😈',
+    'rank-1Description':
+      "You have achieved the rank no human was able to achieve before! Congratulations, here is your pie: 🍰. It's not a lie this time.",
+    rank0Title: 'Subzero −273.15 °C 🥶',
+    rank0Description: "It'd be a lot cooler if it could.",
+    rank5Title: 'V is for Vroductivive 👺',
+    rank5Description:
+      'Remember kids, if you drop productivity for less than 5 seconds and pick it up, you are safe!',
+    rank13Title: 'Happy Freddy 😱',
+    rank13Description:
+      'You know what day it is. It is the day Jason bakes a cake for you. Every day is this day now.',
+    rank42Title: 'Fisher 🐬',
+    rank42Description: 'So long! And thanks for all the fish!',
+    rank69Title: 'Nice master! 😝',
+    rank69Description: 'The nicest rank there is. Period.',
+    rank85Title: 'Mark-85 🦄',
+    rank85Description: 'One can say your productivity is made of Iron.',
+    rank100Title: '100% force user ⚡️',
+    rank100Description:
+      '100 done, infinity to go! Keep going every day, it is worth it!',
+    rank221Title: 'Sherlock 😎',
+    rank221Description: 'You solved the productivity, well, good for you!',
+    rank256Title: 'Happy plumber 👾',
+    rank256Description:
+      '8 bits of productivity later you still think of good old games.',
+    rank300Title: 'Spartan 💪',
+    rank300Description:
+      'Clear your mind, simplify the routines, spend the next 100 points as a true Spartan!',
+    rank404Title: '❓❓❓',
+    rank404Description: 'Rank not found.',
+    rank777Title: 'Lucky grandmaster! 🍀',
+    rank777Description:
+      'This rank only lasts 23 points. Make it count, it is your lucky day!',
+    rank800Title: 'T-800 🤖',
+    rank800Description:
+      'You are the terminator of dreadful frogs. Go terminate a few!',
+    rank1337Title: '3L1T3 🧑‍💻',
+    rank1337Description: 'Productivity hacking is initiated... Hacking...',
+    rank1338Title: '3L1T3 (Hacked) 🧑‍💻',
+    rank1338Description: 'Hacked productivity successfully!',
+    rank2048Title: 'Chess master ♔',
+    rank2048Description:
+      'You prefer productivity over endless pointless time-killing games, right? RIGHT?',
+    rank9000Title: 'Over 9000 power user 🏋️',
+    rank9000Description: 'You lift the tasks like they are nothing!',
+    rank12800Title: 'Doctor Manhattan ⚛',
+    rank12800Description:
+      'You breakdown the tasks like you split the atoms. Keep up the good work!',
     homeShort: {
       headline: 'Productivity systems fail.',
       headline2: 'Todorant works.',
@@ -824,6 +924,17 @@ export const messages = {
     },
     googleCalendarDisableSuccess: 'Google Calendar disabled',
     googleCalendarEnableSuccess: 'Google Calendar enabled',
+    spread: {
+      hint:
+        'Choose tasks to spread, choose dates to spread over, press a button and see how selected tasks spread evenly between the selected dates',
+      spreading: 'Spreading',
+      chooseTasks: 'Click on the tasks to spread',
+      between: 'between',
+      chooseDates: 'Click on the dates to spread over',
+    },
+    level: 'Level',
+    points: 'points',
+    pointsTillNextLevel: 'points to unlock next level',
   },
   ua: {
     encryption: {
@@ -1716,6 +1827,15 @@ export const messages = {
     refreshRequest:
       'Existe uma nova versão do Todorant disponível. Atualize a página para novas e brilhantes funcionalidades 🦄',
     refresh: 'Atualizar',
+    infoHero:
+      'Esta é a sua página de perfil, campeão! Conclua tarefas e ganhe pontos para obter classificações cada vez mais altas! \\n\\nVocê não conhecerá a lista de classificações até alcançar a mais alta! Lembre-se: a única maneira de chegar ao topo é através da sequência diária de pequenos passos.',
+    rank: '🔥 Sua classificação 🔥',
+    'rank-1Description':
+      'Você alcançou a classificação que nenhum humano foi capaz de alcançar antes! Parabéns, aqui está sua torta: 🍰. Desta vez não é mentira.',
+    rank5Title: 'V de Vrodutividade 👺',
+    rank13Title: 'Freddy Feliz 😱',
+    rank13Description:
+      'Você sabe que dia é hoje. É o dia em que Jason assa um bolo para você. Todo dia é esse dia agora.',
     homeShort: {
       headline: 'Falha nos sistemas de produtividade.',
       headline2: 'Todorant funciona.',
