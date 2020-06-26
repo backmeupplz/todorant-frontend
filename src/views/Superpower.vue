@@ -1,12 +1,20 @@
 <template lang="pug">
   div.pb-10
     // Tabs (panning = false)
-    v-tabs(v-if='!$store.state.userState.planning'
-    v-model='currentTab'
-    :fixed-tabs='$vuetify.breakpoint.xsOnly'
-    show-arrows)
-      v-tab(v-shortkey.once="{ en: ['c'], ru: ['с'] }" @shortkey='currentTab = 0') {{$t('current')}}
-      v-tab(v-shortkey.once="{ en: ['p'], ru: ['з'] }" @shortkey='currentTab = 1') {{$t('planning')}}
+    v-tabs(
+      v-if='!$store.state.userState.planning'
+      v-model='currentTab'
+      :fixed-tabs='$vuetify.breakpoint.xsOnly'
+      show-arrows
+    )
+      v-tab(
+        v-shortkey.once="{ en: ['c'], ru: ['с'] }"
+        @shortkey='switchTab(0)'
+      ) {{$t('current')}}
+      v-tab(
+        v-shortkey.once="{ en: ['p'], ru: ['з'] }"
+        @shortkey='switchTab(1)'
+      ) {{$t('planning')}}
       v-tab {{$t('report.title')}}
       v-tabs-items(v-model='currentTab')
         v-tab-item(:value='0')
@@ -16,7 +24,10 @@
         v-tab-item(:value='2')
           Report
         // Add FAB
-        AddTodo(v-if='!$store.state.editting' :currentTab='currentTab')
+        AddTodo(
+          v-if='!$store.state.editting'
+          :currentTab='currentTab'
+        )
     // Tabs (planning = true)
     v-tabs(v-else
     :value='1'
@@ -93,6 +104,13 @@ export default class Superpower extends Vue {
       serverBus.$emit('refreshRequested')
     }
     store.setEditting(false)
+  }
+
+  switchTab(tabIndex: number) {
+    if (!store.hotKeysEnabled()) {
+      return
+    }
+    this.currentTab = tabIndex
   }
 }
 </script>

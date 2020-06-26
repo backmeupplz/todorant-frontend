@@ -1,24 +1,30 @@
 <template lang="pug">
-  v-dialog(v-model='dialog'
-  persistent
-  scrollable
-  max-width='600px')
+  v-dialog(
+    v-model='dialog'
+    persistent
+    scrollable
+    max-width='600px'
+  )
     v-card
       v-card-text.pt-4 {{$t('deleteHeadline', { name: todo ? textForTodo(todo) : '' } )}}
       v-card-actions
         v-spacer
-        v-btn(color='blue'
-        text
-        @click='dialog = false'
-        :loading='loading'
-        :disabled='loading') {{$t('cancel')}}
-        v-btn(color='error'
-        text 
-        @click='deleteTodo'
-        :loading='loading'
-        :disabled='loading'
-        v-shortkey.once="['enter']"
-        @shortkey='deleteTodo') {{$t('delete')}}
+        v-btn(
+          color='blue'
+          text
+          @click='dialog = false'
+          :loading='loading'
+          :disabled='loading'
+        ) {{$t('cancel')}}
+        v-btn(
+          color='error'
+          text 
+          @click='deleteTodo'
+          :loading='loading'
+          :disabled='loading'
+          v-shortkey.once="['enter']"
+          @shortkey='deleteTodo'
+        ) {{$t('delete')}}
 </template>
 
 <script lang="ts">

@@ -26,6 +26,10 @@
           :label='$t("soundEffects")'
           v-model='soundEffects'
         )
+        v-switch.ma-0.pa-0(
+          :label='$t("settings.hotkeys")'
+          v-model='hotKeys'
+        )
         v-divider
         v-select.mt-4(
           :items='weekdays'
@@ -198,6 +202,12 @@ export default class Settings extends Vue {
   }
   set soundEffects(val: boolean) {
     store.setAudioEnabled(val)
+  }
+  get hotKeys() {
+    return this.$store.state.hotKeysEnabled
+  }
+  set hotKeys(val: boolean) {
+    store.setHotKeysEnabled(val)
   }
 
   googleCalendarConnected() {

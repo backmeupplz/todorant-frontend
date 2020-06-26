@@ -70,7 +70,7 @@
                     :loading='loading'
                     v-on='on'
                     v-shortkey.once="{ en: ['b'], ru: ['и'] }"
-                    @shortkey='addTodo'
+                    @shortkey='addTodo(true)'
                   )
                     v-icon list
                 span {{$t('breakdownInfo')}}
@@ -87,7 +87,7 @@
                 @click='completeTodo'
                 :loading='loading'
                 v-shortkey.once="{ en: ['d'], ru: ['в']}"
-                @shortkey='completeTodo'
+                @shortkey='completeTodo(true)'
               )
                 v-icon done
         v-list-item-content.text-center.mt-4(
@@ -203,7 +203,10 @@ export default class CurrentTodo extends Vue {
     }
   }
 
-  async completeTodo() {
+  async completeTodo(hotkey = false) {
+    if (hotkey && !store.hotKeysEnabled()) {
+      return
+    }
     const user = store.user()
     if (!user) {
       return
@@ -232,7 +235,10 @@ export default class CurrentTodo extends Vue {
     this.todoDeleted = this.todo ? { ...this.todo } : null
   }
 
-  addTodo() {
+  addTodo(hotkey = false) {
+    if (hotkey && !store.hotKeysEnabled()) {
+      return
+    }
     serverBus.$emit('addTodoRequested', undefined, this.todo)
   }
 

@@ -23,6 +23,7 @@ export interface State {
   tagColors: { [index: string]: string }
   password?: String
   audioEnabled: Boolean
+  hotKeysEnabled: Boolean
 
   landingABTestGroup: Number
 }
@@ -103,6 +104,7 @@ const storeOptions = {
     password: undefined,
     landingABTestGroup: Math.floor(Math.random() * 2),
     audioEnabled: true,
+    hotKeysEnabled: true,
   },
   mutations: {
     setUser(state: State, user: User) {
@@ -150,6 +152,9 @@ const storeOptions = {
     setAudioEnabled(state: State, audioEnabled: boolean) {
       state.audioEnabled = audioEnabled
     },
+    setHotKeysEnabled(state: State, hotKeysEnabled: boolean) {
+      state.hotKeysEnabled = hotKeysEnabled
+    },
   },
   getters: {
     user: (state: State) => state.user,
@@ -165,6 +170,7 @@ const storeOptions = {
     password: (state: State) => state.password,
     landingABTestGroup: (state: State) => state.landingABTestGroup,
     audioEnabled: (state: State) => state.audioEnabled,
+    hotKeysEnabled: (state: State) => state.hotKeysEnabled,
   },
   plugins: [
     createPersistedState({
@@ -176,6 +182,7 @@ const storeOptions = {
         'password',
         'landingABTestGroup',
         'audioEnabled',
+        'hotKeysEnabled',
       ],
     }),
   ],
@@ -199,6 +206,7 @@ export const tagColors = () => getters.tagColors as { [index: string]: string }
 export const password = () => getters.password as string | undefined
 export const landingABTestGroup = () => getters.landingABTestGroup as number
 export const audioEnabled = () => getters.audioEnabled as boolean
+export const hotKeysEnabled = () => getters.hotKeysEnabled as boolean
 
 // Mutations
 export const setUser = (user: User) => {
@@ -269,6 +277,9 @@ export const setPassword = (password: string | undefined) => {
 }
 export const setAudioEnabled = (audioEnabled: boolean) => {
   store.commit('setAudioEnabled', audioEnabled)
+}
+export const setHotKeysEnabled = (hotKeysEnabled: boolean) => {
+  store.commit('setHotKeysEnabled', hotKeysEnabled)
 }
 
 setUserProperty('landingABTestGroup', landingABTestGroup())

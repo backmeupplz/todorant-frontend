@@ -352,6 +352,7 @@ export const messages = {
       export: 'Экспорт данных',
       disconnectConfirm: 'Уверены, что хотите отключить этот сервис?',
       account: 'Аккаунт',
+      hotkeys: 'Горячие клавиши',
     },
     weekdays: [
       'Воскресенье',
@@ -769,6 +770,7 @@ export const messages = {
       export: 'Export data',
       disconnectConfirm: 'Are you sure you want to disconnect this service?',
       account: 'Account',
+      hotkeys: 'Hotkeys',
     },
     weekdays: [
       'Sunday',

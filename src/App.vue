@@ -1,11 +1,19 @@
 <template lang="pug">
   div(:style='style')
     v-app
-      div(style='width: 100%' align='center')
-        div(style='maxWidth: 1000px;' align='justify')
-          cookie-law(theme='blood-orange'
-          :buttonText='$t("cookie.button")'
-          :message='$t("cookie.message")')
+      div(
+        style='width: 100%'
+        align='center'
+      )
+        div(
+          style='maxWidth: 1000px;'
+          align='justify'
+        )
+          cookie-law(
+            theme='blood-orange'
+            :buttonText='$t("cookie.button")'
+            :message='$t("cookie.message")'
+          )
           Snackbar
           Navbar
           v-content

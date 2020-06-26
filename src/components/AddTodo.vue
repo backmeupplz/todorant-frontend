@@ -1,17 +1,18 @@
 <template lang="pug">
   div
     v-btn(
-    :absolute="$vuetify.breakpoint.mdAndUp && (currentTab == 0 && !$store.state.userState.planning)"
-    :fixed="$vuetify.breakpoint.smAndDown || (currentTab != 0 || $store.state.userState.planning)"
-    :class='($vuetify.breakpoint.mdAndUp && (currentTab != 0 || $store.state.userState.planning)) ? "rightPadding" : ""'
-    dark
-    fab
-    bottom
-    right
-    color='blue'
-    @click='openDialog'
-    v-shortkey.once="{ en: ['a'], ru: ['ф'] }"
-    @shortkey='openDialog')
+      :absolute="$vuetify.breakpoint.mdAndUp && (currentTab == 0 && !$store.state.userState.planning)"
+      :fixed="$vuetify.breakpoint.smAndDown || (currentTab != 0 || $store.state.userState.planning)"
+      :class='($vuetify.breakpoint.mdAndUp && (currentTab != 0 || $store.state.userState.planning)) ? "rightPadding" : ""'
+      dark
+      fab
+      bottom
+      right
+      color='blue'
+      @click='openDialog'
+      v-shortkey.once="{ en: ['a'], ru: ['ф'] }"
+      @shortkey='openDialog(true)'
+    )
       v-icon add
     v-dialog(v-model='dialog'
     persistent
@@ -57,24 +58,30 @@
                         @click='deleteTodo(i)'
                       ) {{$t('delete')}}
           v-card-actions
-            v-btn(color='blue'
-            text @click='addTodo'
-            v-shortkey.once="{ en: ['ctrl', 'shift', 'a'], ru: ['ctrl', 'shift', 'ф'] }"
-            @shortkey='addTodo')
+            v-btn(
+              color='blue'
+              text @click='addTodo'
+              v-shortkey.once="{ en: ['ctrl', 'shift', 'a'], ru: ['ctrl', 'shift', 'ф'] }"
+              @shortkey='addTodo'
+            )
               v-icon add
             v-spacer
-            v-btn(color='error'
-            text 
-            @click='dialog = false'
-            :disabled='loading'
-            v-shortkey.once="['esc']"
-            @shortkey='dialog=false') {{$t('cancel')}}
-            v-btn(color='blue'
-            text 
-            @click='save'
-            :loading='loading'
-            v-shortkey.once="['enter']"
-            @shortkey='save') {{$t('save')}}
+            v-btn(
+              color='error'
+              text 
+              @click='close'
+              :disabled='loading'
+              v-shortkey.once="['esc']"
+              @shortkey='close'
+            ) {{$t('cancel')}}
+            v-btn(
+              color='blue'
+              text 
+              @click='save'
+              :loading='loading'
+              v-shortkey.once="['enter']"
+              @shortkey='save'
+            ) {{$t('save')}}
 </template>
 
 <script lang="ts">
@@ -135,7 +142,10 @@ export default class AddTodo extends Vue {
     }
   }
 
-  openDialog() {
+  openDialog(hotkey = false) {
+    if (hotkey && !store.hotKeysEnabled()) {
+      return
+    }
     if (
       store.userState().subscriptionStatus === store.SubscriptionStatus.inactive
     ) {
@@ -275,6 +285,10 @@ export default class AddTodo extends Vue {
     } else {
       return false
     }
+  }
+
+  close() {
+    this.dialog = false
   }
 }
 </script>
