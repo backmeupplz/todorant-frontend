@@ -21,41 +21,41 @@
 </template>
 
 <script lang="ts">
-import Navbar from './components/Navbar.vue'
-import Snackbar from './components/Snackbar.vue'
-import * as store from './plugins/store'
-import { i18n } from './plugins/i18n'
-import { setFavIcon } from './utils/setFavIcon'
-const CookieLaw = require('vue-cookie-law')
+import Navbar from "./components/Navbar.vue";
+import Snackbar from "./components/Snackbar.vue";
+import * as store from "./plugins/store";
+import { i18n } from "./plugins/i18n";
+import { setFavIcon } from "./utils/setFavIcon";
+const CookieLaw = require("vue-cookie-law");
 
 export default {
   components: { Navbar, CookieLaw, Snackbar },
   computed: {
     style: () => {
       return {
-        'background-color': store.dark() ? '#303030' : '#fafafa',
-      }
+        "background-color": store.dark() ? "#303030" : "#fafafa",
+      };
     },
   },
   created() {
-    ;(this as any).$vuetify.theme.dark = store.dark()
-    ;(document as any)
+    (this as any).$vuetify.theme.dark = store.dark();
+    (document as any)
       .querySelector('meta[name="theme-color"]')
-      .setAttribute('content', store.dark() ? '#303030' : '#fafafa')
-    setFavIcon(store.dark())
+      .setAttribute("content", store.dark() ? "#303030" : "#fafafa");
+    setFavIcon(store.dark());
     store.setSnackbar({
-      message: '',
-      color: 'error',
+      message: "",
+      color: "error",
       active: false,
-    })
+    });
   },
   metaInfo() {
-    const title = i18n.t('title') as string
+    const title = i18n.t("title") as string;
     return {
       title,
-    }
+    };
   },
-}
+};
 </script>
 
 <style>
