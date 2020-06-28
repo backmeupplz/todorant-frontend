@@ -4,6 +4,8 @@
     Rules(:dialog='rulesDialog' :close='closeRules' :openWelcome='openWelcome')
     // Welcome dialog
     Welcome(:dialog='welcomeDialog' :close='closeWelcome' :openRules='openRules')
+    //Hero dialog
+    HeroProfile(:dialog='heroDialog' :close='closeHeroDialog')
     // Merge dialog
     Merge(:dialog='mergeDialog' :close='closeMerge')
     // Subscription dialog
@@ -49,6 +51,10 @@
           // Dark mode
           v-list-item(@click='toggleMode')
             v-list-item-title {{$store.state.dark ? $t('menu.darkMode.on') : $t('menu.darkMode.off')}}
+          //Hero profile
+          v-list-item(@click='heroDialog = true'
+          v-if='!!$store.state.user')
+            v-list-item-title {{$t('heroProfileTitle')}}
           // Merge accounts
           v-list-item(@click='mergeDialog = true' 
           v-if='!!$store.state.user')
@@ -88,6 +94,7 @@ import * as api from '../utils/api'
 import Rules from './Rules.vue'
 import Welcome from './Welcome.vue'
 import Merge from './Merge.vue'
+import HeroProfile from './HeroProfile.vue'
 import Subscription from './Subscription.vue'
 import Settings from './Settings.vue'
 import Hashtags from './Hashtags.vue'
@@ -109,11 +116,13 @@ import { sockets } from '../utils/sockets'
     QRCode,
     Encryption,
     Welcome,
+    HeroProfile,
   },
 })
 export default class Navbar extends Vue {
   rulesDialog = false
   welcomeDialog = false
+  heroDialog = false
   mergeDialog = false
   subscriptionDialog = false
   settingsDialog = false
@@ -185,6 +194,9 @@ export default class Navbar extends Vue {
   }
   closeMerge() {
     this.mergeDialog = false
+  }
+  closeHeroDialog() {
+    this.heroDialog = false
   }
   closeSubscription() {
     this.subscriptionDialog = false

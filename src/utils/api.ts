@@ -377,3 +377,34 @@ export async function getVersion() {
   return (await axios.get(`${process.env.VUE_APP_WEBSITE}/version.json`)).data
     .version as string
 }
+
+export async function getHeroPoints(user: User) {
+  const response = await axios.get(`${base}/hero`, {
+    headers: getHeaders(user),
+  })
+  return response.data.points
+}
+
+export async function addHeroPoints(user: User, points: number) {
+  axios.post(
+    `${base}/hero`,
+    {
+      points: points,
+    },
+    {
+      headers: getHeaders(user),
+    }
+  )
+}
+
+export async function initializeHeroPoints(user: User, points: number) {
+  axios.post(
+    `${base}/hero/initialize`,
+    {
+      points: points,
+    },
+    {
+      headers: getHeaders(user),
+    }
+  )
+}
