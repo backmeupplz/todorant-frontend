@@ -9,7 +9,7 @@
       bottom
       right
       color='blue'
-      @click='openDialog'
+      @click='openDialog()'
       v-shortkey.once="{ en: ['a'], ru: ['ф'] }"
       @shortkey='openDialog(true)'
     )

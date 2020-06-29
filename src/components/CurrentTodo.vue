@@ -66,7 +66,7 @@
                   v-btn(
                     text
                     icon
-                    @click='addTodo'
+                    @click='addTodo()'
                     :loading='loading'
                     v-on='on'
                     v-shortkey.once="{ en: ['b'], ru: ['и'] }"
@@ -84,7 +84,7 @@
               v-btn.ma-0(
                 text
                 icon
-                @click='completeTodo'
+                @click='completeTodo()'
                 :loading='loading'
                 v-shortkey.once="{ en: ['d'], ru: ['в']}"
                 @shortkey='completeTodo(true)'
