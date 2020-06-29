@@ -186,6 +186,7 @@ export default class TodoForm extends Vue {
 
   textRules = [
     (v: any) => !!(v || '').trim() || i18n.t('errors.todo.textLenght'),
+    (v: any) => v.length <= 1500 || i18n.t('errors.todo.more1500'),
   ]
 
   dateAndMonthRules = [

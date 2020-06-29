@@ -203,6 +203,7 @@ export const messages = {
       todo: {
         textLenght: 'Задачи должны иметь текст',
         dateOrMonth: 'Задачам нужно выставлять либо точную дату, либо месяц',
+        more1500: 'Задача не может иметь более 1500 символов',
       },
       invalidForm: 'Пожалуйста, заполните необходимые поля',
       report: 'Не получилось загрузить отчет',
@@ -679,6 +680,7 @@ export const messages = {
       todo: {
         textLenght: 'Todos should have text',
         dateOrMonth: 'Todos should have either date or month set',
+        more1500: `Todos can't have more than 1500 characters.`,
       },
       invalidForm: 'Please, fill in the required fields',
       report: 'Could not load report',
@@ -1143,6 +1145,7 @@ export const messages = {
       todo: {
         textLenght: 'Задачі повинні мати текст',
         dateOrMonth: 'Задачам необхідно виставляти або точний день, або місяць',
+        more1500: 'Задачам не може мати більше 1500 символів',
       },
       invalidForm: 'Будь ласка, заповніть необхідні поля',
       report: 'Не вдалося завантажити звіт',
@@ -1658,6 +1661,7 @@ export const messages = {
       todo: {
         textLenght: 'As tarefas devem ter texto',
         dateOrMonth: 'Tarefas devem ter data ou mês definidos',
+        more1500: `L'attività non può contenere più di 1500 caratteri.`,
       },
       invalidForm: 'Por favor, preencha os campos obrigatórios',
       report: 'Não foi possível carregar o relatório',
@@ -2050,6 +2054,7 @@ export const messages = {
         textLenght: 'Las tareas deberían tener texto',
         dateOrMonth:
           'Las tareas deben estar asignadas a una fecha o mes específico',
+        more1500: 'La tarea no puede tener más de 1500 caracteres.',
       },
       invalidForm: 'Por favor, completa los campos requeridos',
       report: 'No se pudo cargar el reporte',
