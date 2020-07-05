@@ -216,15 +216,12 @@ export default class CurrentTodo extends Vue {
     }
     this.loading = true
     try {
-      const point = 1
       await api.completeTodo(user, this.todo)
       if (this.todo.frog) {
         await playSound(Sounds.frogDone)
       } else {
         await playSound(Sounds.taskDone)
       }
-      api.addHeroPoints(user, point)
-      this.$store.state.points += point
       this.updateTodo()
       this.tryConfetti()
     } catch (err) {

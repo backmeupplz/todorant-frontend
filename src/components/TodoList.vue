@@ -645,15 +645,12 @@ export default class TodoList extends Vue {
       if (todo.completed) {
         await api.undoTodo(user, todo)
       } else {
-        const point = 1
         await api.completeTodo(user, todo)
         if (todo.frog) {
           await playSound(Sounds.frogDone)
         } else {
           await playSound(Sounds.taskDone)
         }
-        api.addHeroPoints(user, point)
-        this.$store.state.points += point
         this.tryConfetti()
       }
       this.loadTodos(false)

@@ -194,9 +194,15 @@ export async function getTodos(
         queryString,
       },
     })
-  ).data as { todos: Todo[]; state: store.UserState; tags: Tag[] }
+  ).data as {
+    todos: Todo[]
+    state: store.UserState
+    tags: Tag[]
+    points: number
+  }
   store.setUserState(data.state)
   setTags(data.tags)
+  setHero(data.points)
   return data.todos
 }
 
@@ -214,9 +220,11 @@ export async function getCurrentTodo(user: User) {
     todo?: Todo
     state: store.UserState
     tags: Tag[]
+    points: number
   }
   store.setUserState(data.state)
   setTags(data.tags)
+  setHero(data.points)
   return data
 }
 
@@ -280,6 +288,49 @@ function setTags(tags: Tag[]) {
     return p
   }, {} as { [index: string]: string })
   store.setTagColors(tagColors)
+}
+
+function setHero(points: number) {
+  const ranks = [
+    0,
+    5,
+    13,
+    42,
+    69,
+    85,
+    100,
+    221,
+    256,
+    300,
+    404,
+    777,
+    800,
+    1337,
+    1338,
+    2048,
+    9000,
+    12800,
+    1000000,
+  ]
+  store.setPoints(points)
+
+  const getRank = () => {
+    let nearest = 0
+    for (const i of ranks) {
+      if (i > nearest && i <= points) {
+        nearest = i
+      }
+    }
+    return nearest
+  }
+  let currentRank = getRank()
+  let indexOfCurrentRank = ranks.indexOf(getRank())
+  let nextRank = ranks[indexOfCurrentRank + 1]
+  store.setRank(getRank())
+  store.setNextRank(nextRank)
+  store.setProgress(
+    Math.ceil(((points - currentRank) / (nextRank - currentRank)) * 100)
+  )
 }
 
 export async function getReport(
@@ -376,35 +427,4 @@ export function getTomorrow() {
 export async function getVersion() {
   return (await axios.get(`${process.env.VUE_APP_WEBSITE}/version.json`)).data
     .version as string
-}
-
-export async function getHeroPoints(user: User) {
-  const response = await axios.get(`${base}/hero`, {
-    headers: getHeaders(user),
-  })
-  return response.data.points
-}
-
-export async function addHeroPoints(user: User, points: number) {
-  axios.post(
-    `${base}/hero`,
-    {
-      points: points,
-    },
-    {
-      headers: getHeaders(user),
-    }
-  )
-}
-
-export async function initializeHeroPoints(user: User, points: number) {
-  axios.post(
-    `${base}/hero/initialize`,
-    {
-      points: points,
-    },
-    {
-      headers: getHeaders(user),
-    }
-  )
 }

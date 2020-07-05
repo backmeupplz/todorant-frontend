@@ -1,89 +1,87 @@
 <template lang="pug">
   v-dialog(v-model='dialog'
-  scrollable
   max-width='600px'
   @click:outside='close')
-    v-card(height="100%")
+    v-card
       v-card-title {{$t('heroProfileTitle')}}
-      v-card-subtitle.ma-0 {{$t('infoHero')}}
+      div.d-flex.ma-2
+        div.d-flex.flex-column
+          VerticalBar.ml-4.mr-4(:colorArr='colorSchemes' :progresss='this.$store.state.progress')
+        div.ma-2
+          div.ml-1.mt-2 {{ $store.state.nextRank - $store.state.points }} {{(`${$t('pointsTillNextLevel')}`)}}
+          v-card.ml-1.mt-4
+            v-card-title {{$t('level')}} {{($store.state.rank)}}
+            v-card-text {{$t(`rank${$store.state.rank}Title`)}}
+          div.ml-2.mt-2 {{$t(`rank${$store.state.rank}Description`)}}
+      v-divider.ma-2
+      div(v-for='lowerRank in ranks' v-bind:key="lowerRank" v-if='lowerRank < $store.state.rank') 
+        div.d-flex.ma-2
+          div.d-flex
+            div.d-flex.flex-column
+              VerticalBar.ml-4.mr-4(:colorArr='colorSchemes' :progresss='100')
+            div.ma-3
+              v-card.ml-1.mt-4.justify-end
+                v-card-title {{(`${$t('level')} ${lowerRank}`)}}
+                v-card-text {{$t(`rank${lowerRank}Title`)}}
+              div.ml-2.mt-2 {{$t(`rank${lowerRank}Description`)}}
         v-divider.ma-2
-        v-card-text.text-center.body-1.font-weight-medium {{$t('rank')}}
-        v-card.ma-4.rounded(
-          :color='$vuetify.theme.dark ? "blue-grey darken-2" : "blue lighten-4"')
-          v-card-text.text-center.font-weight-medium {{$t(`rank${$store.state.rank}Title`)}}
-          v-card-text.text-center {{$t(`rank${$store.state.rank}Description`)}}
-          v-card-text.text-center.font-weight-black {{$t(`nextRank`, { points: nextRank})}}
-        v-card.ma-4.rounded(v-for='lowerRank in ranks' 
-        :color='$vuetify.theme.dark ? "blue-grey darken-4" : "blue lighten-3"') 
-          v-card-text.text-center.font-weight-medium(v-if='lowerRank < $store.state.rank') {{$t(`rank${lowerRank}Title`)}}
-          v-card-text.text-center(v-if='lowerRank < $store.state.rank') {{$t(`rank${lowerRank}Description`)}}
-        v-btn(color='default'
-          text
-          @click='close'
-          v-shortkey.once="['esc']"
-          @shortkey='close') {{$t('close')}}
+      v-btn(color='default'
+        text
+        @click='close'
+        v-shortkey.once="['esc']"
+        @shortkey='close') {{$t('close')}}
+
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { getTodos, getHeroPoints, initializeHeroPoints } from '../utils/api'
+import { getTodos } from '../utils/api'
 import * as store from '../plugins/store'
+import VerticalBar from './VertiсalProgressBar.vue'
+const ColorScheme = require('color-scheme')
 
 @Component({
+  components: { VerticalBar },
   props: {
     dialog: Boolean,
     close: Function,
   },
 })
 export default class HeroProfile extends Vue {
-  ranks = [
-    1000000,
-    12800,
-    9000,
-    2048,
-    1338,
-    1337,
-    800,
-    777,
-    404,
-    300,
-    256,
-    221,
-    100,
-    85,
-    69,
-    42,
-    13,
-    5,
-    0,
-  ]
-  nextRank = 0
   created() {
-    this.updateRank()
+    this.generateColorScheme()
   }
-  async updateRank() {
-    const user = store.user()
-    if (!user) {
-      return
+  ranks = [
+    0,
+    5,
+    13,
+    42,
+    69,
+    85,
+    100,
+    221,
+    256,
+    300,
+    404,
+    777,
+    800,
+    1337,
+    1338,
+    2048,
+    9000,
+    12800,
+    1000000,
+  ].reverse()
+
+  colorSchemes = [] as string[][]
+
+  generateColorScheme() {
+    for (let i = 0; i < 360; i += 15) {
+      const scheme = new ColorScheme()
+      scheme.from_hue(i).scheme('mono').variation('soft')
+      this.colorSchemes.push(scheme.colors().map((c: any) => `#${c}`))
     }
-    const completedTodos = await getTodos(user, true, 0, 1000000)
-    const points = completedTodos.length
-    this.$store.state.points = points
-    initializeHeroPoints(user, points)
-    this.$store.state.rank = this.nearestRank(points)
-    this.nextRank =
-      this.ranks.reverse()[this.ranks.indexOf(this.$store.state.rank) + 1] -
-      this.$store.state.points
-  }
-  nearestRank(points: number) {
-    let nearest = 0
-    for (const i of this.ranks) {
-      if (i > nearest && i <= this.$store.state.points) {
-        nearest = i
-      }
-    }
-    return nearest
   }
 }
 </script>

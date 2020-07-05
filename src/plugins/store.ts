@@ -20,6 +20,10 @@ export interface State {
   editting: Boolean
   sockets: Sockets
   tags: Tag[]
+  points: Number
+  nextRank: Number
+  rank: Number
+  progress: Number
   tagColors: { [index: string]: string }
   password?: String
   audioEnabled: Boolean
@@ -100,6 +104,10 @@ const storeOptions = {
       connected: false,
     },
     tags: [],
+    points: 0,
+    nextRank: 0,
+    rank: 0,
+    progress: 0,
     tagColors: {},
     password: undefined,
     landingABTestGroup: Math.floor(Math.random() * 2),
@@ -139,6 +147,18 @@ const storeOptions = {
     setTags(state: State, tags: Tag[]) {
       state.tags = tags
     },
+    setPoints(state: State, points: Number) {
+      state.points = points
+    },
+    setRank(state: State, rank: Number) {
+      state.rank = rank
+    },
+    setNextRank(state: State, nextRank: Number) {
+      state.nextRank = nextRank
+    },
+    setProgress(state: State, progress: Number) {
+      state.progress = progress
+    },
     setTagColors(state: State, tagColors: { [index: string]: string }) {
       state.tagColors = tagColors
     },
@@ -166,6 +186,10 @@ const storeOptions = {
     editting: (state: State) => state.editting,
     sockets: (state: State) => state.sockets,
     tags: (state: State) => state.tags,
+    points: (state: State) => state.points,
+    nextRank: (state: State) => state.nextRank,
+    rank: (state: State) => state.rank,
+    progress: (state: State) => state.progress,
     tagColors: (state: State) => state.tagColors,
     password: (state: State) => state.password,
     landingABTestGroup: (state: State) => state.landingABTestGroup,
@@ -202,6 +226,10 @@ export const rulesShown = () => getters.rulesShown as Boolean
 export const editting = () => getters.editting as Boolean
 export const sockets = () => getters.sockets as Sockets
 export const tags = () => getters.tags as Tag[]
+export const points = () => getters.points as number
+export const nextRank = () => getters.nextRank as number
+export const rank = () => getters.rank as number
+export const progress = () => getters.progress as number
 export const tagColors = () => getters.tagColors as { [index: string]: string }
 export const password = () => getters.password as string | undefined
 export const landingABTestGroup = () => getters.landingABTestGroup as number
@@ -268,6 +296,18 @@ export const setSockets = (sockets: Sockets) => {
 }
 export const setTags = (tags: Tag[]) => {
   store.commit('setTags', tags)
+}
+export const setNextRank = (nextRank: number) => {
+  store.commit('setNextRank', nextRank)
+}
+export const setPoints = (points: number) => {
+  store.commit('setPoints', points)
+}
+export const setRank = (rank: number) => {
+  store.commit('setRank', rank)
+}
+export const setProgress = (progress: number) => {
+  store.commit('setProgress', progress)
 }
 export const setTagColors = (tagColors: { [index: string]: string }) => {
   store.commit('setTagColors', tagColors)
