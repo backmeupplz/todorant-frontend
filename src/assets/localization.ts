@@ -900,7 +900,6 @@ export const messages = {
     rank12800Title: 'Doctor Manhattan ⚛',
     rank12800Description:
       'You breakdown the tasks like you split the atoms. Keep up the good work!',
-    nextRank: '{points} points to unlock next level',
     homeShort: {
       headline: 'Productivity systems fail.',
       headline2: 'Todorant works.',
