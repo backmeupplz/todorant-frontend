@@ -2,14 +2,14 @@
   v-dialog(v-model='dialog'
   max-width='600px'
   @click:outside='close')
-    v-card
+    v-card(:color='$vuetify.theme.dark ? "grey darken-4" : "grey lighten-4"')
       v-card-title {{$t('heroProfileTitle')}}
       div.d-flex.ma-2
         div.d-flex.flex-column
           VerticalBar.ml-4.mr-4(:colorArr='colorSchemes' :progresss='this.$store.state.progress')
         div.ma-2
-          div.ml-1.mt-2 {{ $store.state.nextRank - $store.state.points }} {{(`${$t('pointsTillNextLevel')}`)}}
-          v-card.ml-1.mt-4
+          div.ml-2.mt-2 {{ $store.state.nextRank - $store.state.points }} {{(`${$t('pointsTillNextLevel')}`)}}
+          v-card.ml-1.mt-4(:color='$vuetify.theme.dark ? "grey darken-3" : undefined')
             v-card-title {{$t('level')}} {{($store.state.rank)}}
             v-card-text {{$t(`rank${$store.state.rank}Title`)}}
           div.ml-2.mt-2 {{$t(`rank${$store.state.rank}Description`)}}
@@ -20,7 +20,7 @@
             div.d-flex.flex-column
               VerticalBar.ml-4.mr-4(:colorArr='colorSchemes' :progresss='100')
             div.ma-3
-              v-card.ml-1.mt-4.justify-end
+              v-card.ml-1.mt-4.justify-end(:color='$vuetify.theme.dark ? "grey darken-3" : undefined')
                 v-card-title {{(`${$t('level')} ${lowerRank}`)}}
                 v-card-text {{$t(`rank${lowerRank}Title`)}}
               div.ml-2.mt-2 {{$t(`rank${lowerRank}Description`)}}
