@@ -52,6 +52,8 @@ export default class App extends Vue {
       color: 'error',
       active: false,
     })
+
+    document.title = i18n.t('title') as string
   }
 
   get metaInfo() {
