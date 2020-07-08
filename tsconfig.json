@@ -23,7 +23,8 @@
       "@/*": ["src/*"]
     },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost", "es6", "es2015"],
-    "noEmitHelpers": false
+    "noEmitHelpers": false,
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "src/**/*.ts",
