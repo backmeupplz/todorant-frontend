@@ -8,6 +8,8 @@ nav
     :close='closeWelcome',
     :openRules='openRules'
   )
+  // Hero dialog
+  HeroProfile(:dialog='heroDialog', :close='closeHero')
   // Merge dialog
   Merge(:dialog='mergeDialog', :close='closeMerge')
   // Subscription dialog
@@ -60,6 +62,8 @@ nav
         // Merge accounts
         v-list-item(@click='mergeDialog = true', v-if='!!user')
           v-list-item-title {{ $t("menu.merge") }}
+        v-list-item(@click='heroDialog = true', v-if='!!user')
+          v-list-item-title {{ $t("heroProfileTitle") }}
         // Subscription
         v-list-item(@click='showSubscription', v-if='!!user')
           v-list-item-title {{ $t("subscription.title") }}
@@ -88,6 +92,7 @@ import * as api from '@/utils/api'
 import Rules from '@/components/Rules.vue'
 import Welcome from '@/components/Welcome.vue'
 import Merge from '@/components/Merge.vue'
+import HeroProfile from '@/components/HeroProfile.vue'
 import Subscription from '@/components/Subscription.vue'
 import Settings from '@/components/Settings.vue'
 import Hashtags from '@/components/Hashtags.vue'
@@ -108,6 +113,7 @@ const AppStore = namespace('AppStore')
   components: {
     Rules,
     Merge,
+    HeroProfile,
     Subscription,
     Settings,
     Support,
@@ -131,6 +137,7 @@ export default class Navbar extends Vue {
   rulesDialog = false
   welcomeDialog = false
   mergeDialog = false
+  heroDialog = false
   subscriptionDialog = false
   settingsDialog = false
   supportDialog = false
@@ -201,6 +208,9 @@ export default class Navbar extends Vue {
   }
   closeMerge() {
     this.mergeDialog = false
+  }
+  closeHero() {
+    this.heroDialog = false
   }
   closeSubscription() {
     this.subscriptionDialog = false
