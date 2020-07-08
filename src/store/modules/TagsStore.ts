@@ -1,5 +1,5 @@
 import { VuexModule, Module, Mutation } from 'vuex-module-decorators'
-import { Tag } from '@/models/tag'
+import { Tag } from '@/models/Tag'
 import { TagColors } from '@/models/TagColors'
 
 @Module({ namespaced: true, name: 'TagsStore' })
