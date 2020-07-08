@@ -1,25 +1,25 @@
 <template lang="pug">
-  .v-container.pa-4.text-center
-    p(v-html='$t("loginMobile.telegram.headline")')
-    v-text-field(clearable
-    :label='$t("loginMobile.telegram.id")'
-    :hint='$t("loginMobile.telegram.idHint")'
-    v-model='id'
-    autofocus)
-    v-btn(color='primary'
-    @click='login'
-    :loading='loading || checking') {{$t("loginMobile.telegram.loginButton")}}
-    p.pt-2(v-if='checking' v-html='$t("loginMobile.telegram.waiting")')
+.v-container.pa-4.text-center
+  p(v-html='$t("loginMobile.telegram.headline")')
+  v-text-field(
+    clearable,
+    :label='$t("loginMobile.telegram.id")',
+    :hint='$t("loginMobile.telegram.idHint")',
+    v-model='id',
+    autofocus
+  )
+  v-btn(color='primary', @click='login', :loading='loading || checking') {{ $t("loginMobile.telegram.loginButton") }}
+  p.pt-2(v-if='checking', v-html='$t("loginMobile.telegram.waiting")')
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { loginTelegram } from '../utils/api'
-import { i18n } from '../plugins/i18n'
+import { loginTelegram } from '@/utils/api'
+import { i18n } from '@/plugins/i18n'
 const { vueTelegramLogin } = require('vue-telegram-login')
 import { v4 as uuid } from 'uuid'
-import * as api from '../utils/api'
+import * as api from '@/utils/api'
 
 @Component
 export default class LoginTelegram extends Vue {

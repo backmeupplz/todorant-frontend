@@ -1,19 +1,21 @@
 import { AES, enc } from 'crypto-js'
-import * as store from '../plugins/store'
+import store from '@/store'
 
 export function encrypt(str: string) {
-  if (!store.password()) {
+  if (!store.state.UserStore.password) {
     return str
   } else {
-    return _e(str, store.password() as string)
+    return _e(str, store.state.UserStore.password as string)
   }
 }
 
 export function decrypt(str: string, encrypted = false) {
-  if (!store.password() && !encrypted) {
+  if (!store.state.UserStore.password && !encrypted) {
     return str
   } else {
-    return !store.password() ? '' : _d(str, store.password() as string)
+    return !store.state.UserStore.password
+      ? ''
+      : _d(str, store.state.UserStore.password as string)
   }
 }
 

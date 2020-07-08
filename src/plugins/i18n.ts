@@ -1,14 +1,13 @@
-// Dependencies
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import { messages } from '../assets/localization'
-import * as store from './store'
+import { messages } from '@/assets/localization'
+import store from '@/store'
 
 Vue.use(VueI18n)
 
 function getNavigatorLanguage() {
-  if (store.language()) {
-    return store.language()
+  if (store.state.AppStore.language) {
+    return store.state.AppStore.language
   } else {
     const language = (navigator.languages && navigator.languages.length
       ? navigator.languages[0]

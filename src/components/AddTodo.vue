@@ -1,16 +1,16 @@
 <template lang="pug">
   div
     v-btn(
-      :absolute="$vuetify.breakpoint.mdAndUp && (currentTab == 0 && !$store.state.userState.planning)"
-      :fixed="$vuetify.breakpoint.smAndDown || (currentTab != 0 || $store.state.userState.planning)"
-      :class='($vuetify.breakpoint.mdAndUp && (currentTab != 0 || $store.state.userState.planning)) ? "rightPadding" : ""'
+      :absolute="$vuetify.breakpoint.mdAndUp && (currentTab == 0 && !planning)"
+      :fixed="$vuetify.breakpoint.smAndDown || (currentTab != 0 || planning)"
+      :class='($vuetify.breakpoint.mdAndUp && (currentTab != 0 || planning)) ? "rightPadding" : ""'
       dark
       fab
       bottom
       right
       color='blue'
       @click='openDialog()'
-      v-shortkey.once="{ en: ['a'], ru: ['ф'] }"
+      v-shortkey.once='{ en: ["a"], ru: ["ф"] }'
       @shortkey='openDialog(true)'
     )
       v-icon add
@@ -61,7 +61,7 @@
             v-btn(
               color='blue'
               text @click='addTodo'
-              v-shortkey.once="{ en: ['ctrl', 'shift', 'a'], ru: ['ctrl', 'shift', 'ф'] }"
+              v-shortkey.once='{ en: ["ctrl", "shift", "a"], ru: ["ctrl", "shift", "ф"] }'
               @shortkey='addTodo'
             )
               v-icon add
@@ -79,7 +79,7 @@
               text 
               @click='save'
               :loading='loading'
-              v-shortkey.once="['enter']"
+              v-shortkey.once='["enter"]'
               @shortkey='save'
             ) {{$t('save')}}
 </template>
@@ -87,22 +87,39 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { Watch } from 'vue-property-decorator'
-import TodoForm from './TodoForm.vue'
-import { Todo } from '../models/todo'
-import * as store from '../plugins/store'
-import * as api from '../utils/api'
-import { serverBus } from '../main'
-import { logEvent } from '../utils/logEvent'
-import { linkify } from '../utils/linkify'
-import { encrypt, decrypt } from '../utils/encryption'
-import { i18n } from '../plugins/i18n'
+import { Watch, Prop } from 'vue-property-decorator'
+import TodoForm from '@/components/TodoForm.vue'
+import { Todo } from '@/models/Todo'
+import * as api from '@/utils/api'
+import { serverBus } from '@/main'
+import { logEvent } from '@/utils/logEvent'
+import { linkify } from '@/utils/linkify'
+import { encrypt, decrypt } from '@/utils/encryption'
+import { i18n } from '@/plugins/i18n'
+import { namespace } from 'vuex-class'
+import { SubscriptionStatus } from '@/models/SubscriptionStatus'
+import { User } from '@/models/User'
+
+const SettingsStore = namespace('SettingsStore')
+const UserStore = namespace('UserStore')
+const SnackbarStore = namespace('SnackbarStore')
 
 @Component({
   components: { TodoForm },
-  props: ['currentTab'],
 })
 export default class AddTodo extends Vue {
+  @Prop({ required: true }) currentTab!: number
+
+  @SettingsStore.State hotKeysEnabled!: boolean
+  @SettingsStore.State duplicateTagInBreakdown?: boolean
+  @SettingsStore.State newTodosGoFirst?: boolean
+  @SettingsStore.State showTodayOnAddTodo?: boolean
+  @UserStore.State subscriptionStatus!: SubscriptionStatus
+  @UserStore.State user?: User
+  @UserStore.State password?: string
+  @UserStore.State planning!: boolean
+  @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
+
   dialog = false
 
   panel = [] as Number[]
@@ -143,12 +160,10 @@ export default class AddTodo extends Vue {
   }
 
   openDialog(hotkey = false) {
-    if (hotkey && !store.hotKeysEnabled()) {
+    if (hotkey && !this.hotKeysEnabled) {
       return
     }
-    if (
-      store.userState().subscriptionStatus === store.SubscriptionStatus.inactive
-    ) {
+    if (this.subscriptionStatus === SubscriptionStatus.inactive) {
       serverBus.$emit('subscriptionRequested')
     } else {
       this.dialog = true
@@ -177,7 +192,7 @@ export default class AddTodo extends Vue {
         text = decrypt(this.todoToBreakdown.text, true) || ''
       }
       const matches = linkify.match(text) || []
-      if (store.userState().settings.duplicateTagInBreakdown) {
+      if (this.duplicateTagInBreakdown) {
         hashtags = matches
           .map((v) =>
             /^#[\u0400-\u04FFa-zA-Z_0-9]+$/u.test(v.url) ? v.url : undefined
@@ -188,21 +203,21 @@ export default class AddTodo extends Vue {
     if (this.date) {
       this.todos.push({
         date: this.date,
-        goFirst: store.userState().settings.newTodosGoFirst || false,
+        goFirst: this.newTodosGoFirst || false,
         text: hashtags.join(' '),
       })
       this.date = ''
-    } else if (store.userState().settings.showTodayOnAddTodo) {
+    } else if (this.showTodayOnAddTodo) {
       const now = new Date()
       now.setMinutes(now.getMinutes() - now.getTimezoneOffset())
       this.todos.push({
         date: now.toISOString().substr(0, 10),
-        goFirst: store.userState().settings.newTodosGoFirst || false,
+        goFirst: this.newTodosGoFirst || false,
         text: hashtags.join(' '),
       })
     } else {
       this.todos.push({
-        goFirst: store.userState().settings.newTodosGoFirst || false,
+        goFirst: this.newTodosGoFirst || false,
         text: hashtags.join(' '),
       })
     }
@@ -216,7 +231,7 @@ export default class AddTodo extends Vue {
   }
 
   async save() {
-    const user = store.user()
+    const user = this.user
     if (!user) {
       return
     }
@@ -235,7 +250,7 @@ export default class AddTodo extends Vue {
       return
     }
     if (this.panel.length) {
-      store.setSnackbarError('errors.invalidForm')
+      this.setSnackbarError('errors.invalidForm')
       return
     }
     this.loading = true
@@ -245,7 +260,7 @@ export default class AddTodo extends Vue {
         this.todos.map((todo) => {
           const iTodo = { ...todo }
           iTodo.text = iTodo.text!.trim()
-          if (!!store.password()) {
+          if (!!this.password) {
             iTodo.encrypted = true
             iTodo.text = encrypt(iTodo.text)
           }
@@ -260,7 +275,7 @@ export default class AddTodo extends Vue {
       this.dialog = false
       logEvent('add_todo_success')
     } catch (err) {
-      store.setSnackbarError(err.response.data)
+      this.setSnackbarError(err.response.data)
       logEvent('add_todo_error', { error: err.message })
     } finally {
       this.loading = false
@@ -294,6 +309,7 @@ export default class AddTodo extends Vue {
 </script>
 
 <style lang="sass">
+// prettier-ignore
 @for $i from 1 through 50
   @media screen and (min-width: (1000px + ($i * 100px))) and (max-width: 1100px + ($i * 100px))
     .rightPadding

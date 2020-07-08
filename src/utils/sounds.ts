@@ -1,7 +1,7 @@
-import * as store from '../plugins/store'
+import store from '@/store'
 
 export async function playSound(audioName: string) {
-  if (!store.audioEnabled()) {
+  if (!store.state.SettingsStore.audioEnabled) {
     return
   }
   const audioFile = new Audio(audioName)

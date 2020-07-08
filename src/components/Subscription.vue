@@ -1,107 +1,117 @@
 <template lang="pug">
-  v-dialog(v-model='dialog'
-  scrollable
-  max-width='600px'
-  @click:outside='close')
-    v-card
-      v-card-title {{$t('subscription.title')}}
-      v-card-text
-        p {{$t('subscription.statusText', { status: subscriptionStatusText })}}
-        p {{subscriptionDescriptionText}}
-        p(v-if='$store.state.userState.subscriptionIdExists && $store.state.userState.subscriptionStatus === "earlyAdopter"') {{$t('subscription.earlyAdopterBonus')}}
-        p(align='right')
-          | — 
-          a(href='mailto:nikita@borodutch.com') {{$t('subscription.signature')}}
-        .text-center(v-if='!$store.state.userState.subscriptionIdExists')
-          v-btn.ma-2(:loading='loading'
-          @click='redirectToPurchase("monthly")') {{$t('subscription.5dollars')}}
-          v-btn.ma-2(color='primary'
-          :loading='loading'
-          @click='redirectToPurchase("yearly")') {{$t('subscription.50dollars')}}
-      v-card-actions.d-flex.flex-column(
-        v-if='this.$vuetify.breakpoint.xsOnly'
-      )
-        v-btn(
-          v-if='$store.state.userState.subscriptionIdExists'
-          text
-          color='error'
-          :loading='loading'
-          @click='cancelSubscription'
-        ) {{$t('subscription.cancel')}}
-        v-btn(
-          color='blue'
-          text 
-          @click='close'
-          v-shortkey.once="['esc']"
-          @shortkey='close'
-          :loading='loading'
-        ) {{$t('close')}}
-      v-card-actions(v-else)
-        v-spacer
-        v-btn(
-          v-if='$store.state.userState.subscriptionIdExists'
-          text
-          color='error'
-          :loading='loading'
-          @click='cancelSubscription'
-        ) {{$t('subscription.cancel')}}
-        v-btn(
-          color='blue'
-          text 
-          @click='close'
-          v-shortkey.once="['esc']"
-          @shortkey='close'
-          :loading='loading'
-        ) {{$t('close')}}
+v-dialog(
+  v-model='dialog',
+  scrollable,
+  max-width='600px',
+  @click:outside='close'
+)
+  v-card
+    v-card-title {{ $t("subscription.title") }}
+    v-card-text
+      p {{ $t("subscription.statusText", { status: subscriptionStatusText }) }}
+      p {{ subscriptionDescriptionText }}
+      p(v-if='subscriptionIdExists && subscriptionStatus === "earlyAdopter"') {{ $t("subscription.earlyAdopterBonus") }}
+      p(align='right')
+        | —
+        a(href='mailto:nikita@borodutch.com') {{ $t("subscription.signature") }}
+      .text-center(v-if='!subscriptionIdExists')
+        v-btn.ma-2(:loading='loading', @click='redirectToPurchase("monthly")') {{ $t("subscription.5dollars") }}
+        v-btn.ma-2(
+          color='primary',
+          :loading='loading',
+          @click='redirectToPurchase("yearly")'
+        ) {{ $t("subscription.50dollars") }}
+    v-card-actions.d-flex.flex-column(v-if='this.$vuetify.breakpoint.xsOnly')
+      v-btn(
+        v-if='subscriptionIdExists',
+        text,
+        color='error',
+        :loading='loading',
+        @click='cancelSubscription'
+      ) {{ $t("subscription.cancel") }}
+      v-btn(
+        color='blue',
+        text,
+        @click='close',
+        v-shortkey.once='["esc"]',
+        @shortkey='close',
+        :loading='loading'
+      ) {{ $t("close") }}
+    v-card-actions(v-else)
+      v-spacer
+      v-btn(
+        v-if='subscriptionIdExists',
+        text,
+        color='error',
+        :loading='loading',
+        @click='cancelSubscription'
+      ) {{ $t("subscription.cancel") }}
+      v-btn(
+        color='blue',
+        text,
+        @click='close',
+        v-shortkey.once='["esc"]',
+        @shortkey='close',
+        :loading='loading'
+      ) {{ $t("close") }}
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { i18n } from '../plugins/i18n'
-import * as store from '../plugins/store'
-import { daysBetween } from '../utils/daysBetween'
-import * as api from '../utils/api'
-import { serverBus } from '../main'
-import { logEvent } from '../utils/logEvent'
+import { i18n } from '@/plugins/i18n'
+import { daysBetween } from '@/utils/daysBetween'
+import * as api from '@/utils/api'
+import { serverBus } from '@/main'
+import { logEvent } from '@/utils/logEvent'
+import { Prop } from 'vue-property-decorator'
+import { namespace } from 'vuex-class'
+import { SubscriptionStatus } from '@/models/SubscriptionStatus'
+import { User } from '@/models/User'
 
 // Stripe object is global, declaring here for TS
 declare const Stripe: any
 
 const stripe = Stripe(process.env.VUE_APP_STRIPE)
 
-@Component({
-  props: {
-    dialog: Boolean,
-    close: Function,
-  },
-})
+const UserStore = namespace('UserStore')
+const SnackbarStore = namespace('SnackbarStore')
+
+@Component
 export default class Subscription extends Vue {
+  @Prop({ required: true }) dialog!: boolean
+  @Prop({ required: true }) close!: () => void
+
+  @UserStore.State subscriptionStatus!: SubscriptionStatus
+  @UserStore.State createdAt!: Date
+  @UserStore.State user?: User
+  @UserStore.State subscriptionIdExists!: boolean
+  @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
+  @SnackbarStore.Mutation setSnackbar!: (snackbarStore: any) => void
+
   loading = false
 
   get subscriptionStatusText() {
     if (
-      store.userState().subscriptionStatus === store.SubscriptionStatus.trial &&
-      store.userState().createdAt
+      this.subscriptionStatus === SubscriptionStatus.trial &&
+      this.createdAt
     ) {
-      return `${i18n.t(
-        `subscription.${store.userState().subscriptionStatus}`
-      )} ${i18n.t('subscription.daysLeft', {
-        daysLeft:
-          30 - daysBetween(new Date(store.userState().createdAt), new Date()),
-      })}`
+      return `${i18n.t(`subscription.${this.subscriptionStatus}`)} ${i18n.t(
+        'subscription.daysLeft',
+        {
+          daysLeft: 30 - daysBetween(new Date(this.createdAt), new Date()),
+        }
+      )}`
     } else {
-      return i18n.t(`subscription.${store.userState().subscriptionStatus}`)
+      return i18n.t(`subscription.${this.subscriptionStatus}`)
     }
   }
   get subscriptionDescriptionText() {
-    return i18n.t(
-      `subscription.${store.userState().subscriptionStatus}Description`
-    )
+    return i18n.t(`subscription.${this.subscriptionStatus}Description`)
   }
 
   async redirectToPurchase(plan: api.Plan) {
-    const user = store.user()
+    const user = this.user
     if (!user) {
       return
     }
@@ -112,22 +122,22 @@ export default class Subscription extends Vue {
         sessionId: session.session,
       })
       if (result.error) {
-        store.setSnackbarError(result.error.message)
+        this.setSnackbarError(result.error.message)
         return
       }
-      store.setSnackbar({
+      this.setSnackbar({
         message: i18n.t('subscription.success') as string,
         active: true,
         color: 'success',
       })
       ;(this as any).close()
       logEvent('subscription_success', {
-        status: store.userState().subscriptionStatus,
+        status: this.subscriptionStatus,
       })
     } catch (err) {
-      store.setSnackbarError(err.message)
+      this.setSnackbarError(err.message)
       logEvent('subscription_purchase_error', {
-        status: store.userState().subscriptionStatus,
+        status: this.subscriptionStatus,
         error: err.message,
       })
     } finally {
@@ -136,7 +146,7 @@ export default class Subscription extends Vue {
   }
 
   async cancelSubscription() {
-    const user = store.user()
+    const user = this.user
     if (!user) {
       return
     }
@@ -149,12 +159,12 @@ export default class Subscription extends Vue {
       ;(this as any).close()
       serverBus.$emit('refreshRequested')
       logEvent('subscription_canceled', {
-        status: store.userState().subscriptionStatus,
+        status: this.subscriptionStatus,
       })
     } catch (err) {
-      store.setSnackbarError(err.message)
+      this.setSnackbarError(err.message)
       logEvent('subscription_cancel_error', {
-        status: store.userState().subscriptionStatus,
+        status: this.subscriptionStatus,
         error: err.message,
       })
     } finally {

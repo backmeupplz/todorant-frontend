@@ -1,19 +1,20 @@
 <template lang="pug">
-Report(external)
+v-container.pa-4
+  v-layout.text-center
+    v-flex(xs12)
+      .headline
+        span {{ $t("notFound") }}
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { logEvent } from '@/utils/logEvent'
-import Report from '@/components/Report.vue'
 
-@Component({
-  components: { Report },
-})
-export default class PublicReport extends Vue {
+@Component
+export default class NotFound extends Vue {
   mounted() {
-    logEvent('public_report_viewed')
+    logEvent('not_found')
   }
 }
 </script>

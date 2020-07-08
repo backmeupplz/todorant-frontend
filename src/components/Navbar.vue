@@ -1,102 +1,108 @@
 <template lang="pug">
-  nav
-    // Rules dialog
-    Rules(:dialog='rulesDialog' :close='closeRules' :openWelcome='openWelcome')
-    // Welcome dialog
-    Welcome(:dialog='welcomeDialog' :close='closeWelcome' :openRules='openRules')
-    // Merge dialog
-    Merge(:dialog='mergeDialog' :close='closeMerge')
-    // Subscription dialog
-    Subscription(:dialog='subscriptionDialog' :close='closeSubscription')
-    // Settings dialog
-    Settings(:dialog='settingsDialog' :close='closeSettingsDialog' :openEncryption='openEncryption')
-    // Hashtags dialog
-    Hashtags(:dialog='hashtagsDialog' :close='closeHashtagsDialog')
-    // QR dialog
-    QRCode(:dialog='qrDialog' :close='closeQRDialog')
-    // Support dialog
-    Support(:dialog='supportDialog' :close='closeSupportDialog')
-    // Encryption dialog
-    Encryption(:dialog='encryptionDialog' :close='closeEncryptionDialog')
-    // Navbar and app
-    v-app-bar(flat app style='maxWidth: 1000px; margin: auto')
-      // Title
-      a(@click='goHome')
-        v-toolbar-title.text-uppercase.grey--text
-          img(src="/img/logo.png" :height='24' :width='101')
-      v-spacer
-      // Language picker
-      v-menu(offset-y)
-        template(v-slot:activator='{ on }')
-          v-btn(text icon color='grey' v-on='on') {{currentLocale.code}}
-        v-list
-          v-list-item(v-for='locale in locales' @click='changeLanguage(locale.code)' :key="locale.code")
-            v-list-item-title 
-              flag(:iso='locale.icon')
-      // Rules
-      v-btn.pl-6(
-        icon
-        color='grey'
-        @click='rulesDialog = true'
-      )
-        v-icon info_outlined
-      // Extra
-      v-menu(offset-y)
-        template(v-slot:activator='{ on }')
-          v-btn(text icon color='grey' v-on='on')
-            v-icon more_vert
-        v-list
-          // Dark mode
-          v-list-item(@click='toggleMode')
-            v-list-item-title {{$store.state.dark ? $t('menu.darkMode.on') : $t('menu.darkMode.off')}}
-          // Merge accounts
-          v-list-item(@click='mergeDialog = true' 
-          v-if='!!$store.state.user')
-            v-list-item-title {{$t('menu.merge')}}
-          // Subscription
-          v-list-item(@click='showSubscription' 
-          v-if='!!$store.state.user')
-            v-list-item-title {{$t('subscription.title')}}
-          // Settings
-          v-list-item(@click='settingsDialog = true' 
-          v-if='!!$store.state.user')
-            v-list-item-title {{$t('settings.title')}}
-          // Hashtags
-          v-list-item(@click='hashtagsDialog = true' 
-          v-if='!!$store.state.user')
-            v-list-item-title {{$t('hashtags.title')}}
-          // QR
-          v-list-item(@click='qrDialog = true' 
-          v-if='!!$store.state.user')
-            v-list-item-title {{$t('qr.code')}}
-          // Support
-          v-list-item(@click='supportDialog = true' 
-          v-if='!!$store.state.user')
-            v-list-item-title {{$t('supportAlert.title')}}
-          // Logout
-          v-list-item(@click='logout'
-          v-if='!!$store.state.user')
-            v-list-item-title {{$t('menu.logout')}}
+nav
+  // Rules dialog
+  Rules(:dialog='rulesDialog', :close='closeRules', :openWelcome='openWelcome')
+  // Welcome dialog
+  Welcome(
+    :dialog='welcomeDialog',
+    :close='closeWelcome',
+    :openRules='openRules'
+  )
+  // Merge dialog
+  Merge(:dialog='mergeDialog', :close='closeMerge')
+  // Subscription dialog
+  Subscription(:dialog='subscriptionDialog', :close='closeSubscription')
+  // Settings dialog
+  Settings(
+    :dialog='settingsDialog',
+    :close='closeSettingsDialog',
+    :openEncryption='openEncryption'
+  )
+  // Hashtags dialog
+  Hashtags(:dialog='hashtagsDialog', :close='closeHashtagsDialog')
+  // QR dialog
+  QRCode(:dialog='qrDialog', :close='closeQRDialog')
+  // Support dialog
+  Support(:dialog='supportDialog', :close='closeSupportDialog')
+  // Encryption dialog
+  Encryption(:dialog='encryptionDialog', :close='closeEncryptionDialog')
+  // Navbar and app
+  v-app-bar(flat, app, style='maxWidth: 1000px; margin: auto')
+    // Title
+    a(@click='goHome')
+      v-toolbar-title.text-uppercase.grey--text
+        img(src='/img/logo.png', :height='24', :width='101')
+    v-spacer
+    // Language picker
+    v-menu(offset-y)
+      template(v-slot:activator='{ on }')
+        v-btn(text, icon, color='grey', v-on='on') {{ currentLocale.code }}
+      v-list
+        v-list-item(
+          v-for='locale in locales',
+          @click='changeLanguage(locale.code)',
+          :key='locale.code'
+        )
+          v-list-item-title 
+            flag(:iso='locale.icon')
+    // Rules
+    v-btn.pl-6(icon, color='grey', @click='rulesDialog = true')
+      v-icon info_outlined
+    // Extra
+    v-menu(offset-y)
+      template(v-slot:activator='{ on }')
+        v-btn(text, icon, color='grey', v-on='on')
+          v-icon more_vert
+      v-list
+        // Dark mode
+        v-list-item(@click='toggleMode')
+          v-list-item-title {{ dark ? $t("menu.darkMode.on") : $t("menu.darkMode.off") }}
+        // Merge accounts
+        v-list-item(@click='mergeDialog = true', v-if='!!user')
+          v-list-item-title {{ $t("menu.merge") }}
+        // Subscription
+        v-list-item(@click='showSubscription', v-if='!!user')
+          v-list-item-title {{ $t("subscription.title") }}
+        // Settings
+        v-list-item(@click='settingsDialog = true', v-if='!!user')
+          v-list-item-title {{ $t("settings.title") }}
+        // Hashtags
+        v-list-item(@click='hashtagsDialog = true', v-if='!!user')
+          v-list-item-title {{ $t("hashtags.title") }}
+        // QR
+        v-list-item(@click='qrDialog = true', v-if='!!user')
+          v-list-item-title {{ $t("qr.code") }}
+        // Support
+        v-list-item(@click='supportDialog = true', v-if='!!user')
+          v-list-item-title {{ $t("supportAlert.title") }}
+        // Logout
+        v-list-item(@click='logout', v-if='!!user')
+          v-list-item-title {{ $t("menu.logout") }}
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import * as store from '../plugins/store'
-import { i18n } from '../plugins/i18n'
-import * as api from '../utils/api'
-import Rules from './Rules.vue'
-import Welcome from './Welcome.vue'
-import Merge from './Merge.vue'
-import Subscription from './Subscription.vue'
-import Settings from './Settings.vue'
-import Hashtags from './Hashtags.vue'
-import QRCode from './QRCode.vue'
-import Support from './Support.vue'
-import Encryption from './Encryption.vue'
-import { serverBus } from '../main'
-import { logEvent } from '../utils/logEvent'
-import { sockets } from '../utils/sockets'
+import { i18n } from '@/plugins/i18n'
+import * as api from '@/utils/api'
+import Rules from '@/components/Rules.vue'
+import Welcome from '@/components/Welcome.vue'
+import Merge from '@/components/Merge.vue'
+import Subscription from '@/components/Subscription.vue'
+import Settings from '@/components/Settings.vue'
+import Hashtags from '@/components/Hashtags.vue'
+import QRCode from '@/components/QRCode.vue'
+import Support from '@/components/Support.vue'
+import Encryption from '@/components/Encryption.vue'
+import { serverBus } from '@/main'
+import { logEvent } from '@/utils/logEvent'
+import { sockets } from '@/utils/sockets'
+import { namespace } from 'vuex-class'
+import { SubscriptionStatus } from '@/models/SubscriptionStatus'
+import { User } from '@/models/User'
+
+const UserStore = namespace('UserStore')
+const AppStore = namespace('AppStore')
 
 @Component({
   components: {
@@ -112,6 +118,16 @@ import { sockets } from '../utils/sockets'
   },
 })
 export default class Navbar extends Vue {
+  @UserStore.State subscriptionStatus!: SubscriptionStatus
+  @UserStore.State user!: User
+  @AppStore.State rulesShown!: boolean
+  @AppStore.State dark!: boolean
+  @AppStore.State language?: string
+  @AppStore.Mutation setRulesShown!: (rulesShown: boolean) => void
+  @AppStore.Mutation setDark!: (dark: boolean) => void
+  @AppStore.Mutation setLanguage!: (language: string) => void
+  @UserStore.Mutation setUser!: (user?: User) => void
+
   rulesDialog = false
   welcomeDialog = false
   mergeDialog = false
@@ -143,31 +159,31 @@ export default class Navbar extends Vue {
     serverBus.$on('subscriptionRequested', () => {
       this.subscriptionDialog = true
       logEvent('subscription_viewed', {
-        status: store.userState().subscriptionStatus,
+        status: this.subscriptionStatus,
       })
     })
     serverBus.$on('rulesRequested', () => {
       this.rulesDialog = true
     })
     serverBus.$on('login', () => {
-      if (!store.rulesShown()) {
+      if (!this.rulesShown) {
         this.welcomeDialog = true
-        store.setRulesShown(true)
+        this.setRulesShown(true)
       }
     })
   }
 
   toggleMode() {
-    store.setDark(!store.dark())
-    ;(this.$vuetify.theme as any).dark = store.dark()
+    this.setDark(!this.dark)
+    ;(this.$vuetify.theme as any).dark = this.dark
   }
   changeLanguage(locale: string) {
     i18n.locale = locale
-    store.setLanguage(locale)
+    this.setLanguage(locale)
     document.title = i18n.t('title') as string
   }
   logout() {
-    store.logout()
+    this.setUser(undefined)
     this.$router.replace('/')
     sockets.logout()
   }
@@ -209,7 +225,7 @@ export default class Navbar extends Vue {
   }
   async goHome() {
     try {
-      await this.$router.replace(store.user() ? '/superpower' : '/')
+      await this.$router.replace(this.user ? '/superpower' : '/')
       serverBus.$emit('cleanHash')
       serverBus.$emit('refreshRequested')
     } catch (err) {
@@ -218,7 +234,7 @@ export default class Navbar extends Vue {
   }
   showSubscription() {
     logEvent('subscription_viewed', {
-      status: store.userState().subscriptionStatus,
+      status: this.subscriptionStatus,
     })
     this.subscriptionDialog = true
   }

@@ -1,19 +1,18 @@
-// Dependencies
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '../views/Home.vue'
-import Superpower from '../views/Superpower.vue'
-import NotFound from '../views/NotFound.vue'
-import Privacy from '../views/Privacy.vue'
-import Terms from '../views/Terms.vue'
-import Payment from '../views/Payment.vue'
-import LoginTelegram from '../views/LoginTelegram.vue'
-import MobileLoginSuccess from '../views/MobileLoginSuccess.vue'
-import MobileLoginError from '../views/MobileLoginError.vue'
-import { store } from './store'
-import PublicReport from '../views/PublicReport.vue'
-import AppleFirefoxError from '../views/AppleFirefoxError.vue'
-import GoogleCalendarSetup from '../views/GoogleCalendarSetup.vue'
+import Home from '@/views/Home.vue'
+import Superpower from '@/views/Superpower.vue'
+import NotFound from '@/views/static/NotFound.vue'
+import Privacy from '@/views/static/Privacy.vue'
+import Terms from '@/views/static/Terms.vue'
+import Payment from '@/views/static/Payment.vue'
+import LoginTelegram from '@/views/LoginTelegram.vue'
+import MobileLoginSuccess from '@/views/static/MobileLoginSuccess.vue'
+import MobileLoginError from '@/views/static/MobileLoginError.vue'
+import store from '@/store'
+import PublicReport from '@/views/PublicReport.vue'
+import AppleFirefoxError from '@/views/static/AppleFirefoxError.vue'
+import GoogleCalendarSetup from '@/views/static/GoogleCalendarSetup.vue'
 
 Vue.use(Router)
 
@@ -99,7 +98,7 @@ const router = new Router({
 
 router.beforeEach((to, _, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
-  const user = store.state.user
+  const user = store.state.UserStore.user
 
   if (requiresAuth && !user) {
     next('/')

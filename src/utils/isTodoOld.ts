@@ -1,5 +1,4 @@
-// Dependencies
-import { Todo } from '../models/todo'
+import { Todo } from '@/models/Todo'
 
 export function isTodoOld(todo: Todo, date: string) {
   const day = date.substr(8)

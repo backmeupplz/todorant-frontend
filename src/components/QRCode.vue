@@ -1,44 +1,49 @@
 <template lang="pug">
-  v-dialog(v-model='dialog'
-  scrollable
-  max-width='600px'
-  @click:outside='close')
-    v-card
-      v-card-title {{$t('qr.code')}}
-      v-card-text
-        p {{$t('qr.description')}}
-        .d-flex.justify-center
-          .loader(v-if='!imageUrl')
-          img(v-else
-          width='300px'
-          height='300px'
-          :src='imageUrl')
-      v-card-actions
-        v-spacer
-        v-btn(color='default'
-          text
-          @click='close'
-          v-shortkey.once="['esc']"
-          @shortkey='close') {{$t('close')}}
+v-dialog(
+  v-model='dialog',
+  scrollable,
+  max-width='600px',
+  @click:outside='close'
+)
+  v-card
+    v-card-title {{ $t("qr.code") }}
+    v-card-text
+      p {{ $t("qr.description") }}
+      .d-flex.justify-center
+        .loader(v-if='!imageUrl')
+        img(v-else, width='300px', height='300px', :src='imageUrl')
+    v-card-actions
+      v-spacer
+      v-btn(
+        color='default',
+        text,
+        @click='close',
+        v-shortkey.once='["esc"]',
+        @shortkey='close'
+      ) {{ $t("close") }}
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { getSvgDataURL } from 'cnf-qrcode'
-import * as store from '../plugins/store'
+import { Prop } from 'vue-property-decorator'
+import { namespace } from 'vuex-class'
+import { User } from '@/models/User'
 
-@Component({
-  props: {
-    dialog: Boolean,
-    close: Function,
-  },
-})
+const UserStore = namespace('UserStore')
+
+@Component
 export default class QRCode extends Vue {
+  @Prop({ required: true }) dialog!: boolean
+  @Prop({ required: true }) close!: () => void
+
+  @UserStore.State user?: User
+
   imageUrl = ''
 
   mounted() {
-    const user = store.user()
+    const user = this.user
     if (!user) {
       return
     }

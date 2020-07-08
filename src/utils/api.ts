@@ -1,11 +1,14 @@
-// Dependencies
-import { GoogleCalendarCredentials } from './../plugins/store'
+import { GoogleCalendarCredentials } from '@/models/GoogleCalendarCredentials'
 import axios from 'axios'
-import { User } from '../models/user'
-import { Todo } from '../models/todo'
-import { Tag } from '../models/tag'
-import * as store from '../plugins/store'
-import { TodoSection } from '../models/TodoSection'
+import { User } from '@/models/User'
+import { Todo } from '@/models/Todo'
+import { Tag } from '@/models/Tag'
+import { TodoSection } from '@/models/TodoSection'
+import store from '@/store'
+import { getModule } from 'vuex-module-decorators'
+import TagsStore from '@/store/modules/TagsStore'
+import UserStore from '@/store/modules/UserStore'
+import SettingsStore from '@/store/modules/SettingsStore'
 
 const base = process.env.VUE_APP_API
 
@@ -31,6 +34,10 @@ export async function loginTelegram(loginInfo: any) {
 
 export async function loginApple(loginInfo: any) {
   return (await axios.post(`${base}/login/apple`, loginInfo)).data as User
+}
+
+export async function loginToken(token: string) {
+  return (await axios.post(`${base}/login/token`, { token })).data as User
 }
 
 export async function telegramLoginRequest(uuid: string, id?: string) {
@@ -90,7 +97,7 @@ export async function postTodos(user: User, todos: Partial<Todo>[]) {
           todoCopy.monthAndYear = todo.date.substr(0, 7)
           todoCopy.date = todo.date.substr(8)
         }
-        todoCopy.encrypted = !!store.password()
+        todoCopy.encrypted = !!store.state.UserStore.password
         return todoCopy
       }),
       {
@@ -194,8 +201,9 @@ export async function getTodos(
         queryString,
       },
     })
-  ).data as { todos: Todo[]; state: store.UserState; tags: Tag[] }
-  store.setUserState(data.state)
+  ).data as { todos: Todo[]; state: UserStore; tags: Tag[] }
+  getModule(UserStore, store).setUserStore(data.state)
+  setSettingsFromServer(data.state)
   setTags(data.tags)
   return data.todos
 }
@@ -212,10 +220,11 @@ export async function getCurrentTodo(user: User) {
     todosCount: number
     incompleteTodosCount: number
     todo?: Todo
-    state: store.UserState
+    state: UserStore
     tags: Tag[]
   }
-  store.setUserState(data.state)
+  getModule(UserStore, store).setUserStore(data.state)
+  setSettingsFromServer(data.state)
   setTags(data.tags)
   return data
 }
@@ -255,14 +264,14 @@ export async function cancelSubscription(user: User) {
   })
 }
 
-export async function setSettings(user: User, settings: store.Settings) {
+export async function setSettings(user: User, settings: object) {
   return axios.post(`${base}/settings`, settings, {
     headers: getHeaders(user),
   })
 }
 
 function setTags(tags: Tag[]) {
-  store.setTags(
+  getModule(TagsStore, store).setTags(
     tags.sort((a, b) => {
       return a.numberOfUses !== b.numberOfUses
         ? a.numberOfUses > b.numberOfUses
@@ -279,7 +288,7 @@ function setTags(tags: Tag[]) {
     }
     return p
   }, {} as { [index: string]: string })
-  store.setTagColors(tagColors)
+  getModule(TagsStore, store).setTagColors(tagColors)
 }
 
 export async function getReport(
@@ -346,7 +355,7 @@ export async function authorizeGoogleCalendar(user: User, code: string) {
 
 function getHeaders(user: User) {
   if (user.token) {
-    const password = store.password()
+    const password = store.state.UserStore.password
     return password ? { token: user.token, password } : { token: user.token }
   } else {
     return undefined
@@ -376,4 +385,10 @@ export function getTomorrow() {
 export async function getVersion() {
   return (await axios.get(`${process.env.VUE_APP_WEBSITE}/version.json`)).data
     .version as string
+}
+
+function setSettingsFromServer(state: any) {
+  const settings = state.settings
+  const settingsStore = getModule(SettingsStore, store)
+  settingsStore.setSettingsStore(settings)
 }

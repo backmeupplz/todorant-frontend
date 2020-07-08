@@ -1,6 +1,6 @@
-import { serverBus } from '../main';
+import { serverBus } from '@/main'
 import SocketIO from 'socket.io-client'
-import * as store from '../plugins/store'
+import store from '@/store'
 
 const socketIO = SocketIO(
   process.env.VUE_APP_DEV ? 'http://localhost:3000' : 'https://ws.todorant.com'
@@ -32,12 +32,11 @@ class SocketManager {
     socketIO.connect()
   }
   authorize = () => {
-    const token = store.user()?.token
-    if (
-      !token ||
-      !socketIO.connected ||
-      store.sockets().authorized
-    ) {
+    if (!store.state.UserStore.user) {
+      return
+    }
+    const token = store.state.UserStore.user.token
+    if (!token || !socketIO.connected || store.state.SocketsStore.authorized) {
       return
     }
     socketIO.emit('authorize', token)
@@ -47,19 +46,19 @@ class SocketManager {
       return
     }
     socketIO.emit('logout')
-    store.sockets().authorized = false
+    store.state.SocketsStore.authorized = false
     console.log('sockets logout')
   }
 
   onConnect = () => {
     console.log('sockets connected')
-    store.sockets().connected = true
+    store.state.SocketsStore.connected = true
     this.authorize()
   }
   onDisconnect = () => {
     console.log('sockets disconnected')
-    store.sockets().connected = false
-    store.sockets().authorized = false
+    store.state.SocketsStore.connected = false
+    store.state.SocketsStore.authorized = false
   }
 
   onConnectError = (error: Error) => {
@@ -74,7 +73,7 @@ class SocketManager {
 
   onAuthorized = () => {
     console.log('sockets authorized')
-    store.sockets().authorized = true
+    store.state.SocketsStore.authorized = true
   }
 }
 

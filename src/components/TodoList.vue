@@ -1,263 +1,257 @@
 <template lang="pug">
-  v-container(style='maxWidth: 1000px;')
-    v-list(subheader)
-      v-list-item.pt-4(
-        v-if='$store.state.userState.planning'
+v-container(style='maxWidth: 1000px;')
+  v-list(subheader)
+    v-list-item.pt-4(v-if='planning')
+      v-flex
+        v-alert(text, color='info', icon='info') {{ $t("todo.planning") }}
+    v-list-item.d-flex.align-center(:style='stickyHeaderStyle')
+      v-switch.ma-0.pa-0(
+        v-if='!calendarViewEnabled && !search && !hash',
+        hide-details,
+        v-model='showCompleted',
+        :label='$t("todo.list.completed")',
+        :loading='todosUpdating',
+        :disabled='editable'
       )
-        v-flex
-          v-alert(
-            text
-            color='info'
-            icon='info'
-          ) {{$t('todo.planning')}}
-      v-list-item.d-flex.align-center(
-        :style='stickyHeaderStyle'
+      v-text-field.pt-2.mr-4(
+        v-if='search',
+        v-model='queryString',
+        :label='$t("search")',
+        clearable,
+        dense
       )
-        v-switch.ma-0.pa-0(
-          v-if='!calendarViewEnabled && !search && !hash'
-          hide-details v-model='showCompleted'
-          :label='$t("todo.list.completed")'
-          :loading='todosUpdating'
-          :disabled='editable'
+      div(v-if='!!hash')
+        v-btn.mr-2(
+          :loading='todosUpdating || loading',
+          @click='goHome',
+          small,
+          icon
         )
-        v-text-field.pt-2.mr-4(
-          v-if='search'
-          v-model='queryString'
-          :label='$t("search")'
-          clearable
-          dense
-        )
-        div(v-if='!!hash')
-          v-btn.mr-2(
+          v-icon(small) clear
+        span {{ hash }}
+      v-spacer(v-if='!search')
+      v-btn(
+        v-if='!editable && !showCompleted && !search && !spreadEnabled',
+        icon,
+        @click='toggleCalendar',
+        :color='calendarViewEnabled ? "blue" : ""',
+        :loading='todosUpdating || loading'
+      )
+        v-icon calendar_today
+      v-tooltip(
+        bottom,
+        :max-width='300',
+        v-if='calendarViewEnabled && !editable && !spreadEnabled'
+      )
+        template(v-slot:activator='{ on }')
+          v-btn(
+            @click='spreadEnabled = true',
+            icon,
             :loading='todosUpdating || loading'
-            @click='goHome'
-            small
-            icon
           )
-            v-icon(small) clear
-          span {{hash}}
-        v-spacer(v-if='!search')
-        v-btn(
-          v-if='!editable && !showCompleted && !search && !spreadEnabled'
-          icon
-          @click='toggleCalendar'
-          :color='calendarViewEnabled ? "blue" : ""'
-          :loading='todosUpdating || loading'
-        )
-          v-icon calendar_today
-        v-tooltip(
-          bottom
-          :max-width='300'
-          v-if='calendarViewEnabled && !editable && !spreadEnabled'
-        )
-          template(v-slot:activator='{ on }')
-            v-btn(
-              @click='spreadEnabled = true'
-              icon
-              :loading='todosUpdating || loading'
-            )
-              v-icon(v-on='on') call_split
-          span {{$t('spread.hint')}}
-        v-btn(
-          v-if='!editable && !showCompleted && !spreadEnabled'
-          icon
-          :loading='todosUpdating'
-          @click='editable = true'
-        )
-          v-icon format_list_numbered
-        v-btn(
-          v-if='!!editable || !!spreadEnabled'
-          icon
-          :loading='todosUpdating || loading'
-          @click='crossPressed'
-        )
-          v-icon clear
-        v-btn(
-          v-if='!!editable || !!spreadEnabled'
-          icon
-          :loading='todosUpdating || loading'
-          @click='donePressed'
-          color='green'
-        )
-          v-icon done
-        v-btn(
-          v-if='!editable && !showCompleted && !calendarViewEnabled'
-          icon
-          :loading='todosUpdating || loading'
-          @click='searchTouched'
-          :color='search ? "blue" : ""'
-        )
-          v-icon search
-        v-btn(
-          icon
-          :loading='todosUpdating'
-          @click='loadTodos'
-        )
-          v-icon refresh
-      v-list-item(
-        v-if='calendarViewEnabled && todosUpdating'
-        flex
+            v-icon(v-on='on') call_split
+        span {{ $t("spread.hint") }}
+      v-btn(
+        v-if='!editable && !showCompleted && !spreadEnabled',
+        icon,
+        :loading='todosUpdating',
+        @click='editable = true'
       )
-        v-progress-linear(:indeterminate='true')
-      // Content
-      // Spread
-      v-list-item.my-2(v-if='spreadEnabled')
-        .d-flex.direction-row.align-center.flex-wrap
-          span.mx-1 {{$t('spread.spreading')}}
-          v-chip.mx-1(
-            v-if='!spreadTasks.length'
-          ) {{$t('spread.chooseTasks')}}
-          v-chip.mx-1.my-1(
-            v-else
-            v-for='task in spreadTasks'
-            :key='task._id'
-            close
-            @click:close="removeSpreadTask(task)"
-          ) {{text(task, true)}}
-          span.mx-1 {{$t('spread.between')}}
-          v-chip.mx-1(
-            v-if='!spreadDates.length'
-          ) {{$t('spread.chooseDates')}}
-          v-chip.mx-1.my-1(
-            v-else
-            v-for='(date, i) in spreadDates'
-            :key='i'
-            close
-            @click:close="removeSpreadDate(date)"
-          ) {{date}}
-      v-list-item(v-if='calendarViewEnabled' flex :class='calendarClass')
-        calendar-view(
-          :items='events'
-          :locale='locale'
-          :startingDayOfWeek='firstDayOfWeek'
-          :showDate='currentPeriod'
-          :class='$store.state.dark ? "dark" : "light"'
-          :enableDragDrop='editable'
-          @click-item="editEvent"
-          @click-date="clickDate"
-          @drop-on-date='moveDate'
-          :weekStyles='weekStyles'
-        )
-          calendar-view-header(
-            v-if='!editable && !spreadEnabled'
-            slot="header"
-            slot-scope="{ headerProps }"
-            :header-props="headerProps"
-            @input='(date) => currentPeriod = date'
-          )
-      v-expansion-panels(
-        v-else
-        flat
-        multiple
-        v-model='panels'
+        v-icon format_list_numbered
+      v-btn(
+        v-if='!!editable || !!spreadEnabled',
+        icon,
+        :loading='todosUpdating || loading',
+        @click='crossPressed'
       )
-        v-expansion-panel.my-0.py-0(
-          v-for='(todoSection, i) in todos'
-          :key='i'
+        v-icon clear
+      v-btn(
+        v-if='!!editable || !!spreadEnabled',
+        icon,
+        :loading='todosUpdating || loading',
+        @click='donePressed',
+        color='green'
+      )
+        v-icon done
+      v-btn(
+        v-if='!editable && !showCompleted && !calendarViewEnabled',
+        icon,
+        :loading='todosUpdating || loading',
+        @click='searchTouched',
+        :color='search ? "blue" : ""'
+      )
+        v-icon search
+      v-btn(icon, :loading='todosUpdating', @click='loadTodos')
+        v-icon refresh
+    v-list-item(v-if='calendarViewEnabled && todosUpdating', flex)
+      v-progress-linear(:indeterminate='true')
+    // Content
+    // Spread
+    v-list-item.my-2(v-if='spreadEnabled')
+      .d-flex.direction-row.align-center.flex-wrap
+        span.mx-1 {{ $t("spread.spreading") }}
+        v-chip.mx-1(v-if='!spreadTasks.length') {{ $t("spread.chooseTasks") }}
+        v-chip.mx-1.my-1(
+          v-else,
+          v-for='task in spreadTasks',
+          :key='task._id',
+          close,
+          @click:close='removeSpreadTask(task)'
+        ) {{ text(task, true) }}
+        span.mx-1 {{ $t("spread.between") }}
+        v-chip.mx-1(v-if='!spreadDates.length') {{ $t("spread.chooseDates") }}
+        v-chip.mx-1.my-1(
+          v-else,
+          v-for='(date, i) in spreadDates',
+          :key='i',
+          close,
+          @click:close='removeSpreadDate(date)'
+        ) {{ date }}
+    v-list-item(v-if='calendarViewEnabled', flex, :class='calendarClass')
+      calendar-view(
+        :items='events',
+        :locale='locale',
+        :startingDayOfWeek='safeFirstDayOfWeek',
+        :showDate='currentPeriod',
+        :class='dark ? "dark" : "light"',
+        :enableDragDrop='editable',
+        @click-item='editEvent',
+        @click-date='clickDate',
+        @drop-on-date='moveDate',
+        :weekStyles='weekStyles'
+      )
+        calendar-view-header(
+          v-if='!editable && !spreadEnabled',
+          slot='header',
+          slot-scope='{ headerProps }',
+          :header-props='headerProps',
+          @input='(date) => (currentPeriod = date)'
         )
-          v-expansion-panel-header.py-0.px-6(
-            v-observe-visibility='(isVisible, entry) => headerVisibilityChanged(isVisible, entry, i)'
-          )
-            v-subheader.pa-0
-              v-tooltip(
-                right
-                :max-width='300'
-                v-if='todoSection.title.length === 10'
-              )
-                template(v-slot:activator='{ on }')
-                  span(v-on='on') {{todoSection.title}}{{!panels.includes(i) ? ` (${todoSection.todos.length})` : ''}}
-                span {{$t(weekdayFromTitle(todoSection.title))}}{{!panels.includes(i) ? ` (${todoSection.todos.length})` : ''}}
-              span(v-else) {{todoSection.title}}
-          v-expansion-panel-content
-            draggable(
-              v-model='todoSection.todos'
-              group='todo'
-              @start='drag=true'
-              @end='drag=false'
-              v-bind="dragOptions"
-              handle='.handle'
+    v-expansion-panels(v-else, flat, multiple, v-model='panels')
+      v-expansion-panel.my-0.py-0(v-for='(todoSection, i) in todos', :key='i')
+        v-expansion-panel-header.py-0.px-6(
+          v-observe-visibility='(isVisible, entry) => headerVisibilityChanged(isVisible, entry, i)'
+        )
+          v-subheader.pa-0
+            v-tooltip(
+              right,
+              :max-width='300',
+              v-if='todoSection.title.length === 10'
             )
-              v-list-item.pa-0(
-                v-for='(todo, j) in todoSection.todos'
-                :key='j'
-                v-observe-visibility='(isVisible, entry) => visibilityChanged(isVisible, entry, i, j)'
-              )
-                v-list-item-content
-                  v-card(:class='cardClass(todo)')
-                    v-card-text(:class='!editable ? "px-3 pt-2 pb-0 ma-0" : ""')
-                      v-row(no-gutters)
-                        .handle.pr-3(v-if='editable && todo.frogFails < 3')
-                          v-icon menu
-                        TodoText(:todo='todo' :text='text(todo)' :errorDecrypting='errorDecrypting(todo)')
-                    v-card-actions.pb-2.pt-2.ma-0(v-if='!editable')
-                      v-icon(v-if='todoOutstanding(todo)') error_outline
-                      v-col(no-gutters).px-2.py-0.ma-0
-                        v-row
-                          v-icon.grey--text.pl-2(
-                            v-if='todo.encrypted'
-                            small
-                          ) vpn_key
-                          v-icon.grey--text.pl-2(
-                            v-if='todo.skipped'
-                            small
-                          ) arrow_forward
-                      v-spacer
-                      v-tooltip.mx-0(bottom v-if='todoInFuture(todo)')
-                        template(v-slot:activator='{ on }')
-                          v-btn(text
-                          small
-                          icon
-                          @click='moveTodoToToday(todo)'
-                          :loading='loading'
-                          v-if='!editable'
-                          v-on='on')
-                            v-icon(small) vertical_align_top
-                        span {{$t('moveUp')}}
-                      v-btn.mx-0(text small icon @click='deleteTodo(todo)' :loading='loading' v-if='!editable')
-                        v-icon(small) delete
-                      v-btn.mx-0(text small icon @click='editTodo(todo)' :loading='loading' v-if='!editable')
-                        v-icon(small) edit
-                      v-tooltip.mx-0(bottom v-if='!todo.completed')
-                        template(v-slot:activator='{ on }')
-                          v-btn(text
-                          icon
-                          :loading='loading'
+              template(v-slot:activator='{ on }')
+                span(v-on='on') {{ todoSection.title }}{{ !panels.includes(i) ? ` (${todoSection.todos.length})` : "" }}
+              span {{ $t(weekdayFromTitle(todoSection.title)) }}{{ !panels.includes(i) ? ` (${todoSection.todos.length})` : "" }}
+            span(v-else) {{ todoSection.title }}
+        v-expansion-panel-content
+          draggable(
+            v-model='todoSection.todos',
+            group='todo',
+            @start='drag = true',
+            @end='drag = false',
+            v-bind='dragOptions',
+            handle='.handle'
+          )
+            v-list-item.pa-0(
+              v-for='(todo, j) in todoSection.todos',
+              :key='j',
+              v-observe-visibility='(isVisible, entry) => visibilityChanged(isVisible, entry, i, j)'
+            )
+              v-list-item-content
+                v-card(:class='cardClass(todo)')
+                  v-card-text(:class='!editable ? "px-3 pt-2 pb-0 ma-0" : ""')
+                    v-row(no-gutters)
+                      .handle.pr-3(v-if='editable && todo.frogFails < 3')
+                        v-icon menu
+                      TodoText(
+                        :todo='todo',
+                        :text='text(todo)',
+                        :errorDecrypting='errorDecrypting(todo)'
+                      )
+                  v-card-actions.pb-2.pt-2.ma-0(v-if='!editable')
+                    v-icon(v-if='todoOutstanding(todo)') error_outline
+                    v-col.px-2.py-0.ma-0(no-gutters)
+                      v-row
+                        v-icon.grey--text.pl-2(v-if='todo.encrypted', small) vpn_key
+                        v-icon.grey--text.pl-2(v-if='todo.skipped', small) arrow_forward
+                    v-spacer
+                    v-tooltip.mx-0(bottom, v-if='todoInFuture(todo)')
+                      template(v-slot:activator='{ on }')
+                        v-btn(
+                          text,
+                          small,
+                          icon,
+                          @click='moveTodoToToday(todo)',
+                          :loading='loading',
+                          v-if='!editable',
                           v-on='on'
-                          small
-                          @click='breakdownTodo(todo)')
-                            v-icon(small) list
-                        span {{$t('breakdownInfo')}}
-                      v-btn.mx-0(text
-                      small
-                      icon
-                      @click='completeOrUndoTodo(todo)'
-                      :loading='loading'
-                      v-if='!editable')
-                        v-icon(small) {{todo.completed ? 'repeat' : 'done'}}
-      v-progress-linear(v-if='todosUpdating && !calendarViewEnabled' :indeterminate='true')
-    EditTodo(
-      :todo='todoEdited'
-      :cleanTodo='cleanTodo'
-      :requestDelete='requestDelete'
+                        )
+                          v-icon(small) vertical_align_top
+                      span {{ $t("moveUp") }}
+                    v-btn.mx-0(
+                      text,
+                      small,
+                      icon,
+                      @click='deleteTodo(todo)',
+                      :loading='loading',
+                      v-if='!editable'
+                    )
+                      v-icon(small) delete
+                    v-btn.mx-0(
+                      text,
+                      small,
+                      icon,
+                      @click='editTodo(todo)',
+                      :loading='loading',
+                      v-if='!editable'
+                    )
+                      v-icon(small) edit
+                    v-tooltip.mx-0(bottom, v-if='!todo.completed')
+                      template(v-slot:activator='{ on }')
+                        v-btn(
+                          text,
+                          icon,
+                          :loading='loading',
+                          v-on='on',
+                          small,
+                          @click='breakdownTodo(todo)'
+                        )
+                          v-icon(small) list
+                      span {{ $t("breakdownInfo") }}
+                    v-btn.mx-0(
+                      text,
+                      small,
+                      icon,
+                      @click='completeOrUndoTodo(todo)',
+                      :loading='loading',
+                      v-if='!editable'
+                    )
+                      v-icon(small) {{ todo.completed ? "repeat" : "done" }}
+    v-progress-linear(
+      v-if='todosUpdating && !calendarViewEnabled',
+      :indeterminate='true'
     )
-    DeleteTodo(:todo='todoDeleted')
+  EditTodo(
+    :todo='todoEdited',
+    :cleanTodo='cleanTodo',
+    :requestDelete='requestDelete'
+  )
+  DeleteTodo(:todo='todoDeleted')
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { Todo } from '../models/todo'
-import { getTodos, editTodo } from '../utils/api'
-import * as store from '../plugins/store'
-import EditTodo from './EditTodo.vue'
-import DeleteTodo from './DeleteTodo.vue'
-import TodoText from './TodoText.vue'
+import { Todo } from '@/models/Todo'
+import { getTodos, editTodo } from '@/utils/api'
+import EditTodo from '@/components/EditTodo.vue'
+import DeleteTodo from '@/components/DeleteTodo.vue'
+import TodoText from '@/components/TodoCard/TodoText.vue'
 import { Watch } from 'vue-property-decorator'
-import * as api from '../utils/api'
-import { serverBus } from '../main'
+import * as api from '@/utils/api'
+import { serverBus } from '@/main'
 import draggable from 'vuedraggable'
-import { TodoSection } from '../models/TodoSection'
-import { isTodoOld, isDateTooOld } from '../utils/isTodoOld'
+import { TodoSection } from '@/models/TodoSection'
+import { isTodoOld, isDateTooOld } from '@/utils/isTodoOld'
 import {
   CalendarView,
   CalendarViewHeader,
@@ -265,9 +259,16 @@ import {
 import moment, { LocaleSpecification, Moment } from 'moment'
 import { debounce } from 'lodash'
 import { v4 as uuid } from 'uuid'
-import { decrypt } from '../utils/encryption'
-import { i18n } from '../plugins/i18n'
-import { playSound, Sounds } from '../utils/sounds'
+import { decrypt } from '@/utils/encryption'
+import { i18n } from '@/plugins/i18n'
+import { playSound, Sounds } from '@/utils/sounds'
+import { namespace } from 'vuex-class'
+import { User } from '@/models/User'
+
+const AppStore = namespace('AppStore')
+const UserStore = namespace('UserStore')
+const SnackbarStore = namespace('SnackbarStore')
+const SettingsStore = namespace('SettingsStore')
 
 @Component({
   components: {
@@ -280,6 +281,15 @@ import { playSound, Sounds } from '../utils/sounds'
   },
 })
 export default class TodoList extends Vue {
+  @AppStore.State dark!: boolean
+  @AppStore.State language!: string
+  @AppStore.State editting!: boolean
+  @AppStore.Mutation setEditting!: (editting: boolean) => void
+  @UserStore.State user!: User
+  @UserStore.State planning!: boolean
+  @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
+  @SettingsStore.State firstDayOfWeek?: number
+
   showCompleted = false
   todoEdited: Partial<Todo> | null = null
   todoDeleted: Todo | null = null
@@ -388,7 +398,7 @@ export default class TodoList extends Vue {
       position: 'sticky',
       top: this.$vuetify.breakpoint.smAndDown ? 53 : 60,
       zIndex: 2,
-      backgroundColor: store.dark() ? '#1e1e1e' : '#ffffff',
+      backgroundColor: this.dark ? '#1e1e1e' : '#ffffff',
     }
   }
 
@@ -399,24 +409,23 @@ export default class TodoList extends Vue {
   }
 
   get locale() {
-    return store.language() === 'ua' ? 'uk' : store.language()
+    return this.language === 'ua' ? 'uk' : this.language
   }
 
   get editable() {
-    return store.editting()
+    return this.editting
   }
-  set editable(value: Boolean) {
-    store.setEditting(value)
+  set editable(value: boolean) {
+    this.setEditting(value)
     if (value === false) {
       this.loadTodos()
     }
   }
   get weekdays() {
-    const storeFirstDayOfWeek = this.$store.state.userState.settings
-      .firstDayOfWeek
+    const storeFirstDayOfWeek = this.firstDayOfWeek
     const firstDay =
       storeFirstDayOfWeek === undefined
-        ? this.$store.state.language === 'ru'
+        ? this.language === 'ru'
           ? 1
           : 0
         : storeFirstDayOfWeek
@@ -483,7 +492,7 @@ export default class TodoList extends Vue {
   async loadTodos(fullUpdate = true, more = false) {
     const currentLoadingUUID = uuid()
     this.loadingUUID = currentLoadingUUID
-    const user = store.user()
+    const user = this.user
     if (!user) {
       return
     }
@@ -565,7 +574,7 @@ export default class TodoList extends Vue {
         this.todos.reverse()
       }
     } catch (err) {
-      store.setSnackbarError('errors.loadTodos')
+      this.setSnackbarError('errors.loadTodos')
     } finally {
       if (this.loadingUUID === currentLoadingUUID) {
         this.todosUpdating = false
@@ -607,7 +616,7 @@ export default class TodoList extends Vue {
   }
 
   async moveTodoToToday(todo: Todo) {
-    const user = store.user()
+    const user = this.user
     if (!user) {
       return
     }
@@ -621,7 +630,7 @@ export default class TodoList extends Vue {
       await api.editTodo(user, todo)
       this.loadTodos(false)
     } catch (err) {
-      store.setSnackbarError(err.response ? err.response.data : err.message)
+      this.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
       this.loading = false
     }
@@ -636,7 +645,7 @@ export default class TodoList extends Vue {
   }
 
   async completeOrUndoTodo(todo: Todo) {
-    const user = store.user()
+    const user = this.user
     if (!user) {
       return
     }
@@ -655,7 +664,7 @@ export default class TodoList extends Vue {
       }
       this.loadTodos(false)
     } catch (err) {
-      store.setSnackbarError(err.response ? err.response.data : err.message)
+      this.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
       this.loading = false
     }
@@ -669,7 +678,7 @@ export default class TodoList extends Vue {
   }
 
   cardClass(todo: Todo) {
-    const dark = store.dark()
+    const dark = this.dark
     const outstanding = this.todoOutstanding(todo)
     return dark
       ? outstanding
@@ -696,7 +705,7 @@ export default class TodoList extends Vue {
   }
 
   async doneEditing() {
-    const user = store.user()
+    const user = this.user
     if (!user) {
       return
     }
@@ -705,7 +714,7 @@ export default class TodoList extends Vue {
       await api.rearrangeTodos(user, this.todos)
       await this.loadTodos(false)
     } catch (err) {
-      store.setSnackbarError(err.response ? err.response.data : err.message)
+      this.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
       this.loading = false
       this.editable = false
@@ -758,11 +767,10 @@ export default class TodoList extends Vue {
     this.loadTodos(true, false)
   }
 
-  get firstDayOfWeek() {
-    const storeFirstDayOfWeek = this.$store.state.userState.settings
-      .firstDayOfWeek
+  get safeFirstDayOfWeek() {
+    const storeFirstDayOfWeek = this.firstDayOfWeek
     return storeFirstDayOfWeek === undefined
-      ? this.$store.state.language === 'en'
+      ? this.language === 'en'
         ? 0
         : 1
       : storeFirstDayOfWeek
@@ -840,7 +848,7 @@ export default class TodoList extends Vue {
   async goHome() {
     try {
       this.hash = ''
-      await this.$router.replace(store.user() ? '/superpower' : '/')
+      await this.$router.replace(this.user ? '/superpower' : '/')
       serverBus.$emit('refreshRequested')
     } catch (err) {
       // Do nothing
@@ -874,7 +882,7 @@ export default class TodoList extends Vue {
     const locale = moment.locale()
     moment.locale(locale, {
       week: {
-        dow: this.firstDayOfWeek,
+        dow: this.safeFirstDayOfWeek,
       },
     } as LocaleSpecification)
     const week = date.week()
@@ -900,7 +908,7 @@ export default class TodoList extends Vue {
     if (this.editable) {
       this.doneEditing()
     } else {
-      const user = store.user()
+      const user = this.user
       if (!user) {
         return
       }
@@ -947,7 +955,7 @@ export default class TodoList extends Vue {
         await api.rearrangeTodos(user, this.todos)
         await this.loadTodos(false)
       } catch (err) {
-        store.setSnackbarError(err.response ? err.response.data : err.message)
+        this.setSnackbarError(err.response ? err.response.data : err.message)
       } finally {
         this.loading = false
         this.spreadEnabled = false

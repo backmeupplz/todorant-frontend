@@ -1,49 +1,49 @@
 <template lang="pug">
-  v-dialog(
-    v-model='dialog'
-    persistent
-    scrollable
-    max-width='600px'
-  )
-    v-card
-      v-card-text.pt-4 {{$t('deleteHeadline', { name: todo ? textForTodo(todo) : '' } )}}
-      v-card-actions
-        v-spacer
-        v-btn(
-          color='blue'
-          text
-          @click='dialog = false'
-          :loading='loading'
-          :disabled='loading'
-        ) {{$t('cancel')}}
-        v-btn(
-          color='error'
-          text 
-          @click='deleteTodo'
-          :loading='loading'
-          :disabled='loading'
-          v-shortkey.once="['enter']"
-          @shortkey='deleteTodo'
-        ) {{$t('delete')}}
+v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
+  v-card
+    v-card-text.pt-4 {{ $t("deleteHeadline", { name: todo ? textForTodo(todo) : "" }) }}
+    v-card-actions
+      v-spacer
+      v-btn(
+        color='blue',
+        text,
+        @click='dialog = false',
+        :loading='loading',
+        :disabled='loading'
+      ) {{ $t("cancel") }}
+      v-btn(
+        color='error',
+        text,
+        @click='deleteTodo',
+        :loading='loading',
+        :disabled='loading',
+        v-shortkey.once='["enter"]',
+        @shortkey='deleteTodo'
+      ) {{ $t("delete") }}
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { Watch } from 'vue-property-decorator'
-import * as store from '../plugins/store'
-import * as api from '../utils/api'
-import { serverBus } from '../main'
-import { Todo } from '../models/todo'
-import { decrypt } from '../utils/encryption'
-import { i18n } from '../plugins/i18n'
+import { Watch, Prop } from 'vue-property-decorator'
+import * as api from '@/utils/api'
+import { serverBus } from '@/main'
+import { Todo } from '@/models/Todo'
+import { decrypt } from '@/utils/encryption'
+import { i18n } from '@/plugins/i18n'
+import { namespace } from 'vuex-class'
+import { User } from '@/models/User'
 
-@Component({
-  props: {
-    todo: Object,
-  },
-})
+const UserStore = namespace('UserStore')
+const SnackbarStore = namespace('SnackbarStore')
+
+@Component
 export default class DeleteTodo extends Vue {
+  @Prop({ required: true }) todo!: Todo
+
+  @UserStore.State user?: User
+  @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
+
   loading = false
   dialog = false
 
@@ -53,7 +53,7 @@ export default class DeleteTodo extends Vue {
   }
 
   async deleteTodo() {
-    const user = store.user()
+    const user = this.user
     if (!user) {
       return
     }
@@ -62,7 +62,7 @@ export default class DeleteTodo extends Vue {
       await api.deleteTodo(user, (this as any).todo)
       this.dialog = false
     } catch (err) {
-      store.setSnackbarError(err.response ? err.response.data : err.message)
+      this.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
       this.loading = false
     }
