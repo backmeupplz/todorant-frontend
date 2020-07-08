@@ -1,4 +1,4 @@
-import { Todo } from './todo'
+import { Todo } from './Todo'
 
 export interface TodoSection {
   title: string
