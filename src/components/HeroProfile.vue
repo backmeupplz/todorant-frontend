@@ -15,7 +15,7 @@ v-dialog(v-model='dialog', max-width='600px', @click:outside='close')
         .ml-2.mt-2 {{ $t(`rank${rank}Description`) }}
     v-divider.ma-2
     div(
-      v-for='lowerRank in ranks',
+      v-for='lowerRank in ranksRef',
       v-bind:key='lowerRank',
       v-if='lowerRank < rank'
     ) 
@@ -66,7 +66,7 @@ export default class HeroProfile extends Vue {
     this.generateColorScheme()
   }
 
-  ranks = ranks
+  ranksRef = ranks
 
   colorSchemes = [] as string[][]
 
