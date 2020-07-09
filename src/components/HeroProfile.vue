@@ -4,12 +4,10 @@ v-dialog(v-model='dialog', max-width='600px', @click:outside='close')
     v-card-title {{ $t("heroProfileTitle") }}
     .d-flex.ma-2
       .d-flex.flex-column
-        VerticalBar.ml-4.mr-4(:colorArr='colorSchemes', :progresss='progress')
-      .ma-2
+        VerticalBar.ml-4.mr-4(:color='colorSchemes', :progresss='progress')
+      .ma-2.max-width
         .ml-2.mt-2 {{ nextRank - points }} {{ `${$t("pointsTillNextLevel")}` }}
         v-card.ml-1.mt-4.self-align-center(
-          min-width=510,
-          max-width=510,
           :color='$vuetify.theme.dark ? "grey darken-3" : undefined'
         )
           v-card-title {{ $t("level") }} {{ rank }}
@@ -22,16 +20,14 @@ v-dialog(v-model='dialog', max-width='600px', @click:outside='close')
       v-if='lowerRank < rank'
     ) 
       .d-flex.ma-2
-        .d-flex
+        .d-flex.max-width
           .d-flex.flex-column
-            VerticalBar.ml-4.mr-4(:colorArr='colorSchemes', :progresss='100')
-          .ma-3
-            v-card.ml-1.mt-4.justify-end(
-              min-width=510,
-              max-width=510,
+            VerticalBar.ml-4.mr-4(:color='colorSchemes', :progresss='100')
+          .ma-2.max-width
+            v-card.ml-1.mt-4.self-align-center(
               :color='$vuetify.theme.dark ? "grey darken-3" : undefined'
             )
-              v-card-title {{ `${$t("level")} ${lowerRank}` }}
+              v-card-title {{ $t("level") }} {{ lowerRank }}
               v-card-text {{ $t(`rank${lowerRank}Title`) }}
             .ml-2.mt-2 {{ $t(`rank${lowerRank}Description`) }}
     v-btn(
@@ -48,6 +44,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import VerticalBar from './VertiсalProgressBar.vue'
 import { namespace } from 'vuex-class'
+import { ranks } from '@/assets/ranks'
 
 const ColorScheme = require('color-scheme')
 const HeroStore = namespace('HeroStore')
@@ -61,35 +58,15 @@ const AppStore = namespace('AppStore')
 })
 export default class HeroProfile extends Vue {
   @HeroStore.State points!: number
-  @HeroStore.State rank!: number
-  @HeroStore.State nextRank!: number
-  @HeroStore.State progress!: number
+  @HeroStore.Getter rank!: number
+  @HeroStore.Getter nextRank!: number
+  @HeroStore.Getter progress!: number
 
   created() {
     this.generateColorScheme()
   }
 
-  ranks = [
-    0,
-    5,
-    13,
-    42,
-    69,
-    85,
-    100,
-    221,
-    256,
-    300,
-    404,
-    777,
-    800,
-    1337,
-    1338,
-    2048,
-    9000,
-    12800,
-    1000000,
-  ].reverse()
+  ranks = ranks
 
   colorSchemes = [] as string[][]
 
@@ -102,3 +79,9 @@ export default class HeroProfile extends Vue {
   }
 }
 </script>
+
+<style>
+.max-width {
+  width: 100%;
+}
+</style>

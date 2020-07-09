@@ -1,6 +1,8 @@
 <template lang="pug">
-    div.progress.vertical
-      div.progress-bar(:style="{ height: `${progresss}%`, backgroundColor: `${color}` }")
+.progress.vertical
+  .progress-bar(
+    :style='{ height: `${progresss}%`, backgroundColor: `${colors}` }'
+  )
 </template>
 
 <script lang="ts">
@@ -10,20 +12,20 @@ import Component from 'vue-class-component'
 @Component({
   props: {
     progresss: Number,
-    colorArr: Array,
+    color: Array,
   },
 })
 export default class VerticalBar extends Vue {
   created() {
-    this.colorScheme = this.$props.colorArr[
-      Math.floor(Math.random() * this.$props.colorArr.length)
+    this.colorScheme = this.$props.color[
+      Math.floor(Math.random() * this.$props.color.length)
     ]
-    this.color = this.colorScheme[
+    this.colors = this.colorScheme[
       Math.floor(Math.random() * this.colorScheme.length)
     ]
   }
   colorScheme = []
-  color = []
+  colors = []
 }
 </script>
 

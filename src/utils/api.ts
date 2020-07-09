@@ -206,7 +206,7 @@ export async function getTodos(
   getModule(UserStore, store).setUserStore(data.state)
   setSettingsFromServer(data.state)
   setTags(data.tags)
-  setHero(data.points)
+  getModule(HeroStore, store).setPoints(data.points)
   return data.todos
 }
 
@@ -229,7 +229,7 @@ export async function getCurrentTodo(user: User) {
   getModule(UserStore, store).setUserStore(data.state)
   setSettingsFromServer(data.state)
   setTags(data.tags)
-  setHero(data.points)
+  getModule(HeroStore, store).setPoints(data.points)
   return data
 }
 
@@ -293,50 +293,6 @@ function setTags(tags: Tag[]) {
     return p
   }, {} as { [index: string]: string })
   getModule(TagsStore, store).setTagColors(tagColors)
-}
-
-function setHero(points: number) {
-  const ranks = [
-    0,
-    5,
-    13,
-    42,
-    69,
-    85,
-    100,
-    221,
-    256,
-    300,
-    404,
-    777,
-    800,
-    1337,
-    1338,
-    2048,
-    9000,
-    12800,
-    1000000,
-  ]
-  const getCurrentRank = () => {
-    let nearest = 0
-    for (const i of ranks) {
-      if (i > nearest && i <= points) {
-        nearest = i
-      }
-    }
-    return nearest
-  }
-  const hero = getModule(HeroStore, store)
-  let indexOfCurrentRank = ranks.indexOf(getCurrentRank())
-  let nextRank = ranks[indexOfCurrentRank + 1]
-  let currentRank = getCurrentRank()
-
-  hero.setPoints(points)
-  hero.setRank(currentRank)
-  hero.setNextRank(nextRank)
-  hero.setProgress(
-    Math.ceil(((points - currentRank) / (nextRank - currentRank)) * 100)
-  )
 }
 
 export async function getReport(

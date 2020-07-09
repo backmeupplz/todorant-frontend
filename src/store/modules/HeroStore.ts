@@ -1,11 +1,8 @@
 import { VuexModule, Module, Mutation } from 'vuex-module-decorators'
-
+import { ranks } from '@/assets/ranks'
 @Module({ namespaced: true, name: 'HeroStore' })
 export default class HeroStore extends VuexModule {
   points: number = 0
-  rank: number = 0
-  nextRank: number = 0
-  progress: number = 0
 
   @Mutation
   setHeroStore(heroStore: HeroStore) {
@@ -15,16 +12,24 @@ export default class HeroStore extends VuexModule {
   setPoints(points: number) {
     this.points = points
   }
-  @Mutation
-  setRank(rank: number) {
-    this.rank = rank
+
+  get rank() {
+    let nearest = 0
+    for (const i of ranks) {
+      if (i > nearest && i <= this.points) {
+        nearest = i
+      }
+    }
+    return nearest
   }
-  @Mutation
-  setNextRank(nextRank: number) {
-    this.nextRank = nextRank
+
+  get nextRank() {
+    return ranks[ranks.indexOf(this.rank) - 1]
   }
-  @Mutation
-  setProgress(progress: number) {
-    this.progress = progress
+
+  get progress() {
+    return Math.ceil(
+      ((this.points - this.rank) / (this.nextRank - this.rank)) * 100
+    )
   }
 }
