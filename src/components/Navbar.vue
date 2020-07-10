@@ -38,7 +38,7 @@ nav
     // Language picker
     v-menu(offset-y)
       template(v-slot:activator='{ on }')
-        v-btn(text, icon, color='grey', v-on='on', :loading='loading') {{ currentLocale.code }}
+        v-btn(text, icon, color='grey', v-on='on') {{ currentLocale.code }}
       v-list
         v-list-item(
           v-for='locale in locales',
@@ -147,8 +147,6 @@ export default class Navbar extends Vue {
   qrDialog = false
   encryptionDialog = false
 
-  loading = false
-
   get locales() {
     return [
       { icon: 'us', code: 'en' },
@@ -250,15 +248,12 @@ export default class Navbar extends Vue {
     }
   }
   async setServerLanguage(locale: string) {
-    this.loading = true
     try {
       await api.setSettings(this.user, {
         language: locale,
       })
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)
-    } finally {
-      this.loading = false
     }
   }
 
