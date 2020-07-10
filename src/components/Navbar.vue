@@ -108,6 +108,7 @@ import { User } from '@/models/User'
 
 const UserStore = namespace('UserStore')
 const AppStore = namespace('AppStore')
+const SnackbarStore = namespace('SnackbarStore')
 
 @Component({
   components: {
@@ -133,6 +134,7 @@ export default class Navbar extends Vue {
   @AppStore.Mutation setDark!: (dark: boolean) => void
   @AppStore.Mutation setLanguage!: (language: string) => void
   @UserStore.Mutation setUser!: (user?: User) => void
+  @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
 
   rulesDialog = false
   welcomeDialog = false
@@ -184,15 +186,19 @@ export default class Navbar extends Vue {
     this.setDark(!this.dark)
     ;(this.$vuetify.theme as any).dark = this.dark
   }
-  async changeLanguage(locale: string) {
+  changeLanguage(locale: string) {
     i18n.locale = locale
     this.setLanguage(locale)
-    if (this.user) {
-      await api.setSettings(this.user, {
-        language: locale,
-      })
-    }
     document.title = i18n.t('title') as string
+    if (this.user) {
+      try {
+        api.setSettings(this.user, {
+          language: locale,
+        })
+      } catch (err) {
+        this.setSnackbarError(err.response ? err.response.data : err.message)
+      }
+    }
   }
   logout() {
     this.setUser(undefined)
