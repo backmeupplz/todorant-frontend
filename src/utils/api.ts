@@ -10,6 +10,7 @@ import TagsStore from '@/store/modules/TagsStore'
 import UserStore from '@/store/modules/UserStore'
 import SettingsStore from '@/store/modules/SettingsStore'
 import HeroStore from '@/store/modules/HeroStore'
+import AppStore from '@/store/modules/AppStore'
 
 const base = process.env.VUE_APP_API
 
@@ -395,4 +396,5 @@ function setSettingsFromServer(state: any) {
   const settings = state.settings
   const settingsStore = getModule(SettingsStore, store)
   settingsStore.setSettingsStore(settings)
+  const appStore = getModule(AppStore, store).setLanguage(settings.language)
 }
