@@ -188,21 +188,12 @@ export default class Navbar extends Vue {
     this.setDark(!this.dark)
     ;(this.$vuetify.theme as any).dark = this.dark
   }
-  async changeLanguage(locale: string) {
+  changeLanguage(locale: string) {
     i18n.locale = locale
     this.setLanguage(locale)
     document.title = i18n.t('title') as string
     if (this.user) {
-      this.loading = true
-      try {
-        await api.setSettings(this.user, {
-          language: locale,
-        })
-      } catch (err) {
-        this.setSnackbarError(err.response ? err.response.data : err.message)
-      } finally {
-        this.loading = false
-      }
+      this.setServerLanguage(locale)
     }
   }
   logout() {
@@ -258,6 +249,19 @@ export default class Navbar extends Vue {
       // Do nothing
     }
   }
+  async setServerLanguage(locale: string) {
+    this.loading = true
+    try {
+      await api.setSettings(this.user, {
+        language: locale,
+      })
+    } catch (err) {
+      this.setSnackbarError(err.response ? err.response.data : err.message)
+    } finally {
+      this.loading = false
+    }
+  }
+
   showSubscription() {
     logEvent('subscription_viewed', {
       status: this.subscriptionStatus,
