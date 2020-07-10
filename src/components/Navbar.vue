@@ -184,9 +184,14 @@ export default class Navbar extends Vue {
     this.setDark(!this.dark)
     ;(this.$vuetify.theme as any).dark = this.dark
   }
-  changeLanguage(locale: string) {
+  async changeLanguage(locale: string) {
     i18n.locale = locale
     this.setLanguage(locale)
+    if (this.user) {
+      await api.setSettings(this.user, {
+        language: locale,
+      })
+    }
     document.title = i18n.t('title') as string
   }
   logout() {
