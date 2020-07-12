@@ -58,7 +58,10 @@ export default class TodoText extends Vue {
   }
 
   hash(hash: string) {
-    location.hash = hash
+    if (!location.hash.includes(hash)) {
+      let hashesString = location.hash == '' ? hash : `,${hash}`
+      location.hash += hashesString
+    }
     serverBus.$emit('refreshRequested')
   }
 }

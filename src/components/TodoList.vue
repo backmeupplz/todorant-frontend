@@ -6,7 +6,7 @@ v-container(style='maxWidth: 1000px;')
         v-alert(text, color='info', icon='info') {{ $t("todo.planning") }}
     v-list-item.d-flex.align-center(:style='stickyHeaderStyle')
       v-switch.ma-0.pa-0(
-        v-if='!calendarViewEnabled && !search && !hash',
+        v-if='!calendarViewEnabled && !search && !hashes.size',
         hide-details,
         v-model='showCompleted',
         :label='$t("todo.list.completed")',
@@ -20,7 +20,7 @@ v-container(style='maxWidth: 1000px;')
         clearable,
         dense
       )
-      div(v-if='!!hash')
+      div(v-if='!!hashes.size')
         v-btn.mr-2(
           :loading='todosUpdating || loading',
           @click='goHome',
@@ -28,7 +28,11 @@ v-container(style='maxWidth: 1000px;')
           icon
         )
           v-icon(small) clear
-        span {{ hash }}
+        v-chip.ma-1(
+          close,
+          @click:close='delHash(word)',
+          v-for='word in hashes'
+        ) {{ word }}
       v-spacer(v-if='!search')
       v-btn(
         v-if='!editable && !showCompleted && !search && !spreadEnabled',
@@ -379,7 +383,7 @@ export default class TodoList extends Vue {
   search = false
   queryString = ''
 
-  hash = ''
+  hashes = new Set()
 
   @Watch('queryString')
   onQuerryStringChanged() {
@@ -475,12 +479,20 @@ export default class TodoList extends Vue {
       this.loadTodos()
     })
     serverBus.$on('cleanHash', () => {
-      this.hash = ''
+      this.hashes.clear()
     })
-    this.hash = decodeURI(this.$router.currentRoute.hash)
+
     window.onhashchange = () => {
-      this.hash = decodeURI(this.$router.currentRoute.hash)
+      const hashArr = decodeURI(this.$router.currentRoute.hash).split(',')
+      this.hashes.add(hashArr[hashArr.length - 1])
     }
+  }
+
+  async delHash(word: string) {
+    this.hashes.delete(word)
+    const hashesString = [...this.hashes.values()].join(',')
+    await this.$router.replace(this.user ? `/superpower${hashesString}` : '/')
+    serverBus.$emit('refreshRequested')
   }
 
   todoInFuture(todo: Todo) {
@@ -847,7 +859,7 @@ export default class TodoList extends Vue {
 
   async goHome() {
     try {
-      this.hash = ''
+      this.hashes.clear()
       await this.$router.replace(this.user ? '/superpower' : '/')
       serverBus.$emit('refreshRequested')
     } catch (err) {
