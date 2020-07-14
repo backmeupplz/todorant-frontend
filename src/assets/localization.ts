@@ -680,7 +680,7 @@ export const messages = {
       todo: {
         textLenght: 'Todos should have text',
         dateOrMonth: 'Todos should have either date or month set',
-        more1500: `Todos can't have more than 1500 characters.`,
+        more1500: "Todos can't have more than 1500 characters.",
       },
       invalidForm: 'Please, fill in the required fields',
       report: 'Could not load report',
@@ -1661,7 +1661,7 @@ export const messages = {
       todo: {
         textLenght: 'As tarefas devem ter texto',
         dateOrMonth: 'Tarefas devem ter data ou mês definidos',
-        more1500: `L'attività non può contenere più di 1500 caratteri.`,
+        more1500: "L'attività non può contenere più di 1500 caratteri.",
       },
       invalidForm: 'Por favor, preencha os campos obrigatórios',
       report: 'Não foi possível carregar o relatório',
