@@ -10,6 +10,7 @@
     v-tab(v-shortkey.once='{ en: ["c"], ru: ["с"] }', @shortkey='switchTab(0)') {{ $t("current") }}
     v-tab(v-shortkey.once='{ en: ["p"], ru: ["з"] }', @shortkey='switchTab(1)') {{ $t("planning") }}
     v-tab {{ $t("report.title") }}
+    v-tab {{ $t("delegate.title") }}
     v-tabs-items(v-model='currentTab')
       v-tab-item(:value='0')
         CurrentTodo
@@ -17,6 +18,8 @@
         TodoList
       v-tab-item(:value='2')
         Report
+      v-tab-item(:value='3')
+        Delegate
       // Add FAB
       AddTodo(v-if='!editting', :currentTab='currentTab')
   // Tabs (planning = true)
@@ -29,12 +32,15 @@
     v-tab(disabled) {{ $t("current") }}
     v-tab {{ $t("planning") }}
     v-tab(disabled) {{ $t("report.title") }}
+    v-tab(disabled) {{ $t("delegate.title") }}
     v-tabs-items(:value='1')
       v-tab-item(:value='0')
         .display-3.text-center ☁️
       v-tab-item(:value='1')
         TodoList
       v-tab-item(:value='2')
+        .display-3.text-center ☁️
+      v-tab-item(:value='3')
         .display-3.text-center ☁️
       // Add FAB
       AddTodo(v-if='!editting', :currentTab='currentTab')
@@ -47,6 +53,7 @@ import TodoList from '@/components/TodoList.vue'
 import CurrentTodo from '@/components/CurrentTodo.vue'
 import Report from '@/components/Report.vue'
 import AddTodo from '@/components/AddTodo.vue'
+import Delegate from '@/views/delegate/Delegate.vue'
 import { Watch } from 'vue-property-decorator'
 import { serverBus } from '@/main'
 import { i18n } from '@/plugins/i18n'
@@ -59,7 +66,7 @@ const SnackbarStore = namespace('SnackbarStore')
 const AppStore = namespace('AppStore')
 const SettingsStore = namespace('SettingsStore')
 
-@Component({ components: { TodoList, AddTodo, CurrentTodo, Report } })
+@Component({ components: { TodoList, AddTodo, CurrentTodo, Report, Delegate } })
 export default class Superpower extends Vue {
   @UserStore.State user?: User
   @UserStore.State planning!: boolean
@@ -68,7 +75,7 @@ export default class Superpower extends Vue {
   @AppStore.State editting!: boolean
   @SettingsStore.State hotKeysEnabled!: boolean
 
-  currentTab = 0
+  currentTab = 3
 
   async created() {
     // Try telegram merge

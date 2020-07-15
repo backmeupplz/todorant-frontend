@@ -201,7 +201,7 @@ const AppStore = namespace('AppStore')
   },
 })
 export default class Report extends Vue {
-  @Prop({ required: true }) external!: boolean
+  @Prop({ default: false }) external!: boolean
 
   @UserStore.State user?: User
   @AppStore.State language?: string
