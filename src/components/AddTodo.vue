@@ -38,11 +38,17 @@
                 )
                   v-icon(small) assignment
               v-expansion-panels(multiple v-model='panel')
+              draggable(
+                handle='.handle'
+                )
                 v-expansion-panel(v-for='(todo, i) in todos' :key='i')
                   v-expansion-panel-header
                     v-flex.column
                       span {{!panel.includes(i) ? `${todo.frog ? '🐸 ': ''}${todo.time ? `${todo.time} ` : ''}` : ''}}{{panel.includes(i) || !todo.text ? $t('todo.create.placeholder'): todo.text}}
                       p.my-0.caption(v-if='!panel.includes(i) && todo.date') {{todo.date}}
+                    v-row-reverse
+                      .d-flex.justify-end.ma-2
+                        v-icon.handle(v-if='todos.length > 1') menu
                   v-expansion-panel-content
                     TodoForm(
                       :todo='todo'
@@ -99,13 +105,14 @@ import { i18n } from '@/plugins/i18n'
 import { namespace } from 'vuex-class'
 import { SubscriptionStatus } from '@/models/SubscriptionStatus'
 import { User } from '@/models/User'
+import draggable from 'vuedraggable'
 
 const SettingsStore = namespace('SettingsStore')
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
 
 @Component({
-  components: { TodoForm },
+  components: { TodoForm, draggable },
 })
 export default class AddTodo extends Vue {
   @Prop({ required: true }) currentTab!: number
@@ -222,7 +229,6 @@ export default class AddTodo extends Vue {
       })
     }
     this.panel = [this.todos.length - 1]
-
     logEvent('add_todo_add_more')
   }
 
