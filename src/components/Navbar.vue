@@ -8,6 +8,8 @@ nav
     :close='closeWelcome',
     :openRules='openRules'
   )
+  // Hero dialog
+  HeroProfile(:dialog='heroDialog', :close='closeHero')
   // Merge dialog
   Merge(:dialog='mergeDialog', :close='closeMerge')
   // Subscription dialog
@@ -60,6 +62,8 @@ nav
         // Merge accounts
         v-list-item(@click='mergeDialog = true', v-if='!!user')
           v-list-item-title {{ $t("menu.merge") }}
+        v-list-item(@click='heroDialog = true', v-if='!!user')
+          v-list-item-title {{ $t("heroProfileTitle") }}
         // Subscription
         v-list-item(@click='showSubscription', v-if='!!user')
           v-list-item-title {{ $t("subscription.title") }}
@@ -88,6 +92,7 @@ import * as api from '@/utils/api'
 import Rules from '@/components/Rules.vue'
 import Welcome from '@/components/Welcome.vue'
 import Merge from '@/components/Merge.vue'
+import HeroProfile from '@/components/HeroProfile.vue'
 import Subscription from '@/components/Subscription.vue'
 import Settings from '@/components/Settings.vue'
 import Hashtags from '@/components/Hashtags.vue'
@@ -103,11 +108,13 @@ import { User } from '@/models/User'
 
 const UserStore = namespace('UserStore')
 const AppStore = namespace('AppStore')
+const SnackbarStore = namespace('SnackbarStore')
 
 @Component({
   components: {
     Rules,
     Merge,
+    HeroProfile,
     Subscription,
     Settings,
     Support,
@@ -127,10 +134,12 @@ export default class Navbar extends Vue {
   @AppStore.Mutation setDark!: (dark: boolean) => void
   @AppStore.Mutation setLanguage!: (language: string) => void
   @UserStore.Mutation setUser!: (user?: User) => void
+  @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
 
   rulesDialog = false
   welcomeDialog = false
   mergeDialog = false
+  heroDialog = false
   subscriptionDialog = false
   settingsDialog = false
   supportDialog = false
@@ -181,6 +190,9 @@ export default class Navbar extends Vue {
     i18n.locale = locale
     this.setLanguage(locale)
     document.title = i18n.t('title') as string
+    if (this.user) {
+      this.setServerLanguage(locale)
+    }
   }
   logout() {
     this.setUser(undefined)
@@ -201,6 +213,9 @@ export default class Navbar extends Vue {
   }
   closeMerge() {
     this.mergeDialog = false
+  }
+  closeHero() {
+    this.heroDialog = false
   }
   closeSubscription() {
     this.subscriptionDialog = false
@@ -232,6 +247,16 @@ export default class Navbar extends Vue {
       // Do nothing
     }
   }
+  async setServerLanguage(locale: string) {
+    try {
+      await api.setSettings(this.user, {
+        language: locale,
+      })
+    } catch (err) {
+      this.setSnackbarError(err.response ? err.response.data : err.message)
+    }
+  }
+
   showSubscription() {
     logEvent('subscription_viewed', {
       status: this.subscriptionStatus,

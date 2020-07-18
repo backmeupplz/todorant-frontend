@@ -9,6 +9,7 @@ export default class SettingsStore extends VuexModule {
   preserveOrderByTime?: boolean = undefined
   googleCalendarCredentials?: GoogleCalendarCredentials = undefined
   duplicateTagInBreakdown?: boolean = undefined
+  language?: string = undefined
 
   audioEnabled = true
   hotKeysEnabled = true
