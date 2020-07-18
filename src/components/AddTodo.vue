@@ -34,7 +34,7 @@ div
               v-btn(
                 v-if='!!todoToBreakdown',
                 icon,
-                v-clipboard:copy='!todoToBreakdown ? \'no-todo\' : textForTodo(todoToBreakdown)'
+                v-clipboard:copy='!todoToBreakdown ? "no-todo" : textForTodo(todoToBreakdown)'
               )
                 v-icon(small) assignment
             v-expansion-panels(multiple, v-model='panel')
