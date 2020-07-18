@@ -31,7 +31,8 @@ v-container(style='maxWidth: 1000px;')
         v-chip.ma-1(
           close,
           @click:close='delHash(word)',
-          v-for='word in hashes'
+          v-for='(word, i) in hashes',
+          :key='i'
         ) {{ word }}
       v-spacer(v-if='!search')
       v-btn(
