@@ -34,33 +34,34 @@ div
               v-btn(
                 v-if='!!todoToBreakdown',
                 icon,
-                v-clipboard:copy='!todoToBreakdown ? \'no-todo\' : textForTodo(todoToBreakdown)'
+                v-clipboard:copy='!todoToBreakdown ? "no-todo" : textForTodo(todoToBreakdown)'
               )
                 v-icon(small) assignment
             v-expansion-panels(multiple, v-model='panel')
-              draggable(handle='.handle')
-                v-expansion-panel(v-for='(todo, i) in todos', :key='i')
-                  v-expansion-panel-header
-                    v-flex.column
-                      span {{ !panel.includes(i) ? `${todo.frog ? "🐸 " : ""}${todo.time ? `${todo.time} ` : ""}` : "" }}{{ panel.includes(i) || !todo.text ? $t("todo.create.placeholder") : todo.text }}
-                      p.my-0.caption(v-if='!panel.includes(i) && todo.date') {{ todo.date }}
-                    v-row-reverse
-                      .d-flex.justify-end.ma-2
-                        v-icon.handle(v-if='todos.length > 1') menu
-                  v-expansion-panel-content
-                    TodoForm(
-                      :todo='todo',
-                      :enterPressed='save',
-                      :escapePressed='escapePressed',
-                      :addTodo='addTodo',
-                      ref='todoForm'
-                    )
-                      v-btn(
-                        v-if='todos.length > 1',
-                        color='error',
-                        text,
-                        @click='deleteTodo(i)'
-                      ) {{ $t("delete") }}
+              v-flex
+                draggable(handle='.handle')
+                  v-expansion-panel(v-for='(todo, i) in todos', :key='i')
+                    v-expansion-panel-header
+                      v-flex.column
+                        span {{ !panel.includes(i) ? `${todo.frog ? "🐸 " : ""}${todo.time ? `${todo.time} ` : ""}` : "" }}{{ panel.includes(i) || !todo.text ? $t("todo.create.placeholder") : todo.text }}
+                        p.my-0.caption(v-if='!panel.includes(i) && todo.date') {{ todo.date }}
+                      v-row-reverse
+                        .d-flex.justify-end.ma-2
+                          v-icon.handle(v-if='todos.length > 1') menu
+                    v-expansion-panel-content
+                      TodoForm(
+                        :todo='todo',
+                        :enterPressed='save',
+                        :escapePressed='escapePressed',
+                        :addTodo='addTodo',
+                        ref='todoForm'
+                      )
+                        v-btn(
+                          v-if='todos.length > 1',
+                          color='error',
+                          text,
+                          @click='deleteTodo(i)'
+                        ) {{ $t("delete") }}
         v-card-actions
           v-btn(
             color='blue',
@@ -76,7 +77,7 @@ div
             text,
             @click='close',
             :disabled='loading',
-            v-shortkey.once='[\'esc\']',
+            v-shortkey.once='["esc"]',
             @shortkey='close'
           ) {{ $t("cancel") }}
           v-btn(
