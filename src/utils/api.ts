@@ -9,6 +9,8 @@ import { getModule } from 'vuex-module-decorators'
 import TagsStore from '@/store/modules/TagsStore'
 import UserStore from '@/store/modules/UserStore'
 import SettingsStore from '@/store/modules/SettingsStore'
+import HeroStore from '@/store/modules/HeroStore'
+import AppStore from '@/store/modules/AppStore'
 
 const base = process.env.VUE_APP_API
 
@@ -201,10 +203,11 @@ export async function getTodos(
         queryString,
       },
     })
-  ).data as { todos: Todo[]; state: UserStore; tags: Tag[] }
+  ).data as { todos: Todo[]; state: UserStore; tags: Tag[]; points: number }
   getModule(UserStore, store).setUserStore(data.state)
   setSettingsFromServer(data.state)
   setTags(data.tags)
+  getModule(HeroStore, store).setPoints(data.points)
   return data.todos
 }
 
@@ -222,10 +225,12 @@ export async function getCurrentTodo(user: User) {
     todo?: Todo
     state: UserStore
     tags: Tag[]
+    points: number
   }
   getModule(UserStore, store).setUserStore(data.state)
   setSettingsFromServer(data.state)
   setTags(data.tags)
+  getModule(HeroStore, store).setPoints(data.points)
   return data
 }
 
@@ -391,4 +396,5 @@ function setSettingsFromServer(state: any) {
   const settings = state.settings
   const settingsStore = getModule(SettingsStore, store)
   settingsStore.setSettingsStore(settings)
+  const appStore = getModule(AppStore, store).setLanguage(settings.language)
 }
