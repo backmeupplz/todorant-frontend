@@ -39,7 +39,7 @@ div
                 v-icon(small) assignment
             v-expansion-panels(multiple, v-model='panel')
               v-flex
-                draggable(handle='.handle')
+                draggable(v-model='todos', handle='.handle')
                   v-expansion-panel(v-for='(todo, i) in todos', :key='i')
                     v-expansion-panel-header
                       v-flex.column
