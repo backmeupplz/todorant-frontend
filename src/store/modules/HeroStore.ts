@@ -1,5 +1,6 @@
 import { VuexModule, Module, Mutation } from 'vuex-module-decorators'
 import { ranks } from '@/assets/ranks'
+
 @Module({ namespaced: true, name: 'HeroStore' })
 export default class HeroStore extends VuexModule {
   points: number = 0

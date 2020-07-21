@@ -5,6 +5,7 @@ import SnackbarStore from '@/store/modules/SnackbarStore'
 import TagsStore from '@/store/modules/TagsStore'
 import SocketsStore from '@/store/modules/SocketsStore'
 import HeroStore from '@/store/modules/HeroStore'
+import DelegateStore from '@/store/modules/DelegateStore'
 import persistentState from '@/store/plugins/persistentState'
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -21,6 +22,7 @@ const store = new Vuex.Store({
     TagsStore,
     UserStore,
     HeroStore,
+    DelegateStore,
   },
   plugins: [persistentState],
 })

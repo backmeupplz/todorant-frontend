@@ -357,6 +357,30 @@ export async function authorizeGoogleCalendar(user: User, code: string) {
   ).data as GoogleCalendarCredentials
 }
 
+export async function getDelegateInfo(user: User) {
+  return (
+    await axios.get(`${base}/delegate`, {
+      headers: getHeaders(user),
+    })
+  ).data as {
+    delegates: User[]
+    delegators: User[]
+    token: string
+  }
+}
+
+export async function resetDelegateToken(user: User) {
+  return (
+    await axios.post(
+      `${base}/delegate/generateToken`,
+      {},
+      {
+        headers: getHeaders(user),
+      }
+    )
+  ).data as string
+}
+
 function getHeaders(user: User) {
   if (user.token) {
     const password = store.state.UserStore.password
