@@ -147,6 +147,14 @@ v-container(style='maxWidth: 1000px;')
                 span(v-on='on') {{ todoSection.title }}{{ !panels.includes(i) ? ` (${todoSection.todos.length})` : "" }}
               span {{ $t(weekdayFromTitle(todoSection.title)) }}{{ !panels.includes(i) ? ` (${todoSection.todos.length})` : "" }}
             span(v-else) {{ todoSection.title }}
+            v-flex.ma-1
+              v-btn(
+                small,
+                icon,
+                @click.stop='addTodoWithDate(todoSection.title)',
+                :loading='loading'
+              )
+                v-icon add
         v-expansion-panel-content
           draggable(
             v-model='todoSection.todos',
@@ -851,6 +859,10 @@ export default class TodoList extends Vue {
 
   breakdownTodo(todo: Todo) {
     serverBus.$emit('addTodoRequested', undefined, todo)
+  }
+
+  addTodoWithDate(date: string) {
+    serverBus.$emit('addTodoRequested', date, undefined)
   }
 
   searchTouched() {
