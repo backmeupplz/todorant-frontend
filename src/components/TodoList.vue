@@ -147,7 +147,6 @@ v-container(style='maxWidth: 1000px;')
                 span(v-on='on') {{ todoSection.title }}{{ !panels.includes(i) ? ` (${todoSection.todos.length})` : "" }}
               span {{ $t(weekdayFromTitle(todoSection.title)) }}{{ !panels.includes(i) ? ` (${todoSection.todos.length})` : "" }}
             span(v-else) {{ todoSection.title }}
-
             v-btn.ma-2(
               x-small,
               icon,
