@@ -381,6 +381,32 @@ export async function resetDelegateToken(user: User) {
   ).data as string
 }
 
+export async function deleteDelegate(user: User, id: string) {
+  return (
+    await axios.delete(`${base}/delegate/delegate/${id}`, {
+      headers: getHeaders(user),
+    })
+  ).data as string
+}
+
+export async function deleteDelegator(user: User, id: string) {
+  return (
+    await axios.delete(`${base}/delegate/delegator/${id}`, {
+      headers: getHeaders(user),
+    })
+  ).data as string
+}
+
+export async function useDelegateToken(user: User, token: string) {
+  return axios.post(
+    `${base}/delegate/useToken`,
+    { token },
+    {
+      headers: getHeaders(user),
+    }
+  )
+}
+
 function getHeaders(user: User) {
   if (user.token) {
     const password = store.state.UserStore.password

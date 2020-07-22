@@ -70,6 +70,11 @@ export default class Delegate extends Vue {
       this.setDelegates(response.delegates)
       this.setDelegators(response.delegators)
       this.setToken(response.token)
+
+      console.log(
+        JSON.stringify(this.delegates),
+        JSON.stringify(this.delegators)
+      )
     } catch (err) {
       console.error(err)
       this.setSnackbarError('errors.loadTodos')

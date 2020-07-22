@@ -13,8 +13,7 @@ import { User } from '@/models/User'
 import { GoogleCalendarCredentials } from '@/models/GoogleCalendarCredentials'
 import Loader from '@/components/Loader.vue'
 
-const AppStore = namespace('AppStore')
-const SettingsStore = namespace('SettingsStore')
+const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
 
 @Component({
@@ -22,40 +21,29 @@ const SnackbarStore = namespace('SnackbarStore')
     Loader,
   },
 })
-export default class GoogleCalendarSetup extends Vue {
-  @AppStore.State user?: User
-
-  @SettingsStore.State googleCalendarCredentials?: GoogleCalendarCredentials
-  @SettingsStore.Mutation setGoogleCalendarCredentials!: (
-    googleCalendarCredentials: GoogleCalendarCredentials
-  ) => void
-
+export default class DelegateInvite extends Vue {
+  @UserStore.State user?: User
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @SnackbarStore.Mutation setSnackbarSuccess!: (message: string) => void
 
   async mounted() {
+    const token = this.$route.path.replace('/invite/', '')
     if (!this.user) {
+      this.$router.replace('/superpower')
       return
     }
-    if (
-      this.$route.query &&
-      this.$route.query.code &&
-      typeof this.$route.query.code === 'string'
-    ) {
+    if (!confirm(i18n.t('delegate.inviteConfirm') as string)) {
+      this.$router.replace('/superpower')
+      return
+    }
+    if (token) {
       try {
-        const googleCredentials = await api.authorizeGoogleCalendar(
-          this.user,
-          decodeURIComponent(this.$route.query.code)
-        )
-        this.setGoogleCalendarCredentials(googleCredentials)
-        await api.setSettings(this.user, {
-          googleCalendarCredentials: this.googleCalendarCredentials,
-        })
+        await api.useDelegateToken(this.user, token)
         this.$router.replace('/superpower')
-        this.setSnackbarSuccess(i18n.t('googleCalendarEnableSuccess') as string)
+        this.setSnackbarSuccess(i18n.t('delegate.inviteSuccess') as string)
       } catch (err) {
         this.$router.replace('/superpower')
-        this.setSnackbarError(err.response ? err.response.data : err.message)
+        this.setSnackbarError(i18n.t('errors.delegate.invalidToken') as string)
       }
     } else {
       window.location.href =

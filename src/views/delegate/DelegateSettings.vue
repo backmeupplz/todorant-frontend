@@ -24,11 +24,31 @@ v-dialog(
       // Delegates
       v-divider.mt-2
       v-subheader.pa-0 {{ $t("delegate.delegates") }}
-      p {{ $t("delegate.noDelegates") }}
+      p(v-if='!delegates.length') {{ $t("delegate.noDelegates") }}
+      .d-flex.align-center(
+        v-else,
+        v-for='(delegate, i) in delegates',
+        :key='i'
+      )
+        span {{ delegate.name }}
+        v-btn.ml-2(icon, small)
+          v-icon(small, @click='deleteDelegate(delegate)', :loading='loading') delete
       // Delegators
       v-divider.mt-2
       v-subheader.pa-0 {{ $t("delegate.delegators") }}
-      p {{ $t("delegate.noDelegators") }}
+      p(v-if='!delegators.length') {{ $t("delegate.noDelegators") }}
+      .d-flex.align-center(
+        v-else,
+        v-for='(delegator, i) in delegators',
+        :key='i'
+      )
+        span {{ delegator.name }}
+        v-btn.ml-2(icon, small)
+          v-icon(
+            small,
+            @click='deleteDelegator(delegator)',
+            :loading='loading'
+          ) delete
     v-card-actions
       v-spacer
       v-btn(
@@ -79,9 +99,6 @@ export default class DelegateSettings extends Vue {
     if (!this.user) {
       return
     }
-    if (this.loading) {
-      return
-    }
     this.loading = true
     try {
       const response = await api.getDelegateInfo(this.user)
@@ -103,9 +120,6 @@ export default class DelegateSettings extends Vue {
     if (!this.user) {
       return
     }
-    if (this.loading) {
-      return
-    }
     this.loading = true
     try {
       const token = await api.resetDelegateToken(this.user)
@@ -117,11 +131,52 @@ export default class DelegateSettings extends Vue {
       this.loading = false
     }
   }
+
+  async deleteDelegate(delegate: User) {
+    if (!confirm(i18n.t('delegate.deleteDelegateConfirmation') as string)) {
+      return
+    }
+    if (!this.user) {
+      return
+    }
+    this.loading = true
+    try {
+      const token = await api.deleteDelegate(this.user, delegate._id)
+      this.loadData()
+    } catch (err) {
+      console.error(err)
+      this.setSnackbarError(err.message)
+    } finally {
+      this.loading = false
+    }
+  }
+
+  async deleteDelegator(delegator: User) {
+    if (!confirm(i18n.t('delegate.deleteDelegatorConfirmation') as string)) {
+      return
+    }
+    if (!this.user) {
+      return
+    }
+    this.loading = true
+    try {
+      await api.deleteDelegator(this.user, delegator._id)
+      this.loadData()
+    } catch (err) {
+      console.error(err)
+      this.setSnackbarError(err.message)
+    } finally {
+      this.loading = false
+    }
+  }
 }
 </script>
 
 <style>
 .clickable {
   cursor: pointer;
+}
+.title {
+  overflow-wrap: anywhere;
 }
 </style>

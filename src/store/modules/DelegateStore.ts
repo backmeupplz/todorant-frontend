@@ -23,6 +23,6 @@ export default class DelegateStore extends VuexModule {
   }
 
   get delegateInviteLink() {
-    return `https://todorant.com/invite/${this.token}`
+    return `${process.env.VUE_APP_WEBSITE}/invite/${this.token}`
   }
 }
