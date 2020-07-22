@@ -10,6 +10,8 @@ v-dialog(
     v-card-text
       p(v-if='!tags.length') {{ $t("emptyHashtags") }}
       v-card.mb-2(v-for='(tag, i) in tags', :key='i')
+        .d-flex.direction-row.align-center(v-if='!!tag.epicCompleted')
+          v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
         .d-flex.direction-row.align-center(v-if='!!tag.epic')
           v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
           v-spacer
@@ -21,6 +23,14 @@ v-dialog(
             :loading='loading'
           )
             v-icon(small) clear
+          v-btn(
+            text,
+            icon,
+            @click='selectTag(tag, i)',
+            :loading='loading',
+            v-if='edited == -1'
+          )
+            v-icon(small) edit
           v-btn.mr-4(
             text,
             icon,
@@ -37,14 +47,6 @@ v-dialog(
             v-if='edited == i'
           )
             v-icon(small) done
-          v-btn(
-            text,
-            icon,
-            @click='selectTag(tag, i)',
-            :loading='loading',
-            v-if='edited == -1'
-          )
-            v-icon(small) edit
       v-card.mb-2(v-for='(tag, i) in tags', :key='i')
         .d-flex.direction-row.align-center(v-if='!tag.epic')
           v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
