@@ -137,7 +137,7 @@ v-container(style='maxWidth: 1000px;')
         v-expansion-panel-header.py-0.px-6(
           v-observe-visibility='(isVisible, entry) => headerVisibilityChanged(isVisible, entry, i)'
         )
-          v-subheader.pa-0
+          v-subheader.pa-0.d-flex
             v-tooltip(
               right,
               :max-width='300',
@@ -147,6 +147,13 @@ v-container(style='maxWidth: 1000px;')
                 span(v-on='on') {{ todoSection.title }}{{ !panels.includes(i) ? ` (${todoSection.todos.length})` : "" }}
               span {{ $t(weekdayFromTitle(todoSection.title)) }}{{ !panels.includes(i) ? ` (${todoSection.todos.length})` : "" }}
             span(v-else) {{ todoSection.title }}
+            v-btn.ma-2(
+              x-small,
+              icon,
+              @click.stop='addTodoWithDate(todoSection.title)',
+              :loading='loading'
+            )
+              v-icon(:color='dark ? "grey lighten-1" : "grey darken-1"', dense) add
         v-expansion-panel-content
           draggable(
             v-model='todoSection.todos',
@@ -851,6 +858,10 @@ export default class TodoList extends Vue {
 
   breakdownTodo(todo: Todo) {
     serverBus.$emit('addTodoRequested', undefined, todo)
+  }
+
+  addTodoWithDate(date: string) {
+    serverBus.$emit('addTodoRequested', date, undefined)
   }
 
   searchTouched() {
