@@ -4,6 +4,24 @@ v-container(
   :class='$vuetify.breakpoint.mdAndUp ? "pb-8" : ""'
 )
   v-list
+    v-list-item(v-for='epic in tags', v-if='!!epic.epic')
+      v-progress-linear(
+        rounded,
+        :value='epicProgress(epic)',
+        height='25',
+        :color='epic.color ? epic.color : "blue lighten-3"'
+      )
+        template(v-slot='{ value }')
+          span.caption {{ epic.epicPoints }}/{{ epic.epicGoal }} {{ `#${epic.tag}` }}
+        v-spacer.px-2
+      v-btn(
+        text,
+        icon,
+        :loading='todoUpdating',
+        @click='completeEpic(epic)',
+        v-if='epic.epicGoal == epic.epicPoints'
+      )
+        v-icon check
     v-list-item
       v-progress-linear(
         rounded,
@@ -14,7 +32,7 @@ v-container(
       )
         template(v-slot='{ value }')
           span.caption {{ todosCount - incompleteTodosCount }}/{{ todosCount }}
-      v-spacer.px-2
+        v-spacer.px-2
       v-btn(text, icon, :loading='todoUpdating', @click='updateTodo')
         v-icon refresh
     v-list-item
@@ -100,10 +118,12 @@ import { i18n } from '@/plugins/i18n'
 import { playSound, Sounds } from '@/utils/sounds'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
+import { Tag } from '@/models/Tag'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
 const SettingsStore = namespace('SettingsStore')
+const TagsStore = namespace('TagsStore')
 
 @Component({
   components: {
@@ -116,6 +136,7 @@ export default class CurrentTodo extends Vue {
   @UserStore.State user?: User
   @SettingsStore.State hotKeysEnabled!: boolean
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
+  @TagsStore.State tags!: Tag[]
 
   showCompleted = false
   todo: Todo | null = null
@@ -165,6 +186,29 @@ export default class CurrentTodo extends Vue {
   }
 
   todoUpdating = false
+
+  epicProgress(epic: Tag) {
+    if (!epic.epicPoints || !epic.epicGoal) {
+      return
+    }
+    return ((epic.epicPoints / epic.epicGoal) * 100).toFixed(0)
+  }
+
+  async completeEpic(epic: Tag) {
+    const user = this.user
+    if (!user) {
+      return
+    }
+    this.loading = true
+    try {
+      await api.editTag(user, epic, undefined, undefined, undefined, true)
+    } catch (err) {
+      this.setSnackbarError(err.response ? err.response.data : err.message)
+    } finally {
+      this.loading = false
+    }
+  }
+
   async updateTodo() {
     if (this.todoUpdating) {
       return

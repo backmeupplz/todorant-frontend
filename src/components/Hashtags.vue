@@ -10,9 +10,51 @@ v-dialog(
     v-card-text
       p(v-if='!tags.length') {{ $t("emptyHashtags") }}
       v-card.mb-2(v-for='(tag, i) in tags', :key='i')
-        .d-flex.direction-row.align-center
+        .d-flex.direction-row.align-center(v-if='!!tag.epic')
           v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
           v-spacer
+          v-btn(
+            v-if='!!tag.color',
+            text,
+            icon,
+            @click='defaultTag(tag)',
+            :loading='loading'
+          )
+            v-icon(small) clear
+          v-btn.mr-4(
+            text,
+            icon,
+            @click='deleteTag(tag)',
+            :loading='loading',
+            v-if='edited == -1'
+          )
+            v-icon(small) delete
+          v-btn(
+            text,
+            icon,
+            @click='saveTag(tag)',
+            :loading='loading',
+            v-if='edited == i'
+          )
+            v-icon(small) done
+          v-btn(
+            text,
+            icon,
+            @click='selectTag(tag, i)',
+            :loading='loading',
+            v-if='edited == -1'
+          )
+            v-icon(small) edit
+      v-card.mb-2(v-for='(tag, i) in tags', :key='i')
+        .d-flex.direction-row.align-center(v-if='!tag.epic')
+          v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
+          v-spacer
+          v-btn(
+            color='blue',
+            text,
+            :loading='loading',
+            @click='epicDialog(tag, i)'
+          ) {{ $t("epic.intoEpic") }}
           v-btn(
             v-if='!!tag.color',
             text,
@@ -53,6 +95,15 @@ v-dialog(
             v-if='edited == i'
           )
             v-icon(small) clear
+        v-card-actions.justify-center(v-if='epic === i')
+          v-text-field(
+            clearable,
+            v-model='epicGoal',
+            :label='$t("epic.epicGoal")',
+            :rules='epicRules',
+            :append-icon='parseInt(epicGoal) ? "check" : ""',
+            @click:append='saveEpic(tag)'
+          )
         v-card-actions(v-if='edited == i')
           v-spacer
           v-color-picker(
@@ -107,8 +158,13 @@ export default class Hashtags extends Vue {
 
   editedColor = ''
 
+  epic = -1
+  epicGoal = ''
+
   closePopup() {
     this.edited = -1
+    this.epic = -1
+    this.epicGoal = ''
     this.close()
   }
 
@@ -147,7 +203,7 @@ export default class Hashtags extends Vue {
     }
     this.loading = true
     try {
-      await api.editTag(user, tag, this.editedColor)
+      await api.editTag(user, tag, this.editedColor, tag.epic, tag.epicGoal)
       this.cancelTag(tag)
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)
@@ -163,7 +219,7 @@ export default class Hashtags extends Vue {
     }
     this.loading = true
     try {
-      await api.editTag(user, tag, '')
+      await api.editTag(user, tag, '', tag.epic, tag.epicGoal)
       this.cancelTag(tag)
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)
@@ -175,6 +231,38 @@ export default class Hashtags extends Vue {
   async cancelTag(tag: Tag) {
     this.edited = -1
   }
+
+  epicDialog(tag: Tag, i: number) {
+    if (this.epic === i) {
+      this.epic = -1
+      this.epicGoal = ''
+      return
+    }
+    this.epic = i
+  }
+
+  async saveEpic(tag: Tag) {
+    const user = this.user
+    const goal = parseInt(this.epicGoal)
+    this.epic = -1
+    this.epicGoal = ''
+    if (!user) {
+      return
+    }
+    this.loading = true
+    try {
+      await api.editTag(user, tag, tag.color, true, goal)
+      this.cancelTag(tag)
+    } catch (err) {
+      this.setSnackbarError(err.response ? err.response.data : err.message)
+    } finally {
+      this.loading = false
+    }
+  }
+
+  epicRules = [
+    (v: any) => !!v.match(/^\d+$/) || i18n.t('errors.epic.numberError'),
+  ]
 
   loading = false
 }

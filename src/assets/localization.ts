@@ -205,6 +205,9 @@ export const messages = {
         dateOrMonth: 'Задачам нужно выставлять либо точную дату, либо месяц',
         more1500: 'Задача не может иметь более 1500 символов',
       },
+      epic: {
+        numberError: 'Только цифры',
+      },
       invalidForm: 'Пожалуйста, заполните необходимые поля',
       report: 'Не получилось загрузить отчет',
       addTodoOld: 'Нельзя добавить задачу в прошлом',
@@ -463,6 +466,10 @@ export const messages = {
     level: 'Уровень',
     points: 'очков',
     pointsTillNextLevel: 'очков до следующего уровня',
+    epic: {
+      intoEpic: 'Сделать эпиком',
+      epicGoal: 'Цель эпика',
+    },
   },
   en: {
     encryption: {
@@ -681,6 +688,9 @@ export const messages = {
         textLenght: 'Todos should have text',
         dateOrMonth: 'Todos should have either date or month set',
         more1500: "Todos can't have more than 1500 characters.",
+      },
+      epic: {
+        numberError: 'Numbers only',
       },
       invalidForm: 'Please, fill in the required fields',
       report: 'Could not load report',
@@ -937,6 +947,10 @@ export const messages = {
     level: 'Level',
     points: 'points',
     pointsTillNextLevel: 'points to unlock next level',
+    epic: {
+      intoEpic: 'Turn into an epic',
+      epicGoal: 'Epic goal',
+    },
   },
   ua: {
     encryption: {

@@ -137,11 +137,21 @@ export async function deleteTag(user: User, tag: Tag) {
   })
 }
 
-export async function editTag(user: User, tag: Tag, color?: string) {
+export async function editTag(
+  user: User,
+  tag: Tag,
+  color?: string,
+  epic?: boolean,
+  epicGoal?: number,
+  epicCompleted?: boolean
+) {
   return axios.put(
     `${base}/tag/${tag._id}`,
     {
       color: color || null,
+      epic: epic || null,
+      epicGoal: epicGoal || null,
+      epicCompleted: epicCompleted || null,
     },
     {
       headers: getHeaders(user),
