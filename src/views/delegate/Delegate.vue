@@ -41,7 +41,7 @@ export default class Delegate extends Vue {
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
 
   loading = false
-  settingsDialog = true
+  settingsDialog = false
 
   mounted() {
     this.loadData()

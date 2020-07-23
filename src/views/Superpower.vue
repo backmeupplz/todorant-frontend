@@ -75,7 +75,7 @@ export default class Superpower extends Vue {
   @AppStore.State editting!: boolean
   @SettingsStore.State hotKeysEnabled!: boolean
 
-  currentTab = 3
+  currentTab = 0
 
   async created() {
     // Try telegram merge
