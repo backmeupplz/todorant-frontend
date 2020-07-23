@@ -20,9 +20,11 @@ v-dialog(
             span.caption {{ epic.epicPoints }}/{{ epic.epicGoal }} {{ `#${epic.tag}` }}
           v-spacer.px-2
       v-card.mb-2(v-for='(tag, i) in tags', v-if='!!tag.epic', :key='i')
-        .d-flex.direction-row.align-center(v-if='!!tag.epicCompleted')
-          v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
         .d-flex.direction-row.align-center
+          v-card-text(
+            :style='{ color: colorForTag(tag, i) }',
+            v-if='!!tag.epicCompleted'
+          ) {{ "#" }}{{ tag.tag }}
           v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
           v-spacer
           v-btn(
@@ -57,6 +59,15 @@ v-dialog(
             v-if='edited == i'
           )
             v-icon(small) done
+        v-card-actions(v-if='edited == i')
+          v-spacer
+          v-color-picker(
+            flat,
+            hide-inputs,
+            hide-mode-switch,
+            mode='hexa',
+            v-model='editedColor'
+          )
       v-card.mb-2(v-for='(tag, i) in tags', v-if='!tag.epic', :key='i')
         .d-flex.direction-row.align-center
           .d-flex.flex-column
