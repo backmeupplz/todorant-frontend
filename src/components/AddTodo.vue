@@ -27,10 +27,12 @@ div
         v-card-text
           v-container
             .d-flex.justify-space-between
-              p(
-                v-if='!!todoToBreakdown',
-                :class='isEncryptionWrong(todoToBreakdown) ? "grey--text" : ""'
-              ) {{ textForTodo(todoToBreakdown) }}
+              v-flex(:max-width='300')
+                p(
+                  style='max-width:500px; word-wrap:break-word;',
+                  v-if='!!todoToBreakdown',
+                  :class='isEncryptionWrong(todoToBreakdown) ? "grey--text" : ""'
+                ) {{ textForTodo(todoToBreakdown) }}
               v-btn(
                 v-if='!!todoToBreakdown',
                 icon,
