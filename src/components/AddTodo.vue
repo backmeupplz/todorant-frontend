@@ -27,12 +27,10 @@ div
         v-card-text
           v-container
             .d-flex.justify-space-between
-              v-flex(:max-width='300')
-                p(
-                  style='max-width:500px; word-wrap:break-word;',
-                  v-if='!!todoToBreakdown',
-                  :class='isEncryptionWrong(todoToBreakdown) ? "grey--text" : ""'
-                ) {{ textForTodo(todoToBreakdown) }}
+              p.todoText(
+                v-if='!!todoToBreakdown',
+                :class='isEncryptionWrong(todoToBreakdown) ? "grey--text" : ""'
+              ) {{ textForTodo(todoToBreakdown) }}
               v-btn(
                 v-if='!!todoToBreakdown',
                 icon,
@@ -322,4 +320,6 @@ export default class AddTodo extends Vue {
   @media screen and (min-width: (1000px + ($i * 100px))) and (max-width: 1100px + ($i * 100px))
     .rightPadding
       right: ((100 + ($i * 100)) / 2) !important
+.todoText
+  overflow-wrap: anywhere
 </style>
