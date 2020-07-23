@@ -9,10 +9,20 @@ v-dialog(
     v-card-title {{ $t("hashtags.title") }} {{ editedColor }}
     v-card-text
       p(v-if='!tags.length') {{ $t("emptyHashtags") }}
-      v-card.mb-2(v-for='(tag, i) in tags', :key='i')
+      v-list-item(v-for='epic in epics')
+        v-progress-linear(
+          rounded,
+          :value='epicProgress(epic)',
+          height='25',
+          :color='epic.color ? epic.color : "blue lighten-3"'
+        ) 
+          template(v-slot='{ value }')
+            span.caption {{ epic.epicPoints }}/{{ epic.epicGoal }} {{ `#${epic.tag}` }}
+          v-spacer.px-2
+      v-card.mb-2(v-for='(tag, i) in tags', v-if='!!tag.epic', :key='i')
         .d-flex.direction-row.align-center(v-if='!!tag.epicCompleted')
           v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
-        .d-flex.direction-row.align-center(v-if='!!tag.epic')
+        .d-flex.direction-row.align-center
           v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
           v-spacer
           v-btn(
@@ -47,16 +57,20 @@ v-dialog(
             v-if='edited == i'
           )
             v-icon(small) done
-      v-card.mb-2(v-for='(tag, i) in tags', :key='i')
-        .d-flex.direction-row.align-center(v-if='!tag.epic')
-          v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
+      v-card.mb-2(v-for='(tag, i) in tags', v-if='!tag.epic', :key='i')
+        .d-flex.direction-row.align-center
+          .d-flex.flex-column
+            v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
+            v-btn(
+              small,
+              bottom,
+              color='blue',
+              text,
+              :loading='loading',
+              @click='epicDialog(tag, i)',
+              v-if='epic == -1'
+            ) {{ $t("epic.intoEpic") }}
           v-spacer
-          v-btn(
-            color='blue',
-            text,
-            :loading='loading',
-            @click='epicDialog(tag, i)'
-          ) {{ $t("epic.intoEpic") }}
           v-btn(
             v-if='!!tag.color',
             text,
@@ -97,8 +111,9 @@ v-dialog(
             v-if='edited == i'
           )
             v-icon(small) clear
-        v-card-actions.justify-center(v-if='epic === i')
+        v-card-actions.justify-center(v-if='epic == i')
           v-text-field(
+            type='number',
             clearable,
             v-model='epicGoal',
             :label='$t("epic.epicGoal")',
@@ -106,6 +121,14 @@ v-dialog(
             :append-icon='parseInt(epicGoal) ? "check" : ""',
             @click:append='saveEpic(tag)'
           )
+          v-btn.mr-4(
+            text,
+            icon,
+            @click='epicDialog(tag, i)',
+            :loading='loading',
+            v-if='epic == i'
+          )
+            v-icon(small) clear
         v-card-actions(v-if='edited == i')
           v-spacer
           v-color-picker(
@@ -162,6 +185,10 @@ export default class Hashtags extends Vue {
 
   epic = -1
   epicGoal = ''
+
+  get epics() {
+    return this.tags.filter((t) => t.epic)
+  }
 
   closePopup() {
     this.edited = -1
@@ -241,6 +268,13 @@ export default class Hashtags extends Vue {
       return
     }
     this.epic = i
+  }
+
+  epicProgress(epic: Tag) {
+    if (!epic.epicPoints || !epic.epicGoal) {
+      return
+    }
+    return ((epic.epicPoints / epic.epicGoal) * 100).toFixed(0)
   }
 
   async saveEpic(tag: Tag) {

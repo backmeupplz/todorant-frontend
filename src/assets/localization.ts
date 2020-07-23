@@ -206,7 +206,7 @@ export const messages = {
         more1500: 'Задача не может иметь более 1500 символов',
       },
       epic: {
-        numberError: 'Только цифры',
+        numberError: 'Должно быть цифрой',
       },
       invalidForm: 'Пожалуйста, заполните необходимые поля',
       report: 'Не получилось загрузить отчет',
@@ -690,7 +690,7 @@ export const messages = {
         more1500: "Todos can't have more than 1500 characters.",
       },
       epic: {
-        numberError: 'Numbers only',
+        numberError: 'Should be a number',
       },
       invalidForm: 'Please, fill in the required fields',
       report: 'Could not load report',
@@ -948,7 +948,7 @@ export const messages = {
     points: 'points',
     pointsTillNextLevel: 'points to unlock next level',
     epic: {
-      intoEpic: 'Turn into an epic',
+      intoEpic: 'Make an Epic',
       epicGoal: 'Epic goal',
     },
   },

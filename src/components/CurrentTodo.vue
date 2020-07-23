@@ -4,7 +4,7 @@ v-container(
   :class='$vuetify.breakpoint.mdAndUp ? "pb-8" : ""'
 )
   v-list
-    v-list-item(v-for='epic in tags', v-if='!!epic.epic')
+    v-list-item(v-for='epic in epics')
       v-progress-linear(
         rounded,
         :value='epicProgress(epic)',
@@ -173,6 +173,10 @@ export default class CurrentTodo extends Vue {
           ((this.todosCount - this.incompleteTodosCount) / this.todosCount) *
           100
         ).toFixed(0)
+  }
+
+  get epics() {
+    return this.tags.filter((t) => t.epic)
   }
 
   mounted() {
