@@ -6,4 +6,9 @@ export interface Tag {
   tag: string
   color?: string
   numberOfUses: number
+
+  epic?: boolean
+  epicGoal?: number
+  epicCompleted?: boolean
+  epicPoints?: number
 }
