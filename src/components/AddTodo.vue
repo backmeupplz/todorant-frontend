@@ -27,7 +27,7 @@ div
         v-card-text
           v-container
             .d-flex.justify-space-between
-              p(
+              p.todoText(
                 v-if='!!todoToBreakdown',
                 :class='isEncryptionWrong(todoToBreakdown) ? "grey--text" : ""'
               ) {{ textForTodo(todoToBreakdown) }}
@@ -320,4 +320,6 @@ export default class AddTodo extends Vue {
   @media screen and (min-width: (1000px + ($i * 100px))) and (max-width: 1100px + ($i * 100px))
     .rightPadding
       right: ((100 + ($i * 100)) / 2) !important
+.todoText
+  overflow-wrap: anywhere
 </style>
