@@ -9,22 +9,13 @@ v-dialog(
     v-card-title {{ $t("hashtags.title") }} {{ editedColor }}
     v-card-text
       p(v-if='!tags.length') {{ $t("emptyHashtags") }}
-      v-list-item(v-for='epic in epics')
-        v-progress-linear(
-          rounded,
-          :value='epicProgress(epic)',
-          height='25',
-          :color='epic.color ? epic.color : "blue lighten-3"'
-        ) 
-          template(v-slot='{ value }')
-            span.caption {{ epic.epicPoints }}/{{ epic.epicGoal }} {{ `#${epic.tag}` }}
-          v-spacer.px-2
       v-card.mb-2(v-for='(tag, i) in tags', v-if='!!tag.epic', :key='i')
         .d-flex.direction-row.align-center
           v-card-text(
             :style='{ color: colorForTag(tag, i) }',
             v-if='!!tag.epicCompleted'
           ) {{ "#" }}{{ tag.tag }}
+          v-spacer.px-2
           v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
           v-spacer
           v-btn(
@@ -68,11 +59,19 @@ v-dialog(
             mode='hexa',
             v-model='editedColor'
           )
+        v-progress-linear(
+          rounded,
+          :value='epicProgress(tag)',
+          height='25',
+          :color='tag.color ? tag.color : "blue lighten-3"'
+        ) 
+          template(v-slot='{ value }')
+            span.caption {{ tag.epicPoints }}/{{ tag.epicGoal }} {{ `#${tag.tag}` }}
       v-card.mb-2(v-for='(tag, i) in tags', v-if='!tag.epic', :key='i')
         .d-flex.direction-row.align-center
           .d-flex.flex-column
             v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
-            v-btn(
+            v-btn.ml-2.mb-2(
               small,
               bottom,
               color='blue',
@@ -125,7 +124,6 @@ v-dialog(
         v-card-actions.justify-center(v-if='epic == i')
           v-text-field(
             type='number',
-            clearable,
             v-model='epicGoal',
             :label='$t("epic.epicGoal")',
             :rules='epicRules',
