@@ -4,7 +4,7 @@ v-container(
   :class='$vuetify.breakpoint.mdAndUp ? "pb-8" : ""'
 )
   v-list
-    v-list-item(v-for='epic in epics')
+    v-list-item(v-for='(epic, i) in epics', :key='i')
       v-progress-linear(
         rounded,
         :value='epicProgress(epic)',
