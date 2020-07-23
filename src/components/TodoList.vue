@@ -148,6 +148,7 @@ v-container(style='maxWidth: 1000px;')
               span {{ $t(weekdayFromTitle(todoSection.title)) }}{{ !panels.includes(i) ? ` (${todoSection.todos.length})` : "" }}
             span(v-else) {{ todoSection.title }}
             v-btn.ma-2(
+              v-if='todoSection.title.length === 10',
               x-small,
               icon,
               @click.stop='addTodoWithDate(todoSection.title)',
