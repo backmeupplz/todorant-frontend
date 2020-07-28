@@ -33,6 +33,37 @@ v-dialog(
         :label='$t("settings.firstDayOfWeek")',
         v-model='safeFirstDayOfWeek'
       )
+      v-row
+        v-col(cols='12', md='16')
+          v-menu(
+            ref='menu',
+            v-model='timeMenu',
+            :close-on-content-click='false',
+            :return-value.sync='safeStartTimeOfDay',
+            min-width=0
+          )
+            template(v-slot:activator='{ on }')
+              v-text-field(
+                clearable,
+                v-model='safeStartTimeOfDay',
+                :label='$t("settings.startTimeOfDay")',
+                prepend-icon='access_time',
+                readonly,
+                v-on='on'
+              )
+            v-time-picker(
+              v-model='safeStartTimeOfDay',
+              format='24hr',
+              :close-on-content-click='false'
+            )
+              v-spacer
+              v-btn(
+                text,
+                color='green',
+                @click='$refs.menu.save(safeStartTimeOfDay)'
+              ) Ok
+              v-btn(text, color='blue', @click='timeMenu = false') Close
+
       v-divider
       v-subheader.pa-0 {{ $t("settings.integrations") }}
       .d-flex.justify-space-between.align-center.mb-2
@@ -137,6 +168,7 @@ export default class Settings extends Vue {
 
   @SettingsStore.State showTodayOnAddTodo?: boolean
   @SettingsStore.State firstDayOfWeek?: number
+  @SettingsStore.State startTimeOfDay?: any
   @SettingsStore.State newTodosGoFirst?: boolean
   @SettingsStore.State preserveOrderByTime?: boolean
   @SettingsStore.State duplicateTagInBreakdown?: boolean
@@ -147,6 +179,7 @@ export default class Settings extends Vue {
     hotsetHotKeysEnabled: boolean
   ) => void
   @SettingsStore.Mutation setFirstDayOfWeek!: (firstDayOfWeek: number) => void
+  @SettingsStore.Mutation setStartTimeOfDay!: (startTimeOfDay: any) => void
   @SettingsStore.Mutation setNewTodosGoFirst!: (
     newTodosGoFirst: boolean
   ) => void
@@ -199,6 +232,14 @@ export default class Settings extends Vue {
   }
   set safeFirstDayOfWeek(val: number) {
     this.setFirstDayOfWeek(val)
+  }
+
+  get safeStartTimeOfDay() {
+    const storeStartTimeOfDay = this.startTimeOfDay
+    return storeStartTimeOfDay ? storeStartTimeOfDay : '00:00'
+  }
+  set safeStartTimeOfDay(val: any) {
+    this.setStartTimeOfDay(val)
   }
 
   get safeNewTodosGoFirst() {
@@ -316,6 +357,7 @@ export default class Settings extends Vue {
       this.loading = false
     }
   }
+  timeMenu = false
 }
 </script>
 
