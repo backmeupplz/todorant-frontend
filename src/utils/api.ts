@@ -357,19 +357,11 @@ export async function authorizeGoogleCalendar(user: User, code: string) {
   ).data as GoogleCalendarCredentials
 }
 
-export async function getDelegateInfo(user: User) {
-  return (
-    await axios.get(`${base}/delegate`, {
-      headers: getHeaders(user),
-    })
-  ).data as {
-    delegates: User[]
-    delegators: User[]
-    token: string
+export async function resetDelegateToken() {
+  const user = store.state.UserStore.user
+  if (!user) {
+    throw new Error('No user')
   }
-}
-
-export async function resetDelegateToken(user: User) {
   return (
     await axios.post(
       `${base}/delegate/generateToken`,
@@ -381,7 +373,11 @@ export async function resetDelegateToken(user: User) {
   ).data as string
 }
 
-export async function deleteDelegate(user: User, id: string) {
+export async function deleteDelegate(id: string) {
+  const user = store.state.UserStore.user
+  if (!user) {
+    throw new Error('No user')
+  }
   return (
     await axios.delete(`${base}/delegate/delegate/${id}`, {
       headers: getHeaders(user),
@@ -389,7 +385,11 @@ export async function deleteDelegate(user: User, id: string) {
   ).data as string
 }
 
-export async function deleteDelegator(user: User, id: string) {
+export async function deleteDelegator(id: string) {
+  const user = store.state.UserStore.user
+  if (!user) {
+    throw new Error('No user')
+  }
   return (
     await axios.delete(`${base}/delegate/delegator/${id}`, {
       headers: getHeaders(user),

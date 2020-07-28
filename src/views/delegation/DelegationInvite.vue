@@ -21,7 +21,7 @@ const SnackbarStore = namespace('SnackbarStore')
     Loader,
   },
 })
-export default class DelegateInvite extends Vue {
+export default class DelegationInvite extends Vue {
   @UserStore.State user?: User
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @SnackbarStore.Mutation setSnackbarSuccess!: (message: string) => void

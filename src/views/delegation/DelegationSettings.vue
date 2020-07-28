@@ -32,7 +32,11 @@ v-dialog(
       )
         span {{ delegate.name }}
         v-btn.ml-2(icon, small)
-          v-icon(small, @click='deleteDelegate(delegate)', :loading='loading') delete
+          v-icon(
+            small,
+            @click='deleteDelegateUser(delegate)',
+            :loading='loading'
+          ) delete
       // Delegators
       v-divider.mt-2
       v-subheader.pa-0 {{ $t("delegate.delegators") }}
@@ -46,7 +50,7 @@ v-dialog(
         v-btn.ml-2(icon, small)
           v-icon(
             small,
-            @click='deleteDelegator(delegator)',
+            @click='deleteDelegatorUser(delegator)',
             :loading='loading'
           ) delete
     v-card-actions
@@ -69,9 +73,9 @@ import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
 import * as api from '@/utils/api'
 import { i18n } from '@/plugins/i18n'
+import { db } from '../../utils/db'
 
-const DelegateStore = namespace('DelegateStore')
-const UserStore = namespace('UserStore')
+const DelegationStore = namespace('DelegationStore')
 const SnackbarStore = namespace('SnackbarStore')
 
 @Component
@@ -79,51 +83,24 @@ export default class DelegateSettings extends Vue {
   @Prop({ required: true }) dialog!: boolean
   @Prop({ required: true }) close!: () => void
 
-  @UserStore.State user?: User
-  @DelegateStore.State delegates!: User[]
-  @DelegateStore.State delegators!: User[]
-  @DelegateStore.Getter delegateInviteLink!: string
-  @DelegateStore.State token?: string
-  @DelegateStore.Mutation setDelegates!: (delegates: User[]) => void
-  @DelegateStore.Mutation setDelegators!: (delegators: User[]) => void
-  @DelegateStore.Mutation setToken!: (token: string) => void
+  @DelegationStore.State delegates!: User[]
+  @DelegationStore.State delegators!: User[]
+  @DelegationStore.Getter delegateInviteLink!: string
+  @DelegationStore.State token?: string
+  @DelegationStore.Action resetDelegateToken!: () => void
+  @DelegationStore.Action deleteDelegate!: (id: string) => void
+  @DelegationStore.Action deleteDelegator!: (id: string) => void
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
 
   loading = false
-
-  save() {
-    this.close()
-  }
-
-  async loadData() {
-    if (!this.user) {
-      return
-    }
-    this.loading = true
-    try {
-      const response = await api.getDelegateInfo(this.user)
-      this.setDelegates(response.delegates)
-      this.setDelegators(response.delegators)
-      this.setToken(response.token)
-    } catch (err) {
-      console.error(err)
-      this.setSnackbarError('errors.loadTodos')
-    } finally {
-      this.loading = false
-    }
-  }
 
   async resetToken() {
     if (!confirm(i18n.t('delegate.resetConfirmation') as string)) {
       return
     }
-    if (!this.user) {
-      return
-    }
     this.loading = true
     try {
-      const token = await api.resetDelegateToken(this.user)
-      this.setToken(token)
+      await this.resetDelegateToken()
     } catch (err) {
       console.error(err)
       this.setSnackbarError('errors.loadTodos')
@@ -132,17 +109,13 @@ export default class DelegateSettings extends Vue {
     }
   }
 
-  async deleteDelegate(delegate: User) {
+  async deleteDelegateUser(delegate: User) {
     if (!confirm(i18n.t('delegate.deleteDelegateConfirmation') as string)) {
-      return
-    }
-    if (!this.user) {
       return
     }
     this.loading = true
     try {
-      const token = await api.deleteDelegate(this.user, delegate._id)
-      this.loadData()
+      await this.deleteDelegate(delegate._id)
     } catch (err) {
       console.error(err)
       this.setSnackbarError(err.message)
@@ -151,17 +124,13 @@ export default class DelegateSettings extends Vue {
     }
   }
 
-  async deleteDelegator(delegator: User) {
+  async deleteDelegatorUser(delegator: User) {
     if (!confirm(i18n.t('delegate.deleteDelegatorConfirmation') as string)) {
-      return
-    }
-    if (!this.user) {
       return
     }
     this.loading = true
     try {
-      await api.deleteDelegator(this.user, delegator._id)
-      this.loadData()
+      await this.deleteDelegator(delegator._id)
     } catch (err) {
       console.error(err)
       this.setSnackbarError(err.message)

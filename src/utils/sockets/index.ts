@@ -1,12 +1,22 @@
+import DelegationStore from '@/store/modules/DelegationStore'
+import { User } from '@/models/User'
 import { serverBus } from '@/main'
-import SocketIO from 'socket.io-client'
 import store from '@/store'
-
-const socketIO = SocketIO(
-  process.env.VUE_APP_DEV ? 'http://localhost:3000' : 'https://ws.todorant.com'
-)
+import { socketIO } from '@/utils/sockets/socketIO'
+import { PromiseMap } from '@/utils/PromiseMap'
+import { SyncManager } from '@/utils/sockets/SyncManager'
+import { getModule } from 'vuex-module-decorators'
+import { db } from '@/utils/db'
 
 class SocketManager {
+  pendingPushes = {} as PromiseMap
+
+  delegateSyncManager: SyncManager<{
+    delegates: User[]
+    delegators: User[]
+    token: string
+  }>
+
   constructor() {
     this.connect()
 
@@ -23,6 +33,26 @@ class SocketManager {
       console.log('sockets requested sync')
       serverBus.$emit('refreshRequested')
     })
+
+    this.delegateSyncManager = new SyncManager<{
+      delegates: User[]
+      delegators: User[]
+      token: string
+    }>(
+      'delegate',
+      this.pendingPushes,
+      () => undefined,
+      async (objects) => {
+        // Delegators
+        await db.delegators.clear()
+        await db.delegators.bulkAdd(objects.delegators)
+        // Delegates
+        await db.delegates.clear()
+        await db.delegates.bulkAdd(objects.delegates)
+        // Token
+        getModule(DelegationStore, store).setToken(objects.token)
+      }
+    )
   }
 
   connect = () => {
@@ -74,6 +104,11 @@ class SocketManager {
   onAuthorized = () => {
     console.log('sockets authorized')
     store.state.SocketsStore.authorized = true
+    this.globalSync()
+  }
+
+  globalSync = () => {
+    this.delegateSyncManager.sync()
   }
 }
 

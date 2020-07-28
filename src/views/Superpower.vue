@@ -19,7 +19,7 @@
       v-tab-item(:value='2')
         Report
       v-tab-item(:value='3')
-        Delegate
+        Delegation
       // Add FAB
       AddTodo(v-if='!editting', :currentTab='currentTab')
   // Tabs (planning = true)
@@ -53,7 +53,7 @@ import TodoList from '@/components/TodoList.vue'
 import CurrentTodo from '@/components/CurrentTodo.vue'
 import Report from '@/components/Report.vue'
 import AddTodo from '@/components/AddTodo.vue'
-import Delegate from '@/views/delegate/Delegate.vue'
+import Delegation from '@/views/delegation/Delegation.vue'
 import { Watch } from 'vue-property-decorator'
 import { serverBus } from '@/main'
 import { i18n } from '@/plugins/i18n'
@@ -66,7 +66,9 @@ const SnackbarStore = namespace('SnackbarStore')
 const AppStore = namespace('AppStore')
 const SettingsStore = namespace('SettingsStore')
 
-@Component({ components: { TodoList, AddTodo, CurrentTodo, Report, Delegate } })
+@Component({
+  components: { TodoList, AddTodo, CurrentTodo, Report, Delegation },
+})
 export default class Superpower extends Vue {
   @UserStore.State user?: User
   @UserStore.State planning!: boolean
