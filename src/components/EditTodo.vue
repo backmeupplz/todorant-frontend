@@ -13,7 +13,7 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
             :todo='todo',
             :enterPressed='save',
             :escapePressed='escapePressed',
-            :hideAddToTheTop='true'
+            :editTodo='true'
           )
       v-card-actions
         v-btn(text, @click='deleteTodo', :loading='loading', color='error')

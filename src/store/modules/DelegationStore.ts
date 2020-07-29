@@ -4,6 +4,7 @@ import {
   Module,
   MutationAction,
   Mutation,
+  Action,
 } from 'vuex-module-decorators'
 import * as api from '@/utils/api'
 import { db } from '@/utils/db'
@@ -39,11 +40,13 @@ export default class DelegationStore extends VuexModule {
     }
   }
 
+  @Action
   async deleteDelegate(id: string) {
     await api.deleteDelegate(id)
     await db.delegates.delete(id)
   }
 
+  @Action
   async deleteDelegator(id: string) {
     await api.deleteDelegator(id)
     await db.delegators.delete(id)

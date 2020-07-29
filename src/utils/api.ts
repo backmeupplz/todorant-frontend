@@ -98,7 +98,8 @@ export async function postTodos(user: User, todos: Partial<Todo>[]) {
           todoCopy.monthAndYear = todo.date.substr(0, 7)
           todoCopy.date = todo.date.substr(8)
         }
-        todoCopy.encrypted = !!store.state.UserStore.password
+        todoCopy.encrypted =
+          !!store.state.UserStore.password && !todoCopy.delegate
         return todoCopy
       }),
       {

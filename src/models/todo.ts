@@ -1,3 +1,5 @@
+import { User } from '@/models/User'
+
 export interface Todo {
   _id: string
   createdAt: Date
@@ -14,4 +16,7 @@ export interface Todo {
   time?: string
 
   encrypted: boolean
+
+  delegate?: User
+  delegator?: User
 }
