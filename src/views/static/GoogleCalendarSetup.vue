@@ -13,7 +13,7 @@ import { User } from '@/models/User'
 import { GoogleCalendarCredentials } from '@/models/GoogleCalendarCredentials'
 import Loader from '@/components/Loader.vue'
 
-const AppStore = namespace('AppStore')
+const UserStore = namespace('UserStore')
 const SettingsStore = namespace('SettingsStore')
 const SnackbarStore = namespace('SnackbarStore')
 
@@ -23,7 +23,7 @@ const SnackbarStore = namespace('SnackbarStore')
   },
 })
 export default class GoogleCalendarSetup extends Vue {
-  @AppStore.State user?: User
+  @UserStore.State user?: User
 
   @SettingsStore.State googleCalendarCredentials?: GoogleCalendarCredentials
   @SettingsStore.Mutation setGoogleCalendarCredentials!: (
@@ -34,6 +34,7 @@ export default class GoogleCalendarSetup extends Vue {
   @SnackbarStore.Mutation setSnackbarSuccess!: (message: string) => void
 
   async mounted() {
+    console.log(this.user, this.$route.query)
     if (!this.user) {
       return
     }

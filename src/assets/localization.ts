@@ -205,6 +205,9 @@ export const messages = {
         dateOrMonth: 'Задачам нужно выставлять либо точную дату, либо месяц',
         more1500: 'Задача не может иметь более 1500 символов',
       },
+      epic: {
+        numberError: 'Должно быть цифрой',
+      },
       invalidForm: 'Пожалуйста, заполните необходимые поля',
       report: 'Не получилось загрузить отчет',
       addTodoOld: 'Нельзя добавить задачу в прошлом',
@@ -495,6 +498,10 @@ export const messages = {
         'Вы точно хотите убрать этого делегатора из списка? Этот пользователь больше не сможет делегировать вам задачи.',
       pickDelegateField: 'Делегировать',
     },
+    epic: {
+      intoEpic: 'Сделать эпиком',
+      epicGoal: 'Цель эпика',
+    },
   },
   en: {
     encryption: {
@@ -713,6 +720,9 @@ export const messages = {
         textLenght: 'Todos should have text',
         dateOrMonth: 'Todos should have either date or month set',
         more1500: "Todos can't have more than 1500 characters.",
+      },
+      epic: {
+        numberError: 'Should be a number',
       },
       invalidForm: 'Please, fill in the required fields',
       report: 'Could not load report',
@@ -998,6 +1008,10 @@ export const messages = {
       deleteDelegatorConfirmation:
         'Are you sure you want to delete this delegator? This delegator will no longer be able to delegate tasks to you.',
       pickDelegateField: 'Delegate',
+    },
+    epic: {
+      intoEpic: 'Make an Epic',
+      epicGoal: 'Epic goal',
     },
   },
   ua: {

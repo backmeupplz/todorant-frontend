@@ -1,87 +1,93 @@
 <template lang="pug">
-  div
-    v-btn(
-      :absolute="$vuetify.breakpoint.mdAndUp && (currentTab == 0 && !planning)"
-      :fixed="$vuetify.breakpoint.smAndDown || (currentTab != 0 || planning)"
-      :class='($vuetify.breakpoint.mdAndUp && (currentTab != 0 || planning)) ? "rightPadding" : ""'
-      dark
-      fab
-      bottom
-      right
-      color='blue'
-      @click='openDialog()'
-      v-shortkey.once='{ en: ["a"], ru: ["ф"] }'
-      @shortkey='openDialog(true)'
-    )
-      v-icon add
-    v-dialog(v-model='dialog'
-    persistent
-    scrollable
-    max-width='600px')
-      v-form(ref='form')
-        v-card
-          v-card-title
-            span.headline {{$t('todo.create.title')}}
-            v-spacer
-            v-tooltip(bottom :max-width='300')
-              template(v-slot:activator='{ on }')
-                v-icon(v-on='on') info
-              span {{$t('todo.create.tooltip')}}
-          v-card-text
-            v-container
-              .d-flex.justify-space-between
-                p(v-if='!!todoToBreakdown' :class='isEncryptionWrong(todoToBreakdown) ? "grey--text" : ""') {{textForTodo(todoToBreakdown)}}
-                v-btn(
-                  v-if='!!todoToBreakdown' 
-                  icon
-                  v-clipboard:copy="!todoToBreakdown ? 'no-todo' : textForTodo(todoToBreakdown)"
-                )
-                  v-icon(small) assignment
-              v-expansion-panels(multiple v-model='panel')
-                v-expansion-panel(v-for='(todo, i) in todos' :key='i')
-                  v-expansion-panel-header
-                    v-flex.column
-                      span {{!panel.includes(i) ? `${todo.frog ? '🐸 ': ''}${todo.time ? `${todo.time} ` : ''}` : ''}}{{panel.includes(i) || !todo.text ? $t('todo.create.placeholder'): todo.text}}
-                      p.my-0.caption(v-if='!panel.includes(i) && todo.date') {{todo.date}}
-                  v-expansion-panel-content
-                    TodoForm(
-                      :todo='todo'
-                      :enterPressed='save'
-                      :escapePressed='escapePressed'
-                      :addTodo='addTodo'
-                      ref='todoForm'
-                    )
-                      v-btn(
-                        v-if='todos.length > 1'
-                        color='error'
-                        text
-                        @click='deleteTodo(i)'
-                      ) {{$t('delete')}}
-          v-card-actions
-            v-btn(
-              color='blue'
-              text @click='addTodo'
-              v-shortkey.once='{ en: ["ctrl", "shift", "a"], ru: ["ctrl", "shift", "ф"] }'
-              @shortkey='addTodo'
-            )
-              v-icon add
-            v-spacer
-            v-btn(
-              color='error'
-              text 
-              @click='close'
-              :disabled='loading'
-              v-shortkey.once="['esc']"
-              @shortkey='close'
-            ) {{$t('cancel')}}
-            v-btn(
-              color='blue'
-              text 
-              @click='save'
-              :loading='loading'
-              v-shortkey.once='["enter"]'
-              @shortkey='save'
-            ) {{$t('save')}}
+div
+  v-btn(
+    :absolute='$vuetify.breakpoint.mdAndUp && currentTab == 0 && !planning',
+    :fixed='$vuetify.breakpoint.smAndDown || currentTab != 0 || planning',
+    :class='$vuetify.breakpoint.mdAndUp && (currentTab != 0 || planning) ? "rightPadding" : ""',
+    dark,
+    fab,
+    bottom,
+    right,
+    color='blue',
+    @click='openDialog()',
+    v-shortkey.once='{ en: ["a"], ru: ["ф"] }',
+    @shortkey='openDialog(true)'
+  )
+    v-icon add
+  v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
+    v-form(ref='form')
+      v-card
+        v-card-title
+          span.headline {{ $t("todo.create.title") }}
+          v-spacer
+          v-tooltip(bottom, :max-width='300')
+            template(v-slot:activator='{ on }')
+              v-icon(v-on='on') info
+            span {{ $t("todo.create.tooltip") }}
+        v-card-text
+          v-container
+            .d-flex.justify-space-between
+              p.todoText(
+                v-if='!!todoToBreakdown',
+                :class='isEncryptionWrong(todoToBreakdown) ? "grey--text" : ""'
+              ) {{ textForTodo(todoToBreakdown) }}
+              v-btn(
+                v-if='!!todoToBreakdown',
+                icon,
+                v-clipboard:copy='!todoToBreakdown ? "no-todo" : textForTodo(todoToBreakdown)'
+              )
+                v-icon(small) assignment
+            v-expansion-panels(multiple, v-model='panel')
+              v-flex
+                draggable(v-model='todos', handle='.handle')
+                  v-expansion-panel(v-for='(todo, i) in todos', :key='i')
+                    v-expansion-panel-header
+                      v-flex.column
+                        span {{ !panel.includes(i) ? `${todo.frog ? "🐸 " : ""}${todo.time ? `${todo.time} ` : ""}` : "" }}{{ panel.includes(i) || !todo.text ? $t("todo.create.placeholder") : todo.text }}
+                        p.my-0.caption(v-if='!panel.includes(i) && todo.date') {{ todo.date }}
+                      v-row-reverse
+                        .d-flex.justify-end.ma-2
+                          v-icon.handle(v-if='todos.length > 1') menu
+                    v-expansion-panel-content
+                      TodoForm(
+                        :todo='todo',
+                        :enterPressed='save',
+                        :escapePressed='escapePressed',
+                        :addTodo='addTodo',
+                        ref='todoForm'
+                      )
+                        v-btn(
+                          v-if='todos.length > 1',
+                          color='error',
+                          text,
+                          @click='deleteTodo(i)'
+                        ) {{ $t("delete") }}
+        v-card-actions
+          v-btn(
+            color='blue',
+            text,
+            @click='addTodo',
+            v-shortkey.once='{ en: ["ctrl", "shift", "a"], ru: ["ctrl", "shift", "ф"] }',
+            @shortkey='addTodo'
+          )
+            v-icon add
+          v-spacer
+          v-btn(
+            color='error',
+            text,
+            @click='close',
+            :disabled='loading',
+            v-shortkey.once='["esc"]',
+            @shortkey='close'
+          ) {{ $t("cancel") }}
+          v-btn(
+            color='blue',
+            text,
+            @click='save',
+            :loading='loading',
+            v-shortkey.once='["enter"]',
+            @shortkey='save'
+          ) {{ $t("save") }}
 </template>
 
 <script lang="ts">
@@ -99,13 +105,14 @@ import { i18n } from '@/plugins/i18n'
 import { namespace } from 'vuex-class'
 import { SubscriptionStatus } from '@/models/SubscriptionStatus'
 import { User } from '@/models/User'
+import draggable from 'vuedraggable'
 
 const SettingsStore = namespace('SettingsStore')
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
 
 @Component({
-  components: { TodoForm },
+  components: { TodoForm, draggable },
 })
 export default class AddTodo extends Vue {
   @Prop({ required: true }) currentTab!: number
@@ -222,7 +229,6 @@ export default class AddTodo extends Vue {
       })
     }
     this.panel = [this.todos.length - 1]
-
     logEvent('add_todo_add_more')
   }
 
@@ -314,4 +320,6 @@ export default class AddTodo extends Vue {
   @media screen and (min-width: (1000px + ($i * 100px))) and (max-width: 1100px + ($i * 100px))
     .rightPadding
       right: ((100 + ($i * 100)) / 2) !important
+.todoText
+  overflow-wrap: anywhere
 </style>

@@ -6,7 +6,7 @@ v-container(style='maxWidth: 1000px;')
         v-alert(text, color='info', icon='info') {{ $t("todo.planning") }}
     v-list-item.d-flex.align-center(:style='stickyHeaderStyle')
       v-switch.ma-0.pa-0(
-        v-if='!calendarViewEnabled && !search && !hash',
+        v-if='!calendarViewEnabled && !search && !hashes.size',
         hide-details,
         v-model='showCompleted',
         :label='$t("todo.list.completed")',
@@ -20,7 +20,7 @@ v-container(style='maxWidth: 1000px;')
         clearable,
         dense
       )
-      div(v-if='!!hash')
+      div(v-if='!!hashes.size')
         v-btn.mr-2(
           :loading='todosUpdating || loading',
           @click='goHome',
@@ -28,7 +28,12 @@ v-container(style='maxWidth: 1000px;')
           icon
         )
           v-icon(small) clear
-        span {{ hash }}
+        v-chip.ma-1(
+          close,
+          @click:close='delHash(word)',
+          v-for='(word, i) in hashes',
+          :key='i'
+        ) {{ word }}
       v-spacer(v-if='!search')
       v-btn(
         v-if='!editable && !showCompleted && !search && !spreadEnabled',
@@ -132,7 +137,7 @@ v-container(style='maxWidth: 1000px;')
         v-expansion-panel-header.py-0.px-6(
           v-observe-visibility='(isVisible, entry) => headerVisibilityChanged(isVisible, entry, i)'
         )
-          v-subheader.pa-0
+          v-subheader.pa-0.d-flex
             v-tooltip(
               right,
               :max-width='300',
@@ -142,6 +147,14 @@ v-container(style='maxWidth: 1000px;')
                 span(v-on='on') {{ todoSection.title }}{{ !panels.includes(i) ? ` (${todoSection.todos.length})` : "" }}
               span {{ $t(weekdayFromTitle(todoSection.title)) }}{{ !panels.includes(i) ? ` (${todoSection.todos.length})` : "" }}
             span(v-else) {{ todoSection.title }}
+            v-btn.ma-2(
+              v-if='todoSection.title.length === 10',
+              x-small,
+              icon,
+              @click.stop='addTodoWithDate(todoSection.title)',
+              :loading='loading'
+            )
+              v-icon(:color='dark ? "grey lighten-1" : "grey darken-1"', dense) add
         v-expansion-panel-content
           draggable(
             v-model='todoSection.todos',
@@ -379,7 +392,7 @@ export default class TodoList extends Vue {
   search = false
   queryString = ''
 
-  hash = ''
+  hashes = new Set()
 
   @Watch('queryString')
   onQuerryStringChanged() {
@@ -475,12 +488,20 @@ export default class TodoList extends Vue {
       this.loadTodos()
     })
     serverBus.$on('cleanHash', () => {
-      this.hash = ''
+      this.hashes.clear()
     })
-    this.hash = decodeURI(this.$router.currentRoute.hash)
+
     window.onhashchange = () => {
-      this.hash = decodeURI(this.$router.currentRoute.hash)
+      const hashArr = decodeURI(this.$router.currentRoute.hash).split(',')
+      this.hashes.add(hashArr[hashArr.length - 1])
     }
+  }
+
+  async delHash(word: string) {
+    this.hashes.delete(word)
+    const hashesString = [...this.hashes.values()].join(',')
+    await this.$router.replace(this.user ? `/superpower${hashesString}` : '/')
+    serverBus.$emit('refreshRequested')
   }
 
   todoInFuture(todo: Todo) {
@@ -840,6 +861,10 @@ export default class TodoList extends Vue {
     serverBus.$emit('addTodoRequested', undefined, todo)
   }
 
+  addTodoWithDate(date: string) {
+    serverBus.$emit('addTodoRequested', date, undefined)
+  }
+
   searchTouched() {
     this.search = !this.search
     this.queryString = ''
@@ -847,7 +872,7 @@ export default class TodoList extends Vue {
 
   async goHome() {
     try {
-      this.hash = ''
+      this.hashes.clear()
       await this.$router.replace(this.user ? '/superpower' : '/')
       serverBus.$emit('refreshRequested')
     } catch (err) {

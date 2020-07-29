@@ -10,6 +10,7 @@ import TagsStore from '@/store/modules/TagsStore'
 import UserStore from '@/store/modules/UserStore'
 import SettingsStore from '@/store/modules/SettingsStore'
 import HeroStore from '@/store/modules/HeroStore'
+import AppStore from '@/store/modules/AppStore'
 
 const base = process.env.VUE_APP_API
 
@@ -141,11 +142,21 @@ export async function deleteTag(user: User, tag: Tag) {
   })
 }
 
-export async function editTag(user: User, tag: Tag, color?: string) {
+export async function editTag(
+  user: User,
+  tag: Tag,
+  color?: string,
+  epic?: boolean,
+  epicGoal?: number,
+  epicCompleted?: boolean
+) {
   return axios.put(
     `${base}/tag/${tag._id}`,
     {
       color: color || null,
+      epic: epic || null,
+      epicGoal: epicGoal || null,
+      epicCompleted: epicCompleted || null,
     },
     {
       headers: getHeaders(user),
@@ -476,4 +487,5 @@ function setSettingsFromServer(state: any) {
   const settings = state.settings
   const settingsStore = getModule(SettingsStore, store)
   settingsStore.setSettingsStore(settings)
+  const appStore = getModule(AppStore, store).setLanguage(settings.language)
 }
