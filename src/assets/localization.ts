@@ -497,6 +497,33 @@ export const messages = {
     pointsTillNextLevel: 'очков до следующего уровня',
   },
   en: {
+    accept: 'Accept',
+    delegate: {
+      title: 'Delegation',
+      noDelegators:
+        "You don't have any delegators yet. Share the link above with the people who you want to make delegators",
+      noDelegates:
+        "You don't have any delegates yet. Ask for an invite link to become someone's delegator.",
+      noDelegatedTasks: "You don't have any more newly delegated tasks.",
+      noTasks:
+        "You don't have any tasks that you delegated. Create a task and select a delegate.",
+      link: 'Delegate invite link',
+      linkDescription:
+        'Share this link only with the people you trust. People can become your delegators by following this link. Delegators will only see the tasks that they delegated to you.',
+      resetLink: 'Reset the link',
+      resetConfirmation:
+        "Are you sure that you want to reset the link? The current link won't work anymore!",
+      delegators: 'Delegators',
+      delegates: 'Delegates',
+      inviteSuccess: 'Success! Now you can delegate tasks to this user.',
+      inviteConfirm:
+        'Are you sure you want to became a delegator to this user?',
+      deleteDelegateConfirmation:
+        'Are you sure you want to delete this delegate? You will no longer be able to delegate tasks to this delegate.',
+      deleteDelegatorConfirmation:
+        'Are you sure you want to delete this delegator? This delegator will no longer be able to delegate tasks to you.',
+      pickDelegateField: 'Delegate',
+    },
     encryption: {
       title: 'Encryption',
       info:
@@ -719,6 +746,9 @@ export const messages = {
       addTodoOld: 'Cannot add todo in the past',
       appleFirefox:
         'Unfortunately, there is <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1628361">a bug</a> with Apple signin on Firefox. Until it is resolved, please, use other web browsers to login with Apple — and then merge it with other social accounts on Todorant. Sorry for the inconvenience.',
+      delegate: {
+        invalidToken: 'Invite link is no longer valid',
+      },
     },
     close: 'Close',
     notFound: 'Page not found',
