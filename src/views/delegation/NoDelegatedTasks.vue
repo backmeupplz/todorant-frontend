@@ -1,8 +1,8 @@
 <template lang="pug">
 .v-container.pa-4
-  v-row.v-flex.justify-center.text-center
-    p.display-3 👁👄👁
-    p.body-1 {{ $t("delegate.noDelegates") }}
+  .v-flex.justify-center.text-center
+    p.display-3 🥐
+    p.body-1 {{ $t("delegate.noDelegatedTasks") }}
 </template>
 
 <script lang="ts">
@@ -11,5 +11,5 @@ import Component from 'vue-class-component'
 import { Prop } from 'vue-property-decorator'
 
 @Component
-export default class NoDelegates extends Vue {}
+export default class NoDelegatedTasks extends Vue {}
 </script>

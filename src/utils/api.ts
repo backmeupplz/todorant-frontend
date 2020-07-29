@@ -125,7 +125,11 @@ export async function editTodo(user: User, todo: Todo) {
   })
 }
 
-export async function deleteTodo(user: User, todo: Todo) {
+export async function deleteTodo(todo: Todo) {
+  const user = store.state.UserStore.user
+  if (!user) {
+    throw new Error('No user')
+  }
   return axios.delete(`${base}/todo/${todo._id}`, {
     headers: getHeaders(user),
   })
@@ -374,6 +378,18 @@ export async function resetDelegateToken() {
   ).data as string
 }
 
+export async function getUnacceptedDelegated() {
+  const user = store.state.UserStore.user
+  if (!user) {
+    throw new Error('No user')
+  }
+  return (
+    await axios.get(`${base}/delegate/unaccepted`, {
+      headers: getHeaders(user),
+    })
+  ).data as Todo[]
+}
+
 export async function deleteDelegate(id: string) {
   const user = store.state.UserStore.user
   if (!user) {
@@ -402,6 +418,20 @@ export async function useDelegateToken(user: User, token: string) {
   return axios.post(
     `${base}/delegate/useToken`,
     { token },
+    {
+      headers: getHeaders(user),
+    }
+  )
+}
+
+export async function acceptDelegateTodo(todo: Todo) {
+  const user = store.state.UserStore.user
+  if (!user) {
+    throw new Error('No user')
+  }
+  return axios.post(
+    `${base}/delegate/accept/${todo._id}`,
+    {},
     {
       headers: getHeaders(user),
     }
