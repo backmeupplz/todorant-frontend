@@ -1,34 +1,5 @@
 export const messages = {
   ru: {
-    accept: 'Принять',
-    delegate: {
-      title: 'Делегирование',
-      noDelegators:
-        'У вас пока что нет людей, которые могут делегировать вам задачи. Передайте ссылку выше людям, которым доверяете — и они смогут делегировать вам задачи.',
-      noDelegates:
-        'У вас пока что нет людей, которым вы можете делегировать задачи. Получите ссылку-приглашение от человека, которому хотите начать делегировать задачи.',
-      noDelegatedTasks:
-        'Пока что у вас нет новых задач, которые вам делегировали.',
-      noTasks:
-        'У вас пока что нет задач, которые вы делегировали кому-либо. Создайте задачу и выберите человека, которому хотите ее делегировать.',
-      link: 'Ссылка-приглашение',
-      linkDescription:
-        'Делитесь этой ссылкой только с людьми, которым вы доверяете. Пройдя по этой ссылке, человек сможет начать делегировать вам задачи. Этот человек не сможет увидеть никакие задачи, кроме тех, которые делегировал вам.',
-      resetLink: 'Сбросить ссылку',
-      resetConfirmation:
-        'Уверены, что хотите сбросить ссылку-приглашение? Существующая ссылка больше не будет работать!',
-      delegators: 'Пользователи, которые делегируют вам задачи',
-      delegates: 'Пользователи, которым вы делегируете задачи',
-      inviteSuccess:
-        'Получилось! Теперь вы можете делегировать задачи этому пользователю.',
-      inviteConfirm:
-        'Вы точно хотите стать делегатором этому пользователю и получить возможность делегировать задачи?',
-      deleteDelegateConfirmation:
-        'Вы точно хотите убрать этого делегата из списка? Вы больше не сможете делегировать задачи этому пользователю.',
-      deleteDelegatorConfirmation:
-        'Вы точно хотите убрать этого делегатора из списка? Этот пользователь больше не сможет делегировать вам задачи.',
-      pickDelegateField: 'Делегировать',
-    },
     encryption: {
       title: 'Шифрование',
       info:
@@ -495,35 +466,37 @@ export const messages = {
     level: 'Уровень',
     points: 'очков',
     pointsTillNextLevel: 'очков до следующего уровня',
+    accept: 'Принять',
+    delegate: {
+      title: 'Делегирование',
+      noDelegators:
+        'У вас пока что нет людей, которые могут делегировать вам задачи. Передайте ссылку выше людям, которым доверяете — и они смогут делегировать вам задачи.',
+      noDelegates:
+        'У вас пока что нет людей, которым вы можете делегировать задачи. Получите ссылку-приглашение от человека, которому хотите начать делегировать задачи.',
+      noDelegatedTasks:
+        'Пока что у вас нет новых задач, которые вам делегировали.',
+      noTasks:
+        'У вас пока что нет задач, которые вы делегировали кому-либо. Создайте задачу и выберите человека, которому хотите ее делегировать.',
+      link: 'Ссылка-приглашение',
+      linkDescription:
+        'Делитесь этой ссылкой только с людьми, которым вы доверяете. Пройдя по этой ссылке, человек сможет начать делегировать вам задачи. Этот человек не сможет увидеть никакие задачи, кроме тех, которые делегировал вам.',
+      resetLink: 'Сбросить ссылку',
+      resetConfirmation:
+        'Уверены, что хотите сбросить ссылку-приглашение? Существующая ссылка больше не будет работать!',
+      delegators: 'Пользователи, которые делегируют вам задачи',
+      delegates: 'Пользователи, которым вы делегируете задачи',
+      inviteSuccess:
+        'Получилось! Теперь вы можете делегировать задачи этому пользователю.',
+      inviteConfirm:
+        'Вы точно хотите стать делегатором этому пользователю и получить возможность делегировать задачи?',
+      deleteDelegateConfirmation:
+        'Вы точно хотите убрать этого делегата из списка? Вы больше не сможете делегировать задачи этому пользователю.',
+      deleteDelegatorConfirmation:
+        'Вы точно хотите убрать этого делегатора из списка? Этот пользователь больше не сможет делегировать вам задачи.',
+      pickDelegateField: 'Делегировать',
+    },
   },
   en: {
-    accept: 'Accept',
-    delegate: {
-      title: 'Delegation',
-      noDelegators:
-        "You don't have any delegators yet. Share the link above with the people who you want to make delegators",
-      noDelegates:
-        "You don't have any delegates yet. Ask for an invite link to become someone's delegator.",
-      noDelegatedTasks: "You don't have any more newly delegated tasks.",
-      noTasks:
-        "You don't have any tasks that you delegated. Create a task and select a delegate.",
-      link: 'Delegate invite link',
-      linkDescription:
-        'Share this link only with the people you trust. People can become your delegators by following this link. Delegators will only see the tasks that they delegated to you.',
-      resetLink: 'Reset the link',
-      resetConfirmation:
-        "Are you sure that you want to reset the link? The current link won't work anymore!",
-      delegators: 'Delegators',
-      delegates: 'Delegates',
-      inviteSuccess: 'Success! Now you can delegate tasks to this user.',
-      inviteConfirm:
-        'Are you sure you want to became a delegator to this user?',
-      deleteDelegateConfirmation:
-        'Are you sure you want to delete this delegate? You will no longer be able to delegate tasks to this delegate.',
-      deleteDelegatorConfirmation:
-        'Are you sure you want to delete this delegator? This delegator will no longer be able to delegate tasks to you.',
-      pickDelegateField: 'Delegate',
-    },
     encryption: {
       title: 'Encryption',
       info:
@@ -999,6 +972,33 @@ export const messages = {
     level: 'Level',
     points: 'points',
     pointsTillNextLevel: 'points to unlock next level',
+    accept: 'Accept',
+    delegate: {
+      title: 'Delegation',
+      noDelegators:
+        "You don't have any delegators yet. Share the link above with the people who you want to make delegators",
+      noDelegates:
+        "You don't have any delegates yet. Ask for an invite link to become someone's delegator.",
+      noDelegatedTasks: "You don't have any more newly delegated tasks.",
+      noTasks:
+        "You don't have any tasks that you delegated. Create a task and select a delegate.",
+      link: 'Delegate invite link',
+      linkDescription:
+        'Share this link only with the people you trust. People can become your delegators by following this link. Delegators will only see the tasks that they delegated to you.',
+      resetLink: 'Reset the link',
+      resetConfirmation:
+        "Are you sure that you want to reset the link? The current link won't work anymore!",
+      delegators: 'Delegators',
+      delegates: 'Delegates',
+      inviteSuccess: 'Success! Now you can delegate tasks to this user.',
+      inviteConfirm:
+        'Are you sure you want to became a delegator to this user?',
+      deleteDelegateConfirmation:
+        'Are you sure you want to delete this delegate? You will no longer be able to delegate tasks to this delegate.',
+      deleteDelegatorConfirmation:
+        'Are you sure you want to delete this delegator? This delegator will no longer be able to delegate tasks to you.',
+      pickDelegateField: 'Delegate',
+    },
   },
   ua: {
     encryption: {
