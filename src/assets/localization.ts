@@ -205,9 +205,6 @@ export const messages = {
         dateOrMonth: 'Задачам нужно выставлять либо точную дату, либо месяц',
         more1500: 'Задача не может иметь более 1500 символов',
       },
-      epic: {
-        numberError: 'Должно быть цифрой',
-      },
       invalidForm: 'Пожалуйста, заполните необходимые поля',
       report: 'Не получилось загрузить отчет',
       addTodoOld: 'Нельзя добавить задачу в прошлом',
@@ -215,6 +212,9 @@ export const messages = {
         'К сожалению, это <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1628361">баг</a> в Firefox. Пока его не поправят, пожалуйста, используйте другой браузер для логина через Эппл — а после объедините аккаунты с другими соцсетями в Тудуранте. Прошу прощения за неудобства.',
       delegate: {
         invalidToken: 'Ссылка-приглашение больше не работает',
+      },
+      epic: {
+        numberError: 'Должно быть цифрой',
       },
     },
     close: 'Закрыть',
@@ -721,9 +721,6 @@ export const messages = {
         dateOrMonth: 'Todos should have either date or month set',
         more1500: "Todos can't have more than 1500 characters.",
       },
-      epic: {
-        numberError: 'Should be a number',
-      },
       invalidForm: 'Please, fill in the required fields',
       report: 'Could not load report',
       addTodoOld: 'Cannot add todo in the past',
@@ -731,6 +728,9 @@ export const messages = {
         'Unfortunately, there is <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1628361">a bug</a> with Apple signin on Firefox. Until it is resolved, please, use other web browsers to login with Apple — and then merge it with other social accounts on Todorant. Sorry for the inconvenience.',
       delegate: {
         invalidToken: 'Invite link is no longer valid',
+      },
+      epic: {
+        numberError: 'Should be a number',
       },
     },
     close: 'Close',
