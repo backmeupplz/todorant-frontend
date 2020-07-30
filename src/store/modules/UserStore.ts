@@ -19,6 +19,11 @@ export default class UserStore extends VuexModule {
   }
 
   @Mutation
+  setUserName(name: any): void {
+    this.user!.name = name
+  }
+
+  @Mutation
   setUserStore(userStore: UserStore): void {
     Object.assign(this, userStore)
   }

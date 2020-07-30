@@ -379,6 +379,8 @@ export const messages = {
       'Доступна новая версия Тудуранта. Пожалуйста, обновите страницу, чтобы получить новые блестящие функции 🦄',
     refresh: 'Обновить',
     heroProfileTitle: 'Профиль героя',
+    userName: 'Имя',
+    changeUserName: 'Поменять имя',
     infoHero:
       'Это ваш профиль — профиль героя! Завершайте задачи и зарабатывайте очки, чтобы выбивать все более и более высокие ранги!\n\nВы не увидите полный список рангов, пока не добьетесь самого высокого! Помните: единственный способ добраться до самого верхнего ранга — это ежедневная цепочка из маленьких шажков.',
     rank: '🔥 Ваш ранг 🔥',
@@ -861,6 +863,8 @@ export const messages = {
       'There is a new version of Todorant available. Please refresh the page to get the new shiny stuff 🦄',
     refresh: 'Refresh',
     heroProfileTitle: 'Hero profile',
+    userName: 'User name',
+    changeUserName: 'Change name',
     infoHero:
       "This is the profile page of you — the hero! Complete tasks and earn points to achieve higher and higher ranks!\n\nYou won't know the whole list of ranks until you achieve the highest! Remember: the only way to get to the top is through the everyday sequence of small steps.",
     rank: '🔥 Your rank 🔥',

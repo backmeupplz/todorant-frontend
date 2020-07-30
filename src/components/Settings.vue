@@ -60,6 +60,19 @@ v-dialog(
       v-subheader.pa-0 {{ $t("settings.account") }}
       .d-flex.flex-column
         span(v-for='identifier in identifiers') {{ identifier }}
+        v-divider.my-2
+        p {{ `${$t("userName")}` }}
+        b  {{ user.name }} 
+        v-btn(color='primary', text, @click='changeNameField') {{ $t("changeUserName") }}
+        .d-flex.align-center
+          v-text-field(label='New name', v-if='changeName', v-model='newUserName')
+          v-btn(
+            text, 
+            icon, 
+            v-if='changeName',
+            @click='safeNewUserName'
+          ) 
+            v-icon check
       v-divider.my-2
       .d-flex.flex-column.align-start
         v-btn(
@@ -162,7 +175,15 @@ export default class Settings extends Vue {
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @SnackbarStore.Mutation setSnackbarSuccess!: (message: string) => void
 
+  @UserStore.Mutation setUserName!: (name: any) => void
+
   loading = false
+  changeName = false
+  newUserName = ''
+  
+  changeNameField() {
+    this.$data.changeName = !this.$data.changeName
+  }
 
   weekdays = [1, 2, 3, 4, 5, 6, 0].map((n) => ({
     text: i18n.t(`weekdays.${n}`),
@@ -199,6 +220,12 @@ export default class Settings extends Vue {
   }
   set safeFirstDayOfWeek(val: number) {
     this.setFirstDayOfWeek(val)
+  }
+
+safeNewUserName(name: any) {
+    this.setUserName(this.newUserName)
+    this.changeName = false
+    this.newUserName = ''
   }
 
   get safeNewTodosGoFirst() {
