@@ -196,6 +196,7 @@ export default class Settings extends Vue {
   @SnackbarStore.Mutation setSnackbarSuccess!: (message: string) => void
 
   loading = false
+  timeMenu = false
 
   weekdays = [1, 2, 3, 4, 5, 6, 0].map((n) => ({
     text: i18n.t(`weekdays.${n}`),
@@ -239,7 +240,7 @@ export default class Settings extends Vue {
     return storeStartTimeOfDay ? storeStartTimeOfDay : '00:00'
   }
   set safeStartTimeOfDay(val: any) {
-    this.setStartTimeOfDay(val)
+    this.setStartTimeOfDay(val ? val : '00:00')
   }
 
   get safeNewTodosGoFirst() {
@@ -357,7 +358,6 @@ export default class Settings extends Vue {
       this.loading = false
     }
   }
-  timeMenu = false
 }
 </script>
 
