@@ -337,6 +337,7 @@ export const messages = {
       showTodayOnAddTodo:
         'Устанавливать сегодняшнюю дату автоматически при создании задачи',
       firstDayOfWeek: 'Первый день недели',
+      startTimeOfDay: 'Начало дня',
       newTodosGoFirst: 'Новые задачи добавляются в начало списка',
       preserveOrderByTime: 'Следить за порядком задач с точным временем',
       general: 'Общее',
@@ -819,6 +820,7 @@ export const messages = {
       title: 'Settings',
       showTodayOnAddTodo: 'Default to today when creating a todo',
       firstDayOfWeek: 'First day of the week',
+      startTimeOfDay: 'Start of the day',
       newTodosGoFirst: 'New todos are added on top of the list',
       preserveOrderByTime: 'Preserve exact time order',
       general: 'General',
@@ -1290,6 +1292,7 @@ export const messages = {
       showTodayOnAddTodo:
         'Встановлювати сьогоднішню дату автоматично при створенні завдань',
       firstDayOfWeek: 'Перший день тижня',
+      startTimeOfDay: 'Початок дня',
       newTodosGoFirst: 'Нові завдання додаються на початок списку',
       preserveOrderByTime: 'Зберегти точний порядок часу',
       general: 'Загальне',
@@ -1807,6 +1810,7 @@ export const messages = {
       title: 'Definições',
       showTodayOnAddTodo: 'O padrão é hoje ao criar uma tarefa',
       firstDayOfWeek: 'Primeiro dia da semana',
+      startTimeOfDay: 'Início do dia',
       newTodosGoFirst: 'Novas tarefas são adicionadas no topo da lista',
       preserveOrderByTime: 'Preservar a hora exata',
       general: 'Geral',
@@ -2198,6 +2202,7 @@ export const messages = {
       title: 'Ajustes',
       showTodayOnAddTodo: 'Establecer el día de hoy como predeterminado',
       firstDayOfWeek: 'Primer día de la semana',
+      startTimeOfDay: 'Comienzo del día',
       newTodosGoFirst:
         'Las tareas nuevas se agregan en la parte superior de la lista',
       preserveOrderByTime: 'Conservar el orden exacto por tiempo',

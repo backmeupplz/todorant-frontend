@@ -109,6 +109,15 @@ export async function postTodos(user: User, todos: Partial<Todo>[]) {
   ).data
 }
 
+function getTimeString(now: Date) {
+  const timeArr = [
+    `${0 + now.getHours()}`,
+    `${0 + now.getMinutes()}`,
+  ].map((item) => item.slice(-2))
+  const time = `${timeArr[0]}:${timeArr[1]}`
+  return time
+}
+
 export async function editTodo(user: User, todo: Todo) {
   const todoCopy = { ...todo, today: getToday() }
   if (
@@ -120,8 +129,10 @@ export async function editTodo(user: User, todo: Todo) {
       todoCopy.date = todo.date.substr(8)
     }
   }
+  const time = getTimeString(new Date())
   return axios.put(`${base}/todo/${todo._id}`, todoCopy, {
     headers: getHeaders(user),
+    params: { time: time },
   })
 }
 
@@ -199,6 +210,7 @@ export async function getTodos(
   calendarView: boolean = false,
   period?: Date
 ) {
+  const time = getTimeString(new Date())
   const data = (
     await axios.get(`${base}/todo`, {
       headers: getHeaders(user),
@@ -210,6 +222,7 @@ export async function getTodos(
         today: period ? getStringFromDate(period) : getToday(),
         calendarView,
         date: getToday(),
+        time: time,
         queryString,
       },
     })
@@ -222,11 +235,13 @@ export async function getTodos(
 }
 
 export async function getCurrentTodo(user: User) {
+  const time = getTimeString(new Date())
   const data = (
     await axios.get(`${base}/todo/current`, {
       headers: getHeaders(user),
       params: {
         date: getToday(),
+        time: time,
       },
     })
   ).data as {
@@ -252,9 +267,10 @@ export async function getTodosForExport(user: User) {
 }
 
 export async function rearrangeTodos(user: User, todos: TodoSection[]) {
+  const time = getTimeString(new Date())
   return axios.post(
     `${base}/todo/rearrange`,
-    { todos, today: getToday() },
+    { todos, today: getToday(), time: time },
     { headers: getHeaders(user) }
   )
 }

@@ -5,6 +5,7 @@ import { VuexModule, Module, Mutation } from 'vuex-module-decorators'
 export default class SettingsStore extends VuexModule {
   showTodayOnAddTodo?: boolean = undefined
   firstDayOfWeek?: number = undefined
+  startTimeOfDay?: any = undefined
   newTodosGoFirst?: boolean = undefined
   preserveOrderByTime?: boolean = undefined
   googleCalendarCredentials?: GoogleCalendarCredentials = undefined
@@ -44,6 +45,11 @@ export default class SettingsStore extends VuexModule {
   @Mutation
   setFirstDayOfWeek(firstDayOfWeek: number) {
     this.firstDayOfWeek = firstDayOfWeek
+  }
+
+  @Mutation
+  setStartTimeOfDay(startTimeOfDay: any) {
+    this.startTimeOfDay = startTimeOfDay
   }
 
   @Mutation
