@@ -168,7 +168,7 @@ export default class Settings extends Vue {
 
   @SettingsStore.State showTodayOnAddTodo?: boolean
   @SettingsStore.State firstDayOfWeek?: number
-  @SettingsStore.State startTimeOfDay?: any
+  @SettingsStore.State startTimeOfDay?: string
   @SettingsStore.State newTodosGoFirst?: boolean
   @SettingsStore.State preserveOrderByTime?: boolean
   @SettingsStore.State duplicateTagInBreakdown?: boolean
@@ -179,7 +179,7 @@ export default class Settings extends Vue {
     hotsetHotKeysEnabled: boolean
   ) => void
   @SettingsStore.Mutation setFirstDayOfWeek!: (firstDayOfWeek: number) => void
-  @SettingsStore.Mutation setStartTimeOfDay!: (startTimeOfDay: any) => void
+  @SettingsStore.Mutation setStartTimeOfDay!: (startTimeOfDay: string) => void
   @SettingsStore.Mutation setNewTodosGoFirst!: (
     newTodosGoFirst: boolean
   ) => void
