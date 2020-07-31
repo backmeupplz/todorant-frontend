@@ -205,14 +205,17 @@ export const messages = {
         dateOrMonth: 'Задачам нужно выставлять либо точную дату, либо месяц',
         more1500: 'Задача не может иметь более 1500 символов',
       },
-      epic: {
-        numberError: 'Должно быть цифрой',
-      },
       invalidForm: 'Пожалуйста, заполните необходимые поля',
       report: 'Не получилось загрузить отчет',
       addTodoOld: 'Нельзя добавить задачу в прошлом',
       appleFirefox:
         'К сожалению, это <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1628361">баг</a> в Firefox. Пока его не поправят, пожалуйста, используйте другой браузер для логина через Эппл — а после объедините аккаунты с другими соцсетями в Тудуранте. Прошу прощения за неудобства.',
+      delegate: {
+        invalidToken: 'Ссылка-приглашение больше не работает',
+      },
+      epic: {
+        numberError: 'Должно быть цифрой',
+      },
     },
     close: 'Закрыть',
     notFound: 'Страница не найдена',
@@ -282,7 +285,7 @@ export const messages = {
         'В Тудуранте нет и никогда не будет автоматически повторяющихся задач — единственное, в чем они помогают — это создание атмосферы страха, накапливаясь невыполненным грузом. Если нужно внести повторяющуюся задачу — внесите ее вручную, ваш мозг скажет вам спасибо за осмысленную задачу.',
         'В Тудуранте нет концепта "Проекты", так как он показал себя демотивирующим, некоторые папки просто никогда не открываются. Проекты "Фитнес" и "Саморазвитие" передают привет. Вместо этого, используйте #хештеги.',
         'Лягушки всегда находятся сверху в списке.',
-        'В Тудуранте нет напоминаний о задачах с точным временем. Однако вы можете включить интеграцию с Гугл Календарем, чтобы вам надоедал нотификации Гугл, а не Тудурант.',
+        'В Тудуранте нет напоминаний о задачах с точным временем. Однако вы можете включить интеграцию с Гугл Календарем, чтобы вам надоедал нотификациями Гугл, а не Тудурант.',
       ],
       bonus: {
         title: 'Бонусные функции',
@@ -337,7 +340,6 @@ export const messages = {
       showTodayOnAddTodo:
         'Устанавливать сегодняшнюю дату автоматически при создании задачи',
       firstDayOfWeek: 'Первый день недели',
-      startTimeOfDay: 'Начало дня',
       newTodosGoFirst: 'Новые задачи добавляются в начало списка',
       preserveOrderByTime: 'Следить за порядком задач с точным временем',
       general: 'Общее',
@@ -350,6 +352,7 @@ export const messages = {
       duplicateTagInBreakdown: 'Копировать хештеги при разбивке',
       export: 'Экспорт данных',
       hotkeys: 'Горячие клавиши',
+      startTimeOfDay: 'Начало дня',
     },
     weekdays: [
       'Воскресенье',
@@ -467,6 +470,35 @@ export const messages = {
     level: 'Уровень',
     points: 'очков',
     pointsTillNextLevel: 'очков до следующего уровня',
+    accept: 'Принять',
+    delegate: {
+      title: 'Делегирование',
+      noDelegators:
+        'У вас пока что нет людей, которые могут делегировать вам задачи. Передайте ссылку выше людям, которым доверяете — и они смогут делегировать вам задачи.',
+      noDelegates:
+        'У вас пока что нет людей, которым вы можете делегировать задачи. Получите ссылку-приглашение от человека, которому хотите начать делегировать задачи.',
+      noDelegatedTasks:
+        'Пока что у вас нет новых задач, которые вам делегировали.',
+      noTasks:
+        'У вас пока что нет задач, которые вы делегировали кому-либо. Создайте задачу и выберите человека, которому хотите ее делегировать.',
+      link: 'Ссылка-приглашение',
+      linkDescription:
+        'Делитесь этой ссылкой только с людьми, которым вы доверяете. Пройдя по этой ссылке, человек сможет начать делегировать вам задачи. Этот человек не сможет увидеть никакие задачи, кроме тех, которые делегировал вам.',
+      resetLink: 'Сбросить ссылку',
+      resetConfirmation:
+        'Уверены, что хотите сбросить ссылку-приглашение? Существующая ссылка больше не будет работать!',
+      delegators: 'Пользователи, которые делегируют вам задачи',
+      delegates: 'Пользователи, которым вы делегируете задачи',
+      inviteSuccess:
+        'Получилось! Теперь вы можете делегировать задачи этому пользователю.',
+      inviteConfirm:
+        'Вы точно хотите стать делегатором этому пользователю и получить возможность делегировать задачи?',
+      deleteDelegateConfirmation:
+        'Вы точно хотите убрать этого делегата из списка? Вы больше не сможете делегировать задачи этому пользователю.',
+      deleteDelegatorConfirmation:
+        'Вы точно хотите убрать этого делегатора из списка? Этот пользователь больше не сможет делегировать вам задачи.',
+      pickDelegateField: 'Делегировать',
+    },
     epic: {
       intoEpic: 'Сделать эпиком',
       epicGoal: 'Цель эпика',
@@ -690,14 +722,17 @@ export const messages = {
         dateOrMonth: 'Todos should have either date or month set',
         more1500: "Todos can't have more than 1500 characters.",
       },
-      epic: {
-        numberError: 'Should be a number',
-      },
       invalidForm: 'Please, fill in the required fields',
       report: 'Could not load report',
       addTodoOld: 'Cannot add todo in the past',
       appleFirefox:
         'Unfortunately, there is <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=1628361">a bug</a> with Apple signin on Firefox. Until it is resolved, please, use other web browsers to login with Apple — and then merge it with other social accounts on Todorant. Sorry for the inconvenience.',
+      delegate: {
+        invalidToken: 'Invite link is no longer valid',
+      },
+      epic: {
+        numberError: 'Should be a number',
+      },
     },
     close: 'Close',
     notFound: 'Page not found',
@@ -820,7 +855,6 @@ export const messages = {
       title: 'Settings',
       showTodayOnAddTodo: 'Default to today when creating a todo',
       firstDayOfWeek: 'First day of the week',
-      startTimeOfDay: 'Start of the day',
       newTodosGoFirst: 'New todos are added on top of the list',
       preserveOrderByTime: 'Preserve exact time order',
       general: 'General',
@@ -833,6 +867,7 @@ export const messages = {
       duplicateTagInBreakdown: 'Copy hashtags during breakdown',
       export: 'Export data',
       hotkeys: 'Hotkeys',
+      startTimeOfDay: 'Start of the day',
     },
     weekdays: [
       'Sunday',
@@ -949,6 +984,33 @@ export const messages = {
     level: 'Level',
     points: 'points',
     pointsTillNextLevel: 'points to unlock next level',
+    accept: 'Accept',
+    delegate: {
+      title: 'Delegation',
+      noDelegators:
+        "You don't have any delegators yet. Share the link above with the people who you want to make delegators",
+      noDelegates:
+        "You don't have any delegates yet. Ask for an invite link to become someone's delegator.",
+      noDelegatedTasks: "You don't have any more newly delegated tasks.",
+      noTasks:
+        "You don't have any tasks that you delegated. Create a task and select a delegate.",
+      link: 'Delegate invite link',
+      linkDescription:
+        'Share this link only with the people you trust. People can become your delegators by following this link. Delegators will only see the tasks that they delegated to you.',
+      resetLink: 'Reset the link',
+      resetConfirmation:
+        "Are you sure that you want to reset the link? The current link won't work anymore!",
+      delegators: 'Delegators',
+      delegates: 'Delegates',
+      inviteSuccess: 'Success! Now you can delegate tasks to this user.',
+      inviteConfirm:
+        'Are you sure you want to became a delegator to this user?',
+      deleteDelegateConfirmation:
+        'Are you sure you want to delete this delegate? You will no longer be able to delegate tasks to this delegate.',
+      deleteDelegatorConfirmation:
+        'Are you sure you want to delete this delegator? This delegator will no longer be able to delegate tasks to you.',
+      pickDelegateField: 'Delegate',
+    },
     epic: {
       intoEpic: 'Make an Epic',
       epicGoal: 'Epic goal',
@@ -1292,7 +1354,6 @@ export const messages = {
       showTodayOnAddTodo:
         'Встановлювати сьогоднішню дату автоматично при створенні завдань',
       firstDayOfWeek: 'Перший день тижня',
-      startTimeOfDay: 'Початок дня',
       newTodosGoFirst: 'Нові завдання додаються на початок списку',
       preserveOrderByTime: 'Зберегти точний порядок часу',
       general: 'Загальне',
@@ -1302,6 +1363,7 @@ export const messages = {
       googleCalendar: 'Google Calendar',
       disconnectConfirm: 'Впевнені, що хочете відключити цей сервіс?',
       account: 'Обліковий запис',
+      startTimeOfDay: 'Початок дня',
     },
     weekdays: [
       'Неділя',
@@ -1810,7 +1872,6 @@ export const messages = {
       title: 'Definições',
       showTodayOnAddTodo: 'O padrão é hoje ao criar uma tarefa',
       firstDayOfWeek: 'Primeiro dia da semana',
-      startTimeOfDay: 'Início do dia',
       newTodosGoFirst: 'Novas tarefas são adicionadas no topo da lista',
       preserveOrderByTime: 'Preservar a hora exata',
       general: 'Geral',
@@ -1820,6 +1881,7 @@ export const messages = {
       googleCalendar: 'Google Agenda',
       disconnectConfirm: 'Tem certeza de que deseja desconectar este serviço?',
       account: 'Conta',
+      startTimeOfDay: 'Início do dia',
     },
     weekdays: [
       'Domingo',
@@ -2202,10 +2264,10 @@ export const messages = {
       title: 'Ajustes',
       showTodayOnAddTodo: 'Establecer el día de hoy como predeterminado',
       firstDayOfWeek: 'Primer día de la semana',
-      startTimeOfDay: 'Comienzo del día',
       newTodosGoFirst:
         'Las tareas nuevas se agregan en la parte superior de la lista',
       preserveOrderByTime: 'Conservar el orden exacto por tiempo',
+      startTimeOfDay: 'Comienzo del día',
     },
     weekdays: [
       'Lunes',
