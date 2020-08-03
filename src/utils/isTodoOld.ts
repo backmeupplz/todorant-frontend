@@ -22,12 +22,15 @@ export function isTodoOld(todo: Todo, date: string) {
     }
     if (
       todo.monthAndYear === monthAndYear &&
-      todo.date == yesterday &&
+      parseInt(todo.date) == parseInt(yesterday) &&
       now >= todayDate
     ) {
       return true
     }
-    if (todo.monthAndYear === monthAndYear && todo.date < yesterday) {
+    if (
+      todo.monthAndYear === monthAndYear &&
+      parseInt(todo.date) < parseInt(yesterday)
+    ) {
       return true
     }
   } else {
