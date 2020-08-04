@@ -263,6 +263,7 @@ export default class Settings extends Vue {
     }
     this.loading = true
     try {
+      await api.closeChannel(user)
       await api.setSettings(user, {
         googleCalendarCredentials: undefined,
       })

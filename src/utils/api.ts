@@ -368,6 +368,12 @@ export async function authorizeGoogleCalendar(user: User, code: string) {
   ).data as GoogleCalendarCredentials
 }
 
+export async function closeChannel(user: User) {
+  return axios.post(`${base}/google/closeChannel`, undefined, {
+    headers: getHeaders(user),
+  })
+}
+
 function getHeaders(user: User) {
   if (user.token) {
     const password = store.state.UserStore.password
