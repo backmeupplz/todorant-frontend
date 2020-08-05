@@ -306,7 +306,7 @@ export default class Settings extends Vue {
     this.loading = true
     try {
       await api.setSettings(user, {
-        googleCalendarCredentials: undefined,
+        googleCalendarCredentials: null,
       })
       serverBus.$emit('refreshRequested')
       ;(this as any).close()
