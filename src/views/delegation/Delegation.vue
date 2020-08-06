@@ -13,11 +13,11 @@ div
         v-list-item-content
           v-card
             v-card-text
-              p {{ todo.delegator.name }}: {{ todo.monthAndYear }}{{ todo.date ? `-${todo.date}` : "" }}
               TodoText(
                 :todo='todo',
                 :text='todo.text',
-                :errorDecrypting='false'
+                :errorDecrypting='false',
+                :delegateScreen='true'
               )
             v-card-actions.pb-2.pt-2.ma-0
               v-spacer
