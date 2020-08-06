@@ -93,12 +93,19 @@ div
       v-switch(:label='$t("todo.create.frog")', v-model='todo.frog')
     v-col(cols='12', md='6')
       v-switch(:label='$t("todo.create.completed")', v-model='todo.completed')
+    v-col(v-if='!editTodo && (moreShown || todo.time)', cols='12', md='6')
+      v-switch(:label='$t("todo.create.goFirst")', v-model='todo.goFirst')
     v-col(
-      v-if='!hideAddToTheTop && (moreShown || todo.time)',
+      v-if='!editTodo && delegates.length && (moreShown || todo.time)',
       cols='12',
       md='6'
     )
-      v-switch(:label='$t("todo.create.goFirst")', v-model='todo.goFirst')
+      v-select(
+        :items='delegatesItems',
+        clearable,
+        v-model='todo.delegate',
+        :label='$t("delegate.pickDelegateField")'
+      )
   v-row.v-flex-row
     v-btn(
       v-if='!moreShown && !todo.time',
@@ -121,10 +128,12 @@ import { Tag } from '@/models/Tag'
 import { decrypt, encrypt } from '@/utils/encryption'
 import { Watch, Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
+import { User } from '@/models/User'
 
 const AppStore = namespace('AppStore')
 const TagsStore = namespace('TagsStore')
 const SettingsStore = namespace('SettingsStore')
+const DelegationStore = namespace('DelegationStore')
 
 @Component
 export default class TodoForm extends Vue {
@@ -132,12 +141,13 @@ export default class TodoForm extends Vue {
   @Prop({ required: true }) enterPressed!: () => void
   @Prop({ required: true }) escapePressed!: () => void
   @Prop() addTodo?: () => void
-  @Prop({ default: false }) hideAddToTheTop!: boolean
+  @Prop({ default: false }) editTodo!: boolean
 
   @AppStore.State language?: string
   @AppStore.State dark!: boolean
   @TagsStore.State tags!: Tag[]
   @SettingsStore.State firstDayOfWeek?: number
+  @DelegationStore.State delegates!: User[]
 
   dateMenu = false
   monthMenu = false
@@ -196,6 +206,13 @@ export default class TodoForm extends Vue {
     // Have to use this hack here because in this case we want date to be empty
     ;(this.todo as any).date = undefined
     this.todo.monthAndYear = newMonthAndYear
+  }
+
+  get delegatesItems() {
+    return this.delegates.map((d) => ({
+      value: d._id,
+      text: d.name,
+    }))
   }
 
   errorDecrypting(todo: Todo) {

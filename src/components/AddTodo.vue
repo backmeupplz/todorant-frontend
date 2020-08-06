@@ -266,7 +266,7 @@ export default class AddTodo extends Vue {
         this.todos.map((todo) => {
           const iTodo = { ...todo }
           iTodo.text = iTodo.text!.trim()
-          if (!!this.password) {
+          if (!!this.password && !iTodo.delegate) {
             iTodo.encrypted = true
             iTodo.text = encrypt(iTodo.text)
           }

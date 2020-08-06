@@ -99,7 +99,8 @@ export async function postTodos(user: User, todos: Partial<Todo>[]) {
           todoCopy.monthAndYear = todo.date.substr(0, 7)
           todoCopy.date = todo.date.substr(8)
         }
-        todoCopy.encrypted = !!store.state.UserStore.password
+        todoCopy.encrypted =
+          !!store.state.UserStore.password && !todoCopy.delegate
         return todoCopy
       }),
       {
@@ -136,7 +137,11 @@ export async function editTodo(user: User, todo: Todo) {
   })
 }
 
-export async function deleteTodo(user: User, todo: Todo) {
+export async function deleteTodo(todo: Todo) {
+  const user = store.state.UserStore.user
+  if (!user) {
+    throw new Error('No user')
+  }
   return axios.delete(`${base}/todo/${todo._id}`, {
     headers: getHeaders(user),
   })
@@ -382,6 +387,82 @@ export async function authorizeGoogleCalendar(user: User, code: string) {
       }
     )
   ).data as GoogleCalendarCredentials
+}
+
+export async function resetDelegateToken() {
+  const user = store.state.UserStore.user
+  if (!user) {
+    throw new Error('No user')
+  }
+  return (
+    await axios.post(
+      `${base}/delegate/generateToken`,
+      {},
+      {
+        headers: getHeaders(user),
+      }
+    )
+  ).data as string
+}
+
+export async function getUnacceptedDelegated() {
+  const user = store.state.UserStore.user
+  if (!user) {
+    throw new Error('No user')
+  }
+  return (
+    await axios.get(`${base}/delegate/unaccepted`, {
+      headers: getHeaders(user),
+    })
+  ).data as Todo[]
+}
+
+export async function deleteDelegate(id: string) {
+  const user = store.state.UserStore.user
+  if (!user) {
+    throw new Error('No user')
+  }
+  return (
+    await axios.delete(`${base}/delegate/delegate/${id}`, {
+      headers: getHeaders(user),
+    })
+  ).data as string
+}
+
+export async function deleteDelegator(id: string) {
+  const user = store.state.UserStore.user
+  if (!user) {
+    throw new Error('No user')
+  }
+  return (
+    await axios.delete(`${base}/delegate/delegator/${id}`, {
+      headers: getHeaders(user),
+    })
+  ).data as string
+}
+
+export async function useDelegateToken(user: User, token: string) {
+  return axios.post(
+    `${base}/delegate/useToken`,
+    { token },
+    {
+      headers: getHeaders(user),
+    }
+  )
+}
+
+export async function acceptDelegateTodo(todo: Todo) {
+  const user = store.state.UserStore.user
+  if (!user) {
+    throw new Error('No user')
+  }
+  return axios.post(
+    `${base}/delegate/accept/${todo._id}`,
+    {},
+    {
+      headers: getHeaders(user),
+    }
+  )
 }
 
 function getHeaders(user: User) {

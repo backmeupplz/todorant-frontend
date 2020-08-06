@@ -13,6 +13,7 @@ import './plugins/visibility'
 import './plugins/confetti'
 import './plugins/vue-clipboard2'
 import vuetify from './plugins/vuetify'
+import { setupHooks } from '@/store/hooks'
 
 Vue.config.productionTip = true
 
@@ -25,5 +26,7 @@ new Vue({
   vuetify,
   render: (h) => h(App),
 }).$mount('#app')
+
+setupHooks()
 
 import './utils/sockets'

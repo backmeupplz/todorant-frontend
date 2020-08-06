@@ -130,7 +130,6 @@ v-dialog(
         color='blue',
         text,
         @click='save',
-        @shortkey='close',
         :loading='loading'
       ) {{ $t("save") }}
 </template>

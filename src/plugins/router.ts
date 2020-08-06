@@ -13,6 +13,7 @@ import store from '@/store'
 import PublicReport from '@/views/PublicReport.vue'
 import AppleFirefoxError from '@/views/static/AppleFirefoxError.vue'
 import GoogleCalendarSetup from '@/views/static/GoogleCalendarSetup.vue'
+import DelegationInvite from '@/views/delegation/DelegationInvite.vue'
 
 Vue.use(Router)
 
@@ -87,6 +88,11 @@ const router = new Router({
       path: '/google_calendar_setup_web',
       name: 'google_calendar_setup_web',
       component: GoogleCalendarSetup,
+    },
+    {
+      path: '/invite/*',
+      name: 'delegation_invite',
+      component: DelegationInvite,
     },
     {
       path: '*',

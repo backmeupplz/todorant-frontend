@@ -53,13 +53,9 @@ export default class DeleteTodo extends Vue {
   }
 
   async deleteTodo() {
-    const user = this.user
-    if (!user) {
-      return
-    }
     this.loading = true
     try {
-      await api.deleteTodo(user, (this as any).todo)
+      await api.deleteTodo((this as any).todo)
       this.dialog = false
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)

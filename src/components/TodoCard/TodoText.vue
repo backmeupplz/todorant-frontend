@@ -1,5 +1,8 @@
 <template lang="pug">
 .flex-grow-1(style='max-width: 100%;')
+  p(v-if='todo.delegator')
+    span {{ todo.delegator.name }}
+    span(v-if='delegateScreen') : {{ todo.monthAndYear }}{{ todo.date ? `-${todo.date}` : "" }}
   span(v-if='debug') ({{ todo.order }})
   span(v-if='debug') ({{ todo.frogFails }})
   span(v-if='!!todo.frog') 🐸{{ " " }}
@@ -40,6 +43,7 @@ export default class TodoText extends Vue {
   @Prop({ required: true }) todo!: Todo
   @Prop({ required: true }) text!: string
   @Prop({ required: true }) errorDecrypting!: boolean
+  @Prop() delegateScreen?: boolean
 
   @AppStore.State dark!: boolean
   @TagsStore.State tagColors!: TagColors
