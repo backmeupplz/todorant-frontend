@@ -213,7 +213,6 @@ export default class AddTodo extends Vue {
         goFirst: this.newTodosGoFirst || false,
         text: hashtags.join(' '),
       })
-      this.date = ''
     } else if (this.showTodayOnAddTodo) {
       const now = new Date()
       now.setMinutes(now.getMinutes() - now.getTimezoneOffset())
@@ -309,6 +308,7 @@ export default class AddTodo extends Vue {
   }
 
   close() {
+    this.date = ''
     this.dialog = false
   }
 }
