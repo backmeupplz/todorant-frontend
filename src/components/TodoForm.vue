@@ -129,6 +129,7 @@ import { decrypt, encrypt } from '@/utils/encryption'
 import { Watch, Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
+import store from '@/store'
 
 const AppStore = namespace('AppStore')
 const TagsStore = namespace('TagsStore')
@@ -155,6 +156,8 @@ export default class TodoForm extends Vue {
   moreShown = false
 
   focused = false
+
+  startTimeOfDay = store.state.SettingsStore.startTimeOfDay || '00:00'
 
   get locale() {
     return this.language === 'ua' ? 'uk' : this.language
@@ -266,6 +269,15 @@ export default class TodoForm extends Vue {
   }
 
   get todayFormattedForExactDate() {
+    const date = new Date()
+    const newDay = new Date()
+    newDay.setHours(this.startTimeOfDay.substr(0, 2))
+    newDay.setMinutes(this.startTimeOfDay.substr(3))
+    if (date < newDay) {
+      return moment(
+        new Date(new Date().setDate(new Date().getDate() - 1))
+      ).format()
+    }
     return moment(new Date(new Date().setDate(new Date().getDate()))).format()
   }
 
