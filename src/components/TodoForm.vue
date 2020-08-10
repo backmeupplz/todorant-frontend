@@ -147,6 +147,7 @@ export default class TodoForm extends Vue {
   @AppStore.State dark!: boolean
   @TagsStore.State tags!: Tag[]
   @SettingsStore.State firstDayOfWeek?: number
+  @SettingsStore.State startTimeOfDay?: string
   @DelegationStore.State delegates!: User[]
 
   dateMenu = false
@@ -266,6 +267,16 @@ export default class TodoForm extends Vue {
   }
 
   get todayFormattedForExactDate() {
+    const storeStartTimeOfDay = this.startTimeOfDay || '00:00'
+    const date = new Date()
+    const newDay = new Date()
+    newDay.setHours(parseInt(storeStartTimeOfDay.substr(0, 2)))
+    newDay.setMinutes(parseInt(storeStartTimeOfDay.substr(3)))
+    if (date < newDay) {
+      return moment(
+        new Date(new Date().setDate(new Date().getDate() - 1))
+      ).format()
+    }
     return moment(new Date(new Date().setDate(new Date().getDate()))).format()
   }
 
