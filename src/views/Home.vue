@@ -17,9 +17,8 @@
               li {{ $t("homeShort.feature2") }}
               li {{ $t("homeShort.feature3") }}
               li {{ $t("homeShort.feature4") }}
-        v-col.d-flex.flex-column.justify-space-between
-          v-row
-          v-row.login-button-container
+        v-col.d-flex.flex-column
+          v-row.login-button-container.mb-2
             a.login-button(@click='signinDialog = true')
               span {{ $t("home.signIn") }}
             .d-flex.justify-center
