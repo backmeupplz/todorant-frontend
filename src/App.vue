@@ -108,4 +108,20 @@ export default class App extends Vue {
 .Cookie__button__todorant:hover {
   opacity: 0.8;
 }
+/* Responsiveness */
+@media only screen and (max-width: 1040px) {
+  .Cookie__content {
+    font-size: 16px;
+    line-height: 18px;
+    margin: 0;
+    margin-bottom: 12px;
+  }
+  .Cookie {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .Cookie__buttons {
+    margin: 0;
+  }
+}
 </style>
