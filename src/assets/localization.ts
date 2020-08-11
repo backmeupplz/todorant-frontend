@@ -180,6 +180,7 @@ export const messages = {
           },
         ],
       },
+      act: 'Действуйте!',
     },
     menu: {
       darkMode: {
@@ -697,6 +698,7 @@ export const messages = {
           },
         ],
       },
+      act: 'Act!',
     },
     menu: {
       darkMode: {
@@ -1200,6 +1202,7 @@ export const messages = {
           },
         ],
       },
+      act: 'Дійте!',
     },
     menu: {
       darkMode: {
@@ -1506,7 +1509,10 @@ export const messages = {
           "Anche se nel mondo la popolazione è più felice che mai, la produttività personale ha recentemente subito un duro colpo. Se seguiamo la stessa tendenza, potremmo trovarci tra la massa grigia di umani generici che non sono più produttivi e non riescono a completare un singolo compito più o meno difficile e complesso — semplicemente perché l'ansia non ce lo permette.",
           'Il numero di persone che dimenticano eventi importanti con altri significativi, che promettono molto più di quel che riescono a gestire, che continuano a pensare a "quella cosa che dovrei fare ma non ricordo cos\'è" invece di fare ciò che va fatto, presto aumenterà ancora. Presto, potrete ritrovarvi ad essere soltanto degli insensati automi biologici che svolgono lavori sottopagati, se non iniziate ad agire.',
         ],
-        contact: ['Hai ancora domande? Contattami direttamente a', '. Grazie.'],
+        contact: [
+          'Hai ancora domande? Contattami direttamente a ',
+          '. Grazie.',
+        ],
         solution: [
           'Ma hai la soluzione',
           'Dopo aver familiarizzato con libri sulla scienza cognitiva come "Eat That Frog", "Willpower", "Atomic Habits" e "Getting Things Done", ho sviluppato un sistema che ha potenziato la mia produttività di 10 volte. Sono ora capace di completare 10 volte più compiti coi quali ho lanciato 10 volte più progetti di quanto facevo prima solo con questo semplice sistema. Condivido questa soluzione con te in modo da migliorare lo sviluppo del sistema in cui vivo. Più le persone attorno a me hanno successo, più anche la mia felicità può crescere.',
@@ -1522,6 +1528,7 @@ export const messages = {
           ],
         },
       },
+      act: 'Agire!',
     },
     cancel: 'Annulla',
     save: 'Salva',
@@ -1717,6 +1724,7 @@ export const messages = {
           },
         ],
       },
+      act: 'Agir!',
     },
     menu: {
       darkMode: {
@@ -2110,6 +2118,7 @@ export const messages = {
           },
         ],
       },
+      act: '¡actúe!',
     },
     menu: {
       darkMode: {

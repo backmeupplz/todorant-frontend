@@ -6,7 +6,6 @@ export default class AppStore extends VuexModule {
   dark = false
   rulesShown = false
   editting = false
-  landingABTestGroup = Math.floor(Math.random() * 2)
 
   @Mutation
   setLanguage(language: string) {
