@@ -8709,10 +8709,10 @@ vue-confetti@^2.0.8:
   resolved "https://registry.yarnpkg.com/vue-confetti/-/vue-confetti-2.0.8.tgz#30026592c4dfa47d660e1b6ed1caa85584ea6a91"
   integrity sha512-WJftcoXqBqpqgbi9upb9zA943xq4evwNltz8hS/fmNjbaiga38ob3yxw3YyHnAZmlayIYGYuR+k9stVcNfiinw==
 
-vue-cookie-law@^1.11.0:
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/vue-cookie-law/-/vue-cookie-law-1.11.0.tgz#bc712f52f766c17cbde8d5966d66e350733ee42c"
-  integrity sha512-R0XQWcgLwmSev5Hd0I6BUf4l9S3KIuP8iAGjgRizfwIOz/sz9DqdYUK1Iahg9QMZ/WKJXO6CQ9xWYFxmElmlhA==
+vue-cookie-law@^1.13.3:
+  version "1.13.3"
+  resolved "https://registry.yarnpkg.com/vue-cookie-law/-/vue-cookie-law-1.13.3.tgz#c4fc5d9dd66772d4043c4f140790a0e502caabbc"
+  integrity sha512-n5ef5/dAB4cyUz6OaolYZEeyfV/fcsVU/RCTT/aHXcyjNbXf7EU2TgaOlMwu+cTOjdn5tBJKyKP6lr6IOUf9bg==
   dependencies:
     tiny-cookie "^2.1.1"
 

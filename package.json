@@ -43,7 +43,7 @@
     "vue-class-component": "^7.0.2",
     "vue-clipboard2": "^0.3.1",
     "vue-confetti": "^2.0.8",
-    "vue-cookie-law": "^1.11.0",
+    "vue-cookie-law": "^1.13.3",
     "vue-facebook-signin-button": "^1.0.1",
     "vue-flag-icon": "^1.0.6",
     "vue-google-signin-button": "^1.0.2",

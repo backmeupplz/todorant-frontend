@@ -73,7 +73,7 @@ export const messages = {
     title: 'Тудурант',
     cookie: {
       button: 'Понятненько!',
-      message: 'Этот вебсайт использует печеньки.',
+      message: '🍪 Этот вебсайт использует печеньки.',
     },
     home: {
       texts: {
@@ -580,7 +580,7 @@ export const messages = {
     title: 'Todorant',
     cookie: {
       button: 'Got it!',
-      message: 'This website uses cookies.',
+      message: '🍪 This website uses cookies.',
     },
     home: {
       texts: {
@@ -1092,7 +1092,7 @@ export const messages = {
     title: 'Тудурант',
     cookie: {
       button: 'Зрозуміло!',
-      message: 'Цей вебсайт використовує кукіз.',
+      message: '🍪 Цей вебсайт використовує кукіз.',
     },
     home: {
       texts: {
@@ -1495,7 +1495,7 @@ export const messages = {
     title: 'Todorant',
     cookie: {
       button: 'Ho capito!',
-      message: 'Questi sito utilizza cookies.',
+      message: '🍪 Questi sito utilizza cookies.',
     },
     home: {
       texts: {
@@ -1651,7 +1651,7 @@ export const messages = {
     },
     cookie: {
       button: 'Entendi!',
-      message: 'Este website usa cookies.\n\n',
+      message: '🍪 Este website usa cookies.',
     },
     home: {
       texts: {
@@ -2008,7 +2008,7 @@ export const messages = {
     title: 'Todorant',
     cookie: {
       button: '¡Entendido!',
-      message: 'Este sitio web utiliza cookies.',
+      message: '🍪 Este sitio web utiliza cookies.',
     },
     home: {
       texts: {
