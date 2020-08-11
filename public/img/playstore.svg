@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="73px" height="64px" viewBox="0 0 73 64" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Google Play</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Download-Buttons" transform="translate(-294.000000, -170.000000)">
+            <g id="Google-Play" transform="translate(294.000000, 170.000000)">
+                <rect id="button" fill="#000000" x="0" y="0" width="73" height="64" rx="10"></rect>
+                <path d="M18,49.2637152 L18,14.7403058 C18,13.5355809 18.7081411,12.4942128 19.7357755,12 L39.9832817,31.9961212 L19.7276324,52 C18.7043986,51.5042845 18,50.4653329 18,49.2637152 Z M46.4068704,38.3396961 L24.2675127,50.9630792 L41.7282901,33.7192455 L46.4068704,38.3396961 Z M53.2886113,29.5817164 C54.0249859,30.1383556 54.5,31.0154533 54.5,32.0020105 C54.5,32.9737429 54.0393803,33.839062 53.3219239,34.3967166 L48.6192845,37.0781701 L43.473093,31.9961212 L48.6157887,26.9172809 L53.2886113,29.5817164 Z M24.2804882,13.0418962 L46.4033746,25.6558361 L41.7282901,30.2727938 L24.2804882,13.0418962 Z" id="logo" fill="#FFFFFF" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

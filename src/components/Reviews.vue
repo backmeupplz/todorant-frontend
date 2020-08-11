@@ -1,7 +1,7 @@
 <template lang="pug">
 .d-flex.flex-column.justify-center
-  .d-flex.flex-row.justify-space-between.align-start
-    v-btn(icon, @click='moveLeft')
+  .d-flex.review-container
+    v-btn.top-arrows(icon, @click='moveLeft')
       v-icon keyboard_arrow_left
     .d-flex.flex-row.mx-4.text-left
       v-avatar
@@ -17,16 +17,18 @@
           v-for='(text, i) in currentReview.text.split("\\n")',
           :class='textClass'
         ) {{ text }}
-    v-btn(icon, @click='moveRight')
+    v-btn.top-arrows(icon, @click='moveRight')
       v-icon keyboard_arrow_right
-  .d-flex.flex-row.justify-center.mt-3
+  .d-flex.flex-row.justify-center.mt-3.align-center
+    v-btn.mr-2.bottom-arrows(icon, @click='moveLeft')
+      v-icon keyboard_arrow_left
     .circle(
       v-for='(review, i) in reviews',
       :key='i',
       :class='i === index ? "" : "inactive"'
     )
-    .circle.inactive
-    .circle.inactive
+    v-btn.ml-2.bottom-arrows(icon, @click='moveRight')
+      v-icon keyboard_arrow_right
 </template>
 
 <script lang="ts">
@@ -112,5 +114,25 @@ export default class Reviews extends Vue {
 
 .inactive {
   opacity: 0.3;
+}
+
+/* Responsiveness */
+.top-arrows {
+  visibility: visible;
+}
+.bottom-arrows {
+  visibility: hidden;
+}
+@media only screen and (max-width: 850px) {
+  .review-container {
+    justify-content: flex-start;
+  }
+  .top-arrows {
+    visibility: hidden;
+    width: 0px !important;
+  }
+  .bottom-arrows {
+    visibility: visible;
+  }
 }
 </style>

@@ -1,14 +1,14 @@
 <template lang="pug">
-.v-container
+.v-container.home-container
   // Sign in
   SigninDialog(:dialog='signinDialog', :close='closeSignin')
   // Main content
-  v-layout 
+  v-layout
     v-col
       // Title
-      v-row.title-container.text-left
+      .title-container.text-left
         .orange-box
-        v-col(cols=12, sm=6)
+        v-col
           .title-text
             p.ma-0.bold-title {{ $t("homeShort.headline") }}
             p.ma-0.bold-title {{ $t("homeShort.headline2") }}
@@ -17,30 +17,21 @@
               li {{ $t("homeShort.feature2") }}
               li {{ $t("homeShort.feature3") }}
               li {{ $t("homeShort.feature4") }}
-        v-col.d-flex.flex-column.justify-space-between(cols=12, sm=6)
+        v-col.d-flex.flex-column.justify-space-between
           v-row
-          v-row.d-flex.justify-end
-            a.login-button.mt-3(@click='signinDialog = true')
+          v-row.login-button-container
+            a.login-button(@click='signinDialog = true')
               span {{ $t("home.signIn") }}
-            a.pt-3.pl-1(
-              @click='open(`https://apps.apple.com/${appstoreLanguage}/app/todorant/id1482078243`)'
-            )
-              v-img(
-                width='150',
-                height='50',
-                aspect-ratio='1',
-                :src='appStoreButton'
+            .d-flex.justify-center
+              a.pl-2(
+                @click='open(`https://apps.apple.com/${appstoreLanguage}/app/todorant/id1482078243`)'
               )
-            a.pl-1(
-              @click='open("https://play.google.com/store/apps/details?id=com.todorant")'
-            )
-              v-img(
-                width='170',
-                height='74',
-                aspect-ratio='1',
-                :src='playStoreButton'
+                img.store-button(src='/img/appstore.svg')
+              a.px-2(
+                @click='open("https://play.google.com/store/apps/details?id=com.todorant")'
               )
-          v-row.justify-end
+                img.store-button(src='/img/playstore.svg')
+          .youtube-container
             iframe.youtube-video(
               v-if='language && language === "ru"',
               src='https://www.youtube-nocookie.com/embed/VWs4GFr9blI',
@@ -56,13 +47,13 @@
               allowfullscreen=''
             )
       // Difference
-      v-row.text-left
-        v-col(cols=12, sm=6)
+      .responsive-block.text-left
+        div
           p.text-title(:class='textClass') {{ $t("homeShort.differenceTitle") }}
           p.text-normal(:class='textClass') {{ $t("homeShort.differenceText1") }}
           p.text-normal(:class='textClass') {{ $t("homeShort.differenceText2") }}
           p.text-normal(:class='textClass') {{ $t("homeShort.differenceText3") }}
-        v-col(cols=12, sm=6)
+        div
           .screenshot-container
             .screen.blue-screenshot.rotate-right
             .screen.yellow-screenshot.rotate-left
@@ -80,27 +71,18 @@
       // Act
       .orange-box-act
         .title-act {{ $t("home.act") }}
-        v-row.justify-center
-          a.login-button.mt-3(@click='signinDialog = true')
+        v-row.login-button-container
+          a.login-button(@click='signinDialog = true')
             span {{ $t("home.signIn") }}
-          a.pt-3.pl-1(
-            @click='open(`https://apps.apple.com/${appstoreLanguage}/app/todorant/id1482078243`)'
-          )
-            v-img(
-              width='150',
-              height='50',
-              aspect-ratio='1',
-              :src='appStoreButton'
+          .d-flex.justify-center
+            a.pl-2(
+              @click='open(`https://apps.apple.com/${appstoreLanguage}/app/todorant/id1482078243`)'
             )
-          a.pl-1(
-            @click='open("https://play.google.com/store/apps/details?id=com.todorant")'
-          )
-            v-img(
-              width='170',
-              height='74',
-              aspect-ratio='1',
-              :src='playStoreButton'
+              img.store-button(src='/img/appstore.svg')
+            a.px-2(
+              @click='open("https://play.google.com/store/apps/details?id=com.todorant")'
             )
+              img.store-button(src='/img/playstore.svg')
       // Footer
       v-row.footer-text.justify-space-between
         span
@@ -138,14 +120,6 @@ export default class Home extends Vue {
 
   closeSignin() {
     this.signinDialog = false
-  }
-
-  get appStoreButton() {
-    return `/img/appstore/${this.language || 'en'}.svg`
-  }
-
-  get playStoreButton() {
-    return `/img/playstore/${this.language || 'en'}.svg`
   }
 
   get appstoreLanguage() {
@@ -204,6 +178,7 @@ export default class Home extends Vue {
 .title-container {
   position: relative;
   z-index: 1;
+  display: flex;
 }
 .orange-box {
   background: linear-gradient(93.58deg, #ff5f13 0%, #ff8a53 100%);
@@ -236,6 +211,10 @@ export default class Home extends Vue {
   font-weight: 500;
   font-size: 16px;
   line-height: 30px;
+}
+.youtube-container {
+  display: flex;
+  justify-content: flex-end;
 }
 .youtube-video {
   box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.1);
@@ -286,17 +265,19 @@ export default class Home extends Vue {
 
 /* Screenshot */
 .screenshot-container {
+  margin-top: 40px;
   position: relative;
   height: 425px;
+  width: 425px;
   overflow: hidden;
-  flex-direction: row-reverse;
+  display: flex;
+  justify-content: center;
 }
 .screen {
   width: 300px;
   height: 607px;
   border-radius: 64px;
   top: 20px;
-  right: 45px;
 }
 .rotate-left {
   transform: rotate(-10deg);
@@ -316,7 +297,6 @@ export default class Home extends Vue {
   position: absolute;
   width: 300px;
   border-radius: 32px;
-  right: 45px;
   top: 20px;
   box-shadow: 0px 5px 40px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
@@ -354,10 +334,65 @@ export default class Home extends Vue {
   line-height: 17px;
 
   color: #868a9a;
+  text-align: left;
 }
 
 /* White text */
 .white-text {
   color: #ffffff;
+}
+
+/* Responsiveness */
+@media only screen and (max-width: 1040px) {
+  .home-container {
+    padding: 0px 12px;
+  }
+}
+.login-button-container {
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.store-button {
+  width: 54px;
+  height: 47px;
+}
+.responsive-block {
+  display: flex;
+  flex-direction: row;
+}
+
+@media only screen and (max-width: 850px) {
+  .responsive-block {
+    flex-direction: column;
+  }
+  .screenshot-container {
+    width: 100%;
+  }
+  .title-container {
+    flex-direction: column;
+  }
+  .orange-box {
+    right: 0;
+  }
+  .bullets-box {
+    margin-top: 24px;
+    margin-bottom: 0px;
+  }
+  .login-button-container-bottom {
+    justify-content: start;
+    padding-left: 36px;
+    padding-right: 36px;
+    flex-direction: column;
+    align-items: center;
+  }
+  .youtube-container {
+    justify-content: center;
+    margin-top: 36px;
+  }
+  .login-button-container a {
+    margin-bottom: 12px;
+  }
 }
 </style>
