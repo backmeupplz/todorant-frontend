@@ -1,12 +1,12 @@
 <template lang="pug">
-.v-container.home-container
+.v-container
   // Sign in
   SigninDialog(:dialog='signinDialog', :close='closeSignin')
   // Main content
   v-layout
-    v-col
+    v-col.mx-0.px-0
       // Title
-      .title-container.text-left
+      .title-container.text-left.margined-when-small
         .orange-box
         v-col
           .title-text
@@ -48,7 +48,7 @@
             )
       // Difference
       .responsive-block.text-left
-        div
+        .margined-when-small
           p.text-title(:class='textClass') {{ $t("homeShort.differenceTitle") }}
           p.text-normal(:class='textClass') {{ $t("homeShort.differenceText1") }}
           p.text-normal(:class='textClass') {{ $t("homeShort.differenceText2") }}
@@ -59,17 +59,17 @@
             .screen.yellow-screenshot.rotate-left
             img.real-screenshot(:src='screenshot')
       // Deal
-      v-row.text-left
+      .text-left.margined-when-small
         p.text-title(:class='textClass') {{ $t("homeShort.dealTitle") }}
         p.text-normal(:class='textClass') {{ $t("homeShort.dealText1") }}
         p.text-normal(:class='textClass') {{ $t("homeShort.dealText2") }}
         p.text-normal(:class='textClass') {{ $t("homeShort.dealText3") }}
-      v-row.text-left
+      .text-left.margined-when-small
         p.text-title(:class='textClass') {{ $t("home.feedback.title") }}
       // Reviews
-      Reviews
+      Reviews.margined-when-small
       // Act
-      .orange-box-act
+      .orange-box-act.margined-when-small
         .title-act {{ $t("home.act") }}
         v-row.login-button-container
           a.login-button(@click='signinDialog = true')
@@ -84,12 +84,12 @@
             )
               img.store-button(src='/img/playstore.svg')
       // Footer
-      v-row.footer-text.justify-space-between
+      .footer-text.justify-space-between.margined-when-small
         span
           | {{ $t("home.texts.contact[0]") }}
           a(href='mailto:n@borodutch.com') n@borodutch.com
           | {{ $t("home.texts.contact[1]") }}
-        router-link(to='/privacy') {{ $t("home.privacy") }}
+        router-link.ml-1(to='/privacy') {{ $t("home.privacy") }}
 </template>
 
 <script lang="ts">
@@ -347,6 +347,10 @@ export default class Home extends Vue {
   .home-container {
     padding: 0px 12px;
   }
+  .margined-when-small {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
 }
 .login-button-container {
   flex: 1;
@@ -393,6 +397,27 @@ export default class Home extends Vue {
   }
   .login-button-container a {
     margin-bottom: 12px;
+  }
+}
+/* Mobile */
+@media only screen and (max-width: 600px) {
+  .title-text {
+    margin-left: 16px;
+    margin-top: 16px;
+  }
+  .bold-title {
+    font-size: 20px;
+    line-height: 26px;
+  }
+  .text-title {
+    font-size: 24px;
+    line-height: 28px;
+  }
+  .orange-box-act {
+    padding: 16px;
+  }
+  .title-act {
+    font-size: 24px;
   }
 }
 </style>

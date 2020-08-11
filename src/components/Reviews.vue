@@ -3,7 +3,7 @@
   .d-flex.review-container
     v-btn.top-arrows(icon, @click='moveLeft')
       v-icon keyboard_arrow_left
-    .d-flex.flex-row.mx-4.text-left
+    .d-flex.flex-row.text-left
       v-avatar
         img(
           :src='`/avatars/${currentReview.username || $t("home.feedback.reviews", "en")[index].username}.jpg`'
@@ -13,7 +13,7 @@
           :href='`https://t.me/${currentReview.username || $t("home.feedback.reviews", "en")[index].username}`',
           target='_blank'
         ) @{{ currentReview.username || $t("home.feedback.reviews", "en")[this.index].username }}
-        span.text-margin(
+        span.text-review(
           v-for='(text, i) in currentReview.text.split("\\n")',
           :class='textClass'
         ) {{ text }}
@@ -98,8 +98,9 @@ export default class Reviews extends Vue {
   margin-bottom: 12px;
 }
 
-.text-margin {
+.text-review {
   margin: 3px;
+  font-size: 16px;
 }
 
 .circle {
