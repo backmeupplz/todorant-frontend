@@ -1,5 +1,5 @@
 <template lang="pug">
-v-dialog(v-model='dialog', max-width='600')
+v-dialog(v-model='safeDialog', max-width='600')
   v-card
     v-card-text.pt-4.d-flex.flex-column.justify-center.align-center
       // Facebook
@@ -79,6 +79,15 @@ export default class SigninDialog extends Vue {
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
 
   debugToken = ''
+
+  get safeDialog() {
+    return this.dialog
+  }
+  set safeDialog(newValue: boolean) {
+    if (!newValue) {
+      this.close()
+    }
+  }
 
   get debug() {
     return !!process.env.VUE_APP_DEV
