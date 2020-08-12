@@ -18,7 +18,7 @@
               li {{ $t("homeShort.feature3") }}
               li {{ $t("homeShort.feature4") }}
         .d-flex.flex-column
-          v-row.login-button-container.mb-2
+          v-row.login-button-container
             a.login-button(@click='signinDialog = true')
               span {{ $t("home.signIn") }}
             .d-flex.justify-center
@@ -178,6 +178,7 @@ export default class Home extends Vue {
   position: relative;
   z-index: 1;
   display: flex;
+  justify-content: space-between;
 }
 .orange-box {
   background: linear-gradient(93.58deg, #ff5f13 0%, #ff8a53 100%);
