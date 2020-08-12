@@ -401,6 +401,9 @@ export default class Home extends Vue {
   .login-button-container a {
     margin-bottom: 12px;
   }
+  .login-button-container {
+    margin-bottom: 24px;
+  }
 }
 /* Mobile */
 @media only screen and (max-width: 600px) {
