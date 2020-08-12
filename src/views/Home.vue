@@ -425,5 +425,17 @@ export default class Home extends Vue {
   .title-act {
     font-size: 24px;
   }
+  .youtube-video {
+    min-width: 200px;
+    min-height: 100px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .screen {
+    width: 200px !important;
+  }
+  .real-screenshot {
+    width: 200px !important;
+  }
 }
 </style>
