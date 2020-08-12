@@ -178,7 +178,6 @@ export default class Home extends Vue {
   position: relative;
   z-index: 1;
   display: flex;
-  background-color: blue;
 }
 .orange-box {
   background: linear-gradient(93.58deg, #ff5f13 0%, #ff8a53 100%);
