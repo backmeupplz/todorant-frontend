@@ -8,7 +8,7 @@
       // Title
       .title-container.text-left.margined-when-small
         .orange-box
-        v-col
+        .d-flex.flex-column
           .title-text
             p.ma-0.bold-title {{ $t("homeShort.headline") }}
             p.ma-0.bold-title {{ $t("homeShort.headline2") }}
@@ -17,7 +17,7 @@
               li {{ $t("homeShort.feature2") }}
               li {{ $t("homeShort.feature3") }}
               li {{ $t("homeShort.feature4") }}
-        v-col.d-flex.flex-column
+        .d-flex.flex-column
           v-row.login-button-container.mb-2
             a.login-button(@click='signinDialog = true')
               span {{ $t("home.signIn") }}
@@ -178,6 +178,7 @@ export default class Home extends Vue {
   position: relative;
   z-index: 1;
   display: flex;
+  background-color: blue;
 }
 .orange-box {
   background: linear-gradient(93.58deg, #ff5f13 0%, #ff8a53 100%);
@@ -369,6 +370,9 @@ export default class Home extends Vue {
 @media only screen and (max-width: 850px) {
   .responsive-block {
     flex-direction: column;
+  }
+  .title-text {
+    margin-bottom: 24px;
   }
   .screenshot-container {
     width: 100%;
