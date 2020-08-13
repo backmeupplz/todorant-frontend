@@ -53,6 +53,7 @@ import {
 } from '@/utils/api'
 import { User } from '@/models/User'
 import { logEvent } from '@/utils/logEvent'
+import { setCookie } from '@/utils/cookie'
 const { vueTelegramLogin } = require('vue-telegram-login')
 import { serverBus } from '@/main'
 
@@ -94,7 +95,7 @@ export default class SigninDialog extends Vue {
   }
 
   get googleClientId() {
-    return '599005831909-krrl1m3k011n7qdrkv1voio9cgdv7a0t.apps.googleusercontent.com'
+    return '1061319296854-i8smr0fc3jc06mmthpt7ko1qu87ne3k0.apps.googleusercontent.com'
   }
 
   created() {
@@ -157,6 +158,7 @@ export default class SigninDialog extends Vue {
 
   loginSuccess(user: User, provider: string) {
     this.setUser(user)
+    setCookie('token', user.token!)
     this.close()
     this.$router.replace('superpower')
     logEvent('login_success', { provider })

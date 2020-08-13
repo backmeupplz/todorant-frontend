@@ -1,6 +1,7 @@
 import { User } from '@/models/User'
 import { VuexModule, Module, Mutation } from 'vuex-module-decorators'
 import { SubscriptionStatus } from '@/models/SubscriptionStatus'
+import { setCookie } from '@/utils/cookie'
 
 @Module({ namespaced: true, name: 'UserStore' })
 export default class UserStore extends VuexModule {
@@ -25,6 +26,7 @@ export default class UserStore extends VuexModule {
 
   @Mutation
   setPassword(password?: string) {
+    setCookie('password', password!)
     this.password = password
   }
 }

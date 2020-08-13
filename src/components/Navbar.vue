@@ -105,6 +105,7 @@ import { sockets } from '@/utils/sockets'
 import { namespace } from 'vuex-class'
 import { SubscriptionStatus } from '@/models/SubscriptionStatus'
 import { User } from '@/models/User'
+import { setCookie, deleteCookie } from '../utils/cookie'
 
 const UserStore = namespace('UserStore')
 const AppStore = namespace('AppStore')
@@ -184,6 +185,7 @@ export default class Navbar extends Vue {
 
   toggleMode() {
     this.setDark(!this.dark)
+    setCookie('dark', !this.dark)
     ;(this.$vuetify.theme as any).dark = this.dark
   }
   changeLanguage(locale: string) {
@@ -196,6 +198,7 @@ export default class Navbar extends Vue {
   }
   logout() {
     this.setUser(undefined)
+    deleteCookie()
     this.$router.replace('/')
     sockets.logout()
   }
