@@ -105,8 +105,7 @@ import { sockets } from '@/utils/sockets'
 import { namespace } from 'vuex-class'
 import { SubscriptionStatus } from '@/models/SubscriptionStatus'
 import { User } from '@/models/User'
-import Cookie from 'js-cookie'
-import { setCookie } from '../utils/cookie'
+import { setCookie, deleteCookie } from '../utils/cookie'
 
 const UserStore = namespace('UserStore')
 const AppStore = namespace('AppStore')
@@ -199,7 +198,7 @@ export default class Navbar extends Vue {
   }
   logout() {
     this.setUser(undefined)
-    Cookie.remove('token')
+    deleteCookie()
     this.$router.replace('/')
     sockets.logout()
   }
