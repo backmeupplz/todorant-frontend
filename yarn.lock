@@ -252,6 +252,11 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
+"@types/js-cookie@^2.2.6":
+  version "2.2.6"
+  resolved "https://registry.yarnpkg.com/@types/js-cookie/-/js-cookie-2.2.6.tgz#f1a1cb35aff47bc5cfb05cb0c441ca91e914c26f"
+  integrity sha512-+oY0FDTO2GYKEV0YPvSshGq9t7YozVkgvXLty7zogQNuCxBhT9/3INX9Q7H1aRZ4SUDRXAKlJuA4EA5nTt7SNw==
+
 "@types/linkify-it@^2.1.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@types/linkify-it/-/linkify-it-2.1.0.tgz#ea3dd64c4805597311790b61e872cbd1ed2cd806"
@@ -4539,6 +4544,11 @@ js-base64@^2.1.8:
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.5.1.tgz#1efa39ef2c5f7980bb1784ade4a8af2de3291121"
   integrity sha512-M7kLczedRMYX4L8Mdh4MzyAMM9O5osx+4FcOQuTvr3A9F2D9S5JXheN0ewNbrvK2UatkTRhL5ejGmGSjNMiZuw==
 
+js-cookie@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.2.1.tgz#69e106dc5d5806894562902aa5baec3744e9b2b8"
+  integrity sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==
+
 js-message@1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/js-message/-/js-message-1.0.5.tgz#2300d24b1af08e89dd095bc1a4c9c9cfcb892d15"
@@ -8738,10 +8748,10 @@ vue-hot-reload-api@^2.3.0:
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"
   integrity sha512-BXq3jwIagosjgNVae6tkHzzIk6a8MHFtzAdwhnV5VlvPTFxDCvIttgSiHWjdGoTJvXtmRu5HacExfdarRcFhog==
 
-vue-i18n@^8.15.0:
-  version "8.15.0"
-  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.15.0.tgz#9b11ef8e7a124f67cdf788c8c90a81f3606240ed"
-  integrity sha512-juJ/avAP39bOMycC+qQDLJ8U9z9LtLF/9PsRoJLBSfsYZo9bqYntyyX5QPicwlb1emJKjgxhZ3YofHiQcXBu0Q==
+vue-i18n@^8.20.0:
+  version "8.20.0"
+  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.20.0.tgz#c81b01d6541182b28565316cafe881b65a3c0f1b"
+  integrity sha512-ZiAOoeR4d/JtKpbjipx3I80ey7cYG1ki5gQ7HwzWm4YFio9brA15BEYHjalEoBaEfzF5OBEZP+Y2MvAaWnyXXg==
 
 vue-loader@^15.7.0:
   version "15.7.2"
