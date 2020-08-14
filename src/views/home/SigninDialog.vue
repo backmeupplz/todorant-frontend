@@ -94,7 +94,7 @@ export default class SigninDialog extends Vue {
   }
 
   get googleClientId() {
-    return '599005831909-krrl1m3k011n7qdrkv1voio9cgdv7a0t.apps.googleusercontent.com'
+    return process.env.VUE_APP_GOOGLE_CLIENT_ID
   }
 
   created() {
