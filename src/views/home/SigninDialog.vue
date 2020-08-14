@@ -53,6 +53,7 @@ import {
 } from '@/utils/api'
 import { User } from '@/models/User'
 import { logEvent } from '@/utils/logEvent'
+import { setCookie } from '@/utils/cookie'
 const { vueTelegramLogin } = require('vue-telegram-login')
 import { serverBus } from '@/main'
 
@@ -157,6 +158,7 @@ export default class SigninDialog extends Vue {
 
   loginSuccess(user: User, provider: string) {
     this.setUser(user)
+    setCookie('token', user.token!)
     this.close()
     this.$router.replace('superpower')
     logEvent('login_success', { provider })
