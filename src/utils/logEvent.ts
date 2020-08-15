@@ -1,12 +1,19 @@
 declare const firebase: any
 
 export function logEvent(eventName: string, meta?: object) {
-  firebase.analytics().logEvent(eventName, meta)
+  try {
+    firebase.analytics().logEvent(eventName, meta)
+  } catch (err) {
+    // Do nothing
+  }
 }
 
 export function setUserProperty(name: string, value: any) {
   const obj = {} as { [index: string]: string }
   obj[name] = value
-  // console.log(`Setting user property ${JSON.stringify(obj, undefined, 2)}`)
-  firebase.analytics().setUserProperties(obj)
+  try {
+    firebase.analytics().setUserProperties(obj)
+  } catch (err) {
+    // Do nothing
+  }
 }

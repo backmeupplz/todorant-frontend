@@ -167,8 +167,12 @@
         appId: '1:989382323327:web:c39ca628a7a6f918eae34a',
         measurementId: 'G-HSTNQ80T29',
       }
-      firebase.initializeApp(firebaseConfig)
-      firebase.analytics()
+      try {
+        firebase.initializeApp(firebaseConfig)
+        firebase.analytics()
+      } catch (err) {
+        // Do nothing
+      }
     </script>
     <noscript>
       <font color="white">
