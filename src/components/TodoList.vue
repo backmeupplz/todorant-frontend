@@ -6,7 +6,7 @@ v-container(style='maxWidth: 1000px;')
         v-alert(text, color='info', icon='info') {{ $t("todo.planning") }}
     v-list-item.d-flex.align-center(:style='stickyHeaderStyle')
       v-switch.ma-0.pa-0(
-        v-if='!calendarViewEnabled && !search && !hashes.size',
+        v-if='!calendarViewEnabled && !search && !searchTags.size',
         hide-details,
         v-model='showCompleted',
         :label='$t("todo.list.completed")',
@@ -20,7 +20,7 @@ v-container(style='maxWidth: 1000px;')
         clearable,
         dense
       )
-      div(v-if='!!hashes.size')
+      div(v-if='!!searchTags.size')
         v-btn.mr-2(
           :loading='todosUpdating || loading',
           @click='goHome',
@@ -31,7 +31,7 @@ v-container(style='maxWidth: 1000px;')
         v-chip.ma-1(
           close,
           @click:close='delHash(word)',
-          v-for='(word, i) in hashes',
+          v-for='(word, i) in searchTags',
           :key='i'
         ) {{ word }}
       v-spacer(v-if='!search')
@@ -280,6 +280,7 @@ import { User } from '@/models/User'
 
 const AppStore = namespace('AppStore')
 const UserStore = namespace('UserStore')
+const TagsStore = namespace('TagsStore')
 const SnackbarStore = namespace('SnackbarStore')
 const SettingsStore = namespace('SettingsStore')
 
@@ -302,6 +303,7 @@ export default class TodoList extends Vue {
   @UserStore.State planning!: boolean
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @SettingsStore.State firstDayOfWeek?: number
+  @TagsStore.State searchTags!: Set<String>
 
   showCompleted = false
   todoEdited: Partial<Todo> | null = null
@@ -391,8 +393,6 @@ export default class TodoList extends Vue {
 
   search = false
   queryString = ''
-
-  hashes = new Set()
 
   @Watch('queryString')
   onQuerryStringChanged() {
@@ -488,18 +488,18 @@ export default class TodoList extends Vue {
       this.loadTodos()
     })
     serverBus.$on('cleanHash', () => {
-      this.hashes.clear()
+      this.searchTags.clear()
     })
 
     window.onhashchange = () => {
       const hashArr = decodeURI(this.$router.currentRoute.hash).split(',')
-      this.hashes.add(hashArr[hashArr.length - 1])
+      this.searchTags.add(hashArr[hashArr.length - 1])
     }
   }
 
   async delHash(word: string) {
-    this.hashes.delete(word)
-    const hashesString = [...this.hashes.values()].join(',')
+    this.searchTags.delete(word)
+    const hashesString = [...this.searchTags.values()].join(',')
     await this.$router.replace(this.user ? `/superpower${hashesString}` : '/')
     serverBus.$emit('refreshRequested')
   }
@@ -872,7 +872,7 @@ export default class TodoList extends Vue {
 
   async goHome() {
     try {
-      this.hashes.clear()
+      this.searchTags.clear()
       await this.$router.replace(this.user ? '/superpower' : '/')
       serverBus.$emit('refreshRequested')
     } catch (err) {
