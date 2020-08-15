@@ -137,6 +137,7 @@ export default class CurrentTodo extends Vue {
   @SettingsStore.State hotKeysEnabled!: boolean
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @TagsStore.State tags!: Tag[]
+  @TagsStore.State searchTags!: Set<String>
 
   showCompleted = false
   todo: Todo | null = null
@@ -184,6 +185,11 @@ export default class CurrentTodo extends Vue {
   }
 
   created() {
+    window.onhashchange = () => {
+      const hashArr = decodeURI(this.$router.currentRoute.hash).split(',')
+      this.searchTags.add(hashArr[hashArr.length - 1])
+    }
+
     serverBus.$on('refreshRequested', () => {
       this.updateTodo()
     })
