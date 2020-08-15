@@ -9,7 +9,7 @@ export function setCookie(name: string, value: any) {
 }
 
 export function deleteCookie() {
-  Cookies.remove('token')
-  Cookies.remove('password')
-  Cookies.remove('theme')
+  Cookies.remove('token', {domain: domain})
+  Cookies.remove('password', {domain: domain})
+  Cookies.remove('theme', {domain: domain})
 }
