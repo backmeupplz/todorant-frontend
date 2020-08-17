@@ -5,6 +5,7 @@ const domain = new URL(process.env.VUE_APP_WEBSITE!).hostname
 export function setCookie(name: string, value: any) {
   Cookies.set(name, value, {
     domain: domain,
+    expires: 365
   })
 }
 
