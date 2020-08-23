@@ -239,13 +239,29 @@ export async function getTodos(
   return data.todos
 }
 
-export async function getCurrentTodo(user: User) {
+export async function getCurrentTodo(
+  user: User,
+  startTimeOfDay: string = '00:00'
+) {
+  const now = new Date()
+  const today = new Date()
+  today.setHours(parseInt(startTimeOfDay.substr(0, 2)))
+  today.setMinutes(parseInt(startTimeOfDay.substr(3)))
+
   const time = getTimeString(new Date())
+  let date = getToday()
+
+  if (now < today) {
+    const yesterday = new Date()
+    yesterday.setDate(yesterday.getDate() - 1)
+    date = getStringFromDate(yesterday)
+  }
+
   const data = (
     await axios.get(`${base}/todo/current`, {
       headers: getHeaders(user),
       params: {
-        date: getToday(),
+        date: date,
         time: time,
       },
     })

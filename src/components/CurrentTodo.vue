@@ -135,6 +135,7 @@ const TagsStore = namespace('TagsStore')
 export default class CurrentTodo extends Vue {
   @UserStore.State user?: User
   @SettingsStore.State hotKeysEnabled!: boolean
+  @SettingsStore.State startTimeOfDay?: string
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @TagsStore.State tags!: Tag[]
   @TagsStore.State searchTags!: Set<String>
@@ -229,7 +230,7 @@ export default class CurrentTodo extends Vue {
     }
     this.todoUpdating = true
     try {
-      const fetched = await api.getCurrentTodo(user)
+      const fetched = await api.getCurrentTodo(user, this.startTimeOfDay)
       this.todo = fetched.todo || null
       this.incompleteTodosCount = fetched.incompleteTodosCount
       this.todosCount = fetched.todosCount
