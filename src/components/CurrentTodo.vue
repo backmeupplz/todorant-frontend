@@ -230,7 +230,10 @@ export default class CurrentTodo extends Vue {
     }
     this.todoUpdating = true
     try {
-      const fetched = await api.getCurrentTodo(user, this.startTimeOfDay)
+      const fetched = await api.getCurrentTodo(
+        user,
+        this.startTimeOfDay || undefined
+      )
       this.todo = fetched.todo || null
       this.incompleteTodosCount = fetched.incompleteTodosCount
       this.todosCount = fetched.todosCount
