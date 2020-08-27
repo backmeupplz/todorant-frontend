@@ -1956,6 +1956,9 @@ export const messages = {
     googleCalendarDisableSuccess: 'Google Agenda desativado',
     googleCalendarEnableSuccess: 'Google Agenda ativado',
   },
+  de: {
+    search: 'Suche',
+  },
   es: {
     breakdown: {
       request:
