@@ -6,7 +6,7 @@ v-dialog(
   @click:outside='close'
 )
   v-card
-    v-card-title {{ $t("subscription.title") }}
+    v-card-title {{ $t("subscription.title") }} {{ user.subscriptionId }}
     v-card-text
       p {{ $t("subscription.statusText", { status: subscriptionStatusText }) }}
       p {{ subscriptionDescriptionText }}
@@ -42,10 +42,10 @@ v-dialog(
       v-btn(
         v-if='subscriptionIdExists',
         text,
-        color='error',
+        color='blue',
         :loading='loading',
-        @click='cancelSubscription'
-      ) {{ $t("subscription.cancel") }}
+        @click='manageSubscription'
+      ) {{ $t("subscription.manage") }}
       v-btn(
         color='blue',
         text,
@@ -145,22 +145,24 @@ export default class Subscription extends Vue {
     }
   }
 
-  async cancelSubscription() {
+  async manageSubscription() {
     const user = this.user
     if (!user) {
       return
     }
     this.loading = true
     try {
-      if (!confirm(i18n.t('subscription.cancelConfirm') as string)) {
-        return
+      if (user.appleReceipt) {
+        window.open('https://support.apple.com/en-us/HT202039', '_blank')
+      } else if (user.googleReceipt) {
+        window.open(
+          'https://support.google.com/googleplay/answer/7018481',
+          '_blank'
+        )
+      } else {
+        const url = await api.manageSubscriptionUrl()
+        window.location.href = url
       }
-      const session = await api.cancelSubscription(user)
-      ;(this as any).close()
-      serverBus.$emit('refreshRequested')
-      logEvent('subscription_canceled', {
-        status: this.subscriptionStatus,
-      })
     } catch (err) {
       this.setSnackbarError(err.message)
       logEvent('subscription_cancel_error', {

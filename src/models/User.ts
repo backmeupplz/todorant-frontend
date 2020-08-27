@@ -5,6 +5,9 @@ export interface User {
   facebookId?: string
   telegramId?: string
   appleSubId?: string
+  susbcriptionId?: string
+  appleReceipt?: String
+  googleReceipt?: String
 
   token?: string
 }

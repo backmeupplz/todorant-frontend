@@ -334,6 +334,7 @@ export const messages = {
       },
       cancel: 'Отключить подписку',
       cancelConfirm: 'Вы уверены, что хотите отключить подписку?',
+      manage: 'Управление подпиской',
     },
     moveUp: 'Перенести на сегодня',
     settings: {
@@ -851,6 +852,7 @@ export const messages = {
       },
       cancel: 'Cancel subscription',
       cancelConfirm: 'Are you sure you want to cancel your subscription?',
+      manage: 'Manage subscription',
     },
     moveUp: 'Move to today',
     settings: {
@@ -1350,6 +1352,7 @@ export const messages = {
       },
       cancel: 'Скасувати підписку',
       cancelConfirm: 'Ви впевнені, що бажаєте скасувати підписку?',
+      manage: 'Управління підпискою',
     },
     moveUp: 'Перенести на сьогодні',
     settings: {

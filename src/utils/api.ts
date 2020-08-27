@@ -310,10 +310,16 @@ export async function getPlanSession(user: User, plan: Plan) {
   }
 }
 
-export async function cancelSubscription(user: User) {
-  return axios.post(`${base}/subscription/cancel`, undefined, {
-    headers: getHeaders(user),
-  })
+export async function manageSubscriptionUrl() {
+  const user = store.state.UserStore.user
+  if (!user) {
+    throw new Error('No user')
+  }
+  return (
+    await axios.get<{ url: string }>(`${base}/subscription/manageUrl`, {
+      headers: getHeaders(user),
+    })
+  ).data.url
 }
 
 export async function setSettings(user: User, settings: object) {
