@@ -869,7 +869,7 @@ export const messages = {
       googleCalendar: 'Google Calendar',
       disconnectConfirm: 'Are you sure you want to disconnect this service?',
       account: 'Account',
-      username: 'User Name',
+      username: 'Name',
       duplicateTagInBreakdown: 'Copy hashtags during breakdown',
       export: 'Export data',
       hotkeys: 'Hotkeys',
