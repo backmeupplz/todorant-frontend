@@ -351,7 +351,7 @@ export const messages = {
       googleCalendar: 'Google Calendar',
       disconnectConfirm: 'Уверены, что хотите отключить этот сервис?',
       account: 'Аккаунт',
-      username: 'Имя Пользователя',
+      username: 'Имя',
       duplicateTagInBreakdown: 'Копировать хештеги при разбивке',
       export: 'Экспорт данных',
       hotkeys: 'Горячие клавиши',
