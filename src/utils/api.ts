@@ -328,6 +328,12 @@ export async function setSettings(user: User, settings: object) {
   })
 }
 
+export async function setUserName(user: User, name: object) {
+  return axios.post(`${base}/settings/username`, name, {
+    headers: getHeaders(user),
+  })
+}
+
 function setTags(tags: Tag[]) {
   getModule(TagsStore, store).setTags(
     tags.sort((a, b) => {

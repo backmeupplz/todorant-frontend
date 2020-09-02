@@ -3,7 +3,7 @@ v-dialog(
   v-model='dialog',
   scrollable,
   max-width='600px',
-  @click:outside='close'
+  @click:outside='closeAndDropUserNameMenu'
 )
   v-card
     v-card-title {{ $t("settings.title") }}
@@ -90,6 +90,19 @@ v-dialog(
       v-divider
       v-subheader.pa-0 {{ $t("settings.account") }}
       .d-flex.flex-column
+        span(v-if='!userNameMenu') {{ name }}
+          v-btn.ma-1(small, icon, @click='userNameMenu = true') 
+            v-icon(:color='dark ? "grey lighten-1" : "grey darken-1"', small) edit
+        v-text-field(
+          v-else,
+          v-model='name',
+          :label='$t("settings.username")',
+          :loading='loading',
+          :append-outer-icon='(checkUserName(name) ? "done" : undefined)',
+          :append-icon='"clear"',
+          @click:append-outer='changeUserName',
+          @click:append='clearUserName'
+        )
         span(v-for='identifier in identifiers') {{ identifier }}
       v-divider.my-2
       .d-flex.flex-column.align-start
@@ -104,16 +117,16 @@ v-dialog(
       v-btn(
         color='error',
         text,
-        @click='close',
+        @click='closeAndDropUserNameMenu',
         v-shortkey.once='["esc"]',
-        @shortkey='close',
+        @shortkey='closeAndDropUserNameMenu',
         :loading='loading'
       ) {{ $t("close") }}
       v-btn(
         color='blue',
         text,
         @click='save',
-        @shortkey='close',
+        @shortkey='closeAndDropUserNameMenu',
         :loading='loading'
       ) {{ $t("save") }}
     v-card-actions(v-else)
@@ -121,17 +134,12 @@ v-dialog(
       v-btn(
         color='error',
         text,
-        @click='close',
+        @click='closeAndDropUserNameMenu',
         v-shortkey.once='["esc"]',
-        @shortkey='close',
+        @shortkey='closeAndDropUserNameMenu',
         :loading='loading'
       ) {{ $t("close") }}
-      v-btn(
-        color='blue',
-        text,
-        @click='save',
-        :loading='loading'
-      ) {{ $t("save") }}
+      v-btn(color='blue', text, @click='save', :loading='loading') {{ $t("save") }}
 </template>
 
 <script lang="ts">
@@ -162,6 +170,7 @@ export default class Settings extends Vue {
   @Prop({ required: true }) openEncryption!: () => void
 
   @UserStore.State user?: User
+  @UserStore.Mutation setUserName!: (name: string) => void
 
   @AppStore.State language?: string
 
@@ -196,6 +205,9 @@ export default class Settings extends Vue {
 
   loading = false
   timeMenu = false
+  userNameMenu = false
+
+  name = ''
 
   weekdays = [1, 2, 3, 4, 5, 6, 0].map((n) => ({
     text: i18n.t(`weekdays.${n}`),
@@ -274,6 +286,37 @@ export default class Settings extends Vue {
     this.setHotKeysEnabled(val)
   }
 
+  checkUserName(name: any) {
+    if (!!name && name.length <= 250) return true
+    return false
+  }
+
+  changeUserName() {
+    this.userNameMenu = false
+    if (!this.user) {
+      return
+    }
+    this.setUserName(this.name)
+    return
+  }
+
+  clearUserName() {
+    this.userNameMenu = false
+    if (!this.user) {
+      return
+    }
+    this.name = this.user.name
+    return
+  }
+
+  closeAndDropUserNameMenu() {
+    this.userNameMenu = false
+    if (!!this.user) {
+      this.name = this.user.name
+    }
+    this.close()
+  }
+
   googleCalendarConnected() {
     return !!this.googleCalendarCredentials
   }
@@ -284,6 +327,8 @@ export default class Settings extends Vue {
       return
     }
     this.loading = true
+    this.userNameMenu = false
+    this.name = user.name
     try {
       const url = await api.getCalendarAuthenticationURL(user)
       window.location.href = url
@@ -303,6 +348,8 @@ export default class Settings extends Vue {
       return
     }
     this.loading = true
+    this.userNameMenu = false
+    this.name = user.name
     try {
       await api.setSettings(user, {
         googleCalendarCredentials: null,
@@ -323,9 +370,14 @@ export default class Settings extends Vue {
       return
     }
     this.loading = true
+    this.userNameMenu = false
+    this.name = user.name
     try {
       await api.setSettings(user, {
         ...store.state.SettingsStore,
+      })
+      await api.setUserName(user, {
+        name: this.name,
       })
       serverBus.$emit('refreshRequested')
       ;(this as any).close()
@@ -341,12 +393,21 @@ export default class Settings extends Vue {
     this.close()
   }
 
+  created() {
+    if (!this.user) {
+      return
+    }
+    this.name = this.user.name
+  }
+
   async saveExportedTodos() {
     const user = this.user
     if (!user) {
       return
     }
     this.loading = true
+    this.userNameMenu = false
+    this.name = user.name
     try {
       const file = await getTodosForExport(user)
       const blob = new Blob([file])

@@ -29,4 +29,10 @@ export default class UserStore extends VuexModule {
     setCookie('password', password!)
     this.password = password
   }
+
+  @Mutation
+  setUserName(name: string): void {
+    if (!this.user) return
+    this.user.name = name
+  }
 }
