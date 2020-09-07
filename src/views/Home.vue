@@ -127,7 +127,7 @@ export default class Home extends Vue {
         return 'us'
       case 'en':
         return 'us'
-      case 'ua':
+      case 'uk':
         return 'us'
       default:
         break

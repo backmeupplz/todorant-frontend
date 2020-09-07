@@ -152,7 +152,7 @@ export default class Navbar extends Vue {
     return [
       { icon: 'us', code: 'en' },
       { icon: 'ru', code: 'ru' },
-      { icon: 'ua', code: 'ua' },
+      { icon: 'ua', code: 'uk' },
       { icon: 'es', code: 'es' },
       { icon: 'it', code: 'it' },
     ]

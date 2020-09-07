@@ -1022,7 +1022,7 @@ export const messages = {
       epicGoal: 'Epic goal',
     },
   },
-  ua: {
+  uk: {
     encryption: {
       title: 'Шифрування',
       info:
