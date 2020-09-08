@@ -3,6 +3,10 @@ import VueI18n from 'vue-i18n'
 import { messages } from '@/assets/localization'
 import store from '@/store'
 
+// Fix Ukrainian
+;(messages as any).uk = messages.ua
+;(messages as any).ua = undefined
+
 Vue.use(VueI18n)
 
 function getNavigatorLanguage() {
