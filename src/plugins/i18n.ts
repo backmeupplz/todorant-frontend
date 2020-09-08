@@ -5,7 +5,7 @@ import store from '@/store'
 
 // Fix Ukrainian
 ;(messages as any).uk = messages.ua
-;(messages as any) = undefined
+;(messages as any).ua = undefined
 
 Vue.use(VueI18n)
 
