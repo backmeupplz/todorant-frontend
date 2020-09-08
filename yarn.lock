@@ -8714,10 +8714,10 @@ vue-clipboard2@^0.3.1:
   dependencies:
     clipboard "^2.0.0"
 
-vue-confetti@^2.0.8:
-  version "2.0.8"
-  resolved "https://registry.yarnpkg.com/vue-confetti/-/vue-confetti-2.0.8.tgz#30026592c4dfa47d660e1b6ed1caa85584ea6a91"
-  integrity sha512-WJftcoXqBqpqgbi9upb9zA943xq4evwNltz8hS/fmNjbaiga38ob3yxw3YyHnAZmlayIYGYuR+k9stVcNfiinw==
+vue-confetti@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/vue-confetti/-/vue-confetti-2.2.0.tgz#f446441736b946a5f7ae20d38b0d93a52bac8fc6"
+  integrity sha512-o9H8U6ixJHmbnD74bKZLcq6RIU9ZbnG1lVFeoHLswKWx9Y69Yik070k+/UWYG382AO7AjRLLwucXGg+0NoomhQ==
 
 vue-cookie-law@^1.13.3:
   version "1.13.3"
