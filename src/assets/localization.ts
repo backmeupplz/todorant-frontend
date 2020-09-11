@@ -1865,7 +1865,7 @@ export const messages = {
         '🎉 Muito obrigado por apoiar a Todorant! Pessoalmente, espero que a Todorant já tenha melhorado sua vida e continue melhorando no futuro! Seu suporte me permite trabalhar diariamente com Todorant e adicionar novos recursos, simplificando o trabalho e liberando seu tempo e recursos cognitivos. Muito obrigado novamente!',
       inactiveDescription:
         'Parece que seu período de testes com Todorant chegou ao fim. Este é o momento embaraçoso em que você precisa decidir — se Todorant melhorou sua vida o suficiente para gastar dinheiro com isso — e eu tenho que levá-lo para a decisão certa. Estou no auge da minha satisfação quando sou capaz de agregar valor às pessoas; e se Todorant puder melhorar sua vida, ficarei mais do que agradecido se você comprar a assinatura. São apenas US $ 5 / mês para produtividade ilimitada e mente livre. Cada centavo que ganhar com Todorant será gasto na melhoria do serviço. Ao apoiar a Todorant — você me permite, independente do desenvolvedor, continuar melhorando o produto que nos beneficia todos os dias. Muito obrigado antecipadamente!',
-      signature: 'Nikita Kolmogorov, criadro do Todorant',
+      signature: 'Nikita Kolmogorov, criador do Todorant',
       daysLeft: '(dias restantes: {daysLeft})',
       '5dollars': '$5/mês',
       '50dollars': '$50/ano',
