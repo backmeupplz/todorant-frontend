@@ -15,7 +15,7 @@
       v-tab-item(:value='0')
         CurrentTodo
       v-tab-item(:value='1')
-        TodoList
+        Planning
       v-tab-item(:value='2')
         Report
       v-tab-item(:value='3')
@@ -37,7 +37,7 @@
       v-tab-item(:value='0')
         .display-3.text-center ☁️
       v-tab-item(:value='1')
-        TodoList
+        Planning
       v-tab-item(:value='2')
         .display-3.text-center ☁️
       v-tab-item(:value='3')
@@ -49,7 +49,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import TodoList from '@/components/TodoList.vue'
+import Planning from '@/views/planning/Planning.vue'
 import CurrentTodo from '@/components/CurrentTodo.vue'
 import Report from '@/components/Report.vue'
 import AddTodo from '@/components/AddTodo.vue'
@@ -67,7 +67,7 @@ const AppStore = namespace('AppStore')
 const SettingsStore = namespace('SettingsStore')
 
 @Component({
-  components: { TodoList, AddTodo, CurrentTodo, Report, Delegation },
+  components: { Planning, AddTodo, CurrentTodo, Report, Delegation },
 })
 export default class Superpower extends Vue {
   @UserStore.State user?: User
@@ -129,3 +129,56 @@ export default class Superpower extends Vue {
   }
 }
 </script>
+
+<style>
+.v-tab {
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 20px !important;
+  line-height: 20px !important;
+
+  /* identical to box height, or 100% */
+  letter-spacing: -0.24px !important;
+
+  text-transform: capitalize !important;
+
+  opacity: 0.4 !important;
+}
+.v-tab--active {
+  opacity: 1 !important;
+  color: #0f0f0f !important;
+}
+.theme--dark .v-tab--active {
+  color: #ffffff !important;
+}
+
+.v-tabs-slider {
+  background: #ff641a !important;
+  border-radius: 20px !important;
+}
+
+.v-tabs-bar__content {
+  background-color: #ffffff !important;
+}
+.theme--dark .v-tabs-bar__content {
+  background-color: #121212 !important;
+}
+
+.v-slide-group__next {
+  background-color: #ffffff !important;
+}
+.theme--dark .v-slide-group__next {
+  background-color: #121212 !important;
+}
+
+.v-slide-group__prev {
+  background-color: #ffffff !important;
+}
+.theme--dark .v-slide-group__prev {
+  background-color: #121212 !important;
+}
+
+.theme--light .v-tabs .v-tab:hover::before .v-tab--active {
+  opacity: 0.2 !important;
+}
+</style>

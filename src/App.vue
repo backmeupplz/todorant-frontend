@@ -65,6 +65,21 @@ export default class App extends Vue {
 </script>
 
 <style>
+.container,
+.v-list-item,
+.v-list,
+.v-expansion-panel {
+  background-color: #ffffff !important;
+}
+.theme--dark .container,
+.theme--dark .v-list-item,
+.theme--dark .v-list,
+.theme--dark .v-expansion-panel {
+  background-color: #121212 !important;
+}
+* {
+  font-family: Montserrat;
+}
 .Cookie {
   background: #ffffff;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);

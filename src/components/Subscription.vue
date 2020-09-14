@@ -6,7 +6,7 @@ v-dialog(
   @click:outside='close'
 )
   v-card
-    v-card-title {{ $t("subscription.title") }} {{ user.subscriptionId }}
+    v-card-title {{ $t("subscription.title") }}
     v-card-text
       p {{ $t("subscription.statusText", { status: subscriptionStatusText }) }}
       p {{ subscriptionDescriptionText }}

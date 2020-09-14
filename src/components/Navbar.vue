@@ -29,11 +29,11 @@ nav
   // Encryption dialog
   Encryption(:dialog='encryptionDialog', :close='closeEncryptionDialog')
   // Navbar and app
-  v-app-bar(flat, app, style='maxWidth: 1000px; margin: auto')
+  v-app-bar(flat, app, :style='appBarStyle')
     // Title
     a(@click='goHome')
       v-toolbar-title.text-uppercase.grey--text
-        img(src='/img/logo.png', :height='24', :width='101')
+        img(src='/img/logo.svg', :height='24', :width='118')
     v-spacer
     // Language picker
     v-menu(offset-y)
@@ -162,6 +162,13 @@ export default class Navbar extends Vue {
       if (locale.code === i18n.locale) {
         return locale
       }
+    }
+  }
+  get appBarStyle() {
+    return {
+      backgroundColor: this.dark ? '#121212' : '#FFFFFF',
+      maxWidth: '1000px',
+      margin: 'auto',
     }
   }
 

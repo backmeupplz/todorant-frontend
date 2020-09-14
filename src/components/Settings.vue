@@ -173,6 +173,7 @@ export default class Settings extends Vue {
   @UserStore.Mutation setUserName!: (name: string) => void
 
   @AppStore.State language?: string
+  @AppStore.State dark!: boolean
 
   @SettingsStore.State showTodayOnAddTodo?: boolean
   @SettingsStore.State firstDayOfWeek?: number
