@@ -48,13 +48,12 @@ nav
           v-list-item-title 
             flag(:iso='locale.icon')
     // Rules
-    v-btn.pl-6(icon, color='grey', @click='rulesDialog = true')
-      v-icon info_outlined
+    IconButton(:click='() => { rulesDialog = true; }', color='grey', name='$info')
     // Extra
     v-menu(offset-y)
       template(v-slot:activator='{ on }')
         v-btn(text, icon, color='grey', v-on='on')
-          v-icon more_vert
+          v-icon $settings
       v-list
         // Dark mode
         v-list-item(@click='toggleMode')
@@ -99,6 +98,7 @@ import Hashtags from '@/components/Hashtags.vue'
 import QRCode from '@/components/QRCode.vue'
 import Support from '@/components/Support.vue'
 import Encryption from '@/components/Encryption.vue'
+import IconButton from '@/icons/IconButton.vue'
 import { serverBus } from '@/main'
 import { logEvent } from '@/utils/logEvent'
 import { sockets } from '@/utils/sockets'
@@ -123,6 +123,7 @@ const SnackbarStore = namespace('SnackbarStore')
     QRCode,
     Encryption,
     Welcome,
+    IconButton,
   },
 })
 export default class Navbar extends Vue {

@@ -9,6 +9,8 @@ import BreakdownIcon from '@/icons/BreakdownIcon.vue'
 import CompleteIcon from '@/icons/CompleteIcon.vue'
 import RefreshIcon from '@/icons/RefreshIcon.vue'
 import AddIcon from '@/icons/AddIcon.vue'
+import SettingsIcon from '@/icons/SettingsIcon.vue'
+import InfoIcon from '@/icons/InfoIcon.vue'
 
 Vue.use(Vuetify)
 
@@ -20,6 +22,8 @@ const icons = {
   complete: CompleteIcon,
   refresh: RefreshIcon,
   add: AddIcon,
+  settings: SettingsIcon,
+  info: InfoIcon,
 } as { [index: string]: VueConstructor<Vue> }
 const iconsValues = Object.keys(icons).reduce((p, c) => {
   p[c] = {
