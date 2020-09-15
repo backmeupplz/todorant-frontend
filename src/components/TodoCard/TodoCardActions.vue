@@ -25,7 +25,7 @@
     span {{ $t("breakdownInfo") }}
   IconButton(:click='edit', :loading='loading', name='$edit')
   IconButton(
-    :click='() => completeTodo',
+    :click='() => completeTodo()',
     :loading='loading',
     name='$complete',
     color='#4BB34B',
