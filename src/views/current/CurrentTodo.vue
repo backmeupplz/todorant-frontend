@@ -4,96 +4,31 @@ v-container(
   :class='$vuetify.breakpoint.mdAndUp ? "pb-8" : ""'
 )
   v-list
-    v-list-item(v-for='(epic, i) in epics', :key='i')
-      v-progress-linear(
-        rounded,
-        :value='epicProgress(epic)',
-        height='25',
-        :color='epic.color ? epic.color : "blue lighten-3"'
-      )
-        template(v-slot='{ value }')
-          span.caption {{ epic.epicPoints }}/{{ epic.epicGoal }} {{ `#${epic.tag}` }}
-        v-spacer.px-2
-      v-btn(
-        text,
-        icon,
-        :loading='todoUpdating',
-        @click='completeEpic(epic)',
-        v-if='epic.epicGoal == epic.epicPoints'
-      )
-        v-icon check
-    v-list-item
-      v-progress-linear(
-        rounded,
-        :value='progress',
-        height='25',
-        :color='$vuetify.theme.dark ? undefined : "blue lighten-3"',
-        :loading='todoUpdating'
-      )
-        template(v-slot='{ value }')
-          span.caption {{ todosCount - incompleteTodosCount }}/{{ todosCount }}
-        v-spacer.px-2
-      v-btn(text, icon, :loading='todoUpdating', @click='updateTodo')
-        v-icon refresh
+    ProgressBlock(
+      :updateTodo='updateTodo',
+      :completeEpic='completeEpic',
+      :loading='todoUpdating',
+      :incompleteTodosCount='incompleteTodosCount',
+      :todosCount='todosCount'
+    )
     v-list-item
       v-list-item-content(v-if='!!todo')
-        v-card.grey(:class='$vuetify.theme.dark ? "darken-2" : "lighten-4"')
-          v-card-text
-            TodoText(
-              :todo='todo',
-              :text='text',
-              :errorDecrypting='errorDecrypting'
-            )
-          v-card-actions
-            v-icon.grey--text.pl-2(small, v-if='todo.encrypted') vpn_key
-            v-icon.grey--text.pl-2(small, v-if='todo.skipped') arrow_forward
-            v-spacer
-            v-btn(text, icon, :loading='loading', @click='deleteTodo')
-              v-icon delete
-            v-btn.ma-0(
-              text,
-              icon,
-              @click='skipTodo',
-              :loading='loading',
-              v-if='incompleteTodosCount > 1 && !todo.frog && !todo.time'
-            )
-              v-icon arrow_right_alt
-            v-tooltip.ml-4(:max-width='300', bottom)
-              template(v-slot:activator='{ on }')
-                v-btn(
-                  text,
-                  icon,
-                  @click='addTodo()',
-                  :loading='loading',
-                  v-on='on',
-                  v-shortkey.once='{ en: ["b"], ru: ["и"] }',
-                  @shortkey='addTodo(true)'
-                )
-                  v-icon list
-              span {{ $t("breakdownInfo") }}
-            v-btn.ma-0(text, icon, :loading='loading', @click='edit')
-              v-icon edit
-            v-btn.ma-0(
-              text,
-              icon,
-              @click='completeTodo()',
-              :loading='loading',
-              v-shortkey.once='{ en: ["d"], ru: ["в"]}',
-              @shortkey='completeTodo(true)'
-            )
-              v-icon done
-      v-list-item-content.text-center.mt-4(
+        TodoCard(
+          :deleteTodo='deleteTodo',
+          :skipTodo='skipTodo',
+          :addTodo='addTodo',
+          :completeTodo='completeTodo',
+          :edit='edit',
+          :todo='todo',
+          :loading='loading',
+          :incompleteTodosCount='incompleteTodosCount'
+        )
+      AllDonePlaceholder(
         v-if='!todo && !loading && !todoUpdating && todosCount > 0'
       )
-        span.display-3 🎉
-        span.headline {{ $t("clear.congratulations") }}
-        span.body-1 {{ $t("clear.text") }}
-      v-list-item-content.text-center.mt-4(
+      EmptyPlaceholder(
         v-if='!todo && !loading && !todoUpdating && todosCount === 0'
       )
-        span.display-3 🐝
-        span.headline {{ $t("empty.action") }}
-        span.body-1 {{ $t("empty.text") }}
   EditTodo(
     :todo='todoEdited',
     :cleanTodo='cleanTodo',
@@ -113,12 +48,14 @@ import EditTodo from '@/components/EditTodo.vue'
 import { Watch } from 'vue-property-decorator'
 import * as api from '@/utils/api'
 import { serverBus } from '@/main'
-import { decrypt } from '@/utils/encryption'
-import { i18n } from '@/plugins/i18n'
 import { playSound, Sounds } from '@/utils/sounds'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
 import { Tag } from '@/models/Tag'
+import ProgressBlock from '@/views/current/ProgressBlock.vue'
+import EmptyPlaceholder from '@/views/current/EmptyPlaceholder.vue'
+import AllDonePlaceholder from '@/views/current/AllDonePlaceholder.vue'
+import TodoCard from '@/components/TodoCard/TodoCard.vue'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -130,6 +67,10 @@ const TagsStore = namespace('TagsStore')
     TodoText,
     DeleteTodo,
     EditTodo,
+    ProgressBlock,
+    EmptyPlaceholder,
+    AllDonePlaceholder,
+    TodoCard,
   },
 })
 export default class CurrentTodo extends Vue {
@@ -137,7 +78,6 @@ export default class CurrentTodo extends Vue {
   @SettingsStore.State hotKeysEnabled!: boolean
   @SettingsStore.State startTimeOfDay?: string
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
-  @TagsStore.State tags!: Tag[]
   @TagsStore.State searchTags!: Set<String>
 
   showCompleted = false
@@ -150,24 +90,6 @@ export default class CurrentTodo extends Vue {
   todoEdited: Partial<Todo> | null = null
   todoDeleted: Todo | null = null
 
-  get text() {
-    if (this.todo?.encrypted) {
-      return (
-        decrypt(this.todo?.text, true) || i18n.t('encryption.errorDecrypting')
-      )
-    } else {
-      return this.todo?.text
-    }
-  }
-
-  get errorDecrypting() {
-    if (this.todo?.encrypted) {
-      return !decrypt(this.todo?.text, true)
-    } else {
-      return false
-    }
-  }
-
   get progress() {
     return this.todosCount === 0
       ? 0
@@ -175,10 +97,6 @@ export default class CurrentTodo extends Vue {
           ((this.todosCount - this.incompleteTodosCount) / this.todosCount) *
           100
         ).toFixed(0)
-  }
-
-  get epics() {
-    return this.tags.filter((t) => t.epic)
   }
 
   mounted() {
@@ -197,13 +115,6 @@ export default class CurrentTodo extends Vue {
   }
 
   todoUpdating = false
-
-  epicProgress(epic: Tag) {
-    if (!epic.epicPoints || !epic.epicGoal) {
-      return
-    }
-    return ((epic.epicPoints / epic.epicGoal) * 100).toFixed(0)
-  }
 
   async completeEpic(epic: Tag) {
     const user = this.user
