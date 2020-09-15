@@ -21,7 +21,7 @@ import { Prop } from 'vue-property-decorator'
 export default class Icon extends Vue {
   @Prop({ required: true }) name!: string
   @Prop() color?: string
-  @Prop({ required: true }) loading!: boolean
+  @Prop() loading?: boolean
 
   @Prop({ required: true }) click!: () => void
   @Prop() on?: () => void

@@ -137,24 +137,13 @@ v-container(style='maxWidth: 1000px;')
         v-expansion-panel-header.py-0.px-6(
           v-observe-visibility='(isVisible, entry) => headerVisibilityChanged(isVisible, entry, i)'
         )
-          v-subheader.pa-0.d-flex
-            v-tooltip(
-              right,
-              :max-width='300',
-              v-if='todoSection.title.length === 10'
-            )
-              template(v-slot:activator='{ on }')
-                span(v-on='on') {{ todoSection.title }}{{ !panels.includes(i) ? ` (${todoSection.todos.length})` : "" }}
-              span {{ $t(weekdayFromTitle(todoSection.title)) }}{{ !panels.includes(i) ? ` (${todoSection.todos.length})` : "" }}
-            span(v-else) {{ todoSection.title }}
-            v-btn.ma-2(
-              v-if='todoSection.title.length === 10',
-              x-small,
-              icon,
-              @click.stop='addTodoWithDate(todoSection.title)',
-              :loading='loading'
-            )
-              v-icon(:color='dark ? "grey lighten-1" : "grey darken-1"', dense) add
+          PlanningHeader(
+            :todoSection='todoSection',
+            :loading='loading',
+            :getPanels='getPanels',
+            :setPanels='setPanels',
+            :panelIndex='i'
+          )
         v-expansion-panel-content
           draggable(
             v-model='todoSection.todos',
@@ -277,6 +266,7 @@ import { i18n } from '@/plugins/i18n'
 import { playSound, Sounds } from '@/utils/sounds'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
+import PlanningHeader from '@/views/planning/PlanningHeader.vue'
 
 const AppStore = namespace('AppStore')
 const UserStore = namespace('UserStore')
@@ -292,6 +282,7 @@ const SettingsStore = namespace('SettingsStore')
     draggable,
     CalendarView,
     CalendarViewHeader,
+    PlanningHeader,
   },
 })
 export default class TodoList extends Vue {
@@ -311,6 +302,9 @@ export default class TodoList extends Vue {
   todos = [] as TodoSection[]
 
   collapsedPanels = {} as { [index: string]: boolean }
+  getPanels() {
+    return this.panels
+  }
   get panels() {
     const result = [] as number[]
     this.todos.forEach((section, i) => {
@@ -319,6 +313,9 @@ export default class TodoList extends Vue {
       }
     })
     return result
+  }
+  setPanels(panels: number[]) {
+    this.panels = panels
   }
   set panels(panels: number[]) {
     const result = {} as { [index: string]: boolean }
@@ -464,13 +461,6 @@ export default class TodoList extends Vue {
     return `calc(${
       sizeOfPosition * (numberOfEvents + 1)
     }rem + ${borderHeight}px)`
-  }
-
-  weekdayFromTitle(title: string) {
-    const date = new Date(title)
-    return `weekdays.${
-      (date.getDay() + (date.getTimezoneOffset() > 0 ? 1 : 0)) % 7
-    }`
   }
 
   @Watch('showCompleted')
@@ -859,10 +849,6 @@ export default class TodoList extends Vue {
 
   breakdownTodo(todo: Todo) {
     serverBus.$emit('addTodoRequested', undefined, todo)
-  }
-
-  addTodoWithDate(date: string) {
-    serverBus.$emit('addTodoRequested', date, undefined)
   }
 
   searchTouched() {
