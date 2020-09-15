@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  v-btn(
+  v-btn.fab(
     :absolute='$vuetify.breakpoint.mdAndUp && currentTab == 0 && !planning',
     :fixed='$vuetify.breakpoint.smAndDown || currentTab != 0 || planning',
     :class='$vuetify.breakpoint.mdAndUp && (currentTab != 0 || planning) ? "rightPadding" : ""',
@@ -13,7 +13,7 @@ div
     v-shortkey.once='{ en: ["a"], ru: ["ф"] }',
     @shortkey='openDialog(true)'
   )
-    v-icon add
+    v-icon $add
   v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
     v-form(ref='form')
       v-card
@@ -322,4 +322,9 @@ export default class AddTodo extends Vue {
       right: ((100 + ($i * 100)) / 2) !important
 .todoText
   overflow-wrap: anywhere
+.fab
+  background: linear-gradient(135deg, #1148B9 0%, #5C9BFF 100%) !important
+  border-radius: 28px !important
+  width: 48px !important
+  height: 64px !important
 </style>
