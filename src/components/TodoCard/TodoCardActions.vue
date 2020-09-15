@@ -39,12 +39,10 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Prop } from 'vue-property-decorator'
 import { Todo } from '@/models/Todo'
-import DeleteIcon from '@/components/icons/DeleteIcon.vue'
 import IconButton from '@/icons/IconButton.vue'
 
 @Component({
   components: {
-    DeleteIcon,
     IconButton,
   },
 })
