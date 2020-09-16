@@ -1,7 +1,7 @@
 <template lang="pug">
 v-container(style='maxWidth: 1000px;')
   v-list(subheader)
-    v-list-item.pt-4.text-left(v-if='planning')
+    v-list-item.pt-4.text-left(v-if='planning && !showCompleted')
       v-flex
         v-alert(text, color='info', icon='info') {{ $t("todo.planning") }}
     v-list-item.background-colored.d-flex.align-center.no-margin-no-padding(
