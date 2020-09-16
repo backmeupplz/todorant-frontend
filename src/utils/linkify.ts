@@ -7,6 +7,7 @@ linkify
   .tlds(require('tlds'))
   .tlds('onion', true)
   .set({ fuzzyIP: true })
+  .add('file:', 'http:')
   .add('#', {
     validate: (text, pos, self) => {
       const tail = text.slice(pos - 1)
