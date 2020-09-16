@@ -478,6 +478,8 @@ export const messages = {
       title: 'Делегирование',
       noDelegators:
         'У вас пока что нет людей, которые могут делегировать вам задачи. Передайте ссылку выше людям, которым доверяете — и они смогут делегировать вам задачи.',
+      noDelegatorsShort:
+        'У вас пока что нет людей, которые могут делегировать вам задачи',
       noDelegates:
         'У вас пока что нет людей, которым вы можете делегировать задачи. Получите ссылку-приглашение от человека, которому хотите начать делегировать задачи.',
       noDelegatedTasks:
@@ -995,6 +997,7 @@ export const messages = {
       title: 'Delegation',
       noDelegators:
         "You don't have any delegators yet. Share the link above with the people who you want to make delegators",
+      noDelegatorsShort: "You don't have any delegators yet",
       noDelegates:
         "You don't have any delegates yet. Ask for an invite link to become someone's delegator.",
       noDelegatedTasks: "You don't have any more newly delegated tasks.",

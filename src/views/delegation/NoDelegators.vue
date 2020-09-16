@@ -2,7 +2,7 @@
 .v-container.pa-4
   .v-flex.justify-center.text-center
     p.display-3 👁👄👁
-    p.body-1 {{ $t("delegate.noDelegators") }}
+    p.body-1 {{ $t("delegate.noDelegatorsShort") }}
 </template>
 
 <script lang="ts">
