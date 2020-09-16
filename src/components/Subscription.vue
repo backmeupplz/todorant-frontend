@@ -25,10 +25,10 @@ v-dialog(
       v-btn(
         v-if='subscriptionIdExists',
         text,
-        color='error',
+        color='blue',
         :loading='loading',
-        @click='cancelSubscription'
-      ) {{ $t("subscription.cancel") }}
+        @click='manageSubscription'
+      ) {{ $t("subscription.manage") }}
       v-btn(
         color='blue',
         text,

@@ -14,10 +14,12 @@ v-container(
     v-list-item
       v-list-item-content(v-if='!!todo')
         TodoCard(
+          type='current',
           :deleteTodo='deleteTodo',
           :skipTodo='skipTodo',
           :addTodo='addTodo',
           :completeTodo='completeTodo',
+          :repeat='completeTodo',
           :edit='edit',
           :todo='todo',
           :loading='loading',

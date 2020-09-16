@@ -66,13 +66,13 @@ export default class App extends Vue {
 
 <style>
 .container,
-.v-list-item,
+.background-colored,
 .v-list,
 .v-expansion-panel {
   background-color: #ffffff !important;
 }
 .theme--dark .container,
-.theme--dark .v-list-item,
+.theme--dark .background-colored,
 .theme--dark .v-list,
 .theme--dark .v-expansion-panel {
   background-color: #121212 !important;

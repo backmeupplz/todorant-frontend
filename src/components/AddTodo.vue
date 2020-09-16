@@ -45,7 +45,7 @@ div
                       v-flex.column
                         span {{ !panel.includes(i) ? `${todo.frog ? "🐸 " : ""}${todo.time ? `${todo.time} ` : ""}` : "" }}{{ panel.includes(i) || !todo.text ? $t("todo.create.placeholder") : todo.text }}
                         p.my-0.caption(v-if='!panel.includes(i) && todo.date') {{ todo.date }}
-                      v-row-reverse
+                      div
                         .d-flex.justify-end.ma-2
                           v-icon.handle(v-if='todos.length > 1') menu
                     v-expansion-panel-content

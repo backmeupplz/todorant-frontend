@@ -11,6 +11,9 @@ import RefreshIcon from '@/icons/RefreshIcon.vue'
 import AddIcon from '@/icons/AddIcon.vue'
 import SettingsIcon from '@/icons/SettingsIcon.vue'
 import InfoIcon from '@/icons/InfoIcon.vue'
+import MoveToTodayIcon from '@/icons/MoveToTodayIcon.vue'
+import RepeatIcon from '@/icons/RepeatIcon.vue'
+import DragIcon from '@/icons/DragIcon.vue'
 
 Vue.use(Vuetify)
 
@@ -24,6 +27,9 @@ const icons = {
   add: AddIcon,
   settings: SettingsIcon,
   info: InfoIcon,
+  moveToToday: MoveToTodayIcon,
+  repeat: RepeatIcon,
+  drag: DragIcon,
 } as { [index: string]: VueConstructor<Vue> }
 const iconsValues = Object.keys(icons).reduce((p, c) => {
   p[c] = {

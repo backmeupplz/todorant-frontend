@@ -7,9 +7,10 @@ v-btn(
   :color='color || "#3366ff"',
   v-on='on',
   v-shortkey.once='shortkeys',
-  @shortkey='shortkey'
+  @shortkey='shortkey',
+  :small='small'
 )
-  v-icon(:style='{ fill: color || "#3366ff" }') {{ name }}
+  v-icon(:size='small ? 20 : undefined', :style='{ fill: color || "#3366ff" }') {{ name }}
 </template>
 
 <script lang="ts">
@@ -22,6 +23,7 @@ export default class Icon extends Vue {
   @Prop({ required: true }) name!: string
   @Prop() color?: string
   @Prop() loading?: boolean
+  @Prop() small?: boolean
 
   @Prop({ required: true }) click!: () => void
   @Prop() on?: () => void

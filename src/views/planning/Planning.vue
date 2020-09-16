@@ -1,10 +1,12 @@
 <template lang="pug">
 v-container(style='maxWidth: 1000px;')
   v-list(subheader)
-    v-list-item.pt-4(v-if='planning')
+    v-list-item.pt-4.text-left(v-if='planning')
       v-flex
         v-alert(text, color='info', icon='info') {{ $t("todo.planning") }}
-    v-list-item.d-flex.align-center(:style='stickyHeaderStyle')
+    v-list-item.background-colored.d-flex.align-center(
+      :style='stickyHeaderStyle'
+    )
       v-switch.ma-0.pa-0(
         v-if='!calendarViewEnabled && !search && !searchTags.size',
         hide-details,
@@ -159,75 +161,18 @@ v-container(style='maxWidth: 1000px;')
               v-observe-visibility='(isVisible, entry) => visibilityChanged(isVisible, entry, i, j)'
             )
               v-list-item-content
-                v-card(:class='cardClass(todo)')
-                  v-card-text(:class='!editable ? "px-3 pt-2 pb-0 ma-0" : ""')
-                    v-row(no-gutters)
-                      .handle.pr-3(v-if='editable && todo.frogFails < 3')
-                        v-icon menu
-                      TodoText(
-                        :todo='todo',
-                        :text='text(todo)',
-                        :errorDecrypting='errorDecrypting(todo)'
-                      )
-                  v-card-actions.pb-2.pt-2.ma-0(v-if='!editable')
-                    v-icon(v-if='todoOutstanding(todo)') error_outline
-                    v-col.px-2.py-0.ma-0(no-gutters)
-                      v-row
-                        v-icon.grey--text.pl-2(v-if='todo.encrypted', small) vpn_key
-                        v-icon.grey--text.pl-2(v-if='todo.skipped', small) arrow_forward
-                    v-spacer
-                    v-tooltip.mx-0(bottom, v-if='todoInFuture(todo)')
-                      template(v-slot:activator='{ on }')
-                        v-btn(
-                          text,
-                          small,
-                          icon,
-                          @click='moveTodoToToday(todo)',
-                          :loading='loading',
-                          v-if='!editable',
-                          v-on='on'
-                        )
-                          v-icon(small) vertical_align_top
-                      span {{ $t("moveUp") }}
-                    v-btn.mx-0(
-                      text,
-                      small,
-                      icon,
-                      @click='deleteTodo(todo)',
-                      :loading='loading',
-                      v-if='!editable'
-                    )
-                      v-icon(small) delete
-                    v-btn.mx-0(
-                      text,
-                      small,
-                      icon,
-                      @click='editTodo(todo)',
-                      :loading='loading',
-                      v-if='!editable'
-                    )
-                      v-icon(small) edit
-                    v-tooltip.mx-0(bottom, v-if='!todo.completed')
-                      template(v-slot:activator='{ on }')
-                        v-btn(
-                          text,
-                          icon,
-                          :loading='loading',
-                          v-on='on',
-                          small,
-                          @click='breakdownTodo(todo)'
-                        )
-                          v-icon(small) list
-                      span {{ $t("breakdownInfo") }}
-                    v-btn.mx-0(
-                      text,
-                      small,
-                      icon,
-                      @click='completeOrUndoTodo(todo)',
-                      :loading='loading',
-                      v-if='!editable'
-                    )
-                      v-icon(small) {{ todo.completed ? "repeat" : "done" }}
+                TodoCard(
+                  :type='showCompleted ? "done" : "planning"',
+                  :deleteTodo='() => deleteTodo(todo)',
+                  :addTodo='() => breakdownTodo(todo)',
+                  :completeTodo='() => completeOrUndoTodo(todo)',
+                  :repeat='() => completeOrUndoTodo(todo)',
+                  :edit='() => editTodo(todo)',
+                  :moveTodoToToday='() => moveTodoToToday(todo)',
+                  :todo='todo',
+                  :loading='loading',
+                  :editable='editable'
+                )
     v-progress-linear(
       v-if='todosUpdating && !calendarViewEnabled',
       :indeterminate='true'
@@ -247,7 +192,6 @@ import { Todo } from '@/models/Todo'
 import { getTodos, editTodo } from '@/utils/api'
 import EditTodo from '@/components/EditTodo.vue'
 import DeleteTodo from '@/components/DeleteTodo.vue'
-import TodoText from '@/components/TodoCard/TodoText.vue'
 import { Watch } from 'vue-property-decorator'
 import * as api from '@/utils/api'
 import { serverBus } from '@/main'
@@ -267,6 +211,7 @@ import { playSound, Sounds } from '@/utils/sounds'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
 import PlanningHeader from '@/views/planning/PlanningHeader.vue'
+import TodoCard from '@/components/TodoCard/TodoCard.vue'
 
 const AppStore = namespace('AppStore')
 const UserStore = namespace('UserStore')
@@ -276,13 +221,13 @@ const SettingsStore = namespace('SettingsStore')
 
 @Component({
   components: {
-    TodoText,
     EditTodo,
     DeleteTodo,
     draggable,
     CalendarView,
     CalendarViewHeader,
     PlanningHeader,
+    TodoCard,
   },
 })
 export default class TodoList extends Vue {
@@ -494,10 +439,6 @@ export default class TodoList extends Vue {
     serverBus.$emit('refreshRequested')
   }
 
-  todoInFuture(todo: Todo) {
-    return !isTodoOld(todo, api.getTomorrow())
-  }
-
   todosUpdating = false
   loadingUUID = ''
   async loadTodos(fullUpdate = true, more = false) {
@@ -688,26 +629,6 @@ export default class TodoList extends Vue {
     }
   }
 
-  cardClass(todo: Todo) {
-    const dark = this.dark
-    const outstanding = this.todoOutstanding(todo)
-    return dark
-      ? outstanding
-        ? 'blue darken-3'
-        : 'grey darken-2'
-      : outstanding
-      ? 'blue lighten-4'
-      : 'grey lighten-4'
-  }
-
-  todoOutstanding(todo: Todo) {
-    if (todo.completed) {
-      return false
-    }
-    const today = api.getToday()
-    return isTodoOld(todo, today)
-  }
-
   get dragOptions() {
     return {
       animation: 0,
@@ -879,14 +800,6 @@ export default class TodoList extends Vue {
       text = `${text.substr(0, 15)}...`
     }
     return text
-  }
-
-  errorDecrypting(todo: Todo) {
-    if (todo.encrypted) {
-      return !decrypt(todo.text, true)
-    } else {
-      return false
-    }
   }
 
   weekForDate(date: Moment) {

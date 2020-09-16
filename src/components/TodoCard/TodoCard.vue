@@ -1,11 +1,17 @@
 <template lang="pug">
-.todo-container
+.todo-container(:class='todoOutstanding ? "outstanding" : ""')
   .orange-bubble-container(v-if='todo.frogFails')
     OrangeBubble(v-for='(_, i) in Array(todo.frogFails).fill("")', :key='i')
-  TodoText(:todo='todo', :text='text', :errorDecrypting='errorDecrypting')
-  .footer-container
-    TodoCardModifiers(:todo='todo')
+  .todo-text-container
+    v-icon.handle.mr-2(
+      :style='{ fill: "#ff641a" }',
+      v-if='editable && todo.frogFails < 3'
+    ) $drag
+    TodoText(:todo='todo', :text='text', :errorDecrypting='errorDecrypting')
+  .footer-container(v-if='!editable')
+    TodoCardModifiers(:todo='todo', :todoOutstanding='todoOutstanding')
     TodoCardActions(
+      :type='type',
       :deleteTodo='deleteTodo',
       :skipTodo='skipTodo',
       :addTodo='addTodo',
@@ -13,7 +19,9 @@
       :edit='edit',
       :todo='todo',
       :loading='loading',
-      :incompleteTodosCount='incompleteTodosCount'
+      :incompleteTodosCount='incompleteTodosCount',
+      :moveTodoToToday='moveTodoToToday',
+      :repeat='repeat'
     )
 </template>
 
@@ -28,20 +36,32 @@ import TodoText from '@/components/TodoCard/TodoText.vue'
 import OrangeBubble from '@/components/TodoCard/OrangeBubble.vue'
 import TodoCardModifiers from '@/components/TodoCard/TodoCardModifiers.vue'
 import TodoCardActions from '@/components/TodoCard/TodoCardActions.vue'
+import { CardType } from '@/models/CardType'
+import { namespace } from 'vuex-class'
+import * as api from '@/utils/api'
+import { isTodoOld } from '@/utils/isTodoOld'
+
+const AppStore = namespace('AppStore')
 
 @Component({
   components: { TodoText, OrangeBubble, TodoCardModifiers, TodoCardActions },
 })
 export default class TodoCard extends Vue {
+  @AppStore.State dark!: boolean
+
   @Prop({ required: true }) deleteTodo!: () => void
-  @Prop({ required: true }) skipTodo!: () => void
   @Prop({ required: true }) addTodo!: (hotkey?: boolean) => void
   @Prop({ required: true }) completeTodo!: (hotkey?: boolean) => void
   @Prop({ required: true }) edit!: () => void
+  @Prop() skipTodo?: () => void
+  @Prop() moveTodoToToday?: () => void
+  @Prop() repeat?: () => void
 
+  @Prop({ required: true }) type?: CardType
   @Prop({ required: true }) todo!: Todo
   @Prop({ required: true }) loading!: boolean
   @Prop() incompleteTodosCount?: number
+  @Prop() editable?: boolean
 
   get text() {
     if (this.todo?.encrypted) {
@@ -60,6 +80,14 @@ export default class TodoCard extends Vue {
       return false
     }
   }
+
+  get todoOutstanding() {
+    if (this.todo.completed) {
+      return false
+    }
+    const today = api.getToday()
+    return isTodoOld(this.todo, today)
+  }
 }
 </script>
 
@@ -71,6 +99,11 @@ export default class TodoCard extends Vue {
 
   display: flex;
   flex-direction: column;
+}
+.todo-text-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 .theme--dark .todo-container {
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -91,5 +124,8 @@ export default class TodoCard extends Vue {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+.outstanding {
+  background-color: rgba(255, 0, 0, 0.1);
 }
 </style>
