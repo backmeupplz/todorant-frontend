@@ -31,12 +31,10 @@ v-container(style='maxWidth: 1000px;')
           icon
         )
           v-icon(small) clear
-        v-chip.ma-1(
-          close,
-          @click:close='delHash(word)',
-          v-for='(word, i) in searchTags',
-          :key='i'
-        ) {{ word }}
+        v-chip.ma-1(v-for='(word, i) in searchTags', :key='i')
+          span {{ word }}
+          v-btn.ml-2(small, icon, @click='delHash(word)')
+            v-icon(small) close
       v-spacer(v-if='!search')
       v-btn(
         v-if='!editable && !showCompleted && !search && !spreadEnabled',
@@ -99,22 +97,16 @@ v-container(style='maxWidth: 1000px;')
       .d-flex.direction-row.align-center.flex-wrap
         span.mx-1 {{ $t("spread.spreading") }}
         v-chip.mx-1(v-if='!spreadTasks.length') {{ $t("spread.chooseTasks") }}
-        v-chip.mx-1.my-1(
-          v-else,
-          v-for='task in spreadTasks',
-          :key='task._id',
-          close,
-          @click:close='removeSpreadTask(task)'
-        ) {{ text(task, true) }}
+        v-chip.mx-1.my-1(v-else, v-for='task in spreadTasks', :key='task._id')
+          span {{ text(task, true) }}
+          v-btn.ml-2(small, icon, @click='removeSpreadTask(task)')
+            v-icon(small) close
         span.mx-1 {{ $t("spread.between") }}
         v-chip.mx-1(v-if='!spreadDates.length') {{ $t("spread.chooseDates") }}
-        v-chip.mx-1.my-1(
-          v-else,
-          v-for='(date, i) in spreadDates',
-          :key='i',
-          close,
-          @click:close='removeSpreadDate(date)'
-        ) {{ date }}
+        v-chip.mx-1.my-1(v-else, v-for='(date, i) in spreadDates', :key='i')
+          span {{ date }}
+          v-btn.ml-2(small, icon, @click='removeSpreadDate(date)')
+            v-icon(small) close
     v-list-item(v-if='calendarViewEnabled', flex, :class='calendarClass')
       calendar-view(
         :items='events',
