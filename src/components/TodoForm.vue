@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+.px-4
   v-textarea(
     clearable,
     :label='$t("todo.create.text")',
