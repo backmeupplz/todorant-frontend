@@ -128,4 +128,8 @@ export default class TodoCard extends Vue {
 .outstanding {
   background-color: rgba(255, 0, 0, 0.1);
 }
+.handle {
+  flex-grow: 1;
+  max-width: 25px;
+}
 </style>
