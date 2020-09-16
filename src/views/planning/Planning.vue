@@ -4,10 +4,11 @@ v-container(style='maxWidth: 1000px;')
     v-list-item.pt-4.text-left(v-if='planning')
       v-flex
         v-alert(text, color='info', icon='info') {{ $t("todo.planning") }}
-    v-list-item.background-colored.d-flex.align-center(
-      :style='stickyHeaderStyle'
+    v-list-item.background-colored.d-flex.align-center.no-margin-no-padding(
+      :style='stickyHeaderStyle',
+      dense
     )
-      v-switch.ma-0.pa-0(
+      v-switch.no-margin-no-padding(
         v-if='!calendarViewEnabled && !search && !searchTags.size',
         hide-details,
         v-model='showCompleted',
@@ -135,8 +136,11 @@ v-container(style='maxWidth: 1000px;')
           @input='(date) => (currentPeriod = date)'
         )
     v-expansion-panels(v-else, flat, multiple, v-model='panels')
-      v-expansion-panel.my-0.py-0(v-for='(todoSection, i) in todos', :key='i')
-        v-expansion-panel-header.py-0.px-6(
+      v-expansion-panel.no-margin-no-padding(
+        v-for='(todoSection, i) in todos',
+        :key='i'
+      )
+        v-expansion-panel-header.no-margin-no-padding(
           v-observe-visibility='(isVisible, entry) => headerVisibilityChanged(isVisible, entry, i)'
         )
           PlanningHeader(
@@ -146,7 +150,7 @@ v-container(style='maxWidth: 1000px;')
             :setPanels='setPanels',
             :panelIndex='i'
           )
-        v-expansion-panel-content
+        v-expansion-panel-content.no-margin-no-padding
           draggable(
             v-model='todoSection.todos',
             group='todo',
@@ -156,6 +160,7 @@ v-container(style='maxWidth: 1000px;')
             handle='.handle'
           )
             v-list-item.pa-0(
+              dense,
               v-for='(todo, j) in todoSection.todos',
               :key='j',
               v-observe-visibility='(isVisible, entry) => visibilityChanged(isVisible, entry, i, j)'
@@ -914,6 +919,12 @@ export default class TodoList extends Vue {
 </script>
 
 <style>
+.no-margin-no-padding,
+.v-expansion-panel-content__wrap {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+
 /*
   List view
 */
