@@ -231,8 +231,15 @@ export async function getTodos(
         queryString,
       },
     })
-  ).data as { todos: Todo[]; state: UserStore; tags: Tag[]; points: number }
+  ).data as {
+    todos: Todo[]
+    state: UserStore
+    tags: Tag[]
+    points: number
+    name: string
+  }
   getModule(UserStore, store).setUserStore(data.state)
+  getModule(UserStore, store).setUserName(data.name)
   setSettingsFromServer(data.state)
   setTags(data.tags)
   getModule(HeroStore, store).setPoints(data.points)
@@ -272,8 +279,10 @@ export async function getCurrentTodo(
     state: UserStore
     tags: Tag[]
     points: number
+    name: string
   }
   getModule(UserStore, store).setUserStore(data.state)
+  getModule(UserStore, store).setUserName(data.name)
   setSettingsFromServer(data.state)
   setTags(data.tags)
   getModule(HeroStore, store).setPoints(data.points)
