@@ -274,12 +274,12 @@ export async function getCurrentTodo(
     todosCount: number
     incompleteTodosCount: number
     todo?: Todo
-    state: any
+    state: UserStore & { name: any }
     tags: Tag[]
     points: number
   }
   getModule(UserStore, store).setUserStore(data.state)
-  getModule(UserStore, store).setUserName(data.state.name)
+  getModule(UserStore, store).setUserName(data.state.name.name)
   setSettingsFromServer(data.state)
   setTags(data.tags)
   getModule(HeroStore, store).setPoints(data.points)
