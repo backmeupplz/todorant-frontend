@@ -274,11 +274,12 @@ export async function getCurrentTodo(
     todosCount: number
     incompleteTodosCount: number
     todo?: Todo
-    state: UserStore
+    state: any
     tags: Tag[]
     points: number
   }
   getModule(UserStore, store).setUserStore(data.state)
+  getModule(UserStore, store).setUserName(data.state.name)
   setSettingsFromServer(data.state)
   setTags(data.tags)
   getModule(HeroStore, store).setPoints(data.points)
@@ -347,8 +348,8 @@ function setTags(tags: Tag[]) {
           ? -1
           : 1
         : a.tag < b.tag
-          ? -1
-          : 1
+        ? -1
+        : 1
     })
   )
   const tagColors = tags.reduce((p, c) => {
@@ -514,7 +515,7 @@ export function getToday() {
 export function getStringFromDate(date: Date) {
   return `${date.getFullYear()}-${
     date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
-    }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`
+  }-${date.getDate() < 10 ? `0${date.getDate()}` : date.getDate()}`
 }
 
 export function getTomorrow() {
@@ -524,7 +525,7 @@ export function getTomorrow() {
     tomorrow.getMonth() + 1 < 10
       ? `0${tomorrow.getMonth() + 1}`
       : tomorrow.getMonth() + 1
-    }-${tomorrow.getDate() < 10 ? `0${tomorrow.getDate()}` : tomorrow.getDate()}`
+  }-${tomorrow.getDate() < 10 ? `0${tomorrow.getDate()}` : tomorrow.getDate()}`
 }
 
 export async function getVersion() {
