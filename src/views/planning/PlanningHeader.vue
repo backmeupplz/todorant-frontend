@@ -37,7 +37,7 @@ export default class PlanningHeader extends Vue {
 
   weekdayFromTitle(title: string) {
     const date = new Date(title)
-    return `weekdays.${
+    return `weekday${
       (date.getDay() + (date.getTimezoneOffset() > 0 ? 1 : 0)) % 7
     }`
   }

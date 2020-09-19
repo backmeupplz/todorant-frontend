@@ -211,7 +211,7 @@ export default class Settings extends Vue {
   name = ''
 
   weekdays = [1, 2, 3, 4, 5, 6, 0].map((n) => ({
-    text: i18n.t(`weekdays.${n}`),
+    text: i18n.t(`weekday${n}`),
     value: n,
   }))
 
