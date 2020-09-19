@@ -4,7 +4,7 @@ v-dialog(v-model='dialog', scrollable, max-width='600px', persistent)
     v-card-title {{ $t("howto.title") }}
     v-card-text
       ul
-        li(v-for='rule in $t("howto.rules")', v-html='rule')
+        li(v-for='rule in $t("rules")', v-html='rule')
       .title.py-2 {{ $t("howto.bonus.title") }}
       ul
         li(v-for='rule in $t("howto.bonus.rules")', v-html='rule')
