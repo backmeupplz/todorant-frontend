@@ -1,8 +1,8 @@
 <template lang="pug">
 v-list-item-content.text-center.mt-4
   span.display-3 🐝
-  span.headline {{ $t("empty.action") }}
-  span.body-1 {{ $t("empty.text") }}
+  span.headline {{ $t("noTodosTitle") }}
+  span.body-1 {{ $t("noTodosText") }}
 </template>
 
 <script lang="ts">

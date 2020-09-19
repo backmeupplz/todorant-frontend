@@ -199,16 +199,6 @@ export const messages = {
     planning: 'Планирование',
     created: 'Создано',
     breakdownInfo: 'Используйте разбивку, если текущая задача слишком широкая',
-    clear: {
-      congratulations: 'Поздравляем!',
-      text:
-        '🥳 Вы это сделали! Все задачи на сегодня выполнены, идите отдохните — ну или потанцуйте немного 💃',
-    },
-    empty: {
-      action: 'Вперед!',
-      text:
-        'На сегодня у вас нет задач. Хотите поработать — добавьте новые задачи на сегодня или заберите задачи с других дней.',
-    },
     howto: {
       title: 'Как пользоваться Тудурантом?',
       premise:
@@ -300,6 +290,12 @@ export const messages = {
       startTimeOfDay: 'Начало дня',
       username: 'Имя',
     },
+    allDoneTitle: 'Поздравляем!',
+    allDoneText:
+      '🥳 Вы это сделали! Все задачи на сегодня выполнены, идите отдохните — ну или потанцуйте немного 💃',
+    noTodosTitle: 'Вперед!',
+    noTodosText:
+      'На сегодня у вас нет задач. Хотите поработать — добавьте новые задачи на сегодня или заберите задачи с других дней.',
     planningText:
       'Похоже, вам нужно заняться планированием! Пожалуйста, перераспределите оставшиеся задачи ниже для того, чтобы разблокировать секцию "Текущее", и для того, чтобы оставаться продуктивными. Удачи!',
     weekday1: 'Понедельник',
@@ -661,16 +657,6 @@ export const messages = {
     planning: 'Planning',
     created: 'Created',
     breakdownInfo: 'Use breakdown when the current task is too broad',
-    clear: {
-      congratulations: 'Congratulations!',
-      text:
-        '🥳 You did it! All the tasks for today are done, go get rest or maybe dance a little 💃',
-    },
-    empty: {
-      action: 'To infinity!',
-      text:
-        "You don't have any todos for today. If you want to work — add a new todo for today or take the todos from future days.",
-    },
     howto: {
       title: 'How to use Todorant?',
       premise:
@@ -760,6 +746,12 @@ export const messages = {
       startTimeOfDay: 'Start of the day',
       username: 'Name',
     },
+    allDoneTitle: 'Congratulations!',
+    allDoneText:
+      '🥳 You did it! All the tasks for today are done, go get rest or maybe dance a little 💃',
+    noTodosTitle: 'To infinity!',
+    noTodosText:
+      "You don't have any todos for today. If you want to work — add a new todo for today or take the todos from future days.",
     planningText:
       'Looks like you have some planning to do! Please, redistribute the outstanding tasks below to unlock the "Current" tab and to keep being productive. Cheers!',
     weekday1: 'Monday',
@@ -1103,16 +1095,6 @@ export const messages = {
     created: 'Створено',
     breakdownInfo:
       "Використовуйте розбивку, якщо поточна задача занадто об'ємна",
-    clear: {
-      congratulations: 'Вітаємо!',
-      text:
-        '🥳 Ви це зробили! Усі задачі на сьогодні виконані, йдіть відпочиньте — ну або трохи потанцюйте 💃',
-    },
-    empty: {
-      action: 'Уперед!',
-      text:
-        'На сьогодні у вас немає задач. Бажаєте попрацювати — додайте нові задачі на сьогодні або заберіть задачі з інших днів.',
-    },
     howto: {
       title: 'Як користуватися Тудурантом?',
       premise:
@@ -1199,6 +1181,12 @@ export const messages = {
       account: 'Обліковий запис',
       startTimeOfDay: 'Початок дня',
     },
+    allDoneTitle: 'Вітаємо!',
+    allDoneText:
+      '🥳 Ви зробили це! Всі завдання на сьогодні зроблено, відпочиньте або трішки потанцюйте 💃',
+    noTodosTitle: 'Нумо!',
+    noTodosText:
+      'У Вас сьогодні немає жодних завдань. Якщо Ви хочете попрацювати—додайте нове завдання на сьогодні або візьміть завдання з майбутнього.',
     planningText:
       'Схоже, вам треба зайнятись плануванням! Будь-ласка перерозподіліть невирішені завдання, щоб розблокувати розділ "Поточне" і для того, щоб залишатися продуктивними. Удачі!',
     weekday1: 'Понеділок',
@@ -1340,6 +1328,12 @@ export const messages = {
     current: 'Corrente',
     planning: 'Pianificazione',
     skipped: 'Saltato',
+    allDoneTitle: 'Congratulazioni!',
+    allDoneText:
+      "🥳 Ce l'hai fatta! Le attività di oggi son state completate, riposati o balla un po' 💃",
+    noTodosTitle: "Verso l'infinito!",
+    noTodosText:
+      "Non hai attività per oggi. Se vuoi fare qualcosa aggiungi un'attività per oggi o fai quelle dei prossimi giorni.",
     planningText:
       'Sembra che tu abbia qualche programmazione da fare! Per favore, ridistribuisci i compiti in sospeso qui sotto per sbloccare la scheda "Corrente" e continuare ad essere produttivo. Buona fortuna!',
     weekday1: 'Lunedì',
@@ -1551,16 +1545,6 @@ export const messages = {
     created: 'Criada',
     breakdownInfo:
       'Use a função decompor quando a tarefa atual for muito extensa',
-    clear: {
-      congratulations: 'Parabéns!',
-      text:
-        '🥳 Você conseguiu! Todas as tarefas de hoje estão concluídas, vá descansar. Ou talvez dançar um pouco 💃',
-    },
-    empty: {
-      action: 'Ao infinito!',
-      text:
-        'Você não tem tarefas por hoje. Se você quiser trabalhar — adicione uma nova tarefa pra hoje ou pegue tarefas de dias futuros.',
-    },
     howto: {
       title: 'Como usar Todorant?',
       premise:
@@ -1647,6 +1631,12 @@ export const messages = {
       account: 'Conta',
       startTimeOfDay: 'Início do dia',
     },
+    allDoneTitle: 'Parabéns!',
+    allDoneText:
+      '🥳 Você Conseguiu! Todas as tarefas de hoje estão concluídas, para descansar ou, quem sabe, dançar um pouco 💃',
+    noTodosTitle: 'Ao infinito!',
+    noTodosText:
+      'Você não tem nenhuma tarefa pra hoje. Se você quiser trabalhar — adicione uma nova tarefa ou pegue uma tarefa futura.',
     planningText:
       'Parece que vc tem um planejamento a ser feito. Distribua as tarefas pendentes abaixo para desbloquear a guia "Atual" e continuar produtivo. Felicidades!',
     weekday1: 'Segunda',
@@ -1891,16 +1881,6 @@ export const messages = {
     created: 'Creada',
     breakdownInfo:
       'Usa el desglose cuando la tarea actual es demasiado amplia. Después de que agregues todas las subtareas, siéntete libre de completar esta tarea, te lo mereces.',
-    clear: {
-      congratulations: '¡Felicidades!',
-      text:
-        '🥳 ¡Lo hiciste! Todas las tareas de hoy están terminadas, ve a descansar o quizás a bailar un poco 💃',
-    },
-    empty: {
-      action: '¡Al infinito!',
-      text:
-        'No tienes ninguna tarea para hoy. Si quieres trabajar, agrega una nueva tarea para hoy o adelanta las tareas planeadas para días futuros.',
-    },
     howto: {
       title: '¿Cómo usar Todorant?',
       premise:
@@ -1979,6 +1959,12 @@ export const messages = {
       preserveOrderByTime: 'Conservar el orden exacto por tiempo',
       startTimeOfDay: 'Comienzo del día',
     },
+    allDoneTitle: '¡Felicidades!',
+    allDoneText:
+      '🥳 ¡Lo hiciste! Todas las tareas para hoy están hechas, ve a descansar o quizás a bailar un poco 💃',
+    noTodosTitle: '¡Hasta el infinito!',
+    noTodosText:
+      'No tienes ninguna tarea para hoy. Si quieres trabajar agrega una nueva tarea para hoy o adelanta alguna tarea de días futuros.',
     planningText:
       '¡Parece que tienes un poco de planeación por hacer! Por favor, redistribuya las tareas pendientes para desbloquear la pestaña "Actual" y para continuar siendo productivo. ¡Bien!',
     weekday1: 'Lunes',
