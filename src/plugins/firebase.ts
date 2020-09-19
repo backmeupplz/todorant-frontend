@@ -4,7 +4,7 @@ import * as firebase from 'firebase/app'
     apiKey: 'AIzaSyD9TFO750NsPGpvJsGqo4ICOZjZaTf97zA',
     authDomain: process.env.VUE_APP_DEV
       ? 'todorant-e99c2.firebaseapp.com'
-      : 'todorant.com',
+      : 'auth.todorant.com',
     databaseURL: 'https://todorant-e99c2.firebaseio.com',
     projectId: 'todorant-e99c2',
     storageBucket: 'todorant-e99c2.appspot.com',
