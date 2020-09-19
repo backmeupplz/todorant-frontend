@@ -132,7 +132,7 @@ export default class SigninDialog extends Vue {
     console.log(JSON.stringify(redirectResult, undefined, 2))
     if (redirectResult.credential) {
       if (redirectResult.credential.signInMethod === 'google.com') {
-        const token = (redirectResult.credential as any).oauthIdToken
+        const token = (redirectResult.credential as any).oauthAccessToken
         try {
           const user = await loginGoogle(token)
           this.loginSuccess(user, 'google')
