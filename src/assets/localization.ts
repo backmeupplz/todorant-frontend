@@ -1,7 +1,6 @@
 export const messages = {
   en: {
     encryption: {
-      title: 'Encryption',
       info:
         'Use this section with the utmost caution! Encryption will not work unless you add a password. There will be two types of tasks: encrypted and unencrypted. All new tasks will be encrypted. Old todos can be converted to be encrypted with the button below. If you lose the password there will be no way to recover tasks.',
       switch: 'Encrypt todos',
@@ -14,6 +13,7 @@ export const messages = {
         'Are you sure you want to remove the key and disable the encryption? This will not decrypt the tasks that are encrypted.',
       errorDecrypting: 'Wrong decryption password',
       repeatPassword: 'Repeat password',
+      title: 'Encryption',
     },
     search: 'Search',
     qr: {
@@ -453,7 +453,6 @@ export const messages = {
   },
   ru: {
     encryption: {
-      title: 'Шифрование',
       info:
         'Используйте эту секцию с максимальной осторожностью! Шифрование не будет работать, если вы не введете пароль. Дальше будет два типа задач: зашифрованные и незашифрованные. Все новые задачи будут зашифрованными. Старые задачи можно будет зашифровать, нажав на кнопку ниже. Если вы потеряете пароль, восстановить задачи будет невозможно.',
       switch: 'Шифровать задачи',
@@ -466,6 +465,7 @@ export const messages = {
         'Уверены, что хотите убрать пароль и выключить шифрование? Это действие не расшифрует зашифрованные задачи.',
       errorDecrypting: 'Неправильный пароль расшифровки',
       repeatPassword: 'Повторите пароль',
+      title: 'Шифрование',
     },
     search: 'Поиск',
     qr: {
@@ -899,7 +899,6 @@ export const messages = {
   },
   ua: {
     encryption: {
-      title: 'Шифрування',
       info:
         'Використовуйте цю секцію з максимальною обережністю! Шифрування не працюватиме, якщо ви не введете пароль. Далі буде два типи задач: зашифровані та незашифровані. Всі нові задачі будуть зашифрованими. Старі задачі можна буде зашифрувати, натиснувши на кнопку нижче. Якщо ви втратите пароль, відновити задачі буде неможливо.',
       switch: 'Шифрувати задачi',
@@ -912,6 +911,7 @@ export const messages = {
         'Впевнені, що хочете прибрати пароль і вимкнути шифрування? Це дія не розшифрує зашифровані задачі.',
       errorDecrypting: 'Неправильний пароль розшифровки',
       repeatPassword: 'Повторіть пароль',
+      title: 'Шифрування',
     },
     search: 'Пошук',
     qr: {
@@ -1242,7 +1242,6 @@ export const messages = {
   },
   it: {
     encryption: {
-      title: 'Crittografia',
       info:
         'Usa questa sezione con la massima cautela! La crittografia non funzionerà se non si aggiunge una password. Esistono due tipi di attività: crittografate e non crittografate. Tutte le nuove attività saranno crittografate. I vecchi compiti possono essere convertiti per essere crittografati con il pulsante in basso. Se perdi la password non ci sarà modo di recuperare le attività.',
       switch: 'Attività criptate',
@@ -1255,6 +1254,7 @@ export const messages = {
         'Sei sicuro di voler rimuovere la password e disabilitare la crittografia? Questo non decripterà le attività che sono state criptate.',
       errorDecrypting: 'Password di decriptazione errata',
       repeatPassword: 'Ripetere la password',
+      title: 'Crittografia',
     },
     search: 'Ricerca',
     qr: {
@@ -1430,7 +1430,6 @@ export const messages = {
   },
   'pt-BR': {
     encryption: {
-      title: 'Criptografia',
       info:
         'Use esta seção com o máximo cuidado! A criptografia não funcionará, a menos que você adicione uma senha. Haverá dois tipos de tarefas: criptografadas e não criptografadas. Todas as novas tarefas serão criptografadas. Todos as antigas podem ser convertidas para criptografadas com o botão abaixo. Se você perder a senha, não haverá como recuperar as tarefas.',
       switch: 'Encriptar tarefas',
@@ -1443,6 +1442,7 @@ export const messages = {
         'Tem certeza de que deseja remover a chave e desativar a criptografia? Isso não descriptografará as tarefas criptografadas.',
       errorDecrypting: 'Senha de descriptografia incorreta',
       repeatPassword: 'Repita a senha',
+      title: 'Criptografia',
     },
     search: 'Procurar',
     qr: {
