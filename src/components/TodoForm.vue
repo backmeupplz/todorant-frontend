@@ -73,7 +73,7 @@
           v-text-field(
             clearable,
             readonly,
-            :label='$t("todo.create.time")',
+            :label='$t("addTodoTime")',
             prepend-icon='access_time',
             v-on='on',
             v-model='todo.time'
@@ -92,7 +92,7 @@
     v-col(cols='12', md='6')
       v-switch(:label='$t("todo.create.frog")', v-model='todo.frog')
     v-col(cols='12', md='6')
-      v-switch(:label='$t("todo.create.completed")', v-model='todo.completed')
+      v-switch(:label='$t("completed")', v-model='todo.completed')
     v-col(v-if='!editTodo && (moreShown || todo.time)', cols='12', md='6')
       v-switch(:label='$t("todo.create.goFirst")', v-model='todo.goFirst')
     v-col(
