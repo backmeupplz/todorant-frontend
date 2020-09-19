@@ -131,8 +131,8 @@ export default class SigninDialog extends Vue {
     const redirectResult = await firebase.auth().getRedirectResult()
     console.log(JSON.stringify(redirectResult, undefined, 2))
     if (redirectResult.credential) {
-      if (redirectResult.credential.signInMethod === 'google') {
-        const token = (redirectResult.credential as any).accessToken
+      if (redirectResult.credential.signInMethod === 'google.com') {
+        const token = (redirectResult.credential as any).oauthIdToken
         try {
           const user = await loginGoogle(token)
           this.loginSuccess(user, 'google')
