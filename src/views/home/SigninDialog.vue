@@ -8,10 +8,7 @@ v-dialog(v-model='safeDialog', max-width='600')
         @success='onFacebookSignInSuccess',
         @error='onFacebookSignInError'
       ) {{ $t("home.facebook") }}
-      v-btn.google-button(
-        v-google-signin-button='googleClientId',
-        color='#FFFFFF'
-      )
+      v-btn.google-button(color='#FFFFFF', @click='loginWithGoogle')
         img.google-button-img(
           src='/img/google.svg',
           height='18dp',
@@ -43,7 +40,6 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
-import GoogleSignInButton from 'vue-google-signin-button-directive'
 import {
   loginFacebook,
   loginTelegram,
@@ -56,6 +52,7 @@ import { logEvent } from '@/utils/logEvent'
 import { setCookie } from '@/utils/cookie'
 const { vueTelegramLogin } = require('vue-telegram-login')
 import { serverBus } from '@/main'
+import * as firebase from 'firebase/app'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -63,12 +60,13 @@ const SnackbarStore = namespace('SnackbarStore')
 // FB object is global, declaring here for TS
 declare const FB: any
 
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
+googleAuthProvider.addScope('https://www.googleapis.com/auth/userinfo.email')
+googleAuthProvider.addScope('https://www.googleapis.com/auth/userinfo.profile')
+
 @Component({
   components: {
     vueTelegramLogin,
-  },
-  directives: {
-    GoogleSignInButton,
   },
 })
 export default class SigninDialog extends Vue {
@@ -108,6 +106,8 @@ export default class SigninDialog extends Vue {
         this.onAppleAuth(JSON.parse(this.$route.query.apple as string))
       }
     }
+
+    this.checkSignIn()
   }
 
   async onFacebookSignInSuccess(response: any) {
@@ -121,17 +121,27 @@ export default class SigninDialog extends Vue {
   onFacebookSignInError(error: Error) {
     this.loginError(error, 'facebook')
   }
-  async OnGoogleAuthSuccess(token: any) {
-    try {
-      const user = await loginGoogle(token)
-      this.loginSuccess(user, 'google')
-    } catch (error) {
-      this.loginError(error, 'google')
+
+  loginWithGoogle() {
+    firebase.auth().signInWithRedirect(googleAuthProvider)
+  }
+
+  async checkSignIn() {
+    const redirectResult = await firebase.auth().getRedirectResult()
+    console.log(JSON.stringify(redirectResult, undefined, 2))
+    if (redirectResult.credential) {
+      if (redirectResult.credential.signInMethod === 'google') {
+        const token = (redirectResult.credential as any).accessToken
+        try {
+          const user = await loginGoogle(token)
+          this.loginSuccess(user, 'google')
+        } catch (error) {
+          this.loginError(error, 'google')
+        }
+      }
     }
   }
-  OnGoogleAuthFail(error: Error) {
-    this.loginError(error, 'google')
-  }
+
   async onTelegramAuth(loginInfo: any) {
     try {
       const user = await loginTelegram(loginInfo)

@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import store from '@/store'
 import './plugins/facebook'
-import './plugins/google'
 import './plugins/apple'
 import './plugins/vue-meta'
 import App from './App.vue'
