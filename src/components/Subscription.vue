@@ -10,7 +10,7 @@ v-dialog(
     v-card-text
       p {{ $t("subscription.statusText", { status: subscriptionStatusText }) }}
       p {{ subscriptionDescriptionText }}
-      p(v-if='subscriptionIdExists && subscriptionStatus === "earlyAdopter"') {{ $t("subscription.earlyAdopterBonus") }}
+      p(v-if='subscriptionIdExists && subscriptionStatus === "earlyAdopter"') {{ $t("earlyAdopterTextBonus") }}
       p(align='right')
         | —
         a(href='mailto:nikita@borodutch.com') {{ $t("subscription.signature") }}
@@ -96,18 +96,18 @@ export default class Subscription extends Vue {
       this.subscriptionStatus === SubscriptionStatus.trial &&
       this.createdAt
     ) {
-      return `${i18n.t(`subscription.${this.subscriptionStatus}`)} ${i18n.t(
+      return `${i18n.t(this.subscriptionStatus)} ${i18n.t(
         'subscription.daysLeft',
         {
           daysLeft: 30 - daysBetween(new Date(this.createdAt), new Date()),
         }
       )}`
     } else {
-      return i18n.t(`subscription.${this.subscriptionStatus}`)
+      return i18n.t(this.subscriptionStatus)
     }
   }
   get subscriptionDescriptionText() {
-    return i18n.t(`subscription.${this.subscriptionStatus}Description`)
+    return i18n.t(`${this.subscriptionStatus}Text`)
   }
 
   async redirectToPurchase(plan: api.Plan) {
