@@ -24,7 +24,7 @@ export async function loginFacebook(accessToken: string) {
 
 export async function loginGoogle(accessToken: string) {
   return (
-    await axios.post(`${base}/login/google`, {
+    await axios.post(`${base}/login/google-firebase`, {
       accessToken,
     })
   ).data as User

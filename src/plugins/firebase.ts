@@ -1,9 +1,10 @@
 import * as firebase from 'firebase/app'
-
 ;(function init() {
   const firebaseConfig = {
     apiKey: 'AIzaSyD9TFO750NsPGpvJsGqo4ICOZjZaTf97zA',
-    authDomain: 'todorant-e99c2.firebaseapp.com',
+    authDomain: process.env.VUE_APP_DEV
+      ? 'todorant-e99c2.firebaseapp.com'
+      : 'todorant.com',
     databaseURL: 'https://todorant-e99c2.firebaseio.com',
     projectId: 'todorant-e99c2',
     storageBucket: 'todorant-e99c2.appspot.com',

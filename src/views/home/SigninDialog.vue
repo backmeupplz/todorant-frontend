@@ -61,10 +61,6 @@ const SnackbarStore = namespace('SnackbarStore')
 // FB object is global, declaring here for TS
 declare const FB: any
 
-const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
-googleAuthProvider.addScope('https://www.googleapis.com/auth/userinfo.email')
-googleAuthProvider.addScope('https://www.googleapis.com/auth/userinfo.profile')
-
 @Component({
   components: {
     vueTelegramLogin,
@@ -124,15 +120,17 @@ export default class SigninDialog extends Vue {
   }
 
   loginWithGoogle() {
+    const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
+    googleAuthProvider.addScope('email')
+    googleAuthProvider.addScope('profile')
     firebase.auth().signInWithRedirect(googleAuthProvider)
   }
 
   async checkSignIn() {
     const redirectResult = await firebase.auth().getRedirectResult()
-    console.log(JSON.stringify(redirectResult, undefined, 2))
     if (redirectResult.credential) {
       if (redirectResult.credential.signInMethod === 'google.com') {
-        const token = (redirectResult.credential as any).oauthAccessToken
+        const token = (redirectResult.credential as any).accessToken
         try {
           const user = await loginGoogle(token)
           this.loginSuccess(user, 'google')
