@@ -23,7 +23,7 @@ v-dialog(v-model='safeDialog', width='unset')
           span {{ $t("home.apple") }}
 
         // Telegram
-        vue-telegram-login(
+        vue-telegram-login.signin-telegram(
           mode='callback',
           telegram-login='todorant_bot',
           @callback='onTelegramAuth',
@@ -31,7 +31,7 @@ v-dialog(v-model='safeDialog', width='unset')
           :userpic='false'
         )
         // Debug login by token
-        div(v-if='debug && false')
+        div(v-if='debug')
           v-text-field(
             label='Debug token login',
             v-model='debugToken',
@@ -91,10 +91,6 @@ export default class SigninDialog extends Vue {
     return !!process.env.VUE_APP_DEV
   }
 
-  get googleClientId() {
-    return process.env.VUE_APP_GOOGLE_CLIENT_ID
-  }
-
   created() {
     if (this.$route.query && this.$route.query.hash) {
       if (!this.user) {
@@ -109,15 +105,6 @@ export default class SigninDialog extends Vue {
     this.checkSignIn()
   }
 
-  async onFacebookSignInSuccess(response: any) {
-    try {
-      const user = await loginFacebook(response.authResponse.accessToken)
-      this.loginSuccess(user, 'facebook')
-    } catch (error) {
-      this.loginError(error, 'facebook')
-    }
-  }
-
   loginWithGoogle() {
     const authProvider = new firebase.auth.GoogleAuthProvider()
     authProvider.addScope('email')
@@ -128,8 +115,13 @@ export default class SigninDialog extends Vue {
   async loginWithFacebook() {
     const authProvider = new firebase.auth.FacebookAuthProvider()
     authProvider.addScope('email')
-    const result = await firebase.auth().signInWithPopup(authProvider)
-    console.log(result)
+    try {
+      const result = await firebase.auth().signInWithPopup(authProvider)
+      const token = (result.credential as any).accessToken
+      const user = await loginFacebook(token)
+    } catch (error) {
+      this.loginError(error, 'facebook')
+    }
   }
 
   async checkSignIn() {
@@ -224,11 +216,13 @@ export default class SigninDialog extends Vue {
 }
 .signin-apple {
   color: #ffffff !important;
+  margin-bottom: 12px !important;
 }
 .logo-image {
   margin-right: 13px;
 }
-.tgme_widget_login_button {
-  margin: 6px;
+.signin-telegram {
+  display: flex;
+  justify-content: center;
 }
 </style>
