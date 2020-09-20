@@ -101,15 +101,21 @@ export default class SigninDialog extends Vue {
         this.onAppleAuth(JSON.parse(this.$route.query.apple as string))
       }
     }
-
-    this.checkSignIn()
   }
 
-  loginWithGoogle() {
+  async loginWithGoogle() {
     const authProvider = new firebase.auth.GoogleAuthProvider()
     authProvider.addScope('email')
     authProvider.addScope('profile')
-    firebase.auth().signInWithRedirect(authProvider)
+
+    try {
+      const result = await firebase.auth().signInWithPopup(authProvider)
+      const token = (result.credential as any).accessToken
+      const user = await loginGoogle(token)
+      this.loginSuccess(user, 'google')
+    } catch (error) {
+      this.loginError(error, 'google')
+    }
   }
 
   async loginWithFacebook() {
@@ -119,24 +125,9 @@ export default class SigninDialog extends Vue {
       const result = await firebase.auth().signInWithPopup(authProvider)
       const token = (result.credential as any).accessToken
       const user = await loginFacebook(token)
-      this.loginSuccess(user, 'google')
+      this.loginSuccess(user, 'facebook')
     } catch (error) {
       this.loginError(error, 'facebook')
-    }
-  }
-
-  async checkSignIn() {
-    const redirectResult = await firebase.auth().getRedirectResult()
-    if (redirectResult.credential) {
-      if (redirectResult.credential.signInMethod === 'google.com') {
-        const token = (redirectResult.credential as any).accessToken
-        try {
-          const user = await loginGoogle(token)
-          this.loginSuccess(user, 'google')
-        } catch (error) {
-          this.loginError(error, 'google')
-        }
-      }
     }
   }
 
