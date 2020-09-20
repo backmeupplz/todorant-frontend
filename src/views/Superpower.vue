@@ -57,7 +57,6 @@ import Delegation from '@/views/delegation/Delegation.vue'
 import { Watch } from 'vue-property-decorator'
 import { serverBus } from '@/main'
 import { i18n } from '@/plugins/i18n'
-import { mergeTelegram } from '@/utils/api'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
 
@@ -78,34 +77,6 @@ export default class Superpower extends Vue {
   @SettingsStore.State hotKeysEnabled!: boolean
 
   currentTab = 0
-
-  async created() {
-    // Try telegram merge
-    const query = this.$route.query
-    if (query && query.hash) {
-      const user = this.user
-      if (!user || user.telegramId) {
-        return
-      }
-      try {
-        const loginInfo = query
-        if (
-          !confirm(
-            i18n.t('merge.confirm', {
-              id: loginInfo.id,
-            }) as string
-          )
-        ) {
-          return
-        }
-        await mergeTelegram(user, loginInfo)
-      } catch (err) {
-        this.setSnackbarError('errors.login.telegram')
-      } finally {
-        this.$router.replace('/superpower')
-      }
-    }
-  }
 
   mounted() {
     if (this.$router.currentRoute.hash) {

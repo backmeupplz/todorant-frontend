@@ -10,8 +10,6 @@ nav
   )
   // Hero dialog
   HeroProfile(:dialog='heroDialog', :close='closeHero')
-  // Merge dialog
-  Merge(:dialog='mergeDialog', :close='closeMerge')
   // Subscription dialog
   Subscription(:dialog='subscriptionDialog', :close='closeSubscription')
   // Settings dialog
@@ -48,7 +46,11 @@ nav
           v-list-item-title 
             flag(:iso='locale.icon')
     // Rules
-    IconButton(:click='() => { rulesDialog = true; }', color='grey', name='$info')
+    IconButton(
+      :click='() => { rulesDialog = true; }',
+      color='grey',
+      name='$info'
+    )
     // Extra
     v-menu(offset-y)
       template(v-slot:activator='{ on }')
@@ -58,9 +60,7 @@ nav
         // Dark mode
         v-list-item(@click='toggleMode')
           v-list-item-title {{ dark ? $t("menu.darkMode.on") : $t("menu.darkMode.off") }}
-        // Merge accounts
-        v-list-item(@click='mergeDialog = true', v-if='!!user')
-          v-list-item-title {{ $t("menu.merge") }}
+        // Hero
         v-list-item(@click='heroDialog = true', v-if='!!user')
           v-list-item-title {{ $t("heroProfileTitle") }}
         // Subscription
@@ -90,7 +90,6 @@ import { i18n } from '@/plugins/i18n'
 import * as api from '@/utils/api'
 import Rules from '@/components/Rules.vue'
 import Welcome from '@/components/Welcome.vue'
-import Merge from '@/components/Merge.vue'
 import HeroProfile from '@/components/HeroProfile.vue'
 import Subscription from '@/components/Subscription.vue'
 import Settings from '@/components/Settings.vue'
@@ -114,7 +113,6 @@ const SnackbarStore = namespace('SnackbarStore')
 @Component({
   components: {
     Rules,
-    Merge,
     HeroProfile,
     Subscription,
     Settings,
@@ -140,7 +138,6 @@ export default class Navbar extends Vue {
 
   rulesDialog = false
   welcomeDialog = false
-  mergeDialog = false
   heroDialog = false
   subscriptionDialog = false
   settingsDialog = false
@@ -221,9 +218,6 @@ export default class Navbar extends Vue {
   }
   closeWelcome() {
     this.welcomeDialog = false
-  }
-  closeMerge() {
-    this.mergeDialog = false
   }
   closeHero() {
     this.heroDialog = false

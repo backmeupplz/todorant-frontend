@@ -1,38 +1,43 @@
 <template lang="pug">
-v-dialog(v-model='safeDialog', max-width='600')
-  v-card
-    v-card-text.pt-4.d-flex.flex-column.justify-center.align-center
-      // Facebook
-      fb-signin-button(
-        :params='{ scope: "email", return_scopes: true }',
-        @success='onFacebookSignInSuccess',
-        @error='onFacebookSignInError'
-      ) {{ $t("home.facebook") }}
-      v-btn.google-button(color='#FFFFFF', @click='loginWithGoogle')
-        img.google-button-img(
-          src='/img/google.svg',
-          height='18dp',
-          width='18dp'
+v-dialog(v-model='safeDialog', width='unset')
+  v-card.sign-in-container
+    .button-container
+      .width-container
+        // Facebook
+        v-btn.signin-button.signin-facebook
+          img.logo-image(src='/img/facebook.svg', height='18dp', width='18dp')
+          span {{ $t("home.facebook") }}
+        // Google
+        v-btn.signin-button.signin-google(
+          color='#FFFFFF',
+          @click='loginWithFacebook'
         )
-        span {{ $t("home.google") }}
-      // Apple
-      vue-apple-signin.signin-button.pb-3
-      // Telegram
-      vue-telegram-login(
-        mode='callback',
-        telegram-login='todorant_bot',
-        @callback='onTelegramAuth',
-        radius='3',
-        :userpic='false'
-      )
-      // Debug login by token
-      div(v-if='debug')
-        v-text-field(
-          label='Debug token login',
-          v-model='debugToken',
-          append-icon='send',
-          @click:append='debugTokenLogin'
+          img.logo-image(src='/img/google.svg', height='18dp', width='18dp')
+          span {{ $t("home.google") }}
+        // Apple
+        v-btn.signin-button.signin-apple(
+          color='#000000',
+          @click='loginWithGoogle'
         )
+          img.logo-image(src='/img/apple.svg', height='18dp', width='18dp')
+          span {{ $t("home.apple") }}
+
+        // Telegram
+        vue-telegram-login(
+          mode='callback',
+          telegram-login='todorant_bot',
+          @callback='onTelegramAuth',
+          radius='3',
+          :userpic='false'
+        )
+        // Debug login by token
+        div(v-if='debug && false')
+          v-text-field(
+            label='Debug token login',
+            v-model='debugToken',
+            append-icon='send',
+            @click:append='debugTokenLogin'
+          )
 </template>
 
 <script lang="ts">
@@ -57,9 +62,6 @@ import 'firebase/auth'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
-
-// FB object is global, declaring here for TS
-declare const FB: any
 
 @Component({
   components: {
@@ -115,11 +117,15 @@ export default class SigninDialog extends Vue {
       this.loginError(error, 'facebook')
     }
   }
-  onFacebookSignInError(error: Error) {
-    this.loginError(error, 'facebook')
-  }
 
   loginWithGoogle() {
+    const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
+    googleAuthProvider.addScope('email')
+    googleAuthProvider.addScope('profile')
+    firebase.auth().signInWithRedirect(googleAuthProvider)
+  }
+
+  loginWithFacebook() {
     const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
     googleAuthProvider.addScope('email')
     googleAuthProvider.addScope('profile')
@@ -186,37 +192,43 @@ export default class SigninDialog extends Vue {
 </script>
 
 <style>
-.fb-signin-button {
-  margin: 10px 0px;
-  width: 239px;
+.sign-in-container {
+  border-radius: 20px !important;
+  padding: 25px !important;
+}
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.width-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 }
 .signin-button {
-  width: 239px;
   height: 44px;
   cursor: pointer;
   display: block;
   border-radius: 3px;
   size: 14px;
+  text-transform: none !important;
+  margin: 6px;
 }
-.google-button {
-  background-color: white;
-  margin-bottom: 10px;
+.signin-facebook {
+  background-color: #647daf !important;
+  color: #ffffff !important;
+}
+.signin-google {
   color: rgba(0, 0, 0, 0.54) !important;
-  size: 14px !important;
-  font-family: 'Roboto-Medium' !important;
-  flex-direction: row !important;
-  justify-content: flex-start !important;
-  padding-left: 8px !important;
 }
-.google-button-img {
-  margin-right: 24px !important;
+.signin-apple {
+  color: #ffffff !important;
 }
-@media only screen and (max-width: 960px) {
-  .signin-button {
-    margin: 10px auto 10px;
-  }
-  .fb-signin-button {
-    margin: 10px auto 10px;
-  }
+.logo-image {
+  margin-right: 13px;
+}
+.tgme_widget_login_button {
+  margin: 6px;
 }
 </style>
