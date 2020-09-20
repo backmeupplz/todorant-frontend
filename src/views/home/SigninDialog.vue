@@ -17,7 +17,7 @@ v-dialog(v-model='safeDialog', width='unset')
         // Apple
         v-btn.signin-button.signin-apple(
           color='#000000',
-          @click='loginWithGoogle'
+          @click='loginWithApple'
         )
           img.logo-image(src='/img/apple.svg', height='18dp', width='18dp')
           span {{ $t("home.apple") }}
@@ -96,10 +96,6 @@ export default class SigninDialog extends Vue {
       if (!this.user) {
         this.onTelegramAuth(this.$route.query)
       }
-    } else if (this.$route.query && this.$route.query.apple) {
-      if (!this.user) {
-        this.onAppleAuth(JSON.parse(this.$route.query.apple as string))
-      }
     }
   }
 
@@ -131,21 +127,28 @@ export default class SigninDialog extends Vue {
     }
   }
 
+  async loginWithApple() {
+    const authProvider = new firebase.auth.OAuthProvider('apple.com')
+    authProvider.addScope('email')
+    authProvider.addScope('name')
+    try {
+      const result = await firebase.auth().signInWithPopup(authProvider)
+      const user = await loginApple({
+        ...result,
+        name: firebase.auth().currentUser?.displayName,
+      })
+      this.loginSuccess(user, 'apple')
+    } catch (error) {
+      this.loginError(error, 'apple')
+    }
+  }
+
   async onTelegramAuth(loginInfo: any) {
     try {
       const user = await loginTelegram(loginInfo)
       this.loginSuccess(user, 'telegram')
     } catch (error) {
       this.loginError(error, 'telegram')
-    }
-  }
-
-  async onAppleAuth(loginInfo: any) {
-    try {
-      const user = await loginApple(loginInfo)
-      this.loginSuccess(user, 'apple')
-    } catch (error) {
-      this.loginError(error, 'apple')
     }
   }
 
