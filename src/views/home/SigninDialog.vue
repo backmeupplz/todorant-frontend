@@ -4,13 +4,13 @@ v-dialog(v-model='safeDialog', width='unset')
     .button-container
       .width-container
         // Facebook
-        v-btn.signin-button.signin-facebook
+        v-btn.signin-button.signin-facebook(@click='loginWithFacebook')
           img.logo-image(src='/img/facebook.svg', height='18dp', width='18dp')
           span {{ $t("home.facebook") }}
         // Google
         v-btn.signin-button.signin-google(
           color='#FFFFFF',
-          @click='loginWithFacebook'
+          @click='loginWithGoogle'
         )
           img.logo-image(src='/img/google.svg', height='18dp', width='18dp')
           span {{ $t("home.google") }}
@@ -119,22 +119,22 @@ export default class SigninDialog extends Vue {
   }
 
   loginWithGoogle() {
-    const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
-    googleAuthProvider.addScope('email')
-    googleAuthProvider.addScope('profile')
-    firebase.auth().signInWithRedirect(googleAuthProvider)
+    const authProvider = new firebase.auth.GoogleAuthProvider()
+    authProvider.addScope('email')
+    authProvider.addScope('profile')
+    firebase.auth().signInWithRedirect(authProvider)
   }
 
   loginWithFacebook() {
-    const googleAuthProvider = new firebase.auth.GoogleAuthProvider()
-    googleAuthProvider.addScope('email')
-    googleAuthProvider.addScope('profile')
-    firebase.auth().signInWithRedirect(googleAuthProvider)
+    const authProvider = new firebase.auth.FacebookAuthProvider()
+    authProvider.addScope('email')
+    firebase.auth().signInWithRedirect(authProvider)
   }
 
   async checkSignIn() {
     const redirectResult = await firebase.auth().getRedirectResult()
     if (redirectResult.credential) {
+      console.log(redirectResult.credential)
       if (redirectResult.credential.signInMethod === 'google.com') {
         const token = (redirectResult.credential as any).accessToken
         try {
