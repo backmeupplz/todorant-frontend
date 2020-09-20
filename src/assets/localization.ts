@@ -83,7 +83,6 @@ export const messages = {
       signIn: 'Sign in',
       facebook: 'Login with Facebook',
       google: 'Login with Google',
-      apple: 'Login with Apple',
       privacy: 'Privacy policy',
       feedback: {
         title: 'What do the users say?',
@@ -145,6 +144,7 @@ export const messages = {
         ],
       },
       act: 'Act!',
+      apple: 'Login with Apple',
     },
     menu: {
       darkMode: {
@@ -523,7 +523,6 @@ export const messages = {
       signIn: 'Войти',
       facebook: 'Войти через Фейсбук',
       google: 'Войти через Гугл',
-      apple: 'Войти через Эппл',
       privacy: 'Политика конфиденциальности',
       feedback: {
         title: 'Что говорят пользователи?',
@@ -577,6 +576,7 @@ export const messages = {
         ],
       },
       act: 'Действуйте!',
+      apple: 'Войти через Эппл',
     },
     menu: {
       darkMode: {
@@ -964,7 +964,6 @@ export const messages = {
       signIn: 'Увійти',
       facebook: 'Увійти через Facebook',
       google: 'Увійти через Google',
-      apple: 'Увійти через Apple',
       privacy: 'Політика конфіденційності',
       feedback: {
         title: 'Що кажуть користувачі?',
@@ -1018,6 +1017,7 @@ export const messages = {
         ],
       },
       act: 'Дійте!',
+      apple: 'Увійти через Apple',
     },
     menu: {
       darkMode: {
@@ -1484,7 +1484,6 @@ export const messages = {
       signIn: 'Acessar',
       facebook: 'Conecte-se com Facebook',
       google: 'Conecte-se com Google',
-      apple: 'Conecte-se com Apple',
       privacy: 'Política de Privacidade',
       feedback: {
         title: 'O que os usuários dizem?',
@@ -1501,6 +1500,7 @@ export const messages = {
         ],
       },
       act: 'Agir!',
+      apple: 'Conecte-se com Apple',
     },
     menu: {
       darkMode: {
@@ -1774,7 +1774,6 @@ export const messages = {
       signIn: 'Registrarse',
       facebook: 'Registrarse con Facebook',
       google: 'Registrarse con Google',
-      apple: 'Registrarse con Apple',
       privacy: 'Política de privacidad',
       feedback: {
         title: '¿Qué dicen los usuarios?',
@@ -1828,6 +1827,7 @@ export const messages = {
         ],
       },
       act: '¡actúe!',
+      apple: 'Registrarse con Apple',
     },
     menu: {
       darkMode: {
