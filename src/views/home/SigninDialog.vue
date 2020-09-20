@@ -125,16 +125,16 @@ export default class SigninDialog extends Vue {
     firebase.auth().signInWithRedirect(authProvider)
   }
 
-  loginWithFacebook() {
+  async loginWithFacebook() {
     const authProvider = new firebase.auth.FacebookAuthProvider()
     authProvider.addScope('email')
-    firebase.auth().signInWithRedirect(authProvider)
+    const result = await firebase.auth().signInWithPopup(authProvider)
+    console.log(result)
   }
 
   async checkSignIn() {
     const redirectResult = await firebase.auth().getRedirectResult()
     if (redirectResult.credential) {
-      console.log(redirectResult.credential)
       if (redirectResult.credential.signInMethod === 'google.com') {
         const token = (redirectResult.credential as any).accessToken
         try {
