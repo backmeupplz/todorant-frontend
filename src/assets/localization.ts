@@ -151,7 +151,6 @@ export const messages = {
         on: 'Dark mode: on',
         off: 'Dark mode: off',
       },
-      merge: 'Merge accounts',
       logout: 'Logout',
     },
     support:
@@ -222,14 +221,6 @@ export const messages = {
       },
     },
     skipped: 'Skipped',
-    merge: {
-      title: 'Merge accounts',
-      description:
-        'You can merge multiple accounts (e.g. Facebook, Google, Telegram) here. Just login to the accounts with the buttons below and the accounts will be merged. Careful: it cannot be undonde and your account will receive all the todos from both accounts.',
-      done:
-        'All done! You can login though Google, Facebook and Telegram to this account. No more buttons left for you.',
-      confirm: 'Are you sure you want to merge {id} into this account?',
-    },
     subscription: {
       title: 'Subscription',
       statusText: 'Subscription status: {status}',
@@ -592,7 +583,6 @@ export const messages = {
         on: 'Темная тема: вкл',
         off: 'Темная тема: выкл',
       },
-      merge: 'Объединить аккаунты',
       logout: 'Выйти',
     },
     support:
@@ -663,14 +653,6 @@ export const messages = {
       },
     },
     skipped: 'Пропущено',
-    merge: {
-      title: 'Объединить аккаунты',
-      description:
-        'Вы можете объединить разные аккаунты (например, Фейсбук, Гугл, Телеграм) здесь. Просто залогиньтесь в аккаунты, используя кнопки ниже и аккаунты будут объединены. Осторожно: это действие нельзя обратить, и списки задач будут также объединены. Возможно, если вы зашли из России без VPN, вы не видите кнопку Телеграма — тогда либо зайдите через VPN, либо обратитесь к <a target="_blank" href="https://tlg.fyi/todorant_bot">@todorant_bot</a> в Телеграме и залогиньтесь через него.',
-      done:
-        'Отлично! Вы теперь можете заходить в этот аккаунт через Гугл, Фейсбук и Телеграм. Кончились у нас кнопки для вас.',
-      confirm: 'Уверены, что хотите добавить {id} в этот аккаунт?',
-    },
     subscription: {
       title: 'Подписка',
       statusText: 'Статус подписки: {status}',
@@ -1042,7 +1024,6 @@ export const messages = {
         on: 'Темна тема: увімк.',
         off: 'Темна тема: вимк.',
       },
-      merge: "Об'єднати акаунти",
       logout: 'Вийти',
     },
     support:
@@ -1108,14 +1089,6 @@ export const messages = {
       },
     },
     skipped: 'Пропущено',
-    merge: {
-      title: "Об'єднати акаунти",
-      description:
-        'Ви можете об\'єднати різні акаунти (наприклад, Facebook, Google, Telegam) тут. Просто залогиньтеся у акаунти, використовуйте кнопки нижче і акаунти буде об\'єднано. Обережно: це незворотня дія, і списки завдань також буде об\'єднано. Можливо, якщо ви зайшли з Росії без VPN, ви не бачите кнопку Telegram — тоді або зайдіть через VPN, або зверніться до <a target="_blank" href="https://tlg.fyi/todorant_bot">@todorant_bot</a> у Телеграмі й залогиньтеся через нього.',
-      done:
-        'Чудово! Тепер ви можете заходити у цей акаунт через Google, Facebook і Telegram. Закінчилися у нас кнопки для вас.',
-      confirm: 'Впевнені, що бажаєте додати {id} у цей акаунт?',
-    },
     subscription: {
       title: 'Підписка',
       statusText: 'Статус підписки: {status}',
@@ -1534,7 +1507,6 @@ export const messages = {
         on: 'Modo escuro: ativado',
         off: 'Modo escuro: desativado',
       },
-      merge: 'Mesclar contas',
       logout: 'Sair',
     },
     support:
@@ -1600,14 +1572,6 @@ export const messages = {
       },
     },
     skipped: 'Pular',
-    merge: {
-      title: 'Mesclar contas',
-      description:
-        'Você pode mesclar várias contas (por exemplo, Facebook, Google, Telegram) aqui. Basta acessar as contas com os botões abaixo e as contas serão mescladas. Cuidado: isto não pode ser desfeito e sua conta receberá todos os itens de todas as outras contas.',
-      done:
-        'Tudo feito! Você pode fazer login através do Google, Facebook e Telegram nesta conta. Não há mais botões para você.',
-      confirm: 'Tem certeza de que deseja mesclar {id} a esta conta?',
-    },
     subscription: {
       title: 'Inscrição',
       statusText: 'Status da inscrição: {status}',
@@ -1870,7 +1834,6 @@ export const messages = {
         on: 'Modo oscuro: encendido',
         off: 'Modo oscuro: apagado',
       },
-      merge: 'Combinar cuentas',
       logout: 'Cerrar sesión',
     },
     support:
@@ -1937,14 +1900,6 @@ export const messages = {
       },
     },
     skipped: 'Pospuesta',
-    merge: {
-      title: 'Combinar cuentas',
-      description:
-        'Puedes combinar múltiples cuentas (por ejemplo: Facebook, Google, Telegram) aquí. Simplemente inicia sesión en cada cuenta con los botones de debajo y se combinarán. Ten cuidado: esta acción no se puede deshacer y tu cuenta recibirá todas las tareas de ambas cuentas.',
-      done:
-        '¡Todo listo! Puedes iniciar sesión a través de Google, Facebook y Telegram en esta cuenta. No quedan más botones para ti.',
-      confirm: '¿Estás seguro de que deseas combinar {id} con esta cuenta?',
-    },
     subscription: {
       title: 'Suscripción',
       statusText: 'Estatus de la suscripción: {status}',
