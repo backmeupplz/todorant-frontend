@@ -118,6 +118,9 @@ export default class SigninDialog extends Vue {
     try {
       const result = await firebase.auth().signInWithPopup(authProvider)
       const token = (result.credential as any).accessToken
+      console.log(result)
+      console.log(result.credential)
+      console.log(token)
       const user = await loginFacebook(token)
     } catch (error) {
       this.loginError(error, 'facebook')
