@@ -91,11 +91,21 @@ export default class SigninDialog extends Vue {
     return !!process.env.VUE_APP_DEV
   }
 
-  created() {
+  async created() {
+    // Telegram auth
     if (this.$route.query && this.$route.query.hash) {
       if (!this.user) {
         this.onTelegramAuth(this.$route.query)
       }
+    }
+    // Google auth
+    try {
+      const result = await firebase.auth().getRedirectResult()
+      const token = (result.credential as any).accessToken
+      const user = await loginGoogle(token)
+      this.loginSuccess(user, 'google')
+    } catch (error) {
+      this.loginError(error, 'google')
     }
   }
 
@@ -103,15 +113,7 @@ export default class SigninDialog extends Vue {
     const authProvider = new firebase.auth.GoogleAuthProvider()
     authProvider.addScope('email')
     authProvider.addScope('profile')
-
-    try {
-      const result = await firebase.auth().signInWithPopup(authProvider)
-      const token = (result.credential as any).accessToken
-      const user = await loginGoogle(token)
-      this.loginSuccess(user, 'google')
-    } catch (error) {
-      this.loginError(error, 'google')
-    }
+    await firebase.auth().signInWithRedirect(authProvider)
   }
 
   async loginWithFacebook() {
