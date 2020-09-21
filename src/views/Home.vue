@@ -40,7 +40,7 @@
             )
             iframe.youtube-video(
               v-else,
-              src='https://www.youtube-nocookie.com/embed/EHI8gCtHTII',
+              src='https://www.youtube-nocookie.com/embed/lYXhqHt7_QY',
               frameborder='0',
               allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture',
               allowfullscreen=''
