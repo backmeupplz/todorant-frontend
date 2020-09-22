@@ -29,7 +29,7 @@
     ) {{ "#" }}{{ tag.tag }}
   v-row(no-gutters)
     v-col(cols='12', md='6')
-      v-menu(v-model='dateMenu', min-width=0)
+      v-menu(v-model='dateMenu', :close-on-content-click='false', min-width=0)
         template(v-slot:activator='{ on }')
           v-text-field(
             clearable,
@@ -49,7 +49,7 @@
           :show-current='todayFormatted'
         )
     v-col(cols='12', md='6')
-      v-menu(v-model='monthMenu', min-width=0)
+      v-menu(v-model='monthMenu', :close-on-content-click='false', min-width=0)
         template(v-slot:activator='{ on }')
           v-text-field(
             clearable,
