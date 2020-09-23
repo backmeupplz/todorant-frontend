@@ -1711,6 +1711,12 @@ export const messages = {
     },
     googleCalendarDisableSuccess: 'Google Agenda desativado',
     googleCalendarEnableSuccess: 'Google Agenda ativado',
+    delegate: {
+      title: 'Atribuição',
+      noDelegators:
+        'Você ainda não tem atribuições. Compartilhe o link acima com as pessoas que você deseja designar atribuições.',
+      pickDelegateField: 'Atribuir',
+    },
   },
   de: {
     search: 'Suche',
