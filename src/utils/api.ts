@@ -48,7 +48,7 @@ export async function mergeTelegram(user: User, loginInfo: any) {
     await axios.post(`${base}/merge/telegram`, loginInfo, {
       headers: getHeaders(user),
     })
-  ).data as User
+  ).data as { telegramId: string }
 }
 
 export async function telegramLoginRequest(uuid: string, id?: string) {

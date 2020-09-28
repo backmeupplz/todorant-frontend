@@ -15,7 +15,6 @@ export const messages = {
       repeatPassword: 'Repeat password',
       title: 'Encryption',
     },
-    confirm: 'Are you sure?',
     search: 'Search',
     qr: {
       code: 'QR code',
@@ -258,6 +257,7 @@ export const messages = {
       hotkeys: 'Hotkeys',
       startTimeOfDay: 'Start of the day',
       username: 'Name',
+      telegram: 'Telegram',
     },
     allDoneTitle: 'Congratulations!',
     allDoneText:
@@ -444,6 +444,7 @@ export const messages = {
       intoEpic: 'Make an Epic',
       epicGoal: 'Epic goal',
     },
+    success: 'Success!',
   },
   ru: {
     encryption: {
@@ -461,7 +462,6 @@ export const messages = {
       repeatPassword: 'Повторите пароль',
       title: 'Шифрование',
     },
-    confirm: 'Вы уверены?',
     search: 'Поиск',
     qr: {
       code: 'QR код',
@@ -687,7 +687,6 @@ export const messages = {
       connected: 'Подключено',
       notConnected: 'Не подключено',
       googleCalendar: 'Google Calendar',
-      telegram: 'Telegram',
       disconnectConfirm: 'Уверены, что хотите отключить этот сервис?',
       account: 'Аккаунт',
       duplicateTagInBreakdown: 'Копировать хештеги при разбивке',
@@ -695,6 +694,7 @@ export const messages = {
       hotkeys: 'Горячие клавиши',
       startTimeOfDay: 'Начало дня',
       username: 'Имя',
+      telegram: 'Телеграм',
     },
     allDoneTitle: 'Поздравляем!',
     allDoneText:
@@ -885,6 +885,7 @@ export const messages = {
       intoEpic: 'Сделать эпиком',
       epicGoal: 'Цель эпика',
     },
+    success: 'Успех!',
   },
   ua: {
     encryption: {
@@ -1124,10 +1125,10 @@ export const messages = {
       connected: "З'єднано",
       notConnected: "Не з'єднано",
       googleCalendar: 'Google Calendar',
-      telegram: 'Telegram',
       disconnectConfirm: 'Впевнені, що хочете відключити цей сервіс?',
       account: 'Обліковий запис',
       startTimeOfDay: 'Початок дня',
+      telegram: 'Телеграм',
     },
     allDoneTitle: 'Вітаємо!',
     allDoneText:

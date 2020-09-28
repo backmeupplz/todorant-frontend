@@ -35,4 +35,10 @@ export default class UserStore extends VuexModule {
     if (!this.user) return
     this.user.name = name
   }
+
+  @Mutation
+  setTelegramId(telegramId: string): void {
+    if (!this.user) return
+    this.user.telegramId = telegramId
+  }
 }

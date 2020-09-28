@@ -188,6 +188,7 @@ export default class Settings extends Vue {
 
   @UserStore.State user?: User
   @UserStore.Mutation setUserName!: (name: string) => void
+  @UserStore.Mutation setTelegramId!: (telegramId: string) => void
 
   @AppStore.State language?: string
   @AppStore.State dark!: boolean
@@ -388,16 +389,9 @@ export default class Settings extends Vue {
       if (!this.user) {
         return
       }
-      if (
-        !confirm(
-          i18n.t('confirm', {
-            id: loginInfo.id,
-          }) as string
-        )
-      ) {
-        return
-      }
-      await mergeTelegram(this.user, loginInfo)
+      const { telegramId } = await mergeTelegram(this.user, loginInfo)
+      this.setTelegramId(telegramId)
+      this.setSnackbarSuccess('success')
     } catch (err) {
       this.setSnackbarError('errors.login.telegram')
     } finally {
