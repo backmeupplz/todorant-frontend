@@ -22,11 +22,6 @@ nav
   Hashtags(:dialog='hashtagsDialog', :close='closeHashtagsDialog')
   // QR dialog
   QRCode(:dialog='qrDialog', :close='closeQRDialog')
-  // Connect telegram dialog
-  ConnectTelegram(
-    :dialog='connectTelegramDialog',
-    :close='closeConnectTelegramDialog'
-  )
   // Support dialog
   Support(:dialog='supportDialog', :close='closeSupportDialog')
   // Encryption dialog
@@ -77,11 +72,6 @@ nav
         // Hashtags
         v-list-item(@click='hashtagsDialog = true', v-if='!!user')
           v-list-item-title {{ $t("hashtags.title") }}
-        v-list-item(
-          @click='connectTelegramDialog = true',
-          v-if='!user.telegramId'
-        )
-          v-list-item-title {{ $t("connectTelegram.button") }}
         // QR
         v-list-item(@click='qrDialog = true', v-if='!!user')
           v-list-item-title {{ $t("qr.code") }}
@@ -108,7 +98,6 @@ import QRCode from '@/components/QRCode.vue'
 import Support from '@/components/Support.vue'
 import Encryption from '@/components/Encryption.vue'
 import IconButton from '@/icons/IconButton.vue'
-import ConnectTelegram from '@/components/ConnectTelegram.vue'
 import { serverBus } from '@/main'
 import { logEvent } from '@/utils/logEvent'
 import { sockets } from '@/utils/sockets'
@@ -133,7 +122,6 @@ const SnackbarStore = namespace('SnackbarStore')
     Encryption,
     Welcome,
     IconButton,
-    ConnectTelegram,
   },
 })
 export default class Navbar extends Vue {
@@ -157,7 +145,6 @@ export default class Navbar extends Vue {
   hashtagsDialog = false
   qrDialog = false
   encryptionDialog = false
-  connectTelegramDialog = false
 
   get locales() {
     return [
@@ -249,9 +236,6 @@ export default class Navbar extends Vue {
   }
   closeQRDialog() {
     this.qrDialog = false
-  }
-  closeConnectTelegramDialog() {
-    this.connectTelegramDialog = false
   }
   closeEncryptionDialog() {
     this.encryptionDialog = false

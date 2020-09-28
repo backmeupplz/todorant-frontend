@@ -259,12 +259,6 @@ export const messages = {
       username: 'Name',
     },
     allDoneTitle: 'Congratulations!',
-    connectTelegram: {
-      button: 'Connect Telegram',
-      title: 'Connect Telegram',
-      confirm: 'Are you sure?',
-      done: 'Connected :)',
-    },
     allDoneText:
       '🥳 You did it! All the tasks for today are done, go get rest or maybe dance a little 💃',
     noTodosTitle: 'To infinity!',
@@ -691,6 +685,7 @@ export const messages = {
       connected: 'Подключено',
       notConnected: 'Не подключено',
       googleCalendar: 'Google Calendar',
+      telegram: 'Telegram',
       disconnectConfirm: 'Уверены, что хотите отключить этот сервис?',
       account: 'Аккаунт',
       duplicateTagInBreakdown: 'Копировать хештеги при разбивке',
@@ -698,12 +693,6 @@ export const messages = {
       hotkeys: 'Горячие клавиши',
       startTimeOfDay: 'Начало дня',
       username: 'Имя',
-    },
-    connectTelegram: {
-      button: 'Подключить Телеграм',
-      title: 'Подключить Телеграм',
-      confirm: 'Вы уверены?',
-      done: 'Подключено :)',
     },
     allDoneTitle: 'Поздравляем!',
     allDoneText:
@@ -1133,6 +1122,7 @@ export const messages = {
       connected: "З'єднано",
       notConnected: "Не з'єднано",
       googleCalendar: 'Google Calendar',
+      telegram: 'Telegram',
       disconnectConfirm: 'Впевнені, що хочете відключити цей сервіс?',
       account: 'Обліковий запис',
       startTimeOfDay: 'Початок дня',
