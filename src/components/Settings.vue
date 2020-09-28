@@ -67,7 +67,7 @@ v-dialog(
       v-divider
       v-subheader.pa-0 {{ $t("settings.integrations") }}
       .d-flex.flex-column
-        .d-flex.justify-space-between.align-center.mb-2
+        .integration-button-block.mb-2
           span {{ $t("settings.googleCalendar") }}
           v-btn(
             v-if='googleCalendarConnected()',
@@ -88,7 +88,7 @@ v-dialog(
               width='18dp'
             )
             span.google-button-text {{ $t("settings.notConnected") }}
-        .d-flex.justify-space-between.align-center.mb-2(v-if='!user.telegramId')
+        .integration-button-block.mb-2(v-if='!user.telegramId')
           span {{ $t("settings.telegram") }}
           v-layout.text-center(column, justify-center, align-center)
           vue-telegram-login(
@@ -462,5 +462,20 @@ export default class Settings extends Vue {
 }
 .google-button-text {
   color: rgba(0, 0, 0, 0.54) !important;
+}
+.integration-button-block {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+/* Responsiveness */
+@media only screen and (max-width: 500px) {
+  .integration-button-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
 </style>
