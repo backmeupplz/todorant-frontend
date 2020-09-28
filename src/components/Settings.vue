@@ -66,27 +66,39 @@ v-dialog(
 
       v-divider
       v-subheader.pa-0 {{ $t("settings.integrations") }}
-      .d-flex.justify-space-between.align-center.mb-2
-        span {{ $t("settings.googleCalendar") }}
-        v-btn(
-          v-if='googleCalendarConnected()',
-          color='error',
-          text,
-          :loading='loading',
-          @click='disconnectGoogleCalendar'
-        ) {{ $t("settings.connected") }}
-        v-btn(
-          v-else,
-          :loading='loading',
-          @click='connectGoogleCalendar',
-          color='#FFFFFF'
-        )
-          img.google-button-img(
-            src='/img/google.svg',
-            height='18dp',
-            width='18dp'
+      .d-flex.flex-column
+        .d-flex.justify-space-between.align-center.mb-2
+          span {{ $t("settings.googleCalendar") }}
+          v-btn(
+            v-if='googleCalendarConnected()',
+            color='error',
+            text,
+            :loading='loading',
+            @click='disconnectGoogleCalendar'
+          ) {{ $t("settings.connected") }}
+          v-btn(
+            v-else,
+            :loading='loading',
+            @click='connectGoogleCalendar',
+            color='#FFFFFF'
           )
-          span.google-button-text {{ $t("settings.notConnected") }}
+            img.google-button-img(
+              src='/img/google.svg',
+              height='18dp',
+              width='18dp'
+            )
+            span.google-button-text {{ $t("settings.notConnected") }}
+        .d-flex.justify-space-between.align-center.mb-2(v-if='!user.telegramId')
+          span {{ $t("settings.telegram") }}
+          v-layout.text-center(column, justify-center, align-center)
+          vue-telegram-login(
+            mode='callback',
+            telegram-login='todorant_bot',
+            @callback='onTelegramAuth',
+            radius='3',
+            :userpic='false',
+            v-if='!user || !user.telegramId'
+          )
       v-divider
       v-subheader.pa-0 {{ $t("settings.account") }}
       .d-flex.flex-column
@@ -148,12 +160,13 @@ import Component from 'vue-class-component'
 import * as api from '@/utils/api'
 import { serverBus } from '@/main'
 import { i18n } from '@/plugins/i18n'
-import { getTodos, getTodosForExport } from '@/utils/api'
+import { getTodos, getTodosForExport, mergeTelegram } from '@/utils/api'
 import axios from 'axios'
 import { User } from '@/models/User'
 import { saveAs } from 'file-saver'
 import { Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
+const { vueTelegramLogin } = require('vue-telegram-login')
 import { GoogleCalendarCredentials } from '@/models/GoogleCalendarCredentials'
 import store from '@/store'
 import App from '@/App.vue'
@@ -163,7 +176,11 @@ const SettingsStore = namespace('SettingsStore')
 const SnackbarStore = namespace('SnackbarStore')
 const AppStore = namespace('AppStore')
 
-@Component
+@Component({
+  components: {
+    vueTelegramLogin,
+  },
+})
 export default class Settings extends Vue {
   @Prop({ required: true }) dialog!: boolean
   @Prop({ required: true }) close!: () => void
@@ -360,6 +377,29 @@ export default class Settings extends Vue {
       this.setSnackbarSuccess(i18n.t('googleCalendarDisableSuccess') as string)
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)
+    } finally {
+      this.loading = false
+    }
+  }
+
+  async onTelegramAuth(loginInfo: any) {
+    this.loading = true
+    try {
+      if (!this.user) {
+        return
+      }
+      if (
+        !confirm(
+          i18n.t('confirm', {
+            id: loginInfo.id,
+          }) as string
+        )
+      ) {
+        return
+      }
+      await mergeTelegram(this.user, loginInfo)
+    } catch (err) {
+      this.setSnackbarError('errors.login.telegram')
     } finally {
       this.loading = false
     }

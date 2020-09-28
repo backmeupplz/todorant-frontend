@@ -43,6 +43,14 @@ export async function loginToken(token: string) {
   return (await axios.post(`${base}/login/token`, { token })).data as User
 }
 
+export async function mergeTelegram(user: User, loginInfo: any) {
+  return (
+    await axios.post(`${base}/merge/telegram`, loginInfo, {
+      headers: getHeaders(user),
+    })
+  ).data as User
+}
+
 export async function telegramLoginRequest(uuid: string, id?: string) {
   return axios.post(`${base}/login/telegram_mobile`, { uuid, id })
 }

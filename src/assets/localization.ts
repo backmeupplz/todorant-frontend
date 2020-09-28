@@ -15,6 +15,7 @@ export const messages = {
       repeatPassword: 'Repeat password',
       title: 'Encryption',
     },
+    confirm: 'Are you sure?',
     search: 'Search',
     qr: {
       code: 'QR code',
@@ -460,6 +461,7 @@ export const messages = {
       repeatPassword: 'Повторите пароль',
       title: 'Шифрование',
     },
+    confirm: 'Вы уверены?',
     search: 'Поиск',
     qr: {
       code: 'QR код',
@@ -685,6 +687,7 @@ export const messages = {
       connected: 'Подключено',
       notConnected: 'Не подключено',
       googleCalendar: 'Google Calendar',
+      telegram: 'Telegram',
       disconnectConfirm: 'Уверены, что хотите отключить этот сервис?',
       account: 'Аккаунт',
       duplicateTagInBreakdown: 'Копировать хештеги при разбивке',
@@ -1121,6 +1124,7 @@ export const messages = {
       connected: "З'єднано",
       notConnected: "Не з'єднано",
       googleCalendar: 'Google Calendar',
+      telegram: 'Telegram',
       disconnectConfirm: 'Впевнені, що хочете відключити цей сервіс?',
       account: 'Обліковий запис',
       startTimeOfDay: 'Початок дня',
