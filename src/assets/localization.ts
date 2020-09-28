@@ -259,6 +259,10 @@ export const messages = {
       username: 'Name',
     },
     allDoneTitle: 'Congratulations!',
+    connectTelegram: {
+      button: "Connect Telegram",
+      title: 'Connect Telegram',
+    },
     allDoneText:
       '🥳 You did it! All the tasks for today are done, go get rest or maybe dance a little 💃',
     noTodosTitle: 'To infinity!',
@@ -693,6 +697,7 @@ export const messages = {
       startTimeOfDay: 'Начало дня',
       username: 'Имя',
     },
+    connectTelegram: "Подключить Телеграм",
     allDoneTitle: 'Поздравляем!',
     allDoneText:
       '🥳 Вы это сделали! Все задачи на сегодня выполнены, идите отдохните — ну или потанцуйте немного 💃',
