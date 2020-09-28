@@ -99,7 +99,6 @@ v-dialog(
             :userpic='false',
             v-if='!user || !user.telegramId'
           )
-            span.google-button-text {{ $t("settings.notConnected") }}
       v-divider
       v-subheader.pa-0 {{ $t("settings.account") }}
       .d-flex.flex-column

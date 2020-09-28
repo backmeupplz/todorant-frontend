@@ -15,6 +15,7 @@ export const messages = {
       repeatPassword: 'Repeat password',
       title: 'Encryption',
     },
+    confirm: 'Are you sure?',
     search: 'Search',
     qr: {
       code: 'QR code',
@@ -460,6 +461,7 @@ export const messages = {
       repeatPassword: 'Повторите пароль',
       title: 'Шифрование',
     },
+    confirm: 'Вы уверены?',
     search: 'Поиск',
     qr: {
       code: 'QR код',
