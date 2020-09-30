@@ -204,7 +204,8 @@ export default class SigninDialog extends Vue {
   border-radius: 3px;
   size: 14px;
   text-transform: none !important;
-  margin: 6px;
+  margin-top: 6px;
+  margin-bottom: 6px;
 }
 .signin-facebook {
   background-color: #647daf !important;

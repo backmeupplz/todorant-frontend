@@ -145,6 +145,9 @@ export const messages = {
       },
       act: 'Act!',
       apple: 'Login with Apple',
+      crossplatform: {
+        title: 'Truly cross-platform',
+      },
     },
     menu: {
       darkMode: {
@@ -580,6 +583,9 @@ export const messages = {
       },
       act: 'Действуйте!',
       apple: 'Войти через Эппл',
+      crossplatform: {
+        title: 'По-настоящему кросс-платформенный',
+      },
     },
     menu: {
       darkMode: {
@@ -1024,6 +1030,9 @@ export const messages = {
       },
       act: 'Дійте!',
       apple: 'Увійти через Apple',
+      crossplatform: {
+        title: 'По-справжньому крос-платформний',
+      },
     },
     menu: {
       darkMode: {
