@@ -90,30 +90,30 @@
                   max-height='24px'
                 )
               p.xplatform-text Android
-            //- .xplatform-card
-            //-   .platform-image-box
-            //-     v-img(
-            //-       src='/img/platforms/macos.svg',
-            //-       max-width='34px',
-            //-       max-height='34px'
-            //-     )
-            //-   p.xplatform-text macOS
-            //- .xplatform-card
-            //-   .platform-image-box
-            //-     v-img(
-            //-       src='/img/platforms/windows.svg',
-            //-       max-width='34px',
-            //-       max-height='34px'
-            //-     )
-            //-   p.xplatform-text Windows
-            //- .xplatform-card
-            //-   .platform-image-box
-            //-     v-img(
-            //-       src='/img/platforms/linux.svg',
-            //-       max-width='34px',
-            //-       max-height='34px'
-            //-     )
-            //-   p.xplatform-text Linux
+            .xplatform-card(@click='open("/apps/todorant-mac-1.0.0.dmg")')
+              .platform-image-box
+                v-img(
+                  src='/img/platforms/macos.svg',
+                  max-width='34px',
+                  max-height='34px'
+                )
+              p.xplatform-text macOS
+            .xplatform-card(@click='open("/apps/todorant-win-1.0.0.exe")')
+              .platform-image-box
+                v-img(
+                  src='/img/platforms/windows.svg',
+                  max-width='34px',
+                  max-height='34px'
+                )
+              p.xplatform-text Windows
+            .xplatform-card(@click='open("/apps/todorant-linux-64-1.0.0.deb")')
+              .platform-image-box
+                v-img(
+                  src='/img/platforms/linux.svg',
+                  max-width='34px',
+                  max-height='34px'
+                )
+              p.xplatform-text Linux
             .xplatform-card(
               @click='open("https://chrome.google.com/webstore/detail/todorant/elbpjnphgkgohncpccajbomicnejijdk")'
             )
@@ -436,7 +436,7 @@ export default class Home extends Vue {
   flex-wrap: wrap;
   justify-self: center;
 
-  max-width: 500px;
+  max-width: 600px;
 }
 .xplatform-card {
   width: 100px;
