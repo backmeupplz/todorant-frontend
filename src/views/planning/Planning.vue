@@ -36,18 +36,12 @@ v-container(style='maxWidth: 1000px;')
           v-btn.ml-2(small, icon, @click='delHash(word)')
             v-icon(small) close
       v-spacer(v-if='!search')
-      v-btn(
+      IconButton.planning-calendar-button(
         v-if='!editable && !showCompleted && !search && !spreadEnabled',
-        icon,
-        @click='toggleCalendar',
-        :color='calendarViewEnabled ? "blue" : ""',
+        name='$calendar',
+        :click='toggleCalendar',
         :loading='todosUpdating || loading'
       )
-        v-img(
-          src='/img/calendar/calendar-icon.svg',
-          max-height='24',
-          max-width='24'
-        )
       v-tooltip(
         bottom,
         :max-width='300',
@@ -61,13 +55,12 @@ v-container(style='maxWidth: 1000px;')
           )
             v-icon(v-on='on', color='#3366FF') call_split
         span {{ $t("spread.hint") }}
-      v-btn(
+      IconButton(
+        name='$breakdown',
         v-if='!editable && !showCompleted && !spreadEnabled',
-        icon,
         :loading='todosUpdating',
-        @click='editable = true'
+        :click='() => (editable = true)'
       )
-        v-img(src='/img/calendar/list.svg', max-height='30', max-width='30')
       v-btn(
         v-if='!!editable || !!spreadEnabled',
         icon,
@@ -83,16 +76,17 @@ v-container(style='maxWidth: 1000px;')
         color='green'
       )
         v-icon done
-      v-btn(
+      IconButton.planning-calendar-button(
         v-if='!editable && !showCompleted && !calendarViewEnabled',
-        icon,
         :loading='todosUpdating || loading',
-        @click='searchTouched',
-        :color='search ? "blue" : ""'
+        :click='searchTouched',
+        name='$search'
       )
-        v-img(src='/img/calendar/search.svg', max-height='20', max-width='20')
-      v-btn(icon, :loading='todosUpdating', @click='loadTodos')
-        v-img(src='/img/calendar/reload.svg', max-height='30', max-width='30')
+      IconButton.planning-calendar-button(
+        :loading='todosUpdating',
+        :click='loadTodos',
+        name='$refresh'
+      )
     v-list-item(v-if='calendarViewEnabled && todosUpdating', flex)
       v-progress-linear(:indeterminate='true')
     // Content
@@ -129,10 +123,10 @@ v-container(style='maxWidth: 1000px;')
           slot='header',
           slot-scope='{ headerProps }',
           :header-props='headerProps',
-          :previousYearLabel='"/img/previousYearLabel.svg"',
-          :previousPeriodLabel='"/img/previousPeriodLabel.svg"',
-          :nextPeriodLabel='"/img/nextPeriodLabel.svg"',
-          :nextYearLabel='"/img/nextYearLabel.svg"',
+          :previousYearLabel='"/img/calendar/previousYearLabel.svg"',
+          :previousPeriodLabel='"/img/calendar/previousPeriodLabel.svg"',
+          :nextPeriodLabel='"/img/calendar/nextPeriodLabel.svg"',
+          :nextYearLabel='"/img/calendar/nextYearLabel.svg"',
           @input='(date) => (currentPeriod = date)'
         )
     v-expansion-panels(v-else, flat, multiple, v-model='panels')
@@ -214,6 +208,7 @@ import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
 import PlanningHeader from '@/views/planning/PlanningHeader.vue'
 import TodoCard from '@/components/TodoCard/TodoCard.vue'
+import IconButton from '@/icons/IconButton.vue'
 
 const AppStore = namespace('AppStore')
 const UserStore = namespace('UserStore')
@@ -230,6 +225,7 @@ const SettingsStore = namespace('SettingsStore')
     CalendarViewHeader,
     PlanningHeader,
     TodoCard,
+    IconButton,
   },
 })
 export default class TodoList extends Vue {
@@ -942,8 +938,12 @@ export default class TodoList extends Vue {
   margin-left: 6px;
 }
 
-.past {
-  background-color: rgba(51, 102, 255, 0.06);
+.light div[class^='cv-day'][class*='past'] {
+  background-color: rgba(51, 102, 255, 0.06) !important;
+}
+
+.dark div[class^='cv-day'][class*='past'] {
+  background-color: #1b1b1c !important;
 }
 
 .cv-header {
