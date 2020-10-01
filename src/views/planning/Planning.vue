@@ -43,7 +43,11 @@ v-container(style='maxWidth: 1000px;')
         :color='calendarViewEnabled ? "blue" : ""',
         :loading='todosUpdating || loading'
       )
-        v-icon calendar_today
+        v-img(
+          src='/img/calendar/calendar-icon.svg',
+          max-height='24',
+          max-width='24'
+        )
       v-tooltip(
         bottom,
         :max-width='300',
@@ -55,7 +59,7 @@ v-container(style='maxWidth: 1000px;')
             icon,
             :loading='todosUpdating || loading'
           )
-            v-icon(v-on='on') call_split
+            v-icon(v-on='on', color='#3366FF') call_split
         span {{ $t("spread.hint") }}
       v-btn(
         v-if='!editable && !showCompleted && !spreadEnabled',
@@ -63,7 +67,7 @@ v-container(style='maxWidth: 1000px;')
         :loading='todosUpdating',
         @click='editable = true'
       )
-        v-icon format_list_numbered
+        v-img(src='/img/calendar/list.svg', max-height='30', max-width='30')
       v-btn(
         v-if='!!editable || !!spreadEnabled',
         icon,
@@ -86,9 +90,9 @@ v-container(style='maxWidth: 1000px;')
         @click='searchTouched',
         :color='search ? "blue" : ""'
       )
-        v-icon search
+        v-img(src='/img/calendar/search.svg', max-height='20', max-width='20')
       v-btn(icon, :loading='todosUpdating', @click='loadTodos')
-        v-icon refresh
+        v-img(src='/img/calendar/reload.svg', max-height='30', max-width='30')
     v-list-item(v-if='calendarViewEnabled && todosUpdating', flex)
       v-progress-linear(:indeterminate='true')
     // Content
@@ -125,6 +129,10 @@ v-container(style='maxWidth: 1000px;')
           slot='header',
           slot-scope='{ headerProps }',
           :header-props='headerProps',
+          :previousYearLabel='"/img/previousYearLabel.svg"',
+          :previousPeriodLabel='"/img/previousPeriodLabel.svg"',
+          :nextPeriodLabel='"/img/nextPeriodLabel.svg"',
+          :nextYearLabel='"/img/nextYearLabel.svg"',
           @input='(date) => (currentPeriod = date)'
         )
     v-expansion-panels(v-else, flat, multiple, v-model='panels')
@@ -195,10 +203,7 @@ import { serverBus } from '@/main'
 import draggable from 'vuedraggable'
 import { TodoSection } from '@/models/TodoSection'
 import { isTodoOld, isDateTooOld } from '@/utils/isTodoOld'
-import {
-  CalendarView,
-  CalendarViewHeader,
-} from '@borodutch/vue-simple-calendar'
+import { CalendarView, CalendarViewHeader } from '@upacyxou/vue-simple-calendar'
 import moment, { LocaleSpecification, Moment } from 'moment'
 import { debounce } from 'lodash'
 import { v4 as uuid } from 'uuid'
@@ -911,107 +916,236 @@ export default class TodoList extends Vue {
 </script>
 
 <style>
+.cv-header-nav {
+  display: flex;
+  justify-content: center;
+}
+
+.previousYear {
+  cursor: pointer;
+  margin-right: 6px;
+  margin-left: 6px;
+}
+.previousPeriod {
+  cursor: pointer;
+  margin-right: 6px;
+  margin-left: 6px;
+}
+.nextYear {
+  cursor: pointer;
+  margin-right: 6px;
+  margin-left: 6px;
+}
+.nextPeriod {
+  cursor: pointer;
+  margin-right: 6px;
+  margin-left: 6px;
+}
+
+.past {
+  background-color: rgba(51, 102, 255, 0.06);
+}
+
+.cv-header {
+  border: none;
+}
+
+.cv-header-days {
+  border: none;
+}
+
+.cv-weeks {
+  border: none;
+}
+
+.currentPeriod {
+  border: none !important;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px !important;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: -0.24px;
+  text-transform: capitalize;
+}
+
+.light .currentPeriod {
+  color: #000000;
+  opacity: 0.9;
+}
+
+.dark .currentPeriod {
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.cv-day {
+  border: none;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px !important;
+  line-height: 20px !important;
+  letter-spacing: -0.24px !important;
+}
+
+.dark .cv-day {
+  color: #ffffff;
+  opacity: 0.6;
+  border: 1px solid #202021;
+}
+
+.light .cv-day {
+  color: #000000;
+  opacity: 0.6;
+  border: 1px solid #dde2e5;
+}
+
+.cv-header-nav {
+  position: absolute;
+  left: 34%;
+  z-index: 10;
+}
+
+.nextPeriod {
+  border: none !important;
+  color: #b6babf;
+}
+
+.previousPeriod {
+  border: none !important;
+  color: #b6babf;
+}
+
+.previousYear {
+  border: none !important;
+  color: #b6babf;
+}
+
+.nextYear {
+  border: none !important;
+  color: #b6babf;
+}
+
+.periodLabel {
+  text-transform: capitalize;
+  font-family: Montserrat !important;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px !important;
+  line-height: 20px;
+  letter-spacing: -0.24px;
+}
+
+.dark .periodLabel {
+  color: #ffffff;
+
+  opacity: 0.4;
+}
+
+.light .periodLabel {
+  color: #000000;
+  opacity: 0.7;
+}
+
+.light .outsideOfMonth {
+  background-color: rgba(255, 95, 19, 0.08);
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.dark .outsideOfMonth {
+  background-color: rgba(27, 27, 28, 1);
+}
+
+div[class^='cv-wrapper'][class$='light'] {
+  border: 1px solid #dde2e5;
+  border-radius: 12px;
+}
+
+div[class^='cv-wrapper'][class$='dark'] {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+}
+
+.cv-header-day {
+  padding: 20px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px !important;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: -0.24px;
+  text-transform: uppercase;
+}
+
+.dark .cv-header-day {
+  border: 1px solid #202021;
+}
+
+.light .cv-header-day {
+  color: #000000;
+  opacity: 0.4;
+}
+
+.dark .cv-header-day {
+  color: #ffffff;
+  opacity: 0.4;
+}
+
+.cv-day-number {
+  margin-top: 8px;
+  margin-left: 8px;
+}
+
+.today {
+  font-weight: 600;
+  opacity: 1 !important;
+}
+
+.dark .today {
+  color: #ffffff !important;
+  background-color: rgba(255, 95, 19, 0.1);
+}
+
+.light .today {
+  color: #3366ff !important;
+}
+
+.cv-item {
+  border-radius: 4px;
+  border: none;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px !important;
+  line-height: 20px;
+  /* identical to box height, or 143% */
+  letter-spacing: -0.24px;
+  margin-top: 4px;
+  padding: 2px;
+  color: #ffffff;
+  margin-top: 16px;
+}
+
+.light .cv-item {
+  background-color: #3366ff;
+}
+
+.dark .cv-item {
+  background-color: #2a53ce;
+}
+
 .no-margin-no-padding,
 .v-expansion-panel-content__wrap {
   margin: 0px !important;
   padding: 0px !important;
 }
 
-/*
-  List view
-*/
-
 .handle {
   cursor: move;
 }
-
-/* 
-  Calendar view
-*/
-
-/* Colors */
-
-.light .cv-header,
-.light .cv-header-day {
-  background-color: #fff;
-}
-
-.dark .cv-header,
-.dark .cv-header-day {
-  background-color: #424242;
-}
-
-.light .cv-header button {
-  color: rgba(0, 0, 0, 0.54);
-  border-width: 0;
-}
-.dark .cv-header button {
-  color: hsla(0, 0%, 100%, 0.6);
-}
-
-.light .cv-day.past {
-  background-color: #fafafa;
-}
-.light .cv-day.outsideOfMonth {
-  background-color: #f7f7f7;
-}
-.light .cv-day.today {
-  background-color: #ffe;
-}
-.dark .cv-day.past {
-  background-color: #636363;
-}
-.dark .cv-day.outsideOfMonth {
-  background-color: #2b2b2b;
-}
-.dark .cv-day.today {
-  background-color: #61553c;
-}
-
-.light .cv-item {
-  border-color: #e0e0f0;
-  background-color: #e7e7ff;
-}
-
-.dark .cv-item {
-  background-color: #7d7d88;
-}
-
-.dark .cv-day.draghover {
-  box-shadow: inset 0 0 0.2em 0.2em white;
-}
-.light .cv-day.draghover {
-  box-shadow: inset 0 0 0.2em 0.2em rgb(190, 190, 190);
-}
-
-/* Funcionality */
-
-.cv-day {
-  display: flex;
-}
-
-.cv-header button {
-  border-width: 0 !important;
-}
-
-.cv-item {
-  border-radius: 0.5em;
-  text-overflow: ellipsis;
-  border-width: 0;
-}
-
-.non-editable .cv-item {
-  cursor: pointer;
-}
-
-.editable .cv-item {
-  cursor: move;
-}
-
-.spreadable .cv-day {
-  cursor: pointer;
-}
-
 #confetti-canvas {
   z-index: 1000 !important;
 }
