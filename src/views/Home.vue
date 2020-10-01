@@ -117,7 +117,7 @@
             .xplatform-card(@click='open("https://snapcraft.io/todorant")')
               .platform-image-box
                 v-img(
-                  src='/img/platforms/snapcraft.svg',
+                  :src='dark ? "/img/platforms/snapcraft-white.svg" : "/img/platforms/snapcraft.svg"',
                   max-width='34px',
                   max-height='34px'
                 )
