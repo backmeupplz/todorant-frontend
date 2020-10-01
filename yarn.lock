@@ -666,6 +666,14 @@
   dependencies:
     eslint-visitor-keys "^1.1.0"
 
+"@upacyxou/vue-simple-calendar@^4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@upacyxou/vue-simple-calendar/-/vue-simple-calendar-4.4.1.tgz#126e07bdd84b310f768d3810eb7f71b4c4d2c758"
+  integrity sha512-4SfkHdA7Ue7v+taQIWQyrWFhyb6aRSPlsjgqSw1UYA19w8wciZzcBJnB0459p8MNxmpnykt7Su/7uoB7phkX1g==
+  dependencies:
+    core-js "^3.6.5"
+    vue "^2.6.11"
+
 "@vue/cli-overlay@^4.0.5":
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/@vue/cli-overlay/-/cli-overlay-4.0.5.tgz#9fa5936a2e26f94b0d737b475c6d62e1c5813aaa"
@@ -9307,11 +9315,6 @@ vue-cookie-law@^1.13.3:
   integrity sha512-n5ef5/dAB4cyUz6OaolYZEeyfV/fcsVU/RCTT/aHXcyjNbXf7EU2TgaOlMwu+cTOjdn5tBJKyKP6lr6IOUf9bg==
   dependencies:
     tiny-cookie "^2.1.1"
-
-vue-facebook-signin-button@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/vue-facebook-signin-button/-/vue-facebook-signin-button-1.0.1.tgz#c6aadb160821846f2d7767fb8e691e0b9e682028"
-  integrity sha1-xqrbFgghhG8td2f7jmkeC55oICg=
 
 vue-flag-icon@^1.0.6:
   version "1.0.6"
