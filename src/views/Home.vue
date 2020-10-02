@@ -33,7 +33,7 @@
           .youtube-container
             iframe.youtube-video(
               v-if='language && language === "ru"',
-              src='https://www.youtube-nocookie.com/embed/EacxJhvRYXE',
+              src='https://www.youtube-nocookie.com/embed/heR0rlllTVg',
               frameborder='0',
               allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture',
               allowfullscreen=''

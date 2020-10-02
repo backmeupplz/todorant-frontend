@@ -18,7 +18,7 @@ v-dialog(v-model='dialog', scrollable, max-width='600px', persistent)
       iframe(
         v-else-if='$store.state.AppStore.language === "ru"',
         style='width: 100%; min-height: 300px',
-        src='https://www.youtube-nocookie.com/embed/EacxJhvRYXE',
+        src='https://www.youtube-nocookie.com/embed/heR0rlllTVg',
         frameborder='0',
         allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture',
         allowfullscreen=''
