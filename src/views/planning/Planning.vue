@@ -956,7 +956,8 @@ export default class TodoList extends Vue {
 }
 
 .cv-weeks {
-  border: none;
+  border: none !important;
+  border-style: none !important;
 }
 
 .currentPeriod {
