@@ -947,7 +947,8 @@ export default class TodoList extends Vue {
 }
 
 .cv-header {
-  border: none;
+  border: none !important;
+  border-style: none !important;
 }
 
 .cv-header-days {
@@ -1115,7 +1116,8 @@ div[class^='cv-wrapper'][class$='dark'] {
 
 .cv-item {
   border-radius: 4px;
-  border: none;
+  border: none !important;
+  border-style: none !important;
   font-family: Montserrat;
   font-style: normal;
   font-weight: 500;
