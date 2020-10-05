@@ -606,7 +606,7 @@ export default class TodoList extends Vue {
       } else {
         await api.completeTodo(user, todo)
         if (todo.frog) {
-          await playSound(Sounds.frogDone)
+          await playSound(Sounds.levelUp)
         } else {
           await playSound(Sounds.taskDone)
         }

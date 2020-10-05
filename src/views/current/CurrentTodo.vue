@@ -173,7 +173,7 @@ export default class CurrentTodo extends Vue {
     try {
       await api.completeTodo(user, this.todo)
       if (this.todo.frog) {
-        await playSound(Sounds.frogDone)
+        await playSound(Sounds.levelUp)
       } else {
         await playSound(Sounds.taskDone)
       }

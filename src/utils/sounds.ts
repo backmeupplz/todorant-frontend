@@ -1,8 +1,11 @@
 import store from '@/store'
 
-export async function playSound(audioName: string) {
+export async function playSound(audioName: Sounds) {
   if (!store.state.SettingsStore.audioEnabled) {
     return
+  }
+  if (audioName === Sounds.levelUp && Math.floor(Math.random() * 10) === 0) {
+    audioName = Sounds.nice
   }
   const audioFile = new Audio(audioName)
   audioFile.volume = 0.3
@@ -11,5 +14,6 @@ export async function playSound(audioName: string) {
 
 export enum Sounds {
   taskDone = 'audio/task_done.mp3',
-  frogDone = 'audio/splat.mp3',
+  levelUp = 'audio/level_up.mp3',
+  nice = 'audio/nice.mp3',
 }
