@@ -1164,4 +1164,11 @@ div[class^='cv-wrapper'][class$='dark'] {
 .spreadable .cv-day {
   cursor: pointer;
 }
+
+.dark .cv-day.draghover {
+  box-shadow: inset 0 0 0.2em 0.2em white;
+}
+.light .cv-day.draghover {
+  box-shadow: inset 0 0 0.2em 0.2em rgb(190, 190, 190);
+}
 </style>
