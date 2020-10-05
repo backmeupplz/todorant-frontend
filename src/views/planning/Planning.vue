@@ -1149,4 +1149,15 @@ div[class^='cv-wrapper'][class$='dark'] {
 #confetti-canvas {
   z-index: 1000 !important;
 }
+.non-editable .cv-item {
+  cursor: pointer;
+}
+
+.editable .cv-item {
+  cursor: move;
+}
+
+.spreadable .cv-day {
+  cursor: pointer;
+}
 </style>
