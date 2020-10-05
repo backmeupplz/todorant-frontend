@@ -49,7 +49,7 @@
       v-slot:left='{ item }',
       v-if='type === "planning" || type === "current"'
     )
-      .d-flex.justify-center.align-center.ml-2
+      .d-flex.justify-center.align-center.mr-2
         IconButton(
           :click='completeTodo',
           :loading='loading',
