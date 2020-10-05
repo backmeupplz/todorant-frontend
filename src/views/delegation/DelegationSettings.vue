@@ -102,7 +102,10 @@ export default class DelegateSettings extends Vue {
     try {
       await this.resetDelegateToken()
     } catch (err) {
-      console.error(err)
+      // Don's show request abort
+      if (err.message.includes('aborted')) {
+        return
+      }
       this.setSnackbarError('errors.loadTodos')
     } finally {
       this.loading = false

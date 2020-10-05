@@ -151,7 +151,10 @@ export default class CurrentTodo extends Vue {
       this.incompleteTodosCount = fetched.incompleteTodosCount
       this.todosCount = fetched.todosCount
     } catch (err) {
-      console.error(err)
+      // Don's show request abort
+      if (err.message.includes('aborted')) {
+        return
+      }
       this.setSnackbarError('errors.loadTodos')
     } finally {
       this.todoUpdating = false

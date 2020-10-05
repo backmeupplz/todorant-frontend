@@ -92,7 +92,10 @@ export default class Delegation extends Vue {
       sockets.delegateSyncManager.sync()
       await this.getUnacceptedTodos()
     } catch (err) {
-      console.error(err)
+      // Don's show request abort
+      if (err.message.includes('aborted')) {
+        return
+      }
       this.setSnackbarError('errors.loadTodos')
     } finally {
       this.loading = false
@@ -112,7 +115,10 @@ export default class Delegation extends Vue {
       await api.deleteTodo(todo)
       await this.getUnacceptedTodos()
     } catch (err) {
-      console.error(err)
+      // Don's show request abort
+      if (err.message.includes('aborted')) {
+        return
+      }
       this.setSnackbarError('errors.loadTodos')
     } finally {
       this.loading = false
@@ -128,7 +134,10 @@ export default class Delegation extends Vue {
       await api.acceptDelegateTodo(todo)
       await this.getUnacceptedTodos()
     } catch (err) {
-      console.error(err)
+      // Don's show request abort
+      if (err.message.includes('aborted')) {
+        return
+      }
       this.setSnackbarError('errors.loadTodos')
     } finally {
       this.loading = false

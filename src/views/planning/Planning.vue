@@ -524,6 +524,10 @@ export default class TodoList extends Vue {
         this.todos.reverse()
       }
     } catch (err) {
+      // Don's show request abort
+      if (err.message.includes('aborted')) {
+        return
+      }
       this.setSnackbarError('errors.loadTodos')
     } finally {
       if (this.loadingUUID === currentLoadingUUID) {
