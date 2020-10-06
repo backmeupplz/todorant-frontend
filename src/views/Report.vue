@@ -235,6 +235,9 @@ export default class Report extends Vue {
         {
           ticks: {
             beginAtZero: true,
+            stepSize: 1,
+            min: 0,
+            precision: 0,
           },
         },
       ],

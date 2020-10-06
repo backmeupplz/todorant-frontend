@@ -6,7 +6,7 @@ Report(external)
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { logEvent } from '@/utils/logEvent'
-import Report from '@/components/Report.vue'
+import Report from '@/views/Report.vue'
 
 @Component({
   components: { Report },
