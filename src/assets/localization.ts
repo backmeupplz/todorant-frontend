@@ -261,6 +261,7 @@ export const messages = {
       startTimeOfDay: 'Start of the day',
       username: 'Name',
       telegram: 'Telegram',
+      swipeActions: 'Swipe actions',
     },
     allDoneTitle: 'Congratulations!',
     allDoneText:
@@ -448,6 +449,7 @@ export const messages = {
       epicGoal: 'Epic goal',
     },
     success: 'Success!',
+    notLogginedBody: 'Please, login at ',
   },
   ru: {
     encryption: {
@@ -701,6 +703,7 @@ export const messages = {
       startTimeOfDay: 'Начало дня',
       username: 'Имя',
       telegram: 'Телеграм',
+      swipeActions: 'Действия свайпами',
     },
     allDoneTitle: 'Поздравляем!',
     allDoneText:
@@ -892,6 +895,7 @@ export const messages = {
       epicGoal: 'Цель эпика',
     },
     success: 'Успех!',
+    notLogginedBody: 'Пожалуйста, войдите в аккаунт на ',
   },
   ua: {
     encryption: {

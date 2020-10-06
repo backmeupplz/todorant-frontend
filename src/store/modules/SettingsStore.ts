@@ -14,6 +14,7 @@ export default class SettingsStore extends VuexModule {
 
   audioEnabled = true
   hotKeysEnabled = true
+  swipeActionsEnabled = false
 
   @Mutation
   setSettingsStore(settingsStore: SettingsStore) {
@@ -40,6 +41,11 @@ export default class SettingsStore extends VuexModule {
   @Mutation
   setHotKeysEnabled(hotsetHotKeysEnabled: boolean) {
     this.hotKeysEnabled = hotsetHotKeysEnabled
+  }
+
+  @Mutation
+  setSwipeActionsEnabled(swipeActionsEnabled: boolean) {
+    this.swipeActionsEnabled = swipeActionsEnabled
   }
 
   @Mutation

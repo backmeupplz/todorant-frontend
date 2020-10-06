@@ -27,6 +27,7 @@ v-dialog(
       )
       v-switch.ma-0.pa-0(:label='$t("soundEffects")', v-model='soundEffects')
       v-switch.ma-0.pa-0(:label='$t("settings.hotkeys")', v-model='hotKeys')
+      v-switch.ma-0.pa-0(:label='$t("settings.swipeActions")', v-model='swipeActions')
       v-divider
       v-select.mt-4(
         :items='weekdays',
@@ -201,6 +202,7 @@ export default class Settings extends Vue {
   @SettingsStore.State duplicateTagInBreakdown?: boolean
   @SettingsStore.State audioEnabled!: boolean
   @SettingsStore.State hotKeysEnabled!: boolean
+  @SettingsStore.State swipeActionsEnabled!: boolean
   @SettingsStore.State googleCalendarCredentials!: GoogleCalendarCredentials
   @SettingsStore.Mutation setShowTodayOnAddTodo!: (
     hotsetHotKeysEnabled: boolean
@@ -218,6 +220,9 @@ export default class Settings extends Vue {
   ) => void
   @SettingsStore.Mutation setAudioEnabled!: (audioEnabled: boolean) => void
   @SettingsStore.Mutation setHotKeysEnabled!: (hotKeysEnabled: boolean) => void
+  @SettingsStore.Mutation setSwipeActionsEnabled!: (
+    swipeActionsEnabled: boolean
+  ) => void
 
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @SnackbarStore.Mutation setSnackbarSuccess!: (message: string) => void
@@ -303,6 +308,12 @@ export default class Settings extends Vue {
   }
   set hotKeys(val: boolean) {
     this.setHotKeysEnabled(val)
+  }
+  get swipeActions() {
+    return this.swipeActionsEnabled
+  }
+  set swipeActions(val: boolean) {
+    this.setSwipeActionsEnabled(val)
   }
 
   checkUserName(name: any) {

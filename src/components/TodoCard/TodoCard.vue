@@ -47,7 +47,7 @@
           )
     template(
       v-slot:left='{ item }',
-      v-if='type === "planning" || type === "current"'
+      v-if='(type === "planning" || type === "current") && swipeActionsEnabled'
     )
       .d-flex.justify-center.align-center.mr-2
         IconButton(
@@ -58,7 +58,7 @@
         )
     template(
       v-slot:right='{ item }',
-      v-if='type === "planning" || type === "current"'
+      v-if='(type === "planning" || type === "current") && swipeActionsEnabled'
     )
       .d-flex.justify-center.align-center
         IconButton(
@@ -89,6 +89,7 @@ import { SwipeOut } from 'vue-swipe-actions'
 import 'vue-swipe-actions/dist/vue-swipe-actions.css'
 
 const AppStore = namespace('AppStore')
+const SettingsStore = namespace('SettingsStore')
 
 @Component({
   components: {
@@ -102,6 +103,7 @@ const AppStore = namespace('AppStore')
 })
 export default class TodoCard extends Vue {
   @AppStore.State dark!: boolean
+  @SettingsStore.State swipeActionsEnabled!: boolean
 
   @Prop({ required: true }) deleteTodo!: () => void
   @Prop({ required: true }) addTodo!: (hotkey?: boolean) => void
@@ -141,7 +143,11 @@ export default class TodoCard extends Vue {
   }
 
   swipeRightHandler() {
-    if (this.type !== 'planning' && this.type !== 'current') {
+    if (
+      this.type !== 'planning' &&
+      this.type !== 'current' &&
+      !this.swipeActionsEnabled
+    ) {
       return
     }
     this.deleteTodo()
@@ -149,7 +155,11 @@ export default class TodoCard extends Vue {
   }
 
   swipeLeftHandler() {
-    if (this.type !== 'planning' && this.type !== 'current') {
+    if (
+      this.type !== 'planning' &&
+      this.type !== 'current' &&
+      !this.swipeActionsEnabled
+    ) {
       return
     }
     this.completeTodo()
