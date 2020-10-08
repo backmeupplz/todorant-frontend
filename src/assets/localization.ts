@@ -450,6 +450,8 @@ export const messages = {
     },
     success: 'Success!',
     notLogginedBody: 'Please, login at ',
+    cannotLoadTitle: 'Uh oh!',
+    cannotLoadText: 'Could not load your todos, maybe the Internet is down?',
   },
   ru: {
     encryption: {
@@ -896,6 +898,9 @@ export const messages = {
     },
     success: 'Успех!',
     notLogginedBody: 'Пожалуйста, войдите в аккаунт на ',
+    cannotLoadTitle: 'Ай-я-яй!',
+    cannotLoadText:
+      'Не получилось загрузить задачи, может, что-то с Интернетом?',
   },
   ua: {
     encryption: {
