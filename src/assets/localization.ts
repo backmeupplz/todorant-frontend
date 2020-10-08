@@ -452,6 +452,8 @@ export const messages = {
     notLogginedBody: 'Please, login at ',
     cannotLoadTitle: 'Uh oh!',
     cannotLoadText: 'Could not load your todos, maybe the Internet is down?',
+    deleteAllHashtagsConfirm: 'Are you sure you want to delete all hashtags?',
+    deleteAll: 'Delete all',
   },
   ru: {
     encryption: {
@@ -901,6 +903,8 @@ export const messages = {
     cannotLoadTitle: 'Ай-я-яй!',
     cannotLoadText:
       'Не получилось загрузить задачи, может, что-то с Интернетом?',
+    deleteAllHashtagsConfirm: 'Уверены, что хотите удалить все хэштеги?',
+    deleteAll: 'Удалить все',
   },
   ua: {
     encryption: {

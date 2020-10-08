@@ -149,6 +149,13 @@ v-dialog(
           )
           v-spacer
     v-card-actions
+      v-btn(
+        v-if='tags && tags.length',
+        color='error',
+        text,
+        @click='deleteAllHashtags',
+        :loading='loading'
+      ) {{ $t("deleteAll") }}
       v-spacer
       v-btn(
         color='error',
@@ -310,5 +317,19 @@ export default class Hashtags extends Vue {
   ]
 
   loading = false
+
+  async deleteAllHashtags() {
+    if (!confirm(i18n.t('deleteAllHashtagsConfirm') as string)) {
+      return
+    }
+    this.loading = true
+    try {
+      await api.deleteAllTags()
+    } catch (err) {
+      this.setSnackbarError(err.response ? err.response.data : err.message)
+    } finally {
+      this.loading = false
+    }
+  }
 }
 </script>

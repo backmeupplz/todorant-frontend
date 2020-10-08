@@ -148,6 +148,16 @@ export async function editTag(
   )
 }
 
+export async function deleteAllTags() {
+  const user = store.state.UserStore.user
+  if (!user) {
+    throw new Error('No user')
+  }
+  return axios.delete(`${base}/tag/all`, {
+    headers: getHeaders(user),
+  })
+}
+
 export async function completeTodo(user: User, todo: Todo) {
   return axios.put(
     `${base}/todo/${todo._id}/done`,
