@@ -146,6 +146,7 @@ v-container(style='maxWidth: 1000px;')
           )
         v-expansion-panel-content.no-margin-no-padding
           draggable(
+            :forceFallback='true',
             v-model='todoSection.todos',
             group='todo',
             @start='drag = true',
