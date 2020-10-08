@@ -110,6 +110,8 @@ import { namespace } from 'vuex-class'
 import { SubscriptionStatus } from '@/models/SubscriptionStatus'
 import { User } from '@/models/User'
 import draggable from 'vuedraggable'
+import { has } from 'lodash'
+import { playSound, Sounds } from '@/utils/sounds'
 
 const SettingsStore = namespace('SettingsStore')
 const UserStore = namespace('UserStore')
@@ -276,10 +278,19 @@ export default class AddTodo extends Vue {
           return iTodo
         })
       )
+      const hasCompletedTodo =
+        !!this.todoToBreakdown ||
+        this.todos.reduce((p, c) => !!c.completed || p, false as boolean)
+      const hasFrog =
+        (!!this.todoToBreakdown && this.todoToBreakdown.frog) ||
+        this.todos.reduce((p, c) => !!c.frog || p, false as boolean)
       if (this.todoToBreakdown) {
         const tempTodo = this.todoToBreakdown
         this.todoToBreakdown = null
         await api.completeTodo(user, tempTodo)
+      }
+      if (hasCompletedTodo) {
+        playSound(hasFrog ? Sounds.levelUp : Sounds.taskDone)
       }
       this.dialog = false
       logEvent('add_todo_success')

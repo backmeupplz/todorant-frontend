@@ -54,6 +54,7 @@ import * as api from '@/utils/api'
 import { serverBus } from '@/main'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
+import { playSound, Sounds } from '@/utils/sounds'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -113,6 +114,9 @@ export default class EditTodo extends Vue {
       }
       await api.editTodo(user, (this as any).todo)
       ;(this as any).cleanTodo()
+      if ((this as any).todo.completed) {
+        playSound((this as any).todo.frog ? Sounds.levelUp : Sounds.taskDone)
+      }
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
