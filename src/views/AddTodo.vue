@@ -40,7 +40,7 @@ div
             v-expansion-panels(multiple, v-model='panel')
               v-flex
                 draggable(
-                  :forceFallback='true',
+                  :forceFallback='shouldFallbackDraggable',
                   v-model='todos',
                   handle='.handle'
                 )
@@ -144,6 +144,10 @@ export default class AddTodo extends Vue {
   date = ''
 
   todoToBreakdown: null | Todo = null
+
+  get shouldFallbackDraggable() {
+    return navigator.userAgent.toLowerCase().indexOf('safari') > -1
+  }
 
   created() {
     serverBus.$on(
