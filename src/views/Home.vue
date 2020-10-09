@@ -90,7 +90,9 @@
                   max-height='24px'
                 )
               p.xplatform-text Android
-            .xplatform-card(@click='open("/apps/todorant-mac-1.0.0.dmg")')
+            .xplatform-card(
+              @click='open("https://drive.google.com/uc?export=download&id=1wuRkPGzrnkKBeMiricZOaZ7s8voOdj7q")'
+            )
               .platform-image-box
                 v-img(
                   src='/img/platforms/macos.svg',
@@ -98,7 +100,9 @@
                   max-height='34px'
                 )
               p.xplatform-text macOS
-            .xplatform-card(@click='open("/apps/todorant-win-1.0.0.exe")')
+            .xplatform-card(
+              @click='open("https://drive.google.com/uc?export=download&id=1BlLXtet9g3G-MmlwTgY7T9iSOYfgLy1O")'
+            )
               .platform-image-box
                 v-img(
                   src='/img/platforms/windows.svg',
@@ -106,7 +110,9 @@
                   max-height='34px'
                 )
               p.xplatform-text Windows
-            .xplatform-card(@click='open("/apps/todorant-linux-64-1.0.0.deb")')
+            .xplatform-card(
+              @click='open("https://drive.google.com/uc?export=download&id=1HuOa_Le9AWvDzbhvTQzAR2v6HZteyExH")'
+            )
               .platform-image-box
                 v-img(
                   src='/img/platforms/linux.svg',
