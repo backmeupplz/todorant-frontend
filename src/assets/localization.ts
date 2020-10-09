@@ -454,6 +454,7 @@ export const messages = {
     cannotLoadText: 'Could not load your todos, maybe the Internet is down?',
     deleteAllHashtagsConfirm: 'Are you sure you want to delete all hashtags?',
     deleteAll: 'Delete all',
+    apps: 'Apps',
   },
   ru: {
     encryption: {
@@ -905,6 +906,7 @@ export const messages = {
       'Не получилось загрузить задачи, может, что-то с Интернетом?',
     deleteAllHashtagsConfirm: 'Уверены, что хотите удалить все хэштеги?',
     deleteAll: 'Удалить все',
+    apps: 'Приложения',
   },
   ua: {
     encryption: {
