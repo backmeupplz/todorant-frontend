@@ -82,6 +82,9 @@ export default class Superpower extends Vue {
     if (this.$router.currentRoute.hash) {
       this.currentTab = 1
     }
+    serverBus.$on('changeCurrentTab', (newTab: number) => {
+      this.currentTab = newTab
+    })
   }
 
   @Watch('currentTab')
