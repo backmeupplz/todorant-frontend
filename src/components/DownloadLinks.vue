@@ -97,6 +97,7 @@
 </template>
 
 <script lang="ts">
+import { logEvent } from '@/utils/logEvent'
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Prop } from 'vue-property-decorator'
