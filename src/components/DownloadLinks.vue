@@ -109,6 +109,11 @@ export default class DownloadLinks extends Vue {
   @Prop({ required: true, default: true }) showsWeb!: boolean
 
   @AppStore.State dark!: boolean
+
+  open(link: string) {
+    logEvent('open_link', { link })
+    window.open(link, '_blank')
+  }
 }
 </script>
 
