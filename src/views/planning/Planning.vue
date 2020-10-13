@@ -56,7 +56,7 @@ v-container(style='maxWidth: 1000px;')
             v-icon(v-on='on', color='#3366FF') call_split
         span {{ $t("spread.hint") }}
       IconButton(
-        name='$breakdown',
+        name='$rearrange',
         v-if='!editable && !showCompleted && !spreadEnabled',
         :loading='todosUpdating',
         :click='() => (editable = true)'

@@ -16,6 +16,7 @@ import RepeatIcon from '@/icons/RepeatIcon.vue'
 import DragIcon from '@/icons/DragIcon.vue'
 import CalendarIcon from '@/icons/CalendarIcon.vue'
 import SearchIcon from '@/icons/SearchIcon.vue'
+import RearrangeIcon from '@/icons/RearrangeIcon.vue'
 
 Vue.use(Vuetify)
 
@@ -34,6 +35,7 @@ const icons = {
   drag: DragIcon,
   calendar: CalendarIcon,
   search: SearchIcon,
+  rearrange: RearrangeIcon,
 } as { [index: string]: VueConstructor<Vue> }
 const iconsValues = Object.keys(icons).reduce((p, c) => {
   p[c] = {
