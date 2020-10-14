@@ -58,7 +58,8 @@ div
                         :enterPressed='save',
                         :escapePressed='escapePressed',
                         :addTodo='addTodo',
-                        ref='todoForm'
+                        ref='todoForm',
+                        :shouldAutofocus='dialog'
                       )
                         v-btn(
                           v-if='todos.length > 1',
@@ -194,11 +195,6 @@ export default class AddTodo extends Vue {
     if (this.$refs.form) {
       ;(this.$refs.form as any).resetValidation()
     }
-    setTimeout(() => {
-      if (this.$refs.todoForm && (this.$refs.todoForm as any).length) {
-        ;(this.$refs.todoForm as any)[0].$refs.textInput.focus()
-      }
-    }, 500)
   }
 
   addTodo() {
@@ -249,6 +245,11 @@ export default class AddTodo extends Vue {
     const user = this.user
     if (!user) {
       return
+    }
+    if (this.$refs.todoForm && (this.$refs.todoForm as any).length) {
+      for (const ref of this.$refs.todoForm as any) {
+        ref.$refs.textInput.blur()
+      }
     }
     this.panel = []
     this.todos.forEach((todo, i) => {
@@ -307,7 +308,7 @@ export default class AddTodo extends Vue {
   }
 
   escapePressed() {
-    this.dialog = false
+    this.close()
   }
 
   textForTodo(todo: Todo) {
@@ -327,6 +328,12 @@ export default class AddTodo extends Vue {
   }
 
   close() {
+    if (this.$refs.todoForm && (this.$refs.todoForm as any).length) {
+      for (const ref of this.$refs.todoForm as any) {
+        ref.$refs.textInput.blur()
+      }
+    }
+    this.panel = []
     this.date = ''
     this.dialog = false
   }

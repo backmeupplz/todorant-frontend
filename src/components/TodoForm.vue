@@ -6,17 +6,15 @@
     :hint='$t("todo.create.textHint")',
     :rules='textRules',
     v-model='text',
-    autofocus,
     v-on:keydown='keyDown',
     v-on:keyup.esc='escape',
     ref='textInput',
     auto-grow,
     no-resize,
     rows='1',
-    @focus='focused = true',
-    @blur='focused = false',
     :class='filteredTags.length ? "pb-2" : "pb-4"',
-    :disabled='todo && todo.encrypted && (errorDecrypting(todo) || !$store.state.UserStore.password)'
+    :disabled='todo && todo.encrypted && (errorDecrypting(todo) || !$store.state.UserStore.password)',
+    :autofocus='shouldAutofocus'
   )
   .mb-4(v-if='filteredTags.length')
     v-btn(
@@ -142,6 +140,7 @@ export default class TodoForm extends Vue {
   @Prop({ required: true }) escapePressed!: () => void
   @Prop() addTodo?: () => void
   @Prop({ default: false }) editTodo!: boolean
+  @Prop({ default: true }) shouldAutofocus!: boolean
 
   @AppStore.State language?: string
   @AppStore.State dark!: boolean
@@ -154,8 +153,6 @@ export default class TodoForm extends Vue {
   monthMenu = false
   timeMenu = false
   moreShown = false
-
-  focused = false
 
   get locale() {
     return this.language === 'ua' ? 'uk' : this.language
