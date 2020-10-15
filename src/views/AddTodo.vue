@@ -246,11 +246,6 @@ export default class AddTodo extends Vue {
     if (!user) {
       return
     }
-    if (this.$refs.todoForm && (this.$refs.todoForm as any).length) {
-      for (const ref of this.$refs.todoForm as any) {
-        ref.$refs.textInput.blur()
-      }
-    }
     this.panel = []
     this.todos.forEach((todo, i) => {
       if (
@@ -297,6 +292,11 @@ export default class AddTodo extends Vue {
       if (hasCompletedTodo) {
         playSound(hasFrog ? Sounds.levelUp : Sounds.taskDone)
       }
+      if (this.$refs.todoForm && (this.$refs.todoForm as any).length) {
+        for (const ref of this.$refs.todoForm as any) {
+          ref.$refs.textInput.blur()
+        }
+      }
       this.dialog = false
       logEvent('add_todo_success')
     } catch (err) {
@@ -328,13 +328,13 @@ export default class AddTodo extends Vue {
   }
 
   close() {
+    this.panel = []
+    this.date = ''
     if (this.$refs.todoForm && (this.$refs.todoForm as any).length) {
       for (const ref of this.$refs.todoForm as any) {
         ref.$refs.textInput.blur()
       }
     }
-    this.panel = []
-    this.date = ''
     this.dialog = false
   }
 }
