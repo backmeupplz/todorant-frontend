@@ -32,15 +32,6 @@ v-dialog(
             :type='show ? "text" : "password"',
             @click:append='show = !show'
           )
-        //- v-row(no-gutters v-if='!dirty')
-        //-   v-btn.mr-2(color='red'
-        //-   @click='encryptAll'
-        //-   @shortkey='close'
-        //-   :loading='loading') {{$t('encryption.encryptAllButton')}}
-        //-   v-btn(color='red'
-        //-   @click='decryptAll'
-        //-   @shortkey='close'
-        //-   :loading='loading') {{$t('encryption.decryptAllButton')}}
     v-card-actions
       v-spacer
       v-btn(
@@ -48,7 +39,7 @@ v-dialog(
         text,
         @click='close',
         v-shortkey.once='["esc"]',
-        @shortkey='close',
+        @shortkey.native='close',
         :loading='loading'
       ) {{ $t("close") }}
       v-btn(
@@ -57,7 +48,7 @@ v-dialog(
         text,
         @click='save',
         v-shortkey.once='["esc"]',
-        @shortkey='save',
+        @shortkey.native='save',
         :loading='loading'
       ) {{ $t("save") }}
 </template>

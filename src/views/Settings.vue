@@ -132,14 +132,14 @@ v-dialog(
         text,
         @click='closeAndDropUserNameMenu',
         v-shortkey.once='["esc"]',
-        @shortkey='closeAndDropUserNameMenu',
+        @shortkey.native='closeAndDropUserNameMenu',
         :loading='loading'
       ) {{ $t("close") }}
       v-btn(
         color='blue',
         text,
         @click='save',
-        @shortkey='closeAndDropUserNameMenu',
+        @shortkey.native='closeAndDropUserNameMenu',
         :loading='loading'
       ) {{ $t("save") }}
     v-card-actions(v-else)
@@ -149,7 +149,7 @@ v-dialog(
         text,
         @click='closeAndDropUserNameMenu',
         v-shortkey.once='["esc"]',
-        @shortkey='closeAndDropUserNameMenu',
+        @shortkey.native='closeAndDropUserNameMenu',
         :loading='loading'
       ) {{ $t("close") }}
       v-btn(color='blue', text, @click='save', :loading='loading') {{ $t("save") }}

@@ -15,7 +15,7 @@ v-dialog(
         text,
         @click='close',
         v-shortkey.once='["esc"]',
-        @shortkey='close'
+        @shortkey.native='close'
       ) {{ $t("close") }}
 </template>
 

@@ -34,7 +34,7 @@ v-dialog(
         text,
         @click='close',
         v-shortkey.once='["esc"]',
-        @shortkey='close',
+        @shortkey.native='close',
         :loading='loading'
       ) {{ $t("close") }}
     v-card-actions(v-else)
@@ -51,7 +51,7 @@ v-dialog(
         text,
         @click='close',
         v-shortkey.once='["esc"]',
-        @shortkey='close',
+        @shortkey.native='close',
         :loading='loading'
       ) {{ $t("close") }}
 </template>

@@ -27,7 +27,7 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
           @click='cleanTodo(false)',
           :disabled='loading',
           v-shortkey.once='["esc"]',
-          @shortkey='escapePressed'
+          @shortkey.native='escapePressed'
         ) {{ $t("cancel") }}
         v-btn(
           color='blue',
@@ -35,7 +35,7 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
           @click='save',
           :loading='loading',
           v-shortkey.once='["shift", "enter"]',
-          @shortkey='save'
+          @shortkey.native='save'
         ) {{ $t("save") }}
   // Breakdown
   BreakdownRequest(

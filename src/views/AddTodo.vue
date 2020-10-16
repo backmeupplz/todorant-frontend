@@ -11,7 +11,7 @@ div
     color='blue',
     @click='openDialog()',
     v-shortkey.once='{ en: ["a"], ru: ["ф"] }',
-    @shortkey='openDialog(true)'
+    @shortkey.native='openDialog(true)'
   )
     v-icon $add
   v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
@@ -73,7 +73,7 @@ div
             text,
             @click='addTodo',
             v-shortkey.once='{ en: ["ctrl", "shift", "a"], ru: ["ctrl", "shift", "ф"] }',
-            @shortkey='addTodo'
+            @shortkey.native='addTodo'
           )
             v-icon add
           v-spacer
@@ -83,7 +83,7 @@ div
             @click='close',
             :disabled='loading',
             v-shortkey.once='["esc"]',
-            @shortkey='close'
+            @shortkey.native='close'
           ) {{ $t("cancel") }}
           v-btn(
             color='blue',
@@ -91,7 +91,7 @@ div
             @click='save',
             :loading='loading',
             v-shortkey.once='["enter"]',
-            @shortkey='save'
+            @shortkey.native='save'
           ) {{ $t("save") }}
 </template>
 

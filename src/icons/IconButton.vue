@@ -7,7 +7,7 @@ v-btn(
   :color='color || "#3366ff"',
   v-on='on',
   v-shortkey.once='shortkeys',
-  @shortkey='shortkey',
+  @shortkey.native='shortkey',
   :small='small'
 )
   v-icon(:size='small ? 20 : undefined', :style='{ fill: color || "#3366ff" }') {{ name }}
