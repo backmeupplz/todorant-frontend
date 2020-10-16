@@ -315,17 +315,8 @@ export const messages = {
     weekday0: 'Sunday',
     introTitle: 'Welcome!',
     introButton: 'Intro message',
-    intro1:
-      "Let's keep it short: you want to improve your productivity. Todorant can help you. But Todorant is not another task list — it is a system that needs to be followed, it is a lifestyle, it is a habit.",
-    intro2:
-      'Reading through the "How to use Todorant" section in the settings will help you to get the most out of Todorant, but it is not necessary. Todorant will help you by limiting your actions — it will train your brain to get satisfaction from completing the tasks.',
-    intro3:
-      'If you have questions about something on a screen, first tap the "i" button on the top right of the screen. Not sure what a button does? Tap "i"!',
-    intro4:
-      "Todorant is free for the first 30 days and then $5/month. The reason it may appear a bit pricy is that you are not paying for a yet another todo app, you are purchasing productivity — the whole system that doesn't make you sink in settings and functions, but makes you complete the tasks! After all, try Todorant for 30 days for free and upgrade if you get more than $5 of value from it.",
-    intro5:
-      'I welcome you to the productivity journey, let the new era of your life begin!',
     introBack: "Let's go!",
+    back: 'Back',
     soundEffects: 'Sound effects',
     emptyHashtags:
       'Hashtag list is empty for now. Create your first task with a #hashtag to add the first hashtag here!',
@@ -423,7 +414,7 @@ export const messages = {
     delegate: {
       title: 'Delegation',
       noDelegators:
-        "You don't have any delegators yet. Share the link above with the people who you want to make delegators",
+        "You don't have any delegators yet. Share the invite link with the people who you want to make delegators",
       noDelegates:
         "You don't have any delegates yet. Ask for an invite link to become someone's delegator.",
       noDelegatedTasks: "You don't have any more newly delegated tasks.",
@@ -455,6 +446,46 @@ export const messages = {
     deleteAllHashtagsConfirm: 'Are you sure you want to delete all hashtags?',
     deleteAll: 'Delete all',
     apps: 'Apps',
+    next: 'Next',
+    letsGo: "Let's go!",
+    introText0:
+      "Hi there! It's Nikita, the creator of Todorant. I'm so glad you've downloaded Todorant because it means that you too will soon benefit from unlimited productivity.",
+    introText1:
+      'Most of the people who end up here are like me: tried what feels like all productivity tools but none of them were just right.',
+    introText2:
+      'Let me show you how Todorant became the last and the only productivity tool for me and what will happen to you in the next 3-4 weeks. Just scroll or use the buttons on the bottom!',
+    introText3:
+      "First thing that will happen to you after you enter all of your tasks to Todorant will be that it will seem to others like you can remember everything. You won't need to do anything extra, the system will just work.",
+    introText4:
+      "This is why my wife loves the fact that I use Todorant. Before, I kept forgetting things and obligations that didn't seem important to me, but were important for my wife.",
+    introText5:
+      "Now every time I make a commitment or a promise, I add it to Todorant and when the time comes, I'm aware of what needs to be done and can plan accordingly.",
+    introText6:
+      'Second thing that will happen to you will be the ease of mind. You will stop stressing out about undone tasks and tasks you think you forgot about.',
+    introText7:
+      'You will always know what you need to be working on at any moment and will stay in the "Flow Zone" longer achieving goals and completing tasks.',
+    introText8:
+      "Even though I support over a dozen services used by more than 20 000 000 people, I never feel stressed anymore. I always have the current task in front of me and I'm always aware that if I make progress then I'll achieve the goal eventually.",
+    introText9:
+      'Third thing that will happen to you will be a super-human like planning power. You will be able to accurately estimate the length and the ETA of any task.',
+    introText10:
+      'Every time a colleague or a friend asks me when a particular thing will be done, I always check Todorant and see when the task is scheduled to be worked on. Most of the time, I can accurately give them estimates that are quite realistic.',
+    introText11:
+      'I personally never have to rush anything now. I never have to have "crunch time" anymore! I complete tasks at a comfortable pace and people around can trust me.',
+    introText12:
+      'Know that you are in a good company. Thousands of users trust their productivity to Todorant daily, myself included.',
+    introText13:
+      'If you ever have any questions about the app — just click on the "i" button in the top right. If you can\'t find an answer there, find my personal contacts under the "Support" section in the settings and shoot me a message!',
+    introText14:
+      'There is one more thing to note though! To fully control superpower, you need to learn how to use it. Make sure to read "How to use Todorant" in the settings!',
+    introText15:
+      'Good luck with Todorant! I hope it will transform your life to the better as it did mine!',
+    introText0web:
+      "Hi there! It's Nikita, the creator of Todorant. I'm so glad you've decided to try Todorant because it means that you too will soon benefit from unlimited productivity.",
+    introText2web:
+      'Let me show you how Todorant became the last and the only productivity tool for me and what will happen to you in the next 3-4 weeks. Just use the buttons on the bottom to advance!',
+    introText14web:
+      'There is one more thing to note though! To fully control superpower, you need to learn how to use it. Make sure to read "How to use Todorant" by tapping the info button in the top right corner!',
   },
   ru: {
     encryption: {
@@ -762,17 +793,8 @@ export const messages = {
     weekday0: 'Воскресенье',
     introTitle: 'Добро пожаловать!',
     introButton: 'Вступительное сообщение',
-    intro1:
-      'Буду краток: вы хотите улучшить вашу продуктивность. Тудурант поможет вам с этим. Но учтите, что Тудурант — это не очередной список задач — это система, которой нужно следовать, это стиль жизни, это привычка.',
-    intro2:
-      'Прочтение пункта "Как использовать Тудурант" в настройках может помочь, но это совсем необязательно. Тудурант поможет вам, ограничив ваши действия — он заставит ваш мозг получать удовольствие от завершения задач.',
-    intro3:
-      'Если у вас появятся какие-либо вопросы о функциях на каком-либо экране, сначала нажмите на кнопку "i" справа вверху. Не знаете, что делает какая-либо кнопка? Жмите "i"!',
-    intro4:
-      'Тудурант бесплатен первый месяц, а потом стоит примерно $5/месяц. Причина, по которой Тудурант может выглядеть дорогим — это то, что вы не покупаете очередной менеджер задач, а подписываетесь на систему, которая заставляет вас наконец-то эти задачи выполнять. Другие приложения закидывают вас функциями и настройками — Тудурант же заставляет вас наконец-то начать выполнять задачи и добиваться целей! В конце концов, попробуйте Тудурант первые 30 дней и оплатите подписку, если вы получите больше $5 пользы.',
-    intro5:
-      'Я приветствую вас на вашем пути продуктивности, да начнется же новая эра вашей жизни!',
     introBack: 'Поехали!',
+    back: 'Назад',
     soundEffects: 'Звуковые эффекты',
     emptyHashtags:
       'Список хештегов пока что пуст. Добавьте свою первую задачу с #хештегом, чтобы добавить сюда первую позицию!',
@@ -871,7 +893,7 @@ export const messages = {
     delegate: {
       title: 'Делегирование',
       noDelegators:
-        'У вас пока что нет людей, которые могут делегировать вам задачи. Передайте ссылку выше людям, которым доверяете — и они смогут делегировать вам задачи.',
+        'У вас пока что нет людей, которые могут делегировать вам задачи. Передайте ссылку-приглашение людям, которым доверяете — и они смогут делегировать вам задачи.',
       noDelegates:
         'У вас пока что нет людей, которым вы можете делегировать задачи. Получите ссылку-приглашение от человека, которому хотите начать делегировать задачи.',
       noDelegatedTasks:
@@ -907,6 +929,46 @@ export const messages = {
     deleteAllHashtagsConfirm: 'Уверены, что хотите удалить все хэштеги?',
     deleteAll: 'Удалить все',
     apps: 'Приложения',
+    next: 'Дальше',
+    letsGo: 'Поехали!',
+    introText0:
+      'Привет! Это Никита, создатель Тудуранта. Я так рад, что вы скачали Тудурант — ведь это означает, что и вы скоро разблокируете безграничную продуктивность!',
+    introText1:
+      'Большинство людей, которые оказываются здесь, похожи на меня: ощущение, как будто попробовали все существующие приложения продуктивности, но ни одно из них не сработало.',
+    introText2:
+      'Давайте я расскажу вам, почему Тудурант стал моим последним и единственным приложением продуктивности и как ваша жизнь изменится в следующие 3-4 недели. Просто прокручивайте страницу вправо или пользуйтесь кнопками ниже!',
+    introText3:
+      'Во-первых, со стороны будет все выглядеть так, как будто вы вообще ничего не забываете. Вам не нужно будет ничего дополнительно для этого делать, система просто будет работать.',
+    introText4:
+      'Это то, почему моей жене нравится, что я пользуюсь Тудурантом. Раньше, я часто забывал вещи, которые мне казались недостаточно важными, но были важными для моей жены.',
+    introText5:
+      'Теперь каждый раз, когда мы о чем-то договариваемся, я сразу добавляю это в Тудурант. А когда приходит время, я знаю точно, что нужно сделать — и планирую с умом.',
+    introText6:
+      'Во-вторых, вы полностью освободите свой мозг, перестанете стрессовать по поводу невыполненных задач и задач, о которых вы возможно забыли.',
+    introText7:
+      'Вы всегда будете знать, над чем работать прямо сейчас и будете дольше оставаться в "зоне продуктивности", выполняя задачи и достигая целей.',
+    introText8:
+      'Несмотря на то, что я поддерживаю десяток сервисов, которыми пользуется больше 20 000 000 людей, я больше никогда не стрессую. У меня всегда перед глазами текущая задача и я всегда осознаю, что если я добиваюсь прогресса, то в итоге я все обязательно приду к цели.',
+    introText9:
+      'В-третьих, вы заполучите супергеройскую силу точного планирования. Вы всегда сможете предсказать, сколько займет и когда будет выполнено то или иное задание.',
+    introText10:
+      'Каждый раз, когда коллега или друг меня спрашивает о какой-либо задаче, я просто смотрю в Тудурант и четко говорю, когда я этой задачей займусь. Чаще всего, я достаточно реалистично предсказываю, что и когда будет готово.',
+    introText11:
+      'У меня больше нет никаких авралов. Мне не приходится засиживаться после рабочих часов! Я заканчиваю задачи в комфортном темпе, а люди вокруг доверяют мне.',
+    introText12:
+      'Знайте, что вы в хорошей компании! Тысячи людей доверяют свою продуктивность Тудуранту, включая меня.',
+    introText13:
+      'Если у вас остались какие-либо вопросы про приложение — просто нажмите на кнопку "i" справа вверху. А если и там вы не найдете ответ, то просто зайдите в "Поддержку" в настройках, там мои личные контакты. Не стесняйтесь, пишите мне!',
+    introText14:
+      'Стоит отметить еще одну вещь! Чтобы использовать суперсилу по-полной, вам нужно научиться ее контролировать. Обязательно прочитайте "Как пользоваться Тудурантом" в настройках!',
+    introText15:
+      'Удачи с Тудурантом! Надеюсь, вашу жизнь он преобразит так же, как преобразил мою!',
+    introText0web:
+      'Привет! Это Никита, создатель Тудуранта. Я так рад, что вы решили попробовать Тудурант — ведь это означает, что и вы скоро разблокируете безграничную продуктивность!',
+    introText2web:
+      'Давайте я расскажу вам, почему Тудурант стал моим последним и единственным приложением продуктивности и как ваша жизнь изменится в следующие 3-4 недели. Просто пользуйтесь кнопками ниже, чтобы продвинуться дальше!',
+    introText14web:
+      'Стоит отметить еще одну вещь! Чтобы использовать суперсилу по-полной, вам нужно научиться ее контролировать. Обязательно прочитайте "Как пользоваться Тудурантом", нажав на кнопку справа вверху!',
   },
   ua: {
     encryption: {
@@ -1206,17 +1268,8 @@ export const messages = {
     weekday0: 'Неділя',
     introTitle: 'Ласкаво просимо!',
     introButton: 'Вступне повідомлення',
-    intro1:
-      'Най буде коротко: Ви хочете підвищити свою плідність. Todorant може вам допомогти. Але Todorant — це не інший список завдань — це система, якої потрібно дотримуватися, це спосіб життя, це звичка.',
-    intro2:
-      'Прочитавши розділ "Як користуватися Todorant" у налаштуваннях, Ви зможете щонайкраще користуватися Todorant, але це не обов\'язково. Todorant допоможе Вам, обмежуючи Ваші дії — він навчатиме ваш мозок отримувати задоволення від виконання завдань.',
-    intro3:
-      'Якщо у Вас є питання щодо чогось на екрані, спочатку торкніться кнопки "i" у верхньому правом кутку екрана. Не знаєте, що робить кнопка?',
-    intro4:
-      'Торкніться "i"! Тудурант безкоштовний перший місяць, а потім коштує приблизно $5/місяць. Причина, через яку Тудурант може виглядати дорогим — це те, що ви не купуєте черговий менеджер завдань, а підписуєтеся на систему, яка змушує вас нарешті ці завдання виконувати. Інші додатки закидають вас функціями та налаштуваннями — Тудурант натомість змушує вас нарешті почати виконувати завдання і досягати цілей! Зрештою, спробуйте Тудурант перші 30 днів та оплатіть підписку, якщо ви отримаєте більше $5 користі.',
-    intro5:
-      'Я вітаю вас на вашому шляху продуктивності, так почнеться ж нова ера вашому житті!',
     introBack: 'Ходімо!',
+    back: 'Назад',
     soundEffects: 'Звукові ефекти',
     emptyHashtags:
       'Список хештегів поки що порожній. Додайте свою першу задачу з #хештегом, щоб додати сюди першу позицію!',
@@ -1394,17 +1447,8 @@ export const messages = {
     weekday0: 'Domenica',
     introTitle: 'Benvenuto!',
     introButton: 'Messaggio di benvenuto',
-    intro1:
-      "Facciamola breve: volete migliorare la vostra produttività. Todorant può aiutarvi. Ma Todorant non è un'altra lista di compiti — è un sistema da seguire, è uno stile di vita, è un'abitudine.",
-    intro2:
-      'Leggere la sezione "Come usare Todorant" nelle impostazioni vi aiuterà ad ottenere il massimo dal Todorant, ma non è necessario. Todorant vi aiuterà a limitare le vostre azioni — allenerà il vostro cervello per ottenere soddisfazione dal completamento dei compiti.',
-    intro3:
-      'Se avete domande su qualcosa su una schermata, toccate prima il tasto "i" in alto a sinistra dello schermo. Non siete sicuri di cosa fa un pulsante? Toccate "i"!',
-    intro4:
-      "Todorant è gratuito per i primi 30 giorni, poi saranno 5 dollari al mese. Il motivo per cui può sembrare un po' caro è che non state pagando per un'altra app da fare, state acquistando la produttività — l'intero sistema che non vi fa sprofondare nelle impostazioni e nelle funzioni, ma vi fa completare i compiti! Dopo tutto, provate Todorant per 30 giorni gratuitamente e aggiornate se ottenete più di 5 dollari di valore dal suo utilizzo.",
-    intro5:
-      'Vi do il benvenuto nel viaggio della produttività, che la nuova era della vostra vita abbia inizio!',
     introBack: 'Andiamo!',
+    back: 'Indietro',
     soundEffects: 'Effetti sonori',
     emptyHashtags:
       "L'elenco degli hashtag è vuoto per ora. Create il vostro primo compito con un #hashtag per aggiungere il primo hashtag qui!",
@@ -1690,17 +1734,8 @@ export const messages = {
     weekday0: 'Domingo',
     introTitle: 'Bem vindo!',
     introButton: 'Mensagem de introdução',
-    intro1:
-      'Vamos resumir: você quer melhorar sua produtividade. Todorant pode ajudá-lo. Mas Todorant não é outra lista de tarefas — é um sistema que precisa ser seguido, é um estilo de vida, é um hábito.',
-    intro2:
-      'A leitura da seção "Como usar o Todorant" nas configurações ajudará você a tirar o máximo proveito do Todorant, mas isso não é necessário. Todorant o ajudará limitando suas ações — ele treinará seu cérebro para obter satisfação ao concluir as tarefas.',
-    intro3:
-      'Se você tiver dúvidas sobre algo na tela, toque primeiro no botão "i" no canto superior esquerdo da tela. Não sabe o que um botão faz? Toque em "i"!',
-    intro4:
-      'Todorant é gratuito nos primeiros 30 dias e depois custará US $5/mês. A razão pela qual isso pode parecer um pouco caro é que você não está pagando por outro aplicativo, está comprando produtividade — todo um sistema que não faz você afundar em configurações e funções, mas faz você concluir as tarefas! Então, experimente o Todorant por 30 dias gratuitamente e faça o upgrade se você receber mais de US$ 5 em benefícios.',
-    intro5:
-      'Sejam bem-vindos à jornada de produtividade. Que comece a nova era da sua vida!',
     introBack: 'Vamos lá!',
+    back: 'Voltar',
     soundEffects: 'Efeitos sonoros',
     emptyHashtags:
       'A lista de hashtags está vazia por enquanto. Crie sua primeira tarefa com uma #hashtag para adicionar a primeira hashtag aqui!',
@@ -2017,17 +2052,8 @@ export const messages = {
     weekday0: 'Domingo',
     introTitle: '¡Bienvenido!',
     introButton: 'Mensaje de introducción',
-    intro1:
-      'En pocas palabras: deseas mejorar tu productividad. Todorant puede ayudarte. Todorant no es otra lista de tareas más: es un sistema que debe seguirse, es un estilo de vida, es un hábito.',
-    intro2:
-      'Leer la sección "Cómo usar Todorant" en la configuración te ayudará a aprovechar al máximo Todorant, pero no es necesario. Todorant te ayudará al limitar tus acciones: entrenará tu cerebro para obtener satisfacción al completar las tareas.',
-    intro3:
-      'Si tienes dudas acerca de algo que ves en pantalla, primero haz clic en el botón "i" que se encuentra en la parte superior izquierda. ¿No estás seguro de qué hace un botón? ¡Presiona "i"!',
-    intro4:
-      'Todorant es gratis los primeros 30 días y después cuesta $5/mes. La razón por la que el precio puede parecer un poco elevado es que no estás pagando por una aplicación más de tareas, estás pagando productividad: el sistema completo que no te ahoga en funciones y configuraciones, ¡sino que te hace completar las tareas! Después de todo, prueba Todorant gratis por 30 días y actualiza si el valor que obtienes por usarlo supera los $5 de la suscripción.',
-    intro5:
-      'Te doy la bienvenida al viaje de la productividad, ¡que comience una nueva etapa en tu vida!',
     introBack: '¡Vamos!',
+    back: 'Atrás',
     emptyHashtags:
       'La lista de Hashtag está vacía por ahora. ¡Crea tu primera tarea con un #hashtag para añadir el primer hashtag aquí!',
     refreshRequest:
