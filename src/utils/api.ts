@@ -291,9 +291,13 @@ export enum Plan {
 }
 export async function getPlanSession(user: User, plan: Plan) {
   return (
-    await axios.get(`${base}/subscription/session/${plan}`, {
-      headers: getHeaders(user),
-    })
+    await axios.post(
+      `${base}/subscription/session/${plan}`,
+      { locale: getModule(AppStore, store).language },
+      {
+        headers: getHeaders(user),
+      }
+    )
   ).data as {
     session: string
   }
