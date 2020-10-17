@@ -22,6 +22,7 @@
   h2 7. Your Privacy
   p
     | Please read
+    | {{ " " }}
     a(href='https://todorant.com/privacy') our Privacy Policy
     | .
   h2 8. Governing Law
