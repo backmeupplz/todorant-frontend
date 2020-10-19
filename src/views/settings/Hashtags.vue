@@ -298,7 +298,7 @@ export default class Hashtags extends Vue {
     const goal = parseInt(this.epicGoal)
     this.epic = -1
     this.epicGoal = ''
-    if (!user) {
+    if (!user || goal <= 0) {
       return
     }
     this.loading = true
@@ -314,6 +314,7 @@ export default class Hashtags extends Vue {
 
   epicRules = [
     (v: any) => !!v.match(/^\d+$/) || i18n.t('errors.epic.numberError'),
+    (v: any) => +v > 0 || i18n.t('errors.epic.greaterThanZeroError'),
   ]
 
   loading = false

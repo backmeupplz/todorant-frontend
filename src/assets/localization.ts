@@ -181,6 +181,7 @@ export const messages = {
       },
       epic: {
         numberError: 'Should be a number',
+        greaterThanZeroError: 'Should be greater than 0',
       },
     },
     close: 'Close',
@@ -657,6 +658,7 @@ export const messages = {
       },
       epic: {
         numberError: 'Должно быть цифрой',
+        greaterThanZeroError: 'Должно быть больше 0',
       },
     },
     close: 'Закрыть',
