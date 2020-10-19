@@ -666,10 +666,10 @@
   dependencies:
     eslint-visitor-keys "^1.1.0"
 
-"@upacyxou/vue-simple-calendar@^5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@upacyxou/vue-simple-calendar/-/vue-simple-calendar-5.0.1.tgz#68a9fd6ba44f7f47198a9b09a4e39b93be641154"
-  integrity sha512-tHDiLIfvsZDkpnp1fUM27qjlLDsxrqPTsEckBNcIcSCk+e7VYNdG2F1IaKLLa9WeDGCzZMx3x4Lu4PIQ+KNgzg==
+"@upacyxou/vue-simple-calendar@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@upacyxou/vue-simple-calendar/-/vue-simple-calendar-5.0.2.tgz#fbc5815b70cd3ece4617e2cc43fb22861fc49a31"
+  integrity sha512-43fug5XxuDtb27WtnNZu0DVkHpWhMJ0SUAGRxBpgHZ9H9wqw5SuvwuCkCos9hInb27hWE8J95FKwgw7FZbVKVQ==
   dependencies:
     core-js "^3.6.5"
     vue "^2.6.12"
