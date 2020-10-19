@@ -115,6 +115,7 @@ import { setCookie, deleteCookie } from '../utils/cookie'
 const UserStore = namespace('UserStore')
 const AppStore = namespace('AppStore')
 const SnackbarStore = namespace('SnackbarStore')
+const SettingsStore = namespace('SettingsStore')
 
 @Component({
   components: {
@@ -142,6 +143,7 @@ export default class Navbar extends Vue {
   @AppStore.Mutation setLanguage!: (language: string) => void
   @UserStore.Mutation setUser!: (user?: User) => void
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
+  @SettingsStore.Mutation setHotKeysEnabled!: (hotKeysEnabled: boolean) => void
 
   rulesDialog = false
   welcomeDialog = false
@@ -249,9 +251,11 @@ export default class Navbar extends Vue {
     this.appsDialog = false
   }
   closeEncryptionDialog() {
+    this.setHotKeysEnabled(true)
     this.encryptionDialog = false
   }
   openEncryption() {
+    this.setHotKeysEnabled(false)
     this.encryptionDialog = true
   }
   async goHome() {
