@@ -22,7 +22,7 @@
     "@types/node": "^12.12.6",
     "@types/socket.io-client": "^1.4.32",
     "@types/uuid": "^7.0.2",
-    "@upacyxou/vue-simple-calendar": "^4.4.1",
+    "@upacyxou/vue-simple-calendar": "^5.0.1",
     "axios": "^0.19.0",
     "chart.js": "^2.9.3",
     "cnf-qrcode": "^1.0.13",
