@@ -144,6 +144,9 @@ export default class Navbar extends Vue {
   @UserStore.Mutation setUser!: (user?: User) => void
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @SettingsStore.Mutation setHotKeysEnabled!: (hotKeysEnabled: boolean) => void
+  @SettingsStore.State hotKeysEnabled!: boolean
+
+  hotkeysPreviousState = false
 
   rulesDialog = false
   welcomeDialog = false
@@ -251,10 +254,11 @@ export default class Navbar extends Vue {
     this.appsDialog = false
   }
   closeEncryptionDialog() {
-    this.setHotKeysEnabled(true)
+    this.setHotKeysEnabled(this.hotkeysPreviousState)
     this.encryptionDialog = false
   }
   openEncryption() {
+    this.hotkeysPreviousState = this.hotKeysEnabled
     this.setHotKeysEnabled(false)
     this.encryptionDialog = true
   }
