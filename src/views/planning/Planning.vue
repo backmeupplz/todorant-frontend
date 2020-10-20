@@ -300,6 +300,7 @@ export default class TodoList extends Vue {
             id: todo._id,
             title: this.text(todo),
             startDate: section.title,
+            order: todo.order,
           }))
       })
       .reduce((p, c) => p.concat(c), [])
