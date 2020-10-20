@@ -121,7 +121,8 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Todo } from '@/models/Todo'
 import { i18n } from '@/plugins/i18n'
-import moment from 'moment'
+// const moment = require('moment/src/moment')
+import dayjs from 'dayjs'
 import { Tag } from '@/models/Tag'
 import { decrypt, encrypt } from '@/utils/encryption'
 import { Watch, Prop } from 'vue-property-decorator'
@@ -260,7 +261,7 @@ export default class TodoForm extends Vue {
   }
 
   get todayFormatted() {
-    return moment(new Date()).format('YYYY-MM-DD')
+    return dayjs(new Date()).format('YYYY-MM-DD')
   }
 
   get todayFormattedForExactDate() {
@@ -270,17 +271,17 @@ export default class TodoForm extends Vue {
     newDay.setHours(parseInt(storeStartTimeOfDay.substr(0, 2)))
     newDay.setMinutes(parseInt(storeStartTimeOfDay.substr(3)))
     if (date < newDay) {
-      return moment(
+      return dayjs(
         new Date(new Date().setDate(new Date().getDate() - 1))
       ).format()
     }
-    return moment(new Date(new Date().setDate(new Date().getDate()))).format()
+    return dayjs(new Date(new Date().setDate(new Date().getDate()))).format()
   }
 
   get todayFormattedForDatePicker() {
     const date = new Date()
     date.setMonth(date.getMonth() + 1)
-    return moment(date).format()
+    return dayjs(date).format()
   }
 
   keyDown(evt: any) {

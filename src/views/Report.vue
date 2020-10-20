@@ -172,7 +172,7 @@ import TelegramButton from 'vue-share-buttons/src/components/TelegramButton'
 import ViberButton from 'vue-share-buttons/src/components/ViberButton'
 import VkontakteButton from 'vue-share-buttons/src/components/VkontakteButton'
 import WhatsAppButton from 'vue-share-buttons/src/components/WhatsAppButton'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import { Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
@@ -381,7 +381,7 @@ export default class Report extends Vue {
   }
 
   get todayFormatted() {
-    return moment(new Date()).format('YYYY-MM-DD')
+    return dayjs(new Date()).format('YYYY-MM-DD')
   }
 
   enterDown(evt: any) {
