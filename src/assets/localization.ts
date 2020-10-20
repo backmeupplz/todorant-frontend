@@ -38,7 +38,7 @@ export const messages = {
     loginMobile: {
       telegram: {
         headline:
-          'Please login with Telegram by entering your Telegram ID in a field below and hitting the "Login" button. You can get your Telegram ID by sending <code>/id</code> to the <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>. Or you can just send <code>/qr</code> to <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a> and scan it in the QR login section!',
+          'Please login with Telegram by entering your Telegram ID in a field below and hitting the "Login" button. You can get your Telegram ID by sending <code>/id</code> to the <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>. Or you can just send <code>/qr</code> to <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a> and scan it in the QR login section!',
         id: '123456789',
         idHint: 'Telegram ID',
         loginButton: 'Login',
@@ -46,7 +46,7 @@ export const messages = {
         cannotSendMessageError:
           'Could not send a login request to the user. Please make sure that you started @todorant_bot and that the Telegram ID is correct.',
         waiting:
-          'Waiting for the response in <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>...',
+          'Waiting for the response in <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>...',
         notAllowedError: 'Login request was rejected',
       },
     },
@@ -527,14 +527,14 @@ export const messages = {
     loginMobile: {
       telegram: {
         headline:
-          'Пожалуйста, зайдите через Телеграм, введя свой Телеграм ID в поле ниже и нажав "Войти". Вы можете узнать свой Телеграм ID, отправив <code>/id</code> в <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>. Или вы можете отправить команду <code>/qr</code> в <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a> и просканировать его в секции логина через QR код!',
+          'Пожалуйста, зайдите через Телеграм, введя свой Телеграм ID в поле ниже и нажав "Войти". Вы можете узнать свой Телеграм ID, отправив <code>/id</code> в <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>. Или вы можете отправить команду <code>/qr</code> в <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a> и просканировать его в секции логина через QR код!',
         idHint: 'Телеграм ID',
         loginButton: 'Войти',
         noCredentialsError: 'Пожалуйста, укажите Телеграм ID',
         cannotSendMessageError:
           'Не получилось отправить запрос на логин пользователю. Пожалуйста, убедитесь, что вы начали чат с @todorant_bot и что Телеграм ID правильный.',
         waiting:
-          'Ожидаем ответа в <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>...',
+          'Ожидаем ответа в <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>...',
         notAllowedError: 'Запрос на вход был отвергнут',
       },
     },
@@ -1011,14 +1011,14 @@ export const messages = {
     loginMobile: {
       telegram: {
         headline:
-          'Для входу через Telegram введіть свій Telegram ID та натисніть "Увійти". Ви можете дізнатись свій Telegram ID, написавши <code>/id</code> до <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>. Або можете відправити <code>/qr</code> до <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a> та відсканувати його в секції QR Вхід!',
+          'Для входу через Telegram введіть свій Telegram ID та натисніть "Увійти". Ви можете дізнатись свій Telegram ID, написавши <code>/id</code> до <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>. Або можете відправити <code>/qr</code> до <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a> та відсканувати його в секції QR Вхід!',
         idHint: 'Телеграм ID',
         loginButton: 'Увійти',
         noCredentialsError: 'Будь ласка, вкажіть Телеграм ID',
         cannotSendMessageError:
           'Не вийшло відправити запит на логін користувачу. Будь ласка, впевніться, що ви розпочали чат з @todorant_bot і що Телеграм ID правильний',
         waiting:
-          'Чекаю відповіді від <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>...',
+          'Чекаю відповіді від <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>...',
         notAllowedError: 'Запит на вхід було відхилено',
       },
     },
@@ -1342,14 +1342,14 @@ export const messages = {
     loginMobile: {
       telegram: {
         headline:
-          'Prego, accedi con Telegram inserendo il tuo ID Telegram e premendo il bottone "Login". Puoi ottenere il tuo ID Telegram inviando <code>/id</code> su <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>. Oppure puoi anche semplicemente inviare <code>/qr</code> a <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a> e scansionare la foto nella sezione login con codice QR!',
+          'Prego, accedi con Telegram inserendo il tuo ID Telegram e premendo il bottone "Login". Puoi ottenere il tuo ID Telegram inviando <code>/id</code> su <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>. Oppure puoi anche semplicemente inviare <code>/qr</code> a <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a> e scansionare la foto nella sezione login con codice QR!',
         idHint: 'ID Telegram',
         loginButton: 'Login',
         noCredentialsError: 'Per favore, inserisci un ID Telegram',
         cannotSendMessageError:
           "Impossibile inviare la richiesta di accesso all'utente. Assicurati di aver avviato @todorant_bot e che l'ID di Telegram sia corretto.",
         waiting:
-          'In attesa della risposta su <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>...',
+          'In attesa della risposta su <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>...',
         notAllowedError: 'Richiesta di login respinta',
       },
     },
@@ -1521,12 +1521,12 @@ export const messages = {
     loginMobile: {
       telegram: {
         headline:
-          'Faça o login no Telegram digitando seu Telegram ID no campo abaixo e clicando no botão "Login". Você pode obter seu Telegram ID enviando<code>/id</code> para o <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>. Ou você pode simplesmente enviar <code>/qr</code> para <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a> e scan isto na seção de QR Login!',
+          'Faça o login no Telegram digitando seu Telegram ID no campo abaixo e clicando no botão "Login". Você pode obter seu Telegram ID enviando<code>/id</code> para o <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>. Ou você pode simplesmente enviar <code>/qr</code> para <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a> e scan isto na seção de QR Login!',
         noCredentialsError: 'Por favor, forneça um ID Telegram',
         cannotSendMessageError:
           'Não foi possível enviar a solicitação de login para o usuário. Verifique se você iniciou o @todorant_bot e se o ID do Telegram está correto.',
         waiting:
-          'Aguardando a resposta em<a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>...',
+          'Aguardando a resposta em<a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>...',
         notAllowedError: 'Login foi rejeitado',
       },
     },
@@ -1805,14 +1805,14 @@ export const messages = {
     loginMobile: {
       telegram: {
         headline:
-          'Por favor inicia sesión con Telegram introduciendo tu ID de Telegram en el campo que se encuentra debajo y haciendo clic en el botón de "Iniciar sesión". Puedes obtener tu ID de Telegram enviando <code>/id</code> al bot <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>.',
+          'Por favor inicia sesión con Telegram introduciendo tu ID de Telegram en el campo que se encuentra debajo y haciendo clic en el botón de "Iniciar sesión". Puedes obtener tu ID de Telegram enviando <code>/id</code> al bot <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>.',
         idHint: 'ID de Telegram',
         loginButton: 'Iniciar sesión',
         noCredentialsError: 'Por favor, introduce una ID de Telegram',
         cannotSendMessageError:
           'No se pudo enviar la solicitud de inicio de sesión al usuario. Asegúrate de haber iniciado @todorant_bot y de que la ID de Telegram sea correcta.',
         waiting:
-          'Esperando la respuesta en <a href="https://tlg.fyi/todorant_bot" target="_blank">@todorant_bot</a>...',
+          'Esperando la respuesta en <a href="https://t.me/todorant_bot" target="_blank">@todorant_bot</a>...',
         notAllowedError: 'El inicio de sesión fue rechazado',
       },
     },
