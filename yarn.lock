@@ -666,13 +666,13 @@
   dependencies:
     eslint-visitor-keys "^1.1.0"
 
-"@upacyxou/vue-simple-calendar@^4.4.1":
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/@upacyxou/vue-simple-calendar/-/vue-simple-calendar-4.4.1.tgz#126e07bdd84b310f768d3810eb7f71b4c4d2c758"
-  integrity sha512-4SfkHdA7Ue7v+taQIWQyrWFhyb6aRSPlsjgqSw1UYA19w8wciZzcBJnB0459p8MNxmpnykt7Su/7uoB7phkX1g==
+"@upacyxou/vue-simple-calendar@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@upacyxou/vue-simple-calendar/-/vue-simple-calendar-5.0.2.tgz#fbc5815b70cd3ece4617e2cc43fb22861fc49a31"
+  integrity sha512-43fug5XxuDtb27WtnNZu0DVkHpWhMJ0SUAGRxBpgHZ9H9wqw5SuvwuCkCos9hInb27hWE8J95FKwgw7FZbVKVQ==
   dependencies:
     core-js "^3.6.5"
-    vue "^2.6.11"
+    vue "^2.6.12"
 
 "@vue/cli-overlay@^4.0.5":
   version "4.0.5"
@@ -9425,6 +9425,11 @@ vue@^2.6.11, vue@^2.6.6:
   version "2.6.11"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha512-VfPwgcGABbGAue9+sfrD4PuwFar7gPb1yl1UK1MwXoQPAw0BKSqWfoYCT/ThFrdEVWoI51dBuyCoiNU9bZDZxQ==
+
+vue@^2.6.12:
+  version "2.6.12"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
+  integrity sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg==
 
 vuedraggable@^2.23.2:
   version "2.23.2"

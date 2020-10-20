@@ -17,6 +17,8 @@ export interface Todo {
 
   encrypted: boolean
 
+  order?: number
+
   delegate?: User
   delegator?: User
 }
