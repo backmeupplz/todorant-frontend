@@ -89,7 +89,7 @@ v-dialog(
               width='18dp'
             )
             span.google-button-text {{ $t("settings.notConnected") }}
-        .integration-button-block.mb-2(v-if='!user.telegramId')
+        .integration-button-block.mb-2(v-if='!!user && !user.telegramId')
           span {{ $t("settings.telegram") }}
           v-layout.text-center(column, justify-center, align-center)
           vue-telegram-login(
