@@ -343,6 +343,8 @@ export default class Report extends Vue {
       this.renderChart('#frogs', this.completedFrogsData)
       this.renderChart('#todos', this.completedTodosData)
     } catch (err) {
+      // We're doing this because of strange error coming from barchart, that we can't fix
+      if (err.message === 't is null') return
       console.error(err)
       this.setSnackbarError('errors.report')
     } finally {
