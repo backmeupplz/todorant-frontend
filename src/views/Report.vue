@@ -73,10 +73,10 @@ v-container(
     v-row
       v-col(cols=12, sm=6)
         v-card.d-flex.align-center.justify-center
-          canvas#todos(:height='chartHeight', :width='chartWidth')
+          canvas#todos(height=400, width=400)
       v-col(cols=12, sm=6)
         v-card.d-flex.align-center.justify-center
-          canvas#frogs(:height='chartHeight', :width='chartWidth')
+          canvas#frogs(height=400, width=400)
     div(v-if='!external')
       v-row.pt-4.text-center
         v-col
@@ -219,14 +219,6 @@ export default class Report extends Vue {
 
   endDateMenu = false
   endDate: null | string = null
-
-  get chartHeight() {
-    return 400
-  }
-
-  get chartWidth() {
-    return 400
-  }
 
   mounted() {
     this.refresh()
@@ -400,9 +392,3 @@ export default class Report extends Vue {
   }
 }
 </script>
-
-<style>
-.chart-amount {
-  margin-bottom: -24px !important;
-}
-</style>
