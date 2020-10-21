@@ -15,14 +15,14 @@ v-dialog(
         text,
         @click='close',
         v-shortkey.once='["esc"]',
-        @shortkey='close'
+        @shortkey.native='close'
       ) {{ $t("close") }}
       v-btn(
         color='default',
         text,
         @click='breakdown',
         v-shortkey.once='["esc"]',
-        @shortkey='close'
+        @shortkey.native='close'
       ) {{ $t("breakdown.button") }}
 </template>
 

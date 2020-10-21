@@ -89,7 +89,7 @@ v-dialog(
               width='18dp'
             )
             span.google-button-text {{ $t("settings.notConnected") }}
-        .integration-button-block.mb-2(v-if='!user.telegramId')
+        .integration-button-block.mb-2(v-if='!!user && !user.telegramId')
           span {{ $t("settings.telegram") }}
           v-layout.text-center(column, justify-center, align-center)
           vue-telegram-login(
@@ -132,14 +132,14 @@ v-dialog(
         text,
         @click='closeAndDropUserNameMenu',
         v-shortkey.once='["esc"]',
-        @shortkey='closeAndDropUserNameMenu',
+        @shortkey.native='closeAndDropUserNameMenu',
         :loading='loading'
       ) {{ $t("close") }}
       v-btn(
         color='blue',
         text,
         @click='save',
-        @shortkey='closeAndDropUserNameMenu',
+        @shortkey.native='closeAndDropUserNameMenu',
         :loading='loading'
       ) {{ $t("save") }}
     v-card-actions(v-else)
@@ -149,7 +149,7 @@ v-dialog(
         text,
         @click='closeAndDropUserNameMenu',
         v-shortkey.once='["esc"]',
-        @shortkey='closeAndDropUserNameMenu',
+        @shortkey.native='closeAndDropUserNameMenu',
         :loading='loading'
       ) {{ $t("close") }}
       v-btn(color='blue', text, @click='save', :loading='loading') {{ $t("save") }}

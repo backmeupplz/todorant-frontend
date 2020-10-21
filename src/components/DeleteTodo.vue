@@ -18,7 +18,7 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
         :loading='loading',
         :disabled='loading',
         v-shortkey.once='["enter"]',
-        @shortkey='deleteTodo'
+        @shortkey.native='deleteTodo'
       ) {{ $t("delete") }}
 </template>
 

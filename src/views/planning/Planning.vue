@@ -56,7 +56,7 @@ v-container(style='maxWidth: 1000px;')
             v-icon(v-on='on', color='#3366FF') call_split
         span {{ $t("spread.hint") }}
       IconButton(
-        name='$breakdown',
+        name='$rearrange',
         v-if='!editable && !showCompleted && !spreadEnabled',
         :loading='todosUpdating',
         :click='() => (editable = true)'
@@ -199,8 +199,9 @@ import draggable from 'vuedraggable'
 import { TodoSection } from '@/models/TodoSection'
 import { isTodoOld, isDateTooOld } from '@/utils/isTodoOld'
 import { CalendarView, CalendarViewHeader } from '@upacyxou/vue-simple-calendar'
-import moment, { LocaleSpecification, Moment } from 'moment'
-import { debounce } from 'lodash'
+import dayjs, { Dayjs } from 'dayjs'
+import weekOfYear from 'dayjs/plugin/weekOfYear'
+import debounce from 'lodash/debounce'
 import { v4 as uuid } from 'uuid'
 import { decrypt } from '@/utils/encryption'
 import { i18n } from '@/plugins/i18n'
@@ -210,6 +211,8 @@ import { User } from '@/models/User'
 import PlanningHeader from '@/views/planning/PlanningHeader.vue'
 import TodoCard from '@/components/TodoCard/TodoCard.vue'
 import IconButton from '@/icons/IconButton.vue'
+
+dayjs.extend(weekOfYear)
 
 const AppStore = namespace('AppStore')
 const UserStore = namespace('UserStore')
@@ -300,6 +303,7 @@ export default class TodoList extends Vue {
             id: todo._id,
             title: this.text(todo),
             startDate: section.title,
+            order: todo.order,
           }))
       })
       .reduce((p, c) => p.concat(c), [])
@@ -307,7 +311,7 @@ export default class TodoList extends Vue {
 
   get numberOfEventsPerWeek() {
     const weeksMap = this.events.reduce((prev, cur) => {
-      const week = this.weekForDate(moment(cur.startDate))
+      const week = this.weekForDate(dayjs(cur.startDate))
       if (prev[week]) {
         prev[week][cur.startDate] = (prev[week][cur.startDate] || 0) + 1
       } else {
@@ -401,7 +405,7 @@ export default class TodoList extends Vue {
   }
 
   heightForWeek(i: number) {
-    const thisMonth = moment(this.currentPeriod).startOf('month')
+    const thisMonth = dayjs(this.currentPeriod).startOf('month')
     const currentWeek = this.weekForDate(thisMonth)
     const numberOfEvents = this.numberOfEventsPerWeek[currentWeek + i] || 1
     const sizeOfPosition = 1.5
@@ -725,7 +729,7 @@ export default class TodoList extends Vue {
     if (!this.editable) {
       return
     }
-    const newTitle = moment(date).format('YYYY-MM-DD')
+    const newTitle = dayjs(date).format('YYYY-MM-DD')
     if (isDateTooOld(newTitle, api.getToday())) {
       return
     }
@@ -809,15 +813,15 @@ export default class TodoList extends Vue {
     return text
   }
 
-  weekForDate(date: Moment) {
-    const locale = moment.locale()
-    moment.locale(locale, {
+  weekForDate(date: Dayjs) {
+    const locale = dayjs.locale()
+    dayjs.locale(locale, {
       week: {
         dow: this.safeFirstDayOfWeek,
       },
-    } as LocaleSpecification)
+    } as any)
     const week = date.week()
-    moment.locale(locale)
+    dayjs.locale(locale)
     return week
   }
 

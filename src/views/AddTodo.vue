@@ -11,7 +11,7 @@ div
     color='blue',
     @click='openDialog()',
     v-shortkey.once='{ en: ["a"], ru: ["ф"] }',
-    @shortkey='openDialog(true)'
+    @shortkey.native='openDialog(true)'
   )
     v-icon $add
   v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
@@ -58,7 +58,8 @@ div
                         :enterPressed='save',
                         :escapePressed='escapePressed',
                         :addTodo='addTodo',
-                        ref='todoForm'
+                        ref='todoForm',
+                        :shouldAutofocus='dialog'
                       )
                         v-btn(
                           v-if='todos.length > 1',
@@ -72,7 +73,7 @@ div
             text,
             @click='addTodo',
             v-shortkey.once='{ en: ["ctrl", "shift", "a"], ru: ["ctrl", "shift", "ф"] }',
-            @shortkey='addTodo'
+            @shortkey.native='addTodo'
           )
             v-icon add
           v-spacer
@@ -82,7 +83,7 @@ div
             @click='close',
             :disabled='loading',
             v-shortkey.once='["esc"]',
-            @shortkey='close'
+            @shortkey.native='close'
           ) {{ $t("cancel") }}
           v-btn(
             color='blue',
@@ -90,7 +91,7 @@ div
             @click='save',
             :loading='loading',
             v-shortkey.once='["enter"]',
-            @shortkey='save'
+            @shortkey.native='save'
           ) {{ $t("save") }}
 </template>
 
@@ -110,7 +111,7 @@ import { namespace } from 'vuex-class'
 import { SubscriptionStatus } from '@/models/SubscriptionStatus'
 import { User } from '@/models/User'
 import draggable from 'vuedraggable'
-import { has } from 'lodash'
+import has from 'lodash/has'
 import { playSound, Sounds } from '@/utils/sounds'
 
 const SettingsStore = namespace('SettingsStore')
@@ -194,11 +195,6 @@ export default class AddTodo extends Vue {
     if (this.$refs.form) {
       ;(this.$refs.form as any).resetValidation()
     }
-    setTimeout(() => {
-      if (this.$refs.todoForm && (this.$refs.todoForm as any).length) {
-        ;(this.$refs.todoForm as any)[0].$refs.textInput.focus()
-      }
-    }, 500)
   }
 
   addTodo() {
@@ -296,6 +292,11 @@ export default class AddTodo extends Vue {
       if (hasCompletedTodo) {
         playSound(hasFrog ? Sounds.levelUp : Sounds.taskDone)
       }
+      if (this.$refs.todoForm && (this.$refs.todoForm as any).length) {
+        for (const ref of this.$refs.todoForm as any) {
+          ref.$refs.textInput.blur()
+        }
+      }
       this.dialog = false
       logEvent('add_todo_success')
     } catch (err) {
@@ -307,7 +308,7 @@ export default class AddTodo extends Vue {
   }
 
   escapePressed() {
-    this.dialog = false
+    this.close()
   }
 
   textForTodo(todo: Todo) {
@@ -327,7 +328,13 @@ export default class AddTodo extends Vue {
   }
 
   close() {
+    this.panel = []
     this.date = ''
+    if (this.$refs.todoForm && (this.$refs.todoForm as any).length) {
+      for (const ref of this.$refs.todoForm as any) {
+        ref.$refs.textInput.blur()
+      }
+    }
     this.dialog = false
   }
 }

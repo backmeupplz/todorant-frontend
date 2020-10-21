@@ -6,17 +6,15 @@
     :hint='$t("todo.create.textHint")',
     :rules='textRules',
     v-model='text',
-    autofocus,
     v-on:keydown='keyDown',
     v-on:keyup.esc='escape',
     ref='textInput',
     auto-grow,
     no-resize,
     rows='1',
-    @focus='focused = true',
-    @blur='focused = false',
     :class='filteredTags.length ? "pb-2" : "pb-4"',
-    :disabled='todo && todo.encrypted && (errorDecrypting(todo) || !$store.state.UserStore.password)'
+    :disabled='todo && todo.encrypted && (errorDecrypting(todo) || !$store.state.UserStore.password)',
+    :autofocus='shouldAutofocus'
   )
   .mb-4(v-if='filteredTags.length')
     v-btn(
@@ -123,7 +121,8 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Todo } from '@/models/Todo'
 import { i18n } from '@/plugins/i18n'
-import moment from 'moment'
+// const moment = require('moment/src/moment')
+import dayjs from 'dayjs'
 import { Tag } from '@/models/Tag'
 import { decrypt, encrypt } from '@/utils/encryption'
 import { Watch, Prop } from 'vue-property-decorator'
@@ -142,6 +141,7 @@ export default class TodoForm extends Vue {
   @Prop({ required: true }) escapePressed!: () => void
   @Prop() addTodo?: () => void
   @Prop({ default: false }) editTodo!: boolean
+  @Prop({ default: true }) shouldAutofocus!: boolean
 
   @AppStore.State language?: string
   @AppStore.State dark!: boolean
@@ -154,8 +154,6 @@ export default class TodoForm extends Vue {
   monthMenu = false
   timeMenu = false
   moreShown = false
-
-  focused = false
 
   get locale() {
     return this.language === 'ua' ? 'uk' : this.language
@@ -266,7 +264,7 @@ export default class TodoForm extends Vue {
   }
 
   get todayFormatted() {
-    return moment(new Date()).format('YYYY-MM-DD')
+    return dayjs(new Date()).format('YYYY-MM-DD')
   }
 
   get todayFormattedForExactDate() {
@@ -276,32 +274,32 @@ export default class TodoForm extends Vue {
     newDay.setHours(parseInt(storeStartTimeOfDay.substr(0, 2)))
     newDay.setMinutes(parseInt(storeStartTimeOfDay.substr(3)))
     if (date < newDay) {
-      return moment(
+      return dayjs(
         new Date(new Date().setDate(new Date().getDate() - 1))
       ).format()
     }
-    return moment(new Date(new Date().setDate(new Date().getDate()))).format()
+    return dayjs(new Date(new Date().setDate(new Date().getDate()))).format()
   }
 
   get todayFormattedForDatePicker() {
     const date = new Date()
     date.setMonth(date.getMonth() + 1)
-    return moment(date).format()
+    return dayjs(date).format()
   }
 
   keyDown(evt: any) {
     if (!evt.keyCode) {
       return
     }
-    if (evt.keyCode === 13 && !evt.shiftKey) {
-      if (evt.type === 'keydown') {
-        ;(this as any).enterPressed()
-      }
-      evt.preventDefault()
-    }
     if (evt.keyCode === 65 && evt.ctrlKey && evt.shiftKey) {
       if (evt.type === 'keydown' && this.addTodo) {
         this.addTodo()
+      }
+      evt.preventDefault()
+    }
+    if (evt.keyCode === 13 && !evt.shiftKey) {
+      if (evt.type === 'keydown') {
+        ;(this as any).enterPressed()
       }
       evt.preventDefault()
     }

@@ -13,7 +13,9 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
             :todo='todo',
             :enterPressed='save',
             :escapePressed='escapePressed',
-            :editTodo='true'
+            :editTodo='true',
+            :shouldAutofocus='dialog',
+            ref='todoForm'
           )
       v-card-actions
         v-btn(text, @click='deleteTodo', :loading='loading', color='error')
@@ -25,7 +27,7 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
           @click='cleanTodo(false)',
           :disabled='loading',
           v-shortkey.once='["esc"]',
-          @shortkey='dialog = false'
+          @shortkey.native='escapePressed'
         ) {{ $t("cancel") }}
         v-btn(
           color='blue',
@@ -33,7 +35,7 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
           @click='save',
           :loading='loading',
           v-shortkey.once='["shift", "enter"]',
-          @shortkey='save'
+          @shortkey.native='save'
         ) {{ $t("save") }}
   // Breakdown
   BreakdownRequest(
@@ -131,6 +133,9 @@ export default class EditTodo extends Vue {
   }
 
   escapePressed() {
+    if (this.$refs.todoForm) {
+      ;(this.$refs.todoForm as any).$refs.textInput.blur()
+    }
     this.dialog = false
   }
 

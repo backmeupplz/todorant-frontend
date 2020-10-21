@@ -4,7 +4,10 @@ div
     v-list-item(v-for='(epic, i) in epics', :key='i')
       .digit.left(:style='{ color: epic.color ? epic.color : "#ff641a" }') {{ epicProgress(epic).completed }}
       .epic-container
-        .epic-name(:style='{ color: epic.color ? epic.color : "#ff641a" }') {{ `#${epic.tag}` }}
+        .epic-name(
+          :style='{ color: epic.color ? epic.color : "#ff641a" }',
+          @click='epicSelected(`#${epic.tag}`)'
+        ) {{ `#${epic.tag}` }}
         Progress(
           :completed='epicProgress(epic).completed',
           :total='epicProgress(epic).total',
@@ -44,6 +47,7 @@ import Progress from '@/components/Progress.vue'
 import { namespace } from 'vuex-class'
 import { Tag } from '@/models/Tag'
 import IconButton from '@/icons/IconButton.vue'
+import { serverBus } from '@/main'
 
 const TagsStore = namespace('TagsStore')
 
@@ -77,6 +81,14 @@ export default class ProgressBlock extends Vue {
       total: epic.epicGoal,
       completed: epic.epicPoints,
     }
+  }
+
+  epicSelected(hash: string) {
+    if (!location.hash.includes(hash)) {
+      let hashesString = location.hash == '' ? hash : `,${hash}`
+      location.hash += hashesString
+    }
+    serverBus.$emit('changeCurrentTab', 1)
   }
 }
 </script>
@@ -113,6 +125,9 @@ export default class ProgressBlock extends Vue {
 .epic-name {
   text-align: center;
   margin-bottom: 4px;
+  font-style: normal;
+  font-weight: 500;
+  cursor: pointer;
 }
 .rotated-refresh-button {
   transform: rotate(45deg);

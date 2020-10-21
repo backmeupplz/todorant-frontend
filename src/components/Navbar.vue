@@ -26,6 +26,8 @@ nav
   Support(:dialog='supportDialog', :close='closeSupportDialog')
   // Encryption dialog
   Encryption(:dialog='encryptionDialog', :close='closeEncryptionDialog')
+  // Apps dialog
+  Apps(:dialog='appsDialog', :close='closeAppsDialog')
   // Navbar and app
   v-app-bar(flat, app, :style='appBarStyle')
     // Title
@@ -75,6 +77,9 @@ nav
         // QR
         v-list-item(@click='qrDialog = true', v-if='!!user')
           v-list-item-title {{ $t("qr.code") }}
+        // QR
+        v-list-item(@click='appsDialog = true', v-if='!!user')
+          v-list-item-title {{ $t("apps") }}
         // Support
         v-list-item(@click='supportDialog = true', v-if='!!user')
           v-list-item-title {{ $t("supportAlert.title") }}
@@ -89,14 +94,15 @@ import Component from 'vue-class-component'
 import { i18n } from '@/plugins/i18n'
 import * as api from '@/utils/api'
 import Rules from '@/components/Rules.vue'
-import Welcome from '@/components/Welcome.vue'
+import Welcome from '@/views/Welcome.vue'
 import HeroProfile from '@/components/HeroProfile.vue'
-import Subscription from '@/components/Subscription.vue'
+import Subscription from '@/views/Subscription.vue'
 import Settings from '@/views/Settings.vue'
 import Hashtags from '@/views/settings/Hashtags.vue'
 import QRCode from '@/components/QRCode.vue'
 import Support from '@/components/Support.vue'
 import Encryption from '@/components/Encryption.vue'
+import Apps from '@/components/Apps.vue'
 import IconButton from '@/icons/IconButton.vue'
 import { serverBus } from '@/main'
 import { logEvent } from '@/utils/logEvent'
@@ -122,6 +128,7 @@ const SnackbarStore = namespace('SnackbarStore')
     Encryption,
     Welcome,
     IconButton,
+    Apps,
   },
 })
 export default class Navbar extends Vue {
@@ -144,6 +151,7 @@ export default class Navbar extends Vue {
   supportDialog = false
   hashtagsDialog = false
   qrDialog = false
+  appsDialog = false
   encryptionDialog = false
 
   get locales() {
@@ -236,6 +244,9 @@ export default class Navbar extends Vue {
   }
   closeQRDialog() {
     this.qrDialog = false
+  }
+  closeAppsDialog() {
+    this.appsDialog = false
   }
   closeEncryptionDialog() {
     this.encryptionDialog = false

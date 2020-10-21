@@ -16,7 +16,7 @@ v-dialog(v-model='dialog', scrollable, max-width='600px', persistent)
         text,
         @click='close',
         v-shortkey.once='["esc"]',
-        @shortkey='close'
+        @shortkey.native='close'
       ) {{ $t("cookie.button") }}
     v-card-actions(v-else)
       v-btn(v-if='!!user', color='blue', text, @click='openWelcomeDialog') {{ $t("introButton") }}
@@ -26,7 +26,7 @@ v-dialog(v-model='dialog', scrollable, max-width='600px', persistent)
         text,
         @click='close',
         v-shortkey.once='["esc"]',
-        @shortkey='close'
+        @shortkey.native='close'
       ) {{ $t("cookie.button") }}
 </template>
 

@@ -7,8 +7,14 @@
     :fixed-tabs='$vuetify.breakpoint.xsOnly',
     show-arrows
   )
-    v-tab(v-shortkey.once='{ en: ["c"], ru: ["с"] }', @shortkey='switchTab(0)') {{ $t("current") }}
-    v-tab(v-shortkey.once='{ en: ["p"], ru: ["з"] }', @shortkey='switchTab(1)') {{ $t("planning") }}
+    v-tab(
+      v-shortkey='{ en: ["c"], ru: ["с"] }',
+      @shortkey.native='switchTab(0)'
+    ) {{ $t("current") }}
+    v-tab(
+      v-shortkey='{ en: ["p"], ru: ["з"] }',
+      @shortkey.native='switchTab(1)'
+    ) {{ $t("planning") }}
     v-tab {{ $t("report.title") }}
     v-tab {{ $t("delegate.title") }}
     v-tabs-items(v-model='currentTab')
@@ -82,6 +88,9 @@ export default class Superpower extends Vue {
     if (this.$router.currentRoute.hash) {
       this.currentTab = 1
     }
+    serverBus.$on('changeCurrentTab', (newTab: number) => {
+      this.currentTab = newTab
+    })
   }
 
   @Watch('currentTab')
