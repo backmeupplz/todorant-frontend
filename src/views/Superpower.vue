@@ -8,11 +8,11 @@
     show-arrows
   )
     v-tab(
-      v-shortkey.once='{ en: ["c"], ru: ["с"] }',
+      v-shortkey='{ en: ["c"], ru: ["с"] }',
       @shortkey.native='switchTab(0)'
     ) {{ $t("current") }}
     v-tab(
-      v-shortkey.once='{ en: ["p"], ru: ["з"] }',
+      v-shortkey='{ en: ["p"], ru: ["з"] }',
       @shortkey.native='switchTab(1)'
     ) {{ $t("planning") }}
     v-tab {{ $t("report.title") }}
