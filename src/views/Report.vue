@@ -72,19 +72,11 @@ v-container(
         p.headline {{ $t("report.frogsCompleted") }}: {{ completedFrogsCount }}
     v-row
       v-col(cols=12, sm=6)
-        v-card
-          v-card-text
-            bar-chart.ma-4(
-              :chartData='completedTodosData',
-              :options='chartOptions'
-            )
+        v-card.d-flex.align-center.justify-center
+          canvas#todos(:height='chartHeight', :width='chartWidth')
       v-col(cols=12, sm=6)
-        v-card
-          v-card-text
-            bar-chart.ma-4(
-              :chartData='completedFrogsData',
-              :options='chartOptions'
-            )
+        v-card.d-flex.align-center.justify-center
+          canvas#frogs(:height='chartHeight', :width='chartWidth')
     div(v-if='!external')
       v-row.pt-4.text-center
         v-col
@@ -157,7 +149,6 @@ v-container(
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import * as api from '@/utils/api'
-import BarChart from '@/components/BarChart.vue'
 import { i18n } from '@/plugins/i18n'
 import TwitterButton from 'vue-share-buttons/src/components/TwitterButton'
 import FacebookButton from 'vue-share-buttons/src/components/FacebookButton'
@@ -176,6 +167,7 @@ import dayjs from 'dayjs'
 import { Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
+const BarChart = require('bar-chartjs')
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -184,7 +176,6 @@ const AppStore = namespace('AppStore')
 
 @Component({
   components: {
-    BarChart,
     TwitterButton,
     FacebookButton,
     LinkedInButton,
@@ -210,8 +201,8 @@ export default class Report extends Vue {
 
   loading = false
 
-  completedTodosData: object = {}
-  completedFrogsData: object = {}
+  completedTodosData: object | any = {}
+  completedFrogsData: object | any = {}
 
   completedTodosCount = 0
   completedFrogsCount = 0
@@ -229,19 +220,12 @@ export default class Report extends Vue {
   endDateMenu = false
   endDate: null | string = null
 
-  chartOptions = {
-    scales: {
-      yAxes: [
-        {
-          ticks: {
-            beginAtZero: true,
-            stepSize: 1,
-            min: 0,
-            precision: 0,
-          },
-        },
-      ],
-    },
+  get chartHeight() {
+    return 400
+  }
+
+  get chartWidth() {
+    return 400
   }
 
   mounted() {
@@ -254,17 +238,28 @@ export default class Report extends Vue {
     }
   }
 
+  renderChart(canvasName: string, canvasData: any) {
+    const actualCanvas = document.querySelector(canvasName)
+    const canvasOptions = {
+      labels: canvasData.onlyDays,
+      series: [
+        {
+          style: {
+            default: '#ff641a',
+            active: 'red',
+          },
+          data: canvasData.datasets,
+        },
+      ],
+    }
+    new BarChart(actualCanvas, canvasOptions)
+  }
+
   convertData(data: any, title: string) {
     if (!Object.keys(data).length) {
       return {
         labels: [],
-        datasets: [
-          {
-            label: i18n.t(title),
-            backgroundColor: '#f87979',
-            data: [],
-          },
-        ],
+        datasets: [],
       }
     }
 
@@ -285,17 +280,24 @@ export default class Report extends Vue {
     }, {} as any)
 
     const labels = days.map((k) => k.toLocaleDateString())
-    const completedData = labels.map((l) => daysToCompletedMap[l])
+    const completedData = labels
+      .map((l) => daysToCompletedMap[l])
+      .map((data: number) => {
+        if (!data) {
+          return 0
+        }
+        return data
+      })
+
+    const onlyDays = labels
+      .map((date: string) => {
+        return date.split('/')[1]
+      })
+      .slice(-14)
 
     return {
-      labels,
-      datasets: [
-        {
-          label: i18n.t(title),
-          backgroundColor: '#f87979',
-          data: completedData,
-        },
-      ],
+      onlyDays,
+      datasets: completedData.slice(-14),
     }
   }
 
@@ -338,6 +340,8 @@ export default class Report extends Vue {
         data.completedFrogsMap || {}
       ) as number[]).reduce((prev, cur) => prev + cur, 0)
       this.url = ''
+      this.renderChart('#frogs', this.completedFrogsData)
+      this.renderChart('#todos', this.completedTodosData)
     } catch (err) {
       console.error(err)
       this.setSnackbarError('errors.report')
@@ -394,3 +398,9 @@ export default class Report extends Vue {
   }
 }
 </script>
+
+<style>
+.chart-amount {
+  margin-bottom: -24px !important;
+}
+</style>
