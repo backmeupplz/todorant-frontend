@@ -222,7 +222,7 @@ export default class Report extends Vue {
   endDate: null | string = null
 
   @Watch('dark')
-  currentTabChanged(val: any, oldVal: any) {
+  colorChanged() {
     this.renderChart('#frogs', this.completedFrogsData)
     this.renderChart('#todos', this.completedTodosData)
   }
