@@ -111,7 +111,7 @@ import { namespace } from 'vuex-class'
 import { SubscriptionStatus } from '@/models/SubscriptionStatus'
 import { User } from '@/models/User'
 import draggable from 'vuedraggable'
-import { has } from 'lodash'
+import has from 'lodash/has'
 import { playSound, Sounds } from '@/utils/sounds'
 
 const SettingsStore = namespace('SettingsStore')
