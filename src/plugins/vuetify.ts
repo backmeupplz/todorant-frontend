@@ -47,6 +47,7 @@ import Vuetify, {
   VAvatar,
   VCarouselItem,
   VTimePicker,
+  VChip,
 } from 'vuetify/lib'
 import { VuetifyIcons } from 'vuetify/types/services/icons'
 import 'vuetify/dist/vuetify.min.css'
@@ -115,6 +116,7 @@ Vue.use(Vuetify, {
     VAvatar,
     VCarouselItem,
     VTimePicker,
+    VChip,
   },
 })
 

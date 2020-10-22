@@ -121,13 +121,17 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Todo } from '@/models/Todo'
 import { i18n } from '@/plugins/i18n'
-// const moment = require('moment/src/moment')
 import dayjs from 'dayjs'
 import { Tag } from '@/models/Tag'
 import { decrypt, encrypt } from '@/utils/encryption'
 import { Watch, Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
+
+import localizedFormat from 'dayjs/plugin/localizedFormat'
+import enLocale from 'dayjs/locale/en'
+
+dayjs.extend(localizedFormat)
 
 const AppStore = namespace('AppStore')
 const TagsStore = namespace('TagsStore')
@@ -154,6 +158,10 @@ export default class TodoForm extends Vue {
   monthMenu = false
   timeMenu = false
   moreShown = false
+
+  created() {
+    dayjs.locale(enLocale)
+  }
 
   get locale() {
     return this.language === 'ua' ? 'uk' : this.language
