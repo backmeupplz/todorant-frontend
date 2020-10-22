@@ -211,8 +211,12 @@ import { User } from '@/models/User'
 import PlanningHeader from '@/views/planning/PlanningHeader.vue'
 import TodoCard from '@/components/TodoCard/TodoCard.vue'
 import IconButton from '@/icons/IconButton.vue'
+import localizedFormat from 'dayjs/plugin/localizedFormat'
+import enLocale from 'dayjs/locale/en'
 
+dayjs.extend(localizedFormat)
 dayjs.extend(weekOfYear)
+dayjs.locale(enLocale)
 
 const AppStore = namespace('AppStore')
 const UserStore = namespace('UserStore')
@@ -821,7 +825,6 @@ export default class TodoList extends Vue {
       },
     } as any)
     const week = date.week()
-    dayjs.locale(locale)
     return week
   }
 
