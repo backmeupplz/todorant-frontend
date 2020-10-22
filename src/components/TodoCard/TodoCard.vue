@@ -224,6 +224,8 @@ export default class TodoCard extends Vue {
 
 <style>
 .todo-container {
+  position: relative;
+
   border: 1px solid #dde2e5;
   border-radius: 12px;
   padding: 12px;
@@ -271,7 +273,5 @@ export default class TodoCard extends Vue {
   left: 0;
   border-radius: 12px;
   opacity: 0.05;
-  margin-top: 8px;
-  margin-bottom: 8px;
 }
 </style>
