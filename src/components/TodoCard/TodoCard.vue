@@ -4,6 +4,7 @@
   :style='backgroundColor',
   @mousemove='handleMove'
 )
+  .tag-background(v-if='!!tagColor', :style='{ backgroundColor: tagColor }')
   SwipeOut(
     ref='swipelist',
     :items='todo',
@@ -87,9 +88,12 @@ import * as api from '@/utils/api'
 import { isTodoOld } from '@/utils/isTodoOld'
 import { SwipeOut } from 'vue-swipe-actions'
 import 'vue-swipe-actions/dist/vue-swipe-actions.css'
+import { getTags } from '@/utils/getTags'
+import { TagColors } from '@/models/TagColors'
 
 const AppStore = namespace('AppStore')
 const SettingsStore = namespace('SettingsStore')
+const TagsStore = namespace('TagsStore')
 
 @Component({
   components: {
@@ -104,6 +108,7 @@ const SettingsStore = namespace('SettingsStore')
 export default class TodoCard extends Vue {
   @AppStore.State dark!: boolean
   @SettingsStore.State swipeActionsEnabled!: boolean
+  @TagsStore.State tagColors!: TagColors
 
   @Prop({ required: true }) deleteTodo!: () => void
   @Prop({ required: true }) addTodo!: (hotkey?: boolean) => void
@@ -194,6 +199,19 @@ export default class TodoCard extends Vue {
     }
   }
 
+  get tagColor() {
+    if (!this.todo) {
+      return undefined
+    }
+    let text = ''
+    text = this.todo.encrypted ? decrypt(this.todo.text, true) : this.todo.text
+    const tags = getTags(text)
+    if (!tags.length) {
+      return undefined
+    }
+    return this.tagColors[tags[0]]
+  }
+
   get todoOutstanding() {
     if (this.todo.completed) {
       return false
@@ -244,5 +262,16 @@ export default class TodoCard extends Vue {
 .handle {
   flex-grow: 1;
   max-width: 25px;
+}
+.tag-background {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 12px;
+  opacity: 0.05;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 </style>
