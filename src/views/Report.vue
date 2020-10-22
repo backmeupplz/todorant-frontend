@@ -164,7 +164,7 @@ import ViberButton from 'vue-share-buttons/src/components/ViberButton'
 import VkontakteButton from 'vue-share-buttons/src/components/VkontakteButton'
 import WhatsAppButton from 'vue-share-buttons/src/components/WhatsAppButton'
 import dayjs from 'dayjs'
-import { Prop } from 'vue-property-decorator'
+import { Prop, Watch } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
 const BarChart = require('bar-chartjs')
@@ -194,6 +194,7 @@ const AppStore = namespace('AppStore')
 export default class Report extends Vue {
   @Prop({ default: false }) external!: boolean
 
+  @AppStore.State dark!: boolean
   @UserStore.State user?: User
   @AppStore.State language?: string
   @SettingsStore.State firstDayOfWeek?: number
@@ -220,6 +221,12 @@ export default class Report extends Vue {
   endDateMenu = false
   endDate: null | string = null
 
+  @Watch('dark')
+  colorChanged() {
+    this.renderChart('#frogs', this.completedFrogsData)
+    this.renderChart('#todos', this.completedTodosData)
+  }
+
   mounted() {
     this.refresh()
   }
@@ -243,6 +250,31 @@ export default class Report extends Vue {
           data: canvasData.datasets,
         },
       ],
+      xAxis: {
+        font: {
+          size: 13,
+          style: this.dark ? 'white' : 'black',
+        },
+        line: {
+          style: this.dark ? 'white' : 'black',
+        },
+        tick: {
+          style: this.dark ? 'white' : 'black',
+        },
+      },
+      yAxis: {
+        // config style of y-axis
+        font: {
+          size: 13,
+          style: this.dark ? 'white' : 'black',
+        },
+        line: {
+          style: this.dark ? 'white' : 'black',
+        },
+        tick: {
+          style: this.dark ? 'white' : 'black',
+        },
+      },
     }
     new BarChart(actualCanvas, canvasOptions)
   }
