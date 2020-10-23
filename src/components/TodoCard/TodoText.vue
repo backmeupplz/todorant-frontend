@@ -1,7 +1,8 @@
 <template lang="pug">
 .flex-grow-1.text-container(style='max-width: 100%;')
   p(v-if='todo.delegator')
-    span {{ todo.delegator.name }}
+    span(v-if='todo.delegator.name') {{ todo.delegator.name }}
+    span(v-if='!todo.delegator.name') {{ $t("to") }} {{ todo.user.name }}
     span(v-if='delegateScreen') : {{ todo.monthAndYear }}{{ todo.date ? `-${todo.date}` : "" }}
   span(v-if='!!todo.frog') 🐸{{ " " }}
   span(v-if='!!todo.time') {{ todo.time }}{{ " " }}

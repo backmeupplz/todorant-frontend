@@ -438,6 +438,18 @@ export async function getUnacceptedDelegated() {
   ).data as Todo[]
 }
 
+export async function getDelegatedTodos() {
+  const user = store.state.UserStore.user
+  if (!user) {
+    throw new Error('No user')
+  }
+  return (
+    await axios.get(`${base}/delegate/todos`, {
+      headers: getHeaders(user),
+    })
+  ).data as Todo[]
+}
+
 export async function deleteDelegate(id: string) {
   const user = store.state.UserStore.user
   if (!user) {

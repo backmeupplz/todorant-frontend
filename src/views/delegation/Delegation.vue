@@ -1,14 +1,24 @@
 <template lang="pug">
 div
   .v-container.pa-4
-    v-row.mx-0.mb-4
-      v-btn.mr-1(icon, @click='settingsDialog = true', :loading='loading')
-        v-icon supervisor_account
-      v-btn(icon, @click='loadData', :loading='loading')
-        v-icon refresh
-    div(v-if='!loading')
+    v-list-item.d-flex.align-center
+      v-switch.ma-0.pa-0(
+        hide-details,
+        v-model='delegatedTasksTo',
+        :label='$t("todo.list.delegated")',
+        :loading='loading'
+      )
+      v-row.justify-end
+        v-btn.mr-1(icon, @click='settingsDialog = true', :loading='loading')
+          v-icon supervisor_account
+        v-btn(icon, @click='loadData', :loading='loading')
+          v-icon refresh
+    div(v-if='!loading && !delegatedTasksTo')
       NoDelegators(v-if='!delegators.length')
-      NoDelegatedTasks(v-if='delegators.length && !unacceptedTodos.length')
+      NoDelegatedTasks(
+        :delegatedTasksTo='delegatedTasksTo',
+        v-if='delegators.length && !unacceptedTodos.length'
+      )
       v-list-item.pa-0(v-for='(todo, i) in unacceptedTodos', :key='i')
         v-list-item-content
           v-card
@@ -30,6 +40,24 @@ div
                 :loading='loading',
                 :disabled='!todo.monthAndYear'
               ) {{ $t("accept") }}
+    div(v-if='!loading && delegatedTasksTo')
+      NoDelegates(v-if='!delegates.length')
+      NoDelegatedTasks(
+        :delegatedTasksTo='delegatedTasksTo',
+        v-if='delegates.length && !delegatedTodos.length'
+      )
+      v-list-item.pa-0(v-for='(todo, i) in delegatedTodos', :key='i')
+        v-list-item-content
+          v-card
+            v-card-text
+              TodoText(
+                :todo='todo',
+                :text='todo.text',
+                :errorDecrypting='false',
+                :delegateScreen='true'
+              )
+            v-card-actions.pb-2.pt-2.ma-0
+              v-spacer
   DelegationSettings(:dialog='settingsDialog', :close='closeSettingsDialog')
   EditTodo(
     :todo='todoEdited',
@@ -43,6 +71,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import DelegationSettings from '@/views/delegation/DelegationSettings.vue'
 import NoDelegators from '@/views/delegation/NoDelegators.vue'
+import NoDelegates from '@/views/delegation/NoDelegates.vue'
 import NoDelegatedTasks from '@/views/delegation/NoDelegatedTasks.vue'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
@@ -62,6 +91,7 @@ const SnackbarStore = namespace('SnackbarStore')
   components: {
     DelegationSettings,
     NoDelegators,
+    NoDelegates,
     NoDelegatedTasks,
     TodoText,
     EditTodo,
@@ -75,8 +105,10 @@ export default class Delegation extends Vue {
 
   loading = false
   settingsDialog = false
+  delegatedTasksTo = false
 
   unacceptedTodos = [] as Todo[]
+  delegatedTodos = [] as Todo[]
   todoEdited: Partial<Todo> | null = null
 
   mounted() {
@@ -106,6 +138,7 @@ export default class Delegation extends Vue {
     try {
       sockets.delegateSyncManager.sync()
       await this.getUnacceptedTodos()
+      await this.getDelegatedTodos()
     } catch (err) {
       // Don's show request abort
       if (err.message.includes('aborted')) {
@@ -119,6 +152,10 @@ export default class Delegation extends Vue {
 
   async getUnacceptedTodos() {
     this.unacceptedTodos = await api.getUnacceptedDelegated()
+  }
+
+  async getDelegatedTodos() {
+    this.delegatedTodos = await api.getDelegatedTodos()
   }
 
   async deleteTodo(todo: Todo) {
