@@ -201,7 +201,7 @@ export const messages = {
       },
       list: {
         completed: 'Show completed',
-        delegated: 'Show Tasks that I delegated',
+        delegated: 'Show tasks that I delegated',
       },
       edit: {
         title: 'Edit',
@@ -422,7 +422,7 @@ export const messages = {
       noDelegates:
         "You don't have any delegates yet. Ask for an invite link to become someone's delegator.",
       noDelegatedTasks: "You don't have any more newly delegated tasks.",
-      noDelegatedTasksTo: 'You do not delegate any task.',
+      noDelegatedTasksTo: "You haven't delegated tasks yet.",
       link: 'Delegate invite link',
       linkDescription:
         'Share this link only with the people you trust. People can become your delegators by following this link. Delegators will only see the tasks that they delegated to you.',
