@@ -38,6 +38,9 @@ export default class VerticalBar extends Vue {
 .progress.vertical {
   width: 10%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 .progress.vertical > .progress-bar {
   width: 100% !important;
