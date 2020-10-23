@@ -252,7 +252,7 @@ export default class AddTodo extends Vue {
         !todo ||
         !todo.text ||
         !todo.text.trim() ||
-        (!todo.monthAndYear && !todo.date)
+        (!todo.monthAndYear && !todo.date && !todo.delegate)
       ) {
         this.panel.push(i)
       }

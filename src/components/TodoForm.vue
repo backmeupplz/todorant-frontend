@@ -254,7 +254,10 @@ export default class TodoForm extends Vue {
     (v: any) => {
       const todo = (this as any).todo as Partial<Todo>
       return (
-        !!todo.date || !!todo.monthAndYear || i18n.t('errors.todo.dateOrMonth')
+        !!todo.date ||
+        !!todo.monthAndYear ||
+        !!todo.delegate ||
+        i18n.t('errors.todo.dateOrMonth')
       )
     },
   ]

@@ -22,8 +22,20 @@ div
             v-card-actions.pb-2.pt-2.ma-0
               v-spacer
               v-btn(text, small, @click='deleteTodo(todo)', :loading='loading') {{ $t("delete") }}
-              v-btn(text, small, @click='acceptTodo(todo)', :loading='loading') {{ $t("accept") }}
+              v-btn(text, small, @click='editTodo(todo)', :loading='loading') {{ $t("edit") }}
+              v-btn(
+                text,
+                small,
+                @click='acceptTodo(todo)',
+                :loading='loading',
+                :disabled='!todo.monthAndYear'
+              ) {{ $t("accept") }}
   DelegationSettings(:dialog='settingsDialog', :close='closeSettingsDialog')
+  EditTodo(
+    :todo='todoEdited',
+    :cleanTodo='cleanTodo',
+    :requestDelete='requestDelete'
+  )
 </template>
 
 <script lang="ts">
@@ -39,6 +51,7 @@ import * as api from '@/utils/api'
 import { sockets } from '@/utils/sockets'
 import { Todo } from '@/models/Todo'
 import TodoText from '@/components/TodoCard/TodoText.vue'
+import EditTodo from '@/views/EditTodo.vue'
 
 const AppStore = namespace('AppStore')
 const DelegationStore = namespace('DelegationStore')
@@ -51,6 +64,7 @@ const SnackbarStore = namespace('SnackbarStore')
     NoDelegators,
     NoDelegatedTasks,
     TodoText,
+    EditTodo,
   },
 })
 export default class Delegation extends Vue {
@@ -63,6 +77,7 @@ export default class Delegation extends Vue {
   settingsDialog = false
 
   unacceptedTodos = [] as Todo[]
+  todoEdited: Partial<Todo> | null = null
 
   mounted() {
     this.loadData()
@@ -123,6 +138,25 @@ export default class Delegation extends Vue {
     } finally {
       this.loading = false
     }
+  }
+
+  editTodo(todo: Todo) {
+    const propsTodo = { ...todo } as Partial<Todo>
+    if (!propsTodo || !propsTodo.date) {
+      this.todoEdited = propsTodo
+      return
+    }
+    propsTodo.date = `${propsTodo.monthAndYear}-${propsTodo.date}`
+    propsTodo.monthAndYear = undefined
+    this.todoEdited = propsTodo
+  }
+
+  cleanTodo() {
+    this.todoEdited = null
+  }
+
+  requestDelete(todo: Todo) {
+    this.deleteTodo(todo)
   }
 
   async acceptTodo(todo: Todo) {
