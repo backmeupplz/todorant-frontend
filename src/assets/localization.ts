@@ -208,7 +208,6 @@ export const messages = {
     },
     cancel: 'Cancel',
     save: 'Save',
-    edit: 'Edit',
     delete: 'Delete',
     deleteHeadline: 'Are you sure you want to delete "{name}"?',
     current: 'Current',
@@ -489,6 +488,7 @@ export const messages = {
       'Let me show you how Todorant became the last and the only productivity tool for me and what will happen to you in the next 3-4 weeks. Just use the buttons on the bottom to advance!',
     introText14web:
       'There is one more thing to note though! To fully control superpower, you need to learn how to use it. Make sure to read "How to use Todorant" by tapping the info button in the top right corner!',
+    edit: 'Edit',
   },
   ru: {
     encryption: {
@@ -687,7 +687,6 @@ export const messages = {
     },
     cancel: 'Отменить',
     save: 'Сохранить',
-    edit: 'Редактировать',
     delete: 'Удалить',
     deleteHeadline: 'Вы уверены, что хотите удалить "{name}"?',
     current: 'Текущее',
@@ -975,6 +974,7 @@ export const messages = {
       'Давайте я расскажу вам, почему Тудурант стал моим последним и единственным приложением продуктивности и как ваша жизнь изменится в следующие 3-4 недели. Просто пользуйтесь кнопками ниже, чтобы продвинуться дальше!',
     introText14web:
       'Стоит отметить еще одну вещь! Чтобы использовать суперсилу по-полной, вам нужно научиться ее контролировать. Обязательно прочитайте "Как пользоваться Тудурантом", нажав на кнопку справа вверху!',
+    edit: 'Редактировать',
   },
   ua: {
     encryption: {
