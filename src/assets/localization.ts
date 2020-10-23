@@ -264,6 +264,7 @@ export const messages = {
       username: 'Name',
       telegram: 'Telegram',
       swipeActions: 'Swipe actions',
+      coloredCardBackgrounds: 'Color tasks with hashtag colors',
     },
     allDoneTitle: 'Congratulations!',
     allDoneText:
@@ -744,6 +745,7 @@ export const messages = {
       username: 'Имя',
       telegram: 'Телеграм',
       swipeActions: 'Действия свайпами',
+      coloredCardBackgrounds: 'Окрашивать задачи цветами хештегов',
     },
     allDoneTitle: 'Поздравляем!',
     allDoneText:

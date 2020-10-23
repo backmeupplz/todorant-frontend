@@ -28,6 +28,7 @@ v-dialog(
       v-switch.ma-0.pa-0(:label='$t("soundEffects")', v-model='soundEffects')
       v-switch.ma-0.pa-0(:label='$t("settings.hotkeys")', v-model='hotKeys')
       v-switch.ma-0.pa-0(:label='$t("settings.swipeActions")', v-model='swipeActions')
+      v-switch.ma-0.pa-0(:label='$t("settings.coloredCardBackgrounds")', v-model='coloredCardBackgroundsValue')
       v-divider
       v-select.mt-4(
         :items='weekdays',
@@ -203,6 +204,7 @@ export default class Settings extends Vue {
   @SettingsStore.State audioEnabled!: boolean
   @SettingsStore.State hotKeysEnabled!: boolean
   @SettingsStore.State swipeActionsEnabled!: boolean
+  @SettingsStore.State coloredCardBackgrounds!: boolean
   @SettingsStore.State googleCalendarCredentials!: GoogleCalendarCredentials
   @SettingsStore.Mutation setShowTodayOnAddTodo!: (
     hotsetHotKeysEnabled: boolean
@@ -222,6 +224,9 @@ export default class Settings extends Vue {
   @SettingsStore.Mutation setHotKeysEnabled!: (hotKeysEnabled: boolean) => void
   @SettingsStore.Mutation setSwipeActionsEnabled!: (
     swipeActionsEnabled: boolean
+  ) => void
+  @SettingsStore.Mutation setСoloredCardBackgrounds!: (
+    coloredCardBackgrounds: boolean
   ) => void
 
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
@@ -314,6 +319,12 @@ export default class Settings extends Vue {
   }
   set swipeActions(val: boolean) {
     this.setSwipeActionsEnabled(val)
+  }
+  get coloredCardBackgroundsValue() {
+    return this.coloredCardBackgrounds
+  }
+  set coloredCardBackgroundsValue(val: boolean) {
+    this.setСoloredCardBackgrounds(val)
   }
 
   checkUserName(name: any) {

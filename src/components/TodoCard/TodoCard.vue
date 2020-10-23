@@ -108,6 +108,7 @@ const TagsStore = namespace('TagsStore')
 export default class TodoCard extends Vue {
   @AppStore.State dark!: boolean
   @SettingsStore.State swipeActionsEnabled!: boolean
+  @SettingsStore.State coloredCardBackgrounds!: boolean
   @TagsStore.State tagColors!: TagColors
 
   @Prop({ required: true }) deleteTodo!: () => void
@@ -206,7 +207,7 @@ export default class TodoCard extends Vue {
     let text = ''
     text = this.todo.encrypted ? decrypt(this.todo.text, true) : this.todo.text
     const tags = getTags(text)
-    if (!tags.length) {
+    if (!tags.length || !this.coloredCardBackgrounds) {
       return undefined
     }
     return this.tagColors[tags[0]]

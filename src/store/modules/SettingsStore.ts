@@ -15,6 +15,7 @@ export default class SettingsStore extends VuexModule {
   audioEnabled = true
   hotKeysEnabled = true
   swipeActionsEnabled = false
+  coloredCardBackgrounds = false
 
   @Mutation
   setSettingsStore(settingsStore: SettingsStore) {
@@ -46,6 +47,11 @@ export default class SettingsStore extends VuexModule {
   @Mutation
   setSwipeActionsEnabled(swipeActionsEnabled: boolean) {
     this.swipeActionsEnabled = swipeActionsEnabled
+  }
+
+  @Mutation
+  setСoloredCardBackgrounds(coloredCardBackgrounds: boolean) {
+    this.coloredCardBackgrounds = coloredCardBackgrounds
   }
 
   @Mutation
