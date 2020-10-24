@@ -10,7 +10,7 @@ div
   )
     span {{ text }}
     v-btn(color='white', text, @click='hideSnackbar') {{ $t("close") }}
-  v-snackbar(app, v-model='refreshActive', bottom, flat, :timeout='0')
+  v-snackbar(app, v-model='refreshActive', bottom, flat, :timeout='-1')
     span {{ $t("refreshRequest") }}
     v-btn(color='white', @click='reload', text) {{ $t("refresh") }}
 </template>

@@ -233,6 +233,8 @@ export default class TodoCard extends Vue {
 
   display: flex;
   flex-direction: column;
+
+  min-width: 10px;
 }
 .todo-text-container {
   display: flex;

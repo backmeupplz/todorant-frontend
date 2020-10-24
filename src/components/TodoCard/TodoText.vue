@@ -1,5 +1,5 @@
 <template lang="pug">
-.flex-grow-1.text-container(style='max-width: 100%;')
+.text-container
   p(v-if='todo.delegator')
     span {{ todo.delegator.name }}
     span(v-if='delegateScreen') : {{ todo.monthAndYear }}{{ todo.date ? `-${todo.date}` : "" }}
@@ -69,11 +69,15 @@ export default class TodoText extends Vue {
 span {
   white-space: pre-wrap;
 }
+.text-container {
+  min-width: 10px;
+}
 .text-container * {
   font-style: normal;
   font-weight: 500;
   font-size: 15px;
   line-height: 18px;
   letter-spacing: -0.24px;
+  word-wrap: break-word;
 }
 </style>

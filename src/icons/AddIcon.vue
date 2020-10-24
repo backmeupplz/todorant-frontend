@@ -5,10 +5,10 @@
     viewBox="0 0 28 28"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    class="todorant-icon"
   >
     <path
       d="M14 4C14.5523 4 15 4.44772 15 5V13H23C23.5523 13 24 13.4477 24 14C24 14.5523 23.5523 15 23 15H15V23C15 23.5523 14.5523 24 14 24C13.4477 24 13 23.5523 13 23V15H5C4.44772 15 4 14.5523 4 14C4 13.4477 4.44772 13 5 13H13V5C13 4.44772 13.4477 4 14 4Z"
-      fill="white"
       fill-opacity="1.0"
     />
   </svg>
@@ -22,4 +22,8 @@ import Component from 'vue-class-component'
 export default class AddIcon extends Vue {}
 </script>
 
-<style></style>
+<style>
+.todorant-icon {
+  fill: currentColor;
+}
+</style>
