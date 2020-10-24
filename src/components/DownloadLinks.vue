@@ -107,7 +107,7 @@ const AppStore = namespace('AppStore')
 
 @Component
 export default class DownloadLinks extends Vue {
-  @Prop({ required: true, default: true }) showsWeb!: boolean
+  @Prop({ default: true }) showsWeb!: boolean
 
   @AppStore.State dark!: boolean
 
