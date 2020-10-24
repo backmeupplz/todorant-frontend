@@ -3,7 +3,7 @@ import { VuexModule, Module, Mutation } from 'vuex-module-decorators'
 @Module({ namespaced: true, name: 'AppStore' })
 export default class AppStore extends VuexModule {
   language?: string = undefined
-  dark = false
+  dark = true
   rulesShown = false
   editting = false
 
