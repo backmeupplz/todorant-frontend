@@ -12,33 +12,33 @@ v-dialog(v-model='dialog', scrollable, max-width='600px', persistent)
           .d-flex.justify-center.mb-4
             v-avatar(:size='100')
               v-img(:width='100', :height='100', src='/img/nikita.jpg')
-          p {{ $t("introText0web") }}
-          p {{ $t("introText1") }}
-          p {{ $t("introText2web") }}
+          p(:style='textStyle') {{ $t("introText0web") }}
+          p(:style='textStyle') {{ $t("introText1") }}
+          p(:style='textStyle') {{ $t("introText2web") }}
         v-carousel-item.pa-4
           .d-flex.justify-center.mb-4
             IndexCircle(index='1')
-          p {{ $t("introText3") }}
-          p {{ $t("introText4") }}
-          p {{ $t("introText5") }}
+          p(:style='textStyle') {{ $t("introText3") }}
+          p(:style='textStyle') {{ $t("introText4") }}
+          p(:style='textStyle') {{ $t("introText5") }}
         v-carousel-item.pa-4
           .d-flex.justify-center.mb-4
             IndexCircle(index='2')
-          p {{ $t("introText6") }}
-          p {{ $t("introText7") }}
-          p {{ $t("introText8") }}
+          p(:style='textStyle') {{ $t("introText6") }}
+          p(:style='textStyle') {{ $t("introText7") }}
+          p(:style='textStyle') {{ $t("introText8") }}
         v-carousel-item.pa-4
           .d-flex.justify-center.mb-4
             IndexCircle(index='3')
-          p {{ $t("introText9") }}
-          p {{ $t("introText10") }}
-          p {{ $t("introText11") }}
+          p(:style='textStyle') {{ $t("introText9") }}
+          p(:style='textStyle') {{ $t("introText10") }}
+          p(:style='textStyle') {{ $t("introText11") }}
         v-carousel-item.pa-4
           .d-flex.justify-center.mb-4
             IndexCircle(index='😋', :morePadding='true')
-          p {{ $t("introText12") }}
-          p {{ $t("introText14web") }}
-          p {{ $t("introText15") }}
+          p(:style='textStyle') {{ $t("introText12") }}
+          p(:style='textStyle') {{ $t("introText14web") }}
+          p(:style='textStyle') {{ $t("introText15") }}
     .d-flex.flex-row.pa-2
       v-btn(color='blue', text, @click='back', v-if='index > 0') {{ $t("back") }}
       v-spacer
@@ -50,6 +50,9 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Prop } from 'vue-property-decorator'
 import IndexCircle from '@/components/IndexCircle.vue'
+import { namespace } from 'vuex-class'
+
+const AppStore = namespace('AppStore')
 
 @Component({
   components: {
@@ -60,6 +63,8 @@ export default class Welcome extends Vue {
   @Prop({ required: true }) dialog!: boolean
   @Prop({ required: true }) close!: () => void
   @Prop({ required: true }) openRules!: () => void
+
+  @AppStore.State dark!: boolean
 
   index = 0
 
@@ -81,5 +86,13 @@ export default class Welcome extends Vue {
       this.close()
     }
   }
+
+  get textStyle() {
+    return {
+      color: this.dark ? 'rgba(255, 255, 255, 0.87)' : 'rgba(0, 0, 0, 0.87)',
+    }
+  }
 }
 </script>
+
+<style></style>
