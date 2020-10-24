@@ -87,6 +87,7 @@ v-container(
         v-row.justify-center.text-center
           p
             | {{ $t("report.url") }}:
+            | {{ " " }}
             a(:href='url', target='_blank') {{ url }}
         v-row.flex-row.justify-center
           twitter-button.share-button--circle(
