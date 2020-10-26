@@ -57,7 +57,7 @@ import { logEvent } from '@/utils/logEvent'
 import { setCookie } from '@/utils/cookie'
 const { vueTelegramLogin } = require('vue-telegram-login')
 import { serverBus } from '@/main'
-import * as firebase from 'firebase/app'
+import firebase from 'firebase/app'
 import 'firebase/auth'
 
 const UserStore = namespace('UserStore')

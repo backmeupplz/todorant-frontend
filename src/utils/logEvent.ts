@@ -1,4 +1,4 @@
-import * as firebase from 'firebase/app'
+import firebase from 'firebase/app'
 import 'firebase/analytics'
 
 export function logEvent(eventName: string, meta?: object) {
