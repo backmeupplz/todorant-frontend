@@ -74,7 +74,7 @@ export class SyncManager<T> {
 
   // 1
   sync = async () => {
-    if (!store.state.UserStore.user.token || !socketIO.connected) {
+    if (!(store as any).state.UserStore.user.token || !socketIO.connected) {
       return
     }
     console.log(`${this.name}: sync`, this.latestSyncDate())
@@ -95,7 +95,7 @@ export class SyncManager<T> {
         `push_${this.name}`,
         pushId,
         objects,
-        store.state.UserStore.user.password
+        (store as any).state.UserStore.user.password
       )
     })
   }

@@ -431,7 +431,7 @@ export default class Settings extends Vue {
     this.name = user.name
     try {
       await api.setSettings(user, {
-        ...store.state.SettingsStore,
+        ...(store as any).state.SettingsStore,
       })
       await api.setUserName(user, {
         name: this.name,

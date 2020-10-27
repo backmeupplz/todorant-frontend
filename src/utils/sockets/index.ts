@@ -62,11 +62,15 @@ class SocketManager {
     socketIO.connect()
   }
   authorize = () => {
-    if (!store.state.UserStore.user) {
+    if (!(store as any).state.UserStore.user) {
       return
     }
-    const token = store.state.UserStore.user.token
-    if (!token || !socketIO.connected || store.state.SocketsStore.authorized) {
+    const token = (store as any).state.UserStore.user.token
+    if (
+      !token ||
+      !socketIO.connected ||
+      (store as any).state.SocketsStore.authorized
+    ) {
       return
     }
     socketIO.emit('authorize', token)
@@ -76,19 +80,19 @@ class SocketManager {
       return
     }
     socketIO.emit('logout')
-    store.state.SocketsStore.authorized = false
+    ;(store as any).state.SocketsStore.authorized = false
     console.log('sockets logout')
   }
 
   onConnect = () => {
     console.log('sockets connected')
-    store.state.SocketsStore.connected = true
+    ;(store as any).state.SocketsStore.connected = true
     this.authorize()
   }
   onDisconnect = () => {
     console.log('sockets disconnected')
-    store.state.SocketsStore.connected = false
-    store.state.SocketsStore.authorized = false
+    ;(store as any).state.SocketsStore.connected = false
+    ;(store as any).state.SocketsStore.authorized = false
   }
 
   onConnectError = (error: Error) => {
@@ -103,7 +107,7 @@ class SocketManager {
 
   onAuthorized = () => {
     console.log('sockets authorized')
-    store.state.SocketsStore.authorized = true
+    ;(store as any).state.SocketsStore.authorized = true
     this.globalSync()
   }
 

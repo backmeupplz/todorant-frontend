@@ -10,8 +10,8 @@ import store from '@/store'
 Vue.use(VueI18n)
 
 function getNavigatorLanguage() {
-  if (store.state.AppStore.language) {
-    return store.state.AppStore.language
+  if ((store as any).state.AppStore.language) {
+    return (store as any).state.AppStore.language
   } else {
     const language = (navigator.languages && navigator.languages.length
       ? navigator.languages[0]
