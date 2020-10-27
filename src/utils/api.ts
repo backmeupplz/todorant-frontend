@@ -73,7 +73,7 @@ export async function postTodos(user: User, todos: Partial<Todo>[]) {
           todoCopy.date = todo.date.substr(8)
         }
         todoCopy.encrypted =
-          !!store.state.UserStore.password && !todoCopy.delegate
+          !!(store as any).state.UserStore.password && !todoCopy.delegate
         return todoCopy
       }),
       {
@@ -111,7 +111,7 @@ export async function editTodo(user: User, todo: Todo) {
 }
 
 export async function deleteTodo(todo: Todo) {
-  const user = store.state.UserStore.user
+  const user = (store as any).state.UserStore.user
   if (!user) {
     throw new Error('No user')
   }
@@ -149,7 +149,7 @@ export async function editTag(
 }
 
 export async function deleteAllTags() {
-  const user = store.state.UserStore.user
+  const user = (store as any).state.UserStore.user
   if (!user) {
     throw new Error('No user')
   }
@@ -304,7 +304,7 @@ export async function getPlanSession(user: User, plan: Plan) {
 }
 
 export async function manageSubscriptionUrl() {
-  const user = store.state.UserStore.user
+  const user = (store as any).state.UserStore.user
   if (!user) {
     throw new Error('No user')
   }
@@ -411,7 +411,7 @@ export async function authorizeGoogleCalendar(user: User, code: string) {
 }
 
 export async function resetDelegateToken() {
-  const user = store.state.UserStore.user
+  const user = (store as any).state.UserStore.user
   if (!user) {
     throw new Error('No user')
   }
@@ -427,7 +427,7 @@ export async function resetDelegateToken() {
 }
 
 export async function getUnacceptedDelegated() {
-  const user = store.state.UserStore.user
+  const user = (store as any).state.UserStore.user
   if (!user) {
     throw new Error('No user')
   }
@@ -439,7 +439,7 @@ export async function getUnacceptedDelegated() {
 }
 
 export async function deleteDelegate(id: string) {
-  const user = store.state.UserStore.user
+  const user = (store as any).state.UserStore.user
   if (!user) {
     throw new Error('No user')
   }
@@ -451,7 +451,7 @@ export async function deleteDelegate(id: string) {
 }
 
 export async function deleteDelegator(id: string) {
-  const user = store.state.UserStore.user
+  const user = (store as any).state.UserStore.user
   if (!user) {
     throw new Error('No user')
   }
@@ -473,7 +473,7 @@ export async function useDelegateToken(user: User, token: string) {
 }
 
 export async function acceptDelegateTodo(todo: Todo) {
-  const user = store.state.UserStore.user
+  const user = (store as any).state.UserStore.user
   if (!user) {
     throw new Error('No user')
   }
@@ -488,7 +488,7 @@ export async function acceptDelegateTodo(todo: Todo) {
 
 function getHeaders(user: User) {
   if (user.token) {
-    const password = store.state.UserStore.password
+    const password = (store as any).state.UserStore.password
     return password ? { token: user.token, password } : { token: user.token }
   } else {
     return undefined

@@ -104,7 +104,7 @@ const router = new Router({
 
 router.beforeEach((to, _, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth)
-  const user = store.state.UserStore.user
+  const user = (store as any).state.UserStore.user
 
   if (requiresAuth && !user) {
     next('/')

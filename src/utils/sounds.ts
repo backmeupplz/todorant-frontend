@@ -1,7 +1,7 @@
 import store from '@/store'
 
 export async function playSound(audioName: Sounds) {
-  if (!store.state.SettingsStore.audioEnabled) {
+  if (!(store as any).state.SettingsStore.audioEnabled) {
     return
   }
   if (audioName === Sounds.levelUp && Math.floor(Math.random() * 10) === 0) {

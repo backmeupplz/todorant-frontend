@@ -2,20 +2,20 @@ import { AES, enc } from 'crypto-js'
 import store from '@/store'
 
 export function encrypt(str: string) {
-  if (!store.state.UserStore.password) {
+  if (!(store as any).state.UserStore.password) {
     return str
   } else {
-    return _e(str, store.state.UserStore.password as string)
+    return _e(str, (store as any).state.UserStore.password as string)
   }
 }
 
 export function decrypt(str: string, encrypted = false) {
-  if (!store.state.UserStore.password && !encrypted) {
+  if (!(store as any).state.UserStore.password && !encrypted) {
     return str
   } else {
-    return !store.state.UserStore.password
+    return !(store as any).state.UserStore.password
       ? ''
-      : _d(str, store.state.UserStore.password as string)
+      : _d(str, (store as any).state.UserStore.password as string)
   }
 }
 

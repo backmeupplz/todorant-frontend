@@ -28,8 +28,11 @@ const store = new Vuex.Store({
 })
 
 // Setup analytics
-setUserProperty('landingABTestGroup', store.state.AppStore.landingABTestGroup)
-setUserProperty('language', store.state.AppStore.language)
-setUserProperty('darkMode', store.state.AppStore.dark)
+setUserProperty(
+  'landingABTestGroup',
+  (store as any).state.AppStore.landingABTestGroup
+)
+setUserProperty('language', (store as any).state.AppStore.language)
+setUserProperty('darkMode', (store as any).state.AppStore.dark)
 
 export default store
