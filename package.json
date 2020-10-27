@@ -11,6 +11,7 @@
     "increment-version": "versiony public/version.json --minor && versiony package.json --minor && git add . && git commit -m 'new version' && git push"
   },
   "dependencies": {
+    "@types/chart.js": "^2.9.27",
     "@types/crypto-js": "^4.0.1",
     "@types/file-saver": "^2.0.1",
     "@types/js-cookie": "^2.2.6",
@@ -21,7 +22,7 @@
     "@types/uuid": "^8.3.0",
     "@upacyxou/vue-simple-calendar": "^5.0.2",
     "axios": "^0.21.0",
-    "bar-chartjs": "^1.1.2",
+    "chart.js": "^2.9.4",
     "cnf-qrcode": "^1.0.13",
     "color-scheme": "^1.0.1",
     "crypto-js": "^4.0.0",
