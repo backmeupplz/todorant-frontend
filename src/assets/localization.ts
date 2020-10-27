@@ -262,7 +262,6 @@ export const messages = {
       startTimeOfDay: 'Start of the day',
       username: 'Name',
       telegram: 'Telegram',
-      swipeActions: 'Swipe actions',
       coloredCardBackgrounds: 'Color tasks with hashtag colors',
     },
     allDoneTitle: 'Congratulations!',
@@ -443,6 +442,9 @@ export const messages = {
     },
     success: 'Success!',
     notLogginedBody: 'Please, login at ',
+    settingsActions: {
+      swipeActions: 'Swipe actions',
+    },
     cannotLoadTitle: 'Uh oh!',
     cannotLoadText: 'Could not load your todos, maybe the Internet is down?',
     deleteAllHashtagsConfirm: 'Are you sure you want to delete all hashtags?',
@@ -743,7 +745,6 @@ export const messages = {
       startTimeOfDay: 'Начало дня',
       username: 'Имя',
       telegram: 'Телеграм',
-      swipeActions: 'Действия свайпами',
       coloredCardBackgrounds: 'Окрашивать задачи цветами хештегов',
     },
     allDoneTitle: 'Поздравляем!',
@@ -928,6 +929,9 @@ export const messages = {
     },
     success: 'Успех!',
     notLogginedBody: 'Пожалуйста, войдите в аккаунт на ',
+    settingsActions: {
+      swipeActions: 'Действия свайпами',
+    },
     cannotLoadTitle: 'Ай-я-яй!',
     cannotLoadText:
       'Не получилось загрузить задачи, может, что-то с Интернетом?',

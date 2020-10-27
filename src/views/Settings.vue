@@ -27,7 +27,7 @@ v-dialog(
       )
       v-switch.ma-0.pa-0(:label='$t("soundEffects")', v-model='soundEffects')
       v-switch.ma-0.pa-0(:label='$t("settings.hotkeys")', v-model='hotKeys')
-      v-switch.ma-0.pa-0(:label='$t("settings.swipeActions")', v-model='swipeActions')
+      v-switch.ma-0.pa-0(:label='$t("settingsActions.swipeActions")', v-model='swipeActions')
       v-switch.ma-0.pa-0(:label='$t("settings.coloredCardBackgrounds")', v-model='coloredCardBackgroundsValue')
       v-divider
       v-select.mt-4(
