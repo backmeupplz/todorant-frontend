@@ -209,6 +209,8 @@ export default class Report extends Vue {
   hashtag = ''
   url = ''
 
+  charts: any[] = []
+
   name = ''
 
   more = false
@@ -218,12 +220,6 @@ export default class Report extends Vue {
 
   endDateMenu = false
   endDate: null | string = null
-
-  @Watch('dark')
-  colorChanged() {
-    this.renderChart('frogs', this.completedFrogsData)
-    this.renderChart('todos', this.completedTodosData)
-  }
 
   mounted() {
     this.refresh()
@@ -244,30 +240,36 @@ export default class Report extends Vue {
     if (!context) {
       return
     }
-    const newChart = new Chart(context, {
-      type: 'bar',
-      data: canvasData,
-      options: {
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true,
-                stepSize: 2,
-                min: 0,
+    if (this.charts.length >= 2) {
+      this.charts.forEach((chart) => chart.destroy())
+      this.charts = []
+    }
+    this.charts.push(
+      new Chart(context, {
+        type: 'bar',
+        data: canvasData,
+        options: {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                  stepSize: 2,
+                  min: 0,
+                },
               },
-            },
-          ],
-          xAxes: [
-            {
-              gridLines: {
-                color: 'rgba(0, 0, 0, 0)',
+            ],
+            xAxes: [
+              {
+                gridLines: {
+                  color: 'rgba(0, 0, 0, 0)',
+                },
               },
-            },
-          ],
+            ],
+          },
         },
-      },
-    })
+      })
+    )
   }
 
   convertData(data: any, title: string) {
