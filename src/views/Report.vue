@@ -298,11 +298,11 @@ export default class Report extends Vue {
     }
 
     const daysToCompletedMap = keys.reduce((prev, cur) => {
-      prev[new Date(cur).toLocaleDateString()] = data[cur]
+      prev[new Date(cur).toLocaleDateString(this.language)] = data[cur]
       return prev
     }, {} as any)
 
-    const labels = days.map((k) => k.toLocaleDateString())
+    const labels = days.map((k) => k.toLocaleDateString(this.language))
     const completedData = labels.map((l) => daysToCompletedMap[l])
 
     return {
