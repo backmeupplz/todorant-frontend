@@ -17,6 +17,12 @@ v-dialog(
           ) {{ "#" }}{{ tag.tag }}
           v-spacer.px-2
           v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
+            v-text-field(
+              v-model='tagName',
+              :rules='tagRules',
+              :style='{ color: colorForTag(tag, i) }',
+              v-if='edited == i'
+            )
           v-spacer
           v-btn(
             v-if='!!tag.color',
@@ -71,6 +77,12 @@ v-dialog(
         .d-flex.direction-row.align-center
           .d-flex.flex-column
             v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
+              v-text-field(
+                v-model='tagName',
+                :rules='tagRules',
+                :style='{ color: colorForTag(tag, i) }',
+                v-if='edited == i'
+              )
             v-btn.ml-2.mb-2(
               small,
               bottom,
@@ -202,6 +214,8 @@ export default class Hashtags extends Vue {
   epic = -1
   epicGoal = ''
 
+  tagName = ''
+
   get epics() {
     return this.tags.filter((t) => t.epic)
   }
@@ -238,6 +252,7 @@ export default class Hashtags extends Vue {
   selectTag(tag: Tag, i: number) {
     const defaultColor = this.dark ? '#64B5F6' : '#1E88E5'
     this.editedColor = tag.color || defaultColor
+    this.tagName = tag.tag
     this.edited = i
   }
 
@@ -248,7 +263,15 @@ export default class Hashtags extends Vue {
     }
     this.loading = true
     try {
-      await api.editTag(user, tag, this.editedColor, tag.epic, tag.epicGoal)
+      await api.editTag(
+        user,
+        tag,
+        this.editedColor,
+        tag.epic,
+        tag.epicGoal,
+        undefined,
+        this.tagName
+      )
       this.cancelTag(tag)
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)
@@ -316,6 +339,8 @@ export default class Hashtags extends Vue {
     (v: any) => !!v.match(/^\d+$/) || i18n.t('errors.epic.numberError'),
     (v: any) => +v > 0 || i18n.t('errors.epic.greaterThanZeroError'),
   ]
+
+  tagRules = [(v: any) => !!v.match(/^[\S]+$/)]
 
   loading = false
 

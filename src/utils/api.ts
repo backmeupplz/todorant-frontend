@@ -132,7 +132,8 @@ export async function editTag(
   color?: string,
   epic?: boolean,
   epicGoal?: number,
-  epicCompleted?: boolean
+  epicCompleted?: boolean,
+  newEpicName?: string
 ) {
   return axios.put(
     `${base}/tag/${tag._id}`,
@@ -141,6 +142,7 @@ export async function editTag(
       epic: epic || null,
       epicGoal: epicGoal || null,
       epicCompleted: epicCompleted || null,
+      newName: newEpicName || null,
     },
     {
       headers: getHeaders(user),
