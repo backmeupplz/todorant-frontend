@@ -83,6 +83,8 @@ v-container(style='maxWidth: 1000px;')
         :loading='todosUpdating || loading',
         :click='searchTouched',
         name='$search'
+        v-shortkey='["ctrl", "shift" ,"f"]',
+        @shortkey.native='searchTouched'
       )
       IconButton.planning-calendar-button(
         :loading='todosUpdating',
