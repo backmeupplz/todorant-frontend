@@ -102,6 +102,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
+import { i18n } from '@/plugins/i18n'
 
 const AppStore = namespace('AppStore')
 
@@ -114,6 +115,20 @@ export default class DownloadLinks extends Vue {
   open(link: string) {
     logEvent('open_link', { link })
     window.open(link, '_blank')
+  }
+
+  get appstoreLanguage() {
+    switch (i18n.locale) {
+      case undefined:
+        return 'us'
+      case 'en':
+        return 'us'
+      case 'uk':
+        return 'us'
+      default:
+        break
+    }
+    return i18n.locale
   }
 }
 </script>
