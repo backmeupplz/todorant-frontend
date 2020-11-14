@@ -65,7 +65,7 @@ v-container(style='maxWidth: 1000px;')
         v-if='!!editable || !!spreadEnabled',
         icon,
         :loading='todosUpdating || loading',
-        @click='crossPressed'
+        @click='crossPressed',
         v-shortkey.once='["esc"]',
         @shortkey.native='crossPressed'
       )
@@ -82,7 +82,7 @@ v-container(style='maxWidth: 1000px;')
         v-if='!editable && !showCompleted && !calendarViewEnabled',
         :loading='todosUpdating || loading',
         :click='searchTouched',
-        name='$search'
+        name='$search',
         v-shortkey='["ctrl", "shift" ,"f"]',
         @shortkey.native='searchTouched'
       )
@@ -407,7 +407,7 @@ export default class TodoList extends Vue {
   }
 
   get weekStyles() {
-    return [0, 1, 2, 3, 4].map((v) => ({
+    return [0, 1, 2, 3, 4, 5].map((v) => ({
       'min-height': this.heightForWeek(v),
     }))
   }
@@ -822,13 +822,11 @@ export default class TodoList extends Vue {
   }
 
   weekForDate(date: Dayjs) {
-    const locale = dayjs.locale()
-    dayjs.locale(locale, {
-      week: {
-        dow: this.safeFirstDayOfWeek,
-      },
-    } as any)
-    const week = date.week()
+    const week = date
+      .locale(dayjs.locale(), {
+        weekStart: this.safeFirstDayOfWeek,
+      })
+      .week()
     return week
   }
 
