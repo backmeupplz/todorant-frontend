@@ -737,7 +737,7 @@ export default class TodoList extends Vue {
     if (!this.editable) {
       return
     }
-    const newTitle = dayjs(date).format('YYYY-MM-DD')
+    const newTitle = dayjs(date).locale(enLocale).format('YYYY-MM-DD')
     if (isDateTooOld(newTitle, api.getToday())) {
       return
     }
