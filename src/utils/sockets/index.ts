@@ -1,16 +1,21 @@
-import { Tag } from '@/models/Tag'
+import { User } from '@/models/User'
 import { socketIO } from '@/utils/sockets/socketIO'
 import { SyncManager } from '@/utils/sockets/SyncManager'
 import store from '@/store'
 import UserStore from '@/store/modules/UserStore'
 import SocketsStore from '@/store/modules/SocketsStore'
+import DelegationStore from '@/store/modules/DelegationStore'
 
 const userStore = store.state.UserStore as UserStore
 const socketsStore = store.state.SocketsStore as SocketsStore
+const delegationStore = store.state.DelegationStore as DelegationStore
 
 class SocketManager {
-  tagsSyncManager: SyncManager<Tag[]>
-  delegationSyncManager: SyncManager<any>
+  delegationSyncManager: SyncManager<{
+    delegates: User[]
+    delegators: User[]
+    token: string
+  }>
 
   pendingAuthorization?: {
     res: () => void
@@ -19,9 +24,7 @@ class SocketManager {
   }
 
   get isSyncing() {
-    return (
-      this.tagsSyncManager.isSyncing || this.delegationSyncManager.isSyncing
-    )
+    return this.delegationSyncManager.isSyncing
   }
 
   constructor() {
@@ -36,25 +39,11 @@ class SocketManager {
 
     socketIO.on('authorized', this.onAuthorized)
 
-    this.tagsSyncManager = new SyncManager<Tag[]>(
-      'tags',
-      () => sharedTagStore.lastSyncDate,
-      (objects, pushBack, completeSync) => {
-        return sharedTagStore.onObjectsFromServer(
-          objects,
-          pushBack as () => Promise<Tag[]>,
-          completeSync
-        )
-      },
-      (lastSyncDate) => {
-        sharedTagStore.lastSyncDate = new Date(lastSyncDate)
-      }
-    )
     this.delegationSyncManager = new SyncManager<any>(
       'delegate',
       () => undefined,
       (objects, _, completeSync) => {
-        return sharedDelegationStore.onObjectsFromServer(objects, completeSync)
+        return delegationStore.onObjectsFromServer(objects, completeSync)
       }
     )
 
@@ -134,10 +123,7 @@ class SocketManager {
   }
 
   globalSync = () => {
-    return Promise.all([
-      this.tagsSyncManager.sync(),
-      this.delegationSyncManager.sync(),
-    ])
+    return Promise.all([this.delegationSyncManager.sync()])
   }
 }
 
