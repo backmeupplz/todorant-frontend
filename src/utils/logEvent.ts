@@ -1,10 +1,9 @@
-let Countly: any
-
 export function logEvent(eventName: string, meta?: object) {
   try {
-    Countly.q.push([
+    ;(global as any).Countly.q.push([
       'add_event',
       {
+        count: 1,
         key: eventName,
         segmentation: meta,
       },
@@ -16,8 +15,8 @@ export function logEvent(eventName: string, meta?: object) {
 
 export function setUserProperty(name: string, value: any) {
   try {
-    Countly.q.push(['userData.set', name, value])
-    Countly.q.push(['userData.save'])
+    ;(global as any).Countly.q.push(['userData.set', name, value])
+    ;(global as any).Countly.q.push(['userData.save'])
   } catch (err) {
     // Do nothing
   }
