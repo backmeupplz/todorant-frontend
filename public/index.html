@@ -96,15 +96,43 @@
       content="/favicon/browserconfig.xml?v=wAMdXoy3EW"
     />
     <meta name="theme-color" content="#ffffff" />
+    <!-- Analytics -->
+    <script type="text/javascript">
+      var Countly = Countly || {}
+      Countly.q = Countly.q || []
+      Countly.app_key = '95f6d5ac38eb653c69778a309aa53ed709463c70'
+      Countly.url = 'https://analytics.todorant.com'
+      Countly.q.push(['track_sessions'])
+      Countly.q.push(['track_pageview'])
+      Countly.q.push(['track_clicks'])
+      Countly.q.push(['track_scrolls'])
+      Countly.q.push(['track_errors'])
+      Countly.q.push(['track_links'])
+      Countly.q.push(['track_forms'])
+      ;(function () {
+        var cly = document.createElement('script')
+        cly.type = 'text/javascript'
+        cly.async = true
+        cly.src =
+          'https://cdnjs.cloudflare.com/ajax/libs/countly-sdk-web/20.4.0/countly.min.js'
+        cly.onload = function () {
+          Countly.init()
+        }
+        var s = document.getElementsByTagName('script')[0]
+        s.parentNode.insertBefore(cly, s)
+      })()
+    </script>
   </head>
   <body>
     <noscript>
-      <font color="white">
-        <strong
-          >We're sorry but Todorant doesn't work properly without JavaScript
-          enabled. Please, enable it to continue.</strong
-        >
-      </font>
+      <p style="color: white">
+        We're sorry but Todorant doesn't work properly without JavaScript
+        enabled. Please, enable it to continue.
+      </p>
+      <!-- Countly-->
+      <img
+        src="https://analytics.todorant.com/pixel.png?app_key=95f6d5ac38eb653c69778a309aa53ed709463c70&begin_session=1"
+      />
     </noscript>
     <div id="app">
       <img
@@ -114,6 +142,5 @@
         height="100"
       />
     </div>
-    <!-- built files will be auto injected -->
   </body>
 </html>

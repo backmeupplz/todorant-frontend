@@ -1,19 +1,23 @@
-import firebase from 'firebase/app'
-import 'firebase/analytics'
+let Countly: any
 
 export function logEvent(eventName: string, meta?: object) {
   try {
-    firebase.analytics().logEvent(eventName, meta)
+    Countly.q.push([
+      'add_event',
+      {
+        key: eventName,
+        segmentation: meta,
+      },
+    ])
   } catch (err) {
     // Do nothing
   }
 }
 
 export function setUserProperty(name: string, value: any) {
-  const obj = {} as { [index: string]: string }
-  obj[name] = value
   try {
-    firebase.analytics().setUserProperties(obj)
+    Countly.q.push(['userData.set', name, value])
+    Countly.q.push(['userData.save'])
   } catch (err) {
     // Do nothing
   }
