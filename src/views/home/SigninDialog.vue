@@ -163,7 +163,7 @@ export default class SigninDialog extends Vue {
 
   async loginWithApple() {
     window.location.href =
-      'https://appleid.apple.com/auth/authorize?response_type=id_token&response_mode=form_post&client_id=com.todorant.web&redirect_uri=https://backend.todorant.com/login/apple_login_result&scope=email%20name'
+      'https://appleid.apple.com/auth/authorize?response_type=code%20id_token&response_mode=form_post&client_id=com.todorant.web&redirect_uri=https://backend.todorant.com/login/apple_login_result&scope=email%20name'
   }
 
   async onTelegramAuth(loginInfo: any) {
