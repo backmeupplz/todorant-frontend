@@ -127,6 +127,18 @@ export default class SigninDialog extends Vue {
         }
       }
     }
+    // Apple auth
+    if (this.$route.path.includes('apple_login_result')) {
+      const code = this.getArgFromHash('code')
+      if (code) {
+        try {
+          const user = await loginApple({ code })
+          this.loginSuccess(user, 'apple')
+        } catch (error) {
+          this.loginError(error, 'apple')
+        }
+      }
+    }
   }
 
   async loginWithGoogle() {
@@ -144,19 +156,8 @@ export default class SigninDialog extends Vue {
   }
 
   async loginWithApple() {
-    const authProvider = new firebase.auth.OAuthProvider('apple.com')
-    authProvider.addScope('email')
-    authProvider.addScope('name')
-    try {
-      const result = await firebase.auth().signInWithPopup(authProvider)
-      const user = await loginApple({
-        ...result,
-        name: firebase.auth().currentUser?.displayName,
-      })
-      this.loginSuccess(user, 'apple')
-    } catch (error) {
-      this.loginError(error, 'apple')
-    }
+    window.location.href =
+      'https://appleid.apple.com/auth/authorize?response_type=code&response_mode=form_post&client_id=com.todorant.web&redirect_uri=https://backend.todorant.com/login/apple_login_result&scope=email%20name'
   }
 
   async onTelegramAuth(loginInfo: any) {
