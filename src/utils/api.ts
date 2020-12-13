@@ -35,8 +35,7 @@ export async function loginTelegram(loginInfo: any) {
 }
 
 export async function loginApple(loginInfo: any) {
-  return (await axios.post(`${base}/login/apple-firebase`, loginInfo))
-    .data as User
+  return (await axios.post(`${base}/login/apple`, loginInfo)).data as User
 }
 
 export async function loginToken(token: string) {
