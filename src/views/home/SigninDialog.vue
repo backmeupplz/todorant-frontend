@@ -98,6 +98,19 @@ export default class SigninDialog extends Vue {
         this.onTelegramAuth(this.$route.query)
       }
     }
+    // Facebook auth
+    if (
+      this.$route.path.includes('facebook_login_result') &&
+      this.$route.query.access_token &&
+      typeof this.$route.query.access_token === 'string'
+    ) {
+      try {
+        const user = await loginFacebook(this.$route.query.access_token)
+        this.loginSuccess(user, 'facebook')
+      } catch (error) {
+        this.loginError(error, 'facebook')
+      }
+    }
     // Google auth
     try {
       const result = await firebase.auth().getRedirectResult()
@@ -119,16 +132,8 @@ export default class SigninDialog extends Vue {
   }
 
   async loginWithFacebook() {
-    const authProvider = new firebase.auth.FacebookAuthProvider()
-    authProvider.addScope('email')
-    try {
-      const result = await firebase.auth().signInWithPopup(authProvider)
-      const token = (result.credential as any).accessToken
-      const user = await loginFacebook(token)
-      this.loginSuccess(user, 'facebook')
-    } catch (error) {
-      this.loginError(error, 'facebook')
-    }
+    window.location.href =
+      'https://www.facebook.com/dialog/oauth?client_id=640750769753434&redirect_uri=https://todorant.com/facebook_login_result&scope=email,public_profile&response_type=token&auth_type=rerequest'
   }
 
   async loginWithApple() {
