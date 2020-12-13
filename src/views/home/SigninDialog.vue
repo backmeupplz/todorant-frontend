@@ -91,6 +91,11 @@ export default class SigninDialog extends Vue {
     return !!process.env.VUE_APP_DEV
   }
 
+  getArgFromHash(name: string) {
+    const match = RegExp(`${name}=([^&]+)`).exec(this.$route.hash)
+    return match && match[1]
+  }
+
   async created() {
     // Telegram auth
     if (this.$route.query && this.$route.query.hash) {
@@ -99,16 +104,15 @@ export default class SigninDialog extends Vue {
       }
     }
     // Facebook auth
-    if (
-      this.$route.path.includes('facebook_login_result') &&
-      this.$route.query.access_token &&
-      typeof this.$route.query.access_token === 'string'
-    ) {
-      try {
-        const user = await loginFacebook(this.$route.query.access_token)
-        this.loginSuccess(user, 'facebook')
-      } catch (error) {
-        this.loginError(error, 'facebook')
+    if (this.$route.path.includes('facebook_login_result')) {
+      const accessToken = this.getArgFromHash('access_token')
+      if (accessToken) {
+        try {
+          const user = await loginFacebook(accessToken)
+          this.loginSuccess(user, 'facebook')
+        } catch (error) {
+          this.loginError(error, 'facebook')
+        }
       }
     }
     // Google auth
