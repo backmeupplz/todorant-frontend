@@ -92,7 +92,9 @@ export default class SigninDialog extends Vue {
   }
 
   getArgFromHash(name: string) {
-    const match = RegExp(`${name}=([^&]+)`).exec(this.$route.hash)
+    const match = RegExp(`${name}=([^&]+)`).exec(
+      decodeURIComponent(this.$route.hash)
+    )
     return match && match[1]
   }
 
@@ -130,9 +132,13 @@ export default class SigninDialog extends Vue {
     // Apple auth
     if (this.$route.path.includes('apple_login_result')) {
       const code = this.getArgFromHash('code')
+      const userString = this.getArgFromHash('user')
       if (code) {
         try {
-          const user = await loginApple({ code })
+          const user = await loginApple({
+            code,
+            user: userString ? JSON.parse(userString) : undefined,
+          })
           this.loginSuccess(user, 'apple')
         } catch (error) {
           this.loginError(error, 'apple')
