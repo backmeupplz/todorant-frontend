@@ -59,6 +59,7 @@ const { vueTelegramLogin } = require('vue-telegram-login')
 import { serverBus } from '@/main'
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import { v4 as uuid } from 'uuid'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -162,8 +163,7 @@ export default class SigninDialog extends Vue {
   }
 
   async loginWithApple() {
-    window.location.href =
-      'https://appleid.apple.com/auth/authorize?response_type=code%20id_token&response_mode=form_post&client_id=com.todorant.web&redirect_uri=https://backend.todorant.com/login/apple_login_result&scope=email%20name'
+    window.location.href = `https://appleid.apple.com/auth/authorize?response_type=code%20id_token&response_mode=form_post&client_id=com.todorant.web&redirect_uri=https://backend.todorant.com/login/apple_login_result&scope=email%20name&nonce=${uuid()}&state=${uuid()}`
   }
 
   async onTelegramAuth(loginInfo: any) {
