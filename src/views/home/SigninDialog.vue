@@ -116,23 +116,26 @@ export default class SigninDialog extends Vue {
       }
     }
     // Google auth
-    try {
-      const result = await firebase.auth().getRedirectResult()
-      if (result.credential) {
-        const token = (result.credential as any).accessToken
-        const user = await loginGoogle(token)
-        this.loginSuccess(user, 'google')
+    if (this.$route.path.includes('google_login_result')) {
+      const accessToken = this.getArgFromHash('access_token')
+      if (accessToken) {
+        try {
+          const user = await loginGoogle(accessToken)
+          this.loginSuccess(user, 'google')
+        } catch (error) {
+          this.loginError(error, 'google')
+        }
       }
-    } catch (error) {
-      this.loginError(error, 'google')
     }
   }
 
   async loginWithGoogle() {
-    const authProvider = new firebase.auth.GoogleAuthProvider()
-    authProvider.addScope('email')
-    authProvider.addScope('profile')
-    await firebase.auth().signInWithRedirect(authProvider)
+    const clientId =
+      '989382323327-rou6lmk2umbnoaq55493v1kqm8fvp22q.apps.googleusercontent.com'
+    const redirectUri = 'https://todorant.com/google_login_result'
+    const scope =
+      'https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email'
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}&prompt=select_account`
   }
 
   async loginWithFacebook() {
