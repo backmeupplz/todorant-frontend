@@ -24,6 +24,11 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: Home,
+      alias: [
+        '/facebook_login_result',
+        '/google_login_result',
+        '/apple_login_result',
+      ],
     },
     {
       path: '/privacy',
