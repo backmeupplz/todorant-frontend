@@ -526,7 +526,7 @@ export const messages = {
     supportAlert: {
       title: 'Поддержка',
       text:
-        'Если у вас есть какие-либо вопросы или предложения, <a href="mailto:todorant@borodutch.com">напишите мне имеил</a>, <a href="https://t.me/borodutch" target="_blank">в Телеграм</a> или <a href="https://t.me/todorant_feedback" target="_blank">присоединитесь к нашей групе сообщества в Телеграме</a>!',
+        'Если у вас есть какие-либо вопросы или предложения, <a href="mailto:todorant@borodutch.com">напишите мне имеил</a>, <a href="https://t.me/borodutch" target="_blank">в Телеграм</a> или <a href="https://t.me/todorant_feedback" target="_blank">присоединитесь к нашей группе сообщества в Телеграме</a>!',
     },
     loginMobile: {
       telegram: {
