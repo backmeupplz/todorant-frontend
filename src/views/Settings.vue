@@ -29,6 +29,11 @@ v-dialog(
       v-switch.ma-0.pa-0(:label='$t("settings.hotkeys")', v-model='hotKeys')
       v-switch.ma-0.pa-0(:label='$t("settingsActions.swipeActions")', v-model='swipeActions')
       v-switch.ma-0.pa-0(:label='$t("settings.coloredCardBackgrounds")', v-model='coloredCardBackgroundsValue')
+      v-switch.ma-0.pa-0(
+        :label='$t("settings.newLineOnReturn")',
+        v-if='hotKeys',
+        v-model='newLineOnReturnHotKeys'
+      )
       v-divider
       v-select.mt-4(
         :items='weekdays',
@@ -203,6 +208,7 @@ export default class Settings extends Vue {
   @SettingsStore.State duplicateTagInBreakdown?: boolean
   @SettingsStore.State audioEnabled!: boolean
   @SettingsStore.State hotKeysEnabled!: boolean
+  @SettingsStore.State newLineOnReturn!: boolean
   @SettingsStore.State swipeActionsEnabled!: boolean
   @SettingsStore.State coloredCardBackgrounds!: boolean
   @SettingsStore.State googleCalendarCredentials!: GoogleCalendarCredentials
@@ -222,6 +228,9 @@ export default class Settings extends Vue {
   ) => void
   @SettingsStore.Mutation setAudioEnabled!: (audioEnabled: boolean) => void
   @SettingsStore.Mutation setHotKeysEnabled!: (hotKeysEnabled: boolean) => void
+  @SettingsStore.Mutation setNewLineOnReturn!: (
+    newLineOnReturn: boolean
+  ) => void
   @SettingsStore.Mutation setSwipeActionsEnabled!: (
     swipeActionsEnabled: boolean
   ) => void
@@ -313,6 +322,12 @@ export default class Settings extends Vue {
   }
   set hotKeys(val: boolean) {
     this.setHotKeysEnabled(val)
+  }
+  get newLineOnReturnHotKeys() {
+    return this.newLineOnReturn
+  }
+  set newLineOnReturnHotKeys(val: boolean) {
+    this.setNewLineOnReturn(val)
   }
   get swipeActions() {
     return this.swipeActionsEnabled
