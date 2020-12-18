@@ -14,7 +14,7 @@ export default class SettingsStore extends VuexModule {
 
   audioEnabled = true
   hotKeysEnabled = true
-  customHotKey = false
+  newLineOnReturn = false
   swipeActionsEnabled = false
   coloredCardBackgrounds = false
 
@@ -44,13 +44,13 @@ export default class SettingsStore extends VuexModule {
   setHotKeysEnabled(hotsetHotKeysEnabled: boolean) {
     this.hotKeysEnabled = hotsetHotKeysEnabled
     if (!hotsetHotKeysEnabled) {
-      this.customHotKey = false
+      this.newLineOnReturn = false
     }
   }
 
   @Mutation
-  setCustomHotKey(customHotKey: boolean) {
-    this.customHotKey = customHotKey
+  setNewLineOnReturn(newLineOnReturn: boolean) {
+    this.newLineOnReturn = newLineOnReturn
   }
 
   @Mutation

@@ -150,7 +150,7 @@ export default class TodoForm extends Vue {
   @AppStore.State language?: string
   @AppStore.State dark!: boolean
   @TagsStore.State tags!: Tag[]
-  @SettingsStore.State customHotKey!: boolean
+  @SettingsStore.State newLineOnReturn!: boolean
   @SettingsStore.State firstDayOfWeek?: number
   @SettingsStore.State startTimeOfDay?: string
   @DelegationStore.State delegates!: User[]
@@ -300,8 +300,8 @@ export default class TodoForm extends Vue {
     if (!evt.keyCode) {
       return
     }
-    if (this.customHotKey) {
-      if (evt.keyCode === 13 && evt.shiftKey) {
+    if (this.newLineOnReturn) {
+      if (evt.keyCode === 13 && evt.ctrlKey) {
         if (evt.type === 'keydown') {
           ;(this as any).enterPressed()
         }

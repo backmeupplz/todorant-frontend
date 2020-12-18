@@ -10,7 +10,7 @@ export default createPersistedState({
     'AppStore.landingABTestGroup',
     'SettingsStore.audioEnabled',
     'SettingsStore.hotKeysEnabled',
-    'SettingsStore.customHotKey',
+    'SettingsStore.newLineOnReturn',
     'SettingsStore.swipeActionsEnabled',
   ],
 })
