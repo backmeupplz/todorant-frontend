@@ -2,13 +2,13 @@ import { User } from '@/models/User'
 import { socketIO } from '@/utils/sockets/socketIO'
 import { SyncManager } from '@/utils/sockets/SyncManager'
 import store from '@/store'
-import UserStore from '@/store/modules/UserStore'
 import SocketsStore from '@/store/modules/SocketsStore'
 import DelegationStore from '@/store/modules/DelegationStore'
+import { serverBus } from '@/main'
+import { getModule } from 'vuex-module-decorators'
 
-const userStore = store.state.UserStore as UserStore
-const socketsStore = store.state.SocketsStore as SocketsStore
-const delegationStore = store.state.DelegationStore as DelegationStore
+const socketsStore = getModule(SocketsStore, store)
+const delegationStore = getModule(DelegationStore, store)
 
 class SocketManager {
   delegationSyncManager: SyncManager<{
@@ -38,6 +38,11 @@ class SocketManager {
     socketIO.on('error', this.onError)
 
     socketIO.on('authorized', this.onAuthorized)
+
+    socketIO.on(`todos_sync_request`, () => {
+      console.log('sockets requested sync')
+      serverBus.$emit('refreshRequested')
+    })
 
     this.delegationSyncManager = new SyncManager<any>(
       'delegate',
@@ -76,15 +81,15 @@ class SocketManager {
     }
   }
   authorize = () => {
-    return new Promise((res, rej) => {
-      if (!userStore.user?.token || !socketIO.connected) {
+    return new Promise<void>((res, rej) => {
+      if (!store.state.UserStore.user?.token || !socketIO.connected) {
         return rej('Not connected to sockets')
       }
       if (socketsStore.authorized) {
         return res()
       }
       this.pendingAuthorization = { res, rej, createdAt: Date.now() }
-      socketIO.emit('authorize', userStore.user.token, '1')
+      socketIO.emit('authorize', store.state.UserStore.user?.token, '1')
     })
   }
   logout = () => {
