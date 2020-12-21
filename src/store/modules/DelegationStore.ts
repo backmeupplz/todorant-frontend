@@ -55,4 +55,26 @@ export default class DelegationStore extends VuexModule {
   get delegateInviteLink() {
     return `${process.env.VUE_APP_WEBSITE}/invite/${this.token}`
   }
+
+  async onObjectsFromServer(
+    objects: {
+      delegates: User[]
+      delegators: User[]
+      token: string
+    },
+    completeSync: () => void
+  ) {
+    try {
+      // Delegators
+      await db.delegators.clear()
+      await db.delegators.bulkAdd(objects.delegators)
+      // Delegates
+      await db.delegates.clear()
+      await db.delegates.bulkAdd(objects.delegates)
+      // Token
+      this.setToken(objects.token)
+    } finally {
+      completeSync()
+    }
+  }
 }
