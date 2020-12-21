@@ -5,7 +5,7 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
       v-card-title
         span.headline {{ $t("todo.edit.title") }}
         v-spacer
-        v-icon.grey--text.pl-2(small)(v-if='todo && todo.encrypted') vpn_key
+        v-icon.grey--text.pl-2(small, v-if='todo && todo.encrypted') vpn_key
       v-card-text
         v-container
           TodoForm(
