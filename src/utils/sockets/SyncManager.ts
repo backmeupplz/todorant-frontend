@@ -10,8 +10,8 @@ import { SyncStage } from '@/utils/sockets/SyncStage'
 import { v4 as uuid } from 'uuid'
 import store from '@/store'
 
-const userStore = store.state.UserStore as UserStore
-const socketsStore = store.state.SocketsStore as SocketsStore
+const userStore = (store as any).state.UserStore as UserStore
+const socketsStore = (store as any).state.SocketsStore as SocketsStore
 
 export class SyncManager<T> {
   name: string

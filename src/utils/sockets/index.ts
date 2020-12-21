@@ -82,14 +82,18 @@ class SocketManager {
   }
   authorize = () => {
     return new Promise<void>((res, rej) => {
-      if (!store.state.UserStore.user?.token || !socketIO.connected) {
+      if (!(store as any).state.UserStore.user?.token || !socketIO.connected) {
         return rej('Not connected to sockets')
       }
       if (socketsStore.authorized) {
         return res()
       }
       this.pendingAuthorization = { res, rej, createdAt: Date.now() }
-      socketIO.emit('authorize', store.state.UserStore.user?.token, '1')
+      socketIO.emit(
+        'authorize',
+        (store as any).state.UserStore.user?.token,
+        '1'
+      )
     })
   }
   logout = () => {
