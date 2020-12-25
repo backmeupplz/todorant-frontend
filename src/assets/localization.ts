@@ -257,7 +257,7 @@ export const messages = {
       disconnectConfirm: 'Are you sure you want to disconnect this service?',
       account: 'Account',
       duplicateTagInBreakdown: 'Copy hashtags during a breakdown',
-      showMoreByDefault: 'Show more add todo settings by default',
+      showMoreByDefault: 'Show more when adding todos by default',
       export: 'Export data',
       hotkeys: 'Hotkeys',
       newLineOnReturn: 'Insert new line on enter',
