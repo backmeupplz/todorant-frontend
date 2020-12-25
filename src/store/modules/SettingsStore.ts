@@ -10,6 +10,7 @@ export default class SettingsStore extends VuexModule {
   preserveOrderByTime?: boolean = undefined
   googleCalendarCredentials?: GoogleCalendarCredentials = undefined
   duplicateTagInBreakdown?: boolean = undefined
+  showMoreByDefault?: boolean = undefined
   language?: string = undefined
 
   audioEnabled = true
@@ -86,5 +87,10 @@ export default class SettingsStore extends VuexModule {
   @Mutation
   setDuplicateTagInBreakdown(duplicateTagInBreakdown: boolean) {
     this.duplicateTagInBreakdown = duplicateTagInBreakdown
+  }
+
+  @Mutation
+  setShowMoreByDefault(showMoreByDefault: boolean) {
+    this.showMoreByDefault = showMoreByDefault
   }
 }

@@ -25,6 +25,10 @@ v-dialog(
         :label='$t("settings.duplicateTagInBreakdown")',
         v-model='safeDuplicateTagInBreakdown'
       )
+      v-switch.ma-0.pa-0(
+        :label='$t("settings.showMoreByDefault")',
+        v-model='safeShowMoreByDefault'
+      )
       v-switch.ma-0.pa-0(:label='$t("soundEffects")', v-model='soundEffects')
       v-switch.ma-0.pa-0(:label='$t("settings.hotkeys")', v-model='hotKeys')
       v-switch.ma-0.pa-0(:label='$t("settingsActions.swipeActions")', v-model='swipeActions')
@@ -206,6 +210,7 @@ export default class Settings extends Vue {
   @SettingsStore.State newTodosGoFirst?: boolean
   @SettingsStore.State preserveOrderByTime?: boolean
   @SettingsStore.State duplicateTagInBreakdown?: boolean
+  @SettingsStore.State showMoreByDefault?: boolean
   @SettingsStore.State audioEnabled!: boolean
   @SettingsStore.State hotKeysEnabled!: boolean
   @SettingsStore.State newLineOnReturn!: boolean
@@ -225,6 +230,9 @@ export default class Settings extends Vue {
   ) => void
   @SettingsStore.Mutation setDuplicateTagInBreakdown!: (
     duplicateTagInBreakdown: boolean
+  ) => void
+  @SettingsStore.Mutation setShowMoreByDefault!: (
+    showMoreByDefault: boolean
   ) => void
   @SettingsStore.Mutation setAudioEnabled!: (audioEnabled: boolean) => void
   @SettingsStore.Mutation setHotKeysEnabled!: (hotKeysEnabled: boolean) => void
@@ -310,6 +318,12 @@ export default class Settings extends Vue {
   }
   set safeDuplicateTagInBreakdown(val: boolean) {
     this.setDuplicateTagInBreakdown(val)
+  }
+  get safeShowMoreByDefault() {
+    return this.showMoreByDefault || false
+  }
+  set safeShowMoreByDefault(val: boolean) {
+    this.setShowMoreByDefault(val)
   }
   get soundEffects() {
     return this.audioEnabled
