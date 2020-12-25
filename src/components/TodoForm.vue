@@ -65,7 +65,11 @@
           type='month',
           :locale='locale'
         )
-    v-col(v-if='moreShown || todo.time', cols='12', md='6')
+    v-col(
+      v-if='showMoreByDefault || moreShown || todo.time',
+      cols='12',
+      md='6'
+    )
       v-menu(v-model='timeMenu', :close-on-content-click='false', min-width=0)
         template(v-slot:activator='{ on }')
           v-text-field(
@@ -91,10 +95,14 @@
       v-switch(:label='$t("todo.create.frog")', v-model='todo.frog')
     v-col(cols='12', md='6')
       v-switch(:label='$t("completed")', v-model='todo.completed')
-    v-col(v-if='!editTodo && (moreShown || todo.time)', cols='12', md='6')
+    v-col(
+      v-if='!editTodo && (showMoreByDefault || moreShown || todo.time)',
+      cols='12',
+      md='6'
+    )
       v-switch(:label='$t("todo.create.goFirst")', v-model='todo.goFirst')
     v-col(
-      v-if='!editTodo && delegates.length && (moreShown || todo.time)',
+      v-if='!editTodo && delegates.length && (showMoreByDefault || moreShown || todo.time)',
       cols='12',
       md='6'
     )
@@ -106,7 +114,7 @@
       )
   v-row.v-flex-row
     v-btn(
-      v-if='!moreShown && !todo.time',
+      v-if='!showMoreByDefault && !moreShown && !todo.time',
       icon,
       text,
       color='default',
@@ -150,6 +158,7 @@ export default class TodoForm extends Vue {
   @AppStore.State language?: string
   @AppStore.State dark!: boolean
   @TagsStore.State tags!: Tag[]
+  @SettingsStore.State showMoreByDefault!: boolean
   @SettingsStore.State newLineOnReturn!: boolean
   @SettingsStore.State firstDayOfWeek?: number
   @SettingsStore.State startTimeOfDay?: string

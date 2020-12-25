@@ -257,6 +257,7 @@ export const messages = {
       disconnectConfirm: 'Are you sure you want to disconnect this service?',
       account: 'Account',
       duplicateTagInBreakdown: 'Copy hashtags during a breakdown',
+      showMoreByDefault: 'Show more when adding todos by default',
       export: 'Export data',
       hotkeys: 'Hotkeys',
       newLineOnReturn: 'Insert new line on enter',
@@ -741,6 +742,8 @@ export const messages = {
       disconnectConfirm: 'Уверены, что хотите отключить этот сервис?',
       account: 'Аккаунт',
       duplicateTagInBreakdown: 'Копировать хештеги при разбивке',
+      showMoreByDefault:
+        'Сразу показывать расширенные настройки добавления задачи',
       export: 'Экспорт данных',
       hotkeys: 'Горячие клавиши',
       newLineOnReturn: 'Переносить строку на enter',
