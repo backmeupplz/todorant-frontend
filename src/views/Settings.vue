@@ -26,7 +26,7 @@ v-dialog(
         v-model='safeDuplicateTagInBreakdown'
       )
       v-switch.ma-0.pa-0(
-        :label='$t("settings.showMoreByDefault")',
+        :label='$t("settingsObject.showMoreByDefault")',
         v-model='safeShowMoreByDefault'
       )
       v-switch.ma-0.pa-0(:label='$t("soundEffects")', v-model='soundEffects')

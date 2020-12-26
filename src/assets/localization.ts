@@ -257,14 +257,13 @@ export const messages = {
       disconnectConfirm: 'Are you sure you want to disconnect this service?',
       account: 'Account',
       duplicateTagInBreakdown: 'Copy hashtags during a breakdown',
-      showMoreByDefault: 'Show more when adding todos by default',
       export: 'Export data',
       hotkeys: 'Hotkeys',
-      newLineOnReturn: 'Insert new line on enter',
       startTimeOfDay: 'Start of the day',
       username: 'Name',
       telegram: 'Telegram',
       coloredCardBackgrounds: 'Color tasks with hashtag colors',
+      newLineOnReturn: 'Insert new line on enter',
     },
     allDoneTitle: 'Congratulations!',
     allDoneText:
@@ -493,6 +492,9 @@ export const messages = {
     introText14web:
       'There is one more thing to note though! To fully control superpower, you need to learn how to use it. Make sure to read "How to use Todorant" by tapping the info button in the top right corner!',
     edit: 'Edit',
+    settingsObject: {
+      showMoreByDefault: 'Show more when adding todos by default',
+    },
   },
   ru: {
     encryption: {
@@ -742,15 +744,13 @@ export const messages = {
       disconnectConfirm: 'Уверены, что хотите отключить этот сервис?',
       account: 'Аккаунт',
       duplicateTagInBreakdown: 'Копировать хештеги при разбивке',
-      showMoreByDefault:
-        'Сразу показывать расширенные настройки добавления задачи',
       export: 'Экспорт данных',
       hotkeys: 'Горячие клавиши',
-      newLineOnReturn: 'Переносить строку на enter',
       startTimeOfDay: 'Начало дня',
       username: 'Имя',
       telegram: 'Телеграм',
       coloredCardBackgrounds: 'Окрашивать задачи цветами хештегов',
+      newLineOnReturn: 'Переносить строку на enter',
     },
     allDoneTitle: 'Поздравляем!',
     allDoneText:
@@ -984,6 +984,10 @@ export const messages = {
     introText14web:
       'Стоит отметить еще одну вещь! Чтобы использовать суперсилу по-полной, вам нужно научиться ее контролировать. Обязательно прочитайте "Как пользоваться Тудурантом", нажав на кнопку справа вверху!',
     edit: 'Редактировать',
+    settingsObject: {
+      showMoreByDefault:
+        'Сразу показывать расширенные настройки добавления задачи',
+    },
   },
   ua: {
     encryption: {
