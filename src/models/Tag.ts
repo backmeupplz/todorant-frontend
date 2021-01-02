@@ -1,5 +1,7 @@
 export interface Tag {
-  _id: string
+  _tempSyncId: string
+  _id?: string
+  deleted: boolean
   createdAt: Date
   updatedAt: Date
 

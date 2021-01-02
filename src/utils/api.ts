@@ -2,14 +2,8 @@ import { GoogleCalendarCredentials } from '@/models/GoogleCalendarCredentials'
 import axios from 'axios'
 import { User } from '@/models/User'
 import { Todo } from '@/models/Todo'
-import { Tag } from '@/models/Tag'
-import { TodoSection } from '@/models/TodoSection'
 import store from '@/store'
 import { getModule } from 'vuex-module-decorators'
-import TagsStore from '@/store/modules/TagsStore'
-import UserStore from '@/store/modules/UserStore'
-import SettingsStore from '@/store/modules/SettingsStore'
-import HeroStore from '@/store/modules/HeroStore'
 import AppStore from '@/store/modules/AppStore'
 
 const base = process.env.VUE_APP_API
@@ -62,229 +56,11 @@ export async function checkTelegramLoginRequest(uuid: string) {
   )
 }
 
-export async function postTodos(user: User, todos: Partial<Todo>[]) {
-  return (
-    await axios.post(
-      `${base}/todo`,
-      todos.map((todo) => {
-        const todoCopy = { ...todo }
-        if (todo.date) {
-          todoCopy.monthAndYear = todo.date.substr(0, 7)
-          todoCopy.date = todo.date.substr(8)
-        }
-        todoCopy.encrypted =
-          !!(store as any).state.UserStore.password && !todoCopy.delegate
-        return todoCopy
-      }),
-      {
-        headers: getHeaders(user),
-      }
-    )
-  ).data
-}
-
-function getTimeString(now: Date) {
-  const timeArr = [
-    `${0 + now.getHours()}`,
-    `${0 + now.getMinutes()}`,
-  ].map((item) => item.slice(-2))
-  const time = `${timeArr[0]}:${timeArr[1]}`
-  return time
-}
-
-export async function editTodo(user: User, todo: Todo) {
-  const todoCopy = { ...todo, today: getToday() }
-  if (
-    (todo.date && todo.date.length !== 2) ||
-    (todo.monthAndYear && todo.monthAndYear.length !== 7)
-  ) {
-    if (todo.date) {
-      todoCopy.monthAndYear = todo.date.substr(0, 7)
-      todoCopy.date = todo.date.substr(8)
-    }
-  }
-  const time = getTimeString(new Date())
-  return axios.put(`${base}/todo/${todo._id}`, todoCopy, {
-    headers: getHeaders(user),
-    params: { time: time },
-  })
-}
-
-export async function deleteTodo(todo: Todo) {
-  const user = (store as any).state.UserStore.user
-  if (!user) {
-    throw new Error('No user')
-  }
-  return axios.delete(`${base}/todo/${todo._id}`, {
-    headers: getHeaders(user),
-  })
-}
-
-export async function deleteTag(user: User, tag: Tag) {
-  return axios.delete(`${base}/tag/${tag._id}`, {
-    headers: getHeaders(user),
-  })
-}
-
-export async function editTag(
-  user: User,
-  tag: Tag,
-  color?: string,
-  epic?: boolean,
-  epicGoal?: number,
-  epicCompleted?: boolean,
-  newEpicName?: string
-) {
-  return axios.put(
-    `${base}/tag/${tag._id}`,
-    {
-      color: color || null,
-      epic: epic || null,
-      epicGoal: epicGoal || null,
-      epicCompleted: epicCompleted || null,
-      newName: newEpicName || null,
-    },
-    {
-      headers: getHeaders(user),
-    }
-  )
-}
-
-export async function deleteAllTags() {
-  const user = (store as any).state.UserStore.user
-  if (!user) {
-    throw new Error('No user')
-  }
-  return axios.delete(`${base}/tag/all`, {
-    headers: getHeaders(user),
-  })
-}
-
-export async function completeTodo(user: User, todo: Todo) {
-  return axios.put(
-    `${base}/todo/${todo._id}/done`,
-    {},
-    {
-      headers: getHeaders(user),
-    }
-  )
-}
-
-export async function skipTodo(user: User, todo: Todo) {
-  return axios.put(
-    `${base}/todo/${todo._id}/skip`,
-    {},
-    {
-      headers: getHeaders(user),
-    }
-  )
-}
-
-export async function undoTodo(user: User, todo: Todo) {
-  return axios.put(
-    `${base}/todo/${todo._id}/undone`,
-    {},
-    {
-      headers: getHeaders(user),
-    }
-  )
-}
-
-export async function getTodos(
-  user: User,
-  completed: boolean = false,
-  skip: number,
-  limit: number,
-  hash?: string,
-  queryString?: string,
-  calendarView: boolean = false,
-  period?: Date
-) {
-  const time = getTimeString(new Date())
-  const data = (
-    await axios.get(`${base}/todo`, {
-      headers: getHeaders(user),
-      params: {
-        completed,
-        hash,
-        skip,
-        limit,
-        today: period ? getStringFromDate(period) : getToday(),
-        calendarView,
-        date: getToday(),
-        time: time,
-        queryString,
-      },
-    })
-  ).data as {
-    todos: Todo[]
-    state: UserStore
-    tags: Tag[]
-    points: number
-  }
-  getModule(UserStore, store).setUserStore(data.state)
-  setSettingsFromServer(data.state)
-  setTags(data.tags)
-  getModule(HeroStore, store).setPoints(data.points)
-  return data.todos
-}
-
-export async function getCurrentTodo(
-  user: User,
-  startTimeOfDay: string = '00:00'
-) {
-  const now = new Date()
-  const today = new Date()
-  today.setHours(parseInt(startTimeOfDay.substr(0, 2)))
-  today.setMinutes(parseInt(startTimeOfDay.substr(3)))
-
-  const time = getTimeString(new Date())
-  let date = getToday()
-
-  if (now < today) {
-    const yesterday = new Date()
-    yesterday.setDate(yesterday.getDate() - 1)
-    date = getStringFromDate(yesterday)
-  }
-
-  const data = (
-    await axios.get(`${base}/todo/current`, {
-      headers: getHeaders(user),
-      params: {
-        date: date,
-        time: time,
-      },
-    })
-  ).data as {
-    todosCount: number
-    incompleteTodosCount: number
-    todo?: Todo
-    state: UserStore & { userInfo: { name: string } }
-    tags: Tag[]
-    points: number
-  }
-  getModule(UserStore, store).setUserStore(data.state)
-  getModule(UserStore, store).setUserName(data.state.userInfo.name)
-  setSettingsFromServer(data.state)
-  setTags(data.tags)
-  getModule(HeroStore, store).setPoints(data.points)
-  return data
-}
-
 export async function getTodosForExport(user: User) {
   const response = await axios.get(`${base}/data`, {
     headers: getHeaders(user),
   })
   return response.data as string
-}
-
-export async function rearrangeTodos(user: User, todos: TodoSection[]) {
-  const time = getTimeString(new Date())
-  return axios.post(
-    `${base}/todo/rearrange`,
-    { todos, today: getToday(), time: time },
-    { headers: getHeaders(user) }
-  )
 }
 
 export enum Plan {
@@ -327,27 +103,6 @@ export async function setUserName(user: User, name: object) {
   return axios.post(`${base}/settings/username`, name, {
     headers: getHeaders(user),
   })
-}
-
-function setTags(tags: Tag[]) {
-  getModule(TagsStore, store).setTags(
-    tags.sort((a, b) => {
-      return a.numberOfUses !== b.numberOfUses
-        ? a.numberOfUses > b.numberOfUses
-          ? -1
-          : 1
-        : a.tag < b.tag
-        ? -1
-        : 1
-    })
-  )
-  const tagColors = tags.reduce((p, c) => {
-    if (c.color) {
-      p[c.tag] = c.color
-    }
-    return p
-  }, {} as { [index: string]: string })
-  getModule(TagsStore, store).setTagColors(tagColors)
 }
 
 export async function getReport(
@@ -520,11 +275,4 @@ export function getTomorrow() {
 export async function getVersion() {
   return (await axios.get(`${process.env.VUE_APP_WEBSITE}/version.json`)).data
     .version as string
-}
-
-function setSettingsFromServer(state: any) {
-  const settings = state.settings
-  const settingsStore = getModule(SettingsStore, store)
-  settingsStore.setSettingsStore(settings)
-  const appStore = getModule(AppStore, store).setLanguage(settings.language)
 }

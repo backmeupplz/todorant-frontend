@@ -113,10 +113,15 @@ import { User } from '@/models/User'
 import draggable from 'vuedraggable'
 import has from 'lodash/has'
 import { playSound, Sounds } from '@/utils/sounds'
+import { v4 } from 'uuid'
+import store from '@/store'
+import { getTagsFromArr } from '@/utils/getTags'
 
 const SettingsStore = namespace('SettingsStore')
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
+const TagsStore = namespace('TagsStore')
+const TodosStore = namespace('TodosStore')
 
 @Component({
   components: { TodoForm, draggable },
@@ -133,6 +138,9 @@ export default class AddTodo extends Vue {
   @UserStore.State password?: string
   @UserStore.State planning!: boolean
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
+  @TagsStore.Action addTags!: (tagsText: string[]) => void
+  @TodosStore.Action addTodos!: (todos: Todo[]) => Promise<void>
+  @TodosStore.Action completeTodo!: (todo: Todo) => Promise<void>
 
   dialog = false
 
@@ -266,8 +274,7 @@ export default class AddTodo extends Vue {
     }
     this.loading = true
     try {
-      await api.postTodos(
-        user,
+      await this.addTodos(
         this.todos.map((todo) => {
           const iTodo = { ...todo }
           iTodo.text = iTodo.text!.trim()
@@ -275,9 +282,23 @@ export default class AddTodo extends Vue {
             iTodo.encrypted = true
             iTodo.text = encrypt(iTodo.text)
           }
-          return iTodo
+          if (!iTodo._tempSyncId) {
+            iTodo._tempSyncId = v4()
+          }
+          if (!iTodo.createdAt) {
+            iTodo.createdAt = new Date()
+          }
+          if (!iTodo.updatedAt) {
+            iTodo.updatedAt = new Date()
+          }
+          if (!iTodo.monthAndYear) {
+            iTodo.monthAndYear = iTodo.date?.substr(0, 7)
+          }
+          iTodo.date = iTodo.date?.substr(8, 10)
+          return iTodo as Todo
         })
       )
+      this.addTags(getTagsFromArr(this.todos as any))
       const hasCompletedTodo =
         !!this.todoToBreakdown ||
         this.todos.reduce((p, c) => !!c.completed || p, false as boolean)
@@ -287,7 +308,7 @@ export default class AddTodo extends Vue {
       if (this.todoToBreakdown) {
         const tempTodo = this.todoToBreakdown
         this.todoToBreakdown = null
-        await api.completeTodo(user, tempTodo)
+        await this.completeTodo(tempTodo)
       }
       if (hasCompletedTodo) {
         playSound(hasFrog ? Sounds.levelUp : Sounds.taskDone)

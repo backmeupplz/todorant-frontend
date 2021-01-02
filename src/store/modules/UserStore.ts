@@ -20,6 +20,11 @@ export default class UserStore extends VuexModule {
   }
 
   @Mutation
+  setPlanning(planning: boolean) {
+    this.planning = planning
+  }
+
+  @Mutation
   setUserStore(userStore: UserStore): void {
     Object.assign(this, userStore)
   }

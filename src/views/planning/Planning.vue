@@ -99,7 +99,11 @@ v-container(style='maxWidth: 1000px;')
       .d-flex.direction-row.align-center.flex-wrap
         span.mx-1 {{ $t("spread.spreading") }}
         v-chip.mx-1(v-if='!spreadTasks.length') {{ $t("spread.chooseTasks") }}
-        v-chip.mx-1.my-1(v-else, v-for='task in spreadTasks', :key='task._id')
+        v-chip.mx-1.my-1(
+          v-else,
+          v-for='task in spreadTasks',
+          :key='task._tempSyncId'
+        )
           span {{ text(task, true) }}
           v-btn.ml-2(small, icon, @click='removeSpreadTask(task)')
             v-icon(small) close
@@ -193,7 +197,6 @@ v-container(style='maxWidth: 1000px;')
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Todo } from '@/models/Todo'
-import { getTodos, editTodo } from '@/utils/api'
 import EditTodo from '@/views/EditTodo.vue'
 import DeleteTodo from '@/components/DeleteTodo.vue'
 import { Watch } from 'vue-property-decorator'
@@ -227,6 +230,7 @@ const UserStore = namespace('UserStore')
 const TagsStore = namespace('TagsStore')
 const SnackbarStore = namespace('SnackbarStore')
 const SettingsStore = namespace('SettingsStore')
+const TodosStore = namespace('TodosStore')
 
 @Component({
   components: {
@@ -250,6 +254,27 @@ export default class TodoList extends Vue {
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @SettingsStore.State firstDayOfWeek?: number
   @TagsStore.State searchTags!: Set<String>
+  @TodosStore.Action getTodos!: ({
+    completed,
+    skip,
+    limit,
+    hash,
+    queryString,
+    calendarView,
+    period,
+  }: {
+    completed: boolean
+    skip: number
+    limit: number
+    hash?: string
+    queryString?: string
+    calendarView: boolean
+    period?: Date
+  }) => Promise<Todo[]>
+  @TodosStore.Action editTodo!: (todo: Todo) => Promise<void>
+  @TodosStore.Action completeTodo!: (todo: Todo) => Promise<void>
+  @TodosStore.Action undoTodo!: (todo: Todo) => Promise<void>
+  @TodosStore.Action rearrangeTodos!: (todos: TodoSection[]) => Promise<void>
 
   showCompleted = false
   todoEdited: Partial<Todo> | null = null
@@ -298,17 +323,18 @@ export default class TodoList extends Vue {
   get events() {
     let spreadEvents = [] as string[]
     if (this.spreadEnabled) {
-      spreadEvents = this.spreadTasks.map((t) => t._id)
+      spreadEvents = this.spreadTasks.map((t) => t._tempSyncId)
     }
     return this.todos
       .map((section) => {
         return section.todos
           .filter((todo) => !!todo.date)
           .filter(
-            (todo) => !this.spreadEnabled || !spreadEvents.includes(todo._id)
+            (todo) =>
+              !this.spreadEnabled || !spreadEvents.includes(todo._tempSyncId)
           )
           .map((todo) => ({
-            id: todo._id,
+            id: todo._tempSyncId,
             title: this.text(todo),
             startDate: section.title,
             order: todo.order,
@@ -465,19 +491,22 @@ export default class TodoList extends Vue {
     }
     this.todosUpdating = true
     try {
+      // const todos =
       const initialTodosLength = this.todos.length
-      const fetchedTodos = await getTodos(
-        user,
-        this.showCompleted,
-        more ? this.todos.reduce((prev, cur) => prev + cur.todos.length, 0) : 0,
-        fullUpdate || more
-          ? 20
-          : this.todos.reduce((prev, cur) => prev + cur.todos.length, 0),
-        this.$router.currentRoute.hash,
-        this.queryString,
-        this.calendarViewEnabled,
-        this.calendarViewEnabled ? this.currentPeriod : undefined
-      )
+      const fetchedTodos = await this.getTodos({
+        completed: this.showCompleted,
+        skip: more
+          ? this.todos.reduce((prev, cur) => prev + cur.todos.length, 0)
+          : 0,
+        limit:
+          fullUpdate || more
+            ? 20
+            : this.todos.reduce((prev, cur) => prev + cur.todos.length, 0),
+        hash: this.$router.currentRoute.hash,
+        queryString: this.queryString,
+        calendarView: this.calendarViewEnabled,
+        period: this.calendarViewEnabled ? this.currentPeriod : undefined,
+      })
       this.noMoreTodos = fetchedTodos.length <= 0
       let allTodos = more
         ? this.todos
@@ -545,6 +574,7 @@ export default class TodoList extends Vue {
       if (err.message.includes('aborted')) {
         return
       }
+      console.log(err)
       this.setSnackbarError('errors.loadTodos')
     } finally {
       if (this.loadingUUID === currentLoadingUUID) {
@@ -562,20 +592,24 @@ export default class TodoList extends Vue {
       [] as Todo[]
     )
     for (const todo of flatTodos) {
-      if (todo.frogFails < 3 && todo._id === event.id) {
+      if (todo.frogFails < 3 && todo._tempSyncId === event.id) {
         if (this.spreadEnabled) {
-          if (!this.spreadTasks.map((t) => t._id).includes(todo._id)) {
+          if (
+            !this.spreadTasks
+              .map((t) => t._tempSyncId)
+              .includes(todo._tempSyncId)
+          ) {
             this.spreadTasks.push(todo)
           }
         } else {
-          this.editTodo(todo)
+          this.changeTodo(todo)
         }
         return
       }
     }
   }
 
-  editTodo(todo: Todo) {
+  changeTodo(todo: Todo) {
     const propsTodo = { ...todo } as Partial<Todo>
     if (!propsTodo || !propsTodo.date) {
       this.todoEdited = propsTodo
@@ -598,7 +632,7 @@ export default class TodoList extends Vue {
       const date = today.substr(8)
       todo.monthAndYear = monthAndYear
       todo.date = date
-      await api.editTodo(user, todo)
+      await this.changeTodo(todo)
       this.loadTodos(false)
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)
@@ -623,9 +657,9 @@ export default class TodoList extends Vue {
     this.loading = true
     try {
       if (todo.completed) {
-        await api.undoTodo(user, todo)
+        await this.undoTodo(todo)
       } else {
-        await api.completeTodo(user, todo)
+        await this.completeTodo(todo)
         if (todo.frog) {
           await playSound(Sounds.levelUp)
         } else {
@@ -662,7 +696,7 @@ export default class TodoList extends Vue {
     }
     this.loading = true
     try {
-      await api.rearrangeTodos(user, this.todos)
+      await this.rearrangeTodos(this.todos)
       await this.loadTodos(false)
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)
@@ -743,10 +777,12 @@ export default class TodoList extends Vue {
     }
     for (const section of this.todos) {
       for (const todo of section.todos) {
-        if (todo._id === event.id) {
+        if (todo._tempSyncId === event.id) {
           if (newTitle !== section.title) {
             // Remove from old section
-            section.todos = section.todos.filter((t) => t._id !== todo._id)
+            section.todos = section.todos.filter(
+              (t) => t._tempSyncId !== todo._tempSyncId
+            )
             // Add to new section
             let i = 0
             for (const section of this.todos) {
@@ -868,13 +904,13 @@ export default class TodoList extends Vue {
         }
       }
 
-      const allMovedTodosIds = this.spreadTasks.map((t) => t._id)
+      const allMovedTodosIds = this.spreadTasks.map((t) => t._tempSyncId)
 
       try {
         for (const section of this.todos) {
           // Remove moved todos
           section.todos = section.todos.filter(
-            (t) => !allMovedTodosIds.includes(t._id)
+            (t) => !allMovedTodosIds.includes(t._tempSyncId)
           )
           // Re-add mobed todos
           if (spreadTodos[section.title]) {
@@ -892,7 +928,7 @@ export default class TodoList extends Vue {
           }
         }
         // Save
-        await api.rearrangeTodos(user, this.todos)
+        await this.rearrangeTodos(this.todos)
         await this.loadTodos(false)
       } catch (err) {
         this.setSnackbarError(err.response ? err.response.data : err.message)
@@ -906,7 +942,9 @@ export default class TodoList extends Vue {
   }
 
   removeSpreadTask(task: Todo) {
-    this.spreadTasks = this.spreadTasks.filter((t) => t._id !== task._id)
+    this.spreadTasks = this.spreadTasks.filter(
+      (t) => t._tempSyncId !== task._tempSyncId
+    )
   }
 
   removeSpreadDate(date: string) {

@@ -138,6 +138,8 @@ import { User } from '@/models/User'
 
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import enLocale from 'dayjs/locale/en'
+import { serverBus } from '@/main'
+import { db } from '@/utils/db'
 
 dayjs.extend(localizedFormat)
 
@@ -157,7 +159,6 @@ export default class TodoForm extends Vue {
 
   @AppStore.State language?: string
   @AppStore.State dark!: boolean
-  @TagsStore.State tags!: Tag[]
   @SettingsStore.State showMoreByDefault!: boolean
   @SettingsStore.State newLineOnReturn!: boolean
   @SettingsStore.State firstDayOfWeek?: number
@@ -169,8 +170,18 @@ export default class TodoForm extends Vue {
   timeMenu = false
   moreShown = false
 
+  tags: Tag[] = []
+
+  async updateTags() {
+    this.tags = await db.tags.filter((tag) => !tag.deleted).toArray()
+  }
+
   created() {
     dayjs.locale(enLocale)
+    serverBus.$on('updateTags', () => {
+      this.updateTags()
+    })
+    this.updateTags()
   }
 
   get locale() {

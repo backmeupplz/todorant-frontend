@@ -16,10 +16,10 @@ v-container(
         TodoCard(
           type='current',
           :deleteTodo='deleteTodo',
-          :skipTodo='skipTodo',
+          :skipTodo='skipTodoFunction',
           :addTodo='addTodo',
-          :completeTodo='completeTodo',
-          :repeat='completeTodo',
+          :completeTodo='completeTodoFunction',
+          :repeat='completeTodoFunction',
           :edit='edit',
           :todo='todo',
           :loading='loading',
@@ -43,7 +43,6 @@ v-container(
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Todo } from '@/models/Todo'
-import { getTodos, editTodo } from '@/utils/api'
 import TodoText from '@/components/TodoCard/TodoText.vue'
 import DeleteTodo from '@/components/DeleteTodo.vue'
 import EditTodo from '@/views/EditTodo.vue'
@@ -58,11 +57,20 @@ import ProgressBlock from '@/views/current/ProgressBlock.vue'
 import EmptyPlaceholder from '@/views/current/EmptyPlaceholder.vue'
 import AllDonePlaceholder from '@/views/current/AllDonePlaceholder.vue'
 import TodoCard from '@/components/TodoCard/TodoCard.vue'
+import store from '@/store'
+import { db } from '@/utils/db'
+import {
+  getDateDateString,
+  getDateMonthAndYearString,
+  getTodayWithStartOfDay,
+} from '@/utils/time'
+import { isTodoOld } from '@/utils/isTodoOld'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
 const SettingsStore = namespace('SettingsStore')
 const TagsStore = namespace('TagsStore')
+const TodosStore = namespace('TodosStore')
 
 @Component({
   components: {
@@ -77,10 +85,28 @@ const TagsStore = namespace('TagsStore')
 })
 export default class CurrentTodo extends Vue {
   @UserStore.State user?: User
+  @UserStore.Mutation setPlanning!: (planning: boolean) => void
   @SettingsStore.State hotKeysEnabled!: boolean
   @SettingsStore.State startTimeOfDay?: string
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @TagsStore.State searchTags!: Set<String>
+  @TagsStore.Action editTag!: ({
+    tag,
+    color,
+    epic,
+    epicGoal,
+    epicCompleted,
+    newEpicName,
+  }: {
+    tag: Tag
+    color?: string
+    epic?: boolean
+    epicGoal?: number
+    epicCompleted?: boolean
+    newEpicName?: string
+  }) => Promise<void>
+  @TodosStore.Action completeTodo!: (todo: Todo) => Promise<void>
+  @TodosStore.Action skipTodo!: (todo: Todo) => Promise<void>
 
   showCompleted = false
   todo: Todo | null = null
@@ -125,7 +151,13 @@ export default class CurrentTodo extends Vue {
     }
     this.loading = true
     try {
-      await api.editTag(user, epic, undefined, undefined, undefined, true)
+      await this.editTag({
+        tag: epic,
+        color: undefined,
+        epic: undefined,
+        epicGoal: undefined,
+        epicCompleted: true,
+      })
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
@@ -143,13 +175,31 @@ export default class CurrentTodo extends Vue {
     }
     this.todoUpdating = true
     try {
-      const fetched = await api.getCurrentTodo(
-        user,
-        this.startTimeOfDay || undefined
-      )
-      this.todo = fetched.todo || null
-      this.incompleteTodosCount = fetched.incompleteTodosCount
-      this.todosCount = fetched.todosCount
+      const todayDate = getTodayWithStartOfDay()
+      const monthAndYear = getDateMonthAndYearString(todayDate)
+      const date = getDateDateString(todayDate)
+      const allTodos = await db.todos.filter((todo) => true).sortBy('order')
+      const completedTodos: Todo[] = []
+      const incompleteTodos: Todo[] = []
+      let shouldPlanning = false
+      allTodos.forEach((todo) => {
+        if (todo.deleted || todo.delegate || todo.delegator || todo.deleted)
+          return
+        if (todo.date === date && todo.monthAndYear === monthAndYear) {
+          if (todo.completed) {
+            completedTodos.push(todo)
+          } else {
+            incompleteTodos.push(todo)
+            if (isTodoOld(todo, api.getStringFromDate(todayDate))) {
+              shouldPlanning = true
+            }
+          }
+        }
+      })
+      this.setPlanning(shouldPlanning)
+      this.todo = incompleteTodos[0] || null
+      this.incompleteTodosCount = incompleteTodos.length
+      this.todosCount = completedTodos.length + incompleteTodos.length
     } catch (err) {
       // Don's show request abort
       if (err.message.includes('aborted')) {
@@ -161,7 +211,7 @@ export default class CurrentTodo extends Vue {
     }
   }
 
-  async completeTodo(hotkey = false) {
+  async completeTodoFunction(hotkey = false) {
     if (hotkey && !this.hotKeysEnabled) {
       return
     }
@@ -174,7 +224,7 @@ export default class CurrentTodo extends Vue {
     }
     this.loading = true
     try {
-      await api.completeTodo(user, this.todo)
+      await this.completeTodo(this.todo)
       if (this.todo.frog) {
         await playSound(Sounds.levelUp)
       } else {
@@ -211,7 +261,7 @@ export default class CurrentTodo extends Vue {
     this.todoEdited = propsTodo
   }
 
-  async skipTodo() {
+  async skipTodoFunction() {
     const user = this.user
     if (!user) {
       return
@@ -221,7 +271,7 @@ export default class CurrentTodo extends Vue {
     }
     this.loading = true
     try {
-      await api.skipTodo(user, this.todo)
+      this.skipTodo(this.todo)
       this.updateTodo()
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)

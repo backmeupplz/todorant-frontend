@@ -6,6 +6,7 @@ import TagsStore from '@/store/modules/TagsStore'
 import SocketsStore from '@/store/modules/SocketsStore'
 import HeroStore from '@/store/modules/HeroStore'
 import DelegationStore from '@/store/modules/DelegationStore'
+import TodosStore from '@/store/modules/TodosStore'
 import persistentState from '@/store/plugins/persistentState'
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -23,6 +24,7 @@ const store = new Vuex.Store({
     UserStore,
     HeroStore,
     DelegationStore,
+    TodosStore,
   },
   plugins: [persistentState],
 })

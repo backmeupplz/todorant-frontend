@@ -14,11 +14,11 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
       v-btn(
         color='error',
         text,
-        @click='deleteTodo',
+        @click='removeTodo',
         :loading='loading',
         :disabled='loading',
         v-shortkey.once='["enter"]',
-        @shortkey.native='deleteTodo'
+        @shortkey.native='removeTodo'
       ) {{ $t("delete") }}
 </template>
 
@@ -36,6 +36,7 @@ import { User } from '@/models/User'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
+const TodosStore = namespace('TodosStore')
 
 @Component
 export default class DeleteTodo extends Vue {
@@ -43,6 +44,7 @@ export default class DeleteTodo extends Vue {
 
   @UserStore.State user?: User
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
+  @TodosStore.Action deleteTodo!: (todo: Todo) => Promise<void>
 
   loading = false
   dialog = false
@@ -52,10 +54,10 @@ export default class DeleteTodo extends Vue {
     this.dialog = !!val
   }
 
-  async deleteTodo() {
+  async removeTodo() {
     this.loading = true
     try {
-      await api.deleteTodo((this as any).todo)
+      await this.deleteTodo(this.todo)
       this.dialog = false
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)

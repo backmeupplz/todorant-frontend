@@ -57,9 +57,11 @@ import { serverBus } from '@/main'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
 import { playSound, Sounds } from '@/utils/sounds'
+import store from '@/store'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
+const TodosStore = namespace('TodosStore')
 
 @Component({
   components: { TodoForm, BreakdownRequest },
@@ -71,6 +73,7 @@ export default class EditTodo extends Vue {
 
   @UserStore.State user?: User
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
+  @TodosStore.Action editTodo!: (todo: Todo) => Promise<void>
 
   loading = false
   dialog = false
@@ -114,7 +117,7 @@ export default class EditTodo extends Vue {
         this.breakdownRequestDialog = true
         return
       }
-      await api.editTodo(user, (this as any).todo)
+      await this.editTodo(this.todo)
       ;(this as any).cleanTodo()
       if ((this as any).todo.completed) {
         playSound((this as any).todo.frog ? Sounds.levelUp : Sounds.taskDone)

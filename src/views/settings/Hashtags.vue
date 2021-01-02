@@ -43,7 +43,7 @@ v-dialog(
           v-btn.mr-4(
             text,
             icon,
-            @click='deleteTag(tag)',
+            @click='removeTag(tag)',
             :loading='loading',
             v-if='edited == -1'
           )
@@ -112,7 +112,7 @@ v-dialog(
           v-btn.mr-4(
             text,
             icon,
-            @click='deleteTag(tag)',
+            @click='removeTag(tag)',
             :loading='loading',
             v-if='edited == -1'
           )
@@ -190,6 +190,7 @@ import { namespace } from 'vuex-class'
 import { Prop } from 'vue-property-decorator'
 import { TagColors } from '@/models/TagColors'
 import { User } from '@/models/User'
+import { db } from '@/utils/db'
 
 const AppStore = namespace('AppStore')
 const UserStore = namespace('UserStore')
@@ -204,7 +205,23 @@ export default class Hashtags extends Vue {
   @AppStore.State dark!: boolean
   @UserStore.State user?: User
   @TagsStore.State tagColors!: TagColors
-  @TagsStore.State tags!: Tag[]
+  @TagsStore.Action deleteTag!: (tag: Tag) => Promise<void>
+  @TagsStore.Action deleteAllTags!: () => Promise<void>
+  @TagsStore.Action editTag!: ({
+    tag,
+    color,
+    epic,
+    epicGoal,
+    epicCompleted,
+    newEpicName,
+  }: {
+    tag: Tag
+    color?: string
+    epic?: boolean
+    epicGoal?: number
+    epicCompleted?: boolean
+    newEpicName?: string
+  }) => Promise<void>
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
 
   edited = -1
@@ -215,6 +232,19 @@ export default class Hashtags extends Vue {
   epicGoal = ''
 
   tagName = ''
+
+  tags: Tag[] = []
+
+  created() {
+    serverBus.$on('updateTags', () => {
+      this.updateTags()
+    })
+    this.updateTags()
+  }
+
+  async updateTags() {
+    this.tags = await db.tags.filter((tag) => !tag.deleted).toArray()
+  }
 
   get epics() {
     return this.tags.filter((t) => t.epic)
@@ -234,14 +264,14 @@ export default class Hashtags extends Vue {
       : tag.color || defaultColor
   }
 
-  async deleteTag(tag: Tag) {
+  async removeTag(tag: Tag) {
     const user = this.user
     if (!user) {
       return
     }
     this.loading = true
     try {
-      await api.deleteTag(user, tag)
+      await this.deleteTag(tag)
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
@@ -263,15 +293,14 @@ export default class Hashtags extends Vue {
     }
     this.loading = true
     try {
-      await api.editTag(
-        user,
+      await this.editTag({
         tag,
-        this.editedColor,
-        tag.epic,
-        tag.epicGoal,
-        undefined,
-        this.tagName
-      )
+        color: this.editedColor,
+        epic: tag.epic,
+        epicGoal: tag.epicGoal,
+        epicCompleted: undefined,
+        newEpicName: this.tagName,
+      })
       this.cancelTag(tag)
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)
@@ -287,7 +316,12 @@ export default class Hashtags extends Vue {
     }
     this.loading = true
     try {
-      await api.editTag(user, tag, '', tag.epic, tag.epicGoal)
+      await this.editTag({
+        tag,
+        color: '',
+        epic: tag.epic,
+        epicGoal: tag.epicGoal,
+      })
       this.cancelTag(tag)
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)
@@ -326,7 +360,7 @@ export default class Hashtags extends Vue {
     }
     this.loading = true
     try {
-      await api.editTag(user, tag, tag.color, true, goal)
+      await this.editTag({ tag, color: tag.color, epic: true, epicGoal: goal })
       this.cancelTag(tag)
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)
@@ -350,7 +384,7 @@ export default class Hashtags extends Vue {
     }
     this.loading = true
     try {
-      await api.deleteAllTags()
+      await this.deleteAllTags()
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {

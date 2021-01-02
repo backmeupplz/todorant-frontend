@@ -12,5 +12,9 @@ export default createPersistedState({
     'SettingsStore.hotKeysEnabled',
     'SettingsStore.newLineOnReturn',
     'SettingsStore.swipeActionsEnabled',
+    'SettingsStore.startTimeOfDay',
+    'DelegationStore.lastSyncDate',
+    'TagsStore.lastSyncDate',
+    'TodosStore.lastSyncDate',
   ],
 })

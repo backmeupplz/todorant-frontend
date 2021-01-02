@@ -21,7 +21,7 @@ div
               )
             v-card-actions.pb-2.pt-2.ma-0
               v-spacer
-              v-btn(text, small, @click='deleteTodo(todo)', :loading='loading') {{ $t("delete") }}
+              v-btn(text, small, @click='removeTodo(todo)', :loading='loading') {{ $t("delete") }}
               v-btn(text, small, @click='editTodo(todo)', :loading='loading') {{ $t("edit") }}
               v-btn(
                 text,
@@ -57,6 +57,7 @@ const AppStore = namespace('AppStore')
 const DelegationStore = namespace('DelegationStore')
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
+const TodosStore = namespace('TodosStore')
 
 @Component({
   components: {
@@ -72,6 +73,7 @@ export default class Delegation extends Vue {
   @DelegationStore.State delegates!: User[]
   @DelegationStore.State delegators!: User[]
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
+  @TodosStore.Action deleteTodo!: (todo: Todo) => void
 
   loading = false
   settingsDialog = false
@@ -121,13 +123,13 @@ export default class Delegation extends Vue {
     this.unacceptedTodos = await api.getUnacceptedDelegated()
   }
 
-  async deleteTodo(todo: Todo) {
+  async removeTodo(todo: Todo) {
     if (this.loading) {
       return
     }
     this.loading = true
     try {
-      await api.deleteTodo(todo)
+      await this.deleteTodo(todo)
       await this.getUnacceptedTodos()
     } catch (err) {
       // Don's show request abort

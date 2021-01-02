@@ -1,7 +1,8 @@
 import { User } from '@/models/User'
 
 export interface Todo {
-  _id: string
+  _tempSyncId: string
+  _id?: string
   createdAt: Date
   updatedAt: Date
 
@@ -18,6 +19,10 @@ export interface Todo {
   encrypted: boolean
 
   order?: number
+
+  skipped?: boolean
+
+  deleted?: boolean
 
   delegate?: User
   delegator?: User

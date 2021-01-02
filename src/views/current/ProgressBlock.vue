@@ -48,6 +48,7 @@ import { namespace } from 'vuex-class'
 import { Tag } from '@/models/Tag'
 import IconButton from '@/icons/IconButton.vue'
 import { serverBus } from '@/main'
+import { db } from '@/utils/db'
 
 const TagsStore = namespace('TagsStore')
 
@@ -64,7 +65,18 @@ export default class ProgressBlock extends Vue {
   @Prop({ required: true }) todosCount!: number
   @Prop({ required: true }) incompleteTodosCount!: number
 
-  @TagsStore.State tags!: Tag[]
+  tags: Tag[] = []
+
+  created() {
+    serverBus.$on('updateTags', () => {
+      this.updateTags()
+    })
+    this.updateTags()
+  }
+
+  async updateTags() {
+    this.tags = await db.tags.filter((tag) => !tag.deleted).toArray()
+  }
 
   get epics() {
     return this.tags.filter((t) => t.epic)

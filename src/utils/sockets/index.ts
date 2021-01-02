@@ -6,6 +6,14 @@ import SocketsStore from '@/store/modules/SocketsStore'
 import DelegationStore from '@/store/modules/DelegationStore'
 import { serverBus } from '@/main'
 import { getModule } from 'vuex-module-decorators'
+import { Todo } from '@/models/Todo'
+import { db } from '@/utils/db'
+import { Tag } from '@/models/Tag'
+import TodosStore from '@/store/modules/TodosStore'
+import TagsStore from '@/store/modules/TagsStore'
+import SettingsStore from '@/store/modules/SettingsStore'
+import AppStore from '@/store/modules/AppStore'
+import UserStore from '@/store/modules/UserStore'
 
 const socketsStore = getModule(SocketsStore, store)
 const delegationStore = getModule(DelegationStore, store)
@@ -16,6 +24,10 @@ class SocketManager {
     delegators: User[]
     token: string
   }>
+
+  settingsSyncManager: SyncManager<AppStore & UserStore>
+  todoSyncManager: SyncManager<Todo[]>
+  tagSyncManager: SyncManager<Tag[]>
 
   pendingAuthorization?: {
     res: () => void
@@ -43,6 +55,48 @@ class SocketManager {
       console.log('sockets requested sync')
       serverBus.$emit('refreshRequested')
     })
+
+    this.todoSyncManager = new SyncManager<Todo[]>(
+      'todos',
+      () => undefined,
+      (objects, pushBack, completeSync) => {
+        return getModule(TodosStore, store).onObjectFromServer({
+          objects,
+          pushBack,
+          completeSync,
+        })
+      },
+      (lastSyncDate) => {
+        if (socketsStore.connected && socketsStore.authorized) {
+          getModule(TodosStore, store).setLastSyncDate(lastSyncDate)
+        }
+      }
+    )
+    this.tagSyncManager = new SyncManager<Tag[]>(
+      'tags',
+      () => undefined,
+      (objects, pushBack, completeSync) => {
+        return getModule(TagsStore, store).onObjectFromServer({
+          objects,
+          pushBack,
+          completeSync,
+        })
+      },
+      (lastSyncDate) => {
+        getModule(TagsStore, store).lastSyncDate = new Date(lastSyncDate)
+      }
+    )
+
+    this.settingsSyncManager = new SyncManager<any>(
+      'settings',
+      () => undefined,
+      (objects, pushBack, completeSync) => {
+        getModule(SettingsStore, store).setSettingsStore(objects)
+        getModule(AppStore, store).setLanguage(objects.language)
+        completeSync()
+        return new Promise(() => {})
+      }
+    )
 
     this.delegationSyncManager = new SyncManager<any>(
       'delegate',
@@ -129,6 +183,9 @@ class SocketManager {
     socketsStore.setAuthorized(true)
     this.pendingAuthorization?.res()
     this.pendingAuthorization = undefined
+    this.todoSyncManager.sync()
+    this.settingsSyncManager.sync()
+    this.tagSyncManager.sync()
   }
 
   globalSync = () => {
