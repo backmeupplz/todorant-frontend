@@ -17,6 +17,7 @@ v-container(style='maxWidth: 1000px;')
         :disabled='editable'
       )
       v-text-field.pt-2.mr-4(
+        :autofocus='true',
         v-if='search',
         v-model='queryString',
         :label='$t("search")',
