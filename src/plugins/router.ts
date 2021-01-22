@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/store'
-// We are using these strange imports becaose of lazy loading with vue-class-components
+// We are using these strange imports because of lazy loading with vue-class-components
 const Home = (resolve: any) => (require as any)(['@/views/Home.vue'], resolve)
 const Superpower = (resolve: any) =>
   (require as any)(['@/views/Superpower.vue'], resolve)
