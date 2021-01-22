@@ -1,19 +1,31 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/views/Home.vue'
-import Superpower from '@/views/Superpower.vue'
-import NotFound from '@/views/static/NotFound.vue'
-import Privacy from '@/views/static/Privacy.vue'
-import Terms from '@/views/static/Terms.vue'
-import Payment from '@/views/static/Payment.vue'
-import LoginTelegram from '@/views/LoginTelegram.vue'
-import MobileLoginSuccess from '@/views/static/MobileLoginSuccess.vue'
-import MobileLoginError from '@/views/static/MobileLoginError.vue'
 import store from '@/store'
-import PublicReport from '@/views/PublicReport.vue'
-import AppleFirefoxError from '@/views/static/AppleFirefoxError.vue'
-import GoogleCalendarSetup from '@/views/static/GoogleCalendarSetup.vue'
-import DelegationInvite from '@/views/delegation/DelegationInvite.vue'
+const Home = (resolve: any) => (require as any)(['@/views/Home.vue'], resolve)
+const Superpower = (resolve: any) =>
+  (require as any)(['@/views/Superpower.vue'], resolve)
+const NotFound = (resolve: any) =>
+  (require as any)(['@/views/static/NotFound.vue'], resolve)
+const Privacy = (resolve: any) =>
+  (require as any)(['@/views/static/Privacy.vue'], resolve)
+const Terms = (resolve: any) =>
+  (require as any)(['@/views/static/Terms.vue'], resolve)
+const Payment = (resolve: any) =>
+  (require as any)(['@/views/static/Payment.vue'], resolve)
+const LoginTelegram = (resolve: any) =>
+  (require as any)(['@/views/LoginTelegram.vue'], resolve)
+const MobileLoginSuccess = (resolve: any) =>
+  (require as any)(['@/views/static/MobileLoginSuccess.vue'], resolve)
+const MobileLoginError = (resolve: any) =>
+  (require as any)(['@/views/static/MobileLoginError.vue'], resolve)
+const PublicReport = (resolve: any) =>
+  (require as any)(['@/views/PublicReport.vue'], resolve)
+const AppleFirefoxError = (resolve: any) =>
+  (require as any)(['@/views/static/AppleFirefoxError.vue'], resolve)
+const GoogleCalendarSetup = (resolve: any) =>
+  (require as any)(['@/views/static/GoogleCalendarSetup.vue'], resolve)
+const DelegationInvite = (resolve: any) =>
+  (require as any)(['@/views/delegation/DelegationInvite.vue'], resolve)
 
 Vue.use(Router)
 
