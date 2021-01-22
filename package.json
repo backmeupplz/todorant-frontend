@@ -11,6 +11,7 @@
     "increment-version": "versiony public/version.json --minor && versiony package.json --minor && git add . && git commit -m 'new version' && git push"
   },
   "dependencies": {
+    "@justinribeiro/lite-youtube": "^0.9.1",
     "@types/chart.js": "^2.9.27",
     "@types/crypto-js": "^4.0.1",
     "@types/file-saver": "^2.0.1",

@@ -31,20 +31,11 @@
               )
                 img.store-button(src='/img/playstore.svg')
           .youtube-container
-            iframe.youtube-video(
+            lite-youtube.youtube-video(
               v-if='language && language === "ru"',
-              src='https://www.youtube-nocookie.com/embed/heR0rlllTVg',
-              frameborder='0',
-              allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture',
-              allowfullscreen=''
+              videoId='heR0rlllTVg'
             )
-            iframe.youtube-video(
-              v-else,
-              src='https://www.youtube-nocookie.com/embed/lYXhqHt7_QY',
-              frameborder='0',
-              allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture',
-              allowfullscreen=''
-            )
+            lite-youtube.youtube-video(videoId='lYXhqHt7_QY', v-else)
       // Difference
       .responsive-block.text-left
         .margined-when-small
@@ -107,6 +98,7 @@ import Reviews from '@/components/Reviews.vue'
 import DownloadLinks from '@/components/DownloadLinks.vue'
 import { serverBus } from '@/main'
 import { namespace } from 'vuex-class'
+import '@justinribeiro/lite-youtube'
 
 const AppStore = namespace('AppStore')
 
