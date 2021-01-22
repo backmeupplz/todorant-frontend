@@ -9,7 +9,7 @@ v-dialog(
     v-card-title {{ $t("hashtags.title") }} {{ editedColor }}
     v-card-text
       p(v-if='!tags.length') {{ $t("emptyHashtags") }}
-      v-card.mb-2(v-for='(tag, i) in tags', v-if='!!tag.epic', :key='i')
+      v-card.mb-2(v-for='(tag, i) in epics', :key='i')
         .d-flex.direction-row.align-center
           v-card-text(
             :style='{ color: colorForTag(tag, i) }',
@@ -17,12 +17,19 @@ v-dialog(
           ) {{ "#" }}{{ tag.tag }}
           v-spacer.px-2
           v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
-            v-text-field(
-              v-model='tagName',
-              :rules='tagRules',
-              :style='{ color: colorForTag(tag, i) }',
-              v-if='edited == i'
-            )
+            div(v-if='edited == i')
+              v-text-field(
+                :label='$t("epic.name")',
+                v-model='tagName',
+                :rules='tagRules',
+                :style='{ color: colorForTag(tag, i) }'
+              )
+              v-text-field(
+                :label='$t("epic.order")',
+                v-model='tagOrder',
+                type='number',
+                :rules='orderRules'
+              )
           v-spacer
           v-btn(
             v-if='!!tag.color',
@@ -78,6 +85,7 @@ v-dialog(
           .d-flex.flex-column
             v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
               v-text-field(
+                :label='$t("hashtags.name")',
                 v-model='tagName',
                 :rules='tagRules',
                 :style='{ color: colorForTag(tag, i) }',
@@ -215,9 +223,21 @@ export default class Hashtags extends Vue {
   epicGoal = ''
 
   tagName = ''
+  tagOrder = ''
 
   get epics() {
-    return this.tags.filter((t) => t.epic)
+    return this.tags
+      .filter((t) => t.epic)
+      .sort((a, b) => {
+        if (!a.epicOrder) {
+          a.epicOrder = 0
+        }
+        if (!b.epicOrder) {
+          b.epicOrder = 0
+        }
+        if (a.epicOrder > b.epicOrder) return -1
+        else return 1
+      })
   }
 
   closePopup() {
@@ -254,6 +274,7 @@ export default class Hashtags extends Vue {
     this.editedColor = tag.color || defaultColor
     this.tagName = tag.tag
     this.edited = i
+    this.tagOrder = String(tag.epicOrder)
   }
 
   async saveTag(tag: Tag) {
@@ -270,7 +291,10 @@ export default class Hashtags extends Vue {
         tag.epic,
         tag.epicGoal,
         undefined,
-        this.tagName
+        this.tagName,
+        Number.isInteger(parseInt(this.tagOrder))
+          ? parseInt(this.tagOrder)
+          : undefined
       )
       this.cancelTag(tag)
     } catch (err) {
@@ -341,6 +365,7 @@ export default class Hashtags extends Vue {
   ]
 
   tagRules = [(v: any) => !!v.match(/^[\S]+$/)]
+  orderRules = [(v: any) => Number.isInteger(parseInt(v))]
 
   loading = false
 
