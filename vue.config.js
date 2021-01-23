@@ -3,6 +3,9 @@ const PrerenderSPAPlugin = require('prerender-spa-plugin')
 const webpack = require('webpack')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
+const TerserPlugin = require('terser-webpack-plugin')
+
+const isProd = process.env.VUE_APP_PRODUCTION === 'true'
 
 const plugins = [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)]
 
@@ -32,5 +35,22 @@ module.exports = {
   },
   configureWebpack: {
     plugins,
+    optimization: {
+      minimize: true,
+      minimizer: isProd
+        ? [
+            new TerserPlugin({
+              terserOptions: {
+                compress: {
+                  drop_console: true,
+                },
+                output: {
+                  comments: false,
+                },
+              },
+            }),
+          ]
+        : [],
+    },
   },
 }

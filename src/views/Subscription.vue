@@ -72,7 +72,7 @@ import { User } from '@/models/User'
 // Stripe object is global, declaring here for TS
 declare const Stripe: any
 
-const stripe = Stripe(process.env.VUE_APP_STRIPE)
+const stripe = () => Stripe(process.env.VUE_APP_STRIPE)
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -90,6 +90,8 @@ export default class Subscription extends Vue {
   @SnackbarStore.Mutation setSnackbar!: (snackbarStore: any) => void
 
   loading = false
+
+  stripeLoaded = false
 
   get subscriptionStatusText() {
     if (
@@ -118,7 +120,12 @@ export default class Subscription extends Vue {
     this.loading = true
     try {
       const session = await api.getPlanSession(user, plan)
-      const result = await stripe.redirectToCheckout({
+      // load stripe script only in iteraction
+      if (!this.stripeLoaded) {
+        await (Vue as any).loadScript('https://js.stripe.com/v3/')
+        this.stripeLoaded = true
+      }
+      const result = await stripe().redirectToCheckout({
         sessionId: session.session,
       })
       if (result.error) {
