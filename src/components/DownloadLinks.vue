@@ -5,7 +5,8 @@
       v-img(
         src='/img/platforms/webapp.svg',
         max-width='40px',
-        max-height='34px'
+        max-height='34px',
+        alt='Web app logo'
       )
     p.xplatform-text Web
   .xplatform-card(
@@ -15,7 +16,8 @@
       v-img(
         :src='dark ? "/img/platforms/apple.svg" : "/img/platforms/apple-black.svg"',
         max-width='28px',
-        max-height='34px'
+        max-height='34px',
+        alt='Apple logo'
       )
     p.xplatform-text iOS
   .xplatform-card(
@@ -25,7 +27,8 @@
       v-img(
         src='/img/platforms/android.svg',
         max-width='40px',
-        max-height='24px'
+        max-height='24px',
+        alt='Android logo'
       )
     p.xplatform-text Android
   .xplatform-card(
@@ -35,7 +38,8 @@
       v-img(
         src='/img/platforms/macos.svg',
         max-width='34px',
-        max-height='34px'
+        max-height='34px',
+        alt='macOS logo'
       )
     p.xplatform-text macOS
   .xplatform-card(
@@ -45,7 +49,8 @@
       v-img(
         src='/img/platforms/windows.svg',
         max-width='34px',
-        max-height='34px'
+        max-height='34px',
+        alt='Windows logo'
       )
     p.xplatform-text Windows
   .xplatform-card(
@@ -55,7 +60,8 @@
       v-img(
         src='/img/platforms/linux.svg',
         max-width='34px',
-        max-height='34px'
+        max-height='34px',
+        alt='Linux logo'
       )
     p.xplatform-text Linux
   .xplatform-card(@click='open("https://snapcraft.io/todorant")')
@@ -63,7 +69,8 @@
       v-img(
         :src='dark ? "/img/platforms/snapcraft-white.svg" : "/img/platforms/snapcraft.svg"',
         max-width='34px',
-        max-height='34px'
+        max-height='34px',
+        alt='Snap logo'
       )
     p.xplatform-text Snapcraft
   .xplatform-card(
@@ -73,7 +80,8 @@
       v-img(
         src='/img/platforms/chrome.svg',
         max-width='34px',
-        max-height='34px'
+        max-height='34px',
+        alt='Chrome logo'
       )
     p.xplatform-text Chrome
   .xplatform-card(
@@ -83,7 +91,8 @@
       v-img(
         src='/img/platforms/firefox.svg',
         max-width='34px',
-        max-height='34px'
+        max-height='34px',
+        alt='Firefox logo'
       )
     p.xplatform-text Firefox
   .xplatform-card(@click='open("https://t.me/todorant_bot")')
@@ -91,7 +100,8 @@
       v-img(
         src='/img/platforms/telegram.svg',
         max-width='34px',
-        max-height='29px'
+        max-height='29px',
+        alt='Telegram logo'
       )
     p.xplatform-text Telegram
 </template>

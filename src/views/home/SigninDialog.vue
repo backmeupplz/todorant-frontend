@@ -5,21 +5,36 @@ v-dialog(v-model='safeDialog', width='unset')
       .width-container
         // Facebook
         v-btn.signin-button.signin-facebook(@click='loginWithFacebook')
-          img.logo-image(src='/img/facebook.svg', height='18dp', width='18dp')
+          img.logo-image(
+            src='/img/facebook.svg',
+            height='18dp',
+            width='18dp',
+            alt='Facebook logo'
+          )
           span {{ $t("home.facebook") }}
         // Google
         v-btn.signin-button.signin-google(
           color='#FFFFFF',
           @click='loginWithGoogle'
         )
-          img.logo-image(src='/img/google.svg', height='18dp', width='18dp')
+          img.logo-image(
+            src='/img/google.svg',
+            height='18dp',
+            width='18dp',
+            alt='Google logo'
+          )
           span {{ $t("home.google") }}
         // Apple
         v-btn.signin-button.signin-apple(
           color='#000000',
           @click='loginWithApple'
         )
-          img.logo-image(src='/img/apple.svg', height='18dp', width='18dp')
+          img.logo-image(
+            src='/img/apple.svg',
+            height='18dp',
+            width='18dp',
+            alt='Apple logo'
+          )
           span {{ $t("home.apple") }}
 
         // Telegram

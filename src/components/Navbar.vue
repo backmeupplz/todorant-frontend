@@ -33,7 +33,7 @@ nav
     // Title
     a(@click='goHome')
       v-toolbar-title.text-uppercase.grey--text
-        img(src='/img/logo-small.svg', :height='24', :width='118')
+        img(src='/img/logo-small.svg', :height='24', :width='118', alt='Logo')
     v-spacer
     // Language picker
     v-menu(offset-y)

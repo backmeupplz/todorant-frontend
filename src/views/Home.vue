@@ -25,11 +25,14 @@
               a.pl-2(
                 @click='open(`https://apps.apple.com/${appstoreLanguage}/app/todorant/id1482078243`)'
               )
-                img.store-button(src='/img/appstore.svg')
+                img.store-button(src='/img/appstore.svg', alt='App Store logo')
               a.px-2(
                 @click='open("https://play.google.com/store/apps/details?id=com.todorant")'
               )
-                img.store-button(src='/img/playstore.svg')
+                img.store-button(
+                  src='/img/playstore.svg',
+                  alt='Play Store logo'
+                )
           .youtube-container
             lite-youtube.youtube-video(
               v-if='language && language === "ru"',
@@ -47,7 +50,7 @@
           .screenshot-container
             .screen.blue-screenshot.rotate-right
             .screen.yellow-screenshot.rotate-left
-            img.real-screenshot(:src='screenshot')
+            img.real-screenshot(:src='screenshot', alt='Screenshot')
       // Cross platform
       .responsive-block.text-left
         .margined-when-small
@@ -73,11 +76,11 @@
             a.pl-2(
               @click='open(`https://apps.apple.com/${appstoreLanguage}/app/todorant/id1482078243`)'
             )
-              img.store-button(src='/img/appstore.svg')
+              img.store-button(src='/img/appstore.svg', alt='App Store logo')
             a.px-2(
               @click='open("https://play.google.com/store/apps/details?id=com.todorant")'
             )
-              img.store-button(src='/img/playstore.svg')
+              img.store-button(src='/img/playstore.svg', alt='Play Store logo')
       // Footer
       .footer-text.justify-space-between.margined-when-small
         span

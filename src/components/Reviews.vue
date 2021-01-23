@@ -6,7 +6,8 @@
     .d-flex.flex-row.text-left
       v-avatar
         img(
-          :src='`/avatars/${currentReview.username || $t("home.feedback.reviews", "en")[index].username}.jpg`'
+          :src='`/avatars/${currentReview.username || $t("home.feedback.reviews", "en")[index].username}.jpg`',
+          :alt='`${currentReview.username} avatar`'
         )
       .d-flex.flex-column.review-text
         a.review-username(
