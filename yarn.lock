@@ -148,6 +148,11 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
+"@justinribeiro/lite-youtube@^0.9.1":
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/@justinribeiro/lite-youtube/-/lite-youtube-0.9.1.tgz#c9f83861daad361d58de76b2a5e078de6fe6b751"
+  integrity sha512-IgcpHnovzZGxU4Ec+0c7sSLhrJWflvYliQUmdcwBgyVkGw0ZL9Y8IU/m09NPk9EzIk2HAOWUGLywTVpB785egA==
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
