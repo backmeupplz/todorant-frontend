@@ -56,7 +56,7 @@ nav
     // Extra
     v-menu(offset-y)
       template(v-slot:activator='{ on }')
-        v-btn(text, icon, color='grey', v-on='on')
+        v-btn(text, icon, color='grey', v-on='on', aria-label='Settings')
           v-icon $settings
       v-list
         // Dark mode

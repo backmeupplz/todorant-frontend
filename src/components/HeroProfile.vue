@@ -34,7 +34,7 @@ v-dialog(v-model='dialog', max-width='600px', @click:outside='close')
       color='default',
       text,
       @click='close',
-      v-shortkey.once='[\'esc\']',
+      v-shortkey.once='["esc"]',
       @shortkey.native='close'
     ) {{ $t("close") }}
 </template>
@@ -48,7 +48,7 @@ import { ranks } from '@/assets/ranks'
 
 const ColorScheme = require('color-scheme')
 const HeroStore = namespace('HeroStore')
-const AppStore = namespace('AppStore')
+
 @Component({
   components: { VerticalBar },
   props: {
