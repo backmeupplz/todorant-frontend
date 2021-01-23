@@ -12,7 +12,8 @@
       .d-flex.flex-column.review-text
         a.review-username(
           :href='`https://t.me/${currentReview.username || $t("home.feedback.reviews", "en")[index].username}`',
-          target='_blank'
+          target='_blank',
+          rel='noreferrer noopener'
         ) @{{ currentReview.username || $t("home.feedback.reviews", "en")[this.index].username }}
         span.text-review(
           v-for='(text, i) in currentReview.text.split("\\n")',

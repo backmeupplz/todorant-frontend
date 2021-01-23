@@ -21,9 +21,7 @@ import CookieLaw from 'vue-cookie-law'
 import { namespace } from 'vuex-class'
 import Navbar from '@/components/Navbar.vue'
 import Snackbar from '@/components/Snackbar.vue'
-import store from '@/store'
 import { i18n } from '@/plugins/i18n'
-import SnackbarState from '@/store/modules/SnackbarStore'
 
 const AppStore = namespace('AppStore')
 const SnackbarStore = namespace('SnackbarStore')
