@@ -475,7 +475,7 @@ export default class TodoList extends Vue {
           ? 20
           : this.todos.reduce((prev, cur) => prev + cur.todos.length, 0),
         this.$router.currentRoute.hash,
-        this.queryString,
+        this.queryString.trim(),
         this.calendarViewEnabled,
         this.calendarViewEnabled ? this.currentPeriod : undefined
       )
