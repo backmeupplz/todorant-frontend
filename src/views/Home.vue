@@ -163,8 +163,8 @@ export default class Home extends Vue {
 
   get screenshot() {
     return this.dark
-      ? `/img/screenshots/${this.languageImageTag}-dark.png`
-      : `/img/screenshots/${this.languageImageTag}.png`
+      ? `/img/screenshots/${this.languageImageTag}-dark.webp`
+      : `/img/screenshots/${this.languageImageTag}.webp`
   }
 
   open(link: string) {
