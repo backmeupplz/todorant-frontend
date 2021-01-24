@@ -21,10 +21,10 @@ v-dialog(
             v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
               v-text-field(
                 v-if='edited == i',
-                :label='$t("epic.order")',
-                v-model='tagOrder',
-                type='number',
-                :rules='orderRules'
+                :label='$t("epic.name")',
+                v-model='tagName',
+                :rules='tagRules',
+                :style='{ color: colorForTag(tag, i) }'
               )
             v-spacer
             v-btn(
