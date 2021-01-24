@@ -76,7 +76,7 @@ export default class ProgressBlock extends Vue {
         if (!b.epicOrder) {
           b.epicOrder = 0
         }
-        if (a.epicOrder > b.epicOrder) return -1
+        if (a.epicOrder < b.epicOrder) return -1
         else return 1
       })
   }

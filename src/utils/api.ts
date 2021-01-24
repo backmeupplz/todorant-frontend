@@ -62,6 +62,18 @@ export async function checkTelegramLoginRequest(uuid: string) {
   )
 }
 
+export async function postEpics(user: User, epics: Tag[]) {
+  return (
+    await axios.post(
+      `${base}/tag/rearrage`,
+      { epics },
+      {
+        headers: getHeaders(user),
+      }
+    )
+  ).data
+}
+
 export async function postTodos(user: User, todos: Partial<Todo>[]) {
   return (
     await axios.post(
@@ -133,8 +145,7 @@ export async function editTag(
   epic?: boolean,
   epicGoal?: number,
   epicCompleted?: boolean,
-  newEpicName?: string,
-  epicOrder?: number
+  newEpicName?: string
 ) {
   return axios.put(
     `${base}/tag/${tag._id}`,
@@ -144,7 +155,6 @@ export async function editTag(
       epicGoal: epicGoal || null,
       epicCompleted: epicCompleted || null,
       newName: newEpicName || null,
-      epicOrder: epicOrder || null,
     },
     {
       headers: getHeaders(user),
