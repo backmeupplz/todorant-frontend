@@ -19,19 +19,13 @@ v-dialog(
             v-spacer.px-2
             v-icon.handle.mr-2(:style='{ fill: "#ff641a" }') $drag
             v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
-              div(v-if='edited == i')
-                v-text-field(
-                  :label='$t("epic.name")',
-                  v-model='tagName',
-                  :rules='tagRules',
-                  :style='{ color: colorForTag(tag, i) }'
-                )
-                v-text-field(
-                  :label='$t("epic.order")',
-                  v-model='tagOrder',
-                  type='number',
-                  :rules='orderRules'
-                )
+              v-text-field(
+                v-if='edited == i',
+                :label='$t("epic.order")',
+                v-model='tagOrder',
+                type='number',
+                :rules='orderRules'
+              )
             v-spacer
             v-btn(
               v-if='!!tag.color',
@@ -304,10 +298,7 @@ export default class Hashtags extends Vue {
         tag.epic,
         tag.epicGoal,
         undefined,
-        this.tagName,
-        Number.isInteger(parseInt(this.tagOrder))
-          ? parseInt(this.tagOrder)
-          : undefined
+        this.tagName
       )
       this.cancelTag(tag)
     } catch (err) {
@@ -378,7 +369,6 @@ export default class Hashtags extends Vue {
   ]
 
   tagRules = [(v: any) => !!v.match(/^[\S]+$/)]
-  orderRules = [(v: any) => Number.isInteger(parseInt(v))]
 
   loading = false
 
