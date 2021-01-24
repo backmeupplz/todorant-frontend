@@ -62,6 +62,18 @@ export async function checkTelegramLoginRequest(uuid: string) {
   )
 }
 
+export async function postEpics(user: User, epics: Tag[]) {
+  return (
+    await axios.post(
+      `${base}/tag/rearrage`,
+      { epics },
+      {
+        headers: getHeaders(user),
+      }
+    )
+  ).data
+}
+
 export async function postTodos(user: User, todos: Partial<Todo>[]) {
   return (
     await axios.post(
