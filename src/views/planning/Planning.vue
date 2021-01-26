@@ -417,11 +417,12 @@ export default class TodoList extends Vue {
     const thisMonth = dayjs(this.currentPeriod).startOf('month')
     const currentWeek = this.weekForDate(thisMonth)
     const numberOfEvents = this.numberOfEventsPerWeek[currentWeek + i] || 1
-    const sizeOfPosition = 1.5
-    const borderHeight = 0.4 * (numberOfEvents + 1)
-    return `calc(${
-      sizeOfPosition * (numberOfEvents + 1)
-    }rem + ${borderHeight}px)`
+    const height = 18
+    const gap = 2
+    const padding = 1.615
+    const totalHeight = height + gap + padding
+    const margin = 32
+    return `calc(${numberOfEvents * totalHeight}px + ${margin}px)`
   }
 
   @Watch('showCompleted')
