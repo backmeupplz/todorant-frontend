@@ -43,7 +43,7 @@
       )
     p.xplatform-text macOS
   .xplatform-card(
-    @click='open("https://drive.google.com/uc?export=download&id=1BlLXtet9g3G-MmlwTgY7T9iSOYfgLy1O")'
+    @click='open("https://github.com/backmeupplz/todorant-releases/releases/download/v1.0.3/todorant-1.0.3-win.exe")'
   )
     .platform-image-box
       v-img(
@@ -54,7 +54,7 @@
       )
     p.xplatform-text Windows
   .xplatform-card(
-    @click='open("https://drive.google.com/uc?export=download&id=1HuOa_Le9AWvDzbhvTQzAR2v6HZteyExH")'
+    @click='open("https://github.com/backmeupplz/todorant-releases/releases/download/v1.0.3/todorant-1.0.3-linux-x86_64.AppImage")'
   )
     .platform-image-box
       v-img(
