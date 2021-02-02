@@ -245,9 +245,9 @@ export default class TodoForm extends Vue {
     if (emptyMatches.length) {
       return this.tags
     }
-    const matches = this.todo.text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+$/g) || []
+    const matches = this.todo.text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+/g) || []
     if (!matches.length) {
-      return []
+      return this.tags
     }
     const match = matches[0]
     return this.tags
@@ -343,21 +343,34 @@ export default class TodoForm extends Vue {
   }
 
   tagSelected(tag: Tag) {
+    const insertText = `#${tag.tag}`
+
+    const textInput = (this.$refs.textInput as any).$refs.input
+    const text = this.todo.text
+    const len = text.length
+    let pos = textInput.selectionStart
+    if (pos === undefined) {
+      pos = 0
+    }
+    const before = text.substr(0, pos)
+    const after = text.substr(pos, len)
+
     const emptyMatches = this.todo.text.match(/#$/g) || []
     if (emptyMatches.length) {
-      this.todo.text = `${this.todo.text}${tag.tag} `
+      this.todo.text = `${before}${tag.tag}${after}`
       ;(this.$refs.textInput as any).focus()
       return
     }
-    const matches = this.todo.text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+$/g) || []
+    const matches = this.todo.text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+/g) || []
     if (!matches.length) {
+      this.todo.text = `${before}${insertText}${after}`
+      ;(this.$refs.textInput as any).focus()
       return
     }
     const match = matches[0]
-    this.todo.text = `${this.todo.text.substr(
-      0,
-      this.todo.text.length - match.length
-    )}#${tag.tag} `
+    this.todo.text = `${before.substr(0, before.length - match.length)}${
+      insertText
+    }${after}`
     ;(this.$refs.textInput as any).focus()
   }
 }
