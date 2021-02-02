@@ -29,6 +29,7 @@ export const messages = {
     warning: 'Warning',
     hashtags: {
       title: 'Hashtags',
+      name: 'Hashtag name',
     },
     supportAlert: {
       title: 'Support',
@@ -440,6 +441,7 @@ export const messages = {
     epic: {
       intoEpic: 'Make an Epic',
       epicGoal: 'Epic goal',
+      name: 'Epic name',
     },
     success: 'Success!',
     notLogginedBody: 'Please, login at ',
@@ -526,6 +528,7 @@ export const messages = {
     warning: 'Внимание',
     hashtags: {
       title: 'Хештеги',
+      name: 'Название хештега',
     },
     supportAlert: {
       title: 'Поддержка',
@@ -931,6 +934,7 @@ export const messages = {
     epic: {
       intoEpic: 'Сделать эпиком',
       epicGoal: 'Цель эпика',
+      name: 'Название эпика',
     },
     success: 'Успех!',
     notLogginedBody: 'Пожалуйста, войдите в аккаунт на ',

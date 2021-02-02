@@ -10,6 +10,7 @@ import './plugins/vue-flag-icon'
 import './plugins/visibility'
 import './plugins/confetti'
 import './plugins/vue-clipboard2'
+import './plugins/vue-plugin-load-script'
 import vuetify from './plugins/vuetify'
 import { setupHooks } from '@/store/hooks'
 

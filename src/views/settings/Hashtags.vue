@@ -9,75 +9,79 @@ v-dialog(
     v-card-title {{ $t("hashtags.title") }} {{ editedColor }}
     v-card-text
       p(v-if='!tags.length') {{ $t("emptyHashtags") }}
-      v-card.mb-2(v-for='(tag, i) in tags', v-if='!!tag.epic', :key='i')
-        .d-flex.direction-row.align-center
-          v-card-text(
-            :style='{ color: colorForTag(tag, i) }',
-            v-if='!!tag.epicCompleted'
-          ) {{ "#" }}{{ tag.tag }}
-          v-spacer.px-2
-          v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
-            v-text-field(
-              v-model='tagName',
-              :rules='tagRules',
+      draggable(:list='epics', @end='endDraggingEpic()', handle='.handle')
+        v-card.mb-2(v-for='(tag, i) in epics', :key='i')
+          .d-flex.direction-row.align-center
+            v-card-text(
               :style='{ color: colorForTag(tag, i) }',
+              v-if='!!tag.epicCompleted'
+            ) {{ "#" }}{{ tag.tag }}
+            v-spacer.px-2
+            v-icon.handle.mr-2(:style='{ fill: "#ff641a" }') $drag
+            v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
+              v-text-field(
+                v-if='edited == i',
+                :label='$t("epic.name")',
+                v-model='tagName',
+                :rules='tagRules',
+                :style='{ color: colorForTag(tag, i) }'
+              )
+            v-spacer
+            v-btn(
+              v-if='!!tag.color',
+              text,
+              icon,
+              @click='defaultTag(tag)',
+              :loading='loading'
+            )
+              v-icon(small) clear
+            v-btn(
+              text,
+              icon,
+              @click='selectTag(tag, i)',
+              :loading='loading',
+              v-if='edited == -1'
+            )
+              v-icon(small) edit
+            v-btn.mr-4(
+              text,
+              icon,
+              @click='deleteTag(tag)',
+              :loading='loading',
+              v-if='edited == -1'
+            )
+              v-icon(small) delete
+            v-btn(
+              text,
+              icon,
+              @click='saveTag(tag)',
+              :loading='loading',
               v-if='edited == i'
             )
-          v-spacer
-          v-btn(
-            v-if='!!tag.color',
-            text,
-            icon,
-            @click='defaultTag(tag)',
-            :loading='loading'
-          )
-            v-icon(small) clear
-          v-btn(
-            text,
-            icon,
-            @click='selectTag(tag, i)',
-            :loading='loading',
-            v-if='edited == -1'
-          )
-            v-icon(small) edit
-          v-btn.mr-4(
-            text,
-            icon,
-            @click='deleteTag(tag)',
-            :loading='loading',
-            v-if='edited == -1'
-          )
-            v-icon(small) delete
-          v-btn(
-            text,
-            icon,
-            @click='saveTag(tag)',
-            :loading='loading',
-            v-if='edited == i'
-          )
-            v-icon(small) done
-        v-card-actions(v-if='edited == i')
-          v-spacer
-          v-color-picker(
-            flat,
-            hide-inputs,
-            hide-mode-switch,
-            mode='hexa',
-            v-model='editedColor'
-          )
-        v-progress-linear(
-          rounded,
-          :value='epicProgress(tag)',
-          height='25',
-          :color='tag.color ? tag.color : "blue lighten-3"'
-        ) 
-          template(v-slot='{ value }')
-            span.caption {{ tag.epicPoints }}/{{ tag.epicGoal }} {{ `#${tag.tag}` }}
+              v-icon(small) done
+          v-card-actions(v-if='edited == i')
+            v-spacer
+            v-color-picker(
+              flat,
+              hide-inputs,
+              hide-mode-switch,
+              mode='hexa',
+              v-model='editedColor'
+            )
+          v-progress-linear(
+            rounded,
+            :value='epicProgress(tag)',
+            height='25',
+            :color='tag.color ? tag.color : "blue lighten-3"'
+          ) 
+            template(v-slot='{ value }')
+              span.caption {{ tag.epicPoints }}/{{ tag.epicGoal }} {{ `#${tag.tag}` }}
       v-card.mb-2(v-for='(tag, i) in tags', v-if='!tag.epic', :key='i')
         .d-flex.direction-row.align-center
           .d-flex.flex-column
             v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
               v-text-field(
+                :label='$t("hashtags.name")',
                 v-model='tagName',
                 :rules='tagRules',
                 :style='{ color: colorForTag(tag, i) }',
@@ -190,13 +194,14 @@ import { namespace } from 'vuex-class'
 import { Prop } from 'vue-property-decorator'
 import { TagColors } from '@/models/TagColors'
 import { User } from '@/models/User'
+import draggable from 'vuedraggable'
 
 const AppStore = namespace('AppStore')
 const UserStore = namespace('UserStore')
 const TagsStore = namespace('TagsStore')
 const SnackbarStore = namespace('SnackbarStore')
 
-@Component
+@Component({ components: { draggable } })
 export default class Hashtags extends Vue {
   @Prop({ required: true }) dialog!: boolean
   @Prop({ required: true }) close!: () => void
@@ -215,9 +220,31 @@ export default class Hashtags extends Vue {
   epicGoal = ''
 
   tagName = ''
+  tagOrder = ''
+
+  endDraggingEpic() {
+    const epics = this.epics.map((epic, index) => {
+      epic.epicOrder = index
+      return epic
+    })
+    if (this.user) {
+      api.postEpics(this.user, epics)
+    }
+  }
 
   get epics() {
-    return this.tags.filter((t) => t.epic)
+    return this.tags
+      .filter((t) => t.epic)
+      .sort((a, b) => {
+        if (!a.epicOrder) {
+          a.epicOrder = 0
+        }
+        if (!b.epicOrder) {
+          b.epicOrder = 0
+        }
+        if (a.epicOrder < b.epicOrder) return -1
+        else return 1
+      })
   }
 
   closePopup() {
@@ -254,6 +281,7 @@ export default class Hashtags extends Vue {
     this.editedColor = tag.color || defaultColor
     this.tagName = tag.tag
     this.edited = i
+    this.tagOrder = String(tag.epicOrder)
   }
 
   async saveTag(tag: Tag) {

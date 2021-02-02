@@ -196,6 +196,11 @@ export default class TodoForm extends Vue {
         (i18n.t('encryption.errorDecrypting') as string)
       )
     } else {
+      const extensionText = this.$router.currentRoute.query.extension as string
+      if (extensionText) {
+        this.todo.text = extensionText
+        this.$router.push({ path: 'superpower' })
+      }
       return this.todo.text
     }
   }

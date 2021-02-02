@@ -21,9 +21,9 @@ import CookieLaw from 'vue-cookie-law'
 import { namespace } from 'vuex-class'
 import Navbar from '@/components/Navbar.vue'
 import Snackbar from '@/components/Snackbar.vue'
-import store from '@/store'
 import { i18n } from '@/plugins/i18n'
-import SnackbarState from '@/store/modules/SnackbarStore'
+
+const { loadCSS } = require('fg-loadcss')
 
 const AppStore = namespace('AppStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -37,6 +37,24 @@ export default class App extends Vue {
     return {
       'background-color': this.dark ? '#303030' : '#fafafa',
     }
+  }
+
+  async loadRenderBlockingCSS() {
+    // icons
+    loadCSS(
+      'https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css'
+    )
+    // fonts
+    loadCSS(
+      'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap'
+    )
+    loadCSS(
+      'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons&display=swap'
+    )
+  }
+
+  mounted() {
+    this.loadRenderBlockingCSS()
   }
 
   created() {

@@ -97,6 +97,7 @@ v-dialog(
               src='/img/google.svg',
               height='18dp',
               width='18dp'
+              alt='Google logo'
             )
             span.google-button-text {{ $t("settings.notConnected") }}
         .integration-button-block.mb-2(v-if='!!user && !user.telegramId')

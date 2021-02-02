@@ -11,7 +11,12 @@ v-dialog(v-model='dialog', scrollable, max-width='600px', persistent)
         v-carousel-item.pa-4
           .d-flex.justify-center.mb-4
             v-avatar(:size='100')
-              v-img(:width='100', :height='100', src='/img/nikita.jpg')
+              v-img(
+                :width='100',
+                :height='100',
+                src='/img/nikita.webp',
+                alt='Nikita Kolmogorov'
+              )
           p(:style='textStyle') {{ $t("introText0web") }}
           p(:style='textStyle') {{ $t("introText1") }}
           p(:style='textStyle') {{ $t("introText2web") }}

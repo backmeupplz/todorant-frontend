@@ -19,32 +19,31 @@
               li {{ $t("homeShort.feature4") }}
         .d-flex.flex-column
           v-row.login-button-container
-            a.login-button(@click='signinDialog = true')
+            a.login-button(
+              @click='signinDialog = true',
+              rel='noreferrer noopener'
+            )
               span {{ $t("home.signIn") }}
             .d-flex.justify-center
               a.pl-2(
-                @click='open(`https://apps.apple.com/${appstoreLanguage}/app/todorant/id1482078243`)'
+                @click='open(`https://apps.apple.com/${appstoreLanguage}/app/todorant/id1482078243`)',
+                rel='noreferrer noopener'
               )
-                img.store-button(src='/img/appstore.svg')
+                img.store-button(src='/img/appstore.svg', alt='App Store logo')
               a.px-2(
-                @click='open("https://play.google.com/store/apps/details?id=com.todorant")'
+                @click='open("https://play.google.com/store/apps/details?id=com.todorant")',
+                rel='noreferrer noopener'
               )
-                img.store-button(src='/img/playstore.svg')
+                img.store-button(
+                  src='/img/playstore.svg',
+                  alt='Play Store logo'
+                )
           .youtube-container
-            iframe.youtube-video(
+            lite-youtube.youtube-video(
               v-if='language && language === "ru"',
-              src='https://www.youtube-nocookie.com/embed/heR0rlllTVg',
-              frameborder='0',
-              allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture',
-              allowfullscreen=''
+              videoId='heR0rlllTVg'
             )
-            iframe.youtube-video(
-              v-else,
-              src='https://www.youtube-nocookie.com/embed/lYXhqHt7_QY',
-              frameborder='0',
-              allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture',
-              allowfullscreen=''
-            )
+            lite-youtube.youtube-video(videoId='lYXhqHt7_QY', v-else)
       // Difference
       .responsive-block.text-left
         .margined-when-small
@@ -56,7 +55,7 @@
           .screenshot-container
             .screen.blue-screenshot.rotate-right
             .screen.yellow-screenshot.rotate-left
-            img.real-screenshot(:src='screenshot')
+            img.real-screenshot(:src='screenshot', alt='Screenshot')
       // Cross platform
       .responsive-block.text-left
         .margined-when-small
@@ -76,29 +75,33 @@
       .orange-box-act.margined-when-small
         .title-act {{ $t("home.act") }}
         v-row.login-button-container
-          a.login-button(@click='signinDialog = true')
+          a.login-button(
+            @click='signinDialog = true',
+            rel='noreferrer noopener'
+          )
             span {{ $t("home.signIn") }}
           .d-flex.justify-center
             a.pl-2(
-              @click='open(`https://apps.apple.com/${appstoreLanguage}/app/todorant/id1482078243`)'
+              @click='open(`https://apps.apple.com/${appstoreLanguage}/app/todorant/id1482078243`)',
+              rel='noreferrer noopener'
             )
-              img.store-button(src='/img/appstore.svg')
+              img.store-button(src='/img/appstore.svg', alt='App Store logo')
             a.px-2(
-              @click='open("https://play.google.com/store/apps/details?id=com.todorant")'
+              @click='open("https://play.google.com/store/apps/details?id=com.todorant")',
+              rel='noreferrer noopener'
             )
-              img.store-button(src='/img/playstore.svg')
+              img.store-button(src='/img/playstore.svg', alt='Play Store logo')
       // Footer
       .footer-text.justify-space-between.margined-when-small
         span
           | {{ $t("home.texts.contact[0]") }}
-          a(href='mailto:n@borodutch.com') n@borodutch.com
+          a(href='mailto:n@borodutch.com', rel='noreferrer noopener') n@borodutch.com
           | {{ $t("home.texts.contact[1]") }}
         router-link.ml-1(to='/privacy') {{ $t("home.privacy") }}
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import axios from 'axios'
 import Component from 'vue-class-component'
 import { i18n } from '@/plugins/i18n'
 import { logEvent } from '@/utils/logEvent'
@@ -107,6 +110,7 @@ import Reviews from '@/components/Reviews.vue'
 import DownloadLinks from '@/components/DownloadLinks.vue'
 import { serverBus } from '@/main'
 import { namespace } from 'vuex-class'
+import '@justinribeiro/lite-youtube'
 
 const AppStore = namespace('AppStore')
 
@@ -159,8 +163,8 @@ export default class Home extends Vue {
 
   get screenshot() {
     return this.dark
-      ? `/img/screenshots/${this.languageImageTag}-dark.png`
-      : `/img/screenshots/${this.languageImageTag}.png`
+      ? `/img/screenshots/${this.languageImageTag}-dark.webp`
+      : `/img/screenshots/${this.languageImageTag}.webp`
   }
 
   open(link: string) {
