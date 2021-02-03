@@ -252,9 +252,7 @@ export default class TodoForm extends Vue {
     }
     const matches = this.todo.text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+/g) || []
     if (!matches.length) {
-      return this.showMoreByDefault || this.moreShown || this.todo.time
-        ? this.tags
-        : []
+      return this.showMoreByDefault || this.moreShown ? this.tags : []
     }
     const match = matches[0]
     return this.tags
