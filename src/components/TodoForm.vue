@@ -252,7 +252,9 @@ export default class TodoForm extends Vue {
     }
     const matches = this.todo.text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+/g) || []
     if (!matches.length) {
-      return this.showMoreByDefault ? this.tags : []
+      return this.showMoreByDefault || this.moreShown || this.todo.time
+        ? this.tags
+        : []
     }
     const match = matches[0]
     return this.tags
@@ -373,9 +375,10 @@ export default class TodoForm extends Vue {
       return
     }
     const match = matches[0]
-    this.todo.text = `${before.substr(0, before.length - match.length)}${
-      insertText
-    }${after}`
+    this.todo.text = `${before.substr(
+      0,
+      before.length - match.length
+    )}${insertText}${after}`
     ;(this.$refs.textInput as any).focus()
   }
 }
