@@ -60,6 +60,7 @@ export default class TodoText extends Vue {
       let hashesString = location.hash == '' ? hash : `,${hash}`
       location.hash += hashesString
     }
+    serverBus.$emit('changeCurrentTab', 1)
     serverBus.$emit('refreshRequested')
   }
 }
