@@ -1,6 +1,7 @@
 import Vue, { VueConstructor } from 'vue'
 import Vuetify, {
   VApp,
+  VAlert,
   VSnackbar,
   VBtn,
   VDialog,
@@ -70,6 +71,7 @@ import RearrangeIcon from '@/icons/RearrangeIcon.vue'
 Vue.use(Vuetify, {
   components: {
     VApp,
+    VAlert,
     VSnackbar,
     VBtn,
     VDialog,

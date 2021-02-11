@@ -80,10 +80,13 @@ export default class EditTodo extends Vue {
   initialMonthAndYear = ''
   initialDate = ''
 
+  completed = false
+
   @Watch('todo')
   onTodoChanged(val: Todo, oldVal: Todo) {
     this.dialog = !!val
     if (!oldVal && val) {
+      this.completed = val.completed
       this.reset()
       this.initialMonthAndYear = val.monthAndYear
       this.initialDate = val.date
@@ -116,7 +119,7 @@ export default class EditTodo extends Vue {
       }
       await api.editTodo(user, (this as any).todo)
       ;(this as any).cleanTodo()
-      if ((this as any).todo.completed) {
+      if ((this as any).todo.completed && !this.completed) {
         playSound((this as any).todo.frog ? Sounds.levelUp : Sounds.taskDone)
       }
     } catch (err) {
