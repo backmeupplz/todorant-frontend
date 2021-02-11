@@ -31,9 +31,7 @@
         alt='Android logo'
       )
     p.xplatform-text Android
-  .xplatform-card(
-    @click='open("https://drive.google.com/uc?export=download&id=1wuRkPGzrnkKBeMiricZOaZ7s8voOdj7q")'
-  )
+  .xplatform-card(@click='open(macOSLink)')
     .platform-image-box
       v-img(
         src='/img/platforms/macos.svg',
@@ -42,9 +40,7 @@
         alt='macOS logo'
       )
     p.xplatform-text macOS
-  .xplatform-card(
-    @click='open("https://github.com/backmeupplz/todorant-releases/releases/download/v1.0.3/todorant-1.0.3-win.exe")'
-  )
+  .xplatform-card(@click='open(windowsLink)')
     .platform-image-box
       v-img(
         src='/img/platforms/windows.svg',
@@ -53,9 +49,7 @@
         alt='Windows logo'
       )
     p.xplatform-text Windows
-  .xplatform-card(
-    @click='open("https://github.com/backmeupplz/todorant-releases/releases/download/v1.0.3/todorant-1.0.3-linux-x86_64.AppImage")'
-  )
+  .xplatform-card(@click='open(linuxLink)')
     .platform-image-box
       v-img(
         src='/img/platforms/linux.svg',
@@ -113,6 +107,7 @@ import Component from 'vue-class-component'
 import { Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import { i18n } from '@/plugins/i18n'
+import axios from 'axios'
 
 const AppStore = namespace('AppStore')
 
@@ -121,6 +116,41 @@ export default class DownloadLinks extends Vue {
   @Prop({ default: true }) showsWeb!: boolean
 
   @AppStore.State dark!: boolean
+
+  macOSLink =
+    'https://github.com/backmeupplz/todorant-releases/releases/download/v1.0.7/todorant-1.0.7-linux-x86_64.AppImage'
+  windowsLink =
+    'https://github.com/backmeupplz/todorant-releases/releases/download/v1.0.7/todorant-1.0.7-win.exe'
+  linuxLink =
+    'https://github.com/backmeupplz/todorant-releases/releases/download/v1.0.7/todorant-1.0.7-linux-x86_64.AppImage'
+
+  async mounted() {
+    try {
+      const releases = (
+        await axios.get(
+          'https://api.github.com/repos/backmeupplz/todorant-releases/releases/latest'
+        )
+      ).data
+      const assetsLinks = Object.keys(releases.assets).map(
+        (key) => releases.assets[key].browser_download_url
+      )
+      const linuxLink = assetsLinks.find((link) => link.endsWith('AppImage'))
+      if (linuxLink) {
+        this.linuxLink = linuxLink
+      }
+      const windowsLink = assetsLinks.find((link) => link.endsWith('exe'))
+      if (windowsLink) {
+        this.windowsLink = windowsLink
+      }
+      const macOSLink = assetsLinks.find((link) => link.endsWith('dmg'))
+      if (macOSLink) {
+        this.macOSLink = macOSLink
+      }
+      console.log(linuxLink, windowsLink, macOSLink)
+    } catch (err) {
+      // Do nothing
+    }
+  }
 
   open(link: string) {
     logEvent('open_link', { link })
