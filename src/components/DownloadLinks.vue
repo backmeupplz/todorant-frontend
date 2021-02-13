@@ -5,7 +5,8 @@
       v-img(
         src='/img/platforms/webapp.svg',
         max-width='40px',
-        max-height='34px'
+        max-height='34px',
+        alt='Web app logo'
       )
     p.xplatform-text Web
   .xplatform-card(
@@ -15,7 +16,8 @@
       v-img(
         :src='dark ? "/img/platforms/apple.svg" : "/img/platforms/apple-black.svg"',
         max-width='28px',
-        max-height='34px'
+        max-height='34px',
+        alt='Apple logo'
       )
     p.xplatform-text iOS
   .xplatform-card(
@@ -25,37 +27,35 @@
       v-img(
         src='/img/platforms/android.svg',
         max-width='40px',
-        max-height='24px'
+        max-height='24px',
+        alt='Android logo'
       )
     p.xplatform-text Android
-  .xplatform-card(
-    @click='open("https://drive.google.com/uc?export=download&id=1wuRkPGzrnkKBeMiricZOaZ7s8voOdj7q")'
-  )
+  .xplatform-card(@click='open(macOSLink)')
     .platform-image-box
       v-img(
         src='/img/platforms/macos.svg',
         max-width='34px',
-        max-height='34px'
+        max-height='34px',
+        alt='macOS logo'
       )
     p.xplatform-text macOS
-  .xplatform-card(
-    @click='open("https://drive.google.com/uc?export=download&id=1BlLXtet9g3G-MmlwTgY7T9iSOYfgLy1O")'
-  )
+  .xplatform-card(@click='open(windowsLink)')
     .platform-image-box
       v-img(
         src='/img/platforms/windows.svg',
         max-width='34px',
-        max-height='34px'
+        max-height='34px',
+        alt='Windows logo'
       )
     p.xplatform-text Windows
-  .xplatform-card(
-    @click='open("https://drive.google.com/uc?export=download&id=1HuOa_Le9AWvDzbhvTQzAR2v6HZteyExH")'
-  )
+  .xplatform-card(@click='open(linuxLink)')
     .platform-image-box
       v-img(
         src='/img/platforms/linux.svg',
         max-width='34px',
-        max-height='34px'
+        max-height='34px',
+        alt='Linux logo'
       )
     p.xplatform-text Linux
   .xplatform-card(@click='open("https://snapcraft.io/todorant")')
@@ -63,7 +63,8 @@
       v-img(
         :src='dark ? "/img/platforms/snapcraft-white.svg" : "/img/platforms/snapcraft.svg"',
         max-width='34px',
-        max-height='34px'
+        max-height='34px',
+        alt='Snap logo'
       )
     p.xplatform-text Snapcraft
   .xplatform-card(
@@ -73,7 +74,8 @@
       v-img(
         src='/img/platforms/chrome.svg',
         max-width='34px',
-        max-height='34px'
+        max-height='34px',
+        alt='Chrome logo'
       )
     p.xplatform-text Chrome
   .xplatform-card(
@@ -83,7 +85,8 @@
       v-img(
         src='/img/platforms/firefox.svg',
         max-width='34px',
-        max-height='34px'
+        max-height='34px',
+        alt='Firefox logo'
       )
     p.xplatform-text Firefox
   .xplatform-card(@click='open("https://t.me/todorant_bot")')
@@ -91,7 +94,8 @@
       v-img(
         src='/img/platforms/telegram.svg',
         max-width='34px',
-        max-height='29px'
+        max-height='29px',
+        alt='Telegram logo'
       )
     p.xplatform-text Telegram
 </template>
@@ -102,18 +106,69 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
+import { i18n } from '@/plugins/i18n'
+import axios from 'axios'
 
 const AppStore = namespace('AppStore')
 
 @Component
 export default class DownloadLinks extends Vue {
-  @Prop({ required: true, default: true }) showsWeb!: boolean
+  @Prop({ default: true }) showsWeb!: boolean
 
   @AppStore.State dark!: boolean
+
+  macOSLink =
+    'https://github.com/backmeupplz/todorant-releases/releases/download/v1.0.7/todorant-1.0.7-linux-x86_64.AppImage'
+  windowsLink =
+    'https://github.com/backmeupplz/todorant-releases/releases/download/v1.0.7/todorant-1.0.7-win.exe'
+  linuxLink =
+    'https://github.com/backmeupplz/todorant-releases/releases/download/v1.0.7/todorant-1.0.7-linux-x86_64.AppImage'
+
+  async mounted() {
+    try {
+      const releases = (
+        await axios.get(
+          'https://api.github.com/repos/backmeupplz/todorant-releases/releases/latest'
+        )
+      ).data
+      const assetsLinks = Object.keys(releases.assets).map(
+        (key) => releases.assets[key].browser_download_url
+      )
+      const linuxLink = assetsLinks.find((link) => link.endsWith('AppImage'))
+      if (linuxLink) {
+        this.linuxLink = linuxLink
+      }
+      const windowsLink = assetsLinks.find((link) => link.endsWith('exe'))
+      if (windowsLink) {
+        this.windowsLink = windowsLink
+      }
+      const macOSLink = assetsLinks.find((link) => link.endsWith('dmg'))
+      if (macOSLink) {
+        this.macOSLink = macOSLink
+      }
+      console.log(linuxLink, windowsLink, macOSLink)
+    } catch (err) {
+      // Do nothing
+    }
+  }
 
   open(link: string) {
     logEvent('open_link', { link })
     window.open(link, '_blank')
+  }
+
+  get appstoreLanguage() {
+    switch (i18n.locale) {
+      case undefined:
+        return 'us'
+      case 'en':
+        return 'us'
+      case 'uk':
+        return 'us'
+      default:
+        break
+    }
+    return i18n.locale
   }
 }
 </script>

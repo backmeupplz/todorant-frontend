@@ -1,8 +1,5 @@
 <template lang="pug">
-v-container(
-  style='maxWidth: 1000px;',
-  v-observe-visibility='visibilityChanged'
-)
+v-container(style='maxWidth: 1000px;', v-observe-visibility='visibilityChanged')
   v-row(no-gutters, v-if='!external')
     v-col.d-flex.flex-row(cols=12)
       v-text-field(
@@ -72,11 +69,11 @@ v-container(
         p.headline {{ $t("report.frogsCompleted") }}: {{ completedFrogsCount }}
     v-row
       v-col(cols=12, sm=6)
-        v-card.d-flex.align-center.justify-center
-          canvas#todos(height=400, width=400)
+        v-card.d-flex.pa-6
+          canvas#todos
       v-col(cols=12, sm=6)
-        v-card.d-flex.align-center.justify-center
-          canvas#frogs(height=400, width=400)
+        v-card.d-flex.pa-6
+          canvas#frogs
     div(v-if='!external')
       v-row.pt-4.text-center
         v-col
@@ -87,6 +84,7 @@ v-container(
         v-row.justify-center.text-center
           p
             | {{ $t("report.url") }}:
+            | {{ " " }}
             a(:href='url', target='_blank') {{ url }}
         v-row.flex-row.justify-center
           twitter-button.share-button--circle(
@@ -167,7 +165,7 @@ import dayjs from 'dayjs'
 import { Prop, Watch } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
-const BarChart = require('bar-chartjs')
+const Chart = require('chart.js/dist/Chart.bundle')
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -202,14 +200,16 @@ export default class Report extends Vue {
 
   loading = false
 
-  completedTodosData: object | any = {}
-  completedFrogsData: object | any = {}
+  completedTodosData: object = {}
+  completedFrogsData: object = {}
 
   completedTodosCount = 0
   completedFrogsCount = 0
 
   hashtag = ''
   url = ''
+
+  charts: any[] = []
 
   name = ''
 
@@ -220,12 +220,6 @@ export default class Report extends Vue {
 
   endDateMenu = false
   endDate: null | string = null
-
-  @Watch('dark')
-  colorChanged() {
-    this.renderChart('#frogs', this.completedFrogsData)
-    this.renderChart('#todos', this.completedTodosData)
-  }
 
   mounted() {
     this.refresh()
@@ -238,52 +232,57 @@ export default class Report extends Vue {
   }
 
   renderChart(canvasName: string, canvasData: any) {
-    const actualCanvas = document.querySelector(canvasName)
-    const canvasOptions = {
-      labels: canvasData.onlyDays,
-      series: [
-        {
-          style: {
-            default: '#ff641a',
-            active: 'red',
-          },
-          data: canvasData.datasets,
-        },
-      ],
-      xAxis: {
-        font: {
-          size: 13,
-          style: this.dark ? 'white' : 'black',
-        },
-        line: {
-          style: this.dark ? 'white' : 'black',
-        },
-        tick: {
-          style: this.dark ? 'white' : 'black',
-        },
-      },
-      yAxis: {
-        // config style of y-axis
-        font: {
-          size: 13,
-          style: this.dark ? 'white' : 'black',
-        },
-        line: {
-          style: this.dark ? 'white' : 'black',
-        },
-        tick: {
-          style: this.dark ? 'white' : 'black',
-        },
-      },
+    const ctx = document.getElementById(canvasName) as HTMLCanvasElement
+    if (!ctx) {
+      return
     }
-    new BarChart(actualCanvas, canvasOptions)
+    const context = ctx.getContext('2d')
+    if (!context) {
+      return
+    }
+    if (this.charts.length >= 2) {
+      this.charts.forEach((chart) => chart.destroy())
+      this.charts = []
+    }
+    this.charts.push(
+      new Chart(context, {
+        type: 'bar',
+        data: canvasData,
+        options: {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                  stepSize: 2,
+                  min: 0,
+                },
+              },
+            ],
+            xAxes: [
+              {
+                gridLines: {
+                  color: 'rgba(0, 0, 0, 0)',
+                },
+              },
+            ],
+          },
+        },
+      })
+    )
   }
 
   convertData(data: any, title: string) {
     if (!Object.keys(data).length) {
       return {
         labels: [],
-        datasets: [],
+        datasets: [
+          {
+            label: i18n.t(title),
+            backgroundColor: 'rgba(255, 100, 26, 0.8)',
+            data: [],
+          },
+        ],
       }
     }
 
@@ -299,29 +298,25 @@ export default class Report extends Vue {
     }
 
     const daysToCompletedMap = keys.reduce((prev, cur) => {
-      prev[new Date(cur).toLocaleDateString()] = data[cur]
+      prev[new Date(cur).toLocaleDateString(this.language)] = data[cur]
       return prev
     }, {} as any)
 
-    const labels = days.map((k) => k.toLocaleDateString())
-    const completedData = labels
-      .map((l) => daysToCompletedMap[l])
-      .map((data: number) => {
-        if (!data) {
-          return 0
-        }
-        return data
-      })
-
-    const onlyDays = labels
-      .map((date: string) => {
-        return date.split('/')[1]
-      })
-      .slice(-14)
+    const labels = days.map((k) => k.toLocaleDateString(this.language))
+    const completedData = labels.map((l) => daysToCompletedMap[l])
 
     return {
-      onlyDays,
-      datasets: completedData.slice(-14),
+      labels,
+      datasets: [
+        {
+          categoryPercentage: 0.25,
+          label: i18n.t(title),
+          backgroundColor: 'rgba(255, 100, 26, 0.8)',
+          borderColor: 'rgba(255, 100, 26, 1)',
+          data: completedData,
+          borderWidth: 1.5,
+        },
+      ],
     }
   }
 
@@ -364,11 +359,9 @@ export default class Report extends Vue {
         data.completedFrogsMap || {}
       ) as number[]).reduce((prev, cur) => prev + cur, 0)
       this.url = ''
-      this.renderChart('#frogs', this.completedFrogsData)
-      this.renderChart('#todos', this.completedTodosData)
+      this.renderChart('frogs', this.completedFrogsData)
+      this.renderChart('todos', this.completedTodosData)
     } catch (err) {
-      // We're doing this because of strange error coming from barchart, that we can't fix
-      if (err.message === 't is null') return
       console.error(err)
       this.setSnackbarError('errors.report')
     } finally {

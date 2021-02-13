@@ -5,7 +5,8 @@ export function isTodoOld(todo: Todo, date: string) {
   const day = date.substr(8)
   const monthAndYear = date.substr(0, 7)
   const yesterday = `${parseInt(day) - 1}`
-  const startTimeOfDay = store.state.SettingsStore.startTimeOfDay || '00:00'
+  const startTimeOfDay =
+    (store as any).state.SettingsStore.startTimeOfDay || '00:00'
   const now = new Date()
   const todayDate = new Date(
     now.getFullYear(),

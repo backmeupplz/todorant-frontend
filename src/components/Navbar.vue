@@ -33,7 +33,7 @@ nav
     // Title
     a(@click='goHome')
       v-toolbar-title.text-uppercase.grey--text
-        img(src='/img/logo-small.svg', :height='24', :width='118')
+        img(src='/img/logo-small.svg', :height='24', :width='118', alt='Logo')
     v-spacer
     // Language picker
     v-menu(offset-y)
@@ -56,7 +56,7 @@ nav
     // Extra
     v-menu(offset-y)
       template(v-slot:activator='{ on }')
-        v-btn(text, icon, color='grey', v-on='on')
+        v-btn(text, icon, color='grey', v-on='on', aria-label='Settings')
           v-icon $settings
       v-list
         // Dark mode

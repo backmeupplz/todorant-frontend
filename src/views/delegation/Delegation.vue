@@ -136,7 +136,7 @@ export default class Delegation extends Vue {
     }
     this.loading = true
     try {
-      sockets.delegateSyncManager.sync()
+      sockets.delegationSyncManager.sync()
       await this.getUnacceptedTodos()
       await this.getDelegatedTodos()
     } catch (err) {

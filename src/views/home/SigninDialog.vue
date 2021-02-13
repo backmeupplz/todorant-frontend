@@ -5,21 +5,36 @@ v-dialog(v-model='safeDialog', width='unset')
       .width-container
         // Facebook
         v-btn.signin-button.signin-facebook(@click='loginWithFacebook')
-          img.logo-image(src='/img/facebook.svg', height='18dp', width='18dp')
+          img.logo-image(
+            src='/img/facebook.svg',
+            height='18dp',
+            width='18dp',
+            alt='Facebook logo'
+          )
           span {{ $t("home.facebook") }}
         // Google
         v-btn.signin-button.signin-google(
           color='#FFFFFF',
           @click='loginWithGoogle'
         )
-          img.logo-image(src='/img/google.svg', height='18dp', width='18dp')
+          img.logo-image(
+            src='/img/google.svg',
+            height='18dp',
+            width='18dp',
+            alt='Google logo'
+          )
           span {{ $t("home.google") }}
         // Apple
         v-btn.signin-button.signin-apple(
           color='#000000',
           @click='loginWithApple'
         )
-          img.logo-image(src='/img/apple.svg', height='18dp', width='18dp')
+          img.logo-image(
+            src='/img/apple.svg',
+            height='18dp',
+            width='18dp',
+            alt='Apple logo'
+          )
           span {{ $t("home.apple") }}
 
         // Telegram
@@ -57,8 +72,7 @@ import { logEvent } from '@/utils/logEvent'
 import { setCookie } from '@/utils/cookie'
 const { vueTelegramLogin } = require('vue-telegram-login')
 import { serverBus } from '@/main'
-import * as firebase from 'firebase/app'
-import 'firebase/auth'
+import { v4 as uuid } from 'uuid'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -91,6 +105,13 @@ export default class SigninDialog extends Vue {
     return !!process.env.VUE_APP_DEV
   }
 
+  getArgFromHash(name: string) {
+    const match = RegExp(`${name}=([^&]+)`).exec(
+      decodeURIComponent(this.$route.hash)
+    )
+    return match && match[1]
+  }
+
   async created() {
     // Telegram auth
     if (this.$route.query && this.$route.query.hash) {
@@ -98,53 +119,64 @@ export default class SigninDialog extends Vue {
         this.onTelegramAuth(this.$route.query)
       }
     }
-    // Google auth
-    try {
-      const result = await firebase.auth().getRedirectResult()
-      if (result.credential) {
-        const token = (result.credential as any).accessToken
-        const user = await loginGoogle(token)
-        this.loginSuccess(user, 'google')
+    // Facebook auth
+    if (this.$route.path.includes('facebook_login_result')) {
+      const accessToken = this.getArgFromHash('access_token')
+      if (accessToken) {
+        try {
+          const user = await loginFacebook(accessToken)
+          this.loginSuccess(user, 'facebook')
+        } catch (error) {
+          this.loginError(error, 'facebook')
+        }
       }
-    } catch (error) {
-      this.loginError(error, 'google')
+    }
+    // Google auth
+    if (this.$route.path.includes('google_login_result')) {
+      const accessToken = this.getArgFromHash('access_token')
+      if (accessToken) {
+        try {
+          const user = await loginGoogle(accessToken)
+          this.loginSuccess(user, 'google')
+        } catch (error) {
+          this.loginError(error, 'google')
+        }
+      }
+    }
+    // Apple auth
+    if (this.$route.path.includes('apple_login_result')) {
+      const idToken = this.getArgFromHash('id_token')
+      const userString = this.getArgFromHash('user')
+      if (idToken) {
+        try {
+          const user = await loginApple({
+            credential: { oauthIdToken: idToken },
+            user: userString ? JSON.parse(userString) : undefined,
+          })
+          this.loginSuccess(user, 'apple')
+        } catch (error) {
+          this.loginError(error, 'apple')
+        }
+      }
     }
   }
 
   async loginWithGoogle() {
-    const authProvider = new firebase.auth.GoogleAuthProvider()
-    authProvider.addScope('email')
-    authProvider.addScope('profile')
-    await firebase.auth().signInWithRedirect(authProvider)
+    const clientId =
+      '989382323327-rou6lmk2umbnoaq55493v1kqm8fvp22q.apps.googleusercontent.com'
+    const redirectUri = 'https://todorant.com/google_login_result'
+    const scope =
+      'https://www.googleapis.com/auth/userinfo.profile%20https://www.googleapis.com/auth/userinfo.email'
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}&prompt=select_account`
   }
 
   async loginWithFacebook() {
-    const authProvider = new firebase.auth.FacebookAuthProvider()
-    authProvider.addScope('email')
-    try {
-      const result = await firebase.auth().signInWithPopup(authProvider)
-      const token = (result.credential as any).accessToken
-      const user = await loginFacebook(token)
-      this.loginSuccess(user, 'facebook')
-    } catch (error) {
-      this.loginError(error, 'facebook')
-    }
+    window.location.href =
+      'https://www.facebook.com/dialog/oauth?client_id=640750769753434&redirect_uri=https://todorant.com/facebook_login_result&scope=email,public_profile&response_type=token&auth_type=rerequest'
   }
 
   async loginWithApple() {
-    const authProvider = new firebase.auth.OAuthProvider('apple.com')
-    authProvider.addScope('email')
-    authProvider.addScope('name')
-    try {
-      const result = await firebase.auth().signInWithPopup(authProvider)
-      const user = await loginApple({
-        ...result,
-        name: firebase.auth().currentUser?.displayName,
-      })
-      this.loginSuccess(user, 'apple')
-    } catch (error) {
-      this.loginError(error, 'apple')
-    }
+    window.location.href = `https://appleid.apple.com/auth/authorize?response_type=code%20id_token&response_mode=form_post&client_id=com.todorant.web&redirect_uri=https://backend.todorant.com/login/apple_login_result&scope=email%20name&nonce=${uuid()}&state=${uuid()}`
   }
 
   async onTelegramAuth(loginInfo: any) {

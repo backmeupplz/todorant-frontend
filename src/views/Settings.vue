@@ -25,10 +25,19 @@ v-dialog(
         :label='$t("settings.duplicateTagInBreakdown")',
         v-model='safeDuplicateTagInBreakdown'
       )
+      v-switch.ma-0.pa-0(
+        :label='$t("settingsObject.showMoreByDefault")',
+        v-model='safeShowMoreByDefault'
+      )
       v-switch.ma-0.pa-0(:label='$t("soundEffects")', v-model='soundEffects')
       v-switch.ma-0.pa-0(:label='$t("settings.hotkeys")', v-model='hotKeys')
-      v-switch.ma-0.pa-0(:label='$t("settings.swipeActions")', v-model='swipeActions')
+      v-switch.ma-0.pa-0(:label='$t("settingsActions.swipeActions")', v-model='swipeActions')
       v-switch.ma-0.pa-0(:label='$t("settings.coloredCardBackgrounds")', v-model='coloredCardBackgroundsValue')
+      v-switch.ma-0.pa-0(
+        :label='$t("settings.newLineOnReturn")',
+        v-if='hotKeys',
+        v-model='newLineOnReturnHotKeys'
+      )
       v-divider
       v-select.mt-4(
         :items='weekdays',
@@ -88,6 +97,7 @@ v-dialog(
               src='/img/google.svg',
               height='18dp',
               width='18dp'
+              alt='Google logo'
             )
             span.google-button-text {{ $t("settings.notConnected") }}
         .integration-button-block.mb-2(v-if='!!user && !user.telegramId')
@@ -201,8 +211,10 @@ export default class Settings extends Vue {
   @SettingsStore.State newTodosGoFirst?: boolean
   @SettingsStore.State preserveOrderByTime?: boolean
   @SettingsStore.State duplicateTagInBreakdown?: boolean
+  @SettingsStore.State showMoreByDefault?: boolean
   @SettingsStore.State audioEnabled!: boolean
   @SettingsStore.State hotKeysEnabled!: boolean
+  @SettingsStore.State newLineOnReturn!: boolean
   @SettingsStore.State swipeActionsEnabled!: boolean
   @SettingsStore.State coloredCardBackgrounds!: boolean
   @SettingsStore.State googleCalendarCredentials!: GoogleCalendarCredentials
@@ -220,8 +232,14 @@ export default class Settings extends Vue {
   @SettingsStore.Mutation setDuplicateTagInBreakdown!: (
     duplicateTagInBreakdown: boolean
   ) => void
+  @SettingsStore.Mutation setShowMoreByDefault!: (
+    showMoreByDefault: boolean
+  ) => void
   @SettingsStore.Mutation setAudioEnabled!: (audioEnabled: boolean) => void
   @SettingsStore.Mutation setHotKeysEnabled!: (hotKeysEnabled: boolean) => void
+  @SettingsStore.Mutation setNewLineOnReturn!: (
+    newLineOnReturn: boolean
+  ) => void
   @SettingsStore.Mutation setSwipeActionsEnabled!: (
     swipeActionsEnabled: boolean
   ) => void
@@ -302,6 +320,12 @@ export default class Settings extends Vue {
   set safeDuplicateTagInBreakdown(val: boolean) {
     this.setDuplicateTagInBreakdown(val)
   }
+  get safeShowMoreByDefault() {
+    return this.showMoreByDefault || false
+  }
+  set safeShowMoreByDefault(val: boolean) {
+    this.setShowMoreByDefault(val)
+  }
   get soundEffects() {
     return this.audioEnabled
   }
@@ -313,6 +337,12 @@ export default class Settings extends Vue {
   }
   set hotKeys(val: boolean) {
     this.setHotKeysEnabled(val)
+  }
+  get newLineOnReturnHotKeys() {
+    return this.newLineOnReturn
+  }
+  set newLineOnReturnHotKeys(val: boolean) {
+    this.setNewLineOnReturn(val)
   }
   get swipeActions() {
     return this.swipeActionsEnabled
@@ -431,7 +461,7 @@ export default class Settings extends Vue {
     this.name = user.name
     try {
       await api.setSettings(user, {
-        ...store.state.SettingsStore,
+        ...(store as any).state.SettingsStore,
       })
       await api.setUserName(user, {
         name: this.name,

@@ -67,7 +67,18 @@ export default class ProgressBlock extends Vue {
   @TagsStore.State tags!: Tag[]
 
   get epics() {
-    return this.tags.filter((t) => t.epic)
+    return this.tags
+      .filter((t) => t.epic)
+      .sort((a, b) => {
+        if (!a.epicOrder) {
+          a.epicOrder = 0
+        }
+        if (!b.epicOrder) {
+          b.epicOrder = 0
+        }
+        if (a.epicOrder < b.epicOrder) return -1
+        else return 1
+      })
   }
 
   epicProgress(epic: Tag) {

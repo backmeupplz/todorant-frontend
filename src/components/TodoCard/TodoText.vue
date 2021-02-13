@@ -1,5 +1,5 @@
 <template lang="pug">
-.flex-grow-1.text-container(style='max-width: 100%;')
+.text-container
   p(v-if='todo.delegator')
     span(v-if='todo.delegator.name') {{ todo.delegator.name }}
     span(v-if='!todo.delegator.name') {{ $t("to") }} {{ todo.user.name }}
@@ -61,6 +61,7 @@ export default class TodoText extends Vue {
       let hashesString = location.hash == '' ? hash : `,${hash}`
       location.hash += hashesString
     }
+    serverBus.$emit('changeCurrentTab', 1)
     serverBus.$emit('refreshRequested')
   }
 }
@@ -70,11 +71,15 @@ export default class TodoText extends Vue {
 span {
   white-space: pre-wrap;
 }
+.text-container {
+  min-width: 10px;
+}
 .text-container * {
   font-style: normal;
   font-weight: 500;
   font-size: 15px;
   line-height: 18px;
   letter-spacing: -0.24px;
+  word-wrap: break-word;
 }
 </style>

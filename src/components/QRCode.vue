@@ -11,7 +11,13 @@ v-dialog(
       p {{ $t("qr.description") }}
       .d-flex.justify-center
         .loader(v-if='!imageUrl')
-        img(v-else, width='300px', height='300px', :src='imageUrl')
+        img(
+          v-else,
+          width='300px',
+          height='300px',
+          :src='imageUrl',
+          alt='QR code'
+        )
     v-card-actions
       v-spacer
       v-btn(

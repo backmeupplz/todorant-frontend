@@ -1,33 +1,43 @@
 <template lang="pug">
 .d-flex.flex-column.justify-center
   .d-flex.review-container
-    v-btn.top-arrows(icon, @click='moveLeft')
+    v-btn.top-arrows(icon, @click='moveLeft', aria-label='Previous review')
       v-icon keyboard_arrow_left
     .d-flex.flex-row.text-left
       v-avatar
         img(
-          :src='`/avatars/${currentReview.username || $t("home.feedback.reviews", "en")[index].username}.jpg`'
+          :src='`/avatars/${currentReview.username || $t("home.feedback.reviews", "en")[index].username}.webp`',
+          :alt='`${currentReview.username} avatar`'
         )
       .d-flex.flex-column.review-text
         a.review-username(
           :href='`https://t.me/${currentReview.username || $t("home.feedback.reviews", "en")[index].username}`',
-          target='_blank'
+          target='_blank',
+          rel='noreferrer noopener'
         ) @{{ currentReview.username || $t("home.feedback.reviews", "en")[this.index].username }}
         span.text-review(
           v-for='(text, i) in currentReview.text.split("\\n")',
           :class='textClass'
         ) {{ text }}
-    v-btn.top-arrows(icon, @click='moveRight')
+    v-btn.top-arrows(icon, @click='moveRight', aria-label='Next review')
       v-icon keyboard_arrow_right
   .d-flex.flex-row.justify-center.mt-3.align-center
-    v-btn.mr-2.bottom-arrows(icon, @click='moveLeft')
+    v-btn.mr-2.bottom-arrows(
+      icon,
+      @click='moveLeft',
+      aria-label='Previous review'
+    )
       v-icon keyboard_arrow_left
     .circle(
       v-for='(review, i) in reviews',
       :key='i',
       :class='i === index ? "" : "inactive"'
     )
-    v-btn.ml-2.bottom-arrows(icon, @click='moveRight')
+    v-btn.ml-2.bottom-arrows(
+      icon,
+      @click='moveRight',
+      aria-label='Next review'
+    )
       v-icon keyboard_arrow_right
 </template>
 

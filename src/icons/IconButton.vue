@@ -8,7 +8,8 @@ v-btn(
   v-on='on',
   v-shortkey.once='shortkeys',
   @shortkey.native='shortkey',
-  :small='small'
+  :small='small',
+  :aria-label='name.substr(1)'
 )
   v-icon(:size='small ? 20 : undefined', :style='{ fill: color || "#3366ff" }') {{ name }}
 </template>

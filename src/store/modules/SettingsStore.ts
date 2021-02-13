@@ -10,10 +10,12 @@ export default class SettingsStore extends VuexModule {
   preserveOrderByTime?: boolean = undefined
   googleCalendarCredentials?: GoogleCalendarCredentials = undefined
   duplicateTagInBreakdown?: boolean = undefined
+  showMoreByDefault?: boolean = undefined
   language?: string = undefined
 
   audioEnabled = true
   hotKeysEnabled = true
+  newLineOnReturn = false
   swipeActionsEnabled = false
   coloredCardBackgrounds = false
 
@@ -42,6 +44,14 @@ export default class SettingsStore extends VuexModule {
   @Mutation
   setHotKeysEnabled(hotsetHotKeysEnabled: boolean) {
     this.hotKeysEnabled = hotsetHotKeysEnabled
+    if (!hotsetHotKeysEnabled) {
+      this.newLineOnReturn = false
+    }
+  }
+
+  @Mutation
+  setNewLineOnReturn(newLineOnReturn: boolean) {
+    this.newLineOnReturn = newLineOnReturn
   }
 
   @Mutation
@@ -77,5 +87,10 @@ export default class SettingsStore extends VuexModule {
   @Mutation
   setDuplicateTagInBreakdown(duplicateTagInBreakdown: boolean) {
     this.duplicateTagInBreakdown = duplicateTagInBreakdown
+  }
+
+  @Mutation
+  setShowMoreByDefault(showMoreByDefault: boolean) {
+    this.showMoreByDefault = showMoreByDefault
   }
 }

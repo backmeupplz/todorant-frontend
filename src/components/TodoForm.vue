@@ -65,7 +65,11 @@
           type='month',
           :locale='locale'
         )
-    v-col(v-if='moreShown || todo.time', cols='12', md='6')
+    v-col(
+      v-if='showMoreByDefault || moreShown || todo.time',
+      cols='12',
+      md='6'
+    )
       v-menu(v-model='timeMenu', :close-on-content-click='false', min-width=0)
         template(v-slot:activator='{ on }')
           v-text-field(
@@ -91,10 +95,14 @@
       v-switch(:label='$t("todo.create.frog")', v-model='todo.frog')
     v-col(cols='12', md='6')
       v-switch(:label='$t("completed")', v-model='todo.completed')
-    v-col(v-if='!editTodo && (moreShown || todo.time)', cols='12', md='6')
+    v-col(
+      v-if='!editTodo && (showMoreByDefault || moreShown || todo.time)',
+      cols='12',
+      md='6'
+    )
       v-switch(:label='$t("todo.create.goFirst")', v-model='todo.goFirst')
     v-col(
-      v-if='!editTodo && delegates.length && (moreShown || todo.time)',
+      v-if='!editTodo && delegates.length && (showMoreByDefault || moreShown || todo.time)',
       cols='12',
       md='6'
     )
@@ -106,7 +114,7 @@
       )
   v-row.v-flex-row
     v-btn(
-      v-if='!moreShown && !todo.time',
+      v-if='!showMoreByDefault && !moreShown && !todo.time',
       icon,
       text,
       color='default',
@@ -150,6 +158,8 @@ export default class TodoForm extends Vue {
   @AppStore.State language?: string
   @AppStore.State dark!: boolean
   @TagsStore.State tags!: Tag[]
+  @SettingsStore.State showMoreByDefault!: boolean
+  @SettingsStore.State newLineOnReturn!: boolean
   @SettingsStore.State firstDayOfWeek?: number
   @SettingsStore.State startTimeOfDay?: string
   @DelegationStore.State delegates!: User[]
@@ -186,6 +196,11 @@ export default class TodoForm extends Vue {
         (i18n.t('encryption.errorDecrypting') as string)
       )
     } else {
+      const extensionText = this.$router.currentRoute.query.extension as string
+      if (extensionText) {
+        this.todo.text = extensionText
+        this.$router.push({ path: 'superpower' })
+      }
       return this.todo.text
     }
   }
@@ -235,9 +250,9 @@ export default class TodoForm extends Vue {
     if (emptyMatches.length) {
       return this.tags
     }
-    const matches = this.todo.text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+$/g) || []
+    const matches = this.todo.text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+/g) || []
     if (!matches.length) {
-      return []
+      return this.showMoreByDefault || this.moreShown ? this.tags : []
     }
     const match = matches[0]
     return this.tags
@@ -299,6 +314,17 @@ export default class TodoForm extends Vue {
     if (!evt.keyCode) {
       return
     }
+    if (this.newLineOnReturn) {
+      if (evt.keyCode === 13 && evt.ctrlKey) {
+        if (evt.type === 'keydown') {
+          ;(this as any).enterPressed()
+        }
+        evt.preventDefault()
+      }
+      if (evt.keyCode === 13) {
+        return
+      }
+    }
     if (evt.keyCode === 65 && evt.ctrlKey && evt.shiftKey) {
       if (evt.type === 'keydown' && this.addTodo) {
         this.addTodo()
@@ -322,21 +348,35 @@ export default class TodoForm extends Vue {
   }
 
   tagSelected(tag: Tag) {
+    const insertText = `#${tag.tag}`
+
+    const textInput = (this.$refs.textInput as any).$refs.input
+    const text = this.todo.text
+    const len = text.length
+    let pos = textInput.selectionStart
+    if (pos === undefined) {
+      pos = 0
+    }
+    const before = text.substr(0, pos)
+    const after = text.substr(pos, len)
+
     const emptyMatches = this.todo.text.match(/#$/g) || []
     if (emptyMatches.length) {
-      this.todo.text = `${this.todo.text}${tag.tag} `
+      this.todo.text = `${before}${tag.tag}${after}`
       ;(this.$refs.textInput as any).focus()
       return
     }
-    const matches = this.todo.text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+$/g) || []
+    const matches = this.todo.text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+/g) || []
     if (!matches.length) {
+      this.todo.text = `${before}${insertText}${after}`
+      ;(this.$refs.textInput as any).focus()
       return
     }
     const match = matches[0]
-    this.todo.text = `${this.todo.text.substr(
+    this.todo.text = `${before.substr(
       0,
-      this.todo.text.length - match.length
-    )}#${tag.tag} `
+      before.length - match.length
+    )}${insertText}${after}`
     ;(this.$refs.textInput as any).focus()
   }
 }

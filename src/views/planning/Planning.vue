@@ -17,6 +17,7 @@ v-container(style='maxWidth: 1000px;')
         :disabled='editable'
       )
       v-text-field.pt-2.mr-4(
+        :autofocus='true',
         v-if='search',
         v-model='queryString',
         :label='$t("search")',
@@ -65,7 +66,9 @@ v-container(style='maxWidth: 1000px;')
         v-if='!!editable || !!spreadEnabled',
         icon,
         :loading='todosUpdating || loading',
-        @click='crossPressed'
+        @click='crossPressed',
+        v-shortkey.once='["esc"]',
+        @shortkey.native='crossPressed'
       )
         v-icon clear
       v-btn(
@@ -80,7 +83,9 @@ v-container(style='maxWidth: 1000px;')
         v-if='!editable && !showCompleted && !calendarViewEnabled',
         :loading='todosUpdating || loading',
         :click='searchTouched',
-        name='$search'
+        name='$search',
+        v-shortkey='["ctrl", "shift" ,"f"]',
+        @shortkey.native='searchTouched'
       )
       IconButton.planning-calendar-button(
         :loading='todosUpdating',
@@ -403,7 +408,7 @@ export default class TodoList extends Vue {
   }
 
   get weekStyles() {
-    return [0, 1, 2, 3, 4].map((v) => ({
+    return [0, 1, 2, 3, 4, 5].map((v) => ({
       'min-height': this.heightForWeek(v),
     }))
   }
@@ -412,11 +417,12 @@ export default class TodoList extends Vue {
     const thisMonth = dayjs(this.currentPeriod).startOf('month')
     const currentWeek = this.weekForDate(thisMonth)
     const numberOfEvents = this.numberOfEventsPerWeek[currentWeek + i] || 1
-    const sizeOfPosition = 1.5
-    const borderHeight = 0.4 * (numberOfEvents + 1)
-    return `calc(${
-      sizeOfPosition * (numberOfEvents + 1)
-    }rem + ${borderHeight}px)`
+    const height = 18
+    const gap = 2
+    const padding = 1.615
+    const totalHeight = height + gap + padding
+    const margin = 32
+    return `calc(${numberOfEvents * totalHeight}px + ${margin}px)`
   }
 
   @Watch('showCompleted')
@@ -470,7 +476,7 @@ export default class TodoList extends Vue {
           ? 20
           : this.todos.reduce((prev, cur) => prev + cur.todos.length, 0),
         this.$router.currentRoute.hash,
-        this.queryString,
+        this.queryString.trim(),
         this.calendarViewEnabled,
         this.calendarViewEnabled ? this.currentPeriod : undefined
       )
@@ -733,7 +739,7 @@ export default class TodoList extends Vue {
     if (!this.editable) {
       return
     }
-    const newTitle = dayjs(date).format('YYYY-MM-DD')
+    const newTitle = dayjs(date).locale(enLocale).format('YYYY-MM-DD')
     if (isDateTooOld(newTitle, api.getToday())) {
       return
     }
@@ -818,13 +824,11 @@ export default class TodoList extends Vue {
   }
 
   weekForDate(date: Dayjs) {
-    const locale = dayjs.locale()
-    dayjs.locale(locale, {
-      week: {
-        dow: this.safeFirstDayOfWeek,
-      },
-    } as any)
-    const week = date.week()
+    const week = date
+      .locale(dayjs.locale(), {
+        weekStart: this.safeFirstDayOfWeek,
+      })
+      .week()
     return week
   }
 

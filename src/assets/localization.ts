@@ -29,6 +29,7 @@ export const messages = {
     warning: 'Warning',
     hashtags: {
       title: 'Hashtags',
+      name: 'Hashtag name',
     },
     supportAlert: {
       title: 'Support',
@@ -264,8 +265,8 @@ export const messages = {
       startTimeOfDay: 'Start of the day',
       username: 'Name',
       telegram: 'Telegram',
-      swipeActions: 'Swipe actions',
       coloredCardBackgrounds: 'Color tasks with hashtag colors',
+      newLineOnReturn: 'Insert new line on enter',
     },
     allDoneTitle: 'Congratulations!',
     allDoneText:
@@ -444,9 +445,13 @@ export const messages = {
     epic: {
       intoEpic: 'Make an Epic',
       epicGoal: 'Epic goal',
+      name: 'Epic name',
     },
     success: 'Success!',
     notLogginedBody: 'Please, login at ',
+    settingsActions: {
+      swipeActions: 'Swipe actions',
+    },
     cannotLoadTitle: 'Uh oh!',
     cannotLoadText: 'Could not load your todos, maybe the Internet is down?',
     deleteAllHashtagsConfirm: 'Are you sure you want to delete all hashtags?',
@@ -493,6 +498,9 @@ export const messages = {
     introText14web:
       'There is one more thing to note though! To fully control superpower, you need to learn how to use it. Make sure to read "How to use Todorant" by tapping the info button in the top right corner!',
     edit: 'Edit',
+    settingsObject: {
+      showMoreByDefault: 'Show more when adding todos by default',
+    },
   },
   ru: {
     encryption: {
@@ -524,11 +532,12 @@ export const messages = {
     warning: 'Внимание',
     hashtags: {
       title: 'Хештеги',
+      name: 'Название хештега',
     },
     supportAlert: {
       title: 'Поддержка',
       text:
-        'Если у вас есть какие-либо вопросы или предложения, <a href="mailto:todorant@borodutch.com">напишите мне имеил</a>, <a href="https://t.me/borodutch" target="_blank">в Телеграм</a> или <a href="https://t.me/todorant_feedback" target="_blank">присоединитесь к нашей групе сообщества в Телеграме</a>!',
+        'Если у вас есть какие-либо вопросы или предложения, <a href="mailto:todorant@borodutch.com">напишите мне имеил</a>, <a href="https://t.me/borodutch" target="_blank">в Телеграм</a> или <a href="https://t.me/todorant_feedback" target="_blank">присоединитесь к нашей группе сообщества в Телеграме</a>!',
     },
     loginMobile: {
       telegram: {
@@ -749,8 +758,8 @@ export const messages = {
       startTimeOfDay: 'Начало дня',
       username: 'Имя',
       telegram: 'Телеграм',
-      swipeActions: 'Действия свайпами',
       coloredCardBackgrounds: 'Окрашивать задачи цветами хештегов',
+      newLineOnReturn: 'Переносить строку на enter',
     },
     allDoneTitle: 'Поздравляем!',
     allDoneText:
@@ -934,9 +943,13 @@ export const messages = {
     epic: {
       intoEpic: 'Сделать эпиком',
       epicGoal: 'Цель эпика',
+      name: 'Название эпика',
     },
     success: 'Успех!',
     notLogginedBody: 'Пожалуйста, войдите в аккаунт на ',
+    settingsActions: {
+      swipeActions: 'Действия свайпами',
+    },
     cannotLoadTitle: 'Ай-я-яй!',
     cannotLoadText:
       'Не получилось загрузить задачи, может, что-то с Интернетом?',
@@ -984,6 +997,10 @@ export const messages = {
     introText14web:
       'Стоит отметить еще одну вещь! Чтобы использовать суперсилу по-полной, вам нужно научиться ее контролировать. Обязательно прочитайте "Как пользоваться Тудурантом", нажав на кнопку справа вверху!',
     edit: 'Редактировать',
+    settingsObject: {
+      showMoreByDefault:
+        'Сразу показывать расширенные настройки добавления задачи',
+    },
   },
   ua: {
     encryption: {

@@ -1,102 +1,204 @@
-import events from 'events'
+import SocketsStore from '@/store/modules/SocketsStore'
+import UserStore from '@/store/modules/UserStore'
+import {
+  checkPromiseMapForTimeout,
+  PromiseMapType,
+} from '@/utils/sockets/checkPromiseMapForTimeout'
+import { PromiseMap } from '@/utils/sockets/PromiseMap'
 import { socketIO } from '@/utils/sockets/socketIO'
+import { SyncStage } from '@/utils/sockets/SyncStage'
 import { v4 as uuid } from 'uuid'
 import store from '@/store'
-import { PromiseMap } from '@/utils/PromiseMap'
 
-export const syncEventEmitter = new events.EventEmitter()
+const userStore = (store as any).state.UserStore as UserStore
+const socketsStore = (store as any).state.SocketsStore as SocketsStore
 
 export class SyncManager<T> {
   name: string
-  pendingPushes: PromiseMap
+  pendingSyncs: PromiseMap = {}
+  pendingPushes: PromiseMap = {}
   latestSyncDate: () => Date | undefined
+  setLastSyncDate: ((latestSyncDate: Date) => void) | undefined
+
+  isSyncing = false
+  queuedSyncPromise:
+    | { promise: Promise<unknown>; res?: Function; rej?: Function }
+    | undefined = undefined
+
   onObjectsFromServer: (
     objects: T,
-    pushBack: (objects: T) => Promise<T>
+    pushBack: (objects: T) => Promise<T>,
+    completeSync: () => void
   ) => Promise<void>
 
   // 0
   constructor(
     name: string,
-    pendingPushes: PromiseMap,
     latestSyncDate: () => Date | undefined,
     onObjectsFromServer: (
       objects: T,
-      pushBack: (objects: T) => Promise<T>
+      pushBack: (objects: T) => Promise<T>,
+      completeSync: () => void
     ) => Promise<void>,
     setLastSyncDate?: (latestSyncDate: Date) => void
   ) {
     this.name = name
-    this.pendingPushes = pendingPushes
     this.latestSyncDate = latestSyncDate
     this.onObjectsFromServer = onObjectsFromServer
+    this.setLastSyncDate = setLastSyncDate
 
     // -1
     socketIO.on(`${name}_sync_request`, () => {
-      console.log(`${this.name}: sync_request`)
+      console.warn(`${this.name}: sync_request`)
       this.sync()
     })
 
     // 2
-    socketIO.on(name, async (response: T) => {
-      console.log(
+    socketIO.on(name, async (response: T, syncId: string) => {
+      console.warn(
         `${this.name}: onObjectsFromServer`,
         Array.isArray(response) ? response.length : 1
       )
+      this.setSyncStage(syncId, SyncStage.gotObjectsFromServer)
       try {
-        await onObjectsFromServer(response, this.pushObjects)
+        await onObjectsFromServer(
+          response,
+          (objects) => this.pushObjects(objects, syncId),
+          () => {
+            this.completeSync(syncId)
+          }
+        )
       } catch (err) {
-        console.log(err)
-        syncEventEmitter.emit(`${name}_sync_errored`, err)
+        this.rejectSync(typeof err === 'string' ? err : err.message, syncId)
       }
     })
     // 4
-    socketIO.on(`${name}_pushed`, (pushId: string, objects: T) => {
-      console.log(
+    socketIO.on(`${name}_pushed`, (objects: T, syncId: string) => {
+      this.setSyncStage(syncId, SyncStage.gotPushedBackObjectsFromServer)
+      console.warn(
         `${this.name}: pushed`,
-        Array.isArray(objects) ? objects.length : 1
+        Array.isArray(objects) ? objects.length : 1,
+        syncId
       )
-      this.pendingPushes[pushId]?.res(objects)
-      delete this.pendingPushes[pushId]
-      if (setLastSyncDate) {
-        setLastSyncDate(new Date())
-      }
-      syncEventEmitter.emit(`${name}_synced`)
+      this.pendingPushes[syncId]?.res(objects)
+      delete this.pendingPushes[syncId]
     })
-    // 4
-    socketIO.on(`${name}_pushed_error`, (pushId: string, error: Error) => {
-      console.log(`${this.name}: pushed_error`, pushId, error)
-      this.pendingPushes[pushId]?.rej(error)
-      delete this.pendingPushes[pushId]
-      syncEventEmitter.emit(`${name}_sync_errored`, error)
+    // Can happen any time
+    socketIO.on(`${name}_sync_error`, (reason: string, syncId: string) => {
+      console.warn(`${this.name}: sync_error`, reason, syncId)
+      this.rejectSync(reason, syncId)
     })
+    // Start checking for timed out promises
+    setInterval(() => {
+      checkPromiseMapForTimeout(this.pendingSyncs)
+      checkPromiseMapForTimeout(
+        this.pendingPushes,
+        PromiseMapType.pendingPushes
+      )
+    }, 1000)
   }
 
   // 1
   sync = async () => {
-    if (!store.state.UserStore.user.token || !socketIO.connected) {
-      return
+    // Check if authorized
+    if (!socketIO.connected) {
+      return Promise.reject('Not connected to sockets')
     }
-    console.log(`${this.name}: sync`, this.latestSyncDate())
-    socketIO.emit(`sync_${this.name}`, this.latestSyncDate())
+    if (!userStore.user?.token || !socketsStore.authorized) {
+      return Promise.reject('Not authorized')
+    }
+    // Check if already syncing
+    if (this.isSyncing) {
+      if (this.queuedSyncPromise) {
+        return this.queuedSyncPromise.promise
+      } else {
+        this.queuedSyncPromise = {
+          promise: new Promise((res, rej) => {
+            if (this.queuedSyncPromise) {
+              this.queuedSyncPromise.res = res
+              this.queuedSyncPromise.rej = rej
+            }
+          }),
+        }
+        return this.queuedSyncPromise.promise
+      }
+    }
+    // Set syncing flag to true
+    this.isSyncing = true
+    // Sync
+    const syncId = uuid()
+    if (this.queuedSyncPromise) {
+      const queuedSyncPromise = this.queuedSyncPromise
+      this.queuedSyncPromise = undefined
+      console.warn(`${this.name}: sync (queued)`, this.latestSyncDate(), syncId)
+      this.pendingSyncs[syncId] = {
+        // Res and rej should be there right away after the promise is created
+        res: queuedSyncPromise.res!,
+        rej: queuedSyncPromise.rej!,
+        createdAt: Date.now(),
+        syncStage: SyncStage.syncRequested,
+      }
+      socketIO.emit(`sync_${this.name}`, this.latestSyncDate(), syncId)
+      return queuedSyncPromise.promise
+    } else {
+      console.warn(`${this.name}: sync`, this.latestSyncDate(), syncId)
+      return new Promise((res, rej) => {
+        this.pendingSyncs[syncId] = {
+          res,
+          rej,
+          createdAt: Date.now(),
+          syncStage: SyncStage.syncRequested,
+        }
+        socketIO.emit(`sync_${this.name}`, this.latestSyncDate(), syncId)
+      })
+    }
   }
 
   // 3
-  private pushObjects = (objects: T): Promise<T> => {
+  private pushObjects = (objects: T, syncId: string): Promise<T> => {
+    this.setSyncStage(syncId, SyncStage.pushingObjectsToServer)
     return new Promise<T>((res, rej) => {
-      const pushId = uuid()
-      this.pendingPushes[pushId] = { res, rej }
-      console.log(
+      this.pendingPushes[syncId] = { res, rej, createdAt: Date.now() }
+      console.warn(
         `${this.name}: pushObjects`,
-        pushId,
+        syncId,
         Array.isArray(objects) ? objects.length : 1
       )
-      socketIO.emit(
-        `push_${this.name}`,
-        pushId,
-        objects,
-        store.state.UserStore.user.password
-      )
+      socketIO.emit(`push_${this.name}`, syncId, objects, userStore.password)
     })
+  }
+
+  private completeSync = (syncId: string) => {
+    if (this.pendingSyncs[syncId]) {
+      this.pendingSyncs[syncId].res(this.checkIfNeedsAnotherSync())
+      delete this.pendingSyncs[syncId]
+    } else {
+      this.checkIfNeedsAnotherSync()
+    }
+  }
+
+  private checkIfNeedsAnotherSync() {
+    if (this.queuedSyncPromise) {
+      return this.sync()
+    } else {
+      if (this.setLastSyncDate) {
+        this.setLastSyncDate(new Date())
+      }
+      console.warn(`${this.name} sync completed!`)
+      this.isSyncing = false
+    }
+  }
+
+  private rejectSync(reason: string, syncId: string) {
+    this.pendingSyncs[syncId]?.rej(reason)
+    delete this.pendingSyncs[syncId]
+    this.isSyncing = false
+    this.checkIfNeedsAnotherSync()
+  }
+
+  private setSyncStage(syncId: string, stage: SyncStage) {
+    if (this.pendingSyncs[syncId]) {
+      this.pendingSyncs[syncId].syncStage = stage
+    }
   }
 }

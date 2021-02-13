@@ -11,7 +11,8 @@ div
     color='blue',
     @click='openDialog()',
     v-shortkey.once='{ en: ["a"], ru: ["ф"] }',
-    @shortkey.native='openDialog(true)'
+    @shortkey.native='openDialog(true)',
+    aria-label='Add todo'
   )
     v-icon $add
   v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')

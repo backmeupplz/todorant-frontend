@@ -11,4 +11,5 @@ export interface Tag {
   epicGoal?: number
   epicCompleted?: boolean
   epicPoints?: number
+  epicOrder?: number
 }

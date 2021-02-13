@@ -1,21 +1,31 @@
-import DelegationStore from '@/store/modules/DelegationStore'
 import { User } from '@/models/User'
-import { serverBus } from '@/main'
-import store from '@/store'
 import { socketIO } from '@/utils/sockets/socketIO'
-import { PromiseMap } from '@/utils/PromiseMap'
 import { SyncManager } from '@/utils/sockets/SyncManager'
+import store from '@/store'
+import SocketsStore from '@/store/modules/SocketsStore'
+import DelegationStore from '@/store/modules/DelegationStore'
+import { serverBus } from '@/main'
 import { getModule } from 'vuex-module-decorators'
-import { db } from '@/utils/db'
+
+const socketsStore = getModule(SocketsStore, store)
+const delegationStore = getModule(DelegationStore, store)
 
 class SocketManager {
-  pendingPushes = {} as PromiseMap
-
-  delegateSyncManager: SyncManager<{
+  delegationSyncManager: SyncManager<{
     delegates: User[]
     delegators: User[]
     token: string
   }>
+
+  pendingAuthorization?: {
+    res: () => void
+    rej: (reason: string) => void
+    createdAt: number
+  }
+
+  get isSyncing() {
+    return this.delegationSyncManager.isSyncing
+  }
 
   constructor() {
     this.connect()
@@ -34,81 +44,95 @@ class SocketManager {
       serverBus.$emit('refreshRequested')
     })
 
-    this.delegateSyncManager = new SyncManager<{
-      delegates: User[]
-      delegators: User[]
-      token: string
-    }>(
+    this.delegationSyncManager = new SyncManager<any>(
       'delegate',
-      this.pendingPushes,
       () => undefined,
-      async (objects) => {
-        // Delegators
-        await db.delegators.clear()
-        await db.delegators.bulkAdd(objects.delegators)
-        // Delegates
-        await db.delegates.clear()
-        await db.delegates.bulkAdd(objects.delegates)
-        // Token
-        getModule(DelegationStore, store).setToken(objects.token)
+      (objects, _, completeSync) => {
+        return delegationStore.onObjectsFromServer(objects, completeSync)
       }
     )
+
+    // Check authorization promise timeout
+    setInterval(() => {
+      if (!this.pendingAuthorization) {
+        return
+      }
+      const timeout = 20
+      if (Date.now() - this.pendingAuthorization.createdAt > timeout * 1000) {
+        this.pendingAuthorization.rej('Operation timed out')
+        this.pendingAuthorization = undefined
+      }
+    }, 1000)
+
+    // Check connection (if not dev)
+    setInterval(() => {
+      this.connect()
+    }, 1000)
   }
 
   connect = () => {
     if (socketIO.connected) {
       return
     }
-    socketIO.connect()
+    try {
+      socketIO.connect()
+    } catch (err) {
+      console.warn('Socket connection error', err)
+    }
   }
   authorize = () => {
-    if (!store.state.UserStore.user) {
-      return
-    }
-    const token = store.state.UserStore.user.token
-    if (!token || !socketIO.connected || store.state.SocketsStore.authorized) {
-      return
-    }
-    socketIO.emit('authorize', token)
+    return new Promise<void>((res, rej) => {
+      if (!(store as any).state.UserStore.user?.token || !socketIO.connected) {
+        return rej('Not connected to sockets')
+      }
+      if (socketsStore.authorized) {
+        return res()
+      }
+      this.pendingAuthorization = { res, rej, createdAt: Date.now() }
+      socketIO.emit(
+        'authorize',
+        (store as any).state.UserStore.user?.token,
+        '1'
+      )
+    })
   }
   logout = () => {
     if (!socketIO.connected) {
       return
     }
     socketIO.emit('logout')
-    store.state.SocketsStore.authorized = false
-    console.log('sockets logout')
+    socketsStore.setAuthorized(false)
   }
 
   onConnect = () => {
-    console.log('sockets connected')
-    store.state.SocketsStore.connected = true
+    socketsStore.setConnected(true)
+    socketsStore.setСonnectionError(undefined)
     this.authorize()
   }
   onDisconnect = () => {
-    console.log('sockets disconnected')
-    store.state.SocketsStore.connected = false
-    store.state.SocketsStore.authorized = false
+    socketsStore.setConnected(false)
+    socketsStore.setAuthorized(false)
+    this.connect()
   }
 
   onConnectError = (error: Error) => {
-    console.error(error)
+    socketsStore.setСonnectionError(error)
   }
   onConnectTimeout = () => {
-    console.error('ws connect timeout')
+    console.warn('ws connect timeout')
   }
-  onError = () => {
-    console.error('ws error')
+  onError = (err: any) => {
+    console.warn('ws error', err)
   }
 
   onAuthorized = () => {
-    console.log('sockets authorized')
-    store.state.SocketsStore.authorized = true
-    this.globalSync()
+    socketsStore.setAuthorized(true)
+    this.pendingAuthorization?.res()
+    this.pendingAuthorization = undefined
   }
 
   globalSync = () => {
-    this.delegateSyncManager.sync()
+    return Promise.all([this.delegationSyncManager.sync()])
   }
 }
 
