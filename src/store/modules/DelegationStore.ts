@@ -56,13 +56,16 @@ export default class DelegationStore extends VuexModule {
     return `${process.env.VUE_APP_WEBSITE}/invite/${this.token}`
   }
 
+  @Action
   async onObjectsFromServer(
-    objects: {
-      delegates: User[]
-      delegators: User[]
-      token: string
-    },
-    completeSync: () => void
+    { objects, completeSync }: {
+      objects: {
+        delegates: User[]
+        delegators: User[]
+        token: string
+      }, 
+      completeSync: () => void
+    }
   ) {
     try {
       // Delegators

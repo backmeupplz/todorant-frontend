@@ -46,7 +46,7 @@ div
         :delegatedTasksTo='delegatedTasksTo',
         v-if='delegates.length && !delegatedTodos.length'
       )
-      v-list-item.pa-0(v-for='(todo, i) in delegatedTodos', :key='i')
+      v-list-item.pa-0(v-for='(todo, j) in delegatedTodos', :key='j')
         v-list-item-content
           v-card
             v-card-text

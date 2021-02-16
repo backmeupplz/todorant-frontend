@@ -48,7 +48,7 @@ class SocketManager {
       'delegate',
       () => undefined,
       (objects, _, completeSync) => {
-        return delegationStore.onObjectsFromServer(objects, completeSync)
+        return delegationStore.onObjectsFromServer({ objects, completeSync })
       }
     )
 
