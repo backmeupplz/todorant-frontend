@@ -92,7 +92,7 @@ class SocketManager {
       socketIO.emit(
         'authorize',
         (store as any).state.UserStore.user?.token,
-        '1'
+        '2'
       )
     })
   }
