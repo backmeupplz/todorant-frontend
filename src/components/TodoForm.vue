@@ -173,6 +173,15 @@ export default class TodoForm extends Vue {
     dayjs.locale(enLocale)
   }
 
+  mounted() {
+    if (this.shouldAutofocus) {
+      // A hack for the desktop macOS version
+      setTimeout(() => {
+        ;(this.$refs.textInput as any).focus()
+      }, 500)
+    }
+  }
+
   get locale() {
     return this.language === 'ua' ? 'uk' : this.language
   }
