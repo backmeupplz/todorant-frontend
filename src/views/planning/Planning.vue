@@ -548,6 +548,7 @@ export default class TodoList extends Vue {
         return
       }
       this.setSnackbarError('errors.loadTodos')
+      this.queryString = ''
     } finally {
       if (this.loadingUUID === currentLoadingUUID) {
         this.todosUpdating = false
