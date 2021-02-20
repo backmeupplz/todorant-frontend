@@ -363,13 +363,13 @@ export default class TodoForm extends Vue {
     const emptyMatches = this.todo.text.match(/#$/g) || []
     if (emptyMatches.length) {
       this.todo.text = `${before}${tag.tag}${after}`
-      ;(this.$refs.textInput as any).click()
+      ;(this.$refs.textInput as any).focus()
       return
     }
     const matches = this.todo.text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+/g) || []
     if (!matches.length) {
       this.todo.text = `${before}${insertText}${after}`
-      ;(this.$refs.textInput as any).click()
+      ;(this.$refs.textInput as any).focus()
       return
     }
     const match = matches[0]
@@ -377,7 +377,7 @@ export default class TodoForm extends Vue {
       0,
       before.length - match.length
     )}${insertText}${after}`
-    ;(this.$refs.textInput as any).click()
+    ;(this.$refs.textInput as any).focus()
   }
 }
 </script>
