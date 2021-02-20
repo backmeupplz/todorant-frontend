@@ -40,7 +40,7 @@
                 )
           .youtube-container
             lite-youtube.youtube-video(
-              v-if='language && language === "ru"',
+              v-if='(language && language === "ru") || isRussian',
               videoId='heR0rlllTVg'
             )
             lite-youtube.youtube-video(videoId='lYXhqHt7_QY', v-else)
@@ -129,6 +129,14 @@ export default class Home extends Vue {
 
   closeSignin() {
     this.signinDialog = false
+  }
+
+  get isRussian() {
+    return (
+      !this.language &&
+      (navigator.languages.includes('ru') ||
+        navigator.language.includes('ru-RU'))
+    )
   }
 
   get appstoreLanguage() {
