@@ -290,7 +290,9 @@ export default class Report extends Vue {
       new Date(a) < new Date(b) ? -1 : 1
     )
     const firstDay = new Date(this.startDate || keys[0])
-    let i = firstDay
+
+    // this line is needed so that the counter starts from the first day. otherwise, for some unknown reason, the counter starts from the next day.
+    let i = new Date(firstDay.setDate(firstDay.getDate() - 1))
     const days = []
     while (i < (this.endDate ? new Date(this.endDate) : new Date())) {
       days.push(i)
