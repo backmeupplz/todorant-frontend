@@ -375,7 +375,8 @@ export default class TodoForm extends Vue {
       ;(this.$refs.textInput as any).focus()
       return
     }
-    const matches = this.todo.text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+/g) || []
+    const matches =
+      this.todo.text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+(?!\s)$/g) || []
     if (!matches.length) {
       this.todo.text = `${before}${insertText}${after}`
       ;(this.$refs.textInput as any).focus()
