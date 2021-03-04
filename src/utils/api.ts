@@ -235,8 +235,8 @@ export async function getTodos(
     tags: Tag[]
     points: number
   }
-  getModule(UserStore, store).setUserStore(data.state)
   setSettingsFromServer(data.state)
+  getModule(UserStore, store).setUserStore(data.state)
   setTags(data.tags)
   getModule(HeroStore, store).setPoints(data.points)
   return data.todos
@@ -267,9 +267,9 @@ export async function getCurrentTodo(
     tags: Tag[]
     points: number
   }
+  setSettingsFromServer(data.state)
   getModule(UserStore, store).setUserStore(data.state)
   getModule(UserStore, store).setUserName(data.state.userInfo.name)
-  setSettingsFromServer(data.state)
   setTags(data.tags)
   getModule(HeroStore, store).setPoints(data.points)
   return data
