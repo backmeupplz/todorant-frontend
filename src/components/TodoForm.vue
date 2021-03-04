@@ -132,9 +132,10 @@ import { i18n } from '@/plugins/i18n'
 import dayjs from 'dayjs'
 import { Tag } from '@/models/Tag'
 import { decrypt, encrypt } from '@/utils/encryption'
-import { Watch, Prop } from 'vue-property-decorator'
+import { Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
+import { getDateWithStartTimeOfDay } from '@/utils/getDateWithStartTimeOfDay'
 
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import enLocale from 'dayjs/locale/en'
@@ -300,17 +301,8 @@ export default class TodoForm extends Vue {
   }
 
   get todayFormattedForExactDate() {
-    const storeStartTimeOfDay = this.startTimeOfDay || '00:00'
-    const date = new Date()
-    const newDay = new Date()
-    newDay.setHours(parseInt(storeStartTimeOfDay.substr(0, 2)))
-    newDay.setMinutes(parseInt(storeStartTimeOfDay.substr(3)))
-    if (date < newDay) {
-      return dayjs(
-        new Date(new Date().setDate(new Date().getDate() - 1))
-      ).format()
-    }
-    return dayjs(new Date(new Date().setDate(new Date().getDate()))).format()
+    const now = getDateWithStartTimeOfDay(this.startTimeOfDay)
+    return dayjs(now).format()
   }
 
   get todayFormattedForDatePicker() {
