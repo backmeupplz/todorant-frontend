@@ -301,7 +301,9 @@ export default class TodoForm extends Vue {
   }
 
   get todayFormattedForExactDate() {
-    const now = getDateWithStartTimeOfDay(this.startTimeOfDay)
+    const now = this.startTimeOfDay
+      ? getDateWithStartTimeOfDay(this.startTimeOfDay)
+      : new Date()
     return dayjs(now).format()
   }
 
