@@ -247,7 +247,6 @@ export async function getCurrentTodo(
   startTimeOfDay: string = '00:00'
 ) {
   const now = getDateWithStartTimeOfDay(startTimeOfDay)
-  now.setMinutes(now.getMinutes() - now.getTimezoneOffset())
   const date = getStringFromDate(now)
   const time = getTimeString(now)
 
