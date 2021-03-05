@@ -222,7 +222,9 @@ export default class AddTodo extends Vue {
         text: hashtags.join(' '),
       })
     } else if (this.showTodayOnAddTodo) {
-      const now = getDateWithStartTimeOfDay(this.startTimeOfDay)
+      const now = this.startTimeOfDay
+        ? getDateWithStartTimeOfDay(this.startTimeOfDay)
+        : new Date()
       now.setMinutes(now.getMinutes() - now.getTimezoneOffset())
       this.todos.push({
         date: now.toISOString().substr(0, 10),
