@@ -124,7 +124,7 @@ v-container(style='maxWidth: 1000px;')
         :weekStyles='weekStyles'
       )
         calendar-view-header(
-          v-if='!editable && !spreadEnabled',
+          v-if='!editable',
           slot='header',
           slot-scope='{ headerProps }',
           :header-props='headerProps',
