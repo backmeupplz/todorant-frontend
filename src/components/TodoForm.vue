@@ -360,13 +360,18 @@ export default class TodoForm extends Vue {
     if (pos === undefined) {
       pos = 0
     }
+    const endPos = pos + insertText.length
     const before = text.substr(0, pos)
     const after = text.substr(pos, len)
+    const bodyTextInput = (this.$refs.textInput as any).$el.querySelector(
+      'textarea'
+    )
 
     const emptyMatches = this.todo.text.match(/#$/g) || []
     if (emptyMatches.length) {
       this.todo.text = `${before}${tag.tag}${after}`
       ;(this.$refs.textInput as any).focus()
+      setTimeout(() => bodyTextInput.setSelectionRange(endPos, endPos))
       return
     }
     const matches =
@@ -374,6 +379,7 @@ export default class TodoForm extends Vue {
     if (!matches.length) {
       this.todo.text = `${before}${insertText}${after}`
       ;(this.$refs.textInput as any).focus()
+      setTimeout(() => bodyTextInput.setSelectionRange(endPos, endPos))
       return
     }
     const match = matches[0]
@@ -382,6 +388,7 @@ export default class TodoForm extends Vue {
       before.length - match.length
     )}${insertText}${after}`
     ;(this.$refs.textInput as any).focus()
+    setTimeout(() => bodyTextInput.setSelectionRange(endPos, endPos))
   }
 }
 </script>
