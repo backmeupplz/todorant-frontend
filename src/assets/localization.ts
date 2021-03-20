@@ -255,7 +255,9 @@ export const messages = {
       connected: 'Connected',
       notConnected: 'Not connected',
       googleCalendar: 'Google Calendar',
-      googleCalendarHint: 'Please note that for Google calendar work, each task must have an exact time',
+      googleCalendarHint:
+        'Only the tasks created in Todorant with an exact time will be synced to Google Calendar',
+      googleCalendarGotIt: 'Got it!',
       disconnectConfirm: 'Are you sure you want to disconnect this service?',
       account: 'Account',
       duplicateTagInBreakdown: 'Copy hashtags during a breakdown',
@@ -745,7 +747,9 @@ export const messages = {
       connected: 'Подключено',
       notConnected: 'Не подключено',
       googleCalendar: 'Google Calendar',
-      googleCalendarHint: 'Для корректной работы гугл календаря нужно устанавливать точное время каждой задаче',
+      googleCalendarHint:
+        'В Гугл Календарь будут синхронизироваться только задачи, созданные в Тудуранте с точным временем',
+      googleCalendarGotIt: 'Понятно!',
       disconnectConfirm: 'Уверены, что хотите отключить этот сервис?',
       account: 'Аккаунт',
       duplicateTagInBreakdown: 'Копировать хештеги при разбивке',
