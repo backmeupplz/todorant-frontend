@@ -173,13 +173,9 @@ div(v-if='dialog')
   v-dialog(v-model='googleCalendarInfo', max-width='600px')
     v-card
       v-card-title
-      v-card-text {{ $t("settings.googleCalendarHint") }}
+      v-card-text {{ $t("googleCalendarHint") }}
       v-card-actions.d-flex.flex-row-reverse
-        v-btn(
-          text,
-          color='blue',
-          @click='connectGoogleCalendar'
-        ) {{ $t("settings.googleCalendarGotIt") }}
+        v-btn(text, color='blue', @click='connectGoogleCalendar') {{ $t("googleCalendarGotIt") }}
 </template>
 
 <script lang="ts">
@@ -188,8 +184,7 @@ import Component from 'vue-class-component'
 import * as api from '@/utils/api'
 import { serverBus } from '@/main'
 import { i18n } from '@/plugins/i18n'
-import { getTodos, getTodosForExport, mergeTelegram } from '@/utils/api'
-import axios from 'axios'
+import { getTodosForExport, mergeTelegram } from '@/utils/api'
 import { User } from '@/models/User'
 import { saveAs } from 'file-saver'
 import { Prop } from 'vue-property-decorator'
@@ -197,7 +192,6 @@ import { namespace } from 'vuex-class'
 const { vueTelegramLogin } = require('vue-telegram-login')
 import { GoogleCalendarCredentials } from '@/models/GoogleCalendarCredentials'
 import store from '@/store'
-import App from '@/App.vue'
 
 const UserStore = namespace('UserStore')
 const SettingsStore = namespace('SettingsStore')

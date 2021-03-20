@@ -255,9 +255,6 @@ export const messages = {
       connected: 'Connected',
       notConnected: 'Not connected',
       googleCalendar: 'Google Calendar',
-      googleCalendarHint:
-        'Only the tasks created in Todorant with an exact time will be synced to Google Calendar',
-      googleCalendarGotIt: 'Got it!',
       disconnectConfirm: 'Are you sure you want to disconnect this service?',
       account: 'Account',
       duplicateTagInBreakdown: 'Copy hashtags during a breakdown',
@@ -500,6 +497,9 @@ export const messages = {
     settingsObject: {
       showMoreByDefault: 'Show more when adding todos by default',
     },
+    googleCalendarHint:
+      'Only the tasks created in Todorant with an exact time will be synced to Google Calendar',
+    googleCalendarGotIt: 'Got it!',
   },
   ru: {
     encryption: {
@@ -747,9 +747,6 @@ export const messages = {
       connected: 'Подключено',
       notConnected: 'Не подключено',
       googleCalendar: 'Google Calendar',
-      googleCalendarHint:
-        'В Гугл Календарь будут синхронизироваться только задачи, созданные в Тудуранте с точным временем',
-      googleCalendarGotIt: 'Понятно!',
       disconnectConfirm: 'Уверены, что хотите отключить этот сервис?',
       account: 'Аккаунт',
       duplicateTagInBreakdown: 'Копировать хештеги при разбивке',
@@ -998,6 +995,9 @@ export const messages = {
       showMoreByDefault:
         'Сразу показывать расширенные настройки добавления задачи',
     },
+    googleCalendarHint:
+      'В Гугл Календарь будут синхронизироваться только задачи, созданные в Тудуранте с точным временем',
+    googleCalendarGotIt: 'Понятно!',
   },
   ua: {
     encryption: {
@@ -1329,6 +1329,7 @@ export const messages = {
     },
     googleCalendarDisableSuccess: 'Гугл Календар успішно відключений',
     googleCalendarEnableSuccess: 'Гугл Календар успішно підключений',
+    edit: 'Редагувати',
   },
   it: {
     encryption: {
