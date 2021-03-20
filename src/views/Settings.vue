@@ -82,13 +82,7 @@ div(v-if='dialog')
                 ) Ok
                 v-btn(text, color='blue', @click='timeMenu = false') Close
         v-divider
-        .d-flex.justify-space-between
-          v-subheader.pa-0 {{ $t("settings.integrations") }}
-          IconButton(
-            :click='() => { googleCalendarInfo = true; }',
-            color='grey',
-            name='$info'
-          )
+        v-subheader.pa-0 {{ $t("settings.integrations") }}
         .d-flex.flex-column
           .integration-button-block.mb-2
             span {{ $t("settings.googleCalendar") }}
@@ -102,7 +96,7 @@ div(v-if='dialog')
             v-btn(
               v-else,
               :loading='loading',
-              @click='connectGoogleCalendar',
+              @click='() => { googleCalendarInfo = true; }',
               color='#FFFFFF'
             )
               img.google-button-img(
@@ -184,7 +178,7 @@ div(v-if='dialog')
         v-btn(
           text,
           color='blue',
-          @click='() => { googleCalendarInfo = false; }'
+          @click='connectGoogleCalendar'
         ) {{ $t("settings.googleCalendarGotIt") }}
 </template>
 
@@ -204,7 +198,6 @@ const { vueTelegramLogin } = require('vue-telegram-login')
 import { GoogleCalendarCredentials } from '@/models/GoogleCalendarCredentials'
 import store from '@/store'
 import App from '@/App.vue'
-import IconButton from '@/icons/IconButton.vue'
 
 const UserStore = namespace('UserStore')
 const SettingsStore = namespace('SettingsStore')
@@ -214,7 +207,6 @@ const AppStore = namespace('AppStore')
 @Component({
   components: {
     vueTelegramLogin,
-    IconButton,
   },
 })
 export default class Settings extends Vue {
