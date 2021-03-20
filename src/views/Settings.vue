@@ -76,7 +76,13 @@ v-dialog(
               v-btn(text, color='blue', @click='timeMenu = false') Close
 
       v-divider
-      v-subheader.pa-0 {{ $t("settings.integrations") }}
+      .d-flex.justify-space-between
+        v-subheader.pa-0 {{ $t("settings.integrations") }}
+        v-tooltip(bottom, max-width=300)
+          template(v-slot:activator='{ on }')
+            v-btn(icon)
+              v-icon(v-on='on', color='grey') $info
+          span {{ $t("settings.googleCalendarHint") }}
       .d-flex.flex-column
         .integration-button-block.mb-2
           span {{ $t("settings.googleCalendar") }}
@@ -182,6 +188,7 @@ const { vueTelegramLogin } = require('vue-telegram-login')
 import { GoogleCalendarCredentials } from '@/models/GoogleCalendarCredentials'
 import store from '@/store'
 import App from '@/App.vue'
+import IconButton from '@/icons/IconButton.vue'
 
 const UserStore = namespace('UserStore')
 const SettingsStore = namespace('SettingsStore')
@@ -191,6 +198,7 @@ const AppStore = namespace('AppStore')
 @Component({
   components: {
     vueTelegramLogin,
+    IconButton
   },
 })
 export default class Settings extends Vue {
