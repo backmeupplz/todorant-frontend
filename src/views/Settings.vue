@@ -188,7 +188,6 @@ const { vueTelegramLogin } = require('vue-telegram-login')
 import { GoogleCalendarCredentials } from '@/models/GoogleCalendarCredentials'
 import store from '@/store'
 import App from '@/App.vue'
-import IconButton from '@/icons/IconButton.vue'
 
 const UserStore = namespace('UserStore')
 const SettingsStore = namespace('SettingsStore')
@@ -198,7 +197,6 @@ const AppStore = namespace('AppStore')
 @Component({
   components: {
     vueTelegramLogin,
-    IconButton
   },
 })
 export default class Settings extends Vue {
