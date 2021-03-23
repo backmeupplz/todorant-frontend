@@ -161,6 +161,7 @@ export default class Navbar extends Vue {
       { icon: 'ua', code: 'uk' },
       { icon: 'es', code: 'es' },
       { icon: 'it', code: 'it' },
+      { icon: 'pt', code: 'pt-BR' },
     ]
   }
   get currentLocale() {
