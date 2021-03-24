@@ -1,5 +1,5 @@
 <template lang="pug">
-Report(external)
+Report
 </template>
 
 <script lang="ts">
