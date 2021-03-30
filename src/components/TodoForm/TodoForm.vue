@@ -33,8 +33,8 @@
             clearable,
             readonly,
             :label='$t("todo.create.date")',
-            prepend-icon='event',
             v-on='on',
+            :class='"todo-form__textarea"',
             v-model='todo.date',
             :rules='dateAndMonthRules'
           )
@@ -53,9 +53,9 @@
             clearable,
             readonly,
             :label='$t("todo.create.month")',
-            prepend-icon='event',
             v-on='on',
             v-model='todo.monthAndYear',
+            :class='"todo-form__textarea"',
             :rules='dateAndMonthRules'
           )
         v-date-picker(
