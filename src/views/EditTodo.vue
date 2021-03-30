@@ -49,7 +49,7 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Watch, Prop } from 'vue-property-decorator'
-import TodoForm from '@/components/TodoForm.vue'
+import TodoForm from '@/components/TodoForm/TodoForm.vue'
 import { Todo } from '@/models/Todo'
 import BreakdownRequest from '@/components/BreakdownRequest.vue'
 import * as api from '@/utils/api'
@@ -95,7 +95,7 @@ export default class EditTodo extends Vue {
 
   reset() {
     if (this.$refs.form) {
-      ;(this.$refs.form as any).resetValidation()
+      ; (this.$refs.form as any).resetValidation()
     }
   }
 
@@ -118,7 +118,7 @@ export default class EditTodo extends Vue {
         return
       }
       await api.editTodo(user, (this as any).todo)
-      ;(this as any).cleanTodo()
+        ; (this as any).cleanTodo()
       if ((this as any).todo.completed && !this.completed) {
         playSound((this as any).todo.frog ? Sounds.levelUp : Sounds.taskDone)
       }
@@ -131,13 +131,13 @@ export default class EditTodo extends Vue {
 
   async deleteTodo() {
     const todo = this.todo
-    ;(this as any).cleanTodo(false)
+      ; (this as any).cleanTodo(false)
     this.requestDelete(todo)
   }
 
   escapePressed() {
     if (this.$refs.todoForm) {
-      ;(this.$refs.todoForm as any).$refs.textInput.blur()
+      ; (this.$refs.todoForm as any).$refs.textInput.blur()
     }
     this.dialog = false
   }
@@ -148,7 +148,7 @@ export default class EditTodo extends Vue {
 
   breakdownRequest() {
     this.breakdownRequestDialog = false
-    ;(this as any).cleanTodo()
+      ; (this as any).cleanTodo()
     serverBus.$emit('addTodoRequested', undefined, (this as any).todo)
   }
 }

@@ -1,0 +1,25 @@
+.todo-form {
+  &__textarea {
+    & .v-input__slot {
+      border: 1px solid #eee;
+      padding: 5px 10px;
+      border-radius: 15px;
+    }
+
+    & .v-input__slot::before, & .v-input__slot::after {
+      border: 0 !important;
+    }
+
+    & .v-label--active {
+      display: none;
+    }
+
+    & textarea {
+      line-height: 32px !important;
+    }
+
+    & textarea, & .v-label {
+      font-size: 14px !important;
+    }
+  }
+}

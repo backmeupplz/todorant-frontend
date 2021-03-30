@@ -100,7 +100,7 @@ div
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Watch, Prop } from 'vue-property-decorator'
-import TodoForm from '@/components/TodoForm.vue'
+import TodoForm from '@/components/TodoForm/TodoForm.vue'
 import { Todo } from '@/models/Todo'
 import * as api from '@/utils/api'
 import { serverBus } from '@/main'
@@ -195,7 +195,7 @@ export default class AddTodo extends Vue {
     this.addTodo()
     this.panel = [0]
     if (this.$refs.form) {
-      ;(this.$refs.form as any).resetValidation()
+      ; (this.$refs.form as any).resetValidation()
     }
   }
 

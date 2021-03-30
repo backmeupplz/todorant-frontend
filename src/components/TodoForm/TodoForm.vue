@@ -12,7 +12,7 @@
     auto-grow,
     no-resize,
     rows='1',
-    :class='filteredTags.length ? "pb-2" : "pb-4"',
+    :class='"todo-form__textarea " + (filteredTags.length ? "pb-2" : "pb-4")',
     :disabled='todo && todo.encrypted && (errorDecrypting(todo) || !$store.state.UserStore.password)',
     :autofocus='shouldAutofocus'
   )
@@ -178,7 +178,7 @@ export default class TodoForm extends Vue {
     if (this.shouldAutofocus) {
       // A hack for the desktop macOS version
       setTimeout(() => {
-        ;(this.$refs.textInput as any).focus()
+        ; (this.$refs.textInput as any).focus()
       }, 500)
     }
   }
@@ -227,7 +227,7 @@ export default class TodoForm extends Vue {
   }
   set date(newDate: any) {
     // Have to use this hack here because in this case we want monthAndYear to be empty
-    ;(this.todo as any).monthAndYear = undefined
+    ; (this.todo as any).monthAndYear = undefined
     this.todo.date = newDate
   }
 
@@ -236,7 +236,7 @@ export default class TodoForm extends Vue {
   }
   set monthAndYear(newMonthAndYear: any) {
     // Have to use this hack here because in this case we want date to be empty
-    ;(this.todo as any).date = undefined
+    ; (this.todo as any).date = undefined
     this.todo.monthAndYear = newMonthAndYear
   }
 
@@ -320,7 +320,7 @@ export default class TodoForm extends Vue {
     if (this.newLineOnReturn) {
       if (evt.keyCode === 13 && evt.ctrlKey) {
         if (evt.type === 'keydown') {
-          ;(this as any).enterPressed()
+          ; (this as any).enterPressed()
         }
         evt.preventDefault()
       }
@@ -336,14 +336,14 @@ export default class TodoForm extends Vue {
     }
     if (evt.keyCode === 13 && !evt.shiftKey) {
       if (evt.type === 'keydown') {
-        ;(this as any).enterPressed()
+        ; (this as any).enterPressed()
       }
       evt.preventDefault()
     }
   }
 
   escape() {
-    ;(this as any).escapePressed()
+    ; (this as any).escapePressed()
   }
 
   colorForTag(tag: Tag) {
@@ -370,7 +370,7 @@ export default class TodoForm extends Vue {
     const emptyMatches = this.todo.text.match(/#$/g) || []
     if (emptyMatches.length) {
       this.todo.text = `${before}${tag.tag}${after}`
-      ;(this.$refs.textInput as any).focus()
+        ; (this.$refs.textInput as any).focus()
       setTimeout(() => bodyTextInput.setSelectionRange(endPos, endPos))
       return
     }
@@ -378,7 +378,7 @@ export default class TodoForm extends Vue {
       this.todo.text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+(?!\s)$/g) || []
     if (!matches.length) {
       this.todo.text = `${before}${insertText}${after}`
-      ;(this.$refs.textInput as any).focus()
+        ; (this.$refs.textInput as any).focus()
       setTimeout(() => bodyTextInput.setSelectionRange(endPos, endPos))
       return
     }
@@ -387,13 +387,14 @@ export default class TodoForm extends Vue {
       0,
       before.length - match.length
     )}${insertText}${after}`
-    ;(this.$refs.textInput as any).focus()
+      ; (this.$refs.textInput as any).focus()
     setTimeout(() => bodyTextInput.setSelectionRange(endPos, endPos))
   }
 }
 </script>
 
-<style>
+<style lang="scss">
+@import 'TodoForm';
 .v-input {
   padding: 0;
   margin: 0;
