@@ -132,9 +132,10 @@ import { i18n } from '@/plugins/i18n'
 import dayjs from 'dayjs'
 import { Tag } from '@/models/Tag'
 import { decrypt, encrypt } from '@/utils/encryption'
-import { Watch, Prop } from 'vue-property-decorator'
+import { Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
+import { getDateWithStartTimeOfDay } from '@/utils/getDateWithStartTimeOfDay'
 
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import enLocale from 'dayjs/locale/en'
@@ -171,6 +172,15 @@ export default class TodoForm extends Vue {
 
   created() {
     dayjs.locale(enLocale)
+  }
+
+  mounted() {
+    if (this.shouldAutofocus) {
+      // A hack for the desktop macOS version
+      setTimeout(() => {
+        ;(this.$refs.textInput as any).focus()
+      }, 500)
+    }
   }
 
   get locale() {
@@ -291,17 +301,10 @@ export default class TodoForm extends Vue {
   }
 
   get todayFormattedForExactDate() {
-    const storeStartTimeOfDay = this.startTimeOfDay || '00:00'
-    const date = new Date()
-    const newDay = new Date()
-    newDay.setHours(parseInt(storeStartTimeOfDay.substr(0, 2)))
-    newDay.setMinutes(parseInt(storeStartTimeOfDay.substr(3)))
-    if (date < newDay) {
-      return dayjs(
-        new Date(new Date().setDate(new Date().getDate() - 1))
-      ).format()
-    }
-    return dayjs(new Date(new Date().setDate(new Date().getDate()))).format()
+    const now = this.startTimeOfDay
+      ? getDateWithStartTimeOfDay(this.startTimeOfDay)
+      : new Date()
+    return dayjs(now).format()
   }
 
   get todayFormattedForDatePicker() {
@@ -357,19 +360,26 @@ export default class TodoForm extends Vue {
     if (pos === undefined) {
       pos = 0
     }
+    const endPos = pos + insertText.length
     const before = text.substr(0, pos)
     const after = text.substr(pos, len)
+    const bodyTextInput = (this.$refs.textInput as any).$el.querySelector(
+      'textarea'
+    )
 
     const emptyMatches = this.todo.text.match(/#$/g) || []
     if (emptyMatches.length) {
       this.todo.text = `${before}${tag.tag}${after}`
       ;(this.$refs.textInput as any).focus()
+      setTimeout(() => bodyTextInput.setSelectionRange(endPos, endPos))
       return
     }
-    const matches = this.todo.text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+/g) || []
+    const matches =
+      this.todo.text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+(?!\s)$/g) || []
     if (!matches.length) {
       this.todo.text = `${before}${insertText}${after}`
       ;(this.$refs.textInput as any).focus()
+      setTimeout(() => bodyTextInput.setSelectionRange(endPos, endPos))
       return
     }
     const match = matches[0]
@@ -378,6 +388,7 @@ export default class TodoForm extends Vue {
       before.length - match.length
     )}${insertText}${after}`
     ;(this.$refs.textInput as any).focus()
+    setTimeout(() => bodyTextInput.setSelectionRange(endPos, endPos))
   }
 }
 </script>

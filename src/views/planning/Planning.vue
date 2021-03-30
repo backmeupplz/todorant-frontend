@@ -124,7 +124,7 @@ v-container(style='maxWidth: 1000px;')
         :weekStyles='weekStyles'
       )
         calendar-view-header(
-          v-if='!editable && !spreadEnabled',
+          v-if='!editable',
           slot='header',
           slot-scope='{ headerProps }',
           :header-props='headerProps',
@@ -202,7 +202,7 @@ import * as api from '@/utils/api'
 import { serverBus } from '@/main'
 import draggable from 'vuedraggable'
 import { TodoSection } from '@/models/TodoSection'
-import { isTodoOld, isDateTooOld } from '@/utils/isTodoOld'
+import { isDateTooOld } from '@/utils/isTodoOld'
 import { CalendarView, CalendarViewHeader } from '@upacyxou/vue-simple-calendar'
 import dayjs, { Dayjs } from 'dayjs'
 import weekOfYear from 'dayjs/plugin/weekOfYear'
@@ -218,6 +218,7 @@ import TodoCard from '@/components/TodoCard/TodoCard.vue'
 import IconButton from '@/icons/IconButton.vue'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import enLocale from 'dayjs/locale/en'
+import { getDateWithStartTimeOfDay } from '@/utils/getDateWithStartTimeOfDay'
 
 dayjs.extend(localizedFormat)
 dayjs.extend(weekOfYear)
@@ -250,6 +251,7 @@ export default class TodoList extends Vue {
   @UserStore.State planning!: boolean
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @SettingsStore.State firstDayOfWeek?: number
+  @SettingsStore.State startTimeOfDay?: string
   @TagsStore.State searchTags!: Set<String>
 
   showCompleted = false
@@ -548,6 +550,7 @@ export default class TodoList extends Vue {
         return
       }
       this.setSnackbarError('errors.loadTodos')
+      this.queryString = ''
     } finally {
       if (this.loadingUUID === currentLoadingUUID) {
         this.todosUpdating = false
@@ -595,7 +598,10 @@ export default class TodoList extends Vue {
     }
     this.loading = true
     try {
-      const today = api.getToday()
+      const now = this.startTimeOfDay
+        ? getDateWithStartTimeOfDay(this.startTimeOfDay)
+        : new Date()
+      const today = api.getStringFromDate(now)
       const monthAndYear = today.substr(0, 7)
       const date = today.substr(8)
       todo.monthAndYear = monthAndYear

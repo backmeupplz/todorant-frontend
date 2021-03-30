@@ -190,13 +190,13 @@ const AppStore = namespace('AppStore')
   },
 })
 export default class Report extends Vue {
-  @Prop({ default: false }) external!: boolean
-
   @AppStore.State dark!: boolean
   @UserStore.State user?: User
   @AppStore.State language?: string
   @SettingsStore.State firstDayOfWeek?: number
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
+
+  external = false
 
   loading = false
 
@@ -220,6 +220,10 @@ export default class Report extends Vue {
 
   endDateMenu = false
   endDate: null | string = null
+
+  created() {
+    this.external = this.$router.currentRoute.name === 'public_report'
+  }
 
   mounted() {
     this.refresh()
@@ -290,7 +294,9 @@ export default class Report extends Vue {
       new Date(a) < new Date(b) ? -1 : 1
     )
     const firstDay = new Date(this.startDate || keys[0])
-    let i = firstDay
+
+    // this line is needed so that the counter starts from the first day. otherwise, for some unknown reason, the counter starts from the next day.
+    let i = new Date(firstDay.setDate(firstDay.getDate() - 1))
     const days = []
     while (i < (this.endDate ? new Date(this.endDate) : new Date())) {
       days.push(i)
@@ -322,9 +328,6 @@ export default class Report extends Vue {
 
   async refresh() {
     const user = this.user
-    if (!user && !this.external) {
-      return
-    }
     this.loading = true
     try {
       let data: any

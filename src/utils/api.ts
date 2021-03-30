@@ -11,6 +11,7 @@ import UserStore from '@/store/modules/UserStore'
 import SettingsStore from '@/store/modules/SettingsStore'
 import HeroStore from '@/store/modules/HeroStore'
 import AppStore from '@/store/modules/AppStore'
+import { getDateWithStartTimeOfDay } from './getDateWithStartTimeOfDay'
 
 const base = process.env.VUE_APP_API
 
@@ -234,8 +235,8 @@ export async function getTodos(
     tags: Tag[]
     points: number
   }
-  getModule(UserStore, store).setUserStore(data.state)
   setSettingsFromServer(data.state)
+  getModule(UserStore, store).setUserStore(data.state)
   setTags(data.tags)
   getModule(HeroStore, store).setPoints(data.points)
   return data.todos
@@ -245,19 +246,9 @@ export async function getCurrentTodo(
   user: User,
   startTimeOfDay: string = '00:00'
 ) {
-  const now = new Date()
-  const today = new Date()
-  today.setHours(parseInt(startTimeOfDay.substr(0, 2)))
-  today.setMinutes(parseInt(startTimeOfDay.substr(3)))
-
-  const time = getTimeString(new Date())
-  let date = getToday()
-
-  if (now < today) {
-    const yesterday = new Date()
-    yesterday.setDate(yesterday.getDate() - 1)
-    date = getStringFromDate(yesterday)
-  }
+  const now = getDateWithStartTimeOfDay(startTimeOfDay)
+  const date = getStringFromDate(now)
+  const time = getTimeString(now)
 
   const data = (
     await axios.get(`${base}/todo/current`, {
@@ -275,9 +266,9 @@ export async function getCurrentTodo(
     tags: Tag[]
     points: number
   }
+  setSettingsFromServer(data.state)
   getModule(UserStore, store).setUserStore(data.state)
   getModule(UserStore, store).setUserName(data.state.userInfo.name)
-  setSettingsFromServer(data.state)
   setTags(data.tags)
   getModule(HeroStore, store).setPoints(data.points)
   return data

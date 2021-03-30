@@ -1,169 +1,181 @@
 <template lang="pug">
-v-dialog(
-  v-model='dialog',
-  scrollable,
-  max-width='600px',
-  @click:outside='closeAndDropUserNameMenu'
-)
-  v-card
-    v-card-title {{ $t("settings.title") }}
-    v-card-text
-      v-subheader.pa-0 {{ $t("settings.general") }}
-      v-switch.ma-0.pa-0(
-        :label='$t("settings.showTodayOnAddTodo")',
-        v-model='safeShowTodayOnAddTodo'
-      )
-      v-switch.ma-0.pa-0(
-        :label='$t("settings.newTodosGoFirst")',
-        v-model='safeNewTodosGoFirst'
-      )
-      v-switch.ma-0.pa-0(
-        :label='$t("settings.preserveOrderByTime")',
-        v-model='safePreserveOrderByTime'
-      )
-      v-switch.ma-0.pa-0(
-        :label='$t("settings.duplicateTagInBreakdown")',
-        v-model='safeDuplicateTagInBreakdown'
-      )
-      v-switch.ma-0.pa-0(
-        :label='$t("settingsObject.showMoreByDefault")',
-        v-model='safeShowMoreByDefault'
-      )
-      v-switch.ma-0.pa-0(:label='$t("soundEffects")', v-model='soundEffects')
-      v-switch.ma-0.pa-0(:label='$t("settings.hotkeys")', v-model='hotKeys')
-      v-switch.ma-0.pa-0(:label='$t("settingsActions.swipeActions")', v-model='swipeActions')
-      v-switch.ma-0.pa-0(:label='$t("settings.coloredCardBackgrounds")', v-model='coloredCardBackgroundsValue')
-      v-switch.ma-0.pa-0(
-        :label='$t("settings.newLineOnReturn")',
-        v-if='hotKeys',
-        v-model='newLineOnReturnHotKeys'
-      )
-      v-divider
-      v-select.mt-4(
-        :items='weekdays',
-        :label='$t("settings.firstDayOfWeek")',
-        v-model='safeFirstDayOfWeek'
-      )
-      v-row
-        v-col(cols='12', md='16')
-          v-menu(
-            ref='menu',
-            v-model='timeMenu',
-            :close-on-content-click='false',
-            :return-value.sync='safeStartTimeOfDay',
-            min-width=0
-          )
-            template(v-slot:activator='{ on }')
-              v-text-field(
-                clearable,
-                v-model='safeStartTimeOfDay',
-                :label='$t("settings.startTimeOfDay")',
-                prepend-icon='access_time',
-                readonly,
-                v-on='on'
-              )
-            v-time-picker(
-              v-model='safeStartTimeOfDay',
-              format='24hr',
-              :close-on-content-click='false'
+div(v-if='dialog')
+  v-dialog(
+    v-model='dialog',
+    scrollable,
+    max-width='600px',
+    @click:outside='closeAndDropUserNameMenu'
+  )
+    v-card
+      v-card-title {{ $t("settings.title") }}
+      v-card-text
+        v-subheader.pa-0 {{ $t("settings.general") }}
+        v-switch.ma-0.pa-0(
+          :label='$t("settings.showTodayOnAddTodo")',
+          v-model='safeShowTodayOnAddTodo'
+        )
+        v-switch.ma-0.pa-0(
+          :label='$t("settings.newTodosGoFirst")',
+          v-model='safeNewTodosGoFirst'
+        )
+        v-switch.ma-0.pa-0(
+          :label='$t("settings.preserveOrderByTime")',
+          v-model='safePreserveOrderByTime'
+        )
+        v-switch.ma-0.pa-0(
+          :label='$t("settings.duplicateTagInBreakdown")',
+          v-model='safeDuplicateTagInBreakdown'
+        )
+        v-switch.ma-0.pa-0(
+          :label='$t("settingsObject.showMoreByDefault")',
+          v-model='safeShowMoreByDefault'
+        )
+        v-switch.ma-0.pa-0(:label='$t("soundEffects")', v-model='soundEffects')
+        v-switch.ma-0.pa-0(:label='$t("settings.hotkeys")', v-model='hotKeys')
+        v-switch.ma-0.pa-0(
+          :label='$t("settingsActions.swipeActions")',
+          v-model='swipeActions'
+        )
+        v-switch.ma-0.pa-0(
+          :label='$t("settings.coloredCardBackgrounds")',
+          v-model='coloredCardBackgroundsValue'
+        )
+        v-switch.ma-0.pa-0(
+          :label='$t("settings.newLineOnReturn")',
+          v-if='hotKeys',
+          v-model='newLineOnReturnHotKeys'
+        )
+        v-divider
+        v-select.mt-4(
+          :items='weekdays',
+          :label='$t("settings.firstDayOfWeek")',
+          v-model='safeFirstDayOfWeek'
+        )
+        v-row
+          v-col(cols='12', md='16')
+            v-menu(
+              ref='menu',
+              v-model='timeMenu',
+              :close-on-content-click='false',
+              :return-value.sync='safeStartTimeOfDay',
+              min-width=0
             )
-              v-spacer
-              v-btn(
-                text,
-                color='green',
-                @click='$refs.menu.save(safeStartTimeOfDay)'
-              ) Ok
-              v-btn(text, color='blue', @click='timeMenu = false') Close
-
-      v-divider
-      v-subheader.pa-0 {{ $t("settings.integrations") }}
-      .d-flex.flex-column
-        .integration-button-block.mb-2
-          span {{ $t("settings.googleCalendar") }}
+              template(v-slot:activator='{ on }')
+                v-text-field(
+                  clearable,
+                  v-model='safeStartTimeOfDay',
+                  :label='$t("settings.startTimeOfDay")',
+                  prepend-icon='access_time',
+                  readonly,
+                  v-on='on'
+                )
+              v-time-picker(
+                v-model='safeStartTimeOfDay',
+                format='24hr',
+                :close-on-content-click='false'
+              )
+                v-spacer
+                v-btn(
+                  text,
+                  color='green',
+                  @click='$refs.menu.save(safeStartTimeOfDay)'
+                ) Ok
+                v-btn(text, color='blue', @click='timeMenu = false') Close
+        v-divider
+        v-subheader.pa-0 {{ $t("settings.integrations") }}
+        .d-flex.flex-column
+          .integration-button-block.mb-2
+            span {{ $t("settings.googleCalendar") }}
+            v-btn(
+              v-if='googleCalendarConnected()',
+              color='error',
+              text,
+              :loading='loading',
+              @click='disconnectGoogleCalendar'
+            ) {{ $t("settings.connected") }}
+            v-btn(
+              v-else,
+              :loading='loading',
+              @click='() => { googleCalendarInfo = true; }',
+              color='#FFFFFF'
+            )
+              img.google-button-img(
+                src='/img/google.svg',
+                height='18dp',
+                width='18dp',
+                alt='Google logo'
+              )
+              span.google-button-text {{ $t("settings.notConnected") }}
+          .integration-button-block.mb-2(v-if='!!user && !user.telegramId')
+            span {{ $t("settings.telegram") }}
+            v-layout.text-center(column, justify-center, align-center)
+            vue-telegram-login(
+              mode='callback',
+              telegram-login='todorant_bot',
+              @callback='onTelegramAuth',
+              radius='3',
+              :userpic='false',
+              v-if='!user || !user.telegramId'
+            )
+        v-divider
+        v-subheader.pa-0 {{ $t("settings.account") }}
+        .d-flex.flex-column
+          span(v-if='!userNameMenu') {{ name }}
+            v-btn.ma-1(small, icon, @click='userNameMenu = true') 
+              v-icon(:color='dark ? "grey lighten-1" : "grey darken-1"', small) edit
+          v-text-field(
+            v-else,
+            v-model='name',
+            :label='$t("settings.username")',
+            :loading='loading',
+            :append-outer-icon='checkUserName(name) ? "done" : undefined',
+            :append-icon='"clear"',
+            @click:append-outer='changeUserName',
+            @click:append='clearUserName'
+          )
+          span(v-for='identifier in identifiers') {{ identifier }}
+        v-divider.my-2
+        .d-flex.flex-column.align-start
           v-btn(
-            v-if='googleCalendarConnected()',
-            color='error',
             text,
             :loading='loading',
-            @click='disconnectGoogleCalendar'
-          ) {{ $t("settings.connected") }}
-          v-btn(
-            v-else,
-            :loading='loading',
-            @click='connectGoogleCalendar',
-            color='#FFFFFF'
-          )
-            img.google-button-img(
-              src='/img/google.svg',
-              height='18dp',
-              width='18dp'
-              alt='Google logo'
-            )
-            span.google-button-text {{ $t("settings.notConnected") }}
-        .integration-button-block.mb-2(v-if='!!user && !user.telegramId')
-          span {{ $t("settings.telegram") }}
-          v-layout.text-center(column, justify-center, align-center)
-          vue-telegram-login(
-            mode='callback',
-            telegram-login='todorant_bot',
-            @callback='onTelegramAuth',
-            radius='3',
-            :userpic='false',
-            v-if='!user || !user.telegramId'
-          )
-      v-divider
-      v-subheader.pa-0 {{ $t("settings.account") }}
-      .d-flex.flex-column
-        span(v-if='!userNameMenu') {{ name }}
-          v-btn.ma-1(small, icon, @click='userNameMenu = true') 
-            v-icon(:color='dark ? "grey lighten-1" : "grey darken-1"', small) edit
-        v-text-field(
-          v-else,
-          v-model='name',
-          :label='$t("settings.username")',
-          :loading='loading',
-          :append-outer-icon='(checkUserName(name) ? "done" : undefined)',
-          :append-icon='"clear"',
-          @click:append-outer='changeUserName',
-          @click:append='clearUserName'
-        )
-        span(v-for='identifier in identifiers') {{ identifier }}
-      v-divider.my-2
-      .d-flex.flex-column.align-start
+            @click='saveExportedTodos',
+            color='blue'
+          ) {{ $t("settings.export") }}
+          v-btn(color='blue', text, @click='encryptionTouched') {{ $t("encryption.title") }}
+      v-card-actions.d-flex.flex-column(v-if='this.$vuetify.breakpoint.xsOnly')
         v-btn(
+          color='error',
           text,
-          :loading='loading',
-          @click='saveExportedTodos',
-          color='blue'
-        ) {{ $t("settings.export") }}
-        v-btn(color='blue', text, @click='encryptionTouched') {{ $t("encryption.title") }}
-    v-card-actions.d-flex.flex-column(v-if='this.$vuetify.breakpoint.xsOnly')
-      v-btn(
-        color='error',
-        text,
-        @click='closeAndDropUserNameMenu',
-        v-shortkey.once='["esc"]',
-        @shortkey.native='closeAndDropUserNameMenu',
-        :loading='loading'
-      ) {{ $t("close") }}
-      v-btn(
-        color='blue',
-        text,
-        @click='save',
-        @shortkey.native='closeAndDropUserNameMenu',
-        :loading='loading'
-      ) {{ $t("save") }}
-    v-card-actions(v-else)
-      v-spacer
-      v-btn(
-        color='error',
-        text,
-        @click='closeAndDropUserNameMenu',
-        v-shortkey.once='["esc"]',
-        @shortkey.native='closeAndDropUserNameMenu',
-        :loading='loading'
-      ) {{ $t("close") }}
-      v-btn(color='blue', text, @click='save', :loading='loading') {{ $t("save") }}
+          @click='closeAndDropUserNameMenu',
+          v-shortkey.once='["esc"]',
+          @shortkey.native='closeAndDropUserNameMenu',
+          :loading='loading'
+        ) {{ $t("close") }}
+        v-btn(
+          color='blue',
+          text,
+          @click='save',
+          @shortkey.native='closeAndDropUserNameMenu',
+          :loading='loading'
+        ) {{ $t("save") }}
+      v-card-actions(v-else)
+        v-spacer
+        v-btn(
+          color='error',
+          text,
+          @click='closeAndDropUserNameMenu',
+          v-shortkey.once='["esc"]',
+          @shortkey.native='closeAndDropUserNameMenu',
+          :loading='loading'
+        ) {{ $t("close") }}
+        v-btn(color='blue', text, @click='save', :loading='loading') {{ $t("save") }}
+  v-dialog(v-model='googleCalendarInfo', max-width='600px')
+    v-card
+      v-card-title
+      v-card-text {{ $t("googleCalendarHint") }}
+      v-card-actions.d-flex.flex-row-reverse
+        v-btn(text, color='blue', @click='connectGoogleCalendar') {{ $t("googleCalendarGotIt") }}
 </template>
 
 <script lang="ts">
@@ -172,8 +184,7 @@ import Component from 'vue-class-component'
 import * as api from '@/utils/api'
 import { serverBus } from '@/main'
 import { i18n } from '@/plugins/i18n'
-import { getTodos, getTodosForExport, mergeTelegram } from '@/utils/api'
-import axios from 'axios'
+import { getTodosForExport, mergeTelegram } from '@/utils/api'
 import { User } from '@/models/User'
 import { saveAs } from 'file-saver'
 import { Prop } from 'vue-property-decorator'
@@ -181,7 +192,6 @@ import { namespace } from 'vuex-class'
 const { vueTelegramLogin } = require('vue-telegram-login')
 import { GoogleCalendarCredentials } from '@/models/GoogleCalendarCredentials'
 import store from '@/store'
-import App from '@/App.vue'
 
 const UserStore = namespace('UserStore')
 const SettingsStore = namespace('SettingsStore')
@@ -249,6 +259,8 @@ export default class Settings extends Vue {
 
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @SnackbarStore.Mutation setSnackbarSuccess!: (message: string) => void
+
+  googleCalendarInfo = false
 
   loading = false
   timeMenu = false

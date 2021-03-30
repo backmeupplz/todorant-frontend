@@ -112,8 +112,8 @@ import { namespace } from 'vuex-class'
 import { SubscriptionStatus } from '@/models/SubscriptionStatus'
 import { User } from '@/models/User'
 import draggable from 'vuedraggable'
-import has from 'lodash/has'
 import { playSound, Sounds } from '@/utils/sounds'
+import { getDateWithStartTimeOfDay } from '@/utils/getDateWithStartTimeOfDay'
 
 const SettingsStore = namespace('SettingsStore')
 const UserStore = namespace('UserStore')
@@ -129,6 +129,7 @@ export default class AddTodo extends Vue {
   @SettingsStore.State duplicateTagInBreakdown?: boolean
   @SettingsStore.State newTodosGoFirst?: boolean
   @SettingsStore.State showTodayOnAddTodo?: boolean
+  @SettingsStore.State startTimeOfDay?: string
   @UserStore.State subscriptionStatus!: SubscriptionStatus
   @UserStore.State user?: User
   @UserStore.State password?: string
@@ -221,7 +222,9 @@ export default class AddTodo extends Vue {
         text: hashtags.join(' '),
       })
     } else if (this.showTodayOnAddTodo) {
-      const now = new Date()
+      const now = this.startTimeOfDay
+        ? getDateWithStartTimeOfDay(this.startTimeOfDay)
+        : new Date()
       now.setMinutes(now.getMinutes() - now.getTimezoneOffset())
       this.todos.push({
         date: now.toISOString().substr(0, 10),

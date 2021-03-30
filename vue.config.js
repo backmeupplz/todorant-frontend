@@ -30,6 +30,7 @@ if (process.env.VUE_APP_BUNDLE === 'true') {
 }
 
 module.exports = {
+  productionSourceMap: false,
   devServer: {
     disableHostCheck: true,
   },

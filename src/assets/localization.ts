@@ -501,6 +501,9 @@ export const messages = {
     settingsObject: {
       showMoreByDefault: 'Show more when adding todos by default',
     },
+    googleCalendarHint:
+      'Only the tasks created in Todorant with an exact time will be synced to Google Calendar',
+    googleCalendarGotIt: 'Got it!',
   },
   ru: {
     encryption: {
@@ -1001,6 +1004,9 @@ export const messages = {
       showMoreByDefault:
         'Сразу показывать расширенные настройки добавления задачи',
     },
+    googleCalendarHint:
+      'В Гугл Календарь будут синхронизироваться только задачи, созданные в Тудуранте с точным временем',
+    googleCalendarGotIt: 'Понятно!',
   },
   ua: {
     encryption: {
@@ -1332,6 +1338,7 @@ export const messages = {
     },
     googleCalendarDisableSuccess: 'Гугл Календар успішно відключений',
     googleCalendarEnableSuccess: 'Гугл Календар успішно підключений',
+    edit: 'Редагувати',
   },
   it: {
     encryption: {
