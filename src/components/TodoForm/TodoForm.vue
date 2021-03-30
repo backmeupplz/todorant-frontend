@@ -34,7 +34,7 @@
             readonly,
             :label='$t("todo.create.date")',
             v-on='on',
-            :class='"todo-form__textarea"',
+            :class='"todo-form__textarea todo-form__textarea--date"',
             v-model='todo.date',
             :rules='dateAndMonthRules'
           )
@@ -55,7 +55,7 @@
             :label='$t("todo.create.month")',
             v-on='on',
             v-model='todo.monthAndYear',
-            :class='"todo-form__textarea"',
+            :class='"todo-form__textarea todo-form__textarea--date ml-4"',
             :rules='dateAndMonthRules'
           )
         v-date-picker(
@@ -76,7 +76,7 @@
             clearable,
             readonly,
             :label='$t("addTodoTime")',
-            prepend-icon='access_time',
+            :class='"todo-form__textarea todo-form__textarea--date"',
             v-on='on',
             v-model='todo.time'
           )
@@ -90,7 +90,7 @@
           v-card-actions
             v-spacer
             v-btn(text, color='blue', @click='timeMenu = false') Close
-  v-row(no-gutters)
+  v-row(no-gutters, :class='"pt-4"')
     v-col(cols='12', md='6')
       v-switch(:label='$t("todo.create.frog")', v-model='todo.frog')
     v-col(cols='12', md='6')

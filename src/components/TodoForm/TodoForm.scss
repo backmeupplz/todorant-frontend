@@ -1,5 +1,13 @@
 .todo-form {
   &__textarea {
+    &--date {
+      & .v-input__slot {
+        padding-left: 40px !important;
+        background-image: url("../../assets/icons/calendar.svg");
+        background-position: 10px center;
+      }
+    }
+
     & .v-input__slot {
       border: 1px solid #eee;
       padding: 5px 10px;
