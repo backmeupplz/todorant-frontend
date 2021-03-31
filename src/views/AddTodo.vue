@@ -47,7 +47,7 @@ div
                 v-expansion-panel(v-for='(todo, i) in todos', :key='i')
                   v-expansion-panel-header
                     v-flex.column
-                      h2 {{ !panel.includes(i) ? `${todo.frog ? "🐸 " : ""}${todo.time ? `${todo.time} ` : ""}` : "" }}{{ panel.includes(i) || !todo.text ? $t("todo.create.placeholder") : todo.text }}
+                      h2.todo-title {{ !panel.includes(i) ? `${todo.frog ? "🐸 " : ""}${todo.time ? `${todo.time} ` : ""}` : "" }}{{ panel.includes(i) || !todo.text ? $t("todo.create.placeholder") : cutTitle(todo.text) }}
                       p.my-0.caption(v-if='!panel.includes(i) && todo.date') {{ todo.date }}
                     div
                       .d-flex.justify-end.ma-2
@@ -69,25 +69,30 @@ div
                       ) {{ $t("delete") }}
         v-card-actions
           v-btn(
-            color='blue',
-            text,
+            color='primary',
+            fab,
+            small,
+            elevation=0,
+            dark,
             @click='addTodo',
             v-shortkey.once='{ en: ["ctrl", "shift", "a"], ru: ["ctrl", "shift", "ф"] }',
             @shortkey.native='addTodo'
           )
             v-icon add
           v-spacer
-          v-btn(
+          v-btn.button-round(
             color='error',
             text,
+            elevation=0,
             @click='close',
             :disabled='loading',
             v-shortkey.once='["esc"]',
             @shortkey.native='close'
           ) {{ $t("cancel") }}
-          v-btn(
-            color='blue',
-            text,
+          v-btn.button-round(
+            color='primary',
+            dark,
+            elevation=0,
             @click='save',
             :loading='loading',
             v-shortkey.once='["enter"]',
@@ -340,6 +345,10 @@ export default class AddTodo extends Vue {
     }
     this.dialog = false
   }
+
+  cutTitle(title: string) {
+    return title.substr(0, 80) + '...';
+  }
 }
 </script>
 
@@ -358,4 +367,19 @@ export default class AddTodo extends Vue {
   height: 64px !important
 .v-expansion-panel::before
   box-shadow: none
+.todo-title
+  word-break: break-word
+  font-size: 18px
+  font-weight: 600
+.button-round
+  border-radius: 12px !important
+  padding: 8px 16px !important
+.v-expansion-panel-header
+  padding: 16px 0 !important
+.v-card__title
+  padding: 20px 30px !important
+.v-card__text
+  padding: 0 30px 20px 30px !important
+.v-card__actions
+  padding: 20px 30px !important
 </style>

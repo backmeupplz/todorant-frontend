@@ -1,5 +1,5 @@
 <template lang="pug">
-.px-4
+.todo-form-content
   v-textarea(
     clearable,
     :label='$t("todo.create.text")',
@@ -76,7 +76,7 @@
             clearable,
             readonly,
             :label='$t("addTodoTime")',
-            :class='"todo-form__textarea todo-form__textarea--date"',
+            :class='"todo-form__textarea todo-form__textarea--time"',
             v-on='on',
             v-model='todo.time'
           )
@@ -92,15 +92,24 @@
             v-btn(text, color='blue', @click='timeMenu = false') Close
   v-row(no-gutters, :class='"pt-4"')
     v-col(cols='12', md='6')
-      v-switch(:label='$t("todo.create.frog")', v-model='todo.frog')
+      v-switch.todo-form__select(
+        :label='$t("todo.create.frog")',
+        v-model='todo.frog'
+      )
     v-col(cols='12', md='6')
-      v-switch(:label='$t("completed")', v-model='todo.completed')
+      v-switch.todo-form__select(
+        :label='$t("completed")',
+        v-model='todo.completed'
+      )
     v-col(
       v-if='!editTodo && (showMoreByDefault || moreShown || todo.time)',
       cols='12',
       md='6'
     )
-      v-switch(:label='$t("todo.create.goFirst")', v-model='todo.goFirst')
+      v-switch.todo-form__select(
+        :label='$t("todo.create.goFirst")',
+        v-model='todo.goFirst'
+      )
     v-col(
       v-if='!editTodo && delegates.length && (showMoreByDefault || moreShown || todo.time)',
       cols='12',
