@@ -30,6 +30,10 @@
       }
     }
 
+    &.theme--dark .v-input__slot {
+      border-color: #4D5259;
+    }
+
     &.error--text .v-input__slot {
       border-color: #FF3A3A !important;
     }
@@ -59,5 +63,22 @@
   }
   & .v-input--switch__thumb, &.primary--text .v-input--switch__thumb {
     color: white !important;
+  }
+}
+
+.md-mr {
+  margin-right: 10px !important;
+}
+
+.md-ml {
+  margin-left: 10px !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .md-mr {
+    margin-right: 0px !important;
+  }
+  .md-ml {
+    margin-left: 0px !important;
   }
 }

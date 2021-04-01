@@ -29,12 +29,11 @@
     v-col(cols='12', md='6')
       v-menu(v-model='dateMenu', :close-on-content-click='false', min-width=0)
         template(v-slot:activator='{ on }')
-          v-text-field(
+          v-text-field.todo-form__textarea.todo-form__textarea--date.md-mr(
             clearable,
             readonly,
             :label='$t("todo.create.date")',
             v-on='on',
-            :class='"todo-form__textarea todo-form__textarea--date"',
             v-model='todo.date',
             :rules='dateAndMonthRules'
           )
@@ -49,13 +48,12 @@
     v-col(cols='12', md='6')
       v-menu(v-model='monthMenu', :close-on-content-click='false', min-width=0)
         template(v-slot:activator='{ on }')
-          v-text-field(
+          v-text-field.todo-form__textarea.todo-form__textarea--date.md-ml(
             clearable,
             readonly,
             :label='$t("todo.create.month")',
             v-on='on',
             v-model='todo.monthAndYear',
-            :class='"todo-form__textarea todo-form__textarea--date ml-4"',
             :rules='dateAndMonthRules'
           )
         v-date-picker(
@@ -72,11 +70,10 @@
     )
       v-menu(v-model='timeMenu', :close-on-content-click='false', min-width=0)
         template(v-slot:activator='{ on }')
-          v-text-field(
+          v-text-field.todo-form__textarea.todo-form__textarea--time(
             clearable,
             readonly,
             :label='$t("addTodoTime")',
-            :class='"todo-form__textarea todo-form__textarea--time"',
             v-on='on',
             v-model='todo.time'
           )
@@ -90,7 +87,7 @@
           v-card-actions
             v-spacer
             v-btn(text, color='blue', @click='timeMenu = false') Close
-  v-row(no-gutters, :class='"pt-4"')
+  v-row.pt-4(no-gutters)
     v-col(cols='12', md='6')
       v-switch.todo-form__select(
         :label='$t("todo.create.frog")',

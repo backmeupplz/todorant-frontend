@@ -7,31 +7,39 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
         v-spacer
         v-icon.grey--text.pl-2(small, v-if='todo && todo.encrypted') vpn_key
       v-card-text
-        v-container
-          TodoForm(
-            v-if='!!todo',
-            :todo='todo',
-            :enterPressed='save',
-            :escapePressed='escapePressed',
-            :editTodo='true',
-            :shouldAutofocus='dialog',
-            ref='todoForm'
-          )
+        TodoForm(
+          v-if='!!todo',
+          :todo='todo',
+          :enterPressed='save',
+          :escapePressed='escapePressed',
+          :editTodo='true',
+          :shouldAutofocus='dialog',
+          ref='todoForm'
+        )
       v-card-actions
-        v-btn(text, @click='deleteTodo', :loading='loading', color='error')
+        v-btn(
+          @click='deleteTodo',
+          :loading='loading',
+          fab,
+          small,
+          elevation=0,
+          dark,
+          color='error'
+        )
           v-icon delete
         v-spacer
-        v-btn(
+        v-btn.button-round(
           color='error',
           text,
+          elevation=0,
           @click='cleanTodo(false)',
           :disabled='loading',
           v-shortkey.once='["esc"]',
           @shortkey.native='escapePressed'
         ) {{ $t("cancel") }}
-        v-btn(
-          color='blue',
-          text,
+        v-btn.button-round(
+          color='primary',
+          elevation=0,
           @click='save',
           :loading='loading',
           v-shortkey.once='["shift", "enter"]',
@@ -153,3 +161,28 @@ export default class EditTodo extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.v-expansion-panel-header {
+  padding: 16px 0 !important;
+}
+.v-card__title {
+  padding: 20px 30px !important;
+}
+.v-card__text {
+  padding: 0 30px 20px 30px !important;
+}
+.v-card__actions {
+  padding: 20px 30px !important;
+}
+.v-application .headline {
+  font-family: Montserrat, Roboto !important;
+}
+.v-expansion-panel {
+  background-color: transparent !important;
+}
+.button-round {
+  border-radius: 12px !important;
+  padding: 8px 16px !important;
+}
+</style>

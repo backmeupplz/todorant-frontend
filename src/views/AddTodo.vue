@@ -106,6 +106,7 @@ import Component from 'vue-class-component'
 import { Watch, Prop } from 'vue-property-decorator'
 import TodoForm from '@/components/TodoForm/TodoForm.vue'
 import { Todo } from '@/models/Todo'
+import { l } from '@/utils/linkify'
 import * as api from '@/utils/api'
 import { serverBus } from '@/main'
 import { logEvent } from '@/utils/logEvent'
@@ -347,7 +348,12 @@ export default class AddTodo extends Vue {
   }
 
   cutTitle(title: string) {
-    return title.substr(0, 80) + '...';
+    let todoTitle = ''
+    const todoTitleRaw = l(title)
+    todoTitleRaw.forEach((item) => {
+      todoTitle += item.value
+    })
+    return todoTitle.length > 100 ? todoTitle.substring(0, 100) + '...' : todoTitle
   }
 }
 </script>
@@ -368,7 +374,7 @@ export default class AddTodo extends Vue {
 .v-expansion-panel::before
   box-shadow: none
 .todo-title
-  word-break: break-word
+  word-break: break-all
   font-size: 18px
   font-weight: 600
 .button-round
@@ -382,4 +388,8 @@ export default class AddTodo extends Vue {
   padding: 0 30px 20px 30px !important
 .v-card__actions
   padding: 20px 30px !important
+.v-application .headline
+  font-family: Montserrat, Roboto !important
+.v-expansion-panel
+  background-color: transparent !important
 </style>
