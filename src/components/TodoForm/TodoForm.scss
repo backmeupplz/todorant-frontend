@@ -1,54 +1,53 @@
 .todo-form__textarea {
-    &--date {
-      & .v-input__slot {
-        padding-left: 40px !important;
-        background-image: url("../../assets/icons/calendar.svg");
-        background-position: 10px center;
-      }
-    }
-
-    &--time {
-      & .v-input__slot {
-        padding-left: 40px !important;
-        background-image: url("../../assets/icons/clock.svg");
-        background-position: 10px center;
-      }
-    }
-
-    &.v-input--is-focused .v-input__slot {
-      border-color: #3366FF !important;
-    }
-
+  &--date {
     & .v-input__slot {
-      border: 1px solid #DDE2E5;
-      padding: 5px 10px;
-      border-radius: 16px;
-
-      &::before, &::after {
-        border: 0 !important;
-
-      }
+      padding-left: 40px !important;
+      background-image: url("../../assets/icons/calendar.svg");
+      background-position: 10px center;
     }
+  }
 
-    &.theme--dark .v-input__slot {
-      border-color: #4D5259;
+  &--time {
+    & .v-input__slot {
+      padding-left: 40px !important;
+      background-image: url("../../assets/icons/clock.svg");
+      background-position: 10px center;
     }
+  }
 
-    &.error--text .v-input__slot {
-      border-color: #FF3A3A !important;
-    }
+  &.v-input--is-focused .v-input__slot {
+    border-color: #3366FF !important;
+  }
 
-    & .v-label--active {
-      display: none;
-    }
+  & .v-input__slot {
+    border: 1px solid #DDE2E5;
+    padding: 5px 10px;
+    border-radius: 16px;
 
-    & textarea {
-      line-height: 32px !important;
+  &::before, &::after {
+      border: 0 !important;
     }
+  }
 
-    & textarea, & .v-label {
-      font-size: 14px !important;
-    }
+  &.theme--dark .v-input__slot {
+    border-color: #4D5259;
+  }
+
+  &.error--text .v-input__slot {
+    border-color: #FF3A3A !important;
+  }
+
+  & .v-label--active {
+    display: none;
+  }
+
+  & textarea {
+    line-height: 32px !important;
+  }
+
+  & textarea, & .v-label {
+    font-size: 14px !important;
+  }
 }
 
 .todo-form__select {

@@ -17,34 +17,38 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
           ref='todoForm'
         )
       v-card-actions
-        v-btn(
-          @click='deleteTodo',
-          :loading='loading',
-          fab,
-          small,
-          elevation=0,
-          dark,
-          color='error'
+        .d-flex.justify-space-between.flex-column.flex-md-row(
+          style='width: 100%'
         )
-          v-icon delete
-        v-spacer
-        v-btn.button-round(
-          color='error',
-          text,
-          elevation=0,
-          @click='cleanTodo(false)',
-          :disabled='loading',
-          v-shortkey.once='["esc"]',
-          @shortkey.native='escapePressed'
-        ) {{ $t("cancel") }}
-        v-btn.button-round(
-          color='primary',
-          elevation=0,
-          @click='save',
-          :loading='loading',
-          v-shortkey.once='["shift", "enter"]',
-          @shortkey.native='save'
-        ) {{ $t("save") }}
+          .todo-form-left-action
+            v-btn(
+              @click='deleteTodo',
+              :loading='loading',
+              fab,
+              small,
+              elevation=0,
+              dark,
+              color='error'
+            )
+              v-icon delete
+          .todo-form-right-action.d-flex.flex-column.flex-md-row
+            v-btn.button-round(
+              color='error',
+              text,
+              elevation=0,
+              @click='cleanTodo(false)',
+              :disabled='loading',
+              v-shortkey.once='["esc"]',
+              @shortkey.native='escapePressed'
+            ) {{ $t("cancel") }}
+            v-btn.button-round(
+              color='primary',
+              elevation=0,
+              @click='save',
+              :loading='loading',
+              v-shortkey.once='["shift", "enter"]',
+              @shortkey.native='save'
+            ) {{ $t("save") }}
   // Breakdown
   BreakdownRequest(
     :dialog='breakdownRequestDialog',

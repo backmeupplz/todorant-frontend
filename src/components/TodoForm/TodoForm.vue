@@ -70,7 +70,7 @@
     )
       v-menu(v-model='timeMenu', :close-on-content-click='false', min-width=0)
         template(v-slot:activator='{ on }')
-          v-text-field.todo-form__textarea.todo-form__textarea--time(
+          v-text-field.todo-form__textarea.todo-form__textarea--time.md-mr(
             clearable,
             readonly,
             :label='$t("addTodoTime")',

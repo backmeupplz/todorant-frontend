@@ -68,36 +68,40 @@ div
                         @click='deleteTodo(i)'
                       ) {{ $t("delete") }}
         v-card-actions
-          v-btn(
-            color='primary',
-            fab,
-            small,
-            elevation=0,
-            dark,
-            @click='addTodo',
-            v-shortkey.once='{ en: ["ctrl", "shift", "a"], ru: ["ctrl", "shift", "ф"] }',
-            @shortkey.native='addTodo'
+          .d-flex.justify-space-between.flex-column.flex-md-row(
+            style='width: 100%'
           )
-            v-icon add
-          v-spacer
-          v-btn.button-round(
-            color='error',
-            text,
-            elevation=0,
-            @click='close',
-            :disabled='loading',
-            v-shortkey.once='["esc"]',
-            @shortkey.native='close'
-          ) {{ $t("cancel") }}
-          v-btn.button-round(
-            color='primary',
-            dark,
-            elevation=0,
-            @click='save',
-            :loading='loading',
-            v-shortkey.once='["enter"]',
-            @shortkey.native='save'
-          ) {{ $t("save") }}
+            .todo-form-left-action
+              v-btn(
+                color='primary',
+                fab,
+                small,
+                elevation=0,
+                dark,
+                @click='addTodo',
+                v-shortkey.once='{ en: ["ctrl", "shift", "a"], ru: ["ctrl", "shift", "ф"] }',
+                @shortkey.native='addTodo'
+              )
+                v-icon add
+            .todo-form-right-action.d-flex.flex-column.flex-md-row
+              v-btn.button-round(
+                color='error',
+                text,
+                elevation=0,
+                @click='close',
+                :disabled='loading',
+                v-shortkey.once='["esc"]',
+                @shortkey.native='close'
+              ) {{ $t("cancel") }}
+              v-btn.button-round(
+                color='primary',
+                dark,
+                elevation=0,
+                @click='save',
+                :loading='loading',
+                v-shortkey.once='["enter"]',
+                @shortkey.native='save'
+              ) {{ $t("save") }}
 </template>
 
 <script lang="ts">
