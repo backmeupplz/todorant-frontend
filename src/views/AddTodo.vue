@@ -26,82 +26,91 @@ div
               v-icon(v-on='on') info
             span {{ $t("todo.create.tooltip") }}
         v-card-text
-          v-container
-            .d-flex.justify-space-between
-              p.todoText(
-                v-if='!!todoToBreakdown',
-                :class='isEncryptionWrong(todoToBreakdown) ? "grey--text" : ""'
-              ) {{ textForTodo(todoToBreakdown) }}
-              v-btn(
-                v-if='!!todoToBreakdown',
-                icon,
-                v-clipboard:copy='!todoToBreakdown ? "no-todo" : textForTodo(todoToBreakdown)'
+          .d-flex.justify-space-between
+            p.todoText(
+              v-if='!!todoToBreakdown',
+              :class='isEncryptionWrong(todoToBreakdown) ? "grey--text" : ""'
+            ) {{ textForTodo(todoToBreakdown) }}
+            v-btn(
+              v-if='!!todoToBreakdown',
+              icon,
+              v-clipboard:copy='!todoToBreakdown ? "no-todo" : textForTodo(todoToBreakdown)'
+            )
+              v-icon(small) assignment
+          v-expansion-panels(multiple, v-model='panel')
+            v-flex
+              draggable(
+                :forceFallback='shouldFallbackDraggable',
+                v-model='todos',
+                handle='.handle'
               )
-                v-icon(small) assignment
-            v-expansion-panels(multiple, v-model='panel')
-              v-flex
-                draggable(
-                  :forceFallback='shouldFallbackDraggable',
-                  v-model='todos',
-                  handle='.handle'
-                )
-                  v-expansion-panel(v-for='(todo, i) in todos', :key='i')
-                    v-expansion-panel-header
-                      v-flex.column
-                        span {{ !panel.includes(i) ? `${todo.frog ? "🐸 " : ""}${todo.time ? `${todo.time} ` : ""}` : "" }}{{ panel.includes(i) || !todo.text ? $t("todo.create.placeholder") : todo.text }}
-                        p.my-0.caption(v-if='!panel.includes(i) && todo.date') {{ todo.date }}
-                      div
-                        .d-flex.justify-end.ma-2
-                          v-icon.handle(v-if='todos.length > 1') menu
-                    v-expansion-panel-content
-                      TodoForm(
-                        :todo='todo',
-                        :enterPressed='save',
-                        :escapePressed='escapePressed',
-                        :addTodo='addTodo',
-                        ref='todoForm',
-                        :shouldAutofocus='dialog'
-                      )
-                        v-btn(
-                          v-if='todos.length > 1',
-                          color='error',
-                          text,
-                          @click='deleteTodo(i)'
-                        ) {{ $t("delete") }}
+                v-expansion-panel(v-for='(todo, i) in todos', :key='i')
+                  v-expansion-panel-header
+                    v-flex.column
+                      h2.todo-title {{ !panel.includes(i) ? `${todo.frog ? "🐸 " : ""}${todo.time ? `${todo.time} ` : ""}` : "" }}{{ panel.includes(i) || !todo.text ? $t("todo.create.placeholder") : cutTitle(todo.text) }}
+                      p.my-0.caption(v-if='!panel.includes(i) && todo.date') {{ todo.date }}
+                    div
+                      .d-flex.justify-end.ma-2
+                        v-icon.handle(v-if='todos.length > 1') menu
+                  v-expansion-panel-content
+                    TodoForm(
+                      :todo='todo',
+                      :enterPressed='save',
+                      :escapePressed='escapePressed',
+                      :addTodo='addTodo',
+                      ref='todoForm',
+                      :shouldAutofocus='dialog'
+                    )
+                      v-btn(
+                        v-if='todos.length > 1',
+                        color='error',
+                        text,
+                        @click='deleteTodo(i)'
+                      ) {{ $t("delete") }}
         v-card-actions
-          v-btn(
-            color='blue',
-            text,
-            @click='addTodo',
-            v-shortkey.once='{ en: ["ctrl", "shift", "a"], ru: ["ctrl", "shift", "ф"] }',
-            @shortkey.native='addTodo'
+          .d-flex.justify-space-between.flex-column.flex-md-row(
+            style='width: 100%'
           )
-            v-icon add
-          v-spacer
-          v-btn(
-            color='error',
-            text,
-            @click='close',
-            :disabled='loading',
-            v-shortkey.once='["esc"]',
-            @shortkey.native='close'
-          ) {{ $t("cancel") }}
-          v-btn(
-            color='blue',
-            text,
-            @click='save',
-            :loading='loading',
-            v-shortkey.once='["enter"]',
-            @shortkey.native='save'
-          ) {{ $t("save") }}
+            .todo-form-left-action
+              v-btn.button-gradient(
+                color='primary',
+                fab,
+                small,
+                elevation=0,
+                dark,
+                @click='addTodo',
+                v-shortkey.once='{ en: ["ctrl", "shift", "a"], ru: ["ctrl", "shift", "ф"] }',
+                @shortkey.native='addTodo'
+              )
+                v-icon add
+            .todo-form-right-action.d-flex.flex-column.flex-md-row
+              v-btn.button-round(
+                color='error',
+                text,
+                elevation=0,
+                @click='close',
+                :disabled='loading',
+                v-shortkey.once='["esc"]',
+                @shortkey.native='close'
+              ) {{ $t("cancel") }}
+              v-btn.button-round.button-gradient(
+                color='primary',
+                dark,
+                elevation=0,
+                @click='save',
+                :loading='loading',
+                v-shortkey.once='["enter"]',
+                @shortkey.native='save'
+              ) {{ $t("save") }}
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Watch, Prop } from 'vue-property-decorator'
-import TodoForm from '@/components/TodoForm.vue'
+import TodoForm from '@/components/TodoForm/TodoForm.vue'
 import { Todo } from '@/models/Todo'
+import { l } from '@/utils/linkify'
 import * as api from '@/utils/api'
 import { serverBus } from '@/main'
 import { logEvent } from '@/utils/logEvent'
@@ -341,10 +350,19 @@ export default class AddTodo extends Vue {
     }
     this.dialog = false
   }
+
+  cutTitle(title: string) {
+    let todoTitle = ''
+    const todoTitleRaw = l(title)
+    todoTitleRaw.forEach((item) => {
+      todoTitle += item.value
+    })
+    return todoTitle.length > 100 ? todoTitle.substring(0, 100) + '...' : todoTitle
+  }
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 // prettier-ignore
 @for $i from 1 through 50
   @media screen and (min-width: (1000px + ($i * 100px))) and (max-width: 1100px + ($i * 100px))
@@ -357,4 +375,27 @@ export default class AddTodo extends Vue {
   border-radius: 28px !important
   width: 48px !important
   height: 64px !important
+.v-expansion-panel::before
+  box-shadow: none
+.todo-title
+  word-break: break-all
+  font-size: 18px
+  font-weight: 600
+.button-round
+  border-radius: 12px !important
+  padding: 8px 16px !important
+.button-gradient
+  background: linear-gradient(135deg, #1148B9 0%, #5C9BFF 100%) !important
+.v-expansion-panel-header
+  padding: 16px 0 !important
+.v-card__title
+  padding: 20px 30px !important
+.v-card__text
+  padding: 0 30px 20px 30px !important
+.v-card__actions
+  padding: 20px 30px !important
+.v-application .headline
+  font-family: Montserrat, Roboto !important
+.v-expansion-panel
+  background-color: transparent !important
 </style>
