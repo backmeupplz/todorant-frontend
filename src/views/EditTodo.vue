@@ -21,7 +21,7 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
           style='width: 100%'
         )
           .todo-form-left-action
-            v-btn(
+            v-btn.button-gradient(
               @click='deleteTodo',
               :loading='loading',
               fab,
@@ -41,7 +41,7 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
               v-shortkey.once='["esc"]',
               @shortkey.native='escapePressed'
             ) {{ $t("cancel") }}
-            v-btn.button-round(
+            v-btn.button-round.button-gradient(
               color='primary',
               elevation=0,
               @click='save',
@@ -107,7 +107,7 @@ export default class EditTodo extends Vue {
 
   reset() {
     if (this.$refs.form) {
-      ; (this.$refs.form as any).resetValidation()
+      ;(this.$refs.form as any).resetValidation()
     }
   }
 
@@ -130,7 +130,7 @@ export default class EditTodo extends Vue {
         return
       }
       await api.editTodo(user, (this as any).todo)
-        ; (this as any).cleanTodo()
+        ;(this as any).cleanTodo()
       if ((this as any).todo.completed && !this.completed) {
         playSound((this as any).todo.frog ? Sounds.levelUp : Sounds.taskDone)
       }
@@ -143,13 +143,13 @@ export default class EditTodo extends Vue {
 
   async deleteTodo() {
     const todo = this.todo
-      ; (this as any).cleanTodo(false)
+      ;(this as any).cleanTodo(false)
     this.requestDelete(todo)
   }
 
   escapePressed() {
     if (this.$refs.todoForm) {
-      ; (this.$refs.todoForm as any).$refs.textInput.blur()
+      ;(this.$refs.todoForm as any).$refs.textInput.blur()
     }
     this.dialog = false
   }
@@ -160,7 +160,7 @@ export default class EditTodo extends Vue {
 
   breakdownRequest() {
     this.breakdownRequestDialog = false
-      ; (this as any).cleanTodo()
+      ;(this as any).cleanTodo()
     serverBus.$emit('addTodoRequested', undefined, (this as any).todo)
   }
 }
@@ -172,6 +172,9 @@ export default class EditTodo extends Vue {
 }
 .v-card__title {
   padding: 20px 30px !important;
+}
+.button-gradient {
+  background: linear-gradient(135deg, #1148b9 0%, #5c9bff 100%) !important;
 }
 .v-card__text {
   padding: 0 30px 20px 30px !important;

@@ -72,7 +72,7 @@ div
             style='width: 100%'
           )
             .todo-form-left-action
-              v-btn(
+              v-btn.button-gradient(
                 color='primary',
                 fab,
                 small,
@@ -93,7 +93,7 @@ div
                 v-shortkey.once='["esc"]',
                 @shortkey.native='close'
               ) {{ $t("cancel") }}
-              v-btn.button-round(
+              v-btn.button-round.button-gradient(
                 color='primary',
                 dark,
                 elevation=0,
@@ -204,7 +204,7 @@ export default class AddTodo extends Vue {
     this.addTodo()
     this.panel = [0]
     if (this.$refs.form) {
-      ; (this.$refs.form as any).resetValidation()
+      ;(this.$refs.form as any).resetValidation()
     }
   }
 
@@ -384,6 +384,8 @@ export default class AddTodo extends Vue {
 .button-round
   border-radius: 12px !important
   padding: 8px 16px !important
+.button-gradient
+  background: linear-gradient(135deg, #1148B9 0%, #5C9BFF 100%) !important
 .v-expansion-panel-header
   padding: 16px 0 !important
 .v-card__title
