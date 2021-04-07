@@ -204,7 +204,7 @@ export default class AddTodo extends Vue {
     this.addTodo()
     this.panel = [0]
     if (this.$refs.form) {
-      ;(this.$refs.form as any).resetValidation()
+      ; (this.$refs.form as any).resetValidation()
     }
   }
 
@@ -378,7 +378,7 @@ export default class AddTodo extends Vue {
 .v-expansion-panel::before
   box-shadow: none
 .todo-title
-  word-break: break-all
+  word-break: word-break
   font-size: 18px
   font-weight: 600
 .button-round
