@@ -378,7 +378,7 @@ export default class AddTodo extends Vue {
 .v-expansion-panel::before
   box-shadow: none
 .todo-title
-  word-break: break-all
+  word-break: break-word
   font-size: 18px
   font-weight: 600
 .button-round
