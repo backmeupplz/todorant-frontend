@@ -637,7 +637,11 @@ export default class TodoList extends Vue {
       if (todo.completed) {
         await api.undoTodo(user, todo)
       } else {
-        const incompleteFrogsExist = await api.completeTodo(user, todo, this.startTimeOfDay)
+        const { incompleteFrogsExist } = await api.completeTodo(
+          user,
+          todo,
+          this.startTimeOfDay
+        )
         if (todo.frog) {
           await playSound(Sounds.levelUp)
         } else {

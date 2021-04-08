@@ -193,7 +193,7 @@ export async function completeTodo(
         },
       }
     )
-  ).data.incompleteFrogsExist as boolean
+  ).data as { incompleteFrogsExist: boolean }
 }
 
 export async function skipTodo(user: User, todo: Todo) {
