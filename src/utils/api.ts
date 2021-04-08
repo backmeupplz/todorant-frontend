@@ -173,14 +173,27 @@ export async function deleteAllTags() {
   })
 }
 
-export async function completeTodo(user: User, todo: Todo) {
-  return axios.put(
-    `${base}/todo/${todo._id}/done`,
-    {},
-    {
-      headers: getHeaders(user),
-    }
-  )
+export async function completeTodo(
+  user: User,
+  todo: Todo,
+  startTimeOfDay: string = '00:00'
+) {
+  const now = startTimeOfDay
+    ? getDateWithStartTimeOfDay(startTimeOfDay)
+    : new Date()
+
+  return (
+    await axios.put(
+      `${base}/todo/${todo._id}/done`,
+      {},
+      {
+        headers: getHeaders(user),
+        params: {
+          date: getStringFromDate(now),
+        },
+      }
+    )
+  ).data as boolean
 }
 
 export async function skipTodo(user: User, todo: Todo) {
