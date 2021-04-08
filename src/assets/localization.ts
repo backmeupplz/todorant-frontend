@@ -500,6 +500,11 @@ export const messages = {
     googleCalendarHint:
       'Only the tasks created in Todorant with an exact time will be synced to Google Calendar',
     googleCalendarGotIt: 'Got it!',
+    frogsAlert: {
+      title: "Stop! It's illegal",
+      text:
+        "Don't break the rules. If you have any frogs today — finish them first, break them down, move them to future days or remove the frog flag from them. Please, just don't ignore the frogs!",
+    },
   },
   ru: {
     encryption: {
@@ -998,6 +1003,11 @@ export const messages = {
     googleCalendarHint:
       'В Гугл Календарь будут синхронизироваться только задачи, созданные в Тудуранте с точным временем',
     googleCalendarGotIt: 'Понятно!',
+    frogsAlert: {
+      title: 'Стоп! Это нелегально',
+      text:
+        'Не нарушайте правила. Если у вас есть сегодня лягушки, то завершите их, разбейте их, перенесите их на будущие даты или уберите у них статус лягушки. Пожалуйста, не игнорируйте лягушек!',
+    },
   },
   ua: {
     encryption: {

@@ -37,17 +37,17 @@ v-container(
     :requestDelete='requestDelete'
   )
   DeleteTodo(:todo='todoDeleted')
+  // FrogsMessage dialog
+  FrogsMessage(:dialog='frogsMessageDialog', :close='closeFrogsMessageDialog')
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Todo } from '@/models/Todo'
-import { getTodos, editTodo } from '@/utils/api'
 import TodoText from '@/components/TodoCard/TodoText.vue'
 import DeleteTodo from '@/components/DeleteTodo.vue'
 import EditTodo from '@/views/EditTodo.vue'
-import { Watch } from 'vue-property-decorator'
 import * as api from '@/utils/api'
 import { serverBus } from '@/main'
 import { playSound, Sounds } from '@/utils/sounds'
@@ -58,6 +58,7 @@ import ProgressBlock from '@/views/current/ProgressBlock.vue'
 import EmptyPlaceholder from '@/views/current/EmptyPlaceholder.vue'
 import AllDonePlaceholder from '@/views/current/AllDonePlaceholder.vue'
 import TodoCard from '@/components/TodoCard/TodoCard.vue'
+import FrogsMessage from '@/components/FrogsMessage.vue'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -73,6 +74,7 @@ const TagsStore = namespace('TagsStore')
     EmptyPlaceholder,
     AllDonePlaceholder,
     TodoCard,
+    FrogsMessage,
   },
 })
 export default class CurrentTodo extends Vue {
@@ -91,6 +93,8 @@ export default class CurrentTodo extends Vue {
 
   todoEdited: Partial<Todo> | null = null
   todoDeleted: Todo | null = null
+
+  frogsMessageDialog = false
 
   get progress() {
     return this.todosCount === 0
@@ -113,6 +117,10 @@ export default class CurrentTodo extends Vue {
 
     serverBus.$on('refreshRequested', () => {
       this.updateTodo()
+    })
+
+    serverBus.$on('violationFrogRules', () => {
+      this.frogsMessageDialog = true
     })
   }
 
@@ -174,10 +182,17 @@ export default class CurrentTodo extends Vue {
     }
     this.loading = true
     try {
-      await api.completeTodo(user, this.todo)
+      const { incompleteFrogsExist } = await api.completeTodo(
+        user,
+        this.todo,
+        this.startTimeOfDay
+      )
       if (this.todo.frog) {
         await playSound(Sounds.levelUp)
       } else {
+        if (incompleteFrogsExist) {
+          serverBus.$emit('violationFrogRules')
+        }
         await playSound(Sounds.taskDone)
       }
       this.updateTodo()
@@ -258,6 +273,10 @@ export default class CurrentTodo extends Vue {
 
   requestDelete() {
     this.deleteTodo()
+  }
+
+  closeFrogsMessageDialog() {
+    this.frogsMessageDialog = false
   }
 }
 </script>
