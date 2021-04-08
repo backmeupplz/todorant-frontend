@@ -641,6 +641,8 @@ export default class TodoList extends Vue {
         if (todo.frog) {
           await playSound(Sounds.levelUp)
         } else {
+          if (await api.checkIncompleteFrogs(user, this.startTimeOfDay))
+            serverBus.$emit('violationFrogRules')
           await playSound(Sounds.taskDone)
         }
         this.tryConfetti()

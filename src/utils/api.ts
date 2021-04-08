@@ -531,3 +531,21 @@ function setSettingsFromServer(state: any) {
   settingsStore.setSettingsStore(settings)
   const appStore = getModule(AppStore, store).setLanguage(settings.language)
 }
+
+export async function checkIncompleteFrogs(
+  user: User,
+  startTimeOfDay: string = '00:00'
+) {
+  const now = startTimeOfDay
+    ? getDateWithStartTimeOfDay(startTimeOfDay)
+    : new Date()
+  const data = (
+    await axios.get(`${base}/todo/checkFrogs`, {
+      headers: getHeaders(user),
+      params: {
+        date: getStringFromDate(now),
+      },
+    })
+  ).data as boolean
+  return data
+}
