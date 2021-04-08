@@ -193,7 +193,7 @@ export async function completeTodo(
         },
       }
     )
-  ).data as boolean
+  ).data.incompleteFrogsExist as boolean
 }
 
 export async function skipTodo(user: User, todo: Todo) {
@@ -543,22 +543,4 @@ function setSettingsFromServer(state: any) {
   const settingsStore = getModule(SettingsStore, store)
   settingsStore.setSettingsStore(settings)
   const appStore = getModule(AppStore, store).setLanguage(settings.language)
-}
-
-export async function checkIncompleteFrogs(
-  user: User,
-  startTimeOfDay: string = '00:00'
-) {
-  const now = startTimeOfDay
-    ? getDateWithStartTimeOfDay(startTimeOfDay)
-    : new Date()
-  const data = (
-    await axios.get(`${base}/todo/checkFrogs`, {
-      headers: getHeaders(user),
-      params: {
-        date: getStringFromDate(now),
-      },
-    })
-  ).data as boolean
-  return data
 }

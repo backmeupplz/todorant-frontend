@@ -182,11 +182,11 @@ export default class CurrentTodo extends Vue {
     }
     this.loading = true
     try {
-      const isFrogsInDay = await api.completeTodo(user, this.todo, this.startTimeOfDay)
+      const incompleteFrogsExist = await api.completeTodo(user, this.todo, this.startTimeOfDay)
       if (this.todo.frog) {
         await playSound(Sounds.levelUp)
       } else {
-        if (isFrogsInDay) {
+        if (incompleteFrogsExist) {
           serverBus.$emit('violationFrogRules')
         }
         await playSound(Sounds.taskDone)
