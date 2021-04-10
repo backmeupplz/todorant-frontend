@@ -6,8 +6,9 @@ export interface User {
   telegramId?: string
   appleSubId?: string
   susbcriptionId?: string
-  appleReceipt?: String
-  googleReceipt?: String
+  appleReceipt?: string
+  googleReceipt?: string
+  isPerpetualLicense?: boolean
 
   token?: string
 }
