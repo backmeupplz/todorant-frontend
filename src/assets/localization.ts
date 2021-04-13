@@ -233,7 +233,8 @@ export const messages = {
       signature: 'Nikita Kolmogorov, Todorant creator',
       daysLeft: '(days left: {daysLeft})',
       '5dollars': '$5/month',
-      '50dollars': '$50/year',
+      '36dollars': '$36/year',
+      '150dollars': '$150 once',
       success: 'You have successfuly subscribed!',
       payment: {
         success: '✅ You are all done! Enjoy unlimited Todorant experience 💪',
@@ -277,9 +278,9 @@ export const messages = {
     planningText:
       'Looks like you have some planning to do! Please, redistribute the outstanding tasks below to unlock the "Current" tab and to keep being productive. Cheers!',
     activeText:
-      '🎉 Thank you a lot for supporting Todorant! I personally hope that Todorant has improved your life already and will keep making it better in future! You support allows me to work on Todorant daily and to add new features simplifying the work and freeing your time and your cognitive resources. Thank you a lot, again!',
+      '🎉 Thank you a lot for supporting Todorant! I hope that Todorant has improved your life already and will keep making it better in the future! Your support allows me to improve Todorant daily, adding new features and simplifying the work processes!',
     inactiveText:
-      '🐝 It looks like your Todorant trial has come to the end. This is the awkward moment when you have to decide — whether Todorant has improved your life enough to spend money on it — and I have to navigate you towards the right decision. I am at the peak of my happines when I am able to bring value to the people; and if Todorant was able to make your life better, I will be more than thankful if you buy the subscription. It is just $5/month for the unlimited productivity and free mind. Every cent I earn on Todorant will be spent on improving the service. By supporting Todorant — you allow me, independent developer, to keep improving the product that benefits us all from day to day. Thank you a lot in advance!',
+      "🐝 It looks like your Todorant trial has come to the end. Has Todorant improved your life by at least $5/month? I certainly hope so! I'll cut straight to the chase.\n\nTrade offer. I receive: $5 per month, $36 per year (a whopping 40% discount) or $150 one time. You receive: unlimited productivity and unlimited Todorant as a bonus.\n\nWhat do you say?",
     earlyAdopterText:
       '👏👏 — this is me applauding you; you — the crazy ones who agreed to try out the instrument of ever increasing productivity, Todorant, among the first. One can say that you are the golden thousand, feedback of whom was shaping the Todorant from the very beginning. You have all the rights to use Todorant as much as you wish — you will never experience any limits, you have earned it. However, if you noticed that Todorant has drastically improved your life — you can still buy the subscription thus saying the best kind of "Thank you". You will never loose the "Early adopter 🦄" status — but will always be able to cancel the subscription. Thank you a lot for still using Todorant — and I will keep adding new features improving the product that positively affects all of us. Good luck!',
     earlyAdopterTextBonus:
@@ -728,7 +729,8 @@ export const messages = {
       signature: 'Никита Колмогоров, создатель Тудуранта',
       daysLeft: '(осталось дней: {daysLeft})',
       '5dollars': '$5/месяц',
-      '50dollars': '$50/год',
+      '36dollars': '$36/год',
+      '150dollars': '$150 один раз',
       success: 'Подписка приобретена успешно!',
       payment: {
         success:
@@ -776,7 +778,7 @@ export const messages = {
     activeText:
       '🎉 Огромное спасибо за поддержку Тудуранта! Я лично надеюсь, что Тудурант достаточно изменил вашу жизнь и будет помогать ее улучшать изо дня в день в будущем! Ваша поддержка помогает мне заниматься Тудурантом на постоянной основе и добавлять новые функции, упрощающие работу и освобождающие вам время и когнитивные ресурсы. Спасибо вам еще раз!',
     inactiveText:
-      '🐝 Похоже, ваш триал Тудуранта подошел к концу. Это тот самый неловкий момент, когда вам нужно сделать решение — настолько ли вам помог Тудурант, чтобы начать использовать его на постоянной основе; а мне нужно подтолкнуть вас в сторону правильного решения. Вершина моего счастья — это приносить пользу людям; а если Тудурант и вправду стал неотъемлемой частью вашей жизни, то я буду невероятно благодарен вам, если вы приобретете подписку. Всего $5/месяц — это цена бесконечной продуктивности и свободной головы. Каждый цент, который я получу с Тудуранта, я буду направлять на развитие этого сервиса. Поддержав Тудурант, вы лично поможете независимому разработчику ежедневно улучшать продукт, которым вы пользуетесь на постоянной основе. Заранее благодарю вас!',
+      '🐝 Похоже, ваш пробный период Тудуранта подошел к концу. Улучшил ли Тудурант вашу жизнь хотя бы на $5/месяц? Надеюсь, что да! Перейдем прямо к делу.\n\nДеловое предложение. Я получу: $5 в месяц, $36 в год (невероятная скидка в 40%) или $150 один раз. Вы получите: безграничную продуктивности и неограниченный Тудурант как бонус.\n\nЧто скажете?',
     earlyAdopterText:
       '👏👏 — это я хлопаю вам стоя; вы — безумцы, которые согласились попробовать инструмент повышения персональной продуктивности Тудурант одними из первых. Можно сказать, вы — золотая тысяча пользователей, на отзывах которых и создавался Тудурант. Вы имеете полное право пользоваться Тудурантом столько, сколько вам угодно — для этого аккаунта никогда не будет введено никаких ограничений, вы заслужили это. Однако если вы заметили, что Тудурант резко изменил вашу жизнь к лучшему — вы все еще можете приобрести подписку, тем самым сказав простое, но очень важное для меня лично: "Спасибо". Вы никогда не потеряете статус "Ранний адоптер 🦄" — а подписку сможете отменить в любой момент. Спасибо большое, что вы продолжаете пользоваться Тудурантом — а я продолжу добавлять приятные функции в этот инструмент, который делает каждого из нас лучше. Удачи!',
     earlyAdopterTextBonus:
@@ -1227,7 +1229,8 @@ export const messages = {
       signature: 'Никита Колмогоров, творець Тудуранту',
       daysLeft: '(Залишилося днів: {daysLeft})',
       '5dollars': '$5/місяць',
-      '50dollars': '$50/рік',
+      '36dollars': '$36/рік',
+      '150dollars': '$150 один раз',
       success: 'Підписку придбано успішно!',
       payment: {
         success: '✅ Вам вдалося! Насолоджуйтеся необмеженим Тудурантом 💪',
@@ -1268,7 +1271,7 @@ export const messages = {
     activeText:
       '🎉 Спасибі Вам за підтримку Todorant! Я особисто сподіваюся, що Todorant уже покращив Ваше життя і продовжуватиме його покращувати в майбутньому! Підтримка дозволяє мені щодня працювати над Todorant та додавати нові функції, що спрощують роботу та звільняють Ваш час та Ваші ресурси для чогось корисного. Ще раз дякую!',
     inactiveText:
-      '🐝 Схоже, Ваше випробування Todorant закінчилося. Це неприємна мить, коли Ви повинні вирішити — чи Todorant покращив Ваше життя достатньо, щоб витратити на нього гроші, — і я повинен підштовхнути Вас до правильного рішення. Я на піку свого щастя, коли мені вдається принести цінність людям; і якщо Todorant зміг зробити Ваше життя ліпшим, я буду більш ніж вдячний, якщо Ви придбаєте підписку. Це лише 5 доларів на місяць для необмеженої плідності та вільного розуму. Кожен цент, який я заробляю на Todorant, буде витрачений на покращення служби. Підтримуючи Todorant — Ви дозволяєте мені, незалежному розробникові, постійно вдосконалювати виріб, корисний для нас усіх. Наперед дякую!',
+      'Схоже, що ваш пробний період Тудуранта закінчився. Чи покращив Тудурант ваше життя хоча б на 5$/місяць? Сподіваюся що так! Отже до справи.\n\nДілова пропозиція. Я отримаю: 5$ в місяць, 36$ в рік (неймовірна знижка 40%) або ж 150$ прямо зараз. Ви отримаєте: безмежну продуктивність і Тудурант без обмежень в бонус.\n\nЩо скажете?',
     earlyAdopterText:
       '👏👏 — це мої оплески Вам; Ви навіжені, хто погодився випробувати інструмент постійно зростаючої плідності Todorant, серед перших. Можна сказати, що Ви — золота тисяча, відгуки якої формували Todorant із самого початку. У Вас є всі права використовувати Todorant скільки завгодно — Ви ніколи не відчуєте жодних обмежень, Ви заробили це. Однак якщо Ви помітили, що Todorant значно покращив Ваше життя — Ви все одно можете придбати підписку, це найкращий спосіб сказати "Спасибі". Ви ніколи не втратите статус "Ранній користувач 🦄" — але завжди зможете скасувати підписку. Дякую Вам за те, що Ви все ще використовуєте Todorant — я продовжуватиму додавати нові можливості, покращуючи продукт, який позитивно впливає на всіх нас. Щасти!',
     earlyAdopterTextBonus:
@@ -1448,7 +1451,7 @@ export const messages = {
     activeText:
       '🎉 Grazie mille per aver sostenuto Todorant! Personalmente spero che Todorant abbia già migliorato la tua vita e che continui a migliorarla in futuro! Il tuo sostegno mi permette di lavorare quotidianamente su Todorant e di aggiungere nuove funzionalità che semplificano il lavoro e liberano il tuo tempo e le tue risorse cognitive. Grazie mille, ancora una volta!',
     inactiveText:
-      "🐝 Sembra che il tuo periodo di prova di Todorant sia giunto al termine. Questo è il momento imbarazzante in cui dovrai decidere — se il Todorant ha migliorato la tua vita abbastanza da permetterti di spendere soldi per questo — e io devo indirizzarti verso la decisione giusta. Sono all'apice della felicità quando sono in grado di portare valore alle persone; e se Todorant è stato in grado di migliorare la vostra vita, vi sarò più che grato se acquisterete l'abbonamento. Sono solo 5 dollari al mese per la produttività illimitata e la mente libera. Ogni centesimo che guadagno su Todorant sarà speso per migliorare il servizio. Sostenendo Todorant — permettete a me, sviluppatore indipendente, di continuare a migliorare il prodotto che ci avvantaggia tutti di giorno in giorno. Grazie mille in anticipo!",
+      "🐝 Sembra che la tua prova di Todorant sia giunta alla fine. Todorant ha migliorato la tua vita di almeno 5 dollari al mese? Spero proprio di sì! Vado subito al sodo.\n\nOfferta commerciale. Ricevo: 5$ al mese, 36$ all'anno (un enorme sconto del 40%) o 150$ una tantum. Voi ricevete: produttività illimitata e Todorant illimitato come bonus.\n\nChe ne dite?",
     earlyAdopterText:
       '👏👏 — questo sono io che vi applaudo; voi — i pazzi che hanno accettato di provare lo strumento della produttività sempre crescente, Todorant, tra i primi. Si può dire che voi siete i pionieri, il cui feedback ha plasmato il Todorant fin dall\'inizio. Avete tutti i diritti di usare il Todorant quanto volete: non avrete mai limiti, ve lo siete guadagnato. Tuttavia, se avete notato che il Todorant ha drasticamente migliorato la vostra vita — potete comunque acquistare l\'abbonamento dicendo così il miglior tipo di "Grazie". Non perderete mai lo stato di "Early adopter 🦄" — ma potrete sempre annullare l\'abbonamento. Vi ringrazio molto per l\'utilizzo di Todorant — e continuerò ad aggiungere nuove funzionalità che migliorano il prodotto e che hanno un effetto positivo su tutti noi. Buona fortuna!',
     earlyAdopterTextBonus:
@@ -1695,7 +1698,8 @@ export const messages = {
       signature: 'Nikita Kolmogorov, criador do Todorant',
       daysLeft: '(dias restantes: {daysLeft})',
       '5dollars': '$5/mês',
-      '50dollars': '$50/ano',
+      '36dollars': '$36/ano',
+      '150dollars': '$150 uma vez',
       success: 'Você se inscreveu com sucesso!',
       payment: {
         success:
@@ -1735,7 +1739,7 @@ export const messages = {
     activeText:
       '🎉 Muito obrigado por apoiar a Todorant! Pessoalmente, espero que a Todorant já tenha melhorado sua vida e continue melhorando no futuro! Seu suporte me permite trabalhar diariamente com Todorant e adicionar novos recursos, simplificando o trabalho e liberando seu tempo e recursos cognitivos. Muito obrigado novamente!',
     inactiveText:
-      '🐝 Parece que seu teste com Todorant chegou ao fim. Este é o momento embaraçoso em que você precisa decidir — se Todorant melhorou sua vida o suficiente para investir algum dinheiro com isso — e eu tenho que levá-lo para a decisão certa. Fico no auge da minha felicidade quando sou capaz de agregar valor às pessoas; e se Todorant puder melhorar sua vida, ficarei mais do que agradecido se você comprar a assinatura. São apenas US $ 5 / mês para produtividade ilimitada e mente livre. Cada centavo que ganhar com Todorant será gasto na melhoria do serviço. Ao apoiar a Todorant — você me permite um desenvolvimento independente e continuar melhorando o produto que nos beneficia todos os dias. Muito obrigado antecipadamente!',
+      '🐝 Parece que seu julgamento de Todorant chegou ao fim. O Todorant melhorou sua vida em pelo menos $5/mês? Espero bem que sim! Vou direto ao assunto.\n\nOferta comercial. Eu recebo: $5 por mês, $36 por ano (um desconto gritante de 40%) ou $150 uma vez. Você recebe: produtividade ilimitada e Todorant ilimitado como um bônus.\n\nO que você diz?',
     earlyAdopterText:
       '👏👏 — este sou eu aplaudindo você; você — o louco que concordou em experimentar o instrumento de produtividade cada vez maior, Todorant, entre os primeiros. Pode-se dizer que você é o milhar de ouro, cujo feedback moldou o Todorant desde o início. Você tem todos os direitos para usar o Todorant o quanto desejar — você nunca experimentará nenhum limite, você o conquistou. No entanto, se você notou que o Todorant melhorou drasticamente sua vida — você ainda pode comprar a assinatura, dizendo o melhor tipo de "obrigado". Você nunca perderá o status de "Early Adopter🦄" mas sempre poderá cancelar a assinatura. Muito obrigado por ainda usar o Todorant — e continuarei adicionando novos recursos para melhorar o produto que afeta positivamente todos nós. Boa sorte!',
     earlyAdopterTextBonus:
@@ -2021,7 +2025,8 @@ export const messages = {
       signature: 'Nikita Kolmogorov, creador de Todorant',
       daysLeft: '(días restantes: {daysLeft})',
       '5dollars': '$5/mes',
-      '50dollars': '$50/año',
+      '36dollars': '$36/año',
+      '150dollars': '$150 una vez',
       success: '¡Te has suscrito exitosamente!',
       payment: {
         success:
@@ -2054,7 +2059,7 @@ export const messages = {
     activeText:
       '🎉 ¡Muchas gracias por apoyar Todorant! ¡Personalmente espero que Todorant haya mejorado tu vida y que la siga mejorando en el futuro! Tu apoyo me permite trabajar en Todorant diariamente y agregar nuevas funciones que simplifican el trabajo y liberan tu tiempo y tus recursos cognitivos. De nuevo, ¡muchas gracias!',
     inactiveText:
-      '🐝 Parece que tu prueba de Todorant ha llegado al final. Este es el momento incómodo en el que tienes que decidir si Todorant ha mejorado tu vida lo suficiente como para invertir dinero en el sistema, y yo tengo que guiarte hacia la decisión correcta. Estoy en la cima de la felicidad cuando puedo aportar valor a la gente; y si Todorant pudo mejorar tu vida, estaré más que agradecido si compras la suscripción. La productividad ilimitada y la mente libre solo cuestan $5/mes. Cada centavo que gane en Todorant se gastará en mejorar el servicio. Al apoyar a Todorant usted me permite a mí, un desarrollador independiente, seguir mejorando el producto que nos beneficia a todos día a día. ¡Muchas gracias por adelantado!',
+      '🐝 Parece que tu prueba de Todorant ha llegado a su fin. ¿Ha mejorado Todorant tu vida en al menos 5$/mes? Espero que sí. Voy a ir al grano.\n\nOferta de intercambio. Recibo: 5$ al mes, 36$ al año (la friolera de un 40% de descuento) o 150$ de una sola vez. Tú recibes: productividad ilimitada y Todorant ilimitado como bono.\n\n¿Qué me dices?',
     earlyAdopterText:
       '👏👏 — este soy yo aplaudiéndoles; ustedes — los locos que aceptaron probar el instrumento de productividad cada vez mayor, Todorant, entre los primeros. Se puede decir que ustedes son el millar dorado, de quienes su retroalimentación ha estado formando Todorant desde el principio. Tienen todos los derechos para usar Todorant tanto como lo deseen: nunca experimentarán ningún límite, se lo han ganado. Sin embargo, si notaron que Todorant ha mejorado drásticamente su vida, aún pueden comprar la suscripción y decir el mejor tipo de "Gracias". Nunca perderán el estado "Primer adoptante 🦄 ", pero siempre podrán cancelar la suscripción. Muchas gracias por seguir usando Todorant, seguiré agregando nuevas funciones para mejorar el producto que nos afecta positivamente a todos. ¡Buena suerte!',
     earlyAdopterTextBonus:
