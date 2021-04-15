@@ -776,7 +776,7 @@ export const messages = {
     planningText:
       'Похоже, вам нужно заняться планированием! Пожалуйста, перераспределите оставшиеся задачи ниже для того, чтобы разблокировать секцию "Текущее", и для того, чтобы оставаться продуктивными. Удачи!',
     activeText:
-      '🎉 Огромное спасибо за поддержку Тудуранта! Я лично надеюсь, что Тудурант достаточно изменил вашу жизнь и будет помогать ее улучшать изо дня в день в будущем! Ваша поддержка помогает мне заниматься Тудурантом на постоянной основе и добавлять новые функции, упрощающие работу и освобождающие вам время и когнитивные ресурсы. Спасибо вам еще раз!',
+      '🎉 Огромное спасибо за поддержку Тудуранта! Я надеюсь, что Тудурант уже улучшил вашу жизнь и будет улучшать в будущем! Ваша поддержка позволяет мне улучшать Тудурант каждый день, добавляя новые функции и упрощая рабочий процесс!',
     inactiveText:
       '🐝 Похоже, ваш пробный период Тудуранта подошел к концу. Улучшил ли Тудурант вашу жизнь хотя бы на $5/месяц? Надеюсь, что да! Перейдем прямо к делу.\n\nДеловое предложение. Я получу: $5 в месяц, $36 в год (невероятная скидка в 40%) или $150 один раз. Вы получите: безграничную продуктивности и неограниченный Тудурант как бонус.\n\nЧто скажете?',
     earlyAdopterText:
@@ -1268,10 +1268,8 @@ export const messages = {
     completed: 'Виконано',
     planningText:
       'Схоже, вам треба зайнятись плануванням! Будь-ласка перерозподіліть невирішені завдання, щоб розблокувати розділ "Поточне" і для того, щоб залишатися продуктивними. Удачі!',
-    activeText:
-      '🎉 Спасибі Вам за підтримку Todorant! Я особисто сподіваюся, що Todorant уже покращив Ваше життя і продовжуватиме його покращувати в майбутньому! Підтримка дозволяє мені щодня працювати над Todorant та додавати нові функції, що спрощують роботу та звільняють Ваш час та Ваші ресурси для чогось корисного. Ще раз дякую!',
     inactiveText:
-      'Схоже, що ваш пробний період Тудуранта закінчився. Чи покращив Тудурант ваше життя хоча б на 5$/місяць? Сподіваюся що так! Отже до справи.\n\nДілова пропозиція. Я отримаю: 5$ в місяць, 36$ в рік (неймовірна знижка 40%) або ж 150$ прямо зараз. Ви отримаєте: безмежну продуктивність і Тудурант без обмежень в бонус.\n\nЩо скажете?',
+      '🐝 Схоже, що ваш пробний період Тудуранта закінчився. Чи покращив Тудурант ваше життя хоча б на 5$/місяць? Сподіваюся що так! Отже до справи.\n\nДілова пропозиція. Я отримаю: 5$ в місяць, 36$ в рік (неймовірна знижка 40%) або ж 150$ прямо зараз. Ви отримаєте: безмежну продуктивність і Тудурант без обмежень в бонус.\n\nЩо скажете?',
     earlyAdopterText:
       '👏👏 — це мої оплески Вам; Ви навіжені, хто погодився випробувати інструмент постійно зростаючої плідності Todorant, серед перших. Можна сказати, що Ви — золота тисяча, відгуки якої формували Todorant із самого початку. У Вас є всі права використовувати Todorant скільки завгодно — Ви ніколи не відчуєте жодних обмежень, Ви заробили це. Однак якщо Ви помітили, що Todorant значно покращив Ваше життя — Ви все одно можете придбати підписку, це найкращий спосіб сказати "Спасибі". Ви ніколи не втратите статус "Ранній користувач 🦄" — але завжди зможете скасувати підписку. Дякую Вам за те, що Ви все ще використовуєте Todorant — я продовжуватиму додавати нові можливості, покращуючи продукт, який позитивно впливає на всіх нас. Щасти!',
     earlyAdopterTextBonus:
@@ -1449,7 +1447,7 @@ export const messages = {
     planningText:
       'Sembra che tu abbia qualche programmazione da fare! Per favore, ridistribuisci i compiti in sospeso qui sotto per sbloccare la scheda "Corrente" e continuare ad essere produttivo. Buona fortuna!',
     activeText:
-      '🎉 Grazie mille per aver sostenuto Todorant! Personalmente spero che Todorant abbia già migliorato la tua vita e che continui a migliorarla in futuro! Il tuo sostegno mi permette di lavorare quotidianamente su Todorant e di aggiungere nuove funzionalità che semplificano il lavoro e liberano il tuo tempo e le tue risorse cognitive. Grazie mille, ancora una volta!',
+      '🎉 Grazie mille per sostenere Todorant! Spero che Todorant abbia già migliorato la tua vita e che continuerà a migliorarla in futuro! Il tuo supporto mi permette di migliorare Todorant ogni giorno, aggiungendo nuove funzionalità e semplificando i processi di lavoro!',
     inactiveText:
       "🐝 Sembra che la tua prova di Todorant sia giunta alla fine. Todorant ha migliorato la tua vita di almeno 5 dollari al mese? Spero proprio di sì! Vado subito al sodo.\n\nOfferta commerciale. Ricevo: 5$ al mese, 36$ all'anno (un enorme sconto del 40%) o 150$ una tantum. Voi ricevete: produttività illimitata e Todorant illimitato come bonus.\n\nChe ne dite?",
     earlyAdopterText:
@@ -1728,7 +1726,7 @@ export const messages = {
     },
     allDoneTitle: 'Parabéns!',
     allDoneText:
-      '🥳 Você Conseguiu! Todas as tarefas de hoje estão concluídas, para descansar ou, quem sabe, dançar um pouco 💃',
+      '🥳 Você Conseguiu! Todas as tarefas de hoje estão concluídas. Pode ir descansar ou, quem sabe, dançar um pouco 💃',
     noTodosTitle: 'Ao infinito!',
     noTodosText:
       'Você não tem nenhuma tarefa pra hoje. Se você quiser trabalhar — adicione uma nova tarefa ou pegue uma tarefa futura.',
@@ -1737,7 +1735,7 @@ export const messages = {
     planningText:
       'Parece que vc tem um planejamento a ser feito. Distribua as tarefas pendentes abaixo para desbloquear a guia "Atual" e continuar produtivo. Felicidades!',
     activeText:
-      '🎉 Muito obrigado por apoiar a Todorant! Pessoalmente, espero que a Todorant já tenha melhorado sua vida e continue melhorando no futuro! Seu suporte me permite trabalhar diariamente com Todorant e adicionar novos recursos, simplificando o trabalho e liberando seu tempo e recursos cognitivos. Muito obrigado novamente!',
+      '🎉 Muito obrigado por apoiar a Todorant! Espero que a Todorant já tenha melhorado sua vida e que continue a melhorar no futuro! Seu apoio me permite melhorar a Todorant diariamente, acrescentando novas funcionalidades e simplificando os processos de trabalho!',
     inactiveText:
       '🐝 Parece que seu julgamento de Todorant chegou ao fim. O Todorant melhorou sua vida em pelo menos $5/mês? Espero bem que sim! Vou direto ao assunto.\n\nOferta comercial. Eu recebo: $5 por mês, $36 por ano (um desconto gritante de 40%) ou $150 uma vez. Você recebe: produtividade ilimitada e Todorant ilimitado como um bônus.\n\nO que você diz?',
     earlyAdopterText:
@@ -1825,6 +1823,209 @@ export const messages = {
         'Você ainda não tem atribuições. Compartilhe o link acima com as pessoas que você deseja designar atribuições.',
       pickDelegateField: 'Atribuir',
     },
+  },
+  ro: {
+    encryption: {
+      info:
+        'Folosiți această secțiune cu atenție maximă! Criptarea nu va funcționa dacă nu veți introduce o parolă. După finalizare vor exista două tipuri de task-uri: criptate și necriptate. Toate task-urile noi vor fi criptate. Task-urile vechi pot fi criptate făcând clic pe butonul de mai jos. Dacă vă pierdeți parola, va fi imposibilă recuperarea task-urilor.',
+      switch: 'Criptarea task-ului',
+      encryptAllButton: 'Criptează tot',
+      decryptAllButton: 'Decriptează tot',
+      confirm:
+        'Sunteți sigur că doriți să criptați toate task-urile cu o parolă? Veți putea decripta datele cu aceeași parolă. Dacă veți pierde parola, nu veți reuși să decriptați datele!',
+      disableConfirm:
+        'Sunteți sigur că doriți să eliminați parola și să dezactivați criptarea? Această acțiune nu va decripta task-urile criptate.',
+      errorDecrypting: 'Parolă de decriptare incorectă',
+    },
+    search: 'Căutare',
+    qr: {
+      code: 'Cod QR',
+      description:
+        'Utilizați acest cod QR pentru a vă conecta la contul dvs. pe dispozitivele mobile. Această imagine este o parolă, nu o da nimănui!',
+    },
+    breakdown: {
+      request:
+        'Se pare că amânați acest task prea des. Vă rugăm să îl împărțiți în task-uri mai mici, nu îl mai puteți amâna. Crede-mă, acest lucru te va ajuta să îndeplinești sarcina!',
+      button: 'Împarte',
+    },
+    warning: 'Atenție',
+    hashtags: {
+      title: 'Hashtag-uri',
+    },
+    supportAlert: {
+      title: 'Suport',
+    },
+    loginMobile: {
+      telegram: {
+        idHint: 'ID Telegram',
+        loginButton: 'Intrați',
+        noCredentialsError: 'Vă rugăm, indicați ID-ul Telegram',
+        notAllowedError: 'Cererea de logare a fost respinsă',
+      },
+    },
+    noReport: {
+      title: 'Date insuficiente',
+    },
+    report: {
+      title: 'Raport',
+      tasksCompleted: 'Task-uri finalizate',
+      frogsCompleted: 'Broaște finalizate',
+      share: 'Distribuiți prietenilor acest raport!',
+      hashtag: 'Hashtag',
+      shareButton: 'Distribuie',
+      url: 'Link permanent către acest raport',
+      shareMessage:
+        'Trageți o privire la raportul meu de productivitate în Todorant!',
+      call: 'Doriți să vă alăturați?',
+      callButton: 'Alătură-te lui Todorant',
+      startDate: 'Data de început',
+      endDate: 'Data de sfârșit',
+    },
+    title: 'Todorant',
+    cookie: {
+      button: 'Am înțeles!',
+      message: '🍪 Acest site web folosește cookies.',
+    },
+    home: {
+      texts: {
+        contact: ['Au mai rămas întrebări? Scrieți-mi la', '. Mulțumesc.'],
+      },
+      signIn: 'Intrați',
+      facebook: 'Intrați cu Facebook',
+      google: 'Intrați cu Google',
+      privacy: 'Politica de confidențialitate',
+      feedback: {
+        title: 'Ce zic utilizatorii?',
+        reviews: [
+          {
+            name: 'Sergiu Romanov',
+          },
+          {
+            name: 'Dinislam Sad',
+          },
+          {
+            name: 'Aleksei Kaut',
+          },
+          {
+            name: 'Anton',
+          },
+          null,
+          null,
+          {
+            name: 'Vladimir Dubenco',
+          },
+          {
+            name: 'Maksim Alekseyevich',
+            username: 'MMAradiology',
+          },
+          {
+            name: 'Kiku Reise',
+          },
+        ],
+      },
+    },
+    menu: {
+      darkMode: {
+        on: 'Tema întunecată: pornită',
+        off: 'Tema întunecată: deact.',
+      },
+      logout: 'Ieșiți',
+    },
+    support:
+      'Ceva nu e clar? Scrieți-mi la <a target="_blank" href="mailto:n@borodutch.com">n@borodutch.com</a>',
+    errors: {
+      login: {
+        facebook: 'Nu s-a reușit conectarea prin Facebook',
+        google: 'Nu s-a reușit conectarea prin Google',
+        telegram: 'Nu s-a reușit conectarea prin Telegram',
+      },
+      internal: 'Eroare internă de server',
+      loadTodos: 'Nu s-a reușit încărcarea task-urilor',
+      todo: {
+        textLenght: 'Task-urile trebuie să conțină text',
+      },
+      invalidForm: 'Vă rugăm, completați câmpurile necesare',
+      report: 'Nu s-a reușit încărcarea raportului',
+    },
+    close: 'Închide',
+    notFound: 'Pagina nu a fost găsită',
+    todo: {
+      create: {
+        title: 'Adăugă task-uri',
+        text: 'Textul task-ului',
+        placeholder: 'Task-ul',
+        frog: 'Aceasta e o broască!',
+        date: 'Ziua exactă',
+        month: 'Sau luna',
+      },
+    },
+    cancel: 'Anulează',
+    save: 'Salvează',
+    delete: 'Șterge',
+    current: 'Curent',
+    planning: 'Planificare',
+    howto: {
+      bonus: {
+        title: 'Funcții bonus',
+      },
+    },
+    skipped: 'Omis',
+    subscription: {
+      title: 'Abonament',
+      statusText: 'Starea abonamentului: {status}',
+      signature: 'Nichita Kolmogorov, creatorul Todorant',
+      daysLeft: '(au rămas zile: {daysLeft})',
+      '5dollars': '$5/lună',
+    },
+    allDoneTitle: 'Felicitări!',
+    allDoneText:
+      '🥳 Ați reușit! Toate task-urile pentru azi sunt finalizate, vă puteți odihni — fie un pic să dansați 💃',
+    noTodosTitle: 'Înainte!',
+    noTodosText:
+      'Pentru azi dvs. nu aveți task-uri. Doriți să lucrați — adăugați task-uri noi pentru azi fie luați task-uri din alte zile.',
+    addTodoTime: 'Timpul exact',
+    completed: 'Finalizat',
+    planningText:
+      'Aparent, trebuie să realizați o planificare! Vă rog, redistribuiți task-urile rămase de mai jos pentru a debloca secțiunea "Curent" și pentru a rămâne productiv. Succes!',
+    earlyAdopterText:
+      '👏👏 — bat din palme din picioare; sunteți nebuni, care au fost de acord să încerce instrumentul de productivitate personală Todorant printre primii. Putem spune că sunteți cei o mie de utilizatori de aur, pe baza recenziilor cărora a fost creat Todorant. Aveți tot dreptul să utilizați Tudurant cât doriți — nu vor exista niciodată restricții pentru acest cont, chiar ați meritat. Cu toate acestea, dacă observați că Todorant v-a schimbat dramatic viața spre bine, puteți achiziționa în continuare un abonament, spunând astfel un simplu, dar foarte important pentru mine: „Mulțumesc”. Nu veți pierde niciodată statutul de „Adoptator timpuriu 🦄” și vă puteți anula abonamentul oricând. Vă mulțumesc foarte mult pentru că continuați să utilizați Todorant — și voi continua să adaug funcții frumoase acestui instrument care ne face pe fiecare dintre noi mai buni. Mult noroc!',
+    earlyAdopterTextBonus:
+      '🤗 Uau! Aparent fie Todorant, fie eu v-am ajutat personal atât de mult încât, chiar având posibilitatea de a folosi Todorant gratuit, ați decis să mă susțineți. Sunt frapat și cu plăcere aș bea o cafea cu dvs. Scrieți-mi fie în telegram (@borodutch), fie prin e-mail — trebuie doar să faceți clic pe numele meu de mai jos. Mulțumesc mult! Este greu de imaginat cât de importantă este contribuția voastră pentru mine!',
+    trialText:
+      '💪 Bine ați venit la Tudurant! Din momentul înregistrării, aveți exact 30 de zile pentru a încerca sistemul și a vedea dacă vi se potrivește. După 30 de zile, veți avea în continuare acces la sarcinile existente, dar nu veți putea adăuga altele noi. Dacă doriți, puteți să vă abonați chiar înainte de sfârșitul perioadei de probă de 30 de zile. Sunt sigur că împreună cu Todorant veți putea atinge noi orizonturi în propria productivitate!',
+    rules: [
+      'Îndată ce aveți o sarcină (primiți un e-mail, un apel, un mesaj sau pur și simplu vedeți ceva interesant care trebuie adăugat în lista dvs. de sarcini) — creați imediat o sarcină. Nu așteptați, veți uita de ea dacă nu o notați.',
+      'Sarcinile trebuie să fie întotdeauna un îndemn la acțiune și definite cât mai clar posibil. Dacă sarcina durează mai puțin de două minute, faceți-o imediat și creați-o în lista sarcinilor finalizate.',
+      'Când creați o sarcină, specificați data sau luna exactă. Nu puteți selecta luna curentă fără o anumită dată. Acest lucru se face pentru a ameliora stresul creierului. Dacă aveți încredere în sistem și adăugați tot ce aveți nevoie la datele potrivite, atunci veți finaliza sarcinile la momentul potrivit. O cantitate imensă de voință este irosită din cauza stresului constant, cum ar fi „lucrul pe care trebuie să-l fac, dar nu-mi amintesc exact ce este acel lucru”. Învățați să aveți încredere și să vă relaxați. \\n',
+      'Primul lucru pe care va trebui să îl faceți la începutul fiecărei luni este planificarea. Luați toate sarcinile pentru luna curentă și distribuiți-le pe zile. Acest lucru vă permite să filtrați sarcinile care nu mai sunt relevante și vă ajută să rămâneți liniștiți, conștientizând clar ce trebuie să faceți luna aceasta.',
+      'Primul lucru pe care îl veți realiza în fiecare dimineață este planificarea. Aruncați o privire la secțiunea „Planificare”. Puteți face totul? Împrăștiați sarcinile pe care nu le puteți face astăzi pentru alte zile. De asemenea, împrăștiați sarcinile neterminate din zilele anterioare.',
+      'Cu excepția cazurilor extreme, nu priviți niciodată secțiunea de planificare după terminarea procesului de planificare. Vă va fi mult mai ușor din punct de vedere psihologic să vă concentrați pe o singură sarcină la un moment dat, așa că priviți doar la secțiunea "Curent". Ai încredere în sistem, ține minte totul. Lucrați și relaxați-vă creierul.',
+      'În secțiunea "Curent", există întotdeauna cel mult o sarcină pe care ar trebui să vă concentrați — nimic altceva. Puteți avea mai multe sarcini pe zi, numărul sarcinilor și progresul sunt afișate pentru comfortul dumneavoastră. Nu puteți sări între sarcini — trebuie să lucrați într-un mod liniar, realizând câte o sarcină la un moment dat.',
+      'Broaștele — reprezintă un tip special de sarcină pe care nu doriți să o faceți. De obicei, acestea sunt sarcini pe care nu le faceți luni de zile sau chiar ani. Tudurant vă face să vă ocupați de broaște în primul rând în fiecare zi. Dimineața, rezervele voastre sunt suficient de mari pentru a face față și celor mai neplăcute sarcini. Iar după ce învingeți broasca, veți primi o doză suficientă de fericire pentru a străluci cu zâmbet toată ziua. Veți fi mândru de dvs. că în sfârșit reușiți să doborâți aceste "broaște".',
+      'Vi se permite să săriți peste sarcina curentă — dar faceți-o cât mai puțin posibil. Dacă nu puteți finaliza o sarcină și o redistribuiți de două ori, aceasta devine o broască.',
+      'Dacă sarcina curentă este prea grea, descompuneți-o într-o listă de sarcini mai mici. După ce ați împărțit o sarcină în subtask-uri, aceasta este marcată ca finalizată.',
+      'Adăugați cât mai multe informații importante la sarcini. Adăugați linkuri către e-mailuri (Gmail vă permite să faceți acest lucru), site-uri web, note (ca evernote), documente (cum ar fi dropbox), lăsați numere de telefon sau adăugați orice informații care ar putea fi importante pentru rezolvarea unei probleme. Todorant nu ar trebui să fie principalul depozit și catalogul datelor dvs., ci locul în care datele necesare pentru sarcini să fie stocate nemijlocit împreună cu acele sarcini.',
+      'Simțiți-vă liber să vă alăturați grupului nostru în Telegram pentru a vă împărtăși experiențele despre cum să fiți mai productivi — @todorant_feedback! Feedback-ul dvs. cu privire la activitatea serviciului — sugestii, urări și reclamații — este foarte binevenit.',
+      'Mutați activitățile din pagina "Planificare" pentru a le reordona. Dacă doriți să creați o sarcină pentru o anumită săptămână, trebuie doar să o adăugați pentru luni și să o redistribuiți-o luni dimineața, când realizați planificarea.',
+      'În Todorant nu există și nu vor exista niciodată sarcini repetitive automate — singurul lucru pe care ele îl induc — este crearea unei atmosfere de frică, acumularea de sarcini neîmplinite. Dacă trebuie să adăugați o sarcină repetitivă — introduceți-o manual de fiecare dată, creierul vă va mulțumi pentru o sarcină gândită.',
+      'În Todorant nu există un concept de „Proiecte”, întrucât s-a dovedit a fi demotivant, unele dosare pur și simplu nu se deschid niciodată. Proiectele „Fitness” și „Auto-dezvoltare” spun salut. Folosiți în schimb #hashtag-uri.',
+      'Broaștele se află mereu în vârful listei.',
+      'În Todorant nu există memento-uri de sarcină cu orele exacte. Cu toate acestea, puteți activa integrarea cu Google Calendar, astfel încât el să vă bombardeze cu notificări în loc de Todorant.',
+    ],
+    earlyAdopter: 'Adoptator timpuriu 🦄',
+    active: 'Activă',
+    inactive: 'Inactivă',
+    trial: 'Probă',
+    weekday1: 'Luni',
+    weekday2: 'Marți',
+    weekday3: 'Miercuri',
+    weekday4: 'Joi',
+    weekday5: 'Vineri',
+    weekday6: 'Sâmbăta',
+    weekday0: 'Duminica',
+    introTitle: 'Bine ați venit!',
+    introBack: 'Înainte!',
+    back: 'Înapoi',
   },
   de: {
     search: 'Suche',
@@ -2057,7 +2258,7 @@ export const messages = {
     planningText:
       '¡Parece que tienes un poco de planeación por hacer! Por favor, redistribuya las tareas pendientes para desbloquear la pestaña "Actual" y para continuar siendo productivo. ¡Bien!',
     activeText:
-      '🎉 ¡Muchas gracias por apoyar Todorant! ¡Personalmente espero que Todorant haya mejorado tu vida y que la siga mejorando en el futuro! Tu apoyo me permite trabajar en Todorant diariamente y agregar nuevas funciones que simplifican el trabajo y liberan tu tiempo y tus recursos cognitivos. De nuevo, ¡muchas gracias!',
+      '🎉 ¡Muchas gracias por apoyar a Todorant! ¡Espero que Todorant haya mejorado tu vida ya y siga haciéndolo mejor en el futuro! ¡Tu apoyo me permite mejorar Todorant diariamente, añadiendo nuevas características y simplificando los procesos de trabajo!',
     inactiveText:
       '🐝 Parece que tu prueba de Todorant ha llegado a su fin. ¿Ha mejorado Todorant tu vida en al menos 5$/mes? Espero que sí. Voy a ir al grano.\n\nOferta de intercambio. Recibo: 5$ al mes, 36$ al año (la friolera de un 40% de descuento) o 150$ de una sola vez. Tú recibes: productividad ilimitada y Todorant ilimitado como bono.\n\n¿Qué me dices?',
     earlyAdopterText:
