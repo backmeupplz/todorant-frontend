@@ -91,7 +91,7 @@ export default class DelegationStore extends VuexModule {
       this.setToken(objects.token)
       await this.fetchDelegators()
     } catch (err) {
-      console.log(err)
+      console.error(err)
     } finally {
       completeSync()
     }
