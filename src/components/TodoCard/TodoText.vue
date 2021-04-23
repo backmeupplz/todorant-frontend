@@ -1,9 +1,8 @@
 <template lang="pug">
 .text-container
-  p(v-if='todo.delegator')
-    span(v-if='todo.delegator.name') {{ todo.delegator.name }}
-    span(v-if='!todo.delegator.name') {{ $t("to") }} {{ todo.user.name }}
-    span(v-if='delegateScreen') : {{ todo.monthAndYear }}{{ todo.date ? `-${todo.date}` : "" }}
+  p(v-if='!!todo.delegator')
+    span.font-weight-bold(v-if='!isDelegation') {{ $t("from") }}: {{ todo.delegator.name }}
+    span.font-weight-bold(v-if='isDelegation') {{ todo.monthAndYear }}{{ todo.date ? `-${todo.date}` : "" }}
   span(v-if='!!todo.frog') 🐸{{ " " }}
   span(v-if='!!todo.time') {{ todo.time }}{{ " " }}
   span(
@@ -42,10 +41,14 @@ export default class TodoText extends Vue {
   @Prop({ required: true }) todo!: Todo
   @Prop({ required: true }) text!: string
   @Prop({ required: true }) errorDecrypting!: boolean
-  @Prop() delegateScreen?: boolean
+  @Prop() type?: string
 
   @AppStore.State dark!: boolean
   @TagsStore.State tagColors!: TagColors
+
+  get isDelegation() {
+    return this.type === 'delegatedByMe' || this.type === 'delegatedToMe'
+  }
 
   colorForTag(tag: string) {
     return this.tagColors[tag] || (this.dark ? '#64B5F6' : '#1E88E5')

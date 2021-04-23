@@ -28,8 +28,6 @@ class SocketManager {
   }
 
   constructor() {
-    this.connect()
-
     socketIO.on('connect', this.onConnect)
     socketIO.on('disconnect', this.onDisconnect)
 
@@ -129,6 +127,7 @@ class SocketManager {
     socketsStore.setAuthorized(true)
     this.pendingAuthorization?.res()
     this.pendingAuthorization = undefined
+    this.globalSync()
   }
 
   globalSync = () => {

@@ -29,7 +29,8 @@
           TodoText(
             :todo='todo',
             :text='text',
-            :errorDecrypting='errorDecrypting'
+            :errorDecrypting='errorDecrypting',
+            :type='type'
           )
         .footer-container(v-if='!editable')
           TodoCardModifiers(:todo='todo', :todoOutstanding='todoOutstanding')
@@ -40,6 +41,7 @@
             :addTodo='addTodo',
             :completeTodo='completeTodo',
             :edit='edit',
+            :acceptTodo='acceptTodo',
             :todo='todo',
             :loading='loading',
             :incompleteTodosCount='incompleteTodosCount',
@@ -115,6 +117,7 @@ export default class TodoCard extends Vue {
   @Prop({ required: true }) addTodo!: (hotkey?: boolean) => void
   @Prop({ required: true }) completeTodo!: (hotkey?: boolean) => void
   @Prop({ required: true }) edit!: () => void
+  @Prop() acceptTodo?: () => void
   @Prop() skipTodo?: () => void
   @Prop() moveTodoToToday?: () => void
   @Prop() repeat?: () => void
@@ -214,7 +217,11 @@ export default class TodoCard extends Vue {
   }
 
   get todoOutstanding() {
-    if (this.todo.completed) {
+    if (
+      this.todo.completed ||
+      this.type === 'delegatedByMe' ||
+      this.type === 'delegatedToMe'
+    ) {
       return false
     }
     const today = api.getToday()

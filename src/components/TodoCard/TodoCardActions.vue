@@ -28,7 +28,11 @@
     v-if='type === "current" && incompleteTodosCount > 1 && !todo.frog && !todo.time',
     :small='type === "planning" || type === "done"'
   )
-  v-tooltip.ml-4(:max-width='300', bottom, v-if='type !== "done"')
+  v-tooltip.ml-4(
+    :max-width='300',
+    bottom,
+    v-if='type !== "done" && type !== "delegatedByMe" && type !== "delegatedToMe"'
+  )
     template(v-slot:activator='{ on }')
       IconButton(
         :click='() => addTodo()',
@@ -64,6 +68,12 @@
     color='#4BB34B',
     :small='type === "planning" || type === "done"'
   )
+  v-btn(
+    v-if='type === "delegatedToMe"',
+    text,
+    color='#4BB34B',
+    @click='acceptTodo'
+  ) {{ $t("accept") }}
 </template>
 
 <script lang="ts">
@@ -86,6 +96,7 @@ export default class TodoCardActions extends Vue {
   @Prop({ required: true }) addTodo!: (hotkey?: boolean) => void
   @Prop({ required: true }) completeTodo!: (hotkey?: boolean) => void
   @Prop({ required: true }) edit!: () => void
+  @Prop() acceptTodo?: () => void
   @Prop() skipTodo?: () => void
   @Prop() moveTodoToToday?: () => void
   @Prop() repeat?: () => void
