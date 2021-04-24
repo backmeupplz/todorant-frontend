@@ -1,7 +1,7 @@
 <template lang="pug">
-.header-container
-  .header-title
-    span {{ title }}
+.header-container.test
+  .header-title.test
+    span.test {{ title }}
   v-btn(
     v-if='!delegation && todoSection.title.length > 7',
     icon,
@@ -64,6 +64,8 @@ export default class PlanningHeader extends Vue {
 
 <style scoped>
 .header-container {
+  max-width: 100%;
+  overflow: hidden;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -78,7 +80,8 @@ export default class PlanningHeader extends Vue {
   font-size: 15px;
   line-height: 17px;
   letter-spacing: -0.24px;
-
+  text-overflow: ellipsis;
+  overflow: hidden;
   color: #ff641a;
   margin-right: 4px;
 }
