@@ -121,7 +121,8 @@ v-container(style='maxWidth: 1000px;')
         @click-item='editEvent',
         @click-date='clickDate',
         @drop-on-date='moveDate',
-        :weekStyles='weekStyles'
+        :weekStyles='weekStyles',
+        :todayDate='todayDate'
       )
         calendar-view-header(
           v-if='!editable',
@@ -344,6 +345,12 @@ export default class TodoList extends Vue {
 
   get shouldFallbackDraggable() {
     return navigator.userAgent.toLowerCase().indexOf('safari') > -1
+  }
+
+  get todayDate() {
+    return this.startTimeOfDay
+      ? getDateWithStartTimeOfDay(this.startTimeOfDay)
+      : new Date()
   }
 
   noMoreTodos = false
@@ -598,10 +605,7 @@ export default class TodoList extends Vue {
     }
     this.loading = true
     try {
-      const now = this.startTimeOfDay
-        ? getDateWithStartTimeOfDay(this.startTimeOfDay)
-        : new Date()
-      const today = api.getStringFromDate(now)
+      const today = api.getStringFromDate(this.todayDate)
       const monthAndYear = today.substr(0, 7)
       const date = today.substr(8)
       todo.monthAndYear = monthAndYear
@@ -633,10 +637,17 @@ export default class TodoList extends Vue {
       if (todo.completed) {
         await api.undoTodo(user, todo)
       } else {
-        await api.completeTodo(user, todo)
+        const { incompleteFrogsExist } = await api.completeTodo(
+          user,
+          todo,
+          this.startTimeOfDay
+        )
         if (todo.frog) {
           await playSound(Sounds.levelUp)
         } else {
+          if (incompleteFrogsExist) {
+            serverBus.$emit('violationFrogRules')
+          }
           await playSound(Sounds.taskDone)
         }
         this.tryConfetti()

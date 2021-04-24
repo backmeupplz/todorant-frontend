@@ -1,0 +1,83 @@
+.todo-form__textarea {
+  &--date {
+    & .v-input__slot {
+      padding-left: 40px !important;
+      background-image: url("../../assets/icons/calendar.svg");
+      background-position: 10px center;
+    }
+  }
+
+  &--time {
+    & .v-input__slot {
+      padding-left: 40px !important;
+      background-image: url("../../assets/icons/clock.svg");
+      background-position: 10px center;
+    }
+  }
+
+  &.v-input--is-focused .v-input__slot {
+    border-color: #3366FF !important;
+  }
+
+  & .v-input__slot {
+    border: 1px solid #DDE2E5;
+    padding: 5px 10px;
+    border-radius: 16px;
+
+  &::before, &::after {
+      border: 0 !important;
+    }
+  }
+
+  &.theme--dark .v-input__slot {
+    border-color: #4D5259;
+  }
+
+  &.error--text .v-input__slot {
+    border-color: #FF3A3A !important;
+  }
+
+  & .v-label--active {
+    display: none;
+  }
+
+  & textarea {
+    line-height: 32px !important;
+  }
+
+  & textarea, & .v-label {
+    font-size: 14px !important;
+  }
+}
+
+.todo-form__select {
+  & .v-input--switch__track {
+    top: 2px !important;
+    height: 21px !important;
+
+    &.primary--text {
+      color: #FF641A !important;
+      opacity: 0.8 !important;
+    }
+  }
+  & .v-input--switch__thumb, &.primary--text .v-input--switch__thumb {
+    color: white !important;
+  }
+}
+
+.md-mr {
+  margin-right: 10px !important;
+}
+
+.md-ml {
+  margin-left: 10px !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .md-mr {
+    margin-right: 0px !important;
+  }
+  .md-ml {
+    margin-left: 0px !important;
+  }
+}

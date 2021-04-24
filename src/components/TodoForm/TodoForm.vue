@@ -1,5 +1,5 @@
 <template lang="pug">
-.px-4
+.todo-form-content
   v-textarea(
     clearable,
     :label='$t("todo.create.text")',
@@ -12,7 +12,7 @@
     auto-grow,
     no-resize,
     rows='1',
-    :class='filteredTags.length ? "pb-2" : "pb-4"',
+    :class='"todo-form__textarea " + (filteredTags.length ? "pb-2" : "pb-4")',
     :disabled='todo && todo.encrypted && (errorDecrypting(todo) || !$store.state.UserStore.password)',
     :autofocus='shouldAutofocus'
   )
@@ -29,11 +29,10 @@
     v-col(cols='12', md='6')
       v-menu(v-model='dateMenu', :close-on-content-click='false', min-width=0)
         template(v-slot:activator='{ on }')
-          v-text-field(
+          v-text-field.todo-form__textarea.todo-form__textarea--date.md-mr(
             clearable,
             readonly,
             :label='$t("todo.create.date")',
-            prepend-icon='event',
             v-on='on',
             v-model='todo.date',
             :rules='dateAndMonthRules'
@@ -49,11 +48,10 @@
     v-col(cols='12', md='6')
       v-menu(v-model='monthMenu', :close-on-content-click='false', min-width=0)
         template(v-slot:activator='{ on }')
-          v-text-field(
+          v-text-field.todo-form__textarea.todo-form__textarea--date.md-ml(
             clearable,
             readonly,
             :label='$t("todo.create.month")',
-            prepend-icon='event',
             v-on='on',
             v-model='todo.monthAndYear',
             :rules='dateAndMonthRules'
@@ -72,11 +70,10 @@
     )
       v-menu(v-model='timeMenu', :close-on-content-click='false', min-width=0)
         template(v-slot:activator='{ on }')
-          v-text-field(
+          v-text-field.todo-form__textarea.todo-form__textarea--time.md-mr(
             clearable,
             readonly,
             :label='$t("addTodoTime")',
-            prepend-icon='access_time',
             v-on='on',
             v-model='todo.time'
           )
@@ -90,17 +87,26 @@
           v-card-actions
             v-spacer
             v-btn(text, color='blue', @click='timeMenu = false') Close
-  v-row(no-gutters)
+  v-row.pt-4(no-gutters)
     v-col(cols='12', md='6')
-      v-switch(:label='$t("todo.create.frog")', v-model='todo.frog')
+      v-switch.todo-form__select(
+        :label='$t("todo.create.frog")',
+        v-model='todo.frog'
+      )
     v-col(cols='12', md='6')
-      v-switch(:label='$t("completed")', v-model='todo.completed')
+      v-switch.todo-form__select(
+        :label='$t("completed")',
+        v-model='todo.completed'
+      )
     v-col(
       v-if='!editTodo && (showMoreByDefault || moreShown || todo.time)',
       cols='12',
       md='6'
     )
-      v-switch(:label='$t("todo.create.goFirst")', v-model='todo.goFirst')
+      v-switch.todo-form__select(
+        :label='$t("todo.create.goFirst")',
+        v-model='todo.goFirst'
+      )
     v-col(
       v-if='!editTodo && delegates.length && (showMoreByDefault || moreShown || todo.time)',
       cols='12',
@@ -393,7 +399,8 @@ export default class TodoForm extends Vue {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import 'TodoForm';
 .v-input {
   padding: 0;
   margin: 0;

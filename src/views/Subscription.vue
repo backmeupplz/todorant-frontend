@@ -9,7 +9,7 @@ v-dialog(
     v-card-title {{ $t("subscription.title") }}
     v-card-text
       p {{ $t("subscription.statusText", { status: subscriptionStatusText }) }}
-      p {{ subscriptionDescriptionText }}
+      p(v-for='text in subscriptionDescriptionText') {{ text }}
       p(v-if='subscriptionIdExists && subscriptionStatus === "earlyAdopter"') {{ $t("earlyAdopterTextBonus") }}
       p(align='right')
         | —
@@ -20,7 +20,11 @@ v-dialog(
           color='primary',
           :loading='loading',
           @click='redirectToPurchase("yearly")'
-        ) {{ $t("subscription.50dollars") }}
+        ) {{ $t("subscription.36dollars") }}
+        v-btn.ma-2(
+          :loading='loading',
+          @click='redirectToPurchase("perpetual")'
+        ) {{ $t("subscription.150dollars") }}
     v-card-actions.d-flex.flex-column(v-if='this.$vuetify.breakpoint.xsOnly')
       v-btn(
         v-if='subscriptionIdExists',
@@ -62,7 +66,6 @@ import Component from 'vue-class-component'
 import { i18n } from '@/plugins/i18n'
 import { daysBetween } from '@/utils/daysBetween'
 import * as api from '@/utils/api'
-import { serverBus } from '@/main'
 import { logEvent } from '@/utils/logEvent'
 import { Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
@@ -109,7 +112,7 @@ export default class Subscription extends Vue {
     }
   }
   get subscriptionDescriptionText() {
-    return i18n.t(`${this.subscriptionStatus}Text`)
+    return (i18n.t(`${this.subscriptionStatus}Text`) as string).split('\n\n')
   }
 
   async redirectToPurchase(plan: api.Plan) {
