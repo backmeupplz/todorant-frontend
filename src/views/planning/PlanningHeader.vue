@@ -1,7 +1,7 @@
 <template lang="pug">
-.header-container.test
-  .header-title.test
-    span.test {{ title }}
+.header-container
+  .header-title
+    span {{ title }}
   v-btn(
     v-if='!delegation && todoSection.title.length > 7',
     icon,
