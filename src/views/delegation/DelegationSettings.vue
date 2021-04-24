@@ -30,7 +30,7 @@ v-dialog(
         v-for='(delegate, i) in delegates',
         :key='i'
       )
-        span {{ delegate.name }}
+        span.delegation-name {{ delegate.name }}
         v-btn.ml-2(icon, small)
           v-icon(
             small,
@@ -46,7 +46,7 @@ v-dialog(
         v-for='(delegator, i) in delegators',
         :key='i'
       )
-        span {{ delegator.name }}
+        span.delegation-name {{ delegator.name }}
         v-btn.ml-2(icon, small)
           v-icon(
             small,
@@ -150,5 +150,8 @@ export default class DelegateSettings extends Vue {
 }
 .title {
   overflow-wrap: anywhere;
+}
+.delegation-name {
+  overflow: hidden;
 }
 </style>
