@@ -3,7 +3,7 @@
   .header-title
     span {{ title }}
   v-btn(
-    v-if='todoSection.title.length > 7',
+    v-if='!delegation && todoSection.title.length > 7',
     icon,
     @click.stop='addTodoWithDate(todoSection.title)',
     :loading='loading',
@@ -27,6 +27,7 @@ export default class PlanningHeader extends Vue {
   @Prop({ required: true }) getPanels!: () => number[]
   @Prop({ required: true }) setPanels!: (panels: number[]) => void
   @Prop({ required: true }) panelIndex!: number
+  @Prop() delegation?: boolean
 
   get panels() {
     return this.getPanels()
@@ -48,7 +49,7 @@ export default class PlanningHeader extends Vue {
 
   get title() {
     let result = this.todoSection.title
-    if (this.todoSection.title.length > 7) {
+    if (!this.delegation && this.todoSection.title.length > 7) {
       result = `${result} ${i18n.t(
         this.weekdayFromTitle(this.todoSection.title)
       )}`

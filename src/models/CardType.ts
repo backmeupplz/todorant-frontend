@@ -4,4 +4,6 @@ export enum CardType {
   current = 'current',
   breakdown = 'breakdown',
   delegation = 'delegation',
+  delegatedByMe = 'delegatedByMe',
+  delegatedToMe = 'delegatedToMe',
 }

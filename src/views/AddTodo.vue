@@ -265,7 +265,7 @@ export default class AddTodo extends Vue {
         !todo ||
         !todo.text ||
         !todo.text.trim() ||
-        (!todo.monthAndYear && !todo.date && !todo.delegate)
+        (!todo.monthAndYear && !todo.date && !todo.delegator)
       ) {
         this.panel.push(i)
       }
@@ -284,7 +284,7 @@ export default class AddTodo extends Vue {
         this.todos.map((todo) => {
           const iTodo = { ...todo }
           iTodo.text = iTodo.text!.trim()
-          if (!!this.password && !iTodo.delegate) {
+          if (!!this.password && !iTodo.delegator) {
             iTodo.encrypted = true
             iTodo.text = encrypt(iTodo.text)
           }
@@ -357,7 +357,9 @@ export default class AddTodo extends Vue {
     todoTitleRaw.forEach((item) => {
       todoTitle += item.value
     })
-    return todoTitle.length > 100 ? todoTitle.substring(0, 100) + '...' : todoTitle
+    return todoTitle.length > 100
+      ? todoTitle.substring(0, 100) + '...'
+      : todoTitle
   }
 }
 </script>

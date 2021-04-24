@@ -7,7 +7,7 @@ class Database extends Dexie {
 
   constructor() {
     super('Database')
-    this.version(2).stores({
+    this.version(3).stores({
       delegates: '_id, name',
       delegators: '_id, name',
     })

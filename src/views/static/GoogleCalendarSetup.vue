@@ -34,7 +34,6 @@ export default class GoogleCalendarSetup extends Vue {
   @SnackbarStore.Mutation setSnackbarSuccess!: (message: string) => void
 
   async mounted() {
-    console.log(this.user, this.$route.query)
     if (!this.user) {
       return
     }

@@ -20,6 +20,16 @@ export default class DelegationStore extends VuexModule {
     this.token = token
   }
 
+  @Mutation
+  updateDelegates(delegates: User[]) {
+    this.delegates = delegates
+  }
+
+  @Mutation
+  updateDelegators(delegators: User[]) {
+    this.delegators = delegators
+  }
+
   @MutationAction({ mutate: ['token'] })
   async resetDelegateToken() {
     const token = await api.resetDelegateToken()
@@ -56,23 +66,32 @@ export default class DelegationStore extends VuexModule {
     return `${process.env.VUE_APP_WEBSITE}/invite/${this.token}`
   }
 
-  async onObjectsFromServer(
+  @Action
+  async onObjectsFromServer({
+    objects,
+    completeSync,
+  }: {
     objects: {
       delegates: User[]
       delegators: User[]
       token: string
-    },
+    }
     completeSync: () => void
-  ) {
+  }) {
     try {
       // Delegators
       await db.delegators.clear()
       await db.delegators.bulkAdd(objects.delegators)
+      await this.fetchDelegators()
       // Delegates
       await db.delegates.clear()
       await db.delegates.bulkAdd(objects.delegates)
+      await this.fetchDelegates()
       // Token
       this.setToken(objects.token)
+      await this.fetchDelegators()
+    } catch (err) {
+      console.error(err)
     } finally {
       completeSync()
     }

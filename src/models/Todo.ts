@@ -19,6 +19,7 @@ export interface Todo {
 
   order?: number
 
-  delegate?: User
+  user?: User
   delegator?: User
+  delegateAccepted?: boolean
 }
