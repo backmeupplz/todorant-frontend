@@ -115,7 +115,7 @@
       v-select(
         :items='delegatesItems',
         clearable,
-        v-model='todo.delegate',
+        v-model='todo.delegator',
         :label='$t("delegate.pickDelegateField")'
       )
   v-row.v-flex-row
@@ -287,7 +287,7 @@ export default class TodoForm extends Vue {
       return (
         !!todo.date ||
         !!todo.monthAndYear ||
-        !!todo.delegate ||
+        !!todo.delegator ||
         i18n.t('errors.todo.dateOrMonth')
       )
     },

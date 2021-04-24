@@ -86,7 +86,7 @@ export async function postTodos(user: User, todos: Partial<Todo>[]) {
           todoCopy.date = todo.date.substr(8)
         }
         todoCopy.encrypted =
-          !!(store as any).state.UserStore.password && !todoCopy.delegate
+          !!(store as any).state.UserStore.password && !todoCopy.delegator
         return todoCopy
       }),
       {
@@ -451,6 +451,18 @@ export async function getUnacceptedDelegated() {
   }
   return (
     await axios.get(`${base}/delegate/unaccepted`, {
+      headers: getHeaders(user),
+    })
+  ).data as Todo[]
+}
+
+export async function getDelegatedTodos() {
+  const user = (store as any).state.UserStore.user
+  if (!user) {
+    throw new Error('No user')
+  }
+  return (
+    await axios.get(`${base}/delegate/todos`, {
       headers: getHeaders(user),
     })
   ).data as Todo[]

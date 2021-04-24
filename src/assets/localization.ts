@@ -202,11 +202,14 @@ export const messages = {
       },
       list: {
         completed: 'Show completed',
+        delegated: 'Show the tasks that I delegated',
       },
       edit: {
         title: 'Edit',
       },
     },
+    to: 'To',
+    from: 'From',
     cancel: 'Cancel',
     save: 'Save',
     delete: 'Delete',
@@ -422,6 +425,7 @@ export const messages = {
       noDelegates:
         "You don't have any delegates yet. Ask for an invite link to become someone's delegator.",
       noDelegatedTasks: "You don't have any more newly delegated tasks.",
+      noDelegatedTasksTo: "You haven't delegated any tasks yet.",
       link: 'Delegate invite link',
       linkDescription:
         'Share this link only with the people you trust. People can become your delegators by following this link. Delegators will only see the tasks that they delegated to you.',
@@ -438,6 +442,7 @@ export const messages = {
         'Are you sure you want to delete this delegator? This delegator will no longer be able to delegate tasks to you.',
       pickDelegateField: 'Delegate',
       noDelegatorsShort: "You don't have any delegators yet",
+      noDelegatesShort: "You don't have any delegates yet",
     },
     epic: {
       intoEpic: 'Make an Epic',
@@ -698,11 +703,14 @@ export const messages = {
       },
       list: {
         completed: 'Показать завершенные',
+        delegated: 'Показать делегированные мной задачи',
       },
       edit: {
         title: 'Редактирование',
       },
     },
+    to: 'Для',
+    from: 'От',
     cancel: 'Отменить',
     save: 'Сохранить',
     delete: 'Удалить',
@@ -922,6 +930,7 @@ export const messages = {
         'У вас пока что нет людей, которым вы можете делегировать задачи. Получите ссылку-приглашение от человека, которому хотите начать делегировать задачи.',
       noDelegatedTasks:
         'Пока что у вас нет новых задач, которые вам делегировали.',
+      noDelegatedTasksTo: 'Пока что у вас нет задач, которые вы делегировали.',
       link: 'Ссылка-приглашение',
       linkDescription:
         'Делитесь этой ссылкой только с людьми, которым вы доверяете. Пройдя по этой ссылке, человек сможет начать делегировать вам задачи. Этот человек не сможет увидеть никакие задачи, кроме тех, которые делегировал вам.',
@@ -940,6 +949,8 @@ export const messages = {
       pickDelegateField: 'Делегировать',
       noDelegatorsShort:
         'У вас пока что нет людей, которые могут делегировать вам задачи',
+      noDelegatesShort:
+        'У вас пока что нет людей, которым вы можете делегировать задачи',
     },
     epic: {
       intoEpic: 'Сделать эпиком',

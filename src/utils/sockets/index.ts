@@ -28,8 +28,6 @@ class SocketManager {
   }
 
   constructor() {
-    this.connect()
-
     socketIO.on('connect', this.onConnect)
     socketIO.on('disconnect', this.onDisconnect)
 
@@ -48,7 +46,7 @@ class SocketManager {
       'delegate',
       () => undefined,
       (objects, _, completeSync) => {
-        return delegationStore.onObjectsFromServer(objects, completeSync)
+        return delegationStore.onObjectsFromServer({ objects, completeSync })
       }
     )
 
@@ -92,7 +90,7 @@ class SocketManager {
       socketIO.emit(
         'authorize',
         (store as any).state.UserStore.user?.token,
-        '1'
+        '2'
       )
     })
   }
@@ -129,6 +127,7 @@ class SocketManager {
     socketsStore.setAuthorized(true)
     this.pendingAuthorization?.res()
     this.pendingAuthorization = undefined
+    this.globalSync()
   }
 
   globalSync = () => {
