@@ -5,12 +5,19 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
 const TerserPlugin = require('terser-webpack-plugin')
 
-const isProd = process.env.VUE_APP_PRODUCTION === 'true'
+// This env property added by vue builder automatically
+const isProd = process.env.NODE_ENV === 'production'
 
-const plugins = [new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)]
+const plugins = []
+const optimization = {
+  minimize: false,
+  minimizer: [],
+}
 
-plugins.push(
-  new PrerenderSPAPlugin({
+if (isProd) {
+  // Plugins
+  const webpackPlugin = new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+  const prerender = new PrerenderSPAPlugin({
     staticDir: join(__dirname, 'dist'),
     routes: ['/'],
     minify: {
@@ -23,10 +30,21 @@ plugins.push(
       removeComments: true,
     },
   })
-)
-
-if (process.env.VUE_APP_BUNDLE === 'true') {
-  plugins.push(new BundleAnalyzerPlugin())
+  const bundleAnalyzer = new BundleAnalyzerPlugin()
+  plugins.push(webpackPlugin, bundleAnalyzer, prerender)
+  // Optimizations
+  const terser = new TerserPlugin({
+    terserOptions: {
+      compress: {
+        drop_console: true,
+      },
+      output: {
+        comments: false,
+      },
+    },
+  })
+  optimization.minimize = true
+  optimization.minimizer.push(terser)
 }
 
 module.exports = {
@@ -36,22 +54,6 @@ module.exports = {
   },
   configureWebpack: {
     plugins,
-    optimization: {
-      minimize: true,
-      minimizer: isProd
-        ? [
-            new TerserPlugin({
-              terserOptions: {
-                compress: {
-                  drop_console: true,
-                },
-                output: {
-                  comments: false,
-                },
-              },
-            }),
-          ]
-        : [],
-    },
+    optimization,
   },
 }
