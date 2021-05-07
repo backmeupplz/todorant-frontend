@@ -64,6 +64,8 @@ export default class PlanningHeader extends Vue {
 
 <style scoped>
 .header-container {
+  max-width: 100%;
+  overflow: hidden;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -78,7 +80,8 @@ export default class PlanningHeader extends Vue {
   font-size: 15px;
   line-height: 17px;
   letter-spacing: -0.24px;
-
+  text-overflow: ellipsis;
+  overflow: hidden;
   color: #ff641a;
   margin-right: 4px;
 }
