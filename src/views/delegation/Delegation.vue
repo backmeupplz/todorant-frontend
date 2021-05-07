@@ -81,7 +81,6 @@ import { Todo } from '@/models/Todo'
 import TodoText from '@/components/TodoCard/TodoText.vue'
 import EditTodo from '@/views/EditTodo.vue'
 import TodoCard from '@/components/TodoCard/TodoCard.vue'
-import { CardType } from '@/models/CardType'
 import PlanningHeader from '@/views/planning/PlanningHeader.vue'
 
 const AppStore = namespace('AppStore')
@@ -107,7 +106,7 @@ export default class Delegation extends Vue {
 
   loading = false
   settingsDialog = false
-  delegatedTasksTo = true
+  delegatedTasksTo = false
 
   delegatedToMeMap: any[] = []
   delegatedByMeMap: any[] = []
@@ -121,7 +120,7 @@ export default class Delegation extends Vue {
   }
 
   get delegationList() {
-    return this.delegatedTasksTo ? this.delegators : this.delegates
+    return this.delegatedTasksTo ? this.delegates : this.delegators
   }
 
   get panels() {
