@@ -357,8 +357,6 @@ export default class TodoForm extends Vue {
   }
 
   tagSelected(tag: Tag) {
-    const insertText = `#${tag.tag}`
-
     const textInput = (this.$refs.textInput as any).$refs.input
     const text = this.todo.text
     const len = text.length
@@ -366,9 +364,13 @@ export default class TodoForm extends Vue {
     if (pos === undefined) {
       pos = 0
     }
-    const endPos = pos + insertText.length
     const before = text.substr(0, pos)
     const after = text.substr(pos, len)
+    const insertText =
+      before.length && before[before.length - 1] !== ' '
+        ? ` #${tag.tag}`
+        : `#${tag.tag}`
+    const endPos = pos + insertText.length
     const bodyTextInput = (this.$refs.textInput as any).$el.querySelector(
       'textarea'
     )
