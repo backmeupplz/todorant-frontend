@@ -150,7 +150,7 @@ v-container(style='maxWidth: 1000px;')
             :setPanels='setPanels',
             :panelIndex='i'
           )
-        v-expansion-panel-content.no-margin-no-padding
+        v-expansion-panel-content.no-margin-no-padding(translate='no')
           draggable(
             :forceFallback='shouldFallbackDraggable',
             v-model='todoSection.todos',
