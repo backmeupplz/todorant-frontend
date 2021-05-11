@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+div(translate='no')
   v-btn.fab(
     :absolute='$vuetify.breakpoint.mdAndUp && currentTab == 0 && !planning',
     :fixed='$vuetify.breakpoint.smAndDown || currentTab != 0 || planning',
