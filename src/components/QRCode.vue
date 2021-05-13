@@ -8,16 +8,10 @@ v-dialog(
   v-card
     v-card-title {{ $t("qr.code") }}
     v-card-text
-      p {{ $t("qr.description") }}
+      p {{ $t(description) }}
       .d-flex.justify-center
-        .loader(v-if='!imageUrl')
-        img(
-          v-else,
-          width='300px',
-          height='300px',
-          :src='imageUrl',
-          alt='QR code'
-        )
+        .loader(v-if='loading')
+        #qrCanvas(v-observe-visibility='visibilityChanged')
     v-card-actions
       v-spacer
       v-btn(
@@ -32,35 +26,29 @@ v-dialog(
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import { getSvgDataURL } from 'cnf-qrcode'
 import { Prop } from 'vue-property-decorator'
-import { namespace } from 'vuex-class'
-import { User } from '@/models/User'
-
-const UserStore = namespace('UserStore')
+import { drawQR } from '@/utils/drawQR'
+import QRCodeStyling from 'qr-code-styling'
 
 @Component
 export default class QRCode extends Vue {
   @Prop({ required: true }) dialog!: boolean
   @Prop({ required: true }) close!: () => void
+  @Prop({ required: true }) valueForQr!: string
+  @Prop({ required: true }) description!: string
+  @Prop({ required: true }) qrRendered!: QRCodeStyling
+  @Prop({ required: true }) changeQr!: (newQr: QRCodeStyling) => void
 
-  @UserStore.State user?: User
+  loading = true
 
-  imageUrl = ''
-
-  mounted() {
-    const user = this.user
-    if (!user) {
+  async visibilityChanged(isVisible: boolean) {
+    if (!this.valueForQr) {
       return
+    } else if (isVisible && !Object.keys(this.qrRendered).length) {
+      this.changeQr(drawQR('qrCanvas', this.valueForQr))
+      await this.qrRendered._drawingPromise
+      this.loading = false
     }
-    const userString = user.token
-    getSvgDataURL(userString, undefined, (err: any, url: string) => {
-      if (err) {
-        console.log(err)
-      } else {
-        this.imageUrl = url
-      }
-    })
   }
 }
 </script>

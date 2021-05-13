@@ -63,6 +63,15 @@ export async function checkTelegramLoginRequest(uuid: string) {
   )
 }
 
+export async function generateQrUuid() {
+  return (await axios.get(`${base}/login/generate_uuid`)).data.uuid as string
+}
+
+export async function checkQrLogin(uuid: string) {
+  return (await axios.post(`${base}/login/qr_check`, { uuid })).data
+    .token as string
+}
+
 export async function postEpics(user: User, epics: Tag[]) {
   return (
     await axios.post(

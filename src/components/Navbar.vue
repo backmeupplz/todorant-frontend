@@ -21,7 +21,14 @@ nav
   // Hashtags dialog
   Hashtags(:dialog='hashtagsDialog', :close='closeHashtagsDialog')
   // QR dialog
-  QRCode(:dialog='qrDialog', :close='closeQRDialog')
+  QRCode(
+    :dialog='qrDialog',
+    :close='closeQRDialog',
+    :valueForQr='qrToken',
+    :description='"qr.description.app_login"',
+    :qrRendered='qrRendered',
+    :changeQr='changeQr'
+  )
   // Support dialog
   Support(:dialog='supportDialog', :close='closeSupportDialog')
   // Encryption dialog
@@ -75,7 +82,7 @@ nav
         v-list-item(@click='hashtagsDialog = true', v-if='!!user')
           v-list-item-title {{ $t("hashtags.title") }}
         // QR
-        v-list-item(@click='qrDialog = true', v-if='!!user')
+        v-list-item(@click='openQRDialog', v-if='!!user')
           v-list-item-title {{ $t("qr.code") }}
         // QR
         v-list-item(@click='appsDialog = true', v-if='!!user')
@@ -111,6 +118,7 @@ import { namespace } from 'vuex-class'
 import { SubscriptionStatus } from '@/models/SubscriptionStatus'
 import { User } from '@/models/User'
 import { setCookie, deleteCookie } from '../utils/cookie'
+import QRCodeStyling from 'qr-code-styling'
 
 const UserStore = namespace('UserStore')
 const AppStore = namespace('AppStore')
@@ -151,6 +159,8 @@ export default class Navbar extends Vue {
   supportDialog = false
   hashtagsDialog = false
   qrDialog = false
+  qrToken = ''
+  qrRendered?: QRCodeStyling = {} as QRCodeStyling
   appsDialog = false
   encryptionDialog = false
 
@@ -242,6 +252,13 @@ export default class Navbar extends Vue {
   }
   closeHashtagsDialog() {
     this.hashtagsDialog = false
+  }
+  openQRDialog() {
+    this.qrToken = this.user.token!
+    this.qrDialog = true
+  }
+  changeQr(newQr: QRCodeStyling) {
+    this.qrRendered = newQr
   }
   closeQRDialog() {
     this.qrDialog = false

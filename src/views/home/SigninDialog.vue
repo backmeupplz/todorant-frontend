@@ -45,6 +45,18 @@ v-dialog(v-model='safeDialog', width='unset')
           radius='3',
           :userpic='false'
         )
+        // QR
+        v-btn.signin-button.signin-google(
+          color='#FFFFFF',
+          @click='loginWithQR'
+        )
+          img.logo-image(
+            src='/img/qr-code.svg',
+            height='18dp',
+            width='18dp',
+            alt='QR logo'
+          )
+          span {{ $t("home.qr") }}
         // Debug login by token
         div(v-if='debug')
           v-text-field(
@@ -53,6 +65,14 @@ v-dialog(v-model='safeDialog', width='unset')
             append-icon='send',
             @click:append='debugTokenLogin'
           )
+  QRCode(
+    :dialog='qrDialog',
+    :close='closeQRDialog',
+    :valueForQr='qrUuid',
+    :description='"qr.description.web_login"',
+    :qrRendered='qrRendered',
+    :changeQr='changeQr'
+  )
 </template>
 
 <script lang="ts">
@@ -66,6 +86,8 @@ import {
   loginGoogle,
   loginApple,
   loginToken,
+  generateQrUuid,
+  checkQrLogin,
 } from '@/utils/api'
 import { User } from '@/models/User'
 import { logEvent } from '@/utils/logEvent'
@@ -73,6 +95,8 @@ import { setCookie } from '@/utils/cookie'
 const { vueTelegramLogin } = require('vue-telegram-login')
 import { serverBus } from '@/main'
 import { v4 as uuid } from 'uuid'
+import QRCode from '@/components/QRCode.vue'
+import QRCodeStyling from 'qr-code-styling'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -80,6 +104,7 @@ const SnackbarStore = namespace('SnackbarStore')
 @Component({
   components: {
     vueTelegramLogin,
+    QRCode,
   },
 })
 export default class SigninDialog extends Vue {
@@ -91,6 +116,10 @@ export default class SigninDialog extends Vue {
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
 
   debugToken = ''
+  qrDialog = false
+  qrUuid = ''
+  qrCreatedAt?: Date
+  qrRendered?: QRCodeStyling = {} as QRCodeStyling
 
   get safeDialog() {
     return this.dialog
@@ -186,6 +215,59 @@ export default class SigninDialog extends Vue {
     } catch (error) {
       this.loginError(error, 'telegram')
     }
+  }
+
+  async loginWithQR() {
+    const tenMinutes = 600_000
+    const now = new Date()
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset())
+    const timeBetween = this.qrCreatedAt
+      ? now.getTime() - this.qrCreatedAt.getTime()
+      : tenMinutes
+
+    if (timeBetween >= tenMinutes) {
+      this.qrUuid = await generateQrUuid()
+      if (Object.keys(this.qrRendered!).length) {
+        this.qrRendered!.update({ data: this.qrUuid })
+      }
+      this.qrCreatedAt = new Date()
+      this.qrCreatedAt.setMinutes(
+        this.qrCreatedAt.getMinutes() - this.qrCreatedAt.getTimezoneOffset()
+      )
+    }
+    this.qrDialog = true
+
+    let user: User
+    let error: Error
+    const checkLogin = setInterval(async () => {
+      try {
+        const token = await checkQrLogin(this.qrUuid)
+        if (!token) {
+          return
+        }
+        user = await loginToken(token)
+        if (!!user) {
+          clearInterval(checkLogin)
+          this.loginSuccess(user, 'qr')
+        }
+      } catch (err) {
+        error = err
+      }
+    }, 5_000)
+    setTimeout(() => {
+      clearInterval(checkLogin)
+      if (!user) {
+        this.loginError(error, 'qr')
+      }
+    }, tenMinutes)
+  }
+
+  changeQr(newQr: QRCodeStyling) {
+    this.qrRendered = newQr
+  }
+
+  closeQRDialog() {
+    this.qrDialog = false
   }
 
   loginError(error: Error, provider: string) {
