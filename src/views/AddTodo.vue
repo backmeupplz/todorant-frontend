@@ -10,8 +10,8 @@ div(translate='no')
     right,
     color='blue',
     @click='openDialog()',
-    v-shortkey.once='{ en: ["a"], ru: ["ф"] }',
-    @shortkey.native='openDialog(true)',
+    v-shortkey.once.propagte='{ en: ["a"], ru: ["ф"] }',
+    @shortkey.native.propagte='openDialog(true)',
     aria-label='Add todo'
   )
     v-icon $add
@@ -127,6 +127,7 @@ import { getDateWithStartTimeOfDay } from '@/utils/getDateWithStartTimeOfDay'
 const SettingsStore = namespace('SettingsStore')
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
+const AppStore = namespace('AppStore')
 
 @Component({
   components: { TodoForm, draggable },
@@ -144,6 +145,8 @@ export default class AddTodo extends Vue {
   @UserStore.State password?: string
   @UserStore.State planning!: boolean
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
+  @AppStore.State todoDialog!: boolean
+  @AppStore.Mutation setDialog!: (dialog: boolean) => void
 
   dialog = false
 
@@ -182,6 +185,7 @@ export default class AddTodo extends Vue {
 
   @Watch('dialog')
   onDialogChanged(val: boolean, oldVal: boolean) {
+    this.setDialog(val)
     this.reset()
     if (oldVal && !val) {
       this.todoToBreakdown = null
@@ -192,6 +196,7 @@ export default class AddTodo extends Vue {
     if (hotkey && !this.hotKeysEnabled) {
       return
     }
+    if (this.todoDialog) return
     if (this.subscriptionStatus === SubscriptionStatus.inactive) {
       serverBus.$emit('subscriptionRequested')
     } else {

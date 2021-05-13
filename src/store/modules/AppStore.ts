@@ -7,6 +7,8 @@ export default class AppStore extends VuexModule {
   rulesShown = false
   editting = false
 
+  todoDialog = false
+
   @Mutation
   setLanguage(language: string) {
     this.language = language
@@ -25,5 +27,10 @@ export default class AppStore extends VuexModule {
   @Mutation
   setEditting(editting: boolean) {
     this.editting = editting
+  }
+
+  @Mutation
+  setDialog(todoDialog: boolean) {
+    this.todoDialog = todoDialog
   }
 }
