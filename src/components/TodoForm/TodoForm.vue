@@ -1,5 +1,5 @@
 <template lang="pug">
-.todo-form-content
+.todo-form-content(@keydown='enableTagNumber', @keyup='disableTagNumber')
   v-textarea(
     clearable,
     :label='$t("todo.create.text")',
@@ -23,8 +23,10 @@
       v-for='(tag, i) in filteredTags',
       :key='i',
       :color='colorForTag(tag)',
+      v-shortkey.once='["ctrl", `${++i}`]',
+      @shortkey.native='tagSelected(tag, true)',
       @click='tagSelected(tag)'
-    ) {{ "#" }}{{ tag.tag }}
+    ) {{ "#" }}{{ tag.tag }} {{ showTagsHotkeys && i <= 9 ? `(${i})` : "" }}
   v-row(no-gutters)
     v-col(cols='12', md='6')
       v-menu(v-model='dateMenu', :close-on-content-click='false', min-width=0)
@@ -169,12 +171,14 @@ export default class TodoForm extends Vue {
   @SettingsStore.State newLineOnReturn!: boolean
   @SettingsStore.State firstDayOfWeek?: number
   @SettingsStore.State startTimeOfDay?: string
+  @SettingsStore.State hotKeysEnabled!: boolean
   @DelegationStore.State delegates!: User[]
 
   dateMenu = false
   monthMenu = false
   timeMenu = false
   moreShown = false
+  showTagsHotkeys = false
 
   created() {
     dayjs.locale(enLocale)
@@ -348,6 +352,16 @@ export default class TodoForm extends Vue {
     }
   }
 
+  enableTagNumber({ code }: KeyboardEvent) {
+    if (code !== 'ControlLeft' || !this.hotKeysEnabled) return
+    this.showTagsHotkeys = true
+  }
+
+  disableTagNumber({ code }: KeyboardEvent) {
+    if (code !== 'ControlLeft') return
+    this.showTagsHotkeys = false
+  }
+
   escape() {
     ;(this as any).escapePressed()
   }
@@ -356,7 +370,8 @@ export default class TodoForm extends Vue {
     return tag.color || (this.dark ? '#64B5F6' : '#1E88E5')
   }
 
-  tagSelected(tag: Tag) {
+  tagSelected(tag: Tag, hotkey = false) {
+    if (hotkey && !this.hotKeysEnabled) return
     const textInput = (this.$refs.textInput as any).$refs.input
     const text = this.todo.text
     const len = text.length

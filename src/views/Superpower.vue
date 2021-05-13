@@ -80,6 +80,7 @@ export default class Superpower extends Vue {
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @AppStore.Mutation setEditting!: (editting: boolean) => void
   @AppStore.State editting!: boolean
+  @AppStore.State todoDialog!: boolean
   @SettingsStore.State hotKeysEnabled!: boolean
   @SettingsStore.State showTodayOnAddTodo?: boolean
 
@@ -119,7 +120,7 @@ export default class Superpower extends Vue {
   }
 
   switchTab(tabIndex: number) {
-    if (!this.hotKeysEnabled) {
+    if (!this.hotKeysEnabled || this.todoDialog) {
       return
     }
     this.currentTab = tabIndex

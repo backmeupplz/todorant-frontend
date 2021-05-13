@@ -6,8 +6,8 @@ v-btn(
   :loading='loading',
   :color='color || "#3366ff"',
   v-on='on',
-  v-shortkey.once='shortkeys',
-  @shortkey.native='shortkey',
+  v-shortkey.once.propagte='shortkeys',
+  @shortkey.native.propagte='shortkey',
   :small='small',
   :aria-label='name.substr(1)'
 )
@@ -18,9 +18,14 @@ v-btn(
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Prop } from 'vue-property-decorator'
+import { namespace } from 'vuex-class'
+
+const AppStore = namespace('AppStore')
 
 @Component
 export default class Icon extends Vue {
+  @AppStore.State todoDialog!: boolean
+
   @Prop({ required: true }) name!: string
   @Prop() color?: string
   @Prop() loading?: boolean
@@ -32,7 +37,7 @@ export default class Icon extends Vue {
   @Prop() shortkeyFunction?: () => void
 
   shortkey() {
-    if (this.shortkeyFunction) {
+    if (this.shortkeyFunction && !this.todoDialog) {
       this.shortkeyFunction()
     }
   }
