@@ -30,8 +30,9 @@ if (isProd) {
       removeComments: true,
     },
   })
-  const bundleAnalyzer = new BundleAnalyzerPlugin()
-  plugins.push(webpackPlugin, bundleAnalyzer, prerender)
+  // const bundleAnalyzer = new BundleAnalyzerPlugin()
+  // plugins.push(bundleAnalyzer)
+  plugins.push(webpackPlugin, prerender)
   // Optimizations
   const terser = new TerserPlugin({
     terserOptions: {
