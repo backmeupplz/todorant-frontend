@@ -97,10 +97,10 @@ div(translate='no')
                 color='primary',
                 dark,
                 elevation=0,
-                @click='save',
+                @click='save(false)',
                 :loading='loading',
-                v-shortkey.once='["enter"]',
-                @shortkey.native='save'
+                v-shortkey.once.propagte='["enter"]',
+                @shortkey.native='save(true)'
               ) {{ $t("save") }}
 </template>
 
@@ -140,6 +140,7 @@ export default class AddTodo extends Vue {
   @SettingsStore.State newTodosGoFirst?: boolean
   @SettingsStore.State showTodayOnAddTodo?: boolean
   @SettingsStore.State startTimeOfDay?: string
+  @SettingsStore.State newLineOnReturn!: boolean
   @UserStore.State subscriptionStatus!: SubscriptionStatus
   @UserStore.State user?: User
   @UserStore.State password?: string
@@ -259,7 +260,8 @@ export default class AddTodo extends Vue {
     this.todos.splice(i, 1)
   }
 
-  async save() {
+  async save(hotkey = false) {
+    if (hotkey && this.todoDialog && this.newLineOnReturn) return
     const user = this.user
     if (!user) {
       return
