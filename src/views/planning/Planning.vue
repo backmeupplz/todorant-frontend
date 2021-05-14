@@ -19,7 +19,6 @@ v-container(style='maxWidth: 1000px;')
       .d-flex.flex-column(v-if='search', style='width: 100%')
         v-text-field.pt-2.mr-4(
           :autofocus='true',
-          v-if='search',
           v-model='queryString',
           :label='$t("search")',
           clearable,
