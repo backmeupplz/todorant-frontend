@@ -478,10 +478,10 @@ export default class TodoList extends Vue {
   }
 
   tagSelected(tag: Tag) {
-    const textInput = (this.$refs.queryString as any).$refs.input
+    const queryString = (this.$refs.queryString as any).$refs.input
     const text = this.queryString
     const len = text.length
-    let pos = textInput.selectionStart
+    let pos = queryString.selectionStart
     if (pos === undefined) {
       pos = 0
     }
@@ -492,23 +492,23 @@ export default class TodoList extends Vue {
         ? ` #${tag.tag}`
         : `#${tag.tag}`
     const endPos = pos + insertText.length
-    const bodyTextInput = (this.$refs.queryString as any).$el.querySelector(
+    const bodyQueryString = (this.$refs.queryString as any).$el.querySelector(
       'textarea'
     )
 
     const emptyMatches = this.queryString.match(/#$/g) || []
     if (emptyMatches.length) {
       this.queryString = `${before}${tag.tag}${after}`
-      ;(this.$refs.textInput as any).focus()
-      setTimeout(() => bodyTextInput.setSelectionRange(endPos, endPos))
+      ;(this.$refs.queryString as any).focus()
+      setTimeout(() => bodyQueryString.setSelectionRange(endPos, endPos))
       return
     }
     const matches =
       this.queryString.match(/#[\u0400-\u04FFa-zA-Z_0-9]+(?!\s)$/g) || []
     if (!matches.length) {
       this.queryString = `${before}${insertText}${after}`
-      ;(this.$refs.textInput as any).focus()
-      setTimeout(() => bodyTextInput.setSelectionRange(endPos, endPos))
+      ;(this.$refs.queryString as any).focus()
+      setTimeout(() => bodyQueryString.setSelectionRange(endPos, endPos))
       return
     }
     const match = matches[0]
@@ -516,8 +516,8 @@ export default class TodoList extends Vue {
       0,
       before.length - match.length
     )}${insertText}${after}`
-    ;(this.$refs.textInput as any).focus()
-    setTimeout(() => bodyTextInput.setSelectionRange(endPos, endPos))
+    ;(this.$refs.queryString as any).focus()
+    setTimeout(() => bodyQueryString.setSelectionRange(endPos, endPos))
   }
 
   created() {
