@@ -16,14 +16,24 @@ v-container(style='maxWidth: 1000px;')
         :loading='todosUpdating',
         :disabled='editable'
       )
-      v-text-field.pt-2.mr-4(
-        :autofocus='true',
-        v-if='search',
-        v-model='queryString',
-        :label='$t("search")',
-        clearable,
-        dense
-      )
+      .d-flex.flex-column(v-if='search', style='width: 100%')
+        v-text-field.pt-2.mr-4(
+          :autofocus='true',
+          v-model='queryString',
+          :label='$t("search")',
+          clearable,
+          dense,
+          ref='queryString'
+        )
+        .mb-4(v-if='filteredTags.length')
+          v-btn(
+            text,
+            small,
+            v-for='(tag, i) in filteredTags',
+            :key='i',
+            :color='colorForTag(tag)',
+            @click='tagSelected(tag)'
+          ) {{ "#" }}{{ tag.tag }}
       div(v-if='!!searchTags.size')
         v-btn.mr-2(
           :loading='todosUpdating || loading',
@@ -220,6 +230,7 @@ import IconButton from '@/icons/IconButton.vue'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import enLocale from 'dayjs/locale/en'
 import { getDateWithStartTimeOfDay } from '@/utils/getDateWithStartTimeOfDay'
+import { Tag } from '@/models/Tag'
 
 dayjs.extend(localizedFormat)
 dayjs.extend(weekOfYear)
@@ -253,7 +264,9 @@ export default class TodoList extends Vue {
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @SettingsStore.State firstDayOfWeek?: number
   @SettingsStore.State startTimeOfDay?: string
+  @SettingsStore.State showMoreByDefault!: boolean
   @TagsStore.State searchTags!: Set<String>
+  @TagsStore.State tags!: Tag[]
 
   showCompleted = false
   todoEdited: Partial<Todo> | null = null
@@ -373,6 +386,26 @@ export default class TodoList extends Vue {
 
   currentPeriod = new Date()
 
+  get filteredTags() {
+    const emptyMatches = this.queryString.match(/#$/g) || []
+    if (emptyMatches.length) {
+      return this.tags
+    }
+    const matches =
+      this.queryString.match(/#[\u0400-\u04FFa-zA-Z_0-9]+$/g) || []
+    if (!matches.length) {
+      return this.showMoreByDefault ? this.tags : []
+    }
+    const match = matches[0]
+    return this.tags
+      .filter((tag) => tag.tag.includes(match.substr(1)))
+      .filter((tag) => tag.tag !== match.substr(1))
+  }
+
+  colorForTag(tag: Tag) {
+    return tag.color || (this.dark ? '#64B5F6' : '#1E88E5')
+  }
+
   get stickyHeaderStyle() {
     return {
       position: 'sticky',
@@ -442,6 +475,49 @@ export default class TodoList extends Vue {
 
   mounted() {
     this.loadTodos()
+  }
+
+  tagSelected(tag: Tag) {
+    const queryString = (this.$refs.queryString as any).$refs.input
+    const text = this.queryString
+    const len = text.length
+    let pos = queryString.selectionStart
+    if (pos === undefined) {
+      pos = 0
+    }
+    const before = text.substr(0, pos)
+    const after = text.substr(pos, len)
+    const insertText =
+      before.length && before[before.length - 1] !== ' '
+        ? ` #${tag.tag}`
+        : `#${tag.tag}`
+    const endPos = pos + insertText.length
+    const bodyQueryString = (this.$refs.queryString as any).$el.querySelector(
+      'textarea'
+    )
+
+    const emptyMatches = this.queryString.match(/#$/g) || []
+    if (emptyMatches.length) {
+      this.queryString = `${before}${tag.tag}${after}`
+      ;(this.$refs.queryString as any).focus()
+      setTimeout(() => bodyQueryString.setSelectionRange(endPos, endPos))
+      return
+    }
+    const matches =
+      this.queryString.match(/#[\u0400-\u04FFa-zA-Z_0-9]+(?!\s)$/g) || []
+    if (!matches.length) {
+      this.queryString = `${before}${insertText}${after}`
+      ;(this.$refs.queryString as any).focus()
+      setTimeout(() => bodyQueryString.setSelectionRange(endPos, endPos))
+      return
+    }
+    const match = matches[0]
+    this.queryString = `${before.substr(
+      0,
+      before.length - match.length
+    )}${insertText}${after}`
+    ;(this.$refs.queryString as any).focus()
+    setTimeout(() => bodyQueryString.setSelectionRange(endPos, endPos))
   }
 
   created() {
