@@ -55,7 +55,6 @@ div(translate='no')
                   v-expansion-panel-content
                     TodoForm(
                       :todo='todo',
-                      :enterPressed='save',
                       :escapePressed='escapePressed',
                       :addTodo='addTodo',
                       ref='todoForm',
