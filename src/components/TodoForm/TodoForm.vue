@@ -158,7 +158,6 @@ const DelegationStore = namespace('DelegationStore')
 @Component
 export default class TodoForm extends Vue {
   @Prop({ required: true }) todo!: Todo
-  @Prop({ required: true }) enterPressed!: () => void
   @Prop({ required: true }) escapePressed!: () => void
   @Prop() addTodo?: () => void
   @Prop({ default: false }) editTodo!: boolean
@@ -323,15 +322,12 @@ export default class TodoForm extends Vue {
     return dayjs(date).format()
   }
 
-  keyDown(evt: any) {
+  keyDown(evt: KeyboardEvent) {
     if (!evt.keyCode) {
       return
     }
     if (this.newLineOnReturn) {
       if (evt.keyCode === 13 && evt.ctrlKey) {
-        if (evt.type === 'keydown') {
-          ;(this as any).enterPressed()
-        }
         evt.preventDefault()
       }
       if (evt.keyCode === 13) {
@@ -339,15 +335,9 @@ export default class TodoForm extends Vue {
       }
     }
     if (evt.keyCode === 65 && evt.ctrlKey && evt.shiftKey) {
-      if (evt.type === 'keydown' && this.addTodo) {
-        this.addTodo()
-      }
       evt.preventDefault()
     }
     if (evt.keyCode === 13 && !evt.shiftKey) {
-      if (evt.type === 'keydown') {
-        ;(this as any).enterPressed()
-      }
       evt.preventDefault()
     }
   }

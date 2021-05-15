@@ -181,7 +181,7 @@ v-container(style='maxWidth: 1000px;')
                   :type='showCompleted ? "done" : "planning"',
                   :deleteTodo='() => deleteTodo(todo)',
                   :addTodo='() => breakdownTodo(todo)',
-                  :completeTodo='() => completeOrUndoTodo(todo)',
+                  :completeTodo='(hotkey) => (hotkey ? "" : completeOrUndoTodo(todo))',
                   :repeat='() => completeOrUndoTodo(todo)',
                   :edit='() => editTodo(todo)',
                   :moveTodoToToday='() => moveTodoToToday(todo)',
@@ -259,6 +259,7 @@ export default class TodoList extends Vue {
   @AppStore.State language!: string
   @AppStore.State editting!: boolean
   @AppStore.Mutation setEditting!: (editting: boolean) => void
+  @AppStore.Mutation setDialog!: (dialog: boolean) => void
   @UserStore.State user!: User
   @UserStore.State planning!: boolean
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
@@ -888,6 +889,7 @@ export default class TodoList extends Vue {
 
   searchTouched() {
     this.search = !this.search
+    this.setDialog(this.search)
     this.queryString = ''
   }
 

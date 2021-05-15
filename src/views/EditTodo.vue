@@ -10,7 +10,6 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
         TodoForm(
           v-if='!!todo',
           :todo='todo',
-          :enterPressed='save',
           :escapePressed='escapePressed',
           :editTodo='true',
           :shouldAutofocus='dialog',
@@ -72,6 +71,7 @@ import { playSound, Sounds } from '@/utils/sounds'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
+const AppStore = namespace('AppStore')
 
 @Component({
   components: { TodoForm, BreakdownRequest },
@@ -83,6 +83,7 @@ export default class EditTodo extends Vue {
 
   @UserStore.State user?: User
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
+  @AppStore.Mutation setDialog!: (dialog: boolean) => void
 
   loading = false
   dialog = false
@@ -97,6 +98,7 @@ export default class EditTodo extends Vue {
   @Watch('todo')
   onTodoChanged(val: Todo, oldVal: Todo) {
     this.dialog = !!val
+    this.setDialog(this.dialog)
     if (!oldVal && val) {
       this.completed = val.completed
       this.reset()
@@ -116,6 +118,7 @@ export default class EditTodo extends Vue {
     if (!user) {
       return
     }
+    if (!this.todo) return
     if (!(this.$refs.form as any).validate()) {
       return
     }
