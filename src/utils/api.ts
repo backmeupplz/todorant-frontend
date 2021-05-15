@@ -105,7 +105,15 @@ function getTimeString(now: Date) {
   return time
 }
 
-export async function editTodo(user: User, todo: Todo) {
+export async function editTodo(
+  user: User,
+  todo: Todo,
+  startTimeOfDay: string = '00:00'
+) {
+  const now = startTimeOfDay
+    ? getDateWithStartTimeOfDay(startTimeOfDay)
+    : new Date()
+
   const todoCopy = { ...todo, today: getToday() }
   if (
     (todo.date && todo.date.length !== 2) ||
@@ -117,10 +125,15 @@ export async function editTodo(user: User, todo: Todo) {
     }
   }
   const time = getTimeString(new Date())
-  return axios.put(`${base}/todo/${todo._id}`, todoCopy, {
-    headers: getHeaders(user),
-    params: { time: time },
-  })
+  return (
+    await axios.put(`${base}/todo/${todo._id}`, todoCopy, {
+      headers: getHeaders(user),
+      params: {
+        date: getStringFromDate(now),
+        time: time,
+      },
+    })
+  ).data as { incompleteFrogsExist: boolean }
 }
 
 export async function deleteTodo(todo: Todo) {

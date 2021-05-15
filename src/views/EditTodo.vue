@@ -72,6 +72,7 @@ import { playSound, Sounds } from '@/utils/sounds'
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
 const AppStore = namespace('AppStore')
+const SettingsStore = namespace('SettingsStore')
 
 @Component({
   components: { TodoForm, BreakdownRequest },
@@ -84,6 +85,7 @@ export default class EditTodo extends Vue {
   @UserStore.State user?: User
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @AppStore.Mutation setDialog!: (dialog: boolean) => void
+  @SettingsStore.State startTimeOfDay?: string
 
   loading = false
   dialog = false
@@ -125,17 +127,25 @@ export default class EditTodo extends Vue {
     this.loading = true
     try {
       if (
-        (this as any).todo.frogFails > 2 &&
-        (this.initialDate !== (this as any).todo.date ||
-          this.initialMonthAndYear !== (this as any).todo.monthAndYear)
+        this.todo.frogFails > 2 &&
+        (this.initialDate !== this.todo.date ||
+          this.initialMonthAndYear !== this.todo.monthAndYear)
       ) {
         this.breakdownRequestDialog = true
         return
       }
-      await api.editTodo(user, (this as any).todo)
-      ;(this as any).cleanTodo()
-      if ((this as any).todo.completed && !this.completed) {
-        playSound((this as any).todo.frog ? Sounds.levelUp : Sounds.taskDone)
+      const { incompleteFrogsExist } = await api.editTodo(
+        user,
+        this.todo,
+        this.startTimeOfDay
+      )
+      this.cleanTodo()
+      if (this.todo.completed && !this.completed) {
+        playSound(this.todo.frog ? Sounds.levelUp : Sounds.taskDone)
+        if (this.todo.frog) return
+        if (incompleteFrogsExist) {
+          serverBus.$emit('violationFrogRules')
+        }
       }
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)
