@@ -419,20 +419,19 @@ export const messages = {
     delegate: {
       title: 'Delegation',
       noDelegators:
-        "You don't have any delegators yet. Share the invite link with the people who you want to make delegators",
+        "You don't have any delegators yet. Ask for an invite link to become someone's delegate.",
       noDelegates:
-        "You don't have any delegates yet. Ask for an invite link to become someone's delegator.",
+        "You don't have any delegates yet. Share the invite link with the people who you want to make delegates",
       noDelegatedTasks: "You don't have any more newly delegated tasks.",
       link: 'Delegate invite link',
       linkDescription:
-        'Share this link only with the people you trust. People can become your delegators by following this link. Delegators will only see the tasks that they delegated to you.',
+        'People can become your delegates by following this link. Delegates will only see the tasks that you delegated to them.',
       resetConfirmation:
         "Are you sure that you want to reset the link? The current link won't work anymore!",
       delegators: 'Delegators',
       delegates: 'Delegates',
-      inviteSuccess: 'Success! Now you can delegate tasks to this user.',
-      inviteConfirm:
-        'Are you sure you want to become a delegator to this user?',
+      inviteSuccess: 'Success! Now this user can delegate tasks for you.',
+      inviteConfirm: 'Are you sure you want to become a delegate of this user?',
       deleteDelegateConfirmation:
         'Are you sure you want to delete this delegate? You will no longer be able to delegate tasks to this delegate.',
       deleteDelegatorConfirmation:
@@ -923,22 +922,22 @@ export const messages = {
     delegate: {
       title: 'Делегирование',
       noDelegators:
-        'У вас пока что нет людей, которые могут делегировать вам задачи. Передайте ссылку-приглашение людям, которым доверяете — и они смогут делегировать вам задачи.',
+        'У вас пока что нет людей, которые могут делегировать вам задачи. Получите ссылку-приглашение человека, от которого вы хотите принимать задачи.',
       noDelegates:
-        'У вас пока что нет людей, которым вы можете делегировать задачи. Получите ссылку-приглашение от человека, которому хотите начать делегировать задачи.',
+        'У вас пока что нет людей, которым вы можете делегировать задачи. Передайте ссылку-приглашение людям, которым вы хотите делегировать — и они станут вашими делегатами.',
       noDelegatedTasks:
         'Пока что у вас нет новых задач, которые вам делегировали.',
       link: 'Ссылка-приглашение',
       linkDescription:
-        'Делитесь этой ссылкой только с людьми, которым вы доверяете. Пройдя по этой ссылке, человек сможет начать делегировать вам задачи. Этот человек не сможет увидеть никакие задачи, кроме тех, которые делегировал вам.',
+        'Делитесь этой ссылкой с люльми, которым вы хотите делегировать задачи. Пройдя по ссылке, человек станет вашим делегатом. Этот человек не сможет увидеть никакие задачи, кроме тех, которые вы ему делегировали.',
       resetConfirmation:
         'Уверены, что хотите сбросить ссылку-приглашение? Существующая ссылка больше не будет работать!',
       delegators: 'Пользователи, которые делегируют вам задачи',
       delegates: 'Пользователи, которым вы делегируете задачи',
       inviteSuccess:
-        'Получилось! Теперь вы можете делегировать задачи этому пользователю.',
+        'Получилось! Теперь этот пользователь может делегировать вам задачи.',
       inviteConfirm:
-        'Вы точно хотите стать делегатором этому пользователю и получить возможность делегировать задачи?',
+        'Вы точно хотите стать делегатом этого пользователя и получать от него задачи?',
       deleteDelegateConfirmation:
         'Вы точно хотите убрать этого делегата из списка? Вы больше не сможете делегировать задачи этому пользователю.',
       deleteDelegatorConfirmation:
