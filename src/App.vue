@@ -22,16 +22,22 @@ import { namespace } from 'vuex-class'
 import Navbar from '@/components/Navbar.vue'
 import Snackbar from '@/components/Snackbar.vue'
 import { i18n } from '@/plugins/i18n'
+import { getDateString, getTodayWithStartOfDay } from '@/utils/time'
+import { serverBus } from '@/main'
 
 const { loadCSS } = require('fg-loadcss')
 
 const AppStore = namespace('AppStore')
 const SnackbarStore = namespace('SnackbarStore')
+const SettingsStore = namespace('SettingsStore')
 
 @Component({ components: { Navbar, CookieLaw, Snackbar } })
 export default class App extends Vue {
   @AppStore.State dark!: boolean
   @SnackbarStore.Mutation setSnackbar!: (snackbarState: any) => void
+  @SettingsStore.State startTimeOfDay?: string
+
+  todayTitle = getDateString(getTodayWithStartOfDay())
 
   get style() {
     return {
@@ -55,6 +61,9 @@ export default class App extends Vue {
 
   mounted() {
     this.loadRenderBlockingCSS()
+    setInterval(() => {
+      this.updateNow()
+    }, 1000)
   }
 
   created() {
@@ -77,6 +86,14 @@ export default class App extends Vue {
   get metaInfo() {
     return {
       title: i18n.t('title') as string,
+    }
+  }
+
+  private updateNow() {
+    const newTodayTitle = getDateString(getTodayWithStartOfDay())
+    if (this.todayTitle !== newTodayTitle) {
+      this.todayTitle = newTodayTitle
+      serverBus.$emit('refreshRequested')
     }
   }
 }
