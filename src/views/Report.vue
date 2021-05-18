@@ -26,6 +26,7 @@ v-container(style='maxWidth: 1000px;', v-observe-visibility='visibilityChanged')
             v-model='startDate'
           )
         v-date-picker(
+          show-adjacent-months,
           @input='startDateMenu = false',
           v-model='startDate',
           :first-day-of-week='safeFirstDayOfWeek',
@@ -44,6 +45,7 @@ v-container(style='maxWidth: 1000px;', v-observe-visibility='visibilityChanged')
             v-model='endDate'
           )
         v-date-picker(
+          show-adjacent-months,
           @input='endDateMenu = false',
           v-model='endDate',
           :first-day-of-week='safeFirstDayOfWeek',
