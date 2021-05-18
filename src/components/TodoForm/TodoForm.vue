@@ -40,6 +40,7 @@
             :rules='dateAndMonthRules'
           )
         v-date-picker(
+          show-adjacent-months,
           @input='dateMenu = false',
           v-model='date',
           :min='todayFormattedForExactDate',
@@ -59,6 +60,7 @@
             :rules='dateAndMonthRules'
           )
         v-date-picker(
+          show-adjacent-months,
           @input='monthMenu = false',
           v-model='monthAndYear',
           :min='todayFormattedForDatePicker',
