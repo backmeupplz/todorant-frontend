@@ -19,6 +19,10 @@ export default class SettingsStore extends VuexModule {
   swipeActionsEnabled = false
   coloredCardBackgrounds = false
 
+  get safeStartTimeOfDay() {
+    return this.startTimeOfDay
+  }
+
   @Mutation
   setSettingsStore(settingsStore: SettingsStore) {
     Object.assign(this, settingsStore)

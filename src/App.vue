@@ -34,10 +34,11 @@ const SettingsStore = namespace('SettingsStore')
 @Component({ components: { Navbar, CookieLaw, Snackbar } })
 export default class App extends Vue {
   @AppStore.State dark!: boolean
+  @AppStore.State todayDateTitle!: string
+  @AppStore.State todoDialog!: boolean
+  @AppStore.Mutation setTodayTitle!: (todayDateTitle: string) => void
   @SnackbarStore.Mutation setSnackbar!: (snackbarState: any) => void
   @SettingsStore.State startTimeOfDay?: string
-
-  todayTitle = getDateString(getTodayWithStartOfDay())
 
   get style() {
     return {
@@ -91,8 +92,8 @@ export default class App extends Vue {
 
   private updateNow() {
     const newTodayTitle = getDateString(getTodayWithStartOfDay())
-    if (this.todayTitle !== newTodayTitle) {
-      this.todayTitle = newTodayTitle
+    if (this.todayDateTitle !== newTodayTitle && !this.todoDialog) {
+      this.setTodayTitle(newTodayTitle)
       serverBus.$emit('refreshRequested')
     }
   }
