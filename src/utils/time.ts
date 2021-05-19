@@ -13,7 +13,7 @@ export function getDateString(date: Date) {
 export function getTodayWithStartOfDay() {
   const now = new Date()
   const today = new Date()
-  const startTimeOfDay = settingsStore.startTimeOfDay
+  const startTimeOfDay = settingsStore.safeStartTimeOfDay
   if (!startTimeOfDay) return now
   today.setHours(parseInt(startTimeOfDay.substr(0, 2)))
   today.setMinutes(parseInt(startTimeOfDay.substr(3)))

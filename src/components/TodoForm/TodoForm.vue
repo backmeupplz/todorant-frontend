@@ -167,6 +167,7 @@ export default class TodoForm extends Vue {
 
   @AppStore.State language?: string
   @AppStore.State dark!: boolean
+  @AppStore.State todayDateTitle!: string
   @TagsStore.State tags!: Tag[]
   @SettingsStore.State showMoreByDefault!: boolean
   @SettingsStore.State newLineOnReturn!: boolean
@@ -308,7 +309,7 @@ export default class TodoForm extends Vue {
   }
 
   get todayFormatted() {
-    return dayjs(new Date()).format('YYYY-MM-DD')
+    return dayjs(this.todayDateTitle).format('YYYY-MM-DD')
   }
 
   get todayFormattedForExactDate() {
@@ -319,7 +320,7 @@ export default class TodoForm extends Vue {
   }
 
   get todayFormattedForDatePicker() {
-    const date = new Date()
+    const date = new Date(this.todayDateTitle)
     date.setMonth(date.getMonth() + 1)
     return dayjs(date).format()
   }
