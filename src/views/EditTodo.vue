@@ -85,7 +85,6 @@ export default class EditTodo extends Vue {
   @UserStore.State user?: User
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @AppStore.Mutation setDialog!: (dialog: boolean) => void
-  @SettingsStore.State startTimeOfDay?: string
 
   loading = false
   dialog = false
@@ -134,11 +133,7 @@ export default class EditTodo extends Vue {
         this.breakdownRequestDialog = true
         return
       }
-      const { incompleteFrogsExist } = await api.editTodo(
-        user,
-        this.todo,
-        this.startTimeOfDay
-      )
+      const { incompleteFrogsExist } = await api.editTodo(user, this.todo)
       this.cleanTodo()
       if (this.todo.completed && !this.completed) {
         playSound(this.todo.frog ? Sounds.levelUp : Sounds.taskDone)

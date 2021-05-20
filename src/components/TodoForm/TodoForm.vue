@@ -145,7 +145,6 @@ import { decrypt, encrypt } from '@/utils/encryption'
 import { Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
-import { getDateWithStartTimeOfDay } from '@/utils/getDateWithStartTimeOfDay'
 
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import enLocale from 'dayjs/locale/en'
@@ -172,7 +171,6 @@ export default class TodoForm extends Vue {
   @SettingsStore.State showMoreByDefault!: boolean
   @SettingsStore.State newLineOnReturn!: boolean
   @SettingsStore.State firstDayOfWeek?: number
-  @SettingsStore.State startTimeOfDay?: string
   @SettingsStore.State hotKeysEnabled!: boolean
   @DelegationStore.State delegates!: User[]
 
@@ -313,10 +311,7 @@ export default class TodoForm extends Vue {
   }
 
   get todayFormattedForExactDate() {
-    const now = this.startTimeOfDay
-      ? getDateWithStartTimeOfDay(this.startTimeOfDay)
-      : new Date()
-    return dayjs(now).format()
+    return dayjs(this.todayDateTitle).format()
   }
 
   get todayFormattedForDatePicker() {

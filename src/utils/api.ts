@@ -11,7 +11,7 @@ import UserStore from '@/store/modules/UserStore'
 import SettingsStore from '@/store/modules/SettingsStore'
 import HeroStore from '@/store/modules/HeroStore'
 import AppStore from '@/store/modules/AppStore'
-import { getDateWithStartTimeOfDay } from './getDateWithStartTimeOfDay'
+import { getTodayWithStartOfDay } from '@/utils/time'
 
 const base = process.env.VUE_APP_API
 
@@ -105,14 +105,8 @@ function getTimeString(now: Date) {
   return time
 }
 
-export async function editTodo(
-  user: User,
-  todo: Todo,
-  startTimeOfDay: string = '00:00'
-) {
-  const now = startTimeOfDay
-    ? getDateWithStartTimeOfDay(startTimeOfDay)
-    : new Date()
+export async function editTodo(user: User, todo: Todo) {
+  const now = getTodayWithStartOfDay()
 
   const todoCopy = { ...todo, today: getToday() }
   if (
@@ -186,14 +180,8 @@ export async function deleteAllTags() {
   })
 }
 
-export async function completeTodo(
-  user: User,
-  todo: Todo,
-  startTimeOfDay: string = '00:00'
-) {
-  const now = startTimeOfDay
-    ? getDateWithStartTimeOfDay(startTimeOfDay)
-    : new Date()
+export async function completeTodo(user: User, todo: Todo) {
+  const now = getTodayWithStartOfDay()
 
   return (
     await axios.put(
@@ -268,11 +256,8 @@ export async function getTodos(
   return data.todos
 }
 
-export async function getCurrentTodo(
-  user: User,
-  startTimeOfDay: string = '00:00'
-) {
-  const now = getDateWithStartTimeOfDay(startTimeOfDay)
+export async function getCurrentTodo(user: User) {
+  const now = getTodayWithStartOfDay()
   const date = getStringFromDate(now)
   const time = getTimeString(now)
 

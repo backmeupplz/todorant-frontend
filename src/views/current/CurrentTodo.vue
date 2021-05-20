@@ -80,7 +80,6 @@ const TagsStore = namespace('TagsStore')
 export default class CurrentTodo extends Vue {
   @UserStore.State user?: User
   @SettingsStore.State hotKeysEnabled!: boolean
-  @SettingsStore.State startTimeOfDay?: string
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @TagsStore.State searchTags!: Set<String>
 
@@ -151,10 +150,7 @@ export default class CurrentTodo extends Vue {
     }
     this.todoUpdating = true
     try {
-      const fetched = await api.getCurrentTodo(
-        user,
-        this.startTimeOfDay || undefined
-      )
+      const fetched = await api.getCurrentTodo(user)
       this.todo = fetched.todo || null
       this.incompleteTodosCount = fetched.incompleteTodosCount
       this.todosCount = fetched.todosCount
@@ -182,11 +178,7 @@ export default class CurrentTodo extends Vue {
     }
     this.loading = true
     try {
-      const { incompleteFrogsExist } = await api.completeTodo(
-        user,
-        this.todo,
-        this.startTimeOfDay
-      )
+      const { incompleteFrogsExist } = await api.completeTodo(user, this.todo)
       if (this.todo.frog) {
         await playSound(Sounds.levelUp)
       } else {
