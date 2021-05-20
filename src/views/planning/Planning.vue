@@ -229,7 +229,6 @@ import TodoCard from '@/components/TodoCard/TodoCard.vue'
 import IconButton from '@/icons/IconButton.vue'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import enLocale from 'dayjs/locale/en'
-import { getDateWithStartTimeOfDay } from '@/utils/getDateWithStartTimeOfDay'
 import { Tag } from '@/models/Tag'
 
 dayjs.extend(localizedFormat)
@@ -258,13 +257,13 @@ export default class TodoList extends Vue {
   @AppStore.State dark!: boolean
   @AppStore.State language!: string
   @AppStore.State editting!: boolean
+  @AppStore.State todayDateTitle!: string
   @AppStore.Mutation setEditting!: (editting: boolean) => void
   @AppStore.Mutation setDialog!: (dialog: boolean) => void
   @UserStore.State user!: User
   @UserStore.State planning!: boolean
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @SettingsStore.State firstDayOfWeek?: number
-  @SettingsStore.State startTimeOfDay?: string
   @SettingsStore.State showMoreByDefault!: boolean
   @TagsStore.State searchTags!: Set<String>
   @TagsStore.State tags!: Tag[]
@@ -362,9 +361,7 @@ export default class TodoList extends Vue {
   }
 
   get todayDate() {
-    return this.startTimeOfDay
-      ? getDateWithStartTimeOfDay(this.startTimeOfDay)
-      : new Date()
+    return new Date(this.todayDateTitle)
   }
 
   noMoreTodos = false
@@ -714,11 +711,7 @@ export default class TodoList extends Vue {
       if (todo.completed) {
         await api.undoTodo(user, todo)
       } else {
-        const { incompleteFrogsExist } = await api.completeTodo(
-          user,
-          todo,
-          this.startTimeOfDay
-        )
+        const { incompleteFrogsExist } = await api.completeTodo(user, todo)
         if (todo.frog) {
           await playSound(Sounds.levelUp)
         } else {

@@ -1,19 +1,22 @@
 import { Todo } from '@/models/Todo'
 import store from '@/store'
+import SettingsStore from '@/store/modules/SettingsStore'
+import { getModule } from 'vuex-module-decorators'
+
+const settingsStore = getModule(SettingsStore, store)
 
 export function isTodoOld(todo: Todo, date: string) {
   const day = date.substr(8)
   const monthAndYear = date.substr(0, 7)
   const yesterday = `${parseInt(day) - 1}`
-  const startTimeOfDay =
-    (store as any).state.SettingsStore.startTimeOfDay || '00:00'
+  const startTimeOfDay = settingsStore.safeStartTimeOfDay || '00:00'
   const now = new Date()
   const todayDate = new Date(
     now.getFullYear(),
     now.getMonth(),
     now.getDate(),
-    startTimeOfDay.substr(0, 2),
-    startTimeOfDay.substr(3)
+    Number(startTimeOfDay.substr(0, 2)),
+    Number(startTimeOfDay.substr(3))
   )
 
   // Exact date exists or not
