@@ -17,7 +17,7 @@
     :autofocus='shouldAutofocus'
   )
   .mb-4(v-if='filteredTags.length')
-    v-btn(
+    v-btn.tag-text-add-todo(
       text,
       small,
       v-for='(tag, i) in filteredTags',
@@ -409,5 +409,16 @@ export default class TodoForm extends Vue {
 .v-input {
   padding: 0;
   margin: 0;
+}
+
+.tag-text-add-todo {
+  max-width: 100%;
+}
+
+.tag-text-add-todo * {
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
 }
 </style>
