@@ -34,7 +34,7 @@ v-container(style='maxWidth: 1000px;')
             :color='colorForTag(tag)',
             @click='tagSelected(tag)'
           ) {{ "#" }}{{ tag.tag }}
-      div(v-if='!!searchTags.size')
+      .search-container(v-if='!!searchTags.size')
         v-btn.mr-2(
           :loading='todosUpdating || loading',
           @click='goHome',
@@ -43,7 +43,7 @@ v-container(style='maxWidth: 1000px;')
         )
           v-icon(small) clear
         v-chip.ma-1(v-for='(word, i) in searchTags', :key='i')
-          span {{ word }}
+          span.search-word {{ word }}
           v-btn.ml-2(small, icon, @click='delHash(word)')
             v-icon(small) close
       v-spacer(v-if='!search')
@@ -1020,6 +1020,18 @@ export default class TodoList extends Vue {
 </script>
 
 <style>
+@media only screen and (max-width: 1040px) {
+  .search-container {
+    max-width: 50%;
+  }
+}
+
+@media only screen and (min-width: 1040px) {
+  .search-container {
+    max-width: 75%;
+  }
+}
+
 .cv-header-nav {
   display: flex;
   justify-content: center;
@@ -1278,5 +1290,11 @@ div[class^='cv-wrapper'][class$='dark'] {
 }
 .light .cv-day.draghover {
   box-shadow: inset 0 0 0.2em 0.2em rgb(190, 190, 190);
+}
+
+.search-word {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 </style>
