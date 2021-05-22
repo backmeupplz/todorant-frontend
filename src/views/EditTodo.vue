@@ -10,7 +10,6 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
         TodoForm(
           v-if='!!todo',
           :todo='todo',
-          :enterPressed='save',
           :escapePressed='escapePressed',
           :editTodo='true',
           :shouldAutofocus='dialog',
@@ -72,6 +71,8 @@ import { playSound, Sounds } from '@/utils/sounds'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
+const AppStore = namespace('AppStore')
+const SettingsStore = namespace('SettingsStore')
 
 @Component({
   components: { TodoForm, BreakdownRequest },
@@ -83,6 +84,7 @@ export default class EditTodo extends Vue {
 
   @UserStore.State user?: User
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
+  @AppStore.Mutation setDialog!: (dialog: boolean) => void
 
   loading = false
   dialog = false
@@ -97,6 +99,7 @@ export default class EditTodo extends Vue {
   @Watch('todo')
   onTodoChanged(val: Todo, oldVal: Todo) {
     this.dialog = !!val
+    this.setDialog(this.dialog)
     if (!oldVal && val) {
       this.completed = val.completed
       this.reset()
@@ -116,23 +119,28 @@ export default class EditTodo extends Vue {
     if (!user) {
       return
     }
+    if (!this.todo) return
     if (!(this.$refs.form as any).validate()) {
       return
     }
     this.loading = true
     try {
       if (
-        (this as any).todo.frogFails > 2 &&
-        (this.initialDate !== (this as any).todo.date ||
-          this.initialMonthAndYear !== (this as any).todo.monthAndYear)
+        this.todo.frogFails > 2 &&
+        (this.initialDate !== this.todo.date ||
+          this.initialMonthAndYear !== this.todo.monthAndYear)
       ) {
         this.breakdownRequestDialog = true
         return
       }
-      await api.editTodo(user, (this as any).todo)
-      ;(this as any).cleanTodo()
-      if ((this as any).todo.completed && !this.completed) {
-        playSound((this as any).todo.frog ? Sounds.levelUp : Sounds.taskDone)
+      const { incompleteFrogsExist } = await api.editTodo(user, this.todo)
+      this.cleanTodo()
+      if (this.todo.completed && !this.completed) {
+        playSound(this.todo.frog ? Sounds.levelUp : Sounds.taskDone)
+        if (this.todo.frog) return
+        if (incompleteFrogsExist) {
+          serverBus.$emit('violationFrogRules')
+        }
       }
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)

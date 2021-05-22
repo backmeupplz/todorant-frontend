@@ -494,6 +494,14 @@
   dependencies:
     eslint-visitor-keys "^1.1.0"
 
+"@upacyxou/vue-shortkey@^3.1.8":
+  version "3.1.8"
+  resolved "https://registry.yarnpkg.com/@upacyxou/vue-shortkey/-/vue-shortkey-3.1.8.tgz#6cf2fdbfcacc37b68328c448292711df6711777e"
+  integrity sha512-kynVVbDi8vNu8MWyiAH9OPqVxqGlbjvqKary9XHfakddVULdmGQ+e5VvEqDUiJFT/PxKaFRY419DDEV9+JhWDA==
+  dependencies:
+    custom-event-polyfill "^1.0.7"
+    element-matches "^0.1.2"
+
 "@upacyxou/vue-simple-calendar@^5.5.0":
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/@upacyxou/vue-simple-calendar/-/vue-simple-calendar-5.5.0.tgz#8973aba13c45be3d887f690cf1e292067846472c"
@@ -9008,14 +9016,6 @@ vue-share-buttons@^1.0.6:
     sass-loader "^7.1.0"
     vue "^2.6.6"
 
-vue-shortkey@^3.1.7:
-  version "3.1.7"
-  resolved "https://registry.yarnpkg.com/vue-shortkey/-/vue-shortkey-3.1.7.tgz#31c09a99ed597331a6a49a45eeff894a78a19eef"
-  integrity sha512-Wm/vPXXS+4Wl/LoYpD+cZc0J0HIoVlY8Ep0JLIqqswmAya3XUBtsqKbhzEf9sXo+3rZ5p1YsUyZfXas8XD7YjQ==
-  dependencies:
-    custom-event-polyfill "^1.0.7"
-    element-matches "^0.1.2"
-
 vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/vue-style-loader/-/vue-style-loader-4.1.2.tgz#dedf349806f25ceb4e64f3ad7c0a44fba735fcf8"
@@ -9059,10 +9059,10 @@ vuedraggable@^2.24.3:
   dependencies:
     sortablejs "1.10.2"
 
-vuetify@^2.3.15:
-  version "2.3.15"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.3.15.tgz#ea148acce8f5bc272f64f03a0d2ace09e58e092c"
-  integrity sha512-YVJN/ld60S2mmFCKxoVFkB8X2kmuLT0E28ql4kr8HQUeCYdK8axoca/N8ZIP1hFH4NIz392f0nVpZKS4ZFZBVA==
+vuetify@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.5.0.tgz#5e510ed288c268c74fb791facadc7c899e286212"
+  integrity sha512-Lpnwm64xYVEXb5BXdadSRaH0QHjXLFhPPjuVU9VuqWp3Nzr+WP5vA9nMPkJAfUj8vKIJGTRXqyGTGVa4VwrO3A==
 
 vuex-class@^0.3.2:
   version "0.3.2"

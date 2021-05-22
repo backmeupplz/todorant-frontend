@@ -73,6 +73,7 @@ class SocketManager {
       return
     }
     try {
+      socketIO.disconnect()
       socketIO.connect()
     } catch (err) {
       console.warn('Socket connection error', err)

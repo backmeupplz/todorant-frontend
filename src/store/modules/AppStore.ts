@@ -7,6 +7,10 @@ export default class AppStore extends VuexModule {
   rulesShown = false
   editting = false
 
+  todoDialog = false
+
+  todayDateTitle = ''
+
   @Mutation
   setLanguage(language: string) {
     this.language = language
@@ -25,5 +29,15 @@ export default class AppStore extends VuexModule {
   @Mutation
   setEditting(editting: boolean) {
     this.editting = editting
+  }
+
+  @Mutation
+  setDialog(todoDialog: boolean) {
+    this.todoDialog = todoDialog
+  }
+
+  @Mutation
+  setTodayTitle(todayDateTitle: string) {
+    this.todayDateTitle = todayDateTitle
   }
 }

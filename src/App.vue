@@ -22,16 +22,23 @@ import { namespace } from 'vuex-class'
 import Navbar from '@/components/Navbar.vue'
 import Snackbar from '@/components/Snackbar.vue'
 import { i18n } from '@/plugins/i18n'
+import { getDateString, getTodayWithStartOfDay } from '@/utils/time'
+import { serverBus } from '@/main'
 
 const { loadCSS } = require('fg-loadcss')
 
 const AppStore = namespace('AppStore')
 const SnackbarStore = namespace('SnackbarStore')
+const SettingsStore = namespace('SettingsStore')
 
 @Component({ components: { Navbar, CookieLaw, Snackbar } })
 export default class App extends Vue {
   @AppStore.State dark!: boolean
+  @AppStore.State todayDateTitle!: string
+  @AppStore.State todoDialog!: boolean
+  @AppStore.Mutation setTodayTitle!: (todayDateTitle: string) => void
   @SnackbarStore.Mutation setSnackbar!: (snackbarState: any) => void
+  @SettingsStore.State startTimeOfDay?: string
 
   get style() {
     return {
@@ -55,6 +62,9 @@ export default class App extends Vue {
 
   mounted() {
     this.loadRenderBlockingCSS()
+    setInterval(() => {
+      this.updateNow()
+    }, 1000)
   }
 
   created() {
@@ -77,6 +87,14 @@ export default class App extends Vue {
   get metaInfo() {
     return {
       title: i18n.t('title') as string,
+    }
+  }
+
+  private updateNow() {
+    const newTodayTitle = getDateString(getTodayWithStartOfDay())
+    if (this.todayDateTitle !== newTodayTitle && !this.todoDialog) {
+      this.setTodayTitle(newTodayTitle)
+      serverBus.$emit('refreshRequested')
     }
   }
 }
@@ -141,6 +159,11 @@ export default class App extends Vue {
 .Cookie__button__todorant:hover {
   opacity: 0.8;
 }
+
+.v-window {
+  overflow: visible !important;
+}
+
 /* Responsiveness */
 @media only screen and (max-width: 1040px) {
   .Cookie__content {

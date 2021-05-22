@@ -5,7 +5,7 @@ import { VuexModule, Module, Mutation } from 'vuex-module-decorators'
 export default class SettingsStore extends VuexModule {
   showTodayOnAddTodo?: boolean = undefined
   firstDayOfWeek?: number = undefined
-  startTimeOfDay?: any = undefined
+  startTimeOfDay?: string = undefined
   newTodosGoFirst?: boolean = undefined
   preserveOrderByTime?: boolean = undefined
   googleCalendarCredentials?: GoogleCalendarCredentials = undefined
@@ -18,6 +18,10 @@ export default class SettingsStore extends VuexModule {
   newLineOnReturn = false
   swipeActionsEnabled = false
   coloredCardBackgrounds = false
+
+  get safeStartTimeOfDay() {
+    return this.startTimeOfDay
+  }
 
   @Mutation
   setSettingsStore(settingsStore: SettingsStore) {

@@ -1,5 +1,5 @@
 <template lang="pug">
-.todo-form-content
+.todo-form-content(@keydown='enableTagNumber', @keyup='disableTagNumber')
   v-textarea(
     clearable,
     :label='$t("todo.create.text")',
@@ -17,14 +17,16 @@
     :autofocus='shouldAutofocus'
   )
   .mb-4(v-if='filteredTags.length')
-    v-btn(
+    v-btn.tag-text-add-todo(
       text,
       small,
       v-for='(tag, i) in filteredTags',
       :key='i',
       :color='colorForTag(tag)',
+      v-shortkey.once='["ctrl", `${++i}`]',
+      @shortkey.native='tagSelected(tag, true)',
       @click='tagSelected(tag)'
-    ) {{ "#" }}{{ tag.tag }}
+    ) {{ "#" }}{{ tag.tag }} {{ showTagsHotkeys && i <= 9 ? `(${i})` : "" }}
   v-row(no-gutters)
     v-col(cols='12', md='6')
       v-menu(v-model='dateMenu', :close-on-content-click='false', min-width=0)
@@ -38,6 +40,7 @@
             :rules='dateAndMonthRules'
           )
         v-date-picker(
+          show-adjacent-months,
           @input='dateMenu = false',
           v-model='date',
           :min='todayFormattedForExactDate',
@@ -57,6 +60,7 @@
             :rules='dateAndMonthRules'
           )
         v-date-picker(
+          show-adjacent-months,
           @input='monthMenu = false',
           v-model='monthAndYear',
           :min='todayFormattedForDatePicker',
@@ -141,7 +145,6 @@ import { decrypt, encrypt } from '@/utils/encryption'
 import { Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
-import { getDateWithStartTimeOfDay } from '@/utils/getDateWithStartTimeOfDay'
 
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import enLocale from 'dayjs/locale/en'
@@ -156,7 +159,6 @@ const DelegationStore = namespace('DelegationStore')
 @Component
 export default class TodoForm extends Vue {
   @Prop({ required: true }) todo!: Todo
-  @Prop({ required: true }) enterPressed!: () => void
   @Prop({ required: true }) escapePressed!: () => void
   @Prop() addTodo?: () => void
   @Prop({ default: false }) editTodo!: boolean
@@ -164,17 +166,19 @@ export default class TodoForm extends Vue {
 
   @AppStore.State language?: string
   @AppStore.State dark!: boolean
+  @AppStore.State todayDateTitle!: string
   @TagsStore.State tags!: Tag[]
   @SettingsStore.State showMoreByDefault!: boolean
   @SettingsStore.State newLineOnReturn!: boolean
   @SettingsStore.State firstDayOfWeek?: number
-  @SettingsStore.State startTimeOfDay?: string
+  @SettingsStore.State hotKeysEnabled!: boolean
   @DelegationStore.State delegates!: User[]
 
   dateMenu = false
   monthMenu = false
   timeMenu = false
   moreShown = false
+  showTagsHotkeys = false
 
   created() {
     dayjs.locale(enLocale)
@@ -303,31 +307,25 @@ export default class TodoForm extends Vue {
   }
 
   get todayFormatted() {
-    return dayjs(new Date()).format('YYYY-MM-DD')
+    return dayjs(this.todayDateTitle).format('YYYY-MM-DD')
   }
 
   get todayFormattedForExactDate() {
-    const now = this.startTimeOfDay
-      ? getDateWithStartTimeOfDay(this.startTimeOfDay)
-      : new Date()
-    return dayjs(now).format()
+    return dayjs(this.todayDateTitle).format()
   }
 
   get todayFormattedForDatePicker() {
-    const date = new Date()
+    const date = new Date(this.todayDateTitle)
     date.setMonth(date.getMonth() + 1)
     return dayjs(date).format()
   }
 
-  keyDown(evt: any) {
+  keyDown(evt: KeyboardEvent) {
     if (!evt.keyCode) {
       return
     }
     if (this.newLineOnReturn) {
       if (evt.keyCode === 13 && evt.ctrlKey) {
-        if (evt.type === 'keydown') {
-          ;(this as any).enterPressed()
-        }
         evt.preventDefault()
       }
       if (evt.keyCode === 13) {
@@ -335,17 +333,21 @@ export default class TodoForm extends Vue {
       }
     }
     if (evt.keyCode === 65 && evt.ctrlKey && evt.shiftKey) {
-      if (evt.type === 'keydown' && this.addTodo) {
-        this.addTodo()
-      }
       evt.preventDefault()
     }
     if (evt.keyCode === 13 && !evt.shiftKey) {
-      if (evt.type === 'keydown') {
-        ;(this as any).enterPressed()
-      }
       evt.preventDefault()
     }
+  }
+
+  enableTagNumber({ code }: KeyboardEvent) {
+    if (code !== 'ControlLeft' || !this.hotKeysEnabled) return
+    this.showTagsHotkeys = true
+  }
+
+  disableTagNumber({ code }: KeyboardEvent) {
+    if (code !== 'ControlLeft') return
+    this.showTagsHotkeys = false
   }
 
   escape() {
@@ -356,9 +358,8 @@ export default class TodoForm extends Vue {
     return tag.color || (this.dark ? '#64B5F6' : '#1E88E5')
   }
 
-  tagSelected(tag: Tag) {
-    const insertText = `#${tag.tag}`
-
+  tagSelected(tag: Tag, hotkey = false) {
+    if (hotkey && !this.hotKeysEnabled) return
     const textInput = (this.$refs.textInput as any).$refs.input
     const text = this.todo.text
     const len = text.length
@@ -366,9 +367,13 @@ export default class TodoForm extends Vue {
     if (pos === undefined) {
       pos = 0
     }
-    const endPos = pos + insertText.length
     const before = text.substr(0, pos)
     const after = text.substr(pos, len)
+    const insertText =
+      before.length && before[before.length - 1] !== ' '
+        ? ` #${tag.tag}`
+        : `#${tag.tag}`
+    const endPos = pos + insertText.length
     const bodyTextInput = (this.$refs.textInput as any).$el.querySelector(
       'textarea'
     )
@@ -404,5 +409,16 @@ export default class TodoForm extends Vue {
 .v-input {
   padding: 0;
   margin: 0;
+}
+
+.tag-text-add-todo {
+  max-width: 100%;
+}
+
+.tag-text-add-todo * {
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
 }
 </style>

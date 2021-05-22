@@ -118,6 +118,7 @@ import { SubscriptionStatus } from '@/models/SubscriptionStatus'
 import { User } from '@/models/User'
 import { setCookie, deleteCookie } from '../utils/cookie'
 import QRCodeStyling from 'qr-code-styling'
+import { Watch } from 'vue-property-decorator'
 
 const UserStore = namespace('UserStore')
 const AppStore = namespace('AppStore')
@@ -147,6 +148,7 @@ export default class Navbar extends Vue {
   @AppStore.Mutation setRulesShown!: (rulesShown: boolean) => void
   @AppStore.Mutation setDark!: (dark: boolean) => void
   @AppStore.Mutation setLanguage!: (language: string) => void
+  @AppStore.Mutation setDialog!: (dialog: boolean) => void
   @UserStore.Mutation setUser!: (user?: User) => void
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
 
@@ -161,6 +163,11 @@ export default class Navbar extends Vue {
   qrRendered?: QRCodeStyling = {} as QRCodeStyling
   appsDialog = false
   encryptionDialog = false
+
+  @Watch('dialogs')
+  onDialogsChange(val: boolean) {
+    this.setDialog(!val)
+  }
 
   get locales() {
     return [
@@ -185,6 +192,21 @@ export default class Navbar extends Vue {
       maxWidth: '1000px',
       margin: 'auto',
     }
+  }
+
+  get dialogs() {
+    return (
+      !this.rulesDialog &&
+      !this.welcomeDialog &&
+      !this.heroDialog &&
+      !this.subscriptionDialog &&
+      !this.settingsDialog &&
+      !this.supportDialog &&
+      !this.hashtagsDialog &&
+      !this.qrDialog &&
+      !this.appsDialog &&
+      !this.encryptionDialog
+    )
   }
 
   created() {

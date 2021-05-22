@@ -1,7 +1,7 @@
 <template lang="pug">
 .text-container
   p(v-if='!!todo.delegator')
-    span.font-weight-bold(v-if='!isDelegation') {{ $t("from") }}: {{ todo.delegator.name }}
+    span.font-weight-bold.delegation-name(v-if='!isDelegation') {{ $t("from") }}: {{ todo.delegator.name }}
     span.font-weight-bold(v-if='isDelegation') {{ todo.monthAndYear }}{{ todo.date ? `-${todo.date}` : "" }}
   span(v-if='!!todo.frog') 🐸{{ " " }}
   span(v-if='!!todo.time') {{ todo.time }}{{ " " }}
@@ -83,6 +83,9 @@ span {
   font-size: 15px;
   line-height: 18px;
   letter-spacing: -0.24px;
+}
+
+.text-container * :not(.delegation-name) {
   word-wrap: break-word;
 }
 </style>

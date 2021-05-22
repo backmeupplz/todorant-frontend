@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+div(translate='no')
   v-btn.fab(
     :absolute='$vuetify.breakpoint.mdAndUp && currentTab == 0 && !planning',
     :fixed='$vuetify.breakpoint.smAndDown || currentTab != 0 || planning',
@@ -10,8 +10,8 @@ div
     right,
     color='blue',
     @click='openDialog()',
-    v-shortkey.once='{ en: ["a"], ru: ["ф"] }',
-    @shortkey.native='openDialog(true)',
+    v-shortkey.once.propagte='{ en: ["a"], ru: ["ф"] }',
+    @shortkey.native.propagte='openDialog(true)',
     aria-label='Add todo'
   )
     v-icon $add
@@ -55,7 +55,6 @@ div
                   v-expansion-panel-content
                     TodoForm(
                       :todo='todo',
-                      :enterPressed='save',
                       :escapePressed='escapePressed',
                       :addTodo='addTodo',
                       ref='todoForm',
@@ -97,10 +96,10 @@ div
                 color='primary',
                 dark,
                 elevation=0,
-                @click='save',
+                @click='save(false)',
                 :loading='loading',
-                v-shortkey.once='["enter"]',
-                @shortkey.native='save'
+                v-shortkey.once.propagte='["enter"]',
+                @shortkey.native='save(true)'
               ) {{ $t("save") }}
 </template>
 
@@ -122,11 +121,12 @@ import { SubscriptionStatus } from '@/models/SubscriptionStatus'
 import { User } from '@/models/User'
 import draggable from 'vuedraggable'
 import { playSound, Sounds } from '@/utils/sounds'
-import { getDateWithStartTimeOfDay } from '@/utils/getDateWithStartTimeOfDay'
+import { getTodayWithStartOfDay } from '@/utils/time'
 
 const SettingsStore = namespace('SettingsStore')
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
+const AppStore = namespace('AppStore')
 
 @Component({
   components: { TodoForm, draggable },
@@ -138,12 +138,14 @@ export default class AddTodo extends Vue {
   @SettingsStore.State duplicateTagInBreakdown?: boolean
   @SettingsStore.State newTodosGoFirst?: boolean
   @SettingsStore.State showTodayOnAddTodo?: boolean
-  @SettingsStore.State startTimeOfDay?: string
+  @SettingsStore.State newLineOnReturn!: boolean
   @UserStore.State subscriptionStatus!: SubscriptionStatus
   @UserStore.State user?: User
   @UserStore.State password?: string
   @UserStore.State planning!: boolean
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
+  @AppStore.State todoDialog!: boolean
+  @AppStore.Mutation setDialog!: (dialog: boolean) => void
 
   dialog = false
 
@@ -182,6 +184,7 @@ export default class AddTodo extends Vue {
 
   @Watch('dialog')
   onDialogChanged(val: boolean, oldVal: boolean) {
+    this.setDialog(val)
     this.reset()
     if (oldVal && !val) {
       this.todoToBreakdown = null
@@ -192,6 +195,7 @@ export default class AddTodo extends Vue {
     if (hotkey && !this.hotKeysEnabled) {
       return
     }
+    if (this.todoDialog) return
     if (this.subscriptionStatus === SubscriptionStatus.inactive) {
       serverBus.$emit('subscriptionRequested')
     } else {
@@ -231,9 +235,7 @@ export default class AddTodo extends Vue {
         text: hashtags.join(' '),
       })
     } else if (this.showTodayOnAddTodo) {
-      const now = this.startTimeOfDay
-        ? getDateWithStartTimeOfDay(this.startTimeOfDay)
-        : new Date()
+      const now = getTodayWithStartOfDay()
       now.setMinutes(now.getMinutes() - now.getTimezoneOffset())
       this.todos.push({
         date: now.toISOString().substr(0, 10),
@@ -254,7 +256,8 @@ export default class AddTodo extends Vue {
     this.todos.splice(i, 1)
   }
 
-  async save() {
+  async save(hotkey = false) {
+    if (hotkey && this.todoDialog && this.newLineOnReturn) return
     const user = this.user
     if (!user) {
       return

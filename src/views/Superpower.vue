@@ -8,12 +8,12 @@
     show-arrows
   )
     v-tab(
-      v-shortkey='{ en: ["c"], ru: ["с"] }',
-      @shortkey.native='switchTab(0)'
+      v-shortkey.propagte='{ en: ["c"], ru: ["с"] }',
+      @shortkey.propagte.native='switchTab(0)'
     ) {{ $t("current") }}
     v-tab(
-      v-shortkey='{ en: ["p"], ru: ["з"] }',
-      @shortkey.native='switchTab(1)'
+      v-shortkey.propagte='{ en: ["p"], ru: ["з"] }',
+      @shortkey.propagte.native='switchTab(1)'
     ) {{ $t("planning") }}
     v-tab {{ $t("report.title") }}
     v-tab {{ $t("delegate.title") }}
@@ -80,6 +80,7 @@ export default class Superpower extends Vue {
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @AppStore.Mutation setEditting!: (editting: boolean) => void
   @AppStore.State editting!: boolean
+  @AppStore.State todoDialog!: boolean
   @SettingsStore.State hotKeysEnabled!: boolean
   @SettingsStore.State showTodayOnAddTodo?: boolean
 
@@ -119,7 +120,7 @@ export default class Superpower extends Vue {
   }
 
   switchTab(tabIndex: number) {
-    if (!this.hotKeysEnabled) {
+    if (!this.hotKeysEnabled || this.todoDialog) {
       return
     }
     this.currentTab = tabIndex

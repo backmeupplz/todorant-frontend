@@ -16,15 +16,25 @@ v-container(style='maxWidth: 1000px;')
         :loading='todosUpdating',
         :disabled='editable'
       )
-      v-text-field.pt-2.mr-4(
-        :autofocus='true',
-        v-if='search',
-        v-model='queryString',
-        :label='$t("search")',
-        clearable,
-        dense
-      )
-      div(v-if='!!searchTags.size')
+      .d-flex.flex-column(v-if='search', style='width: 100%')
+        v-text-field.pt-2.mr-4(
+          :autofocus='true',
+          v-model='queryString',
+          :label='$t("search")',
+          clearable,
+          dense,
+          ref='queryString'
+        )
+        .mb-4(v-if='filteredTags.length')
+          v-btn(
+            text,
+            small,
+            v-for='(tag, i) in filteredTags',
+            :key='i',
+            :color='colorForTag(tag)',
+            @click='tagSelected(tag)'
+          ) {{ "#" }}{{ tag.tag }}
+      .search-container(v-if='!!searchTags.size')
         v-btn.mr-2(
           :loading='todosUpdating || loading',
           @click='goHome',
@@ -33,7 +43,7 @@ v-container(style='maxWidth: 1000px;')
         )
           v-icon(small) clear
         v-chip.ma-1(v-for='(word, i) in searchTags', :key='i')
-          span {{ word }}
+          span.search-word {{ word }}
           v-btn.ml-2(small, icon, @click='delHash(word)')
             v-icon(small) close
       v-spacer(v-if='!search')
@@ -150,7 +160,7 @@ v-container(style='maxWidth: 1000px;')
             :setPanels='setPanels',
             :panelIndex='i'
           )
-        v-expansion-panel-content.no-margin-no-padding
+        v-expansion-panel-content.no-margin-no-padding(translate='no')
           draggable(
             :forceFallback='shouldFallbackDraggable',
             v-model='todoSection.todos',
@@ -171,7 +181,7 @@ v-container(style='maxWidth: 1000px;')
                   :type='showCompleted ? "done" : "planning"',
                   :deleteTodo='() => deleteTodo(todo)',
                   :addTodo='() => breakdownTodo(todo)',
-                  :completeTodo='() => completeOrUndoTodo(todo)',
+                  :completeTodo='(hotkey) => (hotkey ? "" : completeOrUndoTodo(todo))',
                   :repeat='() => completeOrUndoTodo(todo)',
                   :edit='() => editTodo(todo)',
                   :moveTodoToToday='() => moveTodoToToday(todo)',
@@ -219,7 +229,7 @@ import TodoCard from '@/components/TodoCard/TodoCard.vue'
 import IconButton from '@/icons/IconButton.vue'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import enLocale from 'dayjs/locale/en'
-import { getDateWithStartTimeOfDay } from '@/utils/getDateWithStartTimeOfDay'
+import { Tag } from '@/models/Tag'
 
 dayjs.extend(localizedFormat)
 dayjs.extend(weekOfYear)
@@ -247,13 +257,16 @@ export default class TodoList extends Vue {
   @AppStore.State dark!: boolean
   @AppStore.State language!: string
   @AppStore.State editting!: boolean
+  @AppStore.State todayDateTitle!: string
   @AppStore.Mutation setEditting!: (editting: boolean) => void
+  @AppStore.Mutation setDialog!: (dialog: boolean) => void
   @UserStore.State user!: User
   @UserStore.State planning!: boolean
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @SettingsStore.State firstDayOfWeek?: number
-  @SettingsStore.State startTimeOfDay?: string
+  @SettingsStore.State showMoreByDefault!: boolean
   @TagsStore.State searchTags!: Set<String>
+  @TagsStore.State tags!: Tag[]
 
   showCompleted = false
   todoEdited: Partial<Todo> | null = null
@@ -348,9 +361,7 @@ export default class TodoList extends Vue {
   }
 
   get todayDate() {
-    return this.startTimeOfDay
-      ? getDateWithStartTimeOfDay(this.startTimeOfDay)
-      : new Date()
+    return new Date(this.todayDateTitle)
   }
 
   noMoreTodos = false
@@ -372,6 +383,26 @@ export default class TodoList extends Vue {
   calendarViewEnabled = false
 
   currentPeriod = new Date()
+
+  get filteredTags() {
+    const emptyMatches = this.queryString.match(/#$/g) || []
+    if (emptyMatches.length) {
+      return this.tags
+    }
+    const matches =
+      this.queryString.match(/#[\u0400-\u04FFa-zA-Z_0-9]+$/g) || []
+    if (!matches.length) {
+      return this.showMoreByDefault ? this.tags : []
+    }
+    const match = matches[0]
+    return this.tags
+      .filter((tag) => tag.tag.includes(match.substr(1)))
+      .filter((tag) => tag.tag !== match.substr(1))
+  }
+
+  colorForTag(tag: Tag) {
+    return tag.color || (this.dark ? '#64B5F6' : '#1E88E5')
+  }
 
   get stickyHeaderStyle() {
     return {
@@ -442,6 +473,49 @@ export default class TodoList extends Vue {
 
   mounted() {
     this.loadTodos()
+  }
+
+  tagSelected(tag: Tag) {
+    const queryString = (this.$refs.queryString as any).$refs.input
+    const text = this.queryString
+    const len = text.length
+    let pos = queryString.selectionStart
+    if (pos === undefined) {
+      pos = 0
+    }
+    const before = text.substr(0, pos)
+    const after = text.substr(pos, len)
+    const insertText =
+      before.length && before[before.length - 1] !== ' '
+        ? ` #${tag.tag}`
+        : `#${tag.tag}`
+    const endPos = pos + insertText.length
+    const bodyQueryString = (this.$refs.queryString as any).$el.querySelector(
+      'textarea'
+    )
+
+    const emptyMatches = this.queryString.match(/#$/g) || []
+    if (emptyMatches.length) {
+      this.queryString = `${before}${tag.tag}${after}`
+      ;(this.$refs.queryString as any).focus()
+      setTimeout(() => bodyQueryString.setSelectionRange(endPos, endPos))
+      return
+    }
+    const matches =
+      this.queryString.match(/#[\u0400-\u04FFa-zA-Z_0-9]+(?!\s)$/g) || []
+    if (!matches.length) {
+      this.queryString = `${before}${insertText}${after}`
+      ;(this.$refs.queryString as any).focus()
+      setTimeout(() => bodyQueryString.setSelectionRange(endPos, endPos))
+      return
+    }
+    const match = matches[0]
+    this.queryString = `${before.substr(
+      0,
+      before.length - match.length
+    )}${insertText}${after}`
+    ;(this.$refs.queryString as any).focus()
+    setTimeout(() => bodyQueryString.setSelectionRange(endPos, endPos))
   }
 
   created() {
@@ -637,11 +711,7 @@ export default class TodoList extends Vue {
       if (todo.completed) {
         await api.undoTodo(user, todo)
       } else {
-        const { incompleteFrogsExist } = await api.completeTodo(
-          user,
-          todo,
-          this.startTimeOfDay
-        )
+        const { incompleteFrogsExist } = await api.completeTodo(user, todo)
         if (todo.frog) {
           await playSound(Sounds.levelUp)
         } else {
@@ -812,6 +882,7 @@ export default class TodoList extends Vue {
 
   searchTouched() {
     this.search = !this.search
+    this.setDialog(this.search)
     this.queryString = ''
   }
 
@@ -949,6 +1020,18 @@ export default class TodoList extends Vue {
 </script>
 
 <style>
+@media only screen and (max-width: 1040px) {
+  .search-container {
+    max-width: 50%;
+  }
+}
+
+@media only screen and (min-width: 1040px) {
+  .search-container {
+    max-width: 75%;
+  }
+}
+
 .cv-header-nav {
   display: flex;
   justify-content: center;
@@ -1207,5 +1290,11 @@ div[class^='cv-wrapper'][class$='dark'] {
 }
 .light .cv-day.draghover {
   box-shadow: inset 0 0 0.2em 0.2em rgb(190, 190, 190);
+}
+
+.search-word {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 </style>

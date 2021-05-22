@@ -10,9 +10,9 @@ v-dialog(
     v-card-text
       p(v-if='!tags.length') {{ $t("emptyHashtags") }}
       draggable(:list='epics', @end='endDraggingEpic()', handle='.handle')
-        v-card.mb-2(v-for='(tag, i) in epics', :key='i')
+        v-card.mb-2.tag-text(v-for='(tag, i) in epics', :key='i')
           .d-flex.direction-row.align-center
-            v-card-text(
+            v-card-text.tag-text(
               :style='{ color: colorForTag(tag, i) }',
               v-if='!!tag.epicCompleted'
             ) {{ "#" }}{{ tag.tag }}
@@ -68,7 +68,7 @@ v-dialog(
               mode='hexa',
               v-model='editedColor'
             )
-          v-progress-linear(
+          v-progress-linear.tag-text(
             rounded,
             :value='epicProgress(tag)',
             height='25',
@@ -78,8 +78,8 @@ v-dialog(
               span.caption {{ tag.epicPoints }}/{{ tag.epicGoal }} {{ `#${tag.tag}` }}
       v-card.mb-2(v-for='(tag, i) in tags', v-if='!tag.epic', :key='i')
         .d-flex.direction-row.align-center
-          .d-flex.flex-column
-            v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
+          .d-flex.flex-column.tag-text
+            v-card-text.tag-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
               v-text-field(
                 :label='$t("hashtags.name")',
                 v-model='tagName',
@@ -187,7 +187,6 @@ v-dialog(
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import * as api from '@/utils/api'
-import { serverBus } from '@/main'
 import { i18n } from '@/plugins/i18n'
 import { Tag } from '@/models/Tag'
 import { namespace } from 'vuex-class'
@@ -387,3 +386,15 @@ export default class Hashtags extends Vue {
   }
 }
 </script>
+
+<style>
+.tag-text {
+  overflow: hidden;
+}
+
+.tag-text * {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+</style>
