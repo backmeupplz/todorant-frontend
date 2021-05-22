@@ -22,7 +22,7 @@ export const messages = {
         app_login:
           'Use this QR code to login on mobile devices. This picture is a password, do not share it with anyone!',
         web_login:
-          'Login in mobile application then click the button «‎Add devices» in the section «‎Account» in the settings and scan this QR code to enter your account. Remember that QR is only valid for 10 minutes.',
+          'Login in the Todorant mobile app, then go to the Settings, then tap the "Add devices" button under the "Account" section, then scan this QR code to allow login to Todorant here. Remember: this QR code is only valid for 10 minutes!',
       },
     },
     breakdown: {
@@ -88,7 +88,7 @@ export const messages = {
       signIn: 'Sign in',
       facebook: 'Login with Facebook',
       google: 'Login with Google',
-      qr: 'Login with QR code',
+      mobile: 'Login with mobile app',
       privacy: 'Privacy policy',
       feedback: {
         title: 'What do the users say?',
@@ -170,7 +170,7 @@ export const messages = {
         google: 'Could not log in with Google',
         telegram: 'Could not log in with Telegram',
         apple: 'Could not log in with Apple',
-        qr: 'Could not log in with QR code',
+        mobile: 'Could not log in with mobile app',
       },
       internal: 'Internal server error',
       loadTodos: 'Could not fetch todos',
@@ -541,7 +541,7 @@ export const messages = {
         app_login:
           'Используйте этот QR код, чтобы войти в вашу учетную запись на мобильных устройствах. Это изображение — пароль, никому его не передавайте!',
         web_login:
-          'Залогиньтесь в мобильном приложении и отсканируйте этот QR код нажав на кнопку «Добавить устройства» в разделе «Аккаунт» в настройках, чтобы войти в вашу учетную запись. Помните, что QR код актуален только 10 минут. ',
+          'Залогиньтесь в мобильном приложении Тудуранта, зайдите в Настройки, нажмите на "Добавить устройства" в секции "Аккаунт" и просканируйте этот QR код для того, чтобы разрешить войти в вашу учетную запись в браузере. Помните: этот QR код работает только 10 минут!',
       },
     },
     breakdown: {
@@ -603,7 +603,7 @@ export const messages = {
       signIn: 'Войти',
       facebook: 'Войти через Фейсбук',
       google: 'Войти через Гугл',
-      qr: 'Войти через QR код',
+      mobile: 'Войти через мобильное приложение',
       privacy: 'Политика конфиденциальности',
       feedback: {
         title: 'Что говорят пользователи?',
@@ -677,7 +677,7 @@ export const messages = {
         google: 'Не получилось зайти через Гугл',
         telegram: 'Не получилось зайти через Телеграм',
         apple: 'Не получилось зайти через Эпл',
-        qr: 'Не получилось зайти через QR код',
+        mobile: 'Не получилось зайти через мобильное приложение',
       },
       internal: 'Внутренняя ошибка сервера',
       loadTodos: 'Не получилось загрузить задачи',

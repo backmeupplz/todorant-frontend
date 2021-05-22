@@ -24,7 +24,6 @@ nav
   QRCode(
     :dialog='qrDialog',
     :close='closeQRDialog',
-    :valueForQr='qrToken',
     :description='"qr.description.app_login"',
     :qrRendered='qrRendered',
     :changeQr='changeQr'
@@ -82,7 +81,7 @@ nav
         v-list-item(@click='hashtagsDialog = true', v-if='!!user')
           v-list-item-title {{ $t("hashtags.title") }}
         // QR
-        v-list-item(@click='openQRDialog', v-if='!!user')
+        v-list-item(@click='qrDialog = true', v-if='!!user')
           v-list-item-title {{ $t("qr.code") }}
         // QR
         v-list-item(@click='appsDialog = true', v-if='!!user')
@@ -159,7 +158,6 @@ export default class Navbar extends Vue {
   supportDialog = false
   hashtagsDialog = false
   qrDialog = false
-  qrToken = ''
   qrRendered?: QRCodeStyling = {} as QRCodeStyling
   appsDialog = false
   encryptionDialog = false
@@ -252,10 +250,6 @@ export default class Navbar extends Vue {
   }
   closeHashtagsDialog() {
     this.hashtagsDialog = false
-  }
-  openQRDialog() {
-    this.qrToken = this.user.token!
-    this.qrDialog = true
   }
   changeQr(newQr: QRCodeStyling) {
     this.qrRendered = newQr

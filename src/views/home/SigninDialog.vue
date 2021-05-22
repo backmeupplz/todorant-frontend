@@ -46,17 +46,14 @@ v-dialog(v-model='safeDialog', width='unset')
           :userpic='false'
         )
         // QR
-        v-btn.signin-button.signin-google(
-          color='#FFFFFF',
-          @click='loginWithQR'
-        )
+        v-btn.signin-button.signin-mobile(@click='qrDialog = true')
           img.logo-image(
             src='/img/qr-code.svg',
             height='18dp',
             width='18dp',
             alt='QR logo'
           )
-          span {{ $t("home.qr") }}
+          span {{ $t("home.mobile") }}
         // Debug login by token
         div(v-if='debug')
           v-text-field(
@@ -68,10 +65,12 @@ v-dialog(v-model='safeDialog', width='unset')
   QRCode(
     :dialog='qrDialog',
     :close='closeQRDialog',
-    :valueForQr='qrUuid',
     :description='"qr.description.web_login"',
     :qrRendered='qrRendered',
-    :changeQr='changeQr'
+    :changeQr='changeQr',
+    :webLogin='true',
+    :loginSuccess='loginSuccess',
+    :loginError='loginError'
   )
 </template>
 
@@ -86,8 +85,6 @@ import {
   loginGoogle,
   loginApple,
   loginToken,
-  generateQrUuid,
-  checkQrLogin,
 } from '@/utils/api'
 import { User } from '@/models/User'
 import { logEvent } from '@/utils/logEvent'
@@ -117,8 +114,6 @@ export default class SigninDialog extends Vue {
 
   debugToken = ''
   qrDialog = false
-  qrUuid = ''
-  qrCreatedAt?: Date
   qrRendered?: QRCodeStyling = {} as QRCodeStyling
 
   get safeDialog() {
@@ -217,51 +212,6 @@ export default class SigninDialog extends Vue {
     }
   }
 
-  async loginWithQR() {
-    const tenMinutes = 600_000
-    const now = new Date()
-    now.setMinutes(now.getMinutes() - now.getTimezoneOffset())
-    const timeBetween = this.qrCreatedAt
-      ? now.getTime() - this.qrCreatedAt.getTime()
-      : tenMinutes
-
-    if (timeBetween >= tenMinutes) {
-      this.qrUuid = await generateQrUuid()
-      if (Object.keys(this.qrRendered!).length) {
-        this.qrRendered!.update({ data: this.qrUuid })
-      }
-      this.qrCreatedAt = new Date()
-      this.qrCreatedAt.setMinutes(
-        this.qrCreatedAt.getMinutes() - this.qrCreatedAt.getTimezoneOffset()
-      )
-    }
-    this.qrDialog = true
-
-    let user: User
-    let error: Error
-    const checkLogin = setInterval(async () => {
-      try {
-        const token = await checkQrLogin(this.qrUuid)
-        if (!token) {
-          return
-        }
-        user = await loginToken(token)
-        if (!!user) {
-          clearInterval(checkLogin)
-          this.loginSuccess(user, 'qr')
-        }
-      } catch (err) {
-        error = err
-      }
-    }, 5_000)
-    setTimeout(() => {
-      clearInterval(checkLogin)
-      if (!user) {
-        this.loginError(error, 'qr')
-      }
-    }, tenMinutes)
-  }
-
   changeQr(newQr: QRCodeStyling) {
     this.qrRendered = newQr
   }
@@ -338,5 +288,9 @@ export default class SigninDialog extends Vue {
 .signin-telegram {
   display: flex;
   justify-content: center;
+}
+.signin-mobile {
+  background-color: #5c9bff !important;
+  color: #ffffff !important;
 }
 </style>
