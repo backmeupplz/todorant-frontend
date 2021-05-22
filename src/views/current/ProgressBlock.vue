@@ -132,8 +132,13 @@ export default class ProgressBlock extends Vue {
 }
 .epic-container {
   flex: 1;
+  max-width: 100%;
+  overflow: hidden;
 }
 .epic-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   text-align: center;
   margin-bottom: 4px;
   font-style: normal;
