@@ -13,9 +13,9 @@ v-dialog(
         .loader(v-if='loading')
         #qrCanvas(v-observe-visibility='visibilityChanged')
         vue-countdown(
+          v-if='webLogin && counting',
           :time='tenMinutes',
           v-slot='{ minutes, seconds }',
-          v-if='counting',
           @end='onCountdownEnd'
         )
           p {{ `0${minutes}`.slice(-2) }} : {{ `0${seconds}`.slice(-2) }}
@@ -76,6 +76,7 @@ export default class QRCode extends Vue {
 
         // Regenerate QR code every 10 minutes and show error
         this.updateInterval = setInterval(async () => {
+          this.counting = false
           await this.newUuid()
           await this.updateOrCreateCanvas(this.qrUuid)
           if (!this.loginError || !this.mobileLoginError) return
@@ -93,7 +94,6 @@ export default class QRCode extends Vue {
     }
     if (this.webLogin) {
       this.clearAllIntervals()
-      this.counting = false
     }
   }
 
@@ -115,21 +115,19 @@ export default class QRCode extends Vue {
   }
 
   async updateOrCreateCanvas(data: string) {
-    console.log('before:', this.counting)
     this.startCountdown()
     if (!Object.keys(this.qrRendered).length) {
       this.changeQr(drawQR('qrCanvas', data))
       return
     }
     this.qrRendered.update({ data })
-    console.log('after:', this.counting)
   }
 
   checkLoginInterval() {
     // Check is user loggined every 5 seconds
     this.checkLogin = setInterval(async () => {
       try {
-        const token = '' //await checkQrLogin(this.qrUuid)
+        const token = await checkQrLogin(this.qrUuid)
         if (!token) {
           throw new Error('Token is undefined')
         }
@@ -146,6 +144,8 @@ export default class QRCode extends Vue {
   }
 
   clearAllIntervals() {
+    this.counting = false
+
     if (this.checkLogin) {
       clearInterval(this.checkLogin)
     }
