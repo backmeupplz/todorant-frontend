@@ -26,7 +26,8 @@ nav
     :close='closeQRDialog',
     :description='"qr.description.app_login"',
     :qrRendered='qrRendered',
-    :changeQr='changeQr'
+    :changeQr='changeQr',
+    v-if='!!user'
   )
   // Support dialog
   Support(:dialog='supportDialog', :close='closeSupportDialog')
