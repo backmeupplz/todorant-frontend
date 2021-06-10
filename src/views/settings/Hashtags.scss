@@ -9,10 +9,6 @@
     display: none;
   }
 
-  &.v-input--is-focused .v-input__slot {
-    border-color: #3366ff !important;
-  }
-
   & .v-input__slot {
     border: 1px solid #dde2e5;
     padding: 5px 10px;
@@ -21,10 +17,6 @@
     &::after {
       border: 0 !important;
     }
-  }
-
-  &.theme--dark .v-input__slot {
-    border-color: #4d5259;
   }
 
   &.error--text .v-input__slot {

@@ -146,8 +146,9 @@ export default class Hashtags extends Vue {
   }
 
   getBorderColor(tag: Tag) {
-    const color =
-      this.epic === tag._id || this.edited === tag._id ? '#3366FF' : '#DDE2E5'
+    let color = this.dark ? '#4D5259' : '#DDE2E5'
+    const selected = this.epic === tag._id || this.edited === tag._id
+    if (selected) color = '#3366FF'
     return {
       border: `1px ${color} solid !important`,
     }
