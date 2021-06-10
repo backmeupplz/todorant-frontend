@@ -63,9 +63,9 @@ class SocketManager {
     }, 1000)
 
     // Check connection (if not dev)
-    setInterval(() => {
-      this.connect()
-    }, 1000)
+    // setInterval(() => {
+    //   this.connect()
+    // }, 1000)
   }
 
   connect = () => {
