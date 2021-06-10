@@ -185,7 +185,7 @@ export const messages = {
         greaterThanZeroError: 'Should be greater than 0',
       },
       tag: {
-        whitespaces: 'Tag should be without whitespaces',
+        whitespaces: "Tags shouldn't contain spaces",
       },
     },
     close: 'Close',
@@ -449,7 +449,7 @@ export const messages = {
       epicGoal: 'Epic goal',
       name: 'Epic name',
       epicForeword:
-        'Select the number of tasks that has to be completed with this hashtag. This will turn the hashtag into an epic. Epic progress is displayed on the Current page.',
+        'Select the number of tasks that has to be completed with this hashtag. This will turn the hashtag into an epic. The epic progress will be displayed on the Current page.',
     },
     success: 'Success!',
     notLogginedBody: 'Please, login at ',
@@ -690,7 +690,7 @@ export const messages = {
         greaterThanZeroError: 'Должно быть больше 0',
       },
       tag: {
-        whitespaces: 'Тег должен быть без пробелов',
+        whitespaces: 'В теге не должно быть пробелов',
       },
     },
     close: 'Закрыть',
