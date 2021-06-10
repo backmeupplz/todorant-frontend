@@ -69,8 +69,6 @@ import { Prop } from 'vue-property-decorator'
 import { TagColors } from '@/models/TagColors'
 import { User } from '@/models/User'
 import draggable from 'vuedraggable'
-import IconButton from '@/icons/IconButton.vue'
-import Progress from '@/components/Progress.vue'
 import SingleTag from '@/views/settings/SingleTag.vue'
 
 const AppStore = namespace('AppStore')
@@ -78,7 +76,7 @@ const UserStore = namespace('UserStore')
 const TagsStore = namespace('TagsStore')
 const SnackbarStore = namespace('SnackbarStore')
 
-@Component({ components: { draggable, IconButton, Progress, SingleTag } })
+@Component({ components: { draggable, SingleTag } })
 export default class Hashtags extends Vue {
   @Prop({ required: true }) dialog!: boolean
   @Prop({ required: true }) close!: () => void
@@ -98,8 +96,8 @@ export default class Hashtags extends Vue {
     this.edited = edited
   }
 
-  changeEpic(i: string) {
-    this.epic = i
+  changeEpic(epic: string) {
+    this.epic = epic
   }
 
   endDraggingEpic() {
