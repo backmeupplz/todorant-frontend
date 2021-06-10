@@ -190,6 +190,9 @@ export const messages = {
         numberError: 'Should be a number',
         greaterThanZeroError: 'Should be greater than 0',
       },
+      tag: {
+        whitespaces: "Tags shouldn't contain spaces",
+      },
     },
     close: 'Close',
     notFound: 'Page not found',
@@ -451,6 +454,8 @@ export const messages = {
       intoEpic: 'Make an Epic',
       epicGoal: 'Epic goal',
       name: 'Epic name',
+      epicForeword:
+        'Select the number of tasks that has to be completed with this hashtag. This will turn the hashtag into an epic. The epic progress will be displayed on the Current page.',
     },
     success: 'Success!',
     notLogginedBody: 'Please, login at ',
@@ -695,6 +700,9 @@ export const messages = {
       epic: {
         numberError: 'Должно быть цифрой',
         greaterThanZeroError: 'Должно быть больше 0',
+      },
+      tag: {
+        whitespaces: 'В теге не должно быть пробелов',
       },
     },
     close: 'Закрыть',
@@ -965,6 +973,8 @@ export const messages = {
       intoEpic: 'Сделать эпиком',
       epicGoal: 'Цель эпика',
       name: 'Название эпика',
+      epicForeword:
+        'Укажите количество задач, которые нужно выполнить по этому хештегу. Это превратит хештег в эпик. Прогресс эпиков показывается на Текущем.',
     },
     success: 'Успех!',
     notLogginedBody: 'Пожалуйста, войдите в аккаунт на ',
