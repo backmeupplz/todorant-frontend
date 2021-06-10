@@ -6,164 +6,96 @@ v-dialog(
   @click:outside='closePopup'
 )
   v-card
-    v-card-title {{ $t("hashtags.title") }} {{ editedColor }}
+    v-card-title {{ $t("hashtags.title") }}
     v-card-text
-      p(v-if='!tags.length') {{ $t("emptyHashtags") }}
-      draggable(:list='epics', @end='endDraggingEpic()', handle='.handle')
-        v-card.mb-2.tag-text(v-for='(tag, i) in epics', :key='i')
-          .d-flex.direction-row.align-center
-            v-card-text.tag-text(
-              :style='{ color: colorForTag(tag, i) }',
-              v-if='!!tag.epicCompleted'
-            ) {{ "#" }}{{ tag.tag }}
-            v-spacer.px-2
-            v-icon.handle.mr-2(:style='{ fill: "#ff641a" }') $drag
-            v-card-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
-              v-text-field(
-                v-if='edited == i',
-                :label='$t("epic.name")',
-                v-model='tagName',
-                :rules='tagRules',
-                :style='{ color: colorForTag(tag, i) }'
-              )
-            v-spacer
-            v-btn(
-              v-if='!!tag.color',
-              text,
-              icon,
-              @click='defaultTag(tag)',
-              :loading='loading'
-            )
-              v-icon(small) clear
-            v-btn(
-              text,
-              icon,
-              @click='selectTag(tag, i)',
-              :loading='loading',
-              v-if='edited == -1'
-            )
-              v-icon(small) edit
-            v-btn.mr-4(
-              text,
-              icon,
-              @click='deleteTag(tag)',
-              :loading='loading',
-              v-if='edited == -1'
-            )
-              v-icon(small) delete
-            v-btn(
-              text,
-              icon,
-              @click='saveTag(tag)',
-              :loading='loading',
-              v-if='edited == i'
-            )
-              v-icon(small) done
-          v-card-actions(v-if='edited == i')
-            v-spacer
-            v-color-picker(
-              flat,
-              hide-inputs,
-              hide-mode-switch,
-              mode='hexa',
-              v-model='editedColor'
-            )
-          v-progress-linear.tag-text(
-            rounded,
-            :value='epicProgress(tag)',
-            height='25',
-            :color='tag.color ? tag.color : "blue lighten-3"'
+      .tag-container.mb-2.flex-column(
+        v-for='(tag, i) in sortedTags',
+        :key='i',
+        :style='{ border: `1px ${epic === i || edited === i ? "#3366FF" : "#DDE2E5"} solid !important` }'
+      )
+        .d-flex.align-center.justify-space-between
+          .d-flex.flex-column.tag-overflow.tag-text(
+            :style='{ color: colorForTag(tag, i) }'
           ) 
-            template(v-slot='{ value }')
-              span.caption {{ tag.epicPoints }}/{{ tag.epicGoal }} {{ `#${tag.tag}` }}
-      v-card.mb-2(v-for='(tag, i) in tags', v-if='!tag.epic', :key='i')
-        .d-flex.direction-row.align-center
-          .d-flex.flex-column.tag-text
-            v-card-text.tag-text(:style='{ color: colorForTag(tag, i) }') {{ "#" }}{{ tag.tag }}
-              v-text-field(
-                :label='$t("hashtags.name")',
-                v-model='tagName',
-                :rules='tagRules',
-                :style='{ color: colorForTag(tag, i) }',
-                v-if='edited == i'
-              )
-            v-btn.ml-2.mb-2(
-              small,
-              bottom,
-              color='blue',
-              text,
+            .tag-overflow.tag-text {{ "#" }}{{ tag.tag }}
+          .d-flex
+            IconButton(
+              v-if='!tag.epic',
+              :click='() => selectEpic(i)',
               :loading='loading',
-              @click='epicDialog(tag, i)',
-              v-if='epic == -1'
-            ) {{ $t("epic.intoEpic") }}
-          v-spacer
-          v-btn(
-            v-if='!!tag.color',
-            text,
-            icon,
-            @click='defaultTag(tag)',
-            :loading='loading'
-          )
-            v-icon(small) clear
-          v-btn(
-            text,
-            icon,
-            @click='selectTag(tag, i)',
-            :loading='loading',
-            v-if='edited == -1'
-          )
-            v-icon(small) edit
-          v-btn.mr-4(
-            text,
-            icon,
-            @click='deleteTag(tag)',
-            :loading='loading',
-            v-if='edited == -1'
-          )
-            v-icon(small) delete
-          v-btn(
-            text,
-            icon,
-            @click='saveTag(tag)',
-            :loading='loading',
-            v-if='edited == i'
-          )
-            v-icon(small) done
-          v-btn.mr-4(
-            text,
-            icon,
-            @click='cancelTag(tag)',
-            :loading='loading',
-            v-if='edited == i'
-          )
-            v-icon(small) clear
-        v-card-actions.justify-center(v-if='epic == i')
-          v-text-field(
-            type='number',
+              name='$epic'
+            )
+            IconButton(
+              :click='() => selectTag(i)',
+              :loading='loading',
+              name='$edit'
+            )
+            IconButton(
+              :click='() => deleteTag(tag)',
+              :loading='loading',
+              name='$delete',
+              color='#E64646'
+            )
+        .d-flex.flex-column(v-if='i === edited')
+          v-text-field.epic-form__textarea(
+            :label='$t("hashtags.name")',
             v-model='epicGoal',
+            :rules='epicRules'
+          )
+            template(v-slot:append)
+              v-btn.epic-input-icon-background(
+                icon,
+                @click='turnTagToEpic(tag)',
+                v-if='!rulesForbidden'
+              )
+                v-icon(color='white') mdi-check
+          .d-flex.align-center.justify-space-between
+            .d-flex
+              v-btn.tag-color-preset(
+                v-for='colorPreset in colors',
+                :key='colorPreset',
+                :style='{ backgroundColor: colorPreset }',
+                icon,
+                small,
+                @click='() => (editedColor = colorPreset)'
+              )
+              v-menu(top, offset-x, :close-on-content-click='false')
+                template(v-slot:activator='{ on, attrs }')
+                  v-btn.tag-custom-color(
+                    icon,
+                    small,
+                    v-bind='attrs',
+                    v-on='on'
+                  )
+                    v-icon(color='white') $palette
+                v-color-picker(mode='hexa', v-model='editedColor')
+            v-btn.tag-edit-complete(icon, @click='saveTag(tag)', small)
+              v-icon(color='white') mdi-check
+        .d-flex.align-center(
+          v-if='!!tag.epic',
+          :style='{ color: colorForTag(tag, i) }'
+        )
+          span.tag-text.mr-2 {{ tag.epicPoints }}
+          v-progress-linear(
+            :value='epicProgress(tag)',
+            :color='colorForTag(tag, i)',
+            rounded
+          )
+          span.tag-text.ml-2 {{ tag.epicGoal }}
+        div(v-if='i === epic')
+          v-text-field.epic-form__textarea(
             :label='$t("epic.epicGoal")',
+            v-model='epicGoal',
             :rules='epicRules',
-            :append-icon='parseInt(epicGoal) ? "check" : ""',
-            @click:append='saveEpic(tag)'
+            type='number'
           )
-          v-btn.mr-4(
-            text,
-            icon,
-            @click='epicDialog(tag, i)',
-            :loading='loading',
-            v-if='epic == i'
-          )
-            v-icon(small) clear
-        v-card-actions(v-if='edited == i')
-          v-spacer
-          v-color-picker(
-            flat,
-            hide-inputs,
-            hide-mode-switch,
-            mode='hexa',
-            v-model='editedColor'
-          )
-          v-spacer
+            template(v-slot:append)
+              v-btn.epic-input-icon-background(
+                icon,
+                @click='turnTagToEpic(tag)',
+                v-if='!rulesForbidden'
+              )
+                v-icon(color='white') mdi-check
     v-card-actions
       v-btn(
         v-if='tags && tags.length',
@@ -190,17 +122,19 @@ import * as api from '@/utils/api'
 import { i18n } from '@/plugins/i18n'
 import { Tag } from '@/models/Tag'
 import { namespace } from 'vuex-class'
-import { Prop } from 'vue-property-decorator'
+import { Prop, Watch } from 'vue-property-decorator'
 import { TagColors } from '@/models/TagColors'
 import { User } from '@/models/User'
 import draggable from 'vuedraggable'
+import IconButton from '@/icons/IconButton.vue'
+import Progress from '@/components/Progress.vue'
 
 const AppStore = namespace('AppStore')
 const UserStore = namespace('UserStore')
 const TagsStore = namespace('TagsStore')
 const SnackbarStore = namespace('SnackbarStore')
 
-@Component({ components: { draggable } })
+@Component({ components: { draggable, IconButton, Progress } })
 export default class Hashtags extends Vue {
   @Prop({ required: true }) dialog!: boolean
   @Prop({ required: true }) close!: () => void
@@ -220,6 +154,84 @@ export default class Hashtags extends Vue {
 
   tagName = ''
   tagOrder = ''
+
+  rulesForbidden = true
+
+  @Watch('epicGoal')
+  onTodoChanged(val: string) {
+    this.rulesForbidden = !this.epicRules
+      .map((rule) => rule(val))
+      .includes(true)
+  }
+
+  get sortedTags() {
+    return this.tags.sort((a, b) => {
+      if (a.epic && b.epic) {
+        if (!a.epicOrder) {
+          a.epicOrder = 0
+        }
+        if (!b.epicOrder) {
+          b.epicOrder = 0
+        }
+        if (a.epicOrder < b.epicOrder) return -1
+        else return 1.5
+      }
+      if (a.epic && !b.epic) return -2
+      return 1
+    })
+  }
+
+  get colors() {
+    return [
+      '#E5F1FF',
+      '#EAFAF3',
+      '#FFF2D8',
+      '#FFE3DE',
+      '#FFBE3D',
+      '#FF715B',
+      '#2DCA8C',
+      '#377DFF',
+    ]
+  }
+
+  selectEpic(i: number) {
+    this.edited = -1
+    this.epicGoal = ''
+    if (this.epic === i) {
+      this.epic = -1
+      return
+    }
+    this.epic = i
+  }
+
+  selectTag(i: number) {
+    this.editedColor = ''
+    this.epic = -1
+    if (this.edited === i) {
+      this.edited = -1
+      return
+    }
+    this.edited = i
+  }
+
+  async turnTagToEpic(tag: Tag) {
+    const user = this.user
+    const goal = parseInt(this.epicGoal)
+    this.epic = -1
+    this.epicGoal = ''
+    if (!user || goal <= 0) {
+      return
+    }
+    this.loading = true
+    try {
+      await api.editTag(user, tag, tag.color, true, goal)
+      this.cancelTag(tag)
+    } catch (err) {
+      this.setSnackbarError(err.response ? err.response.data : err.message)
+    } finally {
+      this.loading = false
+    }
+  }
 
   endDraggingEpic() {
     const epics = this.epics.map((epic, index) => {
@@ -255,9 +267,10 @@ export default class Hashtags extends Vue {
 
   colorForTag(tag: Tag, i: number) {
     const defaultColor = this.dark ? '#64B5F6' : '#1E88E5'
-    return i === this.edited
-      ? this.editedColor || defaultColor
-      : tag.color || defaultColor
+    if (i === this.edited) {
+      return this.editedColor || tag.color || defaultColor
+    }
+    return tag.color || defaultColor
   }
 
   async deleteTag(tag: Tag) {
@@ -273,14 +286,6 @@ export default class Hashtags extends Vue {
     } finally {
       this.loading = false
     }
-  }
-
-  selectTag(tag: Tag, i: number) {
-    const defaultColor = this.dark ? '#64B5F6' : '#1E88E5'
-    this.editedColor = tag.color || defaultColor
-    this.tagName = tag.tag
-    this.edited = i
-    this.tagOrder = String(tag.epicOrder)
   }
 
   async saveTag(tag: Tag) {
@@ -387,14 +392,78 @@ export default class Hashtags extends Vue {
 }
 </script>
 
-<style>
-.tag-text {
+<style lang="scss">
+@import 'Hashtags';
+
+.tag-overflow {
   overflow: hidden;
 }
 
-.tag-text * {
+.tag-overflow * {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+.tag-text {
+  font-weight: 500 !important;
+  font-size: 17px !important;
+  line-height: 20px !important;
+  letter-spacing: -0.24px !important;
+}
+
+.tag-container {
+  background: #ffffff;
+  border-radius: 12px !important;
+  padding: 12px 16px 12px 16px;
+}
+
+.epic-input-icon-background {
+  background: linear-gradient(135deg, #1148b9 0%, #5c9bff 100%);
+  border-radius: 30px;
+  width: 32px;
+  height: 32px;
+}
+
+.tag-edit-complete {
+  background: linear-gradient(135deg, #1148b9 0%, #5c9bff 100%);
+  border-radius: 16px;
+  width: 28px;
+  height: 28px;
+  margin: 8px 4px 8px;
+}
+
+.epic-form {
+  margin-bottom: 0px !important;
+}
+
+.tag-color-preset {
+  width: 28px;
+  height: 28px;
+  margin: 8px 4px 8px;
+  border-radius: 16px;
+}
+.tag-custom-color {
+  width: 24px;
+  height: 24px;
+  margin: 8px 4px 8px;
+  border-radius: 16px;
+  background: radial-gradient(
+      98.78% 280.22% at 100% 0%,
+      #fcab14 0%,
+      #fa6641 15.91%,
+      #be40c0 40.21%,
+      rgba(80, 90, 221, 0) 100%
+    ),
+    radial-gradient(
+      107.24% 195.45% at 0% 100%,
+      #48cce0 0%,
+      #428beb 28.85%,
+      #505add 60.18%
+    );
+}
+</style>
+
+<style lang="scss">
+@import 'Hashtags';
 </style>

@@ -1,0 +1,42 @@
+.epic-form__textarea {
+  & .v-input__control {
+    border-radius: 12px !important;
+    margin-top: 12px;
+    margin-bottom: 0px;
+  }
+
+  & .v-text-field__details {
+    display: none;
+  }
+
+  &.v-input--is-focused .v-input__slot {
+    border-color: #3366ff !important;
+  }
+
+  & .v-input__slot {
+    border: 1px solid #dde2e5;
+    padding: 5px 10px;
+
+    &::before,
+    &::after {
+      border: 0 !important;
+    }
+  }
+
+  &.theme--dark .v-input__slot {
+    border-color: #4d5259;
+  }
+
+  &.error--text .v-input__slot {
+    border-color: #ff3a3a !important;
+  }
+
+  & .v-label--active {
+    display: none;
+  }
+
+  & textarea,
+  & .v-label {
+    font-size: 14px !important;
+  }
+}
