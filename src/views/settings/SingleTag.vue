@@ -11,9 +11,13 @@ div
         v-if='!tag.epic',
         :click='() => selectEpic(i)',
         :loading='loading',
-        name='$epic'
+        :name='i === epic ? "mdi-close" : "$epic"'
       )
-      IconButton(:click='() => selectTag(i)', :loading='loading', name='$edit')
+      IconButton(
+        :click='() => selectTag(i)',
+        :loading='loading',
+        :name='i === edited ? "mdi-close" : "$edit"'
+      )
       IconButton(
         :click='() => deleteTag(tag)',
         :loading='loading',
@@ -26,8 +30,8 @@ div
       v-model='tagName',
       :rules='tagRules'
     )
-    .d-flex.align-center.justify-space-between
-      .d-flex
+    .d-flex.align-center.justify-space-between.hashtags-color-presets-parent
+      .d-flex.hashtag-color-presets
         v-btn.tag-color-preset(
           v-for='colorPreset in colors',
           :key='colorPreset',
@@ -68,10 +72,10 @@ div
       type='number'
     )
       template(v-slot:append)
-        v-btn.epic-input-icon-background(
+        v-btn.epic-input-icon-background.mb-1(
           icon,
           @click='turnTagToEpic(tag)',
-          v-if='!rulesForbidden'
+          v-if='!rulesForbidden && !!epic'
         )
           v-icon(color='white') mdi-check
 </template>
@@ -121,16 +125,27 @@ export default class EditTodo extends Vue {
   }
 
   get colors() {
-    return [
-      '#FFBE3D',
-      '#FF984C',
-      '#FF715B',
-      '#2DCA8C',
-      '#32A4C6',
-      '#377DFF',
-      '#4740D6',
-      '#5603AD',
-    ]
+    return this.dark
+      ? [
+          '#FFBE3D',
+          '#FF984C',
+          '#FF715B',
+          '#6cdaaf',
+          '#32A4C6',
+          '#70bfd7',
+          '#23738b',
+          '#ab81d6',
+        ]
+      : [
+          '#FFBE3D',
+          '#FF984C',
+          '#FF715B',
+          '#2DCA8C',
+          '#32A4C6',
+          '#377DFF',
+          '#4740D6',
+          '#5603AD',
+        ]
   }
 
   colorForTag(tag: Tag, i: string) {
@@ -296,11 +311,20 @@ export default class EditTodo extends Vue {
 }
 
 .tag-color-preset {
-  width: 28px;
-  height: 28px;
   margin: 8px 4px 8px;
   border-radius: 16px;
 }
+
+.hashtag-color-presets {
+  max-width: 100%;
+  overflow: auto;
+}
+
+.hashtags-color-presets-parent {
+  width: 100%;
+  max-width: 100%;
+}
+
 .tag-custom-color {
   width: 24px;
   height: 24px;

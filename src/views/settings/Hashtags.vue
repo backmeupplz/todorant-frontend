@@ -40,15 +40,15 @@ v-dialog(
           :user='user'
         )
     v-card-actions
-      v-btn.popup-button(
-        v-if='tags && tags.length',
+      v-btn.button-round(
+        v-if='!!tags && !!tags.length',
         color='error',
         text,
         @click='deleteAllHashtags',
         :loading='loading'
       ) {{ $t("deleteAll") }}
       v-spacer
-      v-btn.popup-button(
+      v-btn.button-round(
         color='error',
         text,
         @click='closePopup',
@@ -162,13 +162,5 @@ export default class Hashtags extends Vue {
 }
 .v-dialog {
   border-radius: 20px !important;
-}
-
-.popup-button * {
-  font-size: 18px !important;
-  line-height: 20px !important;
-  letter-spacing: -0.24px !important;
-
-  color: #ff2f2f !important;
 }
 </style>
