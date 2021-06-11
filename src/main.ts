@@ -29,3 +29,4 @@ new Vue({
 setupHooks()
 
 import './utils/sockets'
+document.getElementById('loading-img')?.remove()
