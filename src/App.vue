@@ -1,9 +1,9 @@
 <template lang="pug">
 div(:style='style')
   img#loading-img(
-    src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fthumbs.gfycat.com%2FDismalComposedArizonaalligatorlizard-size_restricted.gif&f=1&nofb=1',
-    width='116',
-    height='100',
+    src='/img/splash.png',
+    width='723',
+    height='218',
     alt='Loading image'
   )
   v-app(:class='dark ? "dark-content" : ""')
