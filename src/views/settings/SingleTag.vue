@@ -8,12 +8,13 @@ div
       .tag-overflow.tag-text {{ "#" }}{{ tag.tag }}
     .d-flex
       IconButton(
-        v-if='!tag.epic',
+        v-if='!tag.epic && i != edited',
         :click='() => selectEpic(i)',
         :loading='loading',
         :name='i === epic ? "mdi-close" : "$epic"'
       )
       IconButton(
+        v-if='i != epic',
         :click='() => selectTag(i)',
         :loading='loading',
         :name='i === edited ? "mdi-close" : "$edit"'
