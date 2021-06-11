@@ -18,8 +18,12 @@ export const messages = {
     search: 'Search',
     qr: {
       code: 'QR code',
-      description:
-        'Use this QR code to login on mobile devices. This picture is a password, do not share it with anyone!',
+      description: {
+        app_login:
+          'Use this QR code to login on mobile devices. This picture is a password, do not share it with anyone!',
+        web_login:
+          'Login in the Todorant mobile app, then go to the Settings, then tap the "Add devices" button under the "Account" section, then scan this QR code to allow login to Todorant here. Remember: this QR code is only valid for 10 minutes!',
+      },
     },
     breakdown: {
       request:
@@ -84,6 +88,7 @@ export const messages = {
       signIn: 'Sign in',
       facebook: 'Login with Facebook',
       google: 'Login with Google',
+      mobile: 'Login with mobile app',
       privacy: 'Privacy policy',
       feedback: {
         title: 'What do the users say?',
@@ -165,6 +170,7 @@ export const messages = {
         google: 'Could not log in with Google',
         telegram: 'Could not log in with Telegram',
         apple: 'Could not log in with Apple',
+        mobile: 'Could not log in with mobile app',
       },
       internal: 'Internal server error',
       loadTodos: 'Could not fetch todos',
@@ -183,6 +189,9 @@ export const messages = {
       epic: {
         numberError: 'Should be a number',
         greaterThanZeroError: 'Should be greater than 0',
+      },
+      tag: {
+        whitespaces: "Tags shouldn't contain spaces",
       },
     },
     close: 'Close',
@@ -445,6 +454,8 @@ export const messages = {
       intoEpic: 'Make an Epic',
       epicGoal: 'Epic goal',
       name: 'Epic name',
+      epicForeword:
+        'Select the number of tasks that has to be completed with this hashtag. This will turn the hashtag into an epic. The epic progress will be displayed on the Current page.',
     },
     success: 'Success!',
     notLogginedBody: 'Please, login at ',
@@ -530,8 +541,12 @@ export const messages = {
     search: 'Поиск',
     qr: {
       code: 'QR код',
-      description:
-        'Используйте этот QR код, чтобы войти в вашу учетную запись на мобильных устройствах. Это изображение — пароль, никому его не передавайте!',
+      description: {
+        app_login:
+          'Используйте этот QR код, чтобы войти в вашу учетную запись на мобильных устройствах. Это изображение — пароль, никому его не передавайте!',
+        web_login:
+          'Залогиньтесь в мобильном приложении Тудуранта, зайдите в Настройки, нажмите на "Добавить устройства" в секции "Аккаунт" и просканируйте этот QR код для того, чтобы разрешить войти в вашу учетную запись в браузере. Помните: этот QR код работает только 10 минут!',
+      },
     },
     breakdown: {
       request:
@@ -592,6 +607,7 @@ export const messages = {
       signIn: 'Войти',
       facebook: 'Войти через Фейсбук',
       google: 'Войти через Гугл',
+      mobile: 'Войти через мобильное приложение',
       privacy: 'Политика конфиденциальности',
       feedback: {
         title: 'Что говорят пользователи?',
@@ -665,6 +681,7 @@ export const messages = {
         google: 'Не получилось зайти через Гугл',
         telegram: 'Не получилось зайти через Телеграм',
         apple: 'Не получилось зайти через Эпл',
+        mobile: 'Не получилось зайти через мобильное приложение',
       },
       internal: 'Внутренняя ошибка сервера',
       loadTodos: 'Не получилось загрузить задачи',
@@ -683,6 +700,9 @@ export const messages = {
       epic: {
         numberError: 'Должно быть цифрой',
         greaterThanZeroError: 'Должно быть больше 0',
+      },
+      tag: {
+        whitespaces: 'В теге не должно быть пробелов',
       },
     },
     close: 'Закрыть',
@@ -953,6 +973,8 @@ export const messages = {
       intoEpic: 'Сделать эпиком',
       epicGoal: 'Цель эпика',
       name: 'Название эпика',
+      epicForeword:
+        'Укажите количество задач, которые нужно выполнить по этому хештегу. Это превратит хештег в эпик. Прогресс эпиков показывается на Текущем.',
     },
     success: 'Успех!',
     notLogginedBody: 'Пожалуйста, войдите в аккаунт на ',

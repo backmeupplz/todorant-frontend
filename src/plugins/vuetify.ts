@@ -67,6 +67,8 @@ import DragIcon from '@/icons/DragIcon.vue'
 import CalendarIcon from '@/icons/CalendarIcon.vue'
 import SearchIcon from '@/icons/SearchIcon.vue'
 import RearrangeIcon from '@/icons/RearrangeIcon.vue'
+import EpicIcon from '@/icons/EpicIcon.vue'
+import PaletteIcon from '@/icons/PaletteIcon.vue'
 
 Vue.use(Vuetify, {
   components: {
@@ -138,6 +140,8 @@ const icons = {
   calendar: CalendarIcon,
   search: SearchIcon,
   rearrange: RearrangeIcon,
+  epic: EpicIcon,
+  palette: PaletteIcon,
 } as { [index: string]: VueConstructor<Vue> }
 const iconsValues = Object.keys(icons).reduce((p, c) => {
   p[c] = {

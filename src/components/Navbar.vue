@@ -21,7 +21,14 @@ nav
   // Hashtags dialog
   Hashtags(:dialog='hashtagsDialog', :close='closeHashtagsDialog')
   // QR dialog
-  QRCode(:dialog='qrDialog', :close='closeQRDialog')
+  QRCode(
+    :dialog='qrDialog',
+    :close='closeQRDialog',
+    :description='"qr.description.app_login"',
+    :qrRendered='qrRendered',
+    :changeQr='changeQr',
+    v-if='!!user'
+  )
   // Support dialog
   Support(:dialog='supportDialog', :close='closeSupportDialog')
   // Encryption dialog
@@ -111,6 +118,7 @@ import { namespace } from 'vuex-class'
 import { SubscriptionStatus } from '@/models/SubscriptionStatus'
 import { User } from '@/models/User'
 import { setCookie, deleteCookie } from '../utils/cookie'
+import QRCodeStyling from 'qr-code-styling'
 import { Watch } from 'vue-property-decorator'
 
 const UserStore = namespace('UserStore')
@@ -153,6 +161,7 @@ export default class Navbar extends Vue {
   supportDialog = false
   hashtagsDialog = false
   qrDialog = false
+  qrRendered?: QRCodeStyling = {} as QRCodeStyling
   appsDialog = false
   encryptionDialog = false
 
@@ -264,6 +273,9 @@ export default class Navbar extends Vue {
   }
   closeHashtagsDialog() {
     this.hashtagsDialog = false
+  }
+  changeQr(newQr: QRCodeStyling) {
+    this.qrRendered = newQr
   }
   closeQRDialog() {
     this.qrDialog = false

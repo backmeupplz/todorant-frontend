@@ -45,6 +45,15 @@ v-dialog(v-model='safeDialog', width='unset')
           radius='3',
           :userpic='false'
         )
+        // QR
+        v-btn.signin-button.signin-mobile(@click='qrDialog = true')
+          img.logo-image(
+            src='/img/qr-code.svg',
+            height='18dp',
+            width='18dp',
+            alt='QR logo'
+          )
+          span {{ $t("home.mobile") }}
         // Debug login by token
         div(v-if='debug')
           v-text-field(
@@ -53,6 +62,16 @@ v-dialog(v-model='safeDialog', width='unset')
             append-icon='send',
             @click:append='debugTokenLogin'
           )
+  QRCode(
+    :dialog='qrDialog',
+    :close='closeQRDialog',
+    :description='"qr.description.web_login"',
+    :qrRendered='qrRendered',
+    :changeQr='changeQr',
+    :webLogin='true',
+    :loginSuccess='loginSuccess',
+    :loginError='loginError'
+  )
 </template>
 
 <script lang="ts">
@@ -73,6 +92,8 @@ import { setCookie } from '@/utils/cookie'
 const { vueTelegramLogin } = require('vue-telegram-login')
 import { serverBus } from '@/main'
 import { v4 as uuid } from 'uuid'
+import QRCode from '@/components/QRCode.vue'
+import QRCodeStyling from 'qr-code-styling'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -80,6 +101,7 @@ const SnackbarStore = namespace('SnackbarStore')
 @Component({
   components: {
     vueTelegramLogin,
+    QRCode,
   },
 })
 export default class SigninDialog extends Vue {
@@ -91,6 +113,8 @@ export default class SigninDialog extends Vue {
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
 
   debugToken = ''
+  qrDialog = false
+  qrRendered?: QRCodeStyling = {} as QRCodeStyling
 
   get safeDialog() {
     return this.dialog
@@ -188,6 +212,14 @@ export default class SigninDialog extends Vue {
     }
   }
 
+  changeQr(newQr: QRCodeStyling) {
+    this.qrRendered = newQr
+  }
+
+  closeQRDialog() {
+    this.qrDialog = false
+  }
+
   loginError(error: Error, provider: string) {
     console.error(error)
     this.setSnackbarError(`errors.login.${provider}`)
@@ -256,5 +288,9 @@ export default class SigninDialog extends Vue {
 .signin-telegram {
   display: flex;
   justify-content: center;
+}
+.signin-mobile {
+  background-color: #5c9bff !important;
+  color: #ffffff !important;
 }
 </style>
