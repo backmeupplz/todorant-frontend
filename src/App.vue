@@ -1,9 +1,9 @@
 <template lang="pug">
 div(:style='style')
   img#loading-img(
-    src='/img/splash.png',
-    width='723',
-    height='218',
+    src='/img/splash.webp',
+    width='241',
+    height='73',
     alt='Loading image'
   )
   v-app(:class='dark ? "dark-content" : ""')
