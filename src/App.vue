@@ -1,5 +1,11 @@
 <template lang="pug">
 div(:style='style')
+  img#loading-img(
+    src='/img/splash.webp',
+    width='241',
+    height='73',
+    alt='Loading image'
+  )
   v-app(:class='dark ? "dark-content" : ""')
     div(style='width: 100%', align='center')
       div(style='maxWidth: 1000px;', align='justify')
@@ -82,6 +88,10 @@ export default class App extends Vue {
     })
 
     document.title = i18n.t('title') as string
+  }
+
+  updated() {
+    document.getElementById('loading-img')?.remove()
   }
 
   get metaInfo() {
