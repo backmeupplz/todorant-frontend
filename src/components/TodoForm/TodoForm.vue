@@ -371,8 +371,8 @@ export default class TodoForm extends Vue {
     const after = text.substr(pos, len)
     const insertText =
       before.length && before[before.length - 1] !== ' '
-        ? ` #${tag.tag}`
-        : `#${tag.tag}`
+        ? ` #${tag.tag} `
+        : `#${tag.tag} `
     const endPos = pos + insertText.length
     const bodyTextInput = (this.$refs.textInput as any).$el.querySelector(
       'textarea'
