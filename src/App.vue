@@ -90,6 +90,10 @@ export default class App extends Vue {
     document.title = i18n.t('title') as string
   }
 
+  updated() {
+    document.getElementById('loading-img')?.remove()
+  }
+
   get metaInfo() {
     return {
       title: i18n.t('title') as string,
