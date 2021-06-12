@@ -29,6 +29,16 @@ if (isProd) {
       minifyCSS: true,
       removeComments: true,
     },
+    postProcess: (result) => {
+      const dom = new JSDOM(result.html)
+      const app = dom.window.document.querySelector('div#app')
+      if (app) {
+        app.innerHTML = ''
+      }
+
+      result.html = dom.serialize()
+      return result
+    },
   })
   // const bundleAnalyzer = new BundleAnalyzerPlugin()
   // plugins.push(bundleAnalyzer)
