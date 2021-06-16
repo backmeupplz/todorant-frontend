@@ -4,6 +4,7 @@ const webpack = require('webpack')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
 const TerserPlugin = require('terser-webpack-plugin')
+const JsDomRenderer = require('@prerenderer/renderer-jsdom')
 
 // This env property added by vue builder automatically
 const isProd = process.env.NODE_ENV === 'production'
@@ -29,16 +30,7 @@ if (isProd) {
       minifyCSS: true,
       removeComments: true,
     },
-    postProcess: (result) => {
-      const dom = new JSDOM(result.html)
-      const app = dom.window.document.querySelector('div#app')
-      if (app) {
-        app.innerHTML = ''
-      }
-
-      result.html = dom.serialize()
-      return result
-    },
+    renderer: new JsDomRenderer(),
   })
   // const bundleAnalyzer = new BundleAnalyzerPlugin()
   // plugins.push(bundleAnalyzer)
