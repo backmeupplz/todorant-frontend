@@ -13,6 +13,7 @@
   "dependencies": {
     "@chenfengyuan/vue-countdown": "^1.1.5",
     "@justinribeiro/lite-youtube": "^0.9.1",
+    "@prerenderer/renderer-jsdom": "^0.2.0",
     "@types/chart.js": "^2.9.27",
     "@types/crypto-js": "^4.0.1",
     "@types/file-saver": "^2.0.1",
