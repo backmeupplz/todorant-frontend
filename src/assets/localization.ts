@@ -276,6 +276,8 @@ export const messages = {
       telegram: 'Telegram',
       coloredCardBackgrounds: 'Color tasks with hashtag colors',
       newLineOnReturn: 'Insert new line on enter',
+      removeCompletedFromCalendar:
+        'Remove completed todos from Google Calendar',
     },
     allDoneTitle: 'Congratulations!',
     allDoneText:
@@ -789,6 +791,8 @@ export const messages = {
       telegram: 'Телеграм',
       coloredCardBackgrounds: 'Окрашивать задачи цветами хештегов',
       newLineOnReturn: 'Переносить строку на enter',
+      removeCompletedFromCalendar:
+        'Удалять задачи из Гугл Календаря после выполнения',
     },
     allDoneTitle: 'Поздравляем!',
     allDoneText:

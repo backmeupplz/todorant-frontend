@@ -12,6 +12,7 @@ export default class SettingsStore extends VuexModule {
   duplicateTagInBreakdown?: boolean = undefined
   showMoreByDefault?: boolean = undefined
   language?: string = undefined
+  removeCompletedFromCalendar?: boolean = undefined
 
   audioEnabled = true
   hotKeysEnabled = true
@@ -96,5 +97,10 @@ export default class SettingsStore extends VuexModule {
   @Mutation
   setShowMoreByDefault(showMoreByDefault: boolean) {
     this.showMoreByDefault = showMoreByDefault
+  }
+
+  @Mutation
+  setRemoveCompletedFromCalendar(removeCompletedFromCalendar: boolean) {
+    this.removeCompletedFromCalendar = removeCompletedFromCalendar
   }
 }
