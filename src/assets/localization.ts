@@ -232,7 +232,7 @@ export const messages = {
       bonus: {
         title: 'Bonus features',
         rules: [
-          'User keyboard shortcuts when on desktop! You can (a)dd, (b)reakdown, switch to (c)urrent, mark as (d)one and switch to (p)lanning. To add an additional task slot while adding tasks, you can use Ctrl+Shift+A.',
+          'Use keyboard shortcuts when on desktop! You can (a)dd, (b)reakdown, switch to (c)urrent, mark as (d)one and switch to (p)lanning. To add an additional task slot while adding tasks, you can use Ctrl+Shift+A.',
         ],
       },
     },
