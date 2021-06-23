@@ -1,7 +1,8 @@
 <template lang="pug">
 .todo-form-content(@keydown='enableTagNumber', @keyup='disableTagNumber')
   v-textarea(
-    clearable,
+    :append-icon='text ? "clear" : undefined',
+    @click:append='clearTodoText',
     :label='$t("todo.create.text")',
     :hint='$t("todo.create.textHint")',
     :rules='textRules',
@@ -320,6 +321,10 @@ export default class TodoForm extends Vue {
     return dayjs(date).format()
   }
 
+  clearTodoText() {
+    this.todo.text = ''
+  }
+
   keyDown(evt: KeyboardEvent) {
     if (!evt.keyCode) {
       return
@@ -371,8 +376,8 @@ export default class TodoForm extends Vue {
     const after = text.substr(pos, len)
     const insertText =
       before.length && before[before.length - 1] !== ' '
-        ? ` #${tag.tag}`
-        : `#${tag.tag}`
+        ? ` #${tag.tag} `
+        : `#${tag.tag} `
     const endPos = pos + insertText.length
     const bodyTextInput = (this.$refs.textInput as any).$el.querySelector(
       'textarea'

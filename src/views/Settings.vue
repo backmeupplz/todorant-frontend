@@ -45,6 +45,10 @@ div(v-if='dialog')
           v-if='hotKeys',
           v-model='newLineOnReturnHotKeys'
         )
+        v-switch.ma-0.pa-0(
+          :label='$t("settings.removeCompletedFromCalendar")',
+          v-model='safeRemoveCompletedFromCalendar'
+        )
         v-divider
         v-select.mt-4(
           :items='weekdays',
@@ -227,6 +231,7 @@ export default class Settings extends Vue {
   @SettingsStore.State newLineOnReturn!: boolean
   @SettingsStore.State swipeActionsEnabled!: boolean
   @SettingsStore.State coloredCardBackgrounds!: boolean
+  @SettingsStore.State removeCompletedFromCalendar!: boolean
   @SettingsStore.State googleCalendarCredentials!: GoogleCalendarCredentials
   @SettingsStore.Mutation setShowTodayOnAddTodo!: (
     hotsetHotKeysEnabled: boolean
@@ -255,6 +260,9 @@ export default class Settings extends Vue {
   ) => void
   @SettingsStore.Mutation setСoloredCardBackgrounds!: (
     coloredCardBackgrounds: boolean
+  ) => void
+  @SettingsStore.Mutation setRemoveCompletedFromCalendar!: (
+    removeCompletedFromCalendar: boolean
   ) => void
 
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
@@ -367,6 +375,12 @@ export default class Settings extends Vue {
   }
   set coloredCardBackgroundsValue(val: boolean) {
     this.setСoloredCardBackgrounds(val)
+  }
+  get safeRemoveCompletedFromCalendar() {
+    return this.removeCompletedFromCalendar
+  }
+  set safeRemoveCompletedFromCalendar(val: boolean) {
+    this.setRemoveCompletedFromCalendar(val)
   }
 
   checkUserName(name: any) {

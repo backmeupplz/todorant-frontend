@@ -56,7 +56,7 @@ v-container(style='maxWidth: 1000px;', v-observe-visibility='visibilityChanged')
     v-col.text-center(v-if='!!name')
       p.display-1 {{ name }}, {{ $t("report.title").toLowerCase() }}{{ hashtag ? ` #${hashtag}` : "" }}
   v-row
-    v-progress-linear(v-if='loading', indeterminate)
+    v-progress-linear.mb-8(v-if='loading', indeterminate)
     v-col.text-center.mt-4(
       v-if='!loading && !Object.keys(completedTodosData).length'
     )
