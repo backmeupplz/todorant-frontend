@@ -186,7 +186,7 @@ export default class Delegation extends Vue {
   }
 
   async getUnacceptedTodos() {
-    this.unacceptedTodos = await api.getUnacceptedDelegated()
+    this.unacceptedTodos = this.sortTodos(await api.getUnacceptedDelegated())
     const mappedTodos = this.unacceptedTodos.reduce((prev, cur) => {
       const name = cur.delegator?.name
       if (!name) return prev
@@ -207,7 +207,7 @@ export default class Delegation extends Vue {
   }
 
   async getDelegatedTodos() {
-    const delegatedTodos = await api.getDelegatedTodos()
+    const delegatedTodos = this.sortTodos(await api.getDelegatedTodos())
     const mappedTodos = delegatedTodos.reduce((prev, cur) => {
       const name = cur.user?.name
       if (!name) return prev
@@ -283,6 +283,22 @@ export default class Delegation extends Vue {
     } finally {
       this.loading = false
     }
+  }
+
+  sortTodos(todoMap: Todo[]) {
+    return todoMap.sort((a, b) => {
+      if (
+        a.date === null &&
+        a.monthAndYear === undefined &&
+        !(b.date === null && b.monthAndYear === undefined)
+      ) {
+        return 1
+      }
+      return new Date(`${a.monthAndYear}-${a.date}`) >
+        new Date(`${b.monthAndYear}-${b.date}`)
+        ? 1
+        : -1
+    })
   }
 }
 </script>
