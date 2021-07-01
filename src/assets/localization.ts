@@ -88,7 +88,6 @@ export const messages = {
       signIn: 'Sign in',
       facebook: 'Login with Facebook',
       google: 'Login with Google',
-      mobile: 'Login with mobile app',
       privacy: 'Privacy policy',
       feedback: {
         title: 'What do the users say?',
@@ -154,6 +153,7 @@ export const messages = {
       crossplatform: {
         title: 'Truly cross-platform',
       },
+      mobile: 'Login with mobile app',
     },
     menu: {
       darkMode: {
@@ -609,7 +609,6 @@ export const messages = {
       signIn: 'Войти',
       facebook: 'Войти через Фейсбук',
       google: 'Войти через Гугл',
-      mobile: 'Войти через мобильное приложение',
       privacy: 'Политика конфиденциальности',
       feedback: {
         title: 'Что говорят пользователи?',
@@ -667,6 +666,7 @@ export const messages = {
       crossplatform: {
         title: 'По-настоящему кросс-платформенный',
       },
+      mobile: 'Войти через мобильное приложение',
     },
     menu: {
       darkMode: {
@@ -1066,8 +1066,6 @@ export const messages = {
     search: 'Пошук',
     qr: {
       code: 'QR код',
-      description:
-        'Використовуйте цей QR код, щоб увійти до вашого профілю на мобільних пристроях. Це зображення — пароль, нікому його не передавайте!',
     },
     breakdown: {
       request:
@@ -1397,8 +1395,6 @@ export const messages = {
     search: 'Ricerca',
     qr: {
       code: 'Codice QR',
-      description:
-        'Usa questo codice QR per accedere sui dispositivi mobili. Questa immagine è una password, non condividerla con nessuno!',
     },
     breakdown: {
       request:
@@ -1576,8 +1572,6 @@ export const messages = {
     search: 'Procurar',
     qr: {
       code: 'QR code',
-      description:
-        'Use este QR Code para fazer login em dispositivos móveis. Esta imagem é uma senha, não a compartilhe com ninguém!',
     },
     breakdown: {
       request:
@@ -1876,8 +1870,6 @@ export const messages = {
     search: 'Căutare',
     qr: {
       code: 'Cod QR',
-      description:
-        'Utilizați acest cod QR pentru a vă conecta la contul dvs. pe dispozitivele mobile. Această imagine este o parolă, nu o da nimănui!',
     },
     breakdown: {
       request:
