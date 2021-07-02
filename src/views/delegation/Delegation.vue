@@ -186,7 +186,7 @@ export default class Delegation extends Vue {
   }
 
   async getUnacceptedTodos() {
-    this.unacceptedTodos = await api.getUnacceptedDelegated()
+    this.unacceptedTodos = this.sortTodos(await api.getUnacceptedDelegated())
     const mappedTodos = this.unacceptedTodos.reduce((prev, cur) => {
       const name = cur.delegator?.name
       if (!name) return prev
@@ -207,7 +207,7 @@ export default class Delegation extends Vue {
   }
 
   async getDelegatedTodos() {
-    const delegatedTodos = await api.getDelegatedTodos()
+    const delegatedTodos = this.sortTodos(await api.getDelegatedTodos())
     const mappedTodos = delegatedTodos.reduce((prev, cur) => {
       const name = cur.user?.name
       if (!name) return prev
@@ -283,6 +283,53 @@ export default class Delegation extends Vue {
     } finally {
       this.loading = false
     }
+  }
+
+  sortTodos(todoMap: Todo[]) {
+    todoMap
+      .sort((a, b) => {
+        if (!a.time && !b.time) return 0
+        if (!a.time) return -1
+        if (!b.time) return -1
+        const aTime = new Date()
+        aTime.setHours(parseInt(a.time.slice(0, 2)))
+        aTime.setMinutes(parseInt(a.time.slice(3)))
+        const bTime = new Date()
+        bTime.setHours(parseInt(b.time.slice(0, 2)))
+        bTime.setMinutes(parseInt(b.time.slice(3)))
+        return aTime > bTime ? -1 : 1
+      })
+      .sort((a, b) => {
+        const aMonthButNoDate = !a.date && a.monthAndYear
+        const bMonthButNoDate = !b.date && b.monthAndYear
+        if (
+          (aMonthButNoDate && bMonthButNoDate) ||
+          (!aMonthButNoDate && !bMonthButNoDate)
+        )
+          return 0
+        if (!aMonthButNoDate && bMonthButNoDate) return -1
+        return 1
+      })
+      .sort((a, b) => {
+        if (a.frog && b.frog) return 0
+        if (a.frog) return 1
+        return -1
+      })
+      .sort((a, b) => {
+        const doesAHaveDate = a.date || a.monthAndYear
+        const doesBHaveDate = b.date || b.monthAndYear
+        if (!doesAHaveDate && !doesBHaveDate) return 0
+        if (doesAHaveDate && !doesBHaveDate) return -1
+        return 1
+      })
+      .sort((a, b) => {
+        const aDate = new Date(`${a.monthAndYear ?? 1}-${a.date ?? 1}`)
+        const bDate = new Date(`${b.monthAndYear ?? 1}-${b.date ?? 1}`)
+        if (aDate === bDate) return 0
+        if (aDate > bDate) return 1
+        return -1
+      })
+    return todoMap
   }
 }
 </script>
