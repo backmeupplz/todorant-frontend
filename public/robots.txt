@@ -2,3 +2,14 @@ User-agent: *
 Disallow: /superpower
 Disallow: /payment_success
 Disallow: /payment_failure
+
+Disallow: /report/*
+Disallow: /invite/*
+Disallow: /google_calendar_setup_web
+Disallow: /facebook_login_result
+Disallow: /google_login_result
+Disallow: /apple_login_result
+Disallow: /apple_firefox_error
+Disallow: /mobile-login/telegram
+Disallow: /mobile_login_success
+Disallow: /mobile_login_error
