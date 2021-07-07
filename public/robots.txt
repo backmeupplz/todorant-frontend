@@ -10,6 +10,6 @@ Disallow: /facebook_login_result
 Disallow: /google_login_result
 Disallow: /apple_login_result
 Disallow: /apple_firefox_error
-Disallow: /mobile-login
+Disallow: /mobile-login/telegram
 Disallow: /mobile_login_success
 Disallow: /mobile_login_error
