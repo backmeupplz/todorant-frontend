@@ -648,7 +648,7 @@ export default class TodoList extends Vue {
       [] as Todo[]
     )
     for (const todo of flatTodos) {
-      if (todo.frogFails < 3 && todo._id === event.id) {
+      if (todo._id === event.id) {
         if (this.spreadEnabled) {
           if (!this.spreadTasks.map((t) => t._id).includes(todo._id)) {
             this.spreadTasks.push(todo)
