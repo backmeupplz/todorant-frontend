@@ -10,7 +10,7 @@ linkify
   .add('file:', 'http:')
   .add('#', {
     validate: (text, pos, self) => {
-      const tail = text.slice(pos - 1)
+      const tail = text.slice(pos)
       const result = /^\S[\u0400-\u04FFa-zA-Z_0-9/]+/.exec(tail)
       return result ? result[0].length : 0
     },
