@@ -1,6 +1,7 @@
 <template lang="pug">
 .actions-container
   IconButton(
+    v-if='notAcceptedByUser',
     :click='deleteTodo',
     :loading='loading',
     name='$delete',
@@ -45,6 +46,7 @@
       )
     span {{ $t("breakdownInfo") }}
   IconButton(
+    v-if='notAcceptedByUser',
     :click='edit',
     :loading='loading',
     name='$edit',
@@ -108,6 +110,13 @@ export default class TodoCardActions extends Vue {
 
   get todoInFuture() {
     return !isTodoOld(this.todo, api.getTomorrow())
+  }
+
+  get notAcceptedByUser() {
+    if (this.type === 'delegatedByMe') {
+      return !this.todo.delegateAccepted
+    }
+    return true
   }
 }
 </script>
