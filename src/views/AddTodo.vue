@@ -167,13 +167,17 @@ export default class AddTodo extends Vue {
     serverBus.$on(
       'addTodoRequested',
       (date?: string, todoToBreakdown?: Todo) => {
-        if (date) {
-          this.date = date
+        if (this.subscriptionStatus === SubscriptionStatus.inactive) {
+          serverBus.$emit('subscriptionRequested')
+        } else {
+          if (date) {
+            this.date = date
+          }
+          if (todoToBreakdown) {
+            this.todoToBreakdown = todoToBreakdown
+          }
+          this.dialog = true
         }
-        if (todoToBreakdown) {
-          this.todoToBreakdown = todoToBreakdown
-        }
-        this.dialog = true
       }
     )
   }
