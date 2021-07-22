@@ -68,6 +68,7 @@ import { serverBus } from '@/main'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
 import { playSound, Sounds } from '@/utils/sounds'
+import { SubscriptionStatus } from '@/models/SubscriptionStatus'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -83,6 +84,7 @@ export default class EditTodo extends Vue {
   @Prop({ required: true }) requestDelete!: (todo: Todo) => void
 
   @UserStore.State user?: User
+  @UserStore.State subscriptionStatus!: SubscriptionStatus
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @AppStore.Mutation setDialog!: (dialog: boolean) => void
 
@@ -98,13 +100,17 @@ export default class EditTodo extends Vue {
 
   @Watch('todo')
   onTodoChanged(val: Todo, oldVal: Todo) {
-    this.dialog = !!val
-    this.setDialog(this.dialog)
-    if (!oldVal && val) {
-      this.completed = val.completed
-      this.reset()
-      this.initialMonthAndYear = val.monthAndYear
-      this.initialDate = val.date
+    if (this.subscriptionStatus === SubscriptionStatus.inactive) {
+      serverBus.$emit('subscriptionRequested')
+    } else {
+      this.dialog = !!val
+      this.setDialog(this.dialog)
+      if (!oldVal && val) {
+        this.completed = val.completed
+        this.reset()
+        this.initialMonthAndYear = val.monthAndYear
+        this.initialDate = val.date
+      }
     }
   }
 
