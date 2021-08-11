@@ -179,6 +179,16 @@ export async function editTag(
   )
 }
 
+export async function unEpic(user: User, tag: Tag) {
+  return axios.put(
+    `${base}/tag/unEpic/${tag._id}`,
+    {},
+    {
+      headers: getHeaders(user),
+    }
+  )
+}
+
 export async function deleteAllTags() {
   const user = (store as any).state.UserStore.user
   if (!user) {

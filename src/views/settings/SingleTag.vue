@@ -7,12 +7,17 @@ div
       v-icon.mr-2.handle(v-if='!!tag.epic') $drag
       .tag-overflow.tag-text {{ "#" }}{{ tag.tag }}
     .d-flex
-      IconButton(
-        v-if='!tag.epic && i != edited',
-        :click='() => selectEpic(i)',
-        :loading='loading',
-        :name='i === epic ? "mdi-close" : "$epic"'
-      )
+      v-tooltip.ml-4(:max-width='300', bottom, v-if='i != edited')
+        template(v-slot:activator='{ on }')
+          IconButton(
+            v-if='i != edited',
+            :click='() => (!tag.epic ? selectEpic(i) : selectUnEpic(tag))',
+            :loading='loading',
+            :name='i === epic ? "mdi-close" : "$epic"',
+            :color='!tag.epic ? undefined : "secondary"',
+            :on='tag.epic ? on : undefined'
+          )
+        span {{ $t("unEpicInfo") }}
       IconButton(
         v-if='i != epic',
         :click='() => selectTag(i)',
@@ -185,6 +190,24 @@ export default class EditTodo extends Vue {
       return
     }
     this.changeEpic(i)
+  }
+
+  async selectUnEpic(tag: Tag) {
+    if (!confirm(i18n.t('unEpicConfirm') as string)) {
+      return
+    }
+    const user = this.user
+    if (!user) {
+      return
+    }
+    this.loading = true
+    try {
+      await api.unEpic(user, tag)
+    } catch (err) {
+      this.setSnackbarError(err.response ? err.response.data : err.message)
+    } finally {
+      this.loading = false
+    }
   }
 
   cancelTag() {
