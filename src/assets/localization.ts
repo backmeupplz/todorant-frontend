@@ -523,6 +523,8 @@ export const messages = {
     },
     to: 'To',
     from: 'From',
+    unEpicInfo: 'Reset epic',
+    unEpicConfirm: 'Are you sure you want to reset the epic?',
   },
   ru: {
     encryption: {
@@ -1046,6 +1048,8 @@ export const messages = {
     },
     to: 'Для',
     from: 'От',
+    unEpicInfo: 'Сбросить эпик',
+    unEpicConfirm: 'Вы уверены, что хотите сбросить эпик?',
   },
   ua: {
     encryption: {

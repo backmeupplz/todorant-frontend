@@ -84,7 +84,7 @@ export default class ProgressBlock extends Vue {
   epicProgress(epic: Tag) {
     if (!epic.epicPoints || !epic.epicGoal) {
       return {
-        total: 0,
+        total: epic.epicGoal ? epic.epicGoal : 0,
         completed: 0,
       }
     }
