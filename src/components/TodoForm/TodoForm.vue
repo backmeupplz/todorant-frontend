@@ -113,6 +113,15 @@
         v-model='todo.goFirst'
       )
     v-col(
+      v-if='showMoreByDefault || moreShown || todo.time',
+      cols='12',
+      md='6'
+    )
+      v-switch.todo-form__select(
+        :label='$t("breakdownMessage.title")',
+        v-model='todo.repetitive'
+      )
+    v-col(
       v-if='!editTodo && delegates.length && (showMoreByDefault || moreShown || todo.time)',
       cols='12',
       md='6'
