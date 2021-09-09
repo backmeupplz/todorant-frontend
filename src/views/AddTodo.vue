@@ -237,6 +237,7 @@ export default class AddTodo extends Vue {
         date: this.date,
         goFirst: this.newTodosGoFirst || false,
         text: hashtags.join(' '),
+        repetitive: this.todoToBreakdown?.repetitive || false,
       })
     } else if (this.showTodayOnAddTodo) {
       const now = getTodayWithStartOfDay()
@@ -245,11 +246,13 @@ export default class AddTodo extends Vue {
         date: now.toISOString().substr(0, 10),
         goFirst: this.newTodosGoFirst || false,
         text: hashtags.join(' '),
+        repetitive: this.todoToBreakdown?.repetitive || false,
       })
     } else {
       this.todos.push({
         goFirst: this.newTodosGoFirst || false,
         text: hashtags.join(' '),
+        repetitive: this.todoToBreakdown?.repetitive || false,
       })
     }
     this.panel = [this.todos.length - 1]
