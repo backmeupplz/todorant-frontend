@@ -41,8 +41,8 @@ v-container(
   FrogsMessage(:dialog='frogsMessageDialog', :close='closeFrogsMessageDialog')
   BreakdownMessage(
     :dialog='breakdownMessageDialog',
-    :close='closeBreakdownMessageDialog',
-    :todo='copyTodo'
+    :complete='completeRepetitiveTodo',
+    :breakdown='breakdownRepetitiveTodo'
   )
 </template>
 
@@ -102,7 +102,6 @@ export default class CurrentTodo extends Vue {
 
   frogsMessageDialog = false
   breakdownMessageDialog = false
-  copyTodo: Todo = {} as Todo
 
   get progress() {
     return this.todosCount === 0
@@ -188,10 +187,10 @@ export default class CurrentTodo extends Vue {
     this.loading = true
     try {
       if (this.todo.repetitive) {
-        this.copyTodo = Object.assign(this.copyTodo, this.todo)
         this.breakdownMessageDialog = true
+      } else {
+        this.completeTodo(user, this.todo)
       }
-      this.completeTodo(user, this.todo)
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
@@ -288,8 +287,14 @@ export default class CurrentTodo extends Vue {
     this.frogsMessageDialog = false
   }
 
-  closeBreakdownMessageDialog() {
-    this.copyTodo = {} as Todo
+  completeRepetitiveTodo() {
+    if (!this.user || !this.todo) return
+    this.completeTodo(this.user, this.todo)
+    this.breakdownMessageDialog = false
+  }
+
+  breakdownRepetitiveTodo() {
+    serverBus.$emit('addTodoRequested', undefined, this.todo)
     this.breakdownMessageDialog = false
   }
 }

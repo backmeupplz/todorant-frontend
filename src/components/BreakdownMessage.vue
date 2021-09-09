@@ -3,7 +3,7 @@ v-dialog(
   v-model='dialog',
   scrollable,
   max-width='600px',
-  @click:outside='close'
+  @click:outside='complete'
 )
   v-card
     v-card-title {{ $t("breakdownMessage.title") }}
@@ -13,22 +13,20 @@ v-dialog(
       v-btn(
         color='default',
         text,
-        @click='close',
+        @click='complete',
         v-shortkey.once='["esc"]',
-        @shortkey.native='close'
-      ) {{ $t("close") }}
+        @shortkey.native='complete'
+      ) {{ $t("breakdownMessage.complete") }}
       v-btn(
         color='default',
         text,
-        @click='breakdownTodo',
+        @click='breakdown',
         v-shortkey.once='["enter"]',
-        @shortkey.native='breakdownTodo'
+        @shortkey.native='breakdown'
       ) {{ $t("breakdown.button") }}
 </template>
 
 <script lang="ts">
-import { serverBus } from '@/main'
-import { Todo } from '@/models/Todo'
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Prop } from 'vue-property-decorator'
@@ -36,12 +34,7 @@ import { Prop } from 'vue-property-decorator'
 @Component
 export default class BreakdownMessage extends Vue {
   @Prop({ required: true }) dialog!: boolean
-  @Prop({ required: true }) close!: () => void
-  @Prop({ required: true }) todo!: Todo
-
-  async breakdownTodo() {
-    await serverBus.$emit('addTodoRequested', undefined, this.todo)
-    this.close()
-  }
+  @Prop({ required: true }) complete!: () => void
+  @Prop({ required: true }) breakdown!: () => void
 }
 </script>

@@ -201,8 +201,8 @@ v-container(style='maxWidth: 1000px;')
   DeleteTodo(:todo='todoDeleted')
   BreakdownMessage(
     :dialog='breakdownMessageDialog',
-    :close='closeBreakdownMessageDialog',
-    :todo='copyTodo'
+    :complete='completeRepetitiveTodo',
+    :breakdown='breakdownRepetitiveTodo'
   )
 </template>
 
@@ -281,7 +281,7 @@ export default class TodoList extends Vue {
   todos = [] as TodoSection[]
 
   breakdownMessageDialog = false
-  copyTodo: Todo = {} as Todo
+  repetitiveTodo?: Todo
 
   collapsedPanels = {} as { [index: string]: boolean }
   getPanels() {
@@ -461,6 +461,10 @@ export default class TodoList extends Vue {
     return [0, 1, 2, 3, 4, 5].map((v) => ({
       'min-height': this.heightForWeek(v),
     }))
+  }
+
+  setRepetitiveTodo(todo: Todo) {
+    this.repetitiveTodo = todo
   }
 
   heightForWeek(i: number) {
@@ -722,10 +726,11 @@ export default class TodoList extends Vue {
         await api.undoTodo(user, todo)
       } else {
         if (todo.repetitive) {
-          this.copyTodo = Object.assign(this.copyTodo, todo)
+          this.setRepetitiveTodo(todo)
           this.breakdownMessageDialog = true
+        } else {
+          this.completeTodo(user, todo)
         }
-        this.completeTodo(user, todo)
       }
       this.loadTodos(false)
     } catch (err) {
@@ -1035,8 +1040,14 @@ export default class TodoList extends Vue {
     }
   }
 
-  closeBreakdownMessageDialog() {
-    this.copyTodo = {} as Todo
+  completeRepetitiveTodo() {
+    if (!this.repetitiveTodo) return
+    this.completeTodo(this.user, this.repetitiveTodo)
+    this.breakdownMessageDialog = false
+  }
+
+  breakdownRepetitiveTodo() {
+    serverBus.$emit('addTodoRequested', undefined, this.repetitiveTodo)
     this.breakdownMessageDialog = false
   }
 }

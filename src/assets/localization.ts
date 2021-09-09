@@ -527,7 +527,9 @@ export const messages = {
     unEpicConfirm: 'Are you sure you want to reset the epic?',
     breakdownMessage: {
       title: 'Repetitive task',
-      text: 'Want to breakdown a task and add it again? ',
+      text:
+        'This is a repetitive task, do you want to break down it or complete it?',
+      complete: 'Complete',
     },
   },
   ru: {
@@ -1056,7 +1058,8 @@ export const messages = {
     unEpicConfirm: 'Вы уверены, что хотите сбросить эпик?',
     breakdownMessage: {
       title: 'Повторяющаяся задача',
-      text: 'Хотите разбить задачу и добавить её ещё раз?',
+      text: 'Это повторяющаяся задача, вы хотите ее разбить или завершить?',
+      complete: 'Завершить',
     },
   },
   ua: {
