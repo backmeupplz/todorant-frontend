@@ -18,8 +18,8 @@ v-container(
           :deleteTodo='deleteTodo',
           :skipTodo='skipTodo',
           :addTodo='addTodo',
-          :completeTodo='completeTodo',
-          :repeat='completeTodo',
+          :completeTodo='breakdownOrCompleteTodo',
+          :repeat='breakdownOrCompleteTodo',
           :edit='edit',
           :todo='todo',
           :loading='loading',
@@ -39,6 +39,11 @@ v-container(
   DeleteTodo(:todo='todoDeleted')
   // FrogsMessage dialog
   FrogsMessage(:dialog='frogsMessageDialog', :close='closeFrogsMessageDialog')
+  BreakdownMessage(
+    :dialog='breakdownMessageDialog',
+    :complete='completeRepetitiveTodo',
+    :breakdown='breakdownRepetitiveTodo'
+  )
 </template>
 
 <script lang="ts">
@@ -59,6 +64,7 @@ import EmptyPlaceholder from '@/views/current/EmptyPlaceholder.vue'
 import AllDonePlaceholder from '@/views/current/AllDonePlaceholder.vue'
 import TodoCard from '@/components/TodoCard/TodoCard.vue'
 import FrogsMessage from '@/components/FrogsMessage.vue'
+import BreakdownMessage from '@/components/BreakdownMessage.vue'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -75,6 +81,7 @@ const TagsStore = namespace('TagsStore')
     AllDonePlaceholder,
     TodoCard,
     FrogsMessage,
+    BreakdownMessage,
   },
 })
 export default class CurrentTodo extends Vue {
@@ -94,6 +101,7 @@ export default class CurrentTodo extends Vue {
   todoDeleted: Todo | null = null
 
   frogsMessageDialog = false
+  breakdownMessageDialog = false
 
   get progress() {
     return this.todosCount === 0
@@ -165,7 +173,7 @@ export default class CurrentTodo extends Vue {
     }
   }
 
-  async completeTodo(hotkey = false) {
+  async breakdownOrCompleteTodo(hotkey = false) {
     if (hotkey && !this.hotKeysEnabled) {
       return
     }
@@ -178,22 +186,30 @@ export default class CurrentTodo extends Vue {
     }
     this.loading = true
     try {
-      const { incompleteFrogsExist } = await api.completeTodo(user, this.todo)
-      if (this.todo.frog) {
-        await playSound(Sounds.levelUp)
+      if (this.todo.repetitive) {
+        this.breakdownMessageDialog = true
       } else {
-        if (incompleteFrogsExist) {
-          serverBus.$emit('violationFrogRules')
-        }
-        await playSound(Sounds.taskDone)
+        this.completeTodo(user, this.todo)
       }
-      this.updateTodo()
-      this.tryConfetti()
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
       this.loading = false
     }
+  }
+
+  async completeTodo(user: User, todo: Todo) {
+    const { incompleteFrogsExist } = await api.completeTodo(user, todo)
+    if (todo.frog) {
+      await playSound(Sounds.levelUp)
+    } else {
+      if (incompleteFrogsExist) {
+        serverBus.$emit('violationFrogRules')
+      }
+      await playSound(Sounds.taskDone)
+    }
+    this.updateTodo()
+    this.tryConfetti()
   }
 
   async deleteTodo() {
@@ -269,6 +285,17 @@ export default class CurrentTodo extends Vue {
 
   closeFrogsMessageDialog() {
     this.frogsMessageDialog = false
+  }
+
+  completeRepetitiveTodo() {
+    if (!this.user || !this.todo) return
+    this.completeTodo(this.user, this.todo)
+    this.breakdownMessageDialog = false
+  }
+
+  breakdownRepetitiveTodo() {
+    serverBus.$emit('addTodoRequested', undefined, this.todo)
+    this.breakdownMessageDialog = false
   }
 }
 </script>

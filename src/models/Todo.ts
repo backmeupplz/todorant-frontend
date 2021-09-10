@@ -8,6 +8,7 @@ export interface Todo {
   text: string
   completed: boolean
   frog: boolean
+  repetitive: boolean
 
   frogFails: number
 

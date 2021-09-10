@@ -525,6 +525,12 @@ export const messages = {
     from: 'From',
     unEpicInfo: 'Reset epic',
     unEpicConfirm: 'Are you sure you want to reset the epic?',
+    breakdownMessage: {
+      title: 'Repetitive task',
+      text:
+        'This is a repetitive task, do you want to break down it or complete it?',
+      complete: 'Complete',
+    },
   },
   ru: {
     encryption: {
@@ -1050,6 +1056,11 @@ export const messages = {
     from: 'От',
     unEpicInfo: 'Сбросить эпик',
     unEpicConfirm: 'Вы уверены, что хотите сбросить эпик?',
+    breakdownMessage: {
+      title: 'Повторяющаяся задача',
+      text: 'Это повторяющаяся задача, вы хотите ее разбить или завершить?',
+      complete: 'Завершить',
+    },
   },
   ua: {
     encryption: {

@@ -217,6 +217,7 @@ export default class AddTodo extends Vue {
   }
 
   addTodo() {
+    let repetitiveTodoText = ''
     let hashtags = [] as string[]
     if (this.todoToBreakdown) {
       let text = this.todoToBreakdown.text
@@ -224,6 +225,9 @@ export default class AddTodo extends Vue {
         text = decrypt(this.todoToBreakdown.text, true) || ''
       }
       const matches = linkify.match(text) || []
+      if (this.todos.length === 0 && this.todoToBreakdown.repetitive) {
+        repetitiveTodoText = text
+      }
       if (this.duplicateTagInBreakdown) {
         hashtags = matches
           .map((v) =>
@@ -236,7 +240,8 @@ export default class AddTodo extends Vue {
       this.todos.push({
         date: this.date,
         goFirst: this.newTodosGoFirst || false,
-        text: hashtags.join(' '),
+        text: repetitiveTodoText || hashtags.join(' '),
+        repetitive: this.todoToBreakdown?.repetitive || false,
       })
     } else if (this.showTodayOnAddTodo) {
       const now = getTodayWithStartOfDay()
@@ -244,12 +249,14 @@ export default class AddTodo extends Vue {
       this.todos.push({
         date: now.toISOString().substr(0, 10),
         goFirst: this.newTodosGoFirst || false,
-        text: hashtags.join(' '),
+        text: repetitiveTodoText || hashtags.join(' '),
+        repetitive: this.todoToBreakdown?.repetitive || false,
       })
     } else {
       this.todos.push({
         goFirst: this.newTodosGoFirst || false,
-        text: hashtags.join(' '),
+        text: repetitiveTodoText || hashtags.join(' '),
+        repetitive: this.todoToBreakdown?.repetitive || false,
       })
     }
     this.panel = [this.todos.length - 1]

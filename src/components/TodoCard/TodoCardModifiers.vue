@@ -3,6 +3,7 @@ div
   v-icon.mr-2(v-if='todoOutstanding', size='18') error_outline
   v-icon.grey--text.mr-2(small, v-if='todo.encrypted') vpn_key
   v-icon.grey--text.mr-2(small, v-if='todo.skipped') arrow_forward
+  v-icon.grey--text.mr-2(small, v-if='todo.repetitive') repeat
 </template>
 
 <script lang="ts">

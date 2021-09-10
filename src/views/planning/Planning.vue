@@ -199,6 +199,11 @@ v-container(style='maxWidth: 1000px;')
     :requestDelete='requestDelete'
   )
   DeleteTodo(:todo='todoDeleted')
+  BreakdownMessage(
+    :dialog='breakdownMessageDialog',
+    :complete='completeRepetitiveTodo',
+    :breakdown='breakdownRepetitiveTodo'
+  )
 </template>
 
 <script lang="ts">
@@ -230,6 +235,7 @@ import IconButton from '@/icons/IconButton.vue'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import enLocale from 'dayjs/locale/en'
 import { Tag } from '@/models/Tag'
+import BreakdownMessage from '@/components/BreakdownMessage.vue'
 
 dayjs.extend(localizedFormat)
 dayjs.extend(weekOfYear)
@@ -251,6 +257,7 @@ const SettingsStore = namespace('SettingsStore')
     PlanningHeader,
     TodoCard,
     IconButton,
+    BreakdownMessage,
   },
 })
 export default class TodoList extends Vue {
@@ -272,6 +279,9 @@ export default class TodoList extends Vue {
   todoEdited: Partial<Todo> | null = null
   todoDeleted: Todo | null = null
   todos = [] as TodoSection[]
+
+  breakdownMessageDialog = false
+  repetitiveTodo?: Todo
 
   collapsedPanels = {} as { [index: string]: boolean }
   getPanels() {
@@ -451,6 +461,10 @@ export default class TodoList extends Vue {
     return [0, 1, 2, 3, 4, 5].map((v) => ({
       'min-height': this.heightForWeek(v),
     }))
+  }
+
+  setRepetitiveTodo(todo: Todo) {
+    this.repetitiveTodo = todo
   }
 
   heightForWeek(i: number) {
@@ -711,16 +725,12 @@ export default class TodoList extends Vue {
       if (todo.completed) {
         await api.undoTodo(user, todo)
       } else {
-        const { incompleteFrogsExist } = await api.completeTodo(user, todo)
-        if (todo.frog) {
-          await playSound(Sounds.levelUp)
+        if (todo.repetitive) {
+          this.setRepetitiveTodo(todo)
+          this.breakdownMessageDialog = true
         } else {
-          if (incompleteFrogsExist) {
-            serverBus.$emit('violationFrogRules')
-          }
-          await playSound(Sounds.taskDone)
+          this.completeTodo(user, todo)
         }
-        this.tryConfetti()
       }
       this.loadTodos(false)
     } catch (err) {
@@ -728,6 +738,19 @@ export default class TodoList extends Vue {
     } finally {
       this.loading = false
     }
+  }
+
+  async completeTodo(user: User, todo: Todo) {
+    const { incompleteFrogsExist } = await api.completeTodo(user, todo)
+    if (todo.frog) {
+      await playSound(Sounds.levelUp)
+    } else {
+      if (incompleteFrogsExist) {
+        serverBus.$emit('violationFrogRules')
+      }
+      await playSound(Sounds.taskDone)
+    }
+    this.tryConfetti()
   }
 
   cleanTodo(needsReload = true) {
@@ -1015,6 +1038,17 @@ export default class TodoList extends Vue {
     if (!this.spreadDates.includes(dateString)) {
       this.spreadDates.push(dateString)
     }
+  }
+
+  completeRepetitiveTodo() {
+    if (!this.repetitiveTodo) return
+    this.completeTodo(this.user, this.repetitiveTodo)
+    this.breakdownMessageDialog = false
+  }
+
+  breakdownRepetitiveTodo() {
+    serverBus.$emit('addTodoRequested', undefined, this.repetitiveTodo)
+    this.breakdownMessageDialog = false
   }
 }
 </script>
