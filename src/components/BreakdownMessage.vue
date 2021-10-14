@@ -8,7 +8,6 @@ v-dialog(
   v-card
     v-card-title {{ $t("breakdownMessage.title") }}
     v-card-text(v-html='$t("breakdownMessage.text")')
-    //
     v-card-actions
       v-btn(
         color='default',
