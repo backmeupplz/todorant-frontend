@@ -9,12 +9,18 @@ v-dialog(
     v-card-title {{ $t("breakdownMessage.title") }}
     v-card-text(v-html='$t("breakdownMessage.text")')
     v-card-actions
+      v-btn(
+        color='default',
+        text,
+        @click='close',
+        v-shortkey.once='["esc"]',
+        @shortkey.native='close'
+      ) {{ $t("close") }}
       v-spacer
       v-btn(
         color='default',
         text,
         @click='complete',
-        v-shortkey.once='["esc"]',
         @shortkey.native='complete'
       ) {{ $t("breakdownMessage.complete") }}
       v-btn(
@@ -36,5 +42,6 @@ export default class BreakdownMessage extends Vue {
   @Prop({ required: true }) dialog!: boolean
   @Prop({ required: true }) complete!: () => void
   @Prop({ required: true }) breakdown!: () => void
+  @Prop({ required: true }) close!: () => void
 }
 </script>
