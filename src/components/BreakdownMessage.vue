@@ -21,7 +21,6 @@ v-dialog(
         color='default',
         text,
         @click='complete',
-        v-shortkey.once='["esc"]',
         @shortkey.native='complete'
       ) {{ $t("breakdownMessage.complete") }}
       v-btn(
