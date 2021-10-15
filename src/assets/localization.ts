@@ -30,6 +30,11 @@ export const messages = {
         'Looks like you move this task way too much. Please break it down, you can no longer move it to another date. Believe me, it will help to complete the task!',
       button: 'Breakdown',
     },
+    move: {
+      request:
+        "Well, well, well, you're moving this task to the future too often. Maybe you can try to break it down into smaller subtasks?",
+      button: 'Move',
+    },
     warning: 'Warning',
     hashtags: {
       title: 'Hashtags',
@@ -562,6 +567,11 @@ export const messages = {
       request:
         'Похоже, вы переносите эту задачу слишком часто. Пожалуйста, разбейте ее на более мелкие задачи, вы больше не можете ее переносить. Поверьте, это поможет вам завершить задачу!',
       button: 'Разбить',
+    },
+    move: {
+      request:
+        'Так-так-так, вы слишком часто переносите эту задачу на будущее. Может, попробуете разбить ее на более мелкие подзадачи?',
+      button: 'Перенести',
     },
     warning: 'Внимание',
     hashtags: {

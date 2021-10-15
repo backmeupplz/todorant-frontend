@@ -11,6 +11,7 @@ export interface Todo {
   repetitive: boolean
 
   frogFails: number
+  futureSkips: number
 
   monthAndYear: string
   date: string

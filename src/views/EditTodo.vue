@@ -43,16 +43,18 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
             v-btn.button-round.button-gradient(
               color='primary',
               elevation=0,
-              @click='save',
+              @click='validateAndSave',
               :loading='loading',
               v-shortkey.once='["shift", "enter"]',
-              @shortkey.native='save'
+              @shortkey.native='validateAndSave'
             ) {{ $t("save") }}
   // Breakdown
   BreakdownRequest(
     :dialog='breakdownRequestDialog',
     :close='closeBreakdownRequestDialog',
-    :breakdown='breakdownRequest'
+    :breakdown='breakdownRequest',
+    :moveTodo='moveTodo',
+    :futureSkippedTodo='futureSkippedTodo'
   )
 </template>
 
@@ -73,7 +75,6 @@ import { SubscriptionStatus } from '@/models/SubscriptionStatus'
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
 const AppStore = namespace('AppStore')
-const SettingsStore = namespace('SettingsStore')
 
 @Component({
   components: { TodoForm, BreakdownRequest },
@@ -97,6 +98,7 @@ export default class EditTodo extends Vue {
   initialDate = ''
 
   completed = false
+  futureSkippedTodo = false
 
   @Watch('todo')
   onTodoChanged(val: Todo, oldVal: Todo) {
@@ -120,7 +122,7 @@ export default class EditTodo extends Vue {
     }
   }
 
-  async save() {
+  async validateAndSave() {
     const user = this.user
     if (!user) {
       return
@@ -130,20 +132,34 @@ export default class EditTodo extends Vue {
       return
     }
     this.loading = true
+    if (
+      // Check how many times frog was failed
+      this.todo.frogFails > 2 &&
+      (this.initialDate !== this.todo.date ||
+        this.initialMonthAndYear !== this.todo.monthAndYear)
+    ) {
+      this.breakdownRequestDialog = true
+      return
+    } else if (
+      // Check how many times todo was skipped
+      this.todo.futureSkips >= 5 &&
+      new Date(this.initialDate || `${this.initialMonthAndYear}-01`) <
+        new Date(this.todo.date || `${this.todo.monthAndYear}-01`)
+    ) {
+      this.futureSkippedTodo = true
+      this.breakdownRequestDialog = true
+      return
+    }
+    this.save(this.todo, user)
+  }
+
+  async save(todo: Todo, user: User) {
     try {
-      if (
-        this.todo.frogFails > 2 &&
-        (this.initialDate !== this.todo.date ||
-          this.initialMonthAndYear !== this.todo.monthAndYear)
-      ) {
-        this.breakdownRequestDialog = true
-        return
-      }
-      const { incompleteFrogsExist } = await api.editTodo(user, this.todo)
+      const { incompleteFrogsExist } = await api.editTodo(user, todo)
       this.cleanTodo()
-      if (this.todo.completed && !this.completed) {
-        playSound(this.todo.frog ? Sounds.levelUp : Sounds.taskDone)
-        if (this.todo.frog) return
+      if (todo.completed && !this.completed) {
+        playSound(todo.frog ? Sounds.levelUp : Sounds.taskDone)
+        if (todo.frog) return
         if (incompleteFrogsExist) {
           serverBus.$emit('violationFrogRules')
         }
@@ -168,12 +184,20 @@ export default class EditTodo extends Vue {
     this.dialog = false
   }
 
+  moveTodo() {
+    this.closeBreakdownRequestDialog()
+    if (!this.user) return
+    this.save(this.todo, this.user)
+  }
+
   closeBreakdownRequestDialog() {
     this.breakdownRequestDialog = false
+    this.futureSkippedTodo = false
+    this.loading = false
   }
 
   breakdownRequest() {
-    this.breakdownRequestDialog = false
+    this.closeBreakdownRequestDialog()
     ;(this as any).cleanTodo()
     serverBus.$emit('addTodoRequested', undefined, (this as any).todo)
   }
