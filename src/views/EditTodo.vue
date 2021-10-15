@@ -143,8 +143,8 @@ export default class EditTodo extends Vue {
     } else if (
       // Check how many times todo was skipped
       this.todo.futureSkips >= 5 &&
-      new Date(this.initialDate || `${this.initialMonthAndYear}-01`) <
-        new Date(this.todo.date || `${this.todo.monthAndYear}-01`)
+      new Date(this.initialDate || this.initialMonthAndYear) <
+        new Date(this.todo.date || this.todo.monthAndYear)
     ) {
       this.futureSkippedTodo = true
       this.breakdownRequestDialog = true
