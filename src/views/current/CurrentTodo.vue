@@ -42,7 +42,8 @@ v-container(
   BreakdownMessage(
     :dialog='breakdownMessageDialog',
     :complete='completeRepetitiveTodo',
-    :breakdown='breakdownRepetitiveTodo'
+    :breakdown='breakdownRepetitiveTodo',
+    :close='closeRepetitiveTodo'
   )
 </template>
 
@@ -295,6 +296,10 @@ export default class CurrentTodo extends Vue {
 
   breakdownRepetitiveTodo() {
     serverBus.$emit('addTodoRequested', undefined, this.todo)
+    this.breakdownMessageDialog = false
+  }
+
+  closeRepetitiveTodo() {
     this.breakdownMessageDialog = false
   }
 }

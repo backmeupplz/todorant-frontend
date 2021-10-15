@@ -202,7 +202,8 @@ v-container(style='maxWidth: 1000px;')
   BreakdownMessage(
     :dialog='breakdownMessageDialog',
     :complete='completeRepetitiveTodo',
-    :breakdown='breakdownRepetitiveTodo'
+    :breakdown='breakdownRepetitiveTodo',
+    :close='closeRepetitiveTodo'
   )
 </template>
 
@@ -1048,6 +1049,10 @@ export default class TodoList extends Vue {
 
   breakdownRepetitiveTodo() {
     serverBus.$emit('addTodoRequested', undefined, this.repetitiveTodo)
+    this.breakdownMessageDialog = false
+  }
+
+  closeRepetitiveTodo() {
     this.breakdownMessageDialog = false
   }
 }
