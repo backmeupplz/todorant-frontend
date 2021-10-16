@@ -76,6 +76,13 @@ const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
 const AppStore = namespace('AppStore')
 
+interface ResponseErr {
+  response?: {
+    data: string
+  }
+  message: string
+}
+
 @Component({
   components: { TodoForm, BreakdownRequest },
 })
@@ -165,7 +172,10 @@ export default class EditTodo extends Vue {
         }
       }
     } catch (err) {
-      this.setSnackbarError(err.response ? err.response.data : err.message)
+      const typedErr = err as ResponseErr
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
     } finally {
       this.loading = false
     }
