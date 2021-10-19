@@ -232,7 +232,7 @@ export default class Navbar extends Vue {
   toggleMode() {
     this.setDark(!this.dark)
     setCookie('dark', this.dark)
-    ;(this.$vuetify.theme as any).dark = this.dark
+    ;(this as any).$vuetify.theme.dark = this.dark
   }
   changeLanguage(locale: string) {
     i18n.locale = locale
