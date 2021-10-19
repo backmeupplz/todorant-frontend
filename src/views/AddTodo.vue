@@ -122,6 +122,7 @@ import { User } from '@/models/User'
 import draggable from 'vuedraggable'
 import { playSound, Sounds } from '@/utils/sounds'
 import { getTodayWithStartOfDay } from '@/utils/time'
+import { ResponseError } from '@/models/ErrorType'
 
 const SettingsStore = namespace('SettingsStore')
 const UserStore = namespace('UserStore')
@@ -327,8 +328,11 @@ export default class AddTodo extends Vue {
       this.dialog = false
       logEvent('add_todo_success')
     } catch (err) {
-      this.setSnackbarError(err.response.data)
-      logEvent('add_todo_error', { error: err.message })
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
+      logEvent('add_todo_error', { error: typedErr.message })
     } finally {
       this.loading = false
     }
