@@ -120,6 +120,7 @@ import { User } from '@/models/User'
 import { setCookie, deleteCookie } from '../utils/cookie'
 import QRCodeStyling from 'qr-code-styling'
 import { Watch } from 'vue-property-decorator'
+import { ResponseError } from '@/models/ErrorType'
 
 const UserStore = namespace('UserStore')
 const AppStore = namespace('AppStore')
@@ -231,7 +232,7 @@ export default class Navbar extends Vue {
   toggleMode() {
     this.setDark(!this.dark)
     setCookie('dark', this.dark)
-    ;(this.$vuetify.theme as any).dark = this.dark
+    ;(this as any).$vuetify.theme.dark = this.dark
   }
   changeLanguage(locale: string) {
     i18n.locale = locale
@@ -304,7 +305,10 @@ export default class Navbar extends Vue {
         language: locale,
       })
     } catch (err) {
-      this.setSnackbarError(err.response ? err.response.data : err.message)
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
     }
   }
 
