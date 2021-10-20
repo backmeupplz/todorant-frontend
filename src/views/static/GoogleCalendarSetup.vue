@@ -12,7 +12,6 @@ import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
 import { GoogleCalendarCredentials } from '@/models/GoogleCalendarCredentials'
 import Loader from '@/components/Loader.vue'
-import { ResponseError } from '@/models/ErrorType'
 
 const UserStore = namespace('UserStore')
 const SettingsStore = namespace('SettingsStore')
@@ -55,11 +54,8 @@ export default class GoogleCalendarSetup extends Vue {
         this.$router.replace('/superpower')
         this.setSnackbarSuccess(i18n.t('googleCalendarEnableSuccess') as string)
       } catch (err) {
-        const typedErr = err as ResponseError
         this.$router.replace('/superpower')
-        this.setSnackbarError(
-          typedErr.response ? typedErr.response.data : typedErr.message
-        )
+        this.setSnackbarError(err.response ? err.response.data : err.message)
       }
     } else {
       window.location.href =

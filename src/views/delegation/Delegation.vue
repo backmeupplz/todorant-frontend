@@ -82,7 +82,6 @@ import TodoText from '@/components/TodoCard/TodoText.vue'
 import EditTodo from '@/views/EditTodo.vue'
 import TodoCard from '@/components/TodoCard/TodoCard.vue'
 import PlanningHeader from '@/views/planning/PlanningHeader.vue'
-import { ResponseError } from '@/models/ErrorType'
 
 const AppStore = namespace('AppStore')
 const DelegationStore = namespace('DelegationStore')
@@ -176,9 +175,8 @@ export default class Delegation extends Vue {
       await this.getDelegatedTodos()
     } catch (err) {
       console.log(err)
-      const typedErr = err as ResponseError
       // Don's show request abort
-      if (typedErr.message.includes('aborted')) {
+      if (err.message.includes('aborted')) {
         return
       }
       this.setSnackbarError('errors.loadTodos')
@@ -239,9 +237,8 @@ export default class Delegation extends Vue {
       await api.deleteTodo(todo)
       await this.getUnacceptedTodos()
     } catch (err) {
-      const typedErr = err as ResponseError
       // Don's show request abort
-      if (typedErr.message.includes('aborted')) {
+      if (err.message.includes('aborted')) {
         return
       }
       this.setSnackbarError('errors.loadTodos')
@@ -278,9 +275,8 @@ export default class Delegation extends Vue {
       await api.acceptDelegateTodo(todo)
       await this.getUnacceptedTodos()
     } catch (err) {
-      const typedErr = err as ResponseError
       // Don's show request abort
-      if (typedErr.message.includes('aborted')) {
+      if (err.message.includes('aborted')) {
         return
       }
       this.setSnackbarError('errors.loadTodos')

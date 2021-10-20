@@ -69,7 +69,6 @@ import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
 import { playSound, Sounds } from '@/utils/sounds'
 import { SubscriptionStatus } from '@/models/SubscriptionStatus'
-import { ResponseError } from '@/models/ErrorType'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -150,10 +149,7 @@ export default class EditTodo extends Vue {
         }
       }
     } catch (err) {
-      const typedErr = err as ResponseError
-      this.setSnackbarError(
-        typedErr.response ? typedErr.response.data : typedErr.message
-      )
+      this.setSnackbarError(err.response ? err.response.data : err.message)
     } finally {
       this.loading = false
     }

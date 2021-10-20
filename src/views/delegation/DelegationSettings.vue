@@ -74,7 +74,6 @@ import { User } from '@/models/User'
 import * as api from '@/utils/api'
 import { i18n } from '@/plugins/i18n'
 import { db } from '../../utils/db'
-import { ResponseError } from '@/models/ErrorType'
 
 const DelegationStore = namespace('DelegationStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -103,9 +102,8 @@ export default class DelegateSettings extends Vue {
     try {
       await this.resetDelegateToken()
     } catch (err) {
-      const typedErr = err as ResponseError
       // Don's show request abort
-      if (typedErr.message.includes('aborted')) {
+      if (err.message.includes('aborted')) {
         return
       }
       this.setSnackbarError('errors.loadTodos')
@@ -122,9 +120,8 @@ export default class DelegateSettings extends Vue {
     try {
       await this.deleteDelegate(delegate._id)
     } catch (err) {
-      const typedErr = err as ResponseError
       console.error(err)
-      this.setSnackbarError(typedErr.message)
+      this.setSnackbarError(err.message)
     } finally {
       this.loading = false
     }
@@ -138,9 +135,8 @@ export default class DelegateSettings extends Vue {
     try {
       await this.deleteDelegator(delegator._id)
     } catch (err) {
-      const typedErr = err as ResponseError
       console.error(err)
-      this.setSnackbarError(typedErr.message)
+      this.setSnackbarError(err.message)
     } finally {
       this.loading = false
     }

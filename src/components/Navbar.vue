@@ -120,7 +120,6 @@ import { User } from '@/models/User'
 import { setCookie, deleteCookie } from '../utils/cookie'
 import QRCodeStyling from 'qr-code-styling'
 import { Watch } from 'vue-property-decorator'
-import { ResponseError } from '@/models/ErrorType'
 
 const UserStore = namespace('UserStore')
 const AppStore = namespace('AppStore')
@@ -305,10 +304,7 @@ export default class Navbar extends Vue {
         language: locale,
       })
     } catch (err) {
-      const typedErr = err as ResponseError
-      this.setSnackbarError(
-        typedErr.response ? typedErr.response.data : typedErr.message
-      )
+      this.setSnackbarError(err.response ? err.response.data : err.message)
     }
   }
 

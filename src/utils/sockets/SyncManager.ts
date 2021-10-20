@@ -69,11 +69,7 @@ export class SyncManager<T> {
           }
         )
       } catch (err) {
-        const typedErr = err as Error
-        this.rejectSync(
-          typeof err === 'string' ? err : typedErr.message,
-          syncId
-        )
+        this.rejectSync(typeof err === 'string' ? err : err.message, syncId)
       }
     })
     // 4

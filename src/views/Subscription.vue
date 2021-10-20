@@ -71,7 +71,6 @@ import { Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import { SubscriptionStatus } from '@/models/SubscriptionStatus'
 import { User } from '@/models/User'
-import { ResponseError } from '@/models/ErrorType'
 
 // Stripe object is global, declaring here for TS
 declare const Stripe: any
@@ -146,11 +145,10 @@ export default class Subscription extends Vue {
         status: this.subscriptionStatus,
       })
     } catch (err) {
-      const typedErr = err as ResponseError
-      this.setSnackbarError(typedErr.message)
+      this.setSnackbarError(err.message)
       logEvent('subscription_purchase_error', {
         status: this.subscriptionStatus,
-        error: typedErr.message,
+        error: err.message,
       })
     } finally {
       this.loading = false
@@ -176,11 +174,10 @@ export default class Subscription extends Vue {
         window.location.href = url
       }
     } catch (err) {
-      const typedErr = err as ResponseError
-      this.setSnackbarError(typedErr.message)
+      this.setSnackbarError(err.message)
       logEvent('subscription_cancel_error', {
         status: this.subscriptionStatus,
-        error: typedErr.message,
+        error: err.message,
       })
     } finally {
       this.loading = false
