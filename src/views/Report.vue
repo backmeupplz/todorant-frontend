@@ -167,6 +167,7 @@ import dayjs from 'dayjs'
 import { Prop, Watch } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
+import { debounce } from 'lodash'
 const Chart = require('chart.js/dist/Chart.bundle')
 
 const UserStore = namespace('UserStore')
@@ -197,6 +198,7 @@ export default class Report extends Vue {
   @AppStore.State language?: string
   @SettingsStore.State firstDayOfWeek?: number
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
+  @AppStore.Mutation setDialog!: (dialog: boolean) => void
 
   external = false
 
@@ -222,6 +224,12 @@ export default class Report extends Vue {
 
   endDateMenu = false
   endDate: null | string = null
+
+  @Watch('hashtag')
+  onDialogsChange() {
+    this.setDialog(true)
+    this.debouncedHotkeys()
+  }
 
   created() {
     this.external = this.$router.currentRoute.name === 'public_report'
@@ -373,6 +381,10 @@ export default class Report extends Vue {
       this.loading = false
     }
   }
+
+  debouncedHotkeys = debounce(() => {
+    this.setDialog(false)
+  }, 1000)
 
   async share() {
     const user = this.user
