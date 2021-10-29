@@ -226,7 +226,7 @@ export default class Report extends Vue {
   endDate: null | string = null
 
   @Watch('hashtag')
-  onDialogsChange(val: boolean) {
+  onDialogsChange() {
     this.setDialog(true)
     this.debouncedHotkeys()
   }
