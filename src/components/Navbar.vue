@@ -143,6 +143,7 @@ const SnackbarStore = namespace('SnackbarStore')
 export default class Navbar extends Vue {
   @UserStore.State subscriptionStatus!: SubscriptionStatus
   @UserStore.State user!: User
+  @UserStore.Mutation setPassword!: (password?: string) => void
   @AppStore.State rulesShown!: boolean
   @AppStore.State dark!: boolean
   @AppStore.State language?: string
@@ -243,9 +244,11 @@ export default class Navbar extends Vue {
   }
   logout() {
     this.setUser(undefined)
+    this.setPassword(undefined)
     deleteCookie()
     this.$router.replace('/')
     sockets.logout()
+    location.reload()
   }
   openRules() {
     this.rulesDialog = true
