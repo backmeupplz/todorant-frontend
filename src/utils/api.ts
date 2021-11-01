@@ -536,7 +536,9 @@ export async function acceptDelegateTodo(todo: Todo) {
 function getHeaders(user: User) {
   if (user.token) {
     const password = (store as any).state.UserStore.password
-    return password ? { token: user.token, password } : { token: user.token }
+    return password
+      ? { token: user.token, password: encodeURIComponent(password) }
+      : { token: user.token }
   } else {
     return undefined
   }
