@@ -98,7 +98,7 @@ export default class QRCode extends Vue {
   }
 
   async stopLoading() {
-    await this.qrRendered._drawingPromise
+    await (this.qrRendered as any)._drawingPromise
     this.loading = false
   }
 
