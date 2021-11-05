@@ -742,16 +742,23 @@ export default class TodoList extends Vue {
   }
 
   async completeTodo(user: User, todo: Todo) {
-    const { incompleteFrogsExist } = await api.completeTodo(user, todo)
-    if (todo.frog) {
-      await playSound(Sounds.levelUp)
-    } else {
-      if (incompleteFrogsExist) {
-        serverBus.$emit('violationFrogRules')
+    this.loading = true
+    try {
+      const { incompleteFrogsExist } = await api.completeTodo(user, todo)
+      if (todo.frog) {
+        await playSound(Sounds.levelUp)
+      } else {
+        if (incompleteFrogsExist) {
+          serverBus.$emit('violationFrogRules')
+        }
+        await playSound(Sounds.taskDone)
       }
-      await playSound(Sounds.taskDone)
+      this.tryConfetti()
+    } catch (err) {
+      this.setSnackbarError(err.response ? err.response.data : err.message)
+    } finally {
+      this.loading = false
     }
-    this.tryConfetti()
   }
 
   cleanTodo(needsReload = true) {
