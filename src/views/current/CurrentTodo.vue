@@ -192,7 +192,7 @@ export default class CurrentTodo extends Vue {
       if (this.todo.repetitive) {
         this.breakdownMessageDialog = true
       } else {
-        this.completeTodo(user, this.todo)
+        await this.completeTodo(user, this.todo)
       }
     } catch (err) {
       this.setSnackbarError(err.response ? err.response.data : err.message)
