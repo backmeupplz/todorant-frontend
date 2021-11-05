@@ -158,6 +158,7 @@ export default class CurrentTodo extends Vue {
       return
     }
     this.todoUpdating = true
+    this.loading = true
     try {
       const fetched = await api.getCurrentTodo(user)
       this.todo = fetched.todo || null
@@ -170,6 +171,7 @@ export default class CurrentTodo extends Vue {
       }
       this.setSnackbarError('errors.loadTodos')
     } finally {
+      this.loading = false
       this.todoUpdating = false
     }
   }
@@ -200,17 +202,24 @@ export default class CurrentTodo extends Vue {
   }
 
   async completeTodo(user: User, todo: Todo) {
-    const { incompleteFrogsExist } = await api.completeTodo(user, todo)
-    if (todo.frog) {
-      await playSound(Sounds.levelUp)
-    } else {
-      if (incompleteFrogsExist) {
-        serverBus.$emit('violationFrogRules')
+    this.loading = true
+    try {
+      const { incompleteFrogsExist } = await api.completeTodo(user, todo)
+      if (todo.frog) {
+        await playSound(Sounds.levelUp)
+      } else {
+        if (incompleteFrogsExist) {
+          serverBus.$emit('violationFrogRules')
+        }
+        await playSound(Sounds.taskDone)
       }
-      await playSound(Sounds.taskDone)
+      this.updateTodo()
+      this.tryConfetti()
+    } catch (err) {
+      this.setSnackbarError(err.response ? err.response.data : err.message)
+    } finally {
+      this.loading = false
     }
-    this.updateTodo()
-    this.tryConfetti()
   }
 
   async deleteTodo() {
