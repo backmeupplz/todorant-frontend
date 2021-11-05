@@ -33,6 +33,7 @@ export default class AppStore extends VuexModule {
 
   @Mutation
   setDialog(todoDialog: boolean) {
+    return
     this.todoDialog = todoDialog
   }
 

@@ -17,8 +17,7 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
         @click='deleteTodo',
         :loading='loading',
         :disabled='loading',
-        v-shortkey.once='["enter"]',
-        @shortkey.native='deleteTodo'
+        v-hotkey='keymap',
       ) {{ $t("delete") }}
 </template>
 
@@ -46,6 +45,12 @@ export default class DeleteTodo extends Vue {
 
   loading = false
   dialog = false
+
+  get keymap() {
+    return {
+      'enter': this.deleteTodo
+    }
+  }
 
   @Watch('todo')
   onTodoChanged(val: boolean, oldVal: boolean) {

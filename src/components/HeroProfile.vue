@@ -1,5 +1,5 @@
 <template lang="pug">
-v-dialog(v-model='dialog', max-width='600px', @click:outside='close')
+v-dialog(v-model='dialog', max-width='600px', @click:outside='close', persistent)
   v-card(:color='$vuetify.theme.dark ? "grey darken-4" : "grey lighten-4"')
     v-card-title {{ $t("heroProfileTitle") }}
     .d-flex.ma-2
@@ -34,8 +34,7 @@ v-dialog(v-model='dialog', max-width='600px', @click:outside='close')
       color='default',
       text,
       @click='close',
-      v-shortkey.once='["esc"]',
-      @shortkey.native='close'
+      v-hotkey='keymap',
     ) {{ $t("close") }}
 </template>
 
@@ -61,6 +60,12 @@ export default class HeroProfile extends Vue {
   @HeroStore.Getter rank!: number
   @HeroStore.Getter nextRank!: number
   @HeroStore.Getter progress!: number
+
+  get keymap() {
+    return {
+      'esc': this.$props.close
+    }
+  }
 
   created() {
     this.generateColorScheme()

@@ -8,12 +8,10 @@
     show-arrows
   )
     v-tab(
-      v-shortkey.propagte='{ en: ["c"], ru: ["с"] }',
-      @shortkey.propagte.native='switchTab(0)'
+      v-hotkey='keymap',
     ) {{ $t("current") }}
     v-tab(
-      v-shortkey.propagte='{ en: ["p"], ru: ["з"] }',
-      @shortkey.propagte.native='switchTab(1)'
+      v-hotkey='keymap',  
     ) {{ $t("planning") }}
     v-tab {{ $t("report.title") }}
     v-tab {{ $t("delegate.title") }}
@@ -83,6 +81,13 @@ export default class Superpower extends Vue {
   @AppStore.State todoDialog!: boolean
   @SettingsStore.State hotKeysEnabled!: boolean
   @SettingsStore.State showTodayOnAddTodo?: boolean
+
+  get keymap(){
+    return {
+      'c': () => this.switchTab(0),
+      'p': () => this.switchTab(1),
+    }
+  }
 
   currentTab = 0
 

@@ -40,7 +40,7 @@
         :loading='loading',
         name='$breakdown',
         :on='on',
-        :shortkeys='{ en: ["b"], ru: ["и"] }',
+        shortkeys="b",
         :shortkeyFunction='() => addTodo(true)',
         :small='type === "planning" || type === "done"'
       )
@@ -58,7 +58,7 @@
     :loading='loading',
     name='$complete',
     color='#4BB34B',
-    :shortkeys='{ en: ["d"], ru: ["в"] }',
+    shortkeys='d',
     :shortkeyFunction='() => completeTodo(true)',
     :small='type === "planning" || type === "done"'
   )

@@ -24,10 +24,9 @@
       v-for='(tag, i) in filteredTags',
       :key='i',
       :color='colorForTag(tag)',
-      v-shortkey.once='["ctrl", `${++i}`]',
-      @shortkey.native='tagSelected(tag, true)',
+      v-hotkey.forbidden='keymap',
       @click='tagSelected(tag)'
-    ) {{ "#" }}{{ tag.tag }} {{ showTagsHotkeys && i <= 9 ? `(${i})` : "" }}
+    ) {{ "#" }}{{ tag.tag }} {{ showTagsHotkeys && i <= 8 ? `(${i + 1})` : "" }}
   v-row(no-gutters)
     v-col(cols='12', md='6')
       v-menu(v-model='dateMenu', :close-on-content-click='false', min-width=0)
@@ -190,6 +189,16 @@ export default class TodoForm extends Vue {
   moreShown = false
   showTagsHotkeys = false
 
+  get keymap() {
+    const tagsHotkeys = {} as { [key: string]: Function }
+    this.filteredTags.forEach((_, index) => {
+      tagsHotkeys[`ctrl+${index + 1}`] = () => {
+        this.tagSelected(this.filteredTags[index], true)
+      }
+    })
+    return tagsHotkeys
+  }
+
   created() {
     dayjs.locale(enLocale)
   }
@@ -335,22 +344,14 @@ export default class TodoForm extends Vue {
   }
 
   keyDown(evt: KeyboardEvent) {
-    if (!evt.keyCode) {
-      return
-    }
     if (this.newLineOnReturn) {
-      if (evt.keyCode === 13 && evt.ctrlKey) {
+      if (evt.key === 'Enter' && evt.shiftKey) {
         evt.preventDefault()
       }
-      if (evt.keyCode === 13) {
-        return
+    } else {
+      if (evt.key === 'Enter' && !evt.shiftKey) {
+        evt.preventDefault()
       }
-    }
-    if (evt.keyCode === 65 && evt.ctrlKey && evt.shiftKey) {
-      evt.preventDefault()
-    }
-    if (evt.keyCode === 13 && !evt.shiftKey) {
-      evt.preventDefault()
     }
   }
 

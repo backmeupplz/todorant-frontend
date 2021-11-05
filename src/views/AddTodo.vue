@@ -10,8 +10,7 @@ div(translate='no')
     right,
     color='blue',
     @click='openDialog()',
-    v-shortkey.once.propagte='{ en: ["a"], ru: ["ф"] }',
-    @shortkey.native.propagte='openDialog(true)',
+    v-hotkey='keymap',
     aria-label='Add todo'
   )
     v-icon $add
@@ -78,8 +77,7 @@ div(translate='no')
                 elevation=0,
                 dark,
                 @click='addTodo',
-                v-shortkey.once='{ en: ["ctrl", "shift", "a"], ru: ["ctrl", "shift", "ф"] }',
-                @shortkey.native='addTodo'
+                v-hotkey.forbidden='addMoreKeymap'
               )
                 v-icon add
             .todo-form-right-action.d-flex.flex-column.flex-md-row
@@ -89,8 +87,7 @@ div(translate='no')
                 elevation=0,
                 @click='close',
                 :disabled='loading',
-                v-shortkey.once='["esc"]',
-                @shortkey.native='close'
+                v-hotkey.forbidden='keymap'
               ) {{ $t("cancel") }}
               v-btn.button-round.button-gradient(
                 color='primary',
@@ -98,8 +95,7 @@ div(translate='no')
                 elevation=0,
                 @click='save(false)',
                 :loading='loading',
-                v-shortkey.once.propagte='["enter"]',
-                @shortkey.native='save(true)'
+                v-hotkey.prevent.forbidden='addMoreKeymap'
               ) {{ $t("save") }}
 </template>
 
@@ -161,6 +157,26 @@ export default class AddTodo extends Vue {
 
   get shouldFallbackDraggable() {
     return navigator.userAgent.toLowerCase().indexOf('safari') > -1
+  }
+
+  get addMoreKeymap() {
+    return {
+      enter: () => {
+        if (this.newLineOnReturn) return
+        this.save(true)
+      },
+      'shift+enter': () => {
+        if (!this.newLineOnReturn) return
+        this.save(true)
+      },
+    }
+  }
+
+  get keymap() {
+    return {
+      a: this.openDialog,
+      esc: this.close,
+    }
   }
 
   created() {
@@ -268,7 +284,7 @@ export default class AddTodo extends Vue {
   }
 
   async save(hotkey = false) {
-    if (hotkey && this.todoDialog && this.newLineOnReturn) return
+    if (hotkey && !this.hotKeysEnabled) return
     const user = this.user
     if (!user) {
       return

@@ -1,5 +1,6 @@
 <template lang="pug">
 v-dialog(
+  persistent,
   v-model='dialog',
   scrollable,
   max-width='600px',
@@ -38,8 +39,7 @@ v-dialog(
         color='default',
         text,
         @click='close',
-        v-shortkey.once='["esc"]',
-        @shortkey.native='close',
+        v-hotkey='!(dirty && saveble) ? keymap : {}',
         :loading='loading'
       ) {{ $t("close") }}
       v-btn(
@@ -47,8 +47,7 @@ v-dialog(
         color='default',
         text,
         @click='save',
-        v-shortkey.once='["esc"]',
-        @shortkey.native='save',
+        v-hotkey='keymap',
         :loading='loading'
       ) {{ $t("save") }}
 </template>
@@ -86,6 +85,12 @@ export default class Encryption extends Vue {
     this.password = this.storePassword || ''
     this.passwordRepeat = this.storePassword || ''
     this.encryptionOn = !!this.password
+  }
+
+  get keymap() {
+    return {
+      'esc': this.saveble ? this.save : this.close,
+    }
   }
 
   get dirty() {
