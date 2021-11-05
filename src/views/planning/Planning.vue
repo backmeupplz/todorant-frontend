@@ -730,7 +730,7 @@ export default class TodoList extends Vue {
           this.setRepetitiveTodo(todo)
           this.breakdownMessageDialog = true
         } else {
-          this.completeTodo(user, todo)
+          await this.completeTodo(user, todo)
         }
       }
       this.loadTodos(false)
