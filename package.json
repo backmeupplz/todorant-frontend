@@ -24,7 +24,7 @@
     "@types/socket.io-client": "^1.4.34",
     "@types/uuid": "^8.3.0",
     "@upacyxou/vue-shortkey": "^3.1.8",
-    "@upacyxou/vue-simple-calendar": "^5.5.0",
+    "@upacyxou/vue-simple-calendar": "^5.5.9",
     "axios": "^0.21.0",
     "chart.js": "^2.9.4",
     "cnf-qrcode": "^1.0.13",
