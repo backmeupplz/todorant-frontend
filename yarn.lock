@@ -515,10 +515,10 @@
     custom-event-polyfill "^1.0.7"
     element-matches "^0.1.2"
 
-"@upacyxou/vue-simple-calendar@^5.5.0":
-  version "5.5.0"
-  resolved "https://registry.yarnpkg.com/@upacyxou/vue-simple-calendar/-/vue-simple-calendar-5.5.0.tgz#8973aba13c45be3d887f690cf1e292067846472c"
-  integrity sha512-aL6peRGu/0LUkZ9SMGm80jo0svpGAhUSBYtYreEZ9Bug27YZmsqH+F8biV9uqzyN3xYv6lZdgGNmDVkrH5luQw==
+"@upacyxou/vue-simple-calendar@^5.5.9":
+  version "5.5.9"
+  resolved "https://registry.yarnpkg.com/@upacyxou/vue-simple-calendar/-/vue-simple-calendar-5.5.9.tgz#288e5ad87790337a00d2fd075d9f366c98b65692"
+  integrity sha512-U65wuYDRRUvEvxHmfHBOJpuQIG8NAANoJovUiF1blXDXv4dbeOAUmMLX3XNT8FDR7cH4eQTVOJUQ6sLfEpuGOQ==
   dependencies:
     core-js "^3.6.5"
     vue "^2.6.12"
