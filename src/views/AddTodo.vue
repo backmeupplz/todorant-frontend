@@ -87,7 +87,7 @@ div(translate='no')
                 elevation=0,
                 @click='close',
                 :disabled='loading',
-                v-hotkey.forbidden='keymap'
+                v-hotkey='keymap'
               ) {{ $t("cancel") }}
               v-btn.button-round.button-gradient(
                 color='primary',
@@ -118,6 +118,7 @@ import { User } from '@/models/User'
 import draggable from 'vuedraggable'
 import { playSound, Sounds } from '@/utils/sounds'
 import { getTodayWithStartOfDay } from '@/utils/time'
+import { debounce } from 'lodash'
 
 const SettingsStore = namespace('SettingsStore')
 const UserStore = namespace('UserStore')
@@ -155,19 +156,29 @@ export default class AddTodo extends Vue {
 
   todoToBreakdown: null | Todo = null
 
+  enterPressed = false
+
+  shiftPressed = false
+
+  shiftUpBeforeEnter = false
+
   get shouldFallbackDraggable() {
     return navigator.userAgent.toLowerCase().indexOf('safari') > -1
   }
 
+  debouncedSave = debounce(() => this.save(true))
+
   get addMoreKeymap() {
     return {
-      enter: () => {
-        if (this.newLineOnReturn) return
-        this.save(true)
+      enter: {
+        keyup: () => {
+          if (this.newLineOnReturn) return
+          this.debouncedSave()
+        },
       },
       'shift+enter': () => {
         if (!this.newLineOnReturn) return
-        this.save(true)
+        this.debouncedSave()
       },
     }
   }
@@ -179,7 +190,39 @@ export default class AddTodo extends Vue {
     }
   }
 
+  checkEnterKeyType(e: KeyboardEvent) {
+    console.log('hello')
+    // console.log(e.key)
+    // if (e.type === 'keydown') {
+    //   if (e.key === 'Enter') {
+    //     this.enterPressed = true
+    //   }
+    //   if (e.key === 'Shift') {
+    //     this.shiftPressed = true
+    //   }
+    // }
+    // if (e.type === 'keyup') {
+    //   if (e.key === 'Enter') {
+    //     if (this.shiftPressed) {
+    //       this.shiftUpBeforeEnter = true
+    //     }
+    //     this.enterPressed = false
+    //   }
+    //   if (e.key === 'Shift') {
+    //     this.shiftPressed = false
+    //     console.log('ау')
+    //     console.log(this.enterPressed)
+    //     if (this.enterPressed) {
+    //       this.shiftUpBeforeEnter = true
+    //     }
+    //   }
+    // }
+  }
+
   created() {
+    serverBus.$on('shiftBeforeEnter', () => {
+      this.shiftUpBeforeEnter = true
+    })
     serverBus.$on(
       'addTodoRequested',
       (date?: string, todoToBreakdown?: Todo) => {
@@ -283,8 +326,18 @@ export default class AddTodo extends Vue {
     this.todos.splice(i, 1)
   }
 
+  counter = 0
+
   async save(hotkey = false) {
+    console.log(this.counter)
+    console.log(this.shiftUpBeforeEnter)
+    // console.log(this.shiftPressed)
+    // console.log(this.enterPressed)
     if (hotkey && !this.hotKeysEnabled) return
+    if (hotkey && this.shiftUpBeforeEnter) {
+      this.shiftUpBeforeEnter = false
+      return
+    }
     const user = this.user
     if (!user) {
       return

@@ -1,6 +1,6 @@
 <template lang="pug">
 v-dialog(v-model='dialog', scrollable, max-width='600px', persistent)
-  v-card
+  v-card(v-hotkey='keymap')
     v-card-title {{ $t("howto.title") }}
     v-card-text
       ul
@@ -11,23 +11,11 @@ v-dialog(v-model='dialog', scrollable, max-width='600px', persistent)
     v-card-actions.d-flex.flex-column(v-if='this.$vuetify.breakpoint.xsOnly')
       v-btn(v-if='!!user', color='blue', text, @click='openWelcomeDialog') {{ $t("introButton") }}
       v-spacer
-      v-btn(
-        color='blue',
-        text,
-        @click='close',
-        v-shortkey.once='["esc"]',
-        @shortkey.native='close'
-      ) {{ $t("cookie.button") }}
+      v-btn(color='blue', text, @click='close') {{ $t("cookie.button") }}
     v-card-actions(v-else)
       v-btn(v-if='!!user', color='blue', text, @click='openWelcomeDialog') {{ $t("introButton") }}
       v-spacer
-      v-btn(
-        color='blue',
-        text,
-        @click='close',
-        v-shortkey.once='["esc"]',
-        @shortkey.native='close'
-      ) {{ $t("cookie.button") }}
+      v-btn(color='blue', text, @click='close') {{ $t("cookie.button") }}
 </template>
 
 <script lang="ts">
@@ -46,6 +34,12 @@ export default class Rules extends Vue {
   @Prop({ required: true }) openWelcome!: () => void
 
   @UserStore.State user?: User
+
+  get keymap() {
+    return {
+      esc: this.close,
+    }
+  }
 
   openWelcomeDialog() {
     this.close()

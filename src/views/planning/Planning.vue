@@ -77,7 +77,7 @@ v-container(style='maxWidth: 1000px;')
         icon,
         :loading='todosUpdating || loading',
         @click='crossPressed',
-        v-hotkey='keymap',
+        v-hotkey='keymap'
       )
         v-icon clear
       v-btn(
@@ -93,7 +93,7 @@ v-container(style='maxWidth: 1000px;')
         :loading='todosUpdating || loading',
         :click='searchTouched',
         name='$search',
-        shortkeys="ctrl + shift + f",
+        shortkeys='ctrl + shift + f',
         :shortkeyFunction='searchTouched'
       )
       IconButton.planning-calendar-button(
@@ -180,7 +180,7 @@ v-container(style='maxWidth: 1000px;')
                   :type='showCompleted ? "done" : "planning"',
                   :deleteTodo='() => deleteTodo(todo)',
                   :addTodo='() => breakdownTodo(todo)',
-                  :completeTodo='(hotkey) => (hotkey ? "" : completeOrUndoTodo(todo))',
+                  :completeTodo='(hotkey) => completeOrUndoTodo(todo)',
                   :repeat='() => completeOrUndoTodo(todo)',
                   :edit='() => editTodo(todo)',
                   :moveTodoToToday='() => moveTodoToToday(todo)',
@@ -376,7 +376,7 @@ export default class TodoList extends Vue {
 
   get keymap() {
     return {
-      'esc': this.crossPressed,
+      esc: this.crossPressed,
     }
   }
 

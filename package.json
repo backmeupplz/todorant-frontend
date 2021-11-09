@@ -11,7 +11,7 @@
     "increment-version": "versiony public/version.json --minor && versiony package.json --minor && git add . && git commit -m 'new version' && git push"
   },
   "dependencies": {
-    "@borodutch-labs/v-hotkey": "^0.8.0",
+    "@borodutch-labs/v-hotkey": "^0.9.0",
     "@chenfengyuan/vue-countdown": "^1.1.5",
     "@justinribeiro/lite-youtube": "^0.9.1",
     "@prerenderer/renderer-jsdom": "^0.2.0",

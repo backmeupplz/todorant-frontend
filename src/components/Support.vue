@@ -10,13 +10,7 @@ v-dialog(
     v-card-text(v-html='$t("supportAlert.text")')
     v-card-actions
       v-spacer
-      v-btn(
-        color='default',
-        text,
-        @click='close',
-        v-shortkey.once='["esc"]',
-        @shortkey.native='close'
-      ) {{ $t("close") }}
+      v-btn(color='default', text, @click='close', v-hotkey='keymap') {{ $t("close") }}
 </template>
 
 <script lang="ts">
@@ -28,5 +22,11 @@ import { Prop } from 'vue-property-decorator'
 export default class Support extends Vue {
   @Prop({ required: true }) dialog!: boolean
   @Prop({ required: true }) close!: () => void
+
+  get keymap() {
+    return {
+      esc: this.close,
+    }
+  }
 }
 </script>

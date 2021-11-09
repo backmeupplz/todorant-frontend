@@ -10,20 +10,8 @@ v-dialog(
     v-card-text(v-html='$t("breakdown.request")')
     v-card-actions
       v-spacer
-      v-btn(
-        color='default',
-        text,
-        @click='close',
-        v-shortkey.once='["esc"]',
-        @shortkey.native='close'
-      ) {{ $t("close") }}
-      v-btn(
-        color='default',
-        text,
-        @click='breakdown',
-        v-shortkey.once='["esc"]',
-        @shortkey.native='close'
-      ) {{ $t("breakdown.button") }}
+      v-btn(color='default', text, @click='close', v-hotkey='keymap') {{ $t("close") }}
+      v-btn(color='default', text, @click='breakdown') {{ $t("breakdown.button") }}
 </template>
 
 <script lang="ts">
@@ -36,5 +24,11 @@ export default class BreakdownRequest extends Vue {
   @Prop({ required: true }) dialog!: boolean
   @Prop({ required: true }) close!: () => void
   @Prop({ required: true }) breakdown!: () => void
+
+  get keymap() {
+    return {
+      esc: this.close,
+    }
+  }
 }
 </script>

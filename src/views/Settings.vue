@@ -4,9 +4,10 @@ div(v-if='dialog')
     v-model='dialog',
     scrollable,
     max-width='600px',
-    @click:outside='closeAndDropUserNameMenu'
+    @click:outside='closeAndDropUserNameMenu',
+    persistent
   )
-    v-card
+    v-card(v-hotkey='keymap')
       v-card-title {{ $t("settings.title") }}
       v-card-text
         v-subheader.pa-0 {{ $t("settings.general") }}
@@ -152,25 +153,15 @@ div(v-if='dialog')
           color='error',
           text,
           @click='closeAndDropUserNameMenu',
-          v-shortkey.once='["esc"]',
-          @shortkey.native='closeAndDropUserNameMenu',
           :loading='loading'
         ) {{ $t("close") }}
-        v-btn(
-          color='blue',
-          text,
-          @click='save',
-          @shortkey.native='closeAndDropUserNameMenu',
-          :loading='loading'
-        ) {{ $t("save") }}
+        v-btn(color='blue', text, @click='save', :loading='loading') {{ $t("save") }}
       v-card-actions(v-else)
         v-spacer
         v-btn(
           color='error',
           text,
           @click='closeAndDropUserNameMenu',
-          v-shortkey.once='["esc"]',
-          @shortkey.native='closeAndDropUserNameMenu',
           :loading='loading'
         ) {{ $t("close") }}
         v-btn(color='blue', text, @click='save', :loading='loading') {{ $t("save") }}
@@ -280,6 +271,12 @@ export default class Settings extends Vue {
     text: i18n.t(`weekday${n}`),
     value: n,
   }))
+
+  get keymap() {
+    return {
+      esc: this.closeAndDropUserNameMenu,
+    }
+  }
 
   get identifiers() {
     const user = this.user

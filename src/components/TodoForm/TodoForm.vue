@@ -7,6 +7,7 @@
     :hint='$t("todo.create.textHint")',
     :rules='textRules',
     v-model='text',
+    v-on:keyup='keyUp',
     v-on:keydown='keyDown',
     v-on:keyup.esc='escape',
     ref='textInput',
@@ -157,6 +158,7 @@ import { User } from '@/models/User'
 
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import enLocale from 'dayjs/locale/en'
+import { serverBus } from '@/main'
 
 dayjs.extend(localizedFormat)
 
@@ -343,14 +345,93 @@ export default class TodoForm extends Vue {
     this.todo.text = ''
   }
 
-  keyDown(evt: KeyboardEvent) {
+  enterPressed = true
+  shiftPressed = true
+
+  shiftUpBeforeEnter = true
+
+  keyUp(e: KeyboardEvent) {
     if (this.newLineOnReturn) {
-      if (evt.key === 'Enter' && evt.shiftKey) {
-        evt.preventDefault()
+      if (e.key === 'Enter' && e.shiftKey) {
+        e.preventDefault()
       }
     } else {
-      if (evt.key === 'Enter' && !evt.shiftKey) {
-        evt.preventDefault()
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault()
+      }
+    }
+    console.log(e.type)
+    if (e.type === 'keydown') {
+      if (e.key === 'Enter') {
+        this.enterPressed = true
+        console.log('enterPressed')
+      }
+      if (e.key === 'Shift') {
+        this.shiftPressed = true
+        console.log('shiftPressed')
+      }
+    }
+    if (e.type === 'keyup') {
+      if (e.key === 'Enter') {
+        if (this.shiftPressed) {
+          this.shiftUpBeforeEnter = true
+        }
+        this.enterPressed = false
+      }
+      if (e.key === 'Shift') {
+        this.shiftPressed = false
+        console.log('shiftDown')
+        console.log('ау')
+        console.log(this.enterPressed)
+        if (this.enterPressed) {
+          this.shiftUpBeforeEnter = true
+          console.log('oh no')
+          serverBus.$emit('shiftBeforeEnter', () => {
+            this.shiftUpBeforeEnter = true
+          })
+        }
+      }
+    }
+  }
+
+  keyDown(e: KeyboardEvent) {
+    if (this.newLineOnReturn) {
+      if (e.key === 'Enter' && e.shiftKey) {
+        e.preventDefault()
+      }
+    } else {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault()
+      }
+    }
+    console.log(e.type)
+    if (e.type === 'keydown') {
+      if (e.key === 'Enter') {
+        this.enterPressed = true
+        console.log('enterPressed')
+      }
+      if (e.key === 'Shift') {
+        this.shiftPressed = true
+        console.log('shiftPressed')
+      }
+    }
+    if (e.type === 'keyup') {
+      if (e.key === 'Enter') {
+        if (this.shiftPressed) {
+          this.shiftUpBeforeEnter = true
+        }
+        this.enterPressed = false
+      }
+      if (e.key === 'Shift') {
+        this.shiftPressed = false
+        console.log('shiftDown')
+        console.log('ау')
+        console.log(this.enterPressed)
+        if (this.enterPressed) {
+          this.shiftUpBeforeEnter = true
+          console.log('oh no')
+          alert('YES')
+        }
       }
     }
   }
