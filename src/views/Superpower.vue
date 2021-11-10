@@ -5,14 +5,11 @@
     v-if='!planning',
     v-model='currentTab',
     :fixed-tabs='$vuetify.breakpoint.xsOnly',
-    show-arrows
+    show-arrows,
+    v-hotkey='keymap'
   )
-    v-tab(
-      v-hotkey='keymap',
-    ) {{ $t("current") }}
-    v-tab(
-      v-hotkey='keymap',  
-    ) {{ $t("planning") }}
+    v-tab {{ $t("current") }}
+    v-tab {{ $t("planning") }}
     v-tab {{ $t("report.title") }}
     v-tab {{ $t("delegate.title") }}
     v-tabs-items(v-model='currentTab')
@@ -82,10 +79,10 @@ export default class Superpower extends Vue {
   @SettingsStore.State hotKeysEnabled!: boolean
   @SettingsStore.State showTodayOnAddTodo?: boolean
 
-  get keymap(){
+  get keymap() {
     return {
-      'c': () => this.switchTab(0),
-      'p': () => this.switchTab(1),
+      c: () => this.switchTab(0),
+      p: () => this.switchTab(1),
     }
   }
 
