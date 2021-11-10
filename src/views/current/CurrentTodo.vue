@@ -66,6 +66,7 @@ import AllDonePlaceholder from '@/views/current/AllDonePlaceholder.vue'
 import TodoCard from '@/components/TodoCard/TodoCard.vue'
 import FrogsMessage from '@/components/FrogsMessage.vue'
 import BreakdownMessage from '@/components/BreakdownMessage.vue'
+import { ResponseError } from '@/models/ErrorType'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -143,7 +144,10 @@ export default class CurrentTodo extends Vue {
     try {
       await api.editTag(user, epic, undefined, undefined, undefined, true)
     } catch (err) {
-      this.setSnackbarError(err.response ? err.response.data : err.message)
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
     } finally {
       this.loading = false
     }
@@ -165,8 +169,9 @@ export default class CurrentTodo extends Vue {
       this.incompleteTodosCount = fetched.incompleteTodosCount
       this.todosCount = fetched.todosCount
     } catch (err) {
+      const typedErr = err as ResponseError
       // Don's show request abort
-      if (err.message.includes('aborted')) {
+      if (typedErr.message.includes('aborted')) {
         return
       }
       this.setSnackbarError('errors.loadTodos')
@@ -195,7 +200,10 @@ export default class CurrentTodo extends Vue {
         await this.completeTodo(user, this.todo)
       }
     } catch (err) {
-      this.setSnackbarError(err.response ? err.response.data : err.message)
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
     } finally {
       this.loading = false
     }
@@ -257,7 +265,10 @@ export default class CurrentTodo extends Vue {
       await api.skipTodo(user, this.todo)
       this.updateTodo()
     } catch (err) {
-      this.setSnackbarError(err.response ? err.response.data : err.message)
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
     } finally {
       this.loading = false
     }

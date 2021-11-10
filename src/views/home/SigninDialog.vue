@@ -151,7 +151,7 @@ export default class SigninDialog extends Vue {
           const user = await loginFacebook(accessToken)
           this.loginSuccess(user, 'facebook')
         } catch (error) {
-          this.loginError(error, 'facebook')
+          this.loginError(error as Error, 'facebook')
         }
       }
     }
@@ -163,7 +163,7 @@ export default class SigninDialog extends Vue {
           const user = await loginGoogle(accessToken)
           this.loginSuccess(user, 'google')
         } catch (error) {
-          this.loginError(error, 'google')
+          this.loginError(error as Error, 'google')
         }
       }
     }
@@ -179,7 +179,7 @@ export default class SigninDialog extends Vue {
           })
           this.loginSuccess(user, 'apple')
         } catch (error) {
-          this.loginError(error, 'apple')
+          this.loginError(error as Error, 'apple')
         }
       }
     }
@@ -208,7 +208,7 @@ export default class SigninDialog extends Vue {
       const user = await loginTelegram(loginInfo)
       this.loginSuccess(user, 'telegram')
     } catch (error) {
-      this.loginError(error, 'telegram')
+      this.loginError(error as Error, 'telegram')
     }
   }
 
@@ -240,7 +240,7 @@ export default class SigninDialog extends Vue {
       const user = await loginToken(this.debugToken)
       this.loginSuccess(user, 'debug_token')
     } catch (error) {
-      this.loginError(error, 'debug_token')
+      this.loginError(error as Error, 'debug_token')
     }
   }
 }

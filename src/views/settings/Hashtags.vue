@@ -70,6 +70,7 @@ import { TagColors } from '@/models/TagColors'
 import { User } from '@/models/User'
 import draggable from 'vuedraggable'
 import SingleTag from '@/views/settings/SingleTag.vue'
+import { ResponseError } from '@/models/ErrorType'
 
 const AppStore = namespace('AppStore')
 const UserStore = namespace('UserStore')
@@ -133,7 +134,10 @@ export default class Hashtags extends Vue {
     try {
       await api.deleteAllTags()
     } catch (err) {
-      this.setSnackbarError(err.response ? err.response.data : err.message)
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
     } finally {
       this.loading = false
     }
