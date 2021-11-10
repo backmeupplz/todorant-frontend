@@ -158,7 +158,8 @@ v-container(style='maxWidth: 1000px;')
             :loading='loading',
             :getPanels='getPanels',
             :setPanels='setPanels',
-            :panelIndex='i'
+            :panelIndex='i',
+            :showCompleted='showCompleted'
           )
         v-expansion-panel-content.no-margin-no-padding(translate='no')
           draggable(
@@ -763,7 +764,10 @@ export default class TodoList extends Vue {
       }
       this.tryConfetti()
     } catch (err) {
-      this.setSnackbarError(err.response ? err.response.data : err.message)
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
     } finally {
       this.loading = false
     }
