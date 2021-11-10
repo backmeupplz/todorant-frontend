@@ -82,8 +82,8 @@ export default class Encryption extends Vue {
   loading = false
 
   @Watch('dialog')
-  onDialogChange(_: boolean, oldVal: boolean) {
-    this.encryptionOn = oldVal
+  onDialogChange() {
+    this.encryptionOn = this.storePassword ? true : false
     this.password = this.storePassword || ''
     this.passwordRepeat = this.storePassword || ''
   }
@@ -96,7 +96,10 @@ export default class Encryption extends Vue {
 
   get keymap() {
     return {
-      esc: this.saveble && this.dialog ? this.save : this.close,
+      esc: this.close,
+      enter: () => {
+        if (this.saveble && this.dialog) this.save()
+      },
     }
   }
 
