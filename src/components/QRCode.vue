@@ -138,7 +138,7 @@ export default class QRCode extends Vue {
           this.loginSuccess(user, 'mobile')
         }
       } catch (err) {
-        this.mobileLoginError = err
+        this.mobileLoginError = err as Error
       }
     }, 5_000)
   }

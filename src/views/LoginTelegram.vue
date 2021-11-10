@@ -20,6 +20,7 @@ import { i18n } from '@/plugins/i18n'
 const { vueTelegramLogin } = require('vue-telegram-login')
 import { v4 as uuid } from 'uuid'
 import * as api from '@/utils/api'
+import { ResponseError } from '@/models/ErrorType'
 
 @Component
 export default class LoginTelegram extends Vue {
@@ -47,10 +48,11 @@ export default class LoginTelegram extends Vue {
       await api.telegramLoginRequest(this.loginId, this.id)
       this.checking = true
     } catch (err) {
-      if (err.message === 'Request failed with status code 404') {
+      const typedErr = err as ResponseError
+      if (typedErr.message === 'Request failed with status code 404') {
         alert(i18n.t('loginMobile.telegram.cannotSendMessageError'))
       } else {
-        alert(err.message)
+        alert(typedErr.message)
       }
       console.log(err)
     } finally {

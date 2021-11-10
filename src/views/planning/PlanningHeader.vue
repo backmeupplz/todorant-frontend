@@ -3,7 +3,7 @@
   .header-title
     span {{ title }}
   v-btn(
-    v-if='!delegation && todoSection.title.length > 7',
+    v-if='!delegation && !showCompleted && todoSection.title.length > 7',
     icon,
     @click.stop='addTodoWithDate(todoSection.title)',
     :loading='loading',
@@ -28,6 +28,7 @@ export default class PlanningHeader extends Vue {
   @Prop({ required: true }) setPanels!: (panels: number[]) => void
   @Prop({ required: true }) panelIndex!: number
   @Prop() delegation?: boolean
+  @Prop() showCompleted?: boolean
 
   get panels() {
     return this.getPanels()

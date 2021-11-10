@@ -97,6 +97,7 @@ import IconButton from '@/icons/IconButton.vue'
 import VueI18n from 'vue-i18n'
 import * as api from '@/utils/api'
 import { User } from '@/models/User'
+import { ResponseError } from '@/models/ErrorType'
 
 const AppStore = namespace('AppStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -204,7 +205,10 @@ export default class EditTodo extends Vue {
     try {
       await api.unEpic(user, tag)
     } catch (err) {
-      this.setSnackbarError(err.response ? err.response.data : err.message)
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
     } finally {
       this.loading = false
     }
@@ -232,7 +236,10 @@ export default class EditTodo extends Vue {
       )
       this.cancelTag()
     } catch (err) {
-      this.setSnackbarError(err.response ? err.response.data : err.message)
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
     } finally {
       this.loading = false
     }
@@ -247,7 +254,10 @@ export default class EditTodo extends Vue {
     try {
       await api.deleteTag(user, tag)
     } catch (err) {
-      this.setSnackbarError(err.response ? err.response.data : err.message)
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
     } finally {
       this.loading = false
     }
@@ -266,7 +276,10 @@ export default class EditTodo extends Vue {
       await api.editTag(user, tag, tag.color, true, goal)
       this.cancelTag()
     } catch (err) {
-      this.setSnackbarError(err.response ? err.response.data : err.message)
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
     } finally {
       this.loading = false
     }
