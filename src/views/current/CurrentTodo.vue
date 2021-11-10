@@ -224,7 +224,10 @@ export default class CurrentTodo extends Vue {
       this.updateTodo()
       this.tryConfetti()
     } catch (err) {
-      this.setSnackbarError(err.response ? err.response.data : err.message)
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
     } finally {
       this.loading = false
     }
