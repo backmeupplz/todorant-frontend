@@ -404,15 +404,12 @@ export default class TodoForm extends Vue {
         e.preventDefault()
       }
     }
-    console.log(e.type)
     if (e.type === 'keydown') {
       if (e.key === 'Enter') {
         this.enterPressed = true
-        console.log('enterPressed')
       }
       if (e.key === 'Shift') {
         this.shiftPressed = true
-        console.log('shiftPressed')
       }
     }
     if (e.type === 'keyup') {
@@ -424,13 +421,8 @@ export default class TodoForm extends Vue {
       }
       if (e.key === 'Shift') {
         this.shiftPressed = false
-        console.log('shiftDown')
-        console.log('ау')
-        console.log(this.enterPressed)
         if (this.enterPressed) {
           this.shiftUpBeforeEnter = true
-          console.log('oh no')
-          alert('YES')
         }
       }
     }
