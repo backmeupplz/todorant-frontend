@@ -272,6 +272,7 @@ export default class TodoList extends Vue {
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @SettingsStore.State firstDayOfWeek?: number
   @SettingsStore.State showMoreByDefault!: boolean
+  @SettingsStore.State hotKeysEnabled!: boolean
   @TagsStore.State searchTags!: Set<String>
   @TagsStore.State tags!: Tag[]
 
@@ -1046,13 +1047,15 @@ export default class TodoList extends Vue {
     }
   }
 
-  completeRepetitiveTodo() {
+  completeRepetitiveTodo(hotkey = false) {
+    if (hotkey && !this.hotKeysEnabled) return
     if (!this.repetitiveTodo) return
     this.completeTodo(this.user, this.repetitiveTodo)
     this.breakdownMessageDialog = false
   }
 
-  breakdownRepetitiveTodo() {
+  breakdownRepetitiveTodo(hotkey = false) {
+    if (hotkey && !this.hotKeysEnabled) return
     serverBus.$emit('addTodoRequested', undefined, this.repetitiveTodo)
     this.breakdownMessageDialog = false
   }

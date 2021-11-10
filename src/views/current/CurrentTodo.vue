@@ -288,13 +288,15 @@ export default class CurrentTodo extends Vue {
     this.frogsMessageDialog = false
   }
 
-  completeRepetitiveTodo() {
+  completeRepetitiveTodo(hotkey = false) {
+    if (hotkey && !this.hotKeysEnabled) return
     if (!this.user || !this.todo) return
     this.completeTodo(this.user, this.todo)
     this.breakdownMessageDialog = false
   }
 
-  breakdownRepetitiveTodo() {
+  breakdownRepetitiveTodo(hotkey = false) {
+    if (hotkey && !this.hotKeysEnabled) return
     serverBus.$emit('addTodoRequested', undefined, this.todo)
     this.breakdownMessageDialog = false
   }

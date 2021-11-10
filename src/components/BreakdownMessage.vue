@@ -24,15 +24,15 @@ import { Prop } from 'vue-property-decorator'
 @Component
 export default class BreakdownMessage extends Vue {
   @Prop({ required: true }) dialog!: boolean
-  @Prop({ required: true }) complete!: () => void
-  @Prop({ required: true }) breakdown!: () => void
+  @Prop({ required: true }) complete!: (hotkey: boolean) => void
+  @Prop({ required: true }) breakdown!: (hotkey: boolean) => void
   @Prop({ required: true }) close!: () => void
 
   get keymap() {
     return {
       esc: this.dialog ? this.close : () => {},
-      'shift+enter': this.dialog ? this.breakdown : () => {},
-      enter: this.dialog ? this.complete : () => {},
+      'shift+enter': this.dialog ? () => this.breakdown(true) : () => {},
+      enter: this.dialog ? () => this.complete(true) : () => {},
     }
   }
 }
