@@ -32,12 +32,6 @@ export default class AppStore extends VuexModule {
   }
 
   @Mutation
-  setDialog(todoDialog: boolean) {
-    return
-    this.todoDialog = todoDialog
-  }
-
-  @Mutation
   setTodayTitle(todayDateTitle: string) {
     this.todayDateTitle = todayDateTitle
   }

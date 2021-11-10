@@ -57,7 +57,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { i18n } from '@/plugins/i18n'
 import { serverBus } from '@/main'
-import { Prop } from 'vue-property-decorator'
+import { Prop, Watch } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
 
 const UserStore = namespace('UserStore')
@@ -81,6 +81,13 @@ export default class Encryption extends Vue {
 
   loading = false
 
+  @Watch('dialog')
+  onDialogChange(_: boolean, oldVal: boolean) {
+    this.encryptionOn = oldVal
+    this.password = this.storePassword || ''
+    this.passwordRepeat = this.storePassword || ''
+  }
+
   mounted() {
     this.password = this.storePassword || ''
     this.passwordRepeat = this.storePassword || ''
@@ -89,7 +96,7 @@ export default class Encryption extends Vue {
 
   get keymap() {
     return {
-      'esc': this.saveble ? this.save : this.close,
+      esc: this.saveble && this.dialog ? this.save : this.close,
     }
   }
 

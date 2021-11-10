@@ -198,7 +198,6 @@ export default class Report extends Vue {
   @AppStore.State language?: string
   @SettingsStore.State firstDayOfWeek?: number
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
-  @AppStore.Mutation setDialog!: (dialog: boolean) => void
 
   external = false
 
@@ -224,12 +223,6 @@ export default class Report extends Vue {
 
   endDateMenu = false
   endDate: null | string = null
-
-  @Watch('hashtag')
-  onDialogsChange() {
-    this.setDialog(true)
-    this.debouncedHotkeys()
-  }
 
   created() {
     this.external = this.$router.currentRoute.name === 'public_report'
@@ -381,10 +374,6 @@ export default class Report extends Vue {
       this.loading = false
     }
   }
-
-  debouncedHotkeys = debounce(() => {
-    this.setDialog(false)
-  }, 1000)
 
   async share() {
     const user = this.user

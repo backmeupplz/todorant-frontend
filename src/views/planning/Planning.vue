@@ -266,7 +266,6 @@ export default class TodoList extends Vue {
   @AppStore.State editting!: boolean
   @AppStore.State todayDateTitle!: string
   @AppStore.Mutation setEditting!: (editting: boolean) => void
-  @AppStore.Mutation setDialog!: (dialog: boolean) => void
   @UserStore.State user!: User
   @UserStore.State planning!: boolean
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
@@ -912,7 +911,6 @@ export default class TodoList extends Vue {
 
   searchTouched() {
     this.search = !this.search
-    this.setDialog(this.search)
     this.queryString = ''
   }
 

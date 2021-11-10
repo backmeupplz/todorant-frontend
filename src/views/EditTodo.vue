@@ -86,7 +86,6 @@ export default class EditTodo extends Vue {
   @UserStore.State user?: User
   @UserStore.State subscriptionStatus!: SubscriptionStatus
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
-  @AppStore.Mutation setDialog!: (dialog: boolean) => void
 
   loading = false
   dialog = false
@@ -101,7 +100,6 @@ export default class EditTodo extends Vue {
   get keymap() {
     return {
       enter: () => {
-        console.log('yes.')
         if (this.newLineOnReturn) return
         this.save(true)
       },
@@ -119,7 +117,6 @@ export default class EditTodo extends Vue {
       serverBus.$emit('subscriptionRequested')
     } else {
       this.dialog = !!val
-      this.setDialog(this.dialog)
       if (!oldVal && val) {
         this.completed = val.completed
         this.reset()

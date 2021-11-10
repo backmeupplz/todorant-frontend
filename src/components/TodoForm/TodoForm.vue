@@ -360,7 +360,6 @@ export default class TodoForm extends Vue {
         e.preventDefault()
       }
     }
-    console.log(e.type)
     if (e.type === 'keydown') {
       if (e.key === 'Enter') {
         this.enterPressed = true
@@ -380,12 +379,8 @@ export default class TodoForm extends Vue {
       }
       if (e.key === 'Shift') {
         this.shiftPressed = false
-        console.log('shiftDown')
-        console.log('ау')
-        console.log(this.enterPressed)
         if (this.enterPressed) {
           this.shiftUpBeforeEnter = true
-          console.log('oh no')
           serverBus.$emit('shiftBeforeEnter', () => {
             this.shiftUpBeforeEnter = true
           })

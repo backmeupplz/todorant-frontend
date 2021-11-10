@@ -142,7 +142,6 @@ export default class AddTodo extends Vue {
   @UserStore.State planning!: boolean
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
   @AppStore.State todoDialog!: boolean
-  @AppStore.Mutation setDialog!: (dialog: boolean) => void
 
   dialog = false
 
@@ -190,35 +189,6 @@ export default class AddTodo extends Vue {
     }
   }
 
-  checkEnterKeyType(e: KeyboardEvent) {
-    console.log('hello')
-    // console.log(e.key)
-    // if (e.type === 'keydown') {
-    //   if (e.key === 'Enter') {
-    //     this.enterPressed = true
-    //   }
-    //   if (e.key === 'Shift') {
-    //     this.shiftPressed = true
-    //   }
-    // }
-    // if (e.type === 'keyup') {
-    //   if (e.key === 'Enter') {
-    //     if (this.shiftPressed) {
-    //       this.shiftUpBeforeEnter = true
-    //     }
-    //     this.enterPressed = false
-    //   }
-    //   if (e.key === 'Shift') {
-    //     this.shiftPressed = false
-    //     console.log('ау')
-    //     console.log(this.enterPressed)
-    //     if (this.enterPressed) {
-    //       this.shiftUpBeforeEnter = true
-    //     }
-    //   }
-    // }
-  }
-
   created() {
     serverBus.$on('shiftBeforeEnter', () => {
       this.shiftUpBeforeEnter = true
@@ -247,7 +217,6 @@ export default class AddTodo extends Vue {
 
   @Watch('dialog')
   onDialogChanged(val: boolean, oldVal: boolean) {
-    this.setDialog(val)
     this.reset()
     if (oldVal && !val) {
       this.todoToBreakdown = null
@@ -329,10 +298,6 @@ export default class AddTodo extends Vue {
   counter = 0
 
   async save(hotkey = false) {
-    console.log(this.counter)
-    console.log(this.shiftUpBeforeEnter)
-    // console.log(this.shiftPressed)
-    // console.log(this.enterPressed)
     if (hotkey && !this.hotKeysEnabled) return
     if (hotkey && this.shiftUpBeforeEnter) {
       this.shiftUpBeforeEnter = false
