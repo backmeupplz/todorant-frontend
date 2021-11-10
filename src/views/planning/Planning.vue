@@ -159,7 +159,7 @@ v-container(style='maxWidth: 1000px;')
             :getPanels='getPanels',
             :setPanels='setPanels',
             :panelIndex='i',
-            :showCompleted='showCompleted'
+            :dontShowAddTodoButton='!!editable'
           )
         v-expansion-panel-content.no-margin-no-padding(translate='no')
           draggable(
