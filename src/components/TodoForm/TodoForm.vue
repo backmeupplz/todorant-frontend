@@ -381,9 +381,7 @@ export default class TodoForm extends Vue {
         this.shiftPressed = false
         if (this.enterPressed) {
           this.shiftUpBeforeEnter = true
-          serverBus.$emit('shiftBeforeEnter', () => {
-            this.shiftUpBeforeEnter = true
-          })
+          serverBus.$emit('shiftBeforeEnter')
         }
       }
     }

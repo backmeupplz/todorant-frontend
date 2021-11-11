@@ -35,11 +35,10 @@ export default class Icon extends Vue {
   @Prop() shortkeys?: string
   @Prop() shortkeyFunction?: () => void
 
-
   get keymap() {
     if (!this.shortkeys) return {}
     return {
-      [this.shortkeys]: this.shortkeyFunction
+      [this.shortkeys]: this.shortkeyFunction,
     }
   }
 

@@ -65,7 +65,7 @@ div(translate='no')
                         text,
                         @click='deleteTodo(i)'
                       ) {{ $t("delete") }}
-        v-card-actions
+        v-card-actions(v-hotkey.forbidden='addMoreKeymap')
           .d-flex.justify-space-between.flex-column.flex-md-row(
             style='width: 100%'
           )
@@ -76,8 +76,7 @@ div(translate='no')
                 small,
                 elevation=0,
                 dark,
-                @click='addTodo',
-                v-hotkey.forbidden='addMoreKeymap'
+                @click='addTodo'
               )
                 v-icon add
             .todo-form-right-action.d-flex.flex-column.flex-md-row
@@ -95,7 +94,7 @@ div(translate='no')
                 elevation=0,
                 @click='save(false)',
                 :loading='loading',
-                v-hotkey.prevent.forbidden='addMoreKeymap'
+                v-hotkey.prevent.forbidden='newLineKeymap'
               ) {{ $t("save") }}
 </template>
 
@@ -169,15 +168,23 @@ export default class AddTodo extends Vue {
 
   get addMoreKeymap() {
     return {
+      'ctrl+shift+a': this.addTodo,
+    }
+  }
+
+  get newLineKeymap() {
+    return {
       enter: {
         keyup: () => {
           if (this.newLineOnReturn) return
           this.debouncedSave()
         },
       },
-      'shift+enter': () => {
-        if (!this.newLineOnReturn) return
-        this.debouncedSave()
+      'shift+enter': {
+        keyup: () => {
+          if (!this.newLineOnReturn) return
+          this.debouncedSave()
+        },
       },
     }
   }

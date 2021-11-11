@@ -31,7 +31,9 @@ export default class BreakdownMessage extends Vue {
   get keymap() {
     return {
       esc: this.dialog ? this.close : () => {},
-      'shift+enter': this.dialog ? () => this.breakdown(true) : () => {},
+      'shift+enter': {
+        keyup: this.dialog ? () => this.breakdown(true) : () => {},
+      },
       enter: this.dialog ? () => this.complete(true) : () => {},
     }
   }

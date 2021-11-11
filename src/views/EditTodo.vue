@@ -36,8 +36,7 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
               text,
               elevation=0,
               @click='cleanTodo(false)',
-              :disabled='loading',
-              v-hotkey='keymap'
+              :disabled='loading'
             ) {{ $t("cancel") }}
             v-btn.button-round.button-gradient(
               color='primary',
@@ -103,9 +102,11 @@ export default class EditTodo extends Vue {
         if (this.newLineOnReturn) return
         this.save(true)
       },
-      'shift+enter': () => {
-        if (!this.newLineOnReturn) return
-        this.save(true)
+      'shift+enter': {
+        keyup: () => {
+          if (!this.newLineOnReturn) return
+          this.save(true)
+        },
       },
       esc: this.escapePressed,
     }

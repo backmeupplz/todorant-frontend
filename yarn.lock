@@ -71,10 +71,10 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@borodutch-labs/v-hotkey@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@borodutch-labs/v-hotkey/-/v-hotkey-0.8.0.tgz#628f0264fda0b2c9e64fb3b652a15d723e93e28d"
-  integrity sha512-w4hRz8/bdjX8l58hEsx5R7wWafM1t/SJAy4NO0gVxo7OGE1LakNrQFXO+fO+CSqa6tEwWUTgAmvqLnm8ZfxoQQ==
+"@borodutch-labs/v-hotkey@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@borodutch-labs/v-hotkey/-/v-hotkey-0.9.0.tgz#3b92184b357efde4ec8c232e5a696910f8be97f6"
+  integrity sha512-jlBdT1KwzmDKfykF1jgqxXMTIE7QrSg6nqqDHED2DECXLDqlzyhvLrJutLaV7piuO2sns+HL1xzI79MRXYHFkA==
   dependencies:
     core-js "^2.6.5"
 

@@ -93,8 +93,7 @@ v-container(style='maxWidth: 1000px;')
         :loading='todosUpdating || loading',
         :click='searchTouched',
         name='$search',
-        shortkeys='ctrl + shift + f',
-        :shortkeyFunction='searchTouched'
+        v-hotkey.forbidden='searchKeymap'
       )
       IconButton.planning-calendar-button(
         :loading='todosUpdating',
@@ -374,6 +373,14 @@ export default class TodoList extends Vue {
     return new Date(this.todayDateTitle)
   }
 
+  get searchKeymap() {
+    return {
+      'ctrl+shift+f': () => {
+        this.debouncedSearch()
+      },
+    }
+  }
+
   get keymap() {
     return {
       esc: this.crossPressed,
@@ -388,12 +395,14 @@ export default class TodoList extends Vue {
   search = false
   queryString = ''
 
+  debouncedLoadTodos = debounce(() => {
+    this.loadTodos()
+  }, 1500)
+
   @Watch('queryString')
   onQuerryStringChanged() {
     this.todosUpdating = true
-    debounce(async () => {
-      await this.loadTodos()
-    }, 1500)()
+    this.debouncedLoadTodos()
   }
 
   calendarViewEnabled = false
@@ -913,6 +922,8 @@ export default class TodoList extends Vue {
     this.search = !this.search
     this.queryString = ''
   }
+
+  debouncedSearch = debounce(this.searchTouched)
 
   async goHome() {
     try {
