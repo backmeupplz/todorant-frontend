@@ -378,6 +378,7 @@ export default class TodoList extends Vue {
   get searchKeymap() {
     return {
       'ctrl+shift+f': () => {
+        if (!this.hotKeysEnabled) return
         this.debouncedSearch()
       },
     }
@@ -396,7 +397,7 @@ export default class TodoList extends Vue {
           this.completeOrUndoTodo(this.todos[0].todos[0], true)
       },
       b: () => {
-        if (this.currentTab) this.breakdownTodo(this.todos[0].todos[0])
+        if (this.currentTab) this.breakdownTodo(this.todos[0].todos[0], true)
       },
     }
   }
@@ -929,7 +930,8 @@ export default class TodoList extends Vue {
     }, 15000)
   }
 
-  breakdownTodo(todo: Todo) {
+  breakdownTodo(todo: Todo, hotkey = false) {
+    if (hotkey && !this.hotKeysEnabled) return
     serverBus.$emit('addTodoRequested', undefined, todo)
   }
 
