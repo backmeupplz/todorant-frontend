@@ -1,25 +1,40 @@
 <template lang="pug">
 nav
   // Rules dialog
-  Rules(:dialog='rulesDialog', :close='closeRules', :openWelcome='openWelcome')
+  Rules(
+    v-if='rulesDialog',
+    :dialog='rulesDialog',
+    :close='closeRules',
+    :openWelcome='openWelcome'
+  )
   // Welcome dialog
   Welcome(
+    v-if='welcomeDialog',
     :dialog='welcomeDialog',
     :close='closeWelcome',
     :openRules='openRules'
   )
   // Hero dialog
-  HeroProfile(:dialog='heroDialog', :close='closeHero')
+  HeroProfile(v-if='heroDialog', :dialog='heroDialog', :close='closeHero')
   // Subscription dialog
-  Subscription(:dialog='subscriptionDialog', :close='closeSubscription')
+  Subscription(
+    v-if='subscriptionDialog',
+    :dialog='subscriptionDialog',
+    :close='closeSubscription'
+  )
   // Settings dialog
   Settings(
+    v-if='settingsDialog',
     :dialog='settingsDialog',
     :close='closeSettingsDialog',
     :openEncryption='openEncryption'
   )
   // Hashtags dialog
-  Hashtags(:dialog='hashtagsDialog', :close='closeHashtagsDialog')
+  Hashtags(
+    v-if='hashtagsDialog',
+    :dialog='hashtagsDialog',
+    :close='closeHashtagsDialog'
+  )
   // QR dialog
   QRCode(
     :dialog='qrDialog',
@@ -27,14 +42,22 @@ nav
     :description='"qr.description.app_login"',
     :qrRendered='qrRendered',
     :changeQr='changeQr',
-    v-if='!!user'
+    v-if='!!user && qrDialog'
   )
   // Support dialog
-  Support(:dialog='supportDialog', :close='closeSupportDialog')
+  Support(
+    v-if='supportDialog',
+    :dialog='supportDialog',
+    :close='closeSupportDialog'
+  )
   // Encryption dialog
-  Encryption(:dialog='encryptionDialog', :close='closeEncryptionDialog')
+  Encryption(
+    v-if='encryptionDialog',
+    :dialog='encryptionDialog',
+    :close='closeEncryptionDialog'
+  )
   // Apps dialog
-  Apps(:dialog='appsDialog', :close='closeAppsDialog')
+  Apps(v-if='appsDialog', :dialog='appsDialog', :close='closeAppsDialog')
   // Navbar and app
   v-app-bar(flat, app, :style='appBarStyle')
     // Title
@@ -100,16 +123,6 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { i18n } from '@/plugins/i18n'
 import * as api from '@/utils/api'
-import Rules from '@/components/Rules.vue'
-import Welcome from '@/views/Welcome.vue'
-import HeroProfile from '@/components/HeroProfile.vue'
-import Subscription from '@/views/Subscription.vue'
-import Settings from '@/views/Settings.vue'
-import Hashtags from '@/views/settings/Hashtags.vue'
-import QRCode from '@/components/QRCode.vue'
-import Support from '@/components/Support.vue'
-import Encryption from '@/components/Encryption.vue'
-import Apps from '@/components/Apps.vue'
 import IconButton from '@/icons/IconButton.vue'
 import { serverBus } from '@/main'
 import { logEvent } from '@/utils/logEvent'
@@ -121,6 +134,27 @@ import { setCookie, deleteCookie } from '../utils/cookie'
 import QRCodeStyling from 'qr-code-styling'
 import { Watch } from 'vue-property-decorator'
 
+const Rules = (resolve: any) =>
+  (require as any)(['@/components/Rules.vue'], resolve)
+const Welcome = (resolve: any) =>
+  (require as any)(['@/views/Welcome.vue'], resolve)
+const HeroProfile = (resolve: any) =>
+  (require as any)(['@/components/HeroProfile.vue'], resolve)
+const Subscription = (resolve: any) =>
+  (require as any)(['@/views/Subscription.vue'], resolve)
+const Hashtags = (resolve: any) =>
+  (require as any)(['@/views/settings/Hashtags.vue'], resolve)
+const QRCode = (resolve: any) =>
+  (require as any)(['@/components/QRCode.vue'], resolve)
+const Support = (resolve: any) =>
+  (require as any)(['@/components/Support.vue'], resolve)
+const Encryption = (resolve: any) =>
+  (require as any)(['@/components/Encryption.vue'], resolve)
+const Apps = (resolve: any) =>
+  (require as any)(['@/components/Apps.vue'], resolve)
+const Settings = (resolve: any) =>
+  (require as any)(['../views/Settings.vue'], resolve)
+// const Settings = () => import('../views/Settings.vue')
 const UserStore = namespace('UserStore')
 const AppStore = namespace('AppStore')
 const SnackbarStore = namespace('SnackbarStore')
