@@ -36,17 +36,14 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
               text,
               elevation=0,
               @click='cleanTodo(false)',
-              :disabled='loading',
-              v-shortkey.once='["esc"]',
-              @shortkey.native='escapePressed'
+              :disabled='loading'
             ) {{ $t("cancel") }}
             v-btn.button-round.button-gradient(
               color='primary',
               elevation=0,
-              @click='save',
+              @click='save(false)',
               :loading='loading',
-              v-shortkey.once='["shift", "enter"]',
-              @shortkey.native='save'
+              v-hotkey.prevent.forbidden='keymap'
             ) {{ $t("save") }}
   // Breakdown
   BreakdownRequest(
@@ -84,10 +81,11 @@ export default class EditTodo extends Vue {
   @Prop({ required: true }) cleanTodo!: () => void
   @Prop({ required: true }) requestDelete!: (todo: Todo) => void
 
+  @SettingsStore.State hotKeysEnabled!: boolean
+  @SettingsStore.State newLineOnReturn!: boolean
   @UserStore.State user?: User
   @UserStore.State subscriptionStatus!: SubscriptionStatus
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
-  @AppStore.Mutation setDialog!: (dialog: boolean) => void
 
   loading = false
   dialog = false
@@ -98,6 +96,31 @@ export default class EditTodo extends Vue {
   initialDate = ''
 
   completed = false
+  shiftUpBeforeEnter = false
+
+  mounted() {
+    serverBus.$on('shiftBeforeEnter', () => {
+      this.shiftUpBeforeEnter = true
+    })
+  }
+
+  get keymap() {
+    return {
+      enter: {
+        keyup: () => {
+          if (this.newLineOnReturn) return
+          this.save(true)
+        },
+      },
+      'shift+enter': {
+        keyup: () => {
+          if (!this.newLineOnReturn) return
+          this.save(true)
+        },
+      },
+      esc: this.escapePressed,
+    }
+  }
 
   @Watch('todo')
   onTodoChanged(val: Todo, oldVal: Todo) {
@@ -105,7 +128,6 @@ export default class EditTodo extends Vue {
       serverBus.$emit('subscriptionRequested')
     } else {
       this.dialog = !!val
-      this.setDialog(this.dialog)
       if (!oldVal && val) {
         this.completed = val.completed
         this.reset()
@@ -121,7 +143,12 @@ export default class EditTodo extends Vue {
     }
   }
 
-  async save() {
+  async save(hotkey = false) {
+    if (hotkey && !this.hotKeysEnabled) return
+    if (hotkey && this.shiftUpBeforeEnter) {
+      this.shiftUpBeforeEnter = false
+      return
+    }
     const user = this.user
     if (!user) {
       return

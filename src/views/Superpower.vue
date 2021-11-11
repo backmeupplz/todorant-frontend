@@ -5,23 +5,18 @@
     v-if='!planning',
     v-model='currentTab',
     :fixed-tabs='$vuetify.breakpoint.xsOnly',
-    show-arrows
+    show-arrows,
+    v-hotkey='keymap'
   )
-    v-tab(
-      v-shortkey.propagte='{ en: ["c"], ru: ["с"] }',
-      @shortkey.propagte.native='switchTab(0)'
-    ) {{ $t("current") }}
-    v-tab(
-      v-shortkey.propagte='{ en: ["p"], ru: ["з"] }',
-      @shortkey.propagte.native='switchTab(1)'
-    ) {{ $t("planning") }}
+    v-tab {{ $t("current") }}
+    v-tab {{ $t("planning") }}
     v-tab {{ $t("report.title") }}
     v-tab {{ $t("delegate.title") }}
     v-tabs-items(v-model='currentTab')
       v-tab-item(:value='0')
-        CurrentTodo
+        CurrentTodo(:currentTab='currentTab')
       v-tab-item(:value='1')
-        Planning
+        Planning(:currentTab='currentTab')
       v-tab-item(:value='2')
         Report
       v-tab-item(:value='3')
@@ -83,6 +78,13 @@ export default class Superpower extends Vue {
   @AppStore.State todoDialog!: boolean
   @SettingsStore.State hotKeysEnabled!: boolean
   @SettingsStore.State showTodayOnAddTodo?: boolean
+
+  get keymap() {
+    return {
+      c: () => this.switchTab(0),
+      p: () => this.switchTab(1),
+    }
+  }
 
   currentTab = 0
 

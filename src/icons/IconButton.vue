@@ -6,8 +6,7 @@ v-btn(
   :loading='loading',
   :color='color || "#3366ff"',
   v-on='on',
-  v-shortkey.once.propagte='shortkeys',
-  @shortkey.native.propagte='shortkey',
+  v-hotkey='keymap',
   :small='small',
   :aria-label='name.substr(1)'
 )
@@ -33,8 +32,15 @@ export default class Icon extends Vue {
 
   @Prop({ required: true }) click!: () => void
   @Prop() on?: () => void
-  @Prop() shortkeys?: Object
+  @Prop() shortkeys?: string
   @Prop() shortkeyFunction?: () => void
+
+  get keymap() {
+    if (!this.shortkeys) return {}
+    return {
+      [this.shortkeys]: this.shortkeyFunction,
+    }
+  }
 
   shortkey() {
     if (this.shortkeyFunction && !this.todoDialog) {

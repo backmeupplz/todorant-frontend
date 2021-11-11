@@ -17,8 +17,7 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
         @click='deleteTodo',
         :loading='loading',
         :disabled='loading',
-        v-shortkey.once='["enter"]',
-        @shortkey.native='deleteTodo'
+        v-hotkey='keymap'
       ) {{ $t("delete") }}
 </template>
 
@@ -36,6 +35,7 @@ import { ResponseError } from '@/models/ErrorType'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
+const SettingsStore = namespace('SettingsStore')
 
 @Component
 export default class DeleteTodo extends Vue {
@@ -43,16 +43,24 @@ export default class DeleteTodo extends Vue {
 
   @UserStore.State user?: User
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
+  @SettingsStore.State hotKeysEnabled!: boolean
 
   loading = false
   dialog = false
+
+  get keymap() {
+    return {
+      enter: () => this.deleteTodo(true),
+    }
+  }
 
   @Watch('todo')
   onTodoChanged(val: boolean, oldVal: boolean) {
     this.dialog = !!val
   }
 
-  async deleteTodo() {
+  async deleteTodo(hotkey = false) {
+    if (hotkey && !this.hotKeysEnabled) return
     this.loading = true
     try {
       await api.deleteTodo((this as any).todo)

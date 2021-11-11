@@ -3,7 +3,8 @@ v-dialog(
   v-model='dialog',
   scrollable,
   max-width='600px',
-  @click:outside='close'
+  @click:outside='close',
+  persistent
 )
   v-card
     v-card-title {{ $t("qr.code") }}
@@ -21,13 +22,7 @@ v-dialog(
           p {{ `0${minutes}`.slice(-2) }} : {{ `0${seconds}`.slice(-2) }}
     v-card-actions
       v-spacer
-      v-btn(
-        color='default',
-        text,
-        @click='close',
-        v-shortkey.once='["esc"]',
-        @shortkey.native='close'
-      ) {{ $t("close") }}
+      v-btn(color='default', text, @click='close', v-hotkey='keymap') {{ $t("close") }}
 </template>
 
 <script lang="ts">
@@ -56,6 +51,12 @@ export default class QRCode extends Vue {
   @Prop() loginError?: (error: Error, provider: string) => void
 
   @UserStore.State user?: User
+
+  get keymap() {
+    return {
+      esc: this.close,
+    }
+  }
 
   loading = true
   qrUuid = ''

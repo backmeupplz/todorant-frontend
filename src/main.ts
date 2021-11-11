@@ -11,6 +11,7 @@ import './plugins/visibility'
 import './plugins/confetti'
 import './plugins/vue-clipboard2'
 import './plugins/vue-plugin-load-script'
+import './plugins/v-hotkey'
 import vuetify from './plugins/vuetify'
 import { setupHooks } from '@/store/hooks'
 

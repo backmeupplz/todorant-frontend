@@ -3,33 +3,17 @@ v-dialog(
   v-model='dialog',
   scrollable,
   max-width='600px',
-  @click:outside='complete'
+  @click:outside='close',
+  persistent
 )
   v-card
     v-card-title {{ $t("breakdownMessage.title") }}
     v-card-text(v-html='$t("breakdownMessage.text")')
     v-card-actions
-      v-btn(
-        color='default',
-        text,
-        @click='close',
-        v-shortkey.once='["esc"]',
-        @shortkey.native='close'
-      ) {{ $t("close") }}
+      v-btn(color='default', text, @click='close', v-hotkey='keymap') {{ $t("close") }}
       v-spacer
-      v-btn(
-        color='default',
-        text,
-        @click='complete',
-        @shortkey.native='complete'
-      ) {{ $t("breakdownMessage.complete") }}
-      v-btn(
-        color='default',
-        text,
-        @click='breakdown',
-        v-shortkey.once='["enter"]',
-        @shortkey.native='breakdown'
-      ) {{ $t("breakdown.button") }}
+      v-btn(color='default', text, @click='complete') {{ $t("breakdownMessage.complete") }}
+      v-btn(color='default', text, @click='breakdown') {{ $t("breakdown.button") }}
 </template>
 
 <script lang="ts">
@@ -40,8 +24,20 @@ import { Prop } from 'vue-property-decorator'
 @Component
 export default class BreakdownMessage extends Vue {
   @Prop({ required: true }) dialog!: boolean
-  @Prop({ required: true }) complete!: () => void
-  @Prop({ required: true }) breakdown!: () => void
+  @Prop({ required: true }) complete!: (hotkey: boolean) => void
+  @Prop({ required: true }) breakdown!: (hotkey: boolean) => void
   @Prop({ required: true }) close!: () => void
+
+  get keymap() {
+    return !this.dialog
+      ? {}
+      : {
+          esc: this.close,
+          'shift+enter': {
+            keyup: () => this.breakdown(true),
+          },
+          enter: () => this.complete(true),
+        }
+  }
 }
 </script>

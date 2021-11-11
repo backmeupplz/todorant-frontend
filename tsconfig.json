@@ -47,6 +47,7 @@
     "types/vue-cookie-law.d.ts",
     "types/vue-swipe-actions.d.ts",
     "types/vue-plugin-load-script.d.ts",
-    "types/vue-countdown.d.ts"
+    "types/vue-countdown.d.ts",
+    "types/@borodutch-labs/v-hotkey.d.ts"
   ]
 }

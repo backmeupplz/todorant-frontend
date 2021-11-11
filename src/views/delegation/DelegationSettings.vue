@@ -3,7 +3,8 @@ v-dialog(
   v-model='dialog',
   scrollable,
   max-width='600px',
-  @click:outside='close'
+  @click:outside='close',
+  persistent
 )
   v-card
     v-card-title {{ $t("delegate.title") }}
@@ -59,8 +60,7 @@ v-dialog(
         color='blue',
         text,
         @click='close',
-        v-shortkey.once='["esc"]',
-        @shortkey.native='close',
+        v-hotkey='keymap',
         :loading='loading'
       ) {{ $t("close") }}
 </template>
@@ -94,6 +94,12 @@ export default class DelegateSettings extends Vue {
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
 
   loading = false
+
+  get keymap() {
+    return {
+      esc: this.close,
+    }
+  }
 
   async resetToken() {
     if (!confirm(i18n.t('delegate.resetConfirmation') as string)) {

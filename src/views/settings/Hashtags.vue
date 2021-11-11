@@ -1,5 +1,6 @@
 <template lang="pug">
 v-dialog(
+  persistent,
   v-model='dialog',
   scrollable,
   max-width='600px',
@@ -52,8 +53,7 @@ v-dialog(
         color='error',
         text,
         @click='closePopup',
-        v-shortkey.once='["esc"]',
-        @shortkey.native='closePopup',
+        v-hotkey='keymap',
         :loading='loading'
       ) {{ $t("close") }}
 </template>
@@ -92,6 +92,12 @@ export default class Hashtags extends Vue {
   epic = ''
   tagOrder = ''
   loading = false
+
+  get keymap() {
+    return {
+      'esc': this.closePopup
+    }
+  }
 
   changeEdited(edited: string) {
     this.edited = edited

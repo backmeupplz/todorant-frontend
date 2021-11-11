@@ -7,6 +7,7 @@
     :hint='$t("todo.create.textHint")',
     :rules='textRules',
     v-model='text',
+    v-on:keyup='keyUp',
     v-on:keydown='keyDown',
     v-on:keyup.esc='escape',
     ref='textInput',
@@ -24,10 +25,9 @@
       v-for='(tag, i) in filteredTags',
       :key='i',
       :color='colorForTag(tag)',
-      v-shortkey.once='["ctrl", `${++i}`]',
-      @shortkey.native='tagSelected(tag, true)',
+      v-hotkey.forbidden='keymap',
       @click='tagSelected(tag)'
-    ) {{ "#" }}{{ tag.tag }} {{ showTagsHotkeys && i <= 9 ? `(${i})` : "" }}
+    ) {{ "#" }}{{ tag.tag }} {{ showTagsHotkeys && i <= 8 ? `(${i + 1})` : "" }}
   v-row(no-gutters)
     v-col(cols='12', md='6')
       v-menu(v-model='dateMenu', :close-on-content-click='false', min-width=0)
@@ -158,6 +158,7 @@ import { User } from '@/models/User'
 
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import enLocale from 'dayjs/locale/en'
+import { serverBus } from '@/main'
 
 dayjs.extend(localizedFormat)
 
@@ -189,6 +190,16 @@ export default class TodoForm extends Vue {
   timeMenu = false
   moreShown = false
   showTagsHotkeys = false
+
+  get keymap() {
+    const tagsHotkeys = {} as { [key: string]: Function }
+    this.filteredTags.forEach((_, index) => {
+      tagsHotkeys[`ctrl+${index + 1}`] = () => {
+        this.tagSelected(this.filteredTags[index], true)
+      }
+    })
+    return tagsHotkeys
+  }
 
   created() {
     dayjs.locale(enLocale)
@@ -334,23 +345,77 @@ export default class TodoForm extends Vue {
     this.todo.text = ''
   }
 
-  keyDown(evt: KeyboardEvent) {
-    if (!evt.keyCode) {
-      return
-    }
+  enterPressed = true
+  shiftPressed = true
+
+  shiftUpBeforeEnter = true
+
+  keyUp(e: KeyboardEvent) {
     if (this.newLineOnReturn) {
-      if (evt.keyCode === 13 && evt.ctrlKey) {
-        evt.preventDefault()
+      if (e.key === 'Enter' && e.shiftKey) {
+        e.preventDefault()
       }
-      if (evt.keyCode === 13) {
-        return
+    } else {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault()
       }
     }
-    if (evt.keyCode === 65 && evt.ctrlKey && evt.shiftKey) {
-      evt.preventDefault()
+    if (e.type === 'keydown') {
+      if (e.key === 'Enter') {
+        this.enterPressed = true
+      }
+      if (e.key === 'Shift') {
+        this.shiftPressed = true
+      }
     }
-    if (evt.keyCode === 13 && !evt.shiftKey) {
-      evt.preventDefault()
+    if (e.type === 'keyup') {
+      if (e.key === 'Enter') {
+        if (this.shiftPressed) {
+          this.shiftUpBeforeEnter = true
+        }
+        this.enterPressed = false
+      }
+      if (e.key === 'Shift') {
+        this.shiftPressed = false
+        if (this.enterPressed) {
+          this.shiftUpBeforeEnter = true
+          serverBus.$emit('shiftBeforeEnter')
+        }
+      }
+    }
+  }
+
+  keyDown(e: KeyboardEvent) {
+    if (this.newLineOnReturn) {
+      if (e.key === 'Enter' && e.shiftKey) {
+        e.preventDefault()
+      }
+    } else {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault()
+      }
+    }
+    if (e.type === 'keydown') {
+      if (e.key === 'Enter') {
+        this.enterPressed = true
+      }
+      if (e.key === 'Shift') {
+        this.shiftPressed = true
+      }
+    }
+    if (e.type === 'keyup') {
+      if (e.key === 'Enter') {
+        if (this.shiftPressed) {
+          this.shiftUpBeforeEnter = true
+        }
+        this.enterPressed = false
+      }
+      if (e.key === 'Shift') {
+        this.shiftPressed = false
+        if (this.enterPressed) {
+          this.shiftUpBeforeEnter = true
+        }
+      }
     }
   }
 

@@ -1,7 +1,8 @@
 <template lang="pug">
 v-container(
   style='maxWidth: 1000px;',
-  :class='$vuetify.breakpoint.mdAndUp ? "pb-8" : ""'
+  :class='$vuetify.breakpoint.mdAndUp ? "pb-8" : ""',
+  v-hotkey='completeTodoKeymap'
 )
   v-list
     ProgressBlock(
@@ -66,6 +67,7 @@ import AllDonePlaceholder from '@/views/current/AllDonePlaceholder.vue'
 import TodoCard from '@/components/TodoCard/TodoCard.vue'
 import FrogsMessage from '@/components/FrogsMessage.vue'
 import BreakdownMessage from '@/components/BreakdownMessage.vue'
+import { Prop } from 'vue-property-decorator'
 import { ResponseError } from '@/models/ErrorType'
 
 const UserStore = namespace('UserStore')
@@ -87,6 +89,8 @@ const TagsStore = namespace('TagsStore')
   },
 })
 export default class CurrentTodo extends Vue {
+  @Prop({ required: true }) currentTab!: number
+
   @UserStore.State user?: User
   @SettingsStore.State hotKeysEnabled!: boolean
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
@@ -112,6 +116,21 @@ export default class CurrentTodo extends Vue {
           ((this.todosCount - this.incompleteTodosCount) / this.todosCount) *
           100
         ).toFixed(0)
+  }
+
+  get completeTodoKeymap() {
+    return {
+      d: () => {
+        if (!this.currentTab) {
+          this.breakdownOrCompleteTodo(true)
+        }
+      },
+      b: () => {
+        if (!this.currentTab) {
+          this.addTodo(true)
+        }
+      },
+    }
   }
 
   mounted() {
@@ -311,13 +330,15 @@ export default class CurrentTodo extends Vue {
     this.frogsMessageDialog = false
   }
 
-  completeRepetitiveTodo() {
+  completeRepetitiveTodo(hotkey = false) {
+    if (hotkey && !this.hotKeysEnabled) return
     if (!this.user || !this.todo) return
     this.completeTodo(this.user, this.todo)
     this.breakdownMessageDialog = false
   }
 
-  breakdownRepetitiveTodo() {
+  breakdownRepetitiveTodo(hotkey = false) {
+    if (hotkey && !this.hotKeysEnabled) return
     serverBus.$emit('addTodoRequested', undefined, this.todo)
     this.breakdownMessageDialog = false
   }

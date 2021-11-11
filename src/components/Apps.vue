@@ -2,6 +2,7 @@
 v-dialog(
   v-model='dialog',
   scrollable,
+  persistent,
   max-width='600px',
   @click:outside='close'
 )
@@ -15,8 +16,7 @@ v-dialog(
         color='default',
         text,
         @click='close',
-        v-shortkey.once='["esc"]',
-        @shortkey.native='close'
+        v-hotkey='keymap'
       ) {{ $t("close") }}
 </template>
 
@@ -34,5 +34,11 @@ import DownloadLinks from '@/components/DownloadLinks.vue'
 export default class Apps extends Vue {
   @Prop({ required: true }) dialog!: boolean
   @Prop({ required: true }) close!: () => void
+
+  get keymap () {
+    return {
+      'esc': this.close,
+    }
+  }
 }
 </script>

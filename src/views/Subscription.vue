@@ -3,9 +3,10 @@ v-dialog(
   v-model='dialog',
   scrollable,
   max-width='600px',
-  @click:outside='close'
+  @click:outside='close',
+  persistent
 )
-  v-card
+  v-card(v-hotkey='keymap')
     v-card-title {{ $t("subscription.title") }}
     v-card-text
       p {{ $t("subscription.statusText", { status: subscriptionStatusText }) }}
@@ -33,14 +34,7 @@ v-dialog(
         :loading='loading',
         @click='manageSubscription'
       ) {{ $t("subscription.manage") }}
-      v-btn(
-        color='blue',
-        text,
-        @click='close',
-        v-shortkey.once='["esc"]',
-        @shortkey.native='close',
-        :loading='loading'
-      ) {{ $t("close") }}
+      v-btn(color='blue', text, @click='close', :loading='loading') {{ $t("close") }}
     v-card-actions(v-else)
       v-spacer
       v-btn(
@@ -50,14 +44,7 @@ v-dialog(
         :loading='loading',
         @click='manageSubscription'
       ) {{ $t("subscription.manage") }}
-      v-btn(
-        color='blue',
-        text,
-        @click='close',
-        v-shortkey.once='["esc"]',
-        @shortkey.native='close',
-        :loading='loading'
-      ) {{ $t("close") }}
+      v-btn(color='blue', text, @click='close', :loading='loading') {{ $t("close") }}
 </template>
 
 <script lang="ts">
@@ -96,6 +83,12 @@ export default class Subscription extends Vue {
   loading = false
 
   stripeLoaded = false
+
+  get keymap() {
+    return {
+      esc: this.close,
+    }
+  }
 
   get subscriptionStatusText() {
     if (

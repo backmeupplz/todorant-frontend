@@ -151,7 +151,6 @@ export default class Navbar extends Vue {
   @AppStore.Mutation setRulesShown!: (rulesShown: boolean) => void
   @AppStore.Mutation setDark!: (dark: boolean) => void
   @AppStore.Mutation setLanguage!: (language: string) => void
-  @AppStore.Mutation setDialog!: (dialog: boolean) => void
   @UserStore.Mutation setUser!: (user?: User) => void
   @SnackbarStore.Mutation setSnackbarError!: (error: string) => void
 
@@ -166,11 +165,6 @@ export default class Navbar extends Vue {
   qrRendered?: QRCodeStyling = {} as QRCodeStyling
   appsDialog = false
   encryptionDialog = false
-
-  @Watch('dialogs')
-  onDialogsChange(val: boolean) {
-    this.setDialog(!val)
-  }
 
   get locales() {
     return [
