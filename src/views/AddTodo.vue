@@ -164,7 +164,7 @@ export default class AddTodo extends Vue {
 
   get addMoreKeymap() {
     return {
-      'ctrl+shift+a': this.addTodo,
+      'ctrl+shift+a': () => this.addTodo(true),
     }
   }
 
@@ -247,7 +247,8 @@ export default class AddTodo extends Vue {
     }
   }
 
-  addTodo() {
+  addTodo(hotkey = false) {
+    if (hotkey && !this.hotKeysEnabled) return
     let repetitiveTodoText = ''
     let hashtags = [] as string[]
     if (this.todoToBreakdown) {
