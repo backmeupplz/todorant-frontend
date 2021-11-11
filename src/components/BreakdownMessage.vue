@@ -3,7 +3,7 @@ v-dialog(
   v-model='dialog',
   scrollable,
   max-width='600px',
-  @click:outside='complete',
+  @click:outside='close',
   persistent
 )
   v-card
