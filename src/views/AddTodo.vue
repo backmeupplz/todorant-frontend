@@ -154,10 +154,6 @@ export default class AddTodo extends Vue {
 
   todoToBreakdown: null | Todo = null
 
-  enterPressed = false
-
-  shiftPressed = false
-
   shiftUpBeforeEnter = false
 
   get shouldFallbackDraggable() {
