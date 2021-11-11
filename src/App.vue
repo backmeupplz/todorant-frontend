@@ -25,11 +25,14 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import CookieLaw from 'vue-cookie-law'
 import { namespace } from 'vuex-class'
-import Navbar from '@/components/Navbar.vue'
-import Snackbar from '@/components/Snackbar.vue'
 import { i18n } from '@/plugins/i18n'
 import { getDateString, getTodayWithStartOfDay } from '@/utils/time'
 import { serverBus } from '@/main'
+
+const Navbar = (resolve: any) =>
+  (require as any)(['@/components/Navbar.vue'], resolve)
+const Snackbar = (resolve: any) =>
+  (require as any)(['@/components/Snackbar.vue'], resolve)
 
 const { loadCSS } = require('fg-loadcss')
 

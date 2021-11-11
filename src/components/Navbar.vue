@@ -119,7 +119,7 @@ nav
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue, { AsyncComponent } from 'vue'
 import Component from 'vue-class-component'
 import { i18n } from '@/plugins/i18n'
 import * as api from '@/utils/api'
@@ -133,6 +133,13 @@ import { User } from '@/models/User'
 import { setCookie, deleteCookie } from '../utils/cookie'
 import QRCodeStyling from 'qr-code-styling'
 import { Watch } from 'vue-property-decorator'
+import { AsyncComponentPromise } from 'vue/types/options'
+
+type RequireType = typeof require
+
+interface AsyncRequire extends RequireType {
+  (id: string[], resolve: AsyncComponentPromise): AsyncComponent
+}
 
 const Rules = (resolve: any) =>
   (require as any)(['@/components/Rules.vue'], resolve)
