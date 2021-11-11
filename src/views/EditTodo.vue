@@ -95,12 +95,21 @@ export default class EditTodo extends Vue {
   initialDate = ''
 
   completed = false
+  shiftUpBeforeEnter = false
+
+  mounted() {
+    serverBus.$on('shiftBeforeEnter', () => {
+      this.shiftUpBeforeEnter = true
+    })
+  }
 
   get keymap() {
     return {
-      enter: () => {
-        if (this.newLineOnReturn) return
-        this.save(true)
+      enter: {
+        keyup: () => {
+          if (this.newLineOnReturn) return
+          this.save(true)
+        },
       },
       'shift+enter': {
         keyup: () => {
@@ -135,6 +144,10 @@ export default class EditTodo extends Vue {
 
   async save(hotkey = false) {
     if (hotkey && !this.hotKeysEnabled) return
+    if (hotkey && this.shiftUpBeforeEnter) {
+      this.shiftUpBeforeEnter = false
+      return
+    }
     const user = this.user
     if (!user) {
       return
