@@ -156,7 +156,8 @@ v-container(style='maxWidth: 1000px;', v-hotkey='completeTodoKeymap')
             :loading='loading',
             :getPanels='getPanels',
             :setPanels='setPanels',
-            :panelIndex='i'
+            :panelIndex='i',
+            :dontShowAddTodoButton='!!editable'
           )
         v-expansion-panel-content.no-margin-no-padding(translate='no')
           draggable(
@@ -235,6 +236,7 @@ import localizedFormat from 'dayjs/plugin/localizedFormat'
 import enLocale from 'dayjs/locale/en'
 import { Tag } from '@/models/Tag'
 import BreakdownMessage from '@/components/BreakdownMessage.vue'
+import { ResponseError } from '@/models/ErrorType'
 
 dayjs.extend(localizedFormat)
 dayjs.extend(weekOfYear)
@@ -670,8 +672,9 @@ export default class TodoList extends Vue {
         this.todos.reverse()
       }
     } catch (err) {
+      const typedErr = err as ResponseError
       // Don's show request abort
-      if (err.message.includes('aborted')) {
+      if (typedErr.message.includes('aborted')) {
         return
       }
       this.setSnackbarError('errors.loadTodos')
@@ -731,7 +734,10 @@ export default class TodoList extends Vue {
       await api.editTodo(user, todo)
       this.loadTodos(false)
     } catch (err) {
-      this.setSnackbarError(err.response ? err.response.data : err.message)
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
     } finally {
       this.loading = false
     }
@@ -760,28 +766,41 @@ export default class TodoList extends Vue {
           this.setRepetitiveTodo(todo)
           this.breakdownMessageDialog = true
         } else {
-          this.completeTodo(user, todo)
+          await this.completeTodo(user, todo)
         }
       }
       this.loadTodos(false)
     } catch (err) {
-      this.setSnackbarError(err.response ? err.response.data : err.message)
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
     } finally {
       this.loading = false
     }
   }
 
   async completeTodo(user: User, todo: Todo) {
-    const { incompleteFrogsExist } = await api.completeTodo(user, todo)
-    if (todo.frog) {
-      await playSound(Sounds.levelUp)
-    } else {
-      if (incompleteFrogsExist) {
-        serverBus.$emit('violationFrogRules')
+    this.loading = true
+    try {
+      const { incompleteFrogsExist } = await api.completeTodo(user, todo)
+      if (todo.frog) {
+        await playSound(Sounds.levelUp)
+      } else {
+        if (incompleteFrogsExist) {
+          serverBus.$emit('violationFrogRules')
+        }
+        await playSound(Sounds.taskDone)
       }
-      await playSound(Sounds.taskDone)
+      this.tryConfetti()
+    } catch (err) {
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
+    } finally {
+      this.loading = false
     }
-    this.tryConfetti()
   }
 
   cleanTodo(needsReload = true) {
@@ -808,7 +827,10 @@ export default class TodoList extends Vue {
       await api.rearrangeTodos(user, this.todos)
       await this.loadTodos(false)
     } catch (err) {
-      this.setSnackbarError(err.response ? err.response.data : err.message)
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
     } finally {
       this.loading = false
       this.editable = false
@@ -1041,7 +1063,10 @@ export default class TodoList extends Vue {
         await api.rearrangeTodos(user, this.todos)
         await this.loadTodos(false)
       } catch (err) {
-        this.setSnackbarError(err.response ? err.response.data : err.message)
+        const typedErr = err as ResponseError
+        this.setSnackbarError(
+          typedErr.response ? typedErr.response.data : typedErr.message
+        )
       } finally {
         this.loading = false
         this.spreadEnabled = false

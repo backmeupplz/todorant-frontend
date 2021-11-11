@@ -68,6 +68,7 @@ import TodoCard from '@/components/TodoCard/TodoCard.vue'
 import FrogsMessage from '@/components/FrogsMessage.vue'
 import BreakdownMessage from '@/components/BreakdownMessage.vue'
 import { Prop } from 'vue-property-decorator'
+import { ResponseError } from '@/models/ErrorType'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -162,7 +163,10 @@ export default class CurrentTodo extends Vue {
     try {
       await api.editTag(user, epic, undefined, undefined, undefined, true)
     } catch (err) {
-      this.setSnackbarError(err.response ? err.response.data : err.message)
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
     } finally {
       this.loading = false
     }
@@ -177,18 +181,21 @@ export default class CurrentTodo extends Vue {
       return
     }
     this.todoUpdating = true
+    this.loading = true
     try {
       const fetched = await api.getCurrentTodo(user)
       this.todo = fetched.todo || null
       this.incompleteTodosCount = fetched.incompleteTodosCount
       this.todosCount = fetched.todosCount
     } catch (err) {
+      const typedErr = err as ResponseError
       // Don's show request abort
-      if (err.message.includes('aborted')) {
+      if (typedErr.message.includes('aborted')) {
         return
       }
       this.setSnackbarError('errors.loadTodos')
     } finally {
+      this.loading = false
       this.todoUpdating = false
     }
   }
@@ -209,27 +216,40 @@ export default class CurrentTodo extends Vue {
       if (this.todo.repetitive) {
         this.breakdownMessageDialog = true
       } else {
-        this.completeTodo(user, this.todo)
+        await this.completeTodo(user, this.todo)
       }
     } catch (err) {
-      this.setSnackbarError(err.response ? err.response.data : err.message)
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
     } finally {
       this.loading = false
     }
   }
 
   async completeTodo(user: User, todo: Todo) {
-    const { incompleteFrogsExist } = await api.completeTodo(user, todo)
-    if (todo.frog) {
-      await playSound(Sounds.levelUp)
-    } else {
-      if (incompleteFrogsExist) {
-        serverBus.$emit('violationFrogRules')
+    this.loading = true
+    try {
+      const { incompleteFrogsExist } = await api.completeTodo(user, todo)
+      if (todo.frog) {
+        await playSound(Sounds.levelUp)
+      } else {
+        if (incompleteFrogsExist) {
+          serverBus.$emit('violationFrogRules')
+        }
+        await playSound(Sounds.taskDone)
       }
-      await playSound(Sounds.taskDone)
+      this.updateTodo()
+      this.tryConfetti()
+    } catch (err) {
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
+    } finally {
+      this.loading = false
     }
-    this.updateTodo()
-    this.tryConfetti()
   }
 
   async deleteTodo() {
@@ -267,7 +287,10 @@ export default class CurrentTodo extends Vue {
       await api.skipTodo(user, this.todo)
       this.updateTodo()
     } catch (err) {
-      this.setSnackbarError(err.response ? err.response.data : err.message)
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
     } finally {
       this.loading = false
     }
