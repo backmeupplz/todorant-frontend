@@ -363,11 +363,9 @@ export default class TodoForm extends Vue {
     if (e.type === 'keydown') {
       if (e.key === 'Enter') {
         this.enterPressed = true
-        console.log('enterPressed')
       }
       if (e.key === 'Shift') {
         this.shiftPressed = true
-        console.log('shiftPressed')
       }
     }
     if (e.type === 'keyup') {
