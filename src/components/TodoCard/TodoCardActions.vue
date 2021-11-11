@@ -40,8 +40,6 @@
         :loading='loading',
         name='$breakdown',
         :on='on',
-        shortkeys="b",
-        :shortkeyFunction='() => addTodo(true)',
         :small='type === "planning" || type === "done"'
       )
     span {{ $t("breakdownInfo") }}
@@ -58,8 +56,6 @@
     :loading='loading',
     name='$complete',
     color='#4BB34B',
-    shortkeys='d',
-    :shortkeyFunction='() => completeTodo(true)',
     :small='type === "planning" || type === "done"'
   )
   IconButton(
@@ -87,6 +83,7 @@ import IconButton from '@/icons/IconButton.vue'
 import { CardType } from '@/models/CardType'
 import { isTodoOld } from '@/utils/isTodoOld'
 import * as api from '@/utils/api'
+import { debounce } from 'lodash'
 
 @Component({
   components: {

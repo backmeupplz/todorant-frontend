@@ -1,5 +1,5 @@
 <template lang="pug">
-v-container(style='maxWidth: 1000px;')
+v-container(style='maxWidth: 1000px;', v-hotkey='completeTodoKeymap')
   v-list(subheader)
     v-list-item.pt-4.text-left(v-if='planning && !showCompleted')
       v-flex
@@ -179,7 +179,7 @@ v-container(style='maxWidth: 1000px;')
                   :type='showCompleted ? "done" : "planning"',
                   :deleteTodo='() => deleteTodo(todo)',
                   :addTodo='() => breakdownTodo(todo)',
-                  :completeTodo='(hotkey) => completeOrUndoTodo(todo)',
+                  :completeTodo='(hotkey) => completeOrUndoTodo(todo, hotkey)',
                   :repeat='() => completeOrUndoTodo(todo)',
                   :edit='() => editTodo(todo)',
                   :moveTodoToToday='() => moveTodoToToday(todo)',
@@ -212,7 +212,7 @@ import { Todo } from '@/models/Todo'
 import { getTodos, editTodo } from '@/utils/api'
 import EditTodo from '@/views/EditTodo.vue'
 import DeleteTodo from '@/components/DeleteTodo.vue'
-import { Watch } from 'vue-property-decorator'
+import { Prop, Watch } from 'vue-property-decorator'
 import * as api from '@/utils/api'
 import { serverBus } from '@/main'
 import draggable from 'vuedraggable'
@@ -260,6 +260,8 @@ const SettingsStore = namespace('SettingsStore')
   },
 })
 export default class TodoList extends Vue {
+  @Prop({ required: true }) currentTab!: number
+
   @AppStore.State dark!: boolean
   @AppStore.State language!: string
   @AppStore.State editting!: boolean
@@ -384,6 +386,18 @@ export default class TodoList extends Vue {
   get keymap() {
     return {
       esc: this.crossPressed,
+    }
+  }
+
+  get completeTodoKeymap() {
+    return {
+      d: () => {
+        if (this.currentTab)
+          this.completeOrUndoTodo(this.todos[0].todos[0], true)
+      },
+      b: () => {
+        if (this.currentTab) this.breakdownTodo(this.todos[0].todos[0])
+      },
     }
   }
 
@@ -730,7 +744,8 @@ export default class TodoList extends Vue {
     this.todoDeleted = { ...todo } as Todo
   }
 
-  async completeOrUndoTodo(todo: Todo) {
+  async completeOrUndoTodo(todo: Todo, hotkey = false) {
+    if (hotkey && !this.hotKeysEnabled) return
     const user = this.user
     if (!user) {
       return

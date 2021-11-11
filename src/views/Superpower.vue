@@ -14,9 +14,9 @@
     v-tab {{ $t("delegate.title") }}
     v-tabs-items(v-model='currentTab')
       v-tab-item(:value='0')
-        CurrentTodo
+        CurrentTodo(:currentTab='currentTab')
       v-tab-item(:value='1')
-        Planning
+        Planning(:currentTab='currentTab')
       v-tab-item(:value='2')
         Report
       v-tab-item(:value='3')
