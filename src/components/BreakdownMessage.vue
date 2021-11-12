@@ -12,8 +12,8 @@ v-dialog(
     v-card-actions
       v-btn(color='default', text, @click='close', v-hotkey='keymap') {{ $t("close") }}
       v-spacer
-      v-btn(color='default', text, @click='complete') {{ $t("breakdownMessage.complete") }}
-      v-btn(color='default', text, @click='breakdown') {{ $t("breakdown.button") }}
+      v-btn(color='default', text, @click='() => complete()') {{ $t("breakdownMessage.complete") }}
+      v-btn(color='default', text, @click='() => breakdown()') {{ $t("breakdown.button") }}
 </template>
 
 <script lang="ts">

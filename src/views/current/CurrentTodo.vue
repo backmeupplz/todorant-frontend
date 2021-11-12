@@ -42,8 +42,8 @@ v-container(
   FrogsMessage(:dialog='frogsMessageDialog', :close='closeFrogsMessageDialog')
   BreakdownMessage(
     :dialog='breakdownMessageDialog',
-    :complete='() => completeRepetitiveTodo(false)',
-    :breakdown='() => breakdownRepetitiveTodo(false)',
+    :complete='completeRepetitiveTodo',
+    :breakdown='breakdownRepetitiveTodo',
     :close='closeRepetitiveTodo'
   )
 </template>
