@@ -50,11 +50,11 @@
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import Planning from '@/views/planning/Planning.vue'
-import CurrentTodo from '@/views/current/CurrentTodo.vue'
-import Report from '@/views/Report.vue'
-import AddTodo from '@/views/AddTodo.vue'
-import Delegation from '@/views/delegation/Delegation.vue'
+const Planning = () => import('@/views/planning/Planning.vue')
+const CurrentTodo = () => import('@/views/current/CurrentTodo.vue')
+const Report = () => import('@/views/Report.vue')
+const AddTodo = () => import('@/views/AddTodo.vue')
+const Delegation = () => import('@/views/delegation/Delegation.vue')
 import { Watch } from 'vue-property-decorator'
 import { serverBus } from '@/main'
 import { namespace } from 'vuex-class'

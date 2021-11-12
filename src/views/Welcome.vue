@@ -54,10 +54,11 @@ v-dialog(v-model='dialog', scrollable, max-width='600px', persistent)
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Prop } from 'vue-property-decorator'
-import IndexCircle from '@/components/IndexCircle.vue'
 import { namespace } from 'vuex-class'
 
 const AppStore = namespace('AppStore')
+
+const IndexCircle = () => import('@/components/IndexCircle.vue')
 
 @Component({
   components: {

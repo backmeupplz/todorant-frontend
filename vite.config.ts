@@ -56,14 +56,14 @@ export default defineConfig({
       strict: false,
     },
   },
-  // build: {
-  //   target: 'es2015',
-  //   minify: 'terser', // 是否进行压缩,boolean | 'terser' | 'esbuild',默认使用terser
-  //   manifest: false, // 是否产出maifest.json
-  //   sourcemap: false, // 是否产出soucemap.json
-  //   outDir: 'build', // 产出目录
-  //   rollupOptions,
-  // },
+  build: {
+    target: 'es2015',
+    minify: 'terser', // 是否进行压缩,boolean | 'terser' | 'esbuild',默认使用terser
+    manifest: false, // 是否产出maifest.json
+    sourcemap: false, // 是否产出soucemap.json
+    outDir: 'dist', // 产出目录
+    rollupOptions,
+  },
   esbuild,
   plugins: [
     createVuePlugin({

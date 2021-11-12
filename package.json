@@ -3,7 +3,7 @@
   "version": "1.10.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vite",
     "build": "vue-cli-service build",
     "distribute": "vue-cli-service serve --mode development",
     "upload-translations": "node scripts/upload.js",

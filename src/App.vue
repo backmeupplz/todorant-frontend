@@ -23,15 +23,14 @@ div(:style='style')
 <script lang="ts">
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import CookieLaw from 'vue-cookie-law'
 import { namespace } from 'vuex-class'
-import Navbar from '@/components/Navbar.vue'
-import Snackbar from '@/components/Snackbar.vue'
 import { i18n } from '@/plugins/i18n'
 import { getDateString, getTodayWithStartOfDay } from '@/utils/time'
 import { serverBus } from '@/main'
 
-// import { loadCSS } from 'fg-loadcss'
+const Navbar = () => import('@/components/Navbar.vue')
+const Snackbar = () => import('@/components/Snackbar.vue')
+const CookieLaw = () => import('vue-cookie-law')
 
 const AppStore = namespace('AppStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -52,12 +51,7 @@ export default class App extends Vue {
     }
   }
 
-  async loadRenderBlockingCSS() {
-    // fonts
-  }
-
   mounted() {
-    this.loadRenderBlockingCSS()
     setInterval(() => {
       this.updateNow()
     }, 1000)
