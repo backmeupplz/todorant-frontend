@@ -23,12 +23,7 @@ div(:style='dark ? "#303030" : "#fafafa"')
 <script lang="ts">
 import { getDateString, getTodayWithStartOfDay } from '@/utils/time'
 import { serverBus } from '@/main'
-import {
-  defineComponent,
-  onMounted,
-  onUpdated,
-  computed,
-} from '@vue/composition-api'
+import { defineComponent, onMounted, onUpdated } from '@vue/composition-api'
 import { useSnackbar } from './store/modules/SnackbarStore'
 import { useApp } from './store/modules/AppStore'
 import { i18n } from './plugins/i18n'
