@@ -76,7 +76,7 @@ div(translate='no')
                 small,
                 elevation=0,
                 dark,
-                @click='addTodo'
+                @click='() => addTodo(false)'
               )
                 v-icon add
             .todo-form-right-action.d-flex.flex-column.flex-md-row

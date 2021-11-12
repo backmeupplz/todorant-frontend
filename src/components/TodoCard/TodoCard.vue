@@ -38,7 +38,7 @@
             :type='type',
             :deleteTodo='deleteTodo',
             :skipTodo='skipTodo',
-            :addTodo='addTodo',
+            :addTodo='() => addTodo(false)',
             :completeTodo='completeTodo',
             :edit='edit',
             :acceptTodo='acceptTodo',

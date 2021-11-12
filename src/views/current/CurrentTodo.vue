@@ -18,7 +18,7 @@ v-container(
           type='current',
           :deleteTodo='deleteTodo',
           :skipTodo='skipTodo',
-          :addTodo='addTodo',
+          :addTodo='() => addTodo(false)',
           :completeTodo='breakdownOrCompleteTodo',
           :repeat='breakdownOrCompleteTodo',
           :edit='edit',
@@ -42,8 +42,8 @@ v-container(
   FrogsMessage(:dialog='frogsMessageDialog', :close='closeFrogsMessageDialog')
   BreakdownMessage(
     :dialog='breakdownMessageDialog',
-    :complete='completeRepetitiveTodo',
-    :breakdown='breakdownRepetitiveTodo',
+    :complete='() => completeRepetitiveTodo(false)',
+    :breakdown='() => breakdownRepetitiveTodo(false)',
     :close='closeRepetitiveTodo'
   )
 </template>
