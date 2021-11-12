@@ -184,7 +184,7 @@ import { User } from '@/models/User'
 import { saveAs } from 'file-saver'
 import { Prop } from 'vue-property-decorator'
 import { namespace } from 'vuex-class'
-const { vueTelegramLogin } = require('vue-telegram-login')
+import { vueTelegramLogin } from 'vue-telegram-login'
 import { GoogleCalendarCredentials } from '@/models/GoogleCalendarCredentials'
 import store from '@/store'
 import { ResponseError } from '@/models/ErrorType'

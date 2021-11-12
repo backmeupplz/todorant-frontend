@@ -73,7 +73,7 @@ export default class LoginTelegram extends Vue {
       this.loginId = ''
     } else if (result.allowed === true) {
       window.location.href = `${
-        process.env.VUE_APP_WEBSITE
+        import.meta.env.VITE_VUE_APP_WEBSITE
       }/mobile_login_success?data=${JSON.stringify(result.user)}`
     }
   }

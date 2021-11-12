@@ -2,9 +2,11 @@
 import * as url from 'url'
 import Linkify from 'linkify-it'
 
+import tlds from 'tlds'
+
 export const linkify = Linkify()
 linkify
-  .tlds(require('tlds'))
+  .tlds(tlds)
   .tlds('onion', true)
   .set({ fuzzyIP: true })
   .add('file:', 'http:')

@@ -1,5 +1,10 @@
 <template lang="pug">
-v-dialog(v-model='dialog', max-width='600px', @click:outside='close', persistent)
+v-dialog(
+  v-model='dialog',
+  max-width='600px',
+  @click:outside='close',
+  persistent
+)
   v-card(:color='$vuetify.theme.dark ? "grey darken-4" : "grey lighten-4"')
     v-card-title {{ $t("heroProfileTitle") }}
     .d-flex.ma-2
@@ -30,12 +35,7 @@ v-dialog(v-model='dialog', max-width='600px', @click:outside='close', persistent
               v-card-title {{ $t("level") }} {{ lowerRank }}
               v-card-text {{ $t(`rank${lowerRank}Title`) }}
             .ml-2.mt-2 {{ $t(`rank${lowerRank}Description`) }}
-    v-btn(
-      color='default',
-      text,
-      @click='close',
-      v-hotkey='keymap',
-    ) {{ $t("close") }}
+    v-btn(color='default', text, @click='close', v-hotkey='keymap') {{ $t("close") }}
 </template>
 
 <script lang="ts">
@@ -45,7 +45,7 @@ import VerticalBar from './VertiсalProgressBar.vue'
 import { namespace } from 'vuex-class'
 import { ranks } from '@/assets/ranks'
 
-const ColorScheme = require('color-scheme')
+import ColorScheme from 'color-scheme'
 const HeroStore = namespace('HeroStore')
 
 @Component({
@@ -63,7 +63,7 @@ export default class HeroProfile extends Vue {
 
   get keymap() {
     return {
-      'esc': this.$props.close
+      esc: this.$props.close,
     }
   }
 

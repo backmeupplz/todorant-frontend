@@ -63,7 +63,7 @@ export default class DelegationStore extends VuexModule {
   }
 
   get delegateInviteLink() {
-    return `${process.env.VUE_APP_WEBSITE}/invite/${this.token}`
+    return `${import.meta.env.VITE_VUE_APP_WEBSITE}/invite/${this.token}`
   }
 
   @Action

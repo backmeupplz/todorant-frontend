@@ -89,7 +89,7 @@ import {
 import { User } from '@/models/User'
 import { logEvent } from '@/utils/logEvent'
 import { setCookie } from '@/utils/cookie'
-const { vueTelegramLogin } = require('vue-telegram-login')
+import { vueTelegramLogin } from 'vue-telegram-login'
 import { serverBus } from '@/main'
 import { v4 as uuid } from 'uuid'
 import QRCode from '@/components/QRCode.vue'
@@ -126,7 +126,7 @@ export default class SigninDialog extends Vue {
   }
 
   get debug() {
-    return !!process.env.VUE_APP_DEV
+    return !!import.meta.env.VITE_VUE_APP_DEV
   }
 
   getArgFromHash(name: string) {

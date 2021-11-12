@@ -47,7 +47,7 @@ export default class DelegationInvite extends Vue {
       }
     } else {
       window.location.href =
-        process.env.VUE_APP_WEBSITE || 'https://todorant.com'
+        import.meta.env.VITE_VUE_APP_WEBSITE || 'https://todorant.com'
     }
   }
 }

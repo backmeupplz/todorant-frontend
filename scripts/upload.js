@@ -40,7 +40,7 @@ Object.keys(flattenedLocalizations[firstLanguage]).forEach((key) => {
     await axios.post(`https://localizer.todorant.com/localizations`, {
       // await axios.post(`http://localhost:1337/localizations`, {
       localizations: result,
-      password: process.env.PASSWORD,
+      password: import.meta.env.VITE_PASSWORD,
       username: 'borodutch',
       tags: ['web'],
     })

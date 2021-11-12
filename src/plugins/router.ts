@@ -1,32 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/store'
-// We are using these strange imports because of lazy loading with vue-class-components
-const Home = (resolve: any) => (require as any)(['@/views/Home.vue'], resolve)
-const Superpower = (resolve: any) =>
-  (require as any)(['@/views/Superpower.vue'], resolve)
-const NotFound = (resolve: any) =>
-  (require as any)(['@/views/static/NotFound.vue'], resolve)
-const Privacy = (resolve: any) =>
-  (require as any)(['@/views/static/Privacy.vue'], resolve)
-const Terms = (resolve: any) =>
-  (require as any)(['@/views/static/Terms.vue'], resolve)
-const Payment = (resolve: any) =>
-  (require as any)(['@/views/static/Payment.vue'], resolve)
-const LoginTelegram = (resolve: any) =>
-  (require as any)(['@/views/LoginTelegram.vue'], resolve)
-const MobileLoginSuccess = (resolve: any) =>
-  (require as any)(['@/views/static/MobileLoginSuccess.vue'], resolve)
-const MobileLoginError = (resolve: any) =>
-  (require as any)(['@/views/static/MobileLoginError.vue'], resolve)
-const PublicReport = (resolve: any) =>
-  (require as any)(['@/views/PublicReport.vue'], resolve)
-const AppleFirefoxError = (resolve: any) =>
-  (require as any)(['@/views/static/AppleFirefoxError.vue'], resolve)
-const GoogleCalendarSetup = (resolve: any) =>
-  (require as any)(['@/views/static/GoogleCalendarSetup.vue'], resolve)
-const DelegationInvite = (resolve: any) =>
-  (require as any)(['@/views/delegation/DelegationInvite.vue'], resolve)
+// We are using these strange imports because of lazy loading with vue-class-components)
 
 Vue.use(Router)
 
@@ -36,7 +11,7 @@ const router = new Router({
     {
       path: '/',
       name: 'home',
-      component: Home,
+      component: () => import('@/views/Home.vue'),
       alias: [
         '/facebook_login_result',
         '/google_login_result',
@@ -46,32 +21,32 @@ const router = new Router({
     {
       path: '/privacy',
       name: 'privacy',
-      component: Privacy,
+      component: () => import('@/views/static/Privacy.vue'),
     },
     {
       path: '/terms',
       name: 'terms',
-      component: Terms,
+      component: () => import('@/views/static/Terms.vue'),
     },
     {
       path: '/mobile-login/telegram',
       name: 'mobile_login_telegram',
-      component: LoginTelegram,
+      component: () => import('@/views/LoginTelegram.vue'),
     },
     {
       path: '/mobile_login_success',
       name: 'mobile_login_success',
-      component: MobileLoginSuccess,
+      component: () => import('@/views/static/MobileLoginSuccess.vue'),
     },
     {
       path: '/mobile_login_error',
       name: 'mobile_login_error',
-      component: MobileLoginError,
+      component: () => import('@/views/static/MobileLoginError.vue'),
     },
     {
       path: '/superpower',
       name: 'superpower',
-      component: Superpower,
+      component: () => import('@/views/Superpower.vue'),
       meta: {
         requiresAuth: true,
       },
@@ -79,7 +54,7 @@ const router = new Router({
     {
       path: '/payment_success',
       name: 'payment_success',
-      component: Payment,
+      component: () => import('@/views/static/Payment.vue'),
       meta: {
         requiresAuth: true,
       },
@@ -87,7 +62,7 @@ const router = new Router({
     {
       path: '/payment_failure',
       name: 'payment_failure',
-      component: Payment,
+      component: () => import('@/views/static/Payment.vue'),
       meta: {
         requiresAuth: true,
       },
@@ -95,27 +70,27 @@ const router = new Router({
     {
       path: '/report/*',
       name: 'public_report',
-      component: PublicReport,
+      component: () => import('@/views/PublicReport.vue'),
     },
     {
       path: '/apple_firefox_error',
       name: 'apple_firefox_error',
-      component: AppleFirefoxError,
+      component: () => import('@/views/static/AppleFirefoxError.vue'),
     },
     {
       path: '/google_calendar_setup_web',
       name: 'google_calendar_setup_web',
-      component: GoogleCalendarSetup,
+      component: () => import('@/views/static/GoogleCalendarSetup.vue'),
     },
     {
       path: '/invite/*',
       name: 'delegation_invite',
-      component: DelegationInvite,
+      component: () => import('@/views/delegation/DelegationInvite.vue'),
     },
     {
       path: '*',
       name: 'not_found',
-      component: NotFound,
+      component: () => import('@/views/static/NotFound.vue'),
     },
   ],
 })

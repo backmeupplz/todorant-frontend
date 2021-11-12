@@ -31,7 +31,7 @@ import { i18n } from '@/plugins/i18n'
 import { getDateString, getTodayWithStartOfDay } from '@/utils/time'
 import { serverBus } from '@/main'
 
-const { loadCSS } = require('fg-loadcss')
+// import { loadCSS } from 'fg-loadcss'
 
 const AppStore = namespace('AppStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -53,17 +53,7 @@ export default class App extends Vue {
   }
 
   async loadRenderBlockingCSS() {
-    // icons
-    loadCSS(
-      'https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css'
-    )
     // fonts
-    loadCSS(
-      'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap'
-    )
-    loadCSS(
-      'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons&display=swap'
-    )
   }
 
   mounted() {

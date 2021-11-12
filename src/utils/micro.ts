@@ -15,7 +15,7 @@ export function logEventToMicro(name: string) {
     platform: 'web',
     language: settings.language || 'unknown',
     userAgent: navigator.userAgent,
-    debug: process.env.VUE_APP_DEV ? true : undefined,
+    debug: import.meta.env.VITE_VUE_APP_DEV ? true : undefined,
     density: window.devicePixelRatio,
   })
 }

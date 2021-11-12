@@ -63,7 +63,7 @@ import { ResponseError } from '@/models/ErrorType'
 // Stripe object is global, declaring here for TS
 declare const Stripe: any
 
-const stripe = () => Stripe(process.env.VUE_APP_STRIPE)
+const stripe = () => Stripe(import.meta.env.VITE_VUE_APP_STRIPE)
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')

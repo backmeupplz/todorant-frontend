@@ -13,7 +13,7 @@ import HeroStore from '@/store/modules/HeroStore'
 import AppStore from '@/store/modules/AppStore'
 import { getTodayWithStartOfDay } from '@/utils/time'
 
-const base = process.env.VUE_APP_API
+const base = import.meta.env.VITE_VUE_APP_API
 
 export async function loginFacebook(accessToken: string) {
   return (
@@ -563,8 +563,10 @@ export function getTomorrow() {
 }
 
 export async function getVersion() {
-  return (await axios.get(`${process.env.VUE_APP_WEBSITE}/version.json`)).data
-    .version as string
+  console.log(import.meta.env)
+  return (
+    await axios.get(`${import.meta.env.VITE_VUE_APP_WEBSITE}/version.json`)
+  ).data.version as string
 }
 
 function setSettingsFromServer(state: any) {

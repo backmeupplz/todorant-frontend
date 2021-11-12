@@ -7,7 +7,7 @@ const TerserPlugin = require('terser-webpack-plugin')
 const JsDomRenderer = require('@prerenderer/renderer-jsdom')
 
 // This env property added by vue builder automatically
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = import.meta.env.VITE_NODE_ENV === 'production'
 
 const plugins = []
 const optimization = {
