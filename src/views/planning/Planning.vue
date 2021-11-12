@@ -200,8 +200,8 @@ v-container(style='maxWidth: 1000px;', v-hotkey='completeTodoKeymap')
   DeleteTodo(:todo='todoDeleted')
   BreakdownMessage(
     :dialog='breakdownMessageDialog',
-    :complete='() => completeRepetitiveTodo(false)',
-    :breakdown='() => breakdownRepetitiveTodo(false)',
+    :complete='completeRepetitiveTodo',
+    :breakdown='breakdownRepetitiveTodo',
     :close='closeRepetitiveTodo'
   )
 </template>
