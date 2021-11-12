@@ -1,5 +1,5 @@
 <template lang="pug">
-div(:style='dark ? "#303030" : "#fafafa"')
+div(:style='style')
   img#loading-img(
     src='/img/splash.webp',
     width='241',
@@ -23,7 +23,13 @@ div(:style='dark ? "#303030" : "#fafafa"')
 <script lang="ts">
 import { getDateString, getTodayWithStartOfDay } from '@/utils/time'
 import { serverBus } from '@/main'
-import { defineComponent, onMounted, onUpdated } from '@vue/composition-api'
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  onUpdated,
+  reactive,
+} from '@vue/composition-api'
 import { useSnackbar } from './store/modules/SnackbarStore'
 import { useApp } from './store/modules/AppStore'
 import { i18n } from './plugins/i18n'
@@ -39,9 +45,12 @@ export default defineComponent({
     if (query) {
       query.setAttribute('content', dark ? '#303030' : '#fafafa')
     }
-
     onUpdated(() => {
       document.getElementById('loading-img')?.remove()
+    })
+
+    const style = computed(() => {
+      return { 'background-color': dark.value ? '#303030' : '#fafafa' }
     })
 
     onMounted(() => {
@@ -58,6 +67,7 @@ export default defineComponent({
 
     return {
       dark,
+      style,
     }
   },
 })
