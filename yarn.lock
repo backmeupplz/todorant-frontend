@@ -1491,6 +1491,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vue/composition-api@npm:^1.2.4":
+  version: 1.3.3
+  resolution: "@vue/composition-api@npm:1.3.3"
+  dependencies:
+    tslib: ^2.3.1
+  peerDependencies:
+    vue: ">= 2.5 < 3"
+  checksum: 77949b20bfc11b7c49a15bc1a5445d1796517e2e696552c796a2cecb725d4b6fe690f02fda9022fd37bc659f24b2e3a49f45c659bf9d2558ff833cafb8fd19d9
+  languageName: node
+  linkType: hard
+
+"@vue/composition-api@npm:^1.4.0-beta.0":
+  version: 1.4.0-beta.0
+  resolution: "@vue/composition-api@npm:1.4.0-beta.0"
+  dependencies:
+    tslib: ^2.3.1
+  peerDependencies:
+    vue: ">= 2.5 < 3"
+  checksum: c06b904894c89e2929ffff7ea1fa3b7e7058d68166cee9be9be2fe953fef1f724d06fd96c0d7ca13757aa73fc6f00d4e6f37ee7eaf6a0c86e65d21197927f341
+  languageName: node
+  linkType: hard
+
 "@vue/preload-webpack-plugin@npm:^1.1.0":
   version: 1.1.2
   resolution: "@vue/preload-webpack-plugin@npm:1.1.2"
@@ -1525,6 +1547,59 @@ __metadata:
   version: 1.2.0
   resolution: "@vue/web-component-wrapper@npm:1.2.0"
   checksum: 342d56d3fcebcbd94e0be984adc1163587f2d1326dcda7727d3624800be221cf0329c1c6c3f949fdc5a00c9f487946750781cf6441d1585a4fa3800d11ef939e
+  languageName: node
+  linkType: hard
+
+"@vueblocks/vue-use-vuex@npm:^0.2.11":
+  version: 0.2.11
+  resolution: "@vueblocks/vue-use-vuex@npm:0.2.11"
+  dependencies:
+    "@vue/composition-api": ^1.2.4
+    vue-demi: 0.10.0
+    vuex: ^3.6.2
+  peerDependencies:
+    "@vue/composition-api": ^1.2.4
+    vue: ^2.6.14 || ^3.2.0
+    vuex: ^3.6.2
+  peerDependenciesMeta:
+    "@vue/composition-api":
+      optional: true
+  checksum: 4acd35ef39184c1d7ac6533140c470f6606c9a348f6bbc34b9356c321ee42711d96f1b88bd73d4308cf616fccbafc1eaafceffee50c9b73c6ddc180280415d8c
+  languageName: node
+  linkType: hard
+
+"@vueuse/core@npm:^6.8.0":
+  version: 6.8.0
+  resolution: "@vueuse/core@npm:6.8.0"
+  dependencies:
+    "@vueuse/shared": 6.8.0
+    vue-demi: "*"
+  peerDependencies:
+    "@vue/composition-api": ^1.1.0
+    vue: ^2.6.0 || ^3.2.0
+  peerDependenciesMeta:
+    "@vue/composition-api":
+      optional: true
+    vue:
+      optional: true
+  checksum: 364b0c6e11258936c834075d75efd6b8d3d108308fe467f78665cb3df16ce50c429608c2f9a29600ed7a9ffd04fb9bdbcc558ac51b88e7f8a6e9f25c070fe2f5
+  languageName: node
+  linkType: hard
+
+"@vueuse/shared@npm:6.8.0":
+  version: 6.8.0
+  resolution: "@vueuse/shared@npm:6.8.0"
+  dependencies:
+    vue-demi: "*"
+  peerDependencies:
+    "@vue/composition-api": ^1.1.0
+    vue: ^2.6.0 || ^3.2.0
+  peerDependenciesMeta:
+    "@vue/composition-api":
+      optional: true
+    vue:
+      optional: true
+  checksum: fb1e73b38fda48e9c4dec0dd4521a23764e6b0dfe326173241d2e620e26deaf560aac0ca266ec75f1afafe1a9421c82b449294989c9a776e7275e43a50f31eae
   languageName: node
   linkType: hard
 
@@ -9645,6 +9720,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mobx@npm:^6.3.7":
+  version: 6.3.7
+  resolution: "mobx@npm:6.3.7"
+  checksum: c3ad168d67dcf3c3ddf5f06cf3225fc2b99205cde55a9884ad711a762dc888b81c22d2a97ab987a6bff04f00d3cfb6610af516995ab48221920e9123f3f74836
+  languageName: node
+  linkType: hard
+
 "moment@npm:^2.10.2":
   version: 2.29.1
   resolution: "moment@npm:2.29.1"
@@ -13969,6 +14051,9 @@ __metadata:
     "@vitejs/plugin-vue": ^1.9.4
     "@vue/cli-plugin-typescript": ^4.5.8
     "@vue/cli-service": ^4.5.8
+    "@vue/composition-api": ^1.4.0-beta.0
+    "@vueblocks/vue-use-vuex": ^0.2.11
+    "@vueuse/core": ^6.8.0
     axios: ^0.21.0
     chart.js: ^2.9.4
     cnf-qrcode: ^1.0.13
@@ -13982,6 +14067,7 @@ __metadata:
     js-cookie: ^2.2.1
     linkify-it: ^3.0.2
     lodash: ^4.17.20
+    mobx: ^6.3.7
     prerender-spa-plugin: ^3.4.0
     prettier: "prettier/prettier#cd2b8a32b5ef77eb0047e7517b1ea22d605a094a"
     pug: ^3.0.0
@@ -14160,6 +14246,13 @@ __metadata:
   version: 2.0.3
   resolution: "tslib@npm:2.0.3"
   checksum: 00fcdd1f9995c9f8eb6a4a1ad03f55bc95946321b7f55434182dddac259d4e095fedf78a84f73b6e32dd3f881d9281f09cb583123d3159ed4bdac9ad7393ef8b
+  languageName: node
+  linkType: hard
+
+"tslib@npm:^2.3.1":
+  version: 2.3.1
+  resolution: "tslib@npm:2.3.1"
+  checksum: de17a98d4614481f7fcb5cd53ffc1aaf8654313be0291e1bfaee4b4bb31a20494b7d218ff2e15017883e8ea9626599b3b0e0229c18383ba9dce89da2adf15cb9
   languageName: node
   linkType: hard
 
@@ -15048,6 +15141,38 @@ __metadata:
   languageName: node
   linkType: hard
 
+"vue-demi@npm:*":
+  version: 0.12.1
+  resolution: "vue-demi@npm:0.12.1"
+  peerDependencies:
+    "@vue/composition-api": ^1.0.0-rc.1
+    vue: ^3.0.0-0 || ^2.6.0
+  peerDependenciesMeta:
+    "@vue/composition-api":
+      optional: true
+  bin:
+    vue-demi-fix: bin/vue-demi-fix.js
+    vue-demi-switch: bin/vue-demi-switch.js
+  checksum: d39a43e765e5bc34cf5b378ccff53a521e824f8c55aae6a9163c294364e8af593c5331b3b3b1b679b28096a3142abed5aed07e2dfb581c96f2eba88a176666f2
+  languageName: node
+  linkType: hard
+
+"vue-demi@npm:0.10.0":
+  version: 0.10.0
+  resolution: "vue-demi@npm:0.10.0"
+  peerDependencies:
+    "@vue/composition-api": ^1.0.0-beta.1
+    vue: ^2.6.0 || >=3.0.0-rc.1
+  peerDependenciesMeta:
+    "@vue/composition-api":
+      optional: true
+  bin:
+    vue-demi-fix: bin/vue-demi-fix.js
+    vue-demi-switch: bin/vue-demi-switch.js
+  checksum: 717f16fbb5ebfcbb9628d21c18aa7ab61a0cfd6a71f495e4426a13199a8e60b60fbce87a2d36ced50857800691fcaa27f061351856753e2ff8b4ec46d6a6e853
+  languageName: node
+  linkType: hard
+
 "vue-flag-icon@npm:^1.0.6":
   version: 1.0.6
   resolution: "vue-flag-icon@npm:1.0.6"
@@ -15262,6 +15387,15 @@ __metadata:
   peerDependencies:
     vue: ^2.0.0
   checksum: 7f4f72a9b7409d49523c9eb539bfb75158f22c2eb81db38c982f08aaefeabe89413267ba590a79a4a0bda741df407ef0c549fd4d6d95ef37b85fcfd24376fa41
+  languageName: node
+  linkType: hard
+
+"vuex@npm:^3.6.2":
+  version: 3.6.2
+  resolution: "vuex@npm:3.6.2"
+  peerDependencies:
+    vue: ^2.0.0
+  checksum: 37915741ba9557024ea42579e2c8d81847ec699d07d8ea3aa673929f26fceba8c59e7e1e6a875fd3962e50018bc30f782f5ace34d83307ef228ad46a4df343da
   languageName: node
   linkType: hard
 

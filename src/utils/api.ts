@@ -563,7 +563,6 @@ export function getTomorrow() {
 }
 
 export async function getVersion() {
-  console.log(import.meta.env)
   return (
     await axios.get(`${import.meta.env.VITE_VUE_APP_WEBSITE}/version.json`)
   ).data.version as string

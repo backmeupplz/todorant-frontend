@@ -1,5 +1,5 @@
 <template lang="pug">
-div(:style='style')
+div(:style='dark ? "#303030" : "#fafafa"')
   img#loading-img(
     src='/img/splash.webp',
     width='241',
@@ -21,77 +21,51 @@ div(:style='style')
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Component from 'vue-class-component'
-import { namespace } from 'vuex-class'
-import { i18n } from '@/plugins/i18n'
 import { getDateString, getTodayWithStartOfDay } from '@/utils/time'
 import { serverBus } from '@/main'
+import {
+  defineComponent,
+  onMounted,
+  onUpdated,
+  computed,
+} from '@vue/composition-api'
+import { useSnackbar } from './store/modules/SnackbarStore'
+import { useApp } from './store/modules/AppStore'
+import { i18n } from './plugins/i18n'
 
-const Navbar = () => import('@/components/Navbar.vue')
-const Snackbar = () => import('@/components/Snackbar.vue')
-const CookieLaw = () => import('vue-cookie-law')
-
-const AppStore = namespace('AppStore')
-const SnackbarStore = namespace('SnackbarStore')
-const SettingsStore = namespace('SettingsStore')
-
-@Component({ components: { Navbar, CookieLaw, Snackbar } })
-export default class App extends Vue {
-  @AppStore.State dark!: boolean
-  @AppStore.State todayDateTitle!: string
-  @AppStore.State todoDialog!: boolean
-  @AppStore.Mutation setTodayTitle!: (todayDateTitle: string) => void
-  @SnackbarStore.Mutation setSnackbar!: (snackbarState: any) => void
-  @SettingsStore.State startTimeOfDay?: string
-
-  get style() {
-    return {
-      'background-color': this.dark ? '#303030' : '#fafafa',
-    }
-  }
-
-  mounted() {
-    setInterval(() => {
-      this.updateNow()
-    }, 1000)
-  }
-
-  created() {
-    this.$vuetify.theme.dark = this.dark
+export default defineComponent({
+  setup() {
+    const { dark } = useApp()
 
     const query = document.querySelector('meta[name="theme-color"]')
+    document.title = i18n.t('title') as string
+    const { hideBar } = useSnackbar()
+    hideBar()
     if (query) {
-      query.setAttribute('content', this.dark ? '#303030' : '#fafafa')
+      query.setAttribute('content', dark ? '#303030' : '#fafafa')
     }
 
-    this.setSnackbar({
-      message: '',
-      color: 'error',
-      active: false,
+    onUpdated(() => {
+      document.getElementById('loading-img')?.remove()
     })
 
-    document.title = i18n.t('title') as string
-  }
+    onMounted(() => {
+      const { setTodayTitle, todayDateTitle } = useApp()
 
-  updated() {
-    document.getElementById('loading-img')?.remove()
-  }
+      setInterval(() => {
+        const newTodayTitle = getDateString(getTodayWithStartOfDay())
+        if (todayDateTitle.value !== newTodayTitle) {
+          setTodayTitle(newTodayTitle)
+          serverBus.$emit('refreshRequested')
+        }
+      }, 1000)
+    })
 
-  get metaInfo() {
     return {
-      title: i18n.t('title') as string,
+      dark,
     }
-  }
-
-  private updateNow() {
-    const newTodayTitle = getDateString(getTodayWithStartOfDay())
-    if (this.todayDateTitle !== newTodayTitle && !this.todoDialog) {
-      this.setTodayTitle(newTodayTitle)
-      serverBus.$emit('refreshRequested')
-    }
-  }
-}
+  },
+})
 </script>
 
 <style>
