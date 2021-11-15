@@ -14,7 +14,7 @@ v-dialog(v-model='dialog', persistent, scrollable, max-width='600px')
       v-btn(
         color='error',
         text,
-        @click='deleteTodo',
+        @click='() => deleteTodo(false)',
         :loading='loading',
         :disabled='loading',
         v-hotkey='keymap'
