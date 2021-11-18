@@ -301,7 +301,7 @@ export default class AddTodo extends Vue {
   }
 
   async save(hotkey = false) {
-    if (hotkey && !this.hotKeysEnabled) return
+    if ((hotkey && !this.hotKeysEnabled) || this.loading) return
     if (hotkey && this.shiftUpBeforeEnter) {
       this.shiftUpBeforeEnter = false
       return
