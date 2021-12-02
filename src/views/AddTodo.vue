@@ -251,6 +251,7 @@ export default class AddTodo extends Vue {
   addTodo(hotkey = false) {
     if (hotkey && !this.hotKeysEnabled) return
     let repetitiveTodoText = ''
+    let repetitiveTodoTime: string | undefined
     let hashtags = [] as string[]
     if (this.todoToBreakdown) {
       let text = this.todoToBreakdown.text
@@ -260,6 +261,7 @@ export default class AddTodo extends Vue {
       const matches = linkify.match(text) || []
       if (this.todos.length === 0 && this.todoToBreakdown.repetitive) {
         repetitiveTodoText = text
+        repetitiveTodoTime = this.todoToBreakdown.time
       }
       if (this.duplicateTagInBreakdown) {
         hashtags = matches
@@ -272,6 +274,7 @@ export default class AddTodo extends Vue {
     if (this.date) {
       this.todos.push({
         date: this.date,
+        time: repetitiveTodoTime,
         goFirst: this.newTodosGoFirst || false,
         text: repetitiveTodoText || hashtags.join(' '),
         repetitive: this.todoToBreakdown?.repetitive || false,
@@ -281,12 +284,14 @@ export default class AddTodo extends Vue {
       now.setMinutes(now.getMinutes() - now.getTimezoneOffset())
       this.todos.push({
         date: now.toISOString().substr(0, 10),
+        time: repetitiveTodoTime,
         goFirst: this.newTodosGoFirst || false,
         text: repetitiveTodoText || hashtags.join(' '),
         repetitive: this.todoToBreakdown?.repetitive || false,
       })
     } else {
       this.todos.push({
+        time: repetitiveTodoTime,
         goFirst: this.newTodosGoFirst || false,
         text: repetitiveTodoText || hashtags.join(' '),
         repetitive: this.todoToBreakdown?.repetitive || false,
