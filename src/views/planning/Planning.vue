@@ -727,7 +727,6 @@ export default class TodoList extends Vue {
     }
     this.loading = true
     try {
-      //
       const today = api.getStringFromDate(getTodayWithStartOfDay())
       const monthAndYear = today.substr(0, 7)
       const date = today.substr(8)
