@@ -237,6 +237,7 @@ import enLocale from 'dayjs/locale/en'
 import { Tag } from '@/models/Tag'
 import BreakdownMessage from '@/components/BreakdownMessage.vue'
 import { ResponseError } from '@/models/ErrorType'
+import { getTodayWithStartOfDay } from '@/utils/time'
 
 dayjs.extend(localizedFormat)
 dayjs.extend(weekOfYear)
@@ -726,7 +727,7 @@ export default class TodoList extends Vue {
     }
     this.loading = true
     try {
-      const today = api.getStringFromDate(this.todayDate)
+      const today = api.getStringFromDate(getTodayWithStartOfDay())
       const monthAndYear = today.substr(0, 7)
       const date = today.substr(8)
       todo.monthAndYear = monthAndYear
