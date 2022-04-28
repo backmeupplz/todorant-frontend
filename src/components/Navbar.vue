@@ -207,12 +207,6 @@ export default class Navbar extends Vue {
   }
 
   created() {
-    serverBus.$on('subscriptionRequested', () => {
-      this.subscriptionDialog = true
-      logEvent('subscription_viewed', {
-        status: this.subscriptionStatus,
-      })
-    })
     serverBus.$on('rulesRequested', () => {
       this.rulesDialog = true
     })
