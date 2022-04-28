@@ -59,7 +59,6 @@ import { Watch } from 'vue-property-decorator'
 import { serverBus } from '@/main'
 import { namespace } from 'vuex-class'
 import { User } from '@/models/User'
-import { SubscriptionStatus } from '@/models/SubscriptionStatus'
 
 const UserStore = namespace('UserStore')
 const SnackbarStore = namespace('SnackbarStore')
@@ -89,21 +88,14 @@ export default class Superpower extends Vue {
   currentTab = 0
 
   mounted() {
-    const subscriptionStatus = (this.user as any).subscriptionStatus
-    const activeSubscription =
-      subscriptionStatus !== SubscriptionStatus.inactive
     if (this.$router.currentRoute.query.extension) {
-      if (subscriptionStatus && activeSubscription) {
-        let date = undefined
-        if (this.showTodayOnAddTodo) {
-          const now = new Date()
-          now.setMinutes(now.getMinutes() - now.getTimezoneOffset())
-          date = now.toISOString().substr(0, 10)
-        }
-        serverBus.$emit('addTodoRequested', date, undefined)
-      } else {
-        serverBus.$emit('subscriptionRequested')
+      let date = undefined
+      if (this.showTodayOnAddTodo) {
+        const now = new Date()
+        now.setMinutes(now.getMinutes() - now.getTimezoneOffset())
+        date = now.toISOString().substr(0, 10)
       }
+      serverBus.$emit('addTodoRequested', date, undefined)
     }
     if (this.$router.currentRoute.hash) {
       this.currentTab = 1

@@ -112,7 +112,6 @@ import { linkify } from '@/utils/linkify'
 import { encrypt, decrypt } from '@/utils/encryption'
 import { i18n } from '@/plugins/i18n'
 import { namespace } from 'vuex-class'
-import { SubscriptionStatus } from '@/models/SubscriptionStatus'
 import { User } from '@/models/User'
 import draggable from 'vuedraggable'
 import { playSound, Sounds } from '@/utils/sounds'
@@ -136,7 +135,6 @@ export default class AddTodo extends Vue {
   @SettingsStore.State newTodosGoFirst?: boolean
   @SettingsStore.State showTodayOnAddTodo?: boolean
   @SettingsStore.State newLineOnReturn!: boolean
-  @UserStore.State subscriptionStatus!: SubscriptionStatus
   @UserStore.State user?: User
   @UserStore.State password?: string
   @UserStore.State planning!: boolean
@@ -200,17 +198,13 @@ export default class AddTodo extends Vue {
     serverBus.$on(
       'addTodoRequested',
       (date?: string, todoToBreakdown?: Todo) => {
-        if (this.subscriptionStatus === SubscriptionStatus.inactive) {
-          serverBus.$emit('subscriptionRequested')
-        } else {
-          if (date) {
-            this.date = date
-          }
-          if (todoToBreakdown) {
-            this.todoToBreakdown = todoToBreakdown
-          }
-          this.dialog = true
+        if (date) {
+          this.date = date
         }
+        if (todoToBreakdown) {
+          this.todoToBreakdown = todoToBreakdown
+        }
+        this.dialog = true
       }
     )
   }
@@ -232,11 +226,7 @@ export default class AddTodo extends Vue {
       return
     }
     if (this.todoDialog) return
-    if (this.subscriptionStatus === SubscriptionStatus.inactive) {
-      serverBus.$emit('subscriptionRequested')
-    } else {
-      this.dialog = true
-    }
+    this.dialog = true
   }
 
   reset() {
