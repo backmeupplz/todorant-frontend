@@ -287,11 +287,12 @@ export default class TodoForm extends Vue {
   }
 
   get filteredTags() {
-    const emptyMatches = this.todo.text.match(/#$/g) || []
+    let text = this.todo.text.toLowerCase()
+    const emptyMatches = text.match(/#$/g) || []
     if (emptyMatches.length) {
       return this.tags
     }
-    const matches = this.todo.text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+$/g) || []
+    const matches = text.match(/#[\u0400-\u04FFa-zA-Z_0-9]+$/g) || []
     if (!matches.length) {
       return this.showMoreByDefault || this.moreShown ? this.tags : []
     }
