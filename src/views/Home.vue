@@ -61,12 +61,6 @@
         .margined-when-small
           p.text-title(:class='textClass') {{ $t("home.crossplatform.title") }}
           DownloadLinks
-      // Deal
-      .text-left.margined-when-small
-        p.text-title(:class='textClass') {{ $t("homeShort.dealTitle") }}
-        p.text-normal(:class='textClass') {{ $t("homeShort.dealText1") }}
-        p.text-normal(:class='textClass') {{ $t("homeShort.dealText2") }}
-        p.text-normal(:class='textClass') {{ $t("homeShort.dealText3") }}
       .text-left.margined-when-small
         p.text-title(:class='textClass') {{ $t("home.feedback.title") }}
       // Reviews

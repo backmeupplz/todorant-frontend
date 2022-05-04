@@ -272,16 +272,6 @@ export const messages = {
     completed: 'Completed',
     planningText:
       'Looks like you have some planning to do! Please, redistribute the outstanding tasks below to unlock the "Current" tab and to keep being productive. Cheers!',
-    activeText:
-      '🎉 Thank you a lot for supporting Todorant! I hope that Todorant has improved your life already and will keep making it better in the future! Your support allows me to improve Todorant daily, adding new features and simplifying the work processes!',
-    inactiveText:
-      "🐝 It looks like your Todorant trial has come to the end. Has Todorant improved your life by at least $5/month? I certainly hope so! I'll cut straight to the chase.\n\nTrade offer. I receive: $5 per month, $36 per year (a whopping 40% discount) or $150 one time. You receive: unlimited productivity and unlimited Todorant as a bonus.\n\nWhat do you say?",
-    earlyAdopterText:
-      '👏👏 — this is me applauding you; you — the crazy ones who agreed to try out the instrument of ever increasing productivity, Todorant, among the first. One can say that you are the golden thousand, feedback of whom was shaping the Todorant from the very beginning. You have all the rights to use Todorant as much as you wish — you will never experience any limits, you have earned it. However, if you noticed that Todorant has drastically improved your life — you can still buy the subscription thus saying the best kind of "Thank you". You will never loose the "Early adopter 🦄" status — but will always be able to cancel the subscription. Thank you a lot for still using Todorant — and I will keep adding new features improving the product that positively affects all of us. Good luck!',
-    earlyAdopterTextBonus:
-      '🤗 Holy +*%$! Looks like either Todorant or I personally helped you enough that you purchased subscription even though you could use Todorant for free forever. I am deeply touched and happy to have a cup of coffee with you or just to chat a little. Feel free to reach me on Telegram (@borodutch) or by email — just click my name below. Thank you a lot! It is hard to imagine how important your contribution is!',
-    trialText:
-      '💪 Welcome to Todorant! You have 30 days after the registration to figure out whether Todorant works well for you. After 30 days will pass, you will still have access to the old tasks but will not be able to add new ones. It is perfectly fine to purchase subscription before 30 days end. I believe that using Todorant will bring you new heights in the personal productivity!',
     rules: [
       'As soon as you get an actionable task (receive an email, phonecall, text, or if you see anything of interest that has to be put on your todo list) — create a todo for it right away. Do not wait, you will forget about it if you do not take it down.',
       'Todos should always be actionable and as explicit as possible. If a task takes less than 2 minutes, then do it right away and record it as completed.',
@@ -388,13 +378,6 @@ export const messages = {
         'Todorant uses a carefully crafted set of limits and praise to punish bad behaviour and support good habits. It affects the primitive part of the brain to make it crave completing todos like people crave sugar.',
       differenceText3:
         "I've read and tried 20+ productivity books and methodologies. When all of them failed one by one I combined their components and simplified the result. This is how Todorant was created.",
-      dealTitle: "What's the deal?",
-      dealText1:
-        "Todorant is free for the first 30 days and then it is $5/month. It is more expensive than competitors because it works. If you don't get $5 worth of productivity in the first 30 days of the free trial, you are welcome not to continue to use Todorant.",
-      dealText2:
-        "No strings attached. You don't need to give us any information like a credit card at all before your trial ends. You don't even need an account if you install the mobile apps!",
-      dealText3:
-        'The only exception is if you signup on iOS, Apple has forced us to make you commit to a free trial before you can use the app. The way to avoid this limit is to create an account here, on the website, and then log in on the iOS app.',
     },
     googleCalendarDisableSuccess: 'Google Calendar disabled',
     googleCalendarEnableSuccess: 'Google Calendar enabled',
@@ -777,16 +760,6 @@ export const messages = {
     completed: 'Завершено',
     planningText:
       'Похоже, вам нужно заняться планированием! Пожалуйста, перераспределите оставшиеся задачи ниже для того, чтобы разблокировать секцию "Текущее", и для того, чтобы оставаться продуктивными. Удачи!',
-    activeText:
-      '🎉 Огромное спасибо за поддержку Тудуранта! Я надеюсь, что Тудурант уже улучшил вашу жизнь и будет улучшать в будущем! Ваша поддержка позволяет мне улучшать Тудурант каждый день, добавляя новые функции и упрощая рабочий процесс!',
-    inactiveText:
-      '🐝 Похоже, ваш пробный период Тудуранта подошел к концу. Улучшил ли Тудурант вашу жизнь хотя бы на $5/месяц? Надеюсь, что да! Перейдем прямо к делу.\n\nДеловое предложение. Я получу: $5 в месяц, $36 в год (невероятная скидка в 40%) или $150 один раз. Вы получите: безграничную продуктивность и неограниченный Тудурант как бонус.\n\nЧто скажете?',
-    earlyAdopterText:
-      '👏👏 — это я хлопаю вам стоя; вы — безумцы, которые согласились попробовать инструмент повышения персональной продуктивности Тудурант одними из первых. Можно сказать, вы — золотая тысяча пользователей, на отзывах которых и создавался Тудурант. Вы имеете полное право пользоваться Тудурантом столько, сколько вам угодно — для этого аккаунта никогда не будет введено никаких ограничений, вы заслужили это. Однако если вы заметили, что Тудурант резко изменил вашу жизнь к лучшему — вы все еще можете приобрести подписку, тем самым сказав простое, но очень важное для меня лично: "Спасибо". Вы никогда не потеряете статус "Ранний адоптер 🦄" — а подписку сможете отменить в любой момент. Спасибо большое, что вы продолжаете пользоваться Тудурантом — а я продолжу добавлять приятные функции в этот инструмент, который делает каждого из нас лучше. Удачи!',
-    earlyAdopterTextBonus:
-      '🤗 Вот это да! Должно быть, либо Тудурант, либо я лично вам настолько помог, что, даже имея возможность пользоваться Тудурантом бесплатно, вы решили меня поддержать. Я поражен прямо в сердце и с удовольствием попью с вами кофе или просто поболтаю по душам. Пишите либо мне в телеграме (@borodutch), либо на почту — просто нажмите на мое имя ниже. Спасибо вам огромное! Сложно представить, насколько для меня важен ваш вклад!',
-    trialText:
-      '💪 Добро пожаловать в Тудурант! С момента регистрации у вас есть ровно 30 дней для того, чтобы опробовать систему и понять, подходит ли она вам. По истечении 30 дней вы все еще будете иметь доступ к существующим задачам, но не сможете добавлять новые. Если что, то никто не мешает вам оформить подписку до окончания триального периода в 30 дней. Я уверен, что вместе с Тудурантом вы сможете достичь новых высот в собственной продуктивности!',
     rules: [
       'Как только у вас появляется задача (получаете имеил, звонок, сообщение или просто видите что-то интересное, что нужно добавить в ваш список задач) — сразу же создавайте задачу. Не ждите: вы забудете про эту задачу, если её не запишете.',
       'Задачи всегда должны быть призывом к действию и как можно более понятными. Если задача займет меньше двух минут — сделайте ее сразу и создайте в списке задач как выполненную.',
@@ -894,13 +867,6 @@ export const messages = {
         'Тудурант использует тактики наказаний и похвалы для поддержания хороших привычек и отказа от плохого поведения. Он воздействует на примитивную часть мозга и прививает зависимость к выполнению задач по тем же принципам, по которым работает привыкание к сахару.',
       differenceText3:
         'Я прочитал более 20 книг про продуктивность и попробовал все методологии из них. Когда я провалил буквально каждую из систем продуктивности, я разбил их на составляющие, собрал из разбитых частей одну большую методологию и упростил результат. Это то, как был создан Тудурант.',
-      dealTitle: 'Что требуется от вас?',
-      dealText1:
-        'Тудурант бесплатен первые 30 дней использования, после — примерно $5 в месяц. Это дороже, чем у конкурентов, потому что Тудурант реально работает. Если вы не получите $5 в эквиваленте продуктивности за первые 30 дней — ничего страшного, просто перестаньте пользоваться Тудурантом.',
-      dealText2:
-        'Вам нужно лишь начать пользоваться Тудурантом. Вам не нужно давать никакую информацию типа номера кредитной карты до окончания бесплатного периода пользования. Вам даже не нужно создавать аккаунт, если вы начнете пользоваться мобильными приложениями!',
-      dealText3:
-        'Единственное исключение — это если вы создадите аккаунт с девайса от Apple. Apple заставили Тудурант просить пользователей начать бесплатную подписку на iOS до того, как люди могут начать пользоваться сервисом. Чтобы обойти это ограничение, сначала создайте аккаунт здесь, на сайте — а потом зайдите в этот аккаунт через iOS приложение.',
     },
     googleCalendarDisableSuccess: 'Гугл Календарь успешно отключен',
     googleCalendarEnableSuccess: 'Гугл Календарь успешно подключен',
@@ -1265,14 +1231,6 @@ export const messages = {
     completed: 'Виконано',
     planningText:
       'Схоже, вам треба зайнятись плануванням! Будь-ласка перерозподіліть невирішені завдання, щоб розблокувати розділ "Поточне" і для того, щоб залишатися продуктивними. Удачі!',
-    inactiveText:
-      '🐝 Схоже, що ваш пробний період Тудуранта закінчився. Чи покращив Тудурант ваше життя хоча б на 5$/місяць? Сподіваюся що так! Отже до справи.\n\nДілова пропозиція. Я отримаю: 5$ в місяць, 36$ в рік (неймовірна знижка 40%) або ж 150$ прямо зараз. Ви отримаєте: безмежну продуктивність і Тудурант без обмежень в бонус.\n\nЩо скажете?',
-    earlyAdopterText:
-      '👏👏 — це мої оплески Вам; Ви навіжені, хто погодився випробувати інструмент постійно зростаючої плідності Todorant, серед перших. Можна сказати, що Ви — золота тисяча, відгуки якої формували Todorant із самого початку. У Вас є всі права використовувати Todorant скільки завгодно — Ви ніколи не відчуєте жодних обмежень, Ви заробили це. Однак якщо Ви помітили, що Todorant значно покращив Ваше життя — Ви все одно можете придбати підписку, це найкращий спосіб сказати "Спасибі". Ви ніколи не втратите статус "Ранній користувач 🦄" — але завжди зможете скасувати підписку. Дякую Вам за те, що Ви все ще використовуєте Todorant — я продовжуватиму додавати нові можливості, покращуючи продукт, який позитивно впливає на всіх нас. Щасти!',
-    earlyAdopterTextBonus:
-      '🤗 Це нереально! Схоже, що або Todorant, або я особисто допоміг Вам достатньо, щоб Ви придбали підписку, хоча Ви можете користуватися Todorant безплатно. Я глибоко зворушений і радий випити з Вами чашку кави або просто трохи поговорити. Не соромтеся зв’язатися зі мною в Telegram (@borodutch) або електронною поштою — просто натисніть моє ім’я нижче. Щиро вдячний! Важко уявити, наскільки важливий Ваш внесок!',
-    trialText:
-      '💪 Ласкаво просимо до Todorant! У Вас є 30 днів після реєстрації, щоб визначитися, чи добре працює Todorant для Вас. Після того, як мине 30 днів, Ви все одно отримаєте доступ до старих завдань, але не зможете додавати нові. Цілком добре придбати підписку до закінчення 30 днів. Я вірю, що використання Todorant принесе Вам нові висоти в особистій плідності!',
     rules: [
       "Щойно у вас з'являється завдання (отримаєте електронний лист, телефонний дзвінок, текст або якщо Ви побачите щось цікаве, що має бути внесено до Вашого списку завдань) — створіть його зараз. Не чекайте, бо Ви забудете про це, якщо не запишете.",
       'Завдання завжди має бути закликом до дії та щонайточнішим. Якщо завдання займає менше 2 хвилин, виконайте його відразу та позначте як виконане.',
@@ -1327,13 +1285,6 @@ export const messages = {
         'Тудурант використовує тактики покарань і похвали для підтримки хороших звичок і відмови від поганої поведінки. Він впливає на примітивну частина мозку і прищеплює залежність до виконання завдань за тими ж принципами, за якими працює звикання до цукру.',
       differenceText3:
         'Я прочитав більше 20 книг про продуктивність і спробував все методології з них. Коли я провалив буквально кожну з систем продуктивності, я розбив їх на складові, зібрав з розбитих частин одну велику методологію і спростив результат. Це те, як був створений Тудурант.',
-      dealTitle: 'Що потрібно від вас?',
-      dealText1:
-        'Тудурант безкоштовний перші 30 днів використання, після — приблизно $5 в місяць. Це дорожче, ніж у конкурентів, тому що Тудурант реально працює. Якщо ви не отримаєте $5 в еквіваленті продуктивності за перші 30 днів — нічого страшного, просто перестаньте користуватися Тудурантом.',
-      dealText2:
-        'Вам потрібно лише почати користуватися Тудурантом. Вам не потрібно давати жодної інформації типу номера кредитної карти до закінчення безкоштовного періоду користування. Вам навіть не потрібно створювати аккаунт, якщо ви почнете користуватися мобільними додатками!',
-      dealText3:
-        'Єдиний виняток — це якщо ви створите аккаунт з девайса від Apple. Apple змусили Тудурант просити користувачів почати безкоштовну передплату на iOS до того, як люди можуть почати користуватися сервісом. Щоб обійти це обмеження, спочатку створіть акаунт тут, на сайті — а потім зайдіть в цей акаунт через iOS додаток.',
     },
     googleCalendarDisableSuccess: 'Гугл Календар успішно відключений',
     googleCalendarEnableSuccess: 'Гугл Календар успішно підключений',
@@ -1441,16 +1392,6 @@ export const messages = {
     completed: 'Completato',
     planningText:
       'Sembra che tu abbia qualche programmazione da fare! Per favore, ridistribuisci i compiti in sospeso qui sotto per sbloccare la scheda "Corrente" e continuare ad essere produttivo. Buona fortuna!',
-    activeText:
-      '🎉 Grazie mille per sostenere Todorant! Spero che Todorant abbia già migliorato la tua vita e che continuerà a migliorarla in futuro! Il tuo supporto mi permette di migliorare Todorant ogni giorno, aggiungendo nuove funzionalità e semplificando i processi di lavoro!',
-    inactiveText:
-      "🐝 Sembra che la tua prova di Todorant sia giunta alla fine. Todorant ha migliorato la tua vita di almeno 5 dollari al mese? Spero proprio di sì! Vado subito al sodo.\n\nOfferta commerciale. Ricevo: 5$ al mese, 36$ all'anno (un enorme sconto del 40%) o 150$ una tantum. Voi ricevete: produttività illimitata e Todorant illimitato come bonus.\n\nChe ne dite?",
-    earlyAdopterText:
-      '👏👏 — questo sono io che vi applaudo; voi — i pazzi che hanno accettato di provare lo strumento della produttività sempre crescente, Todorant, tra i primi. Si può dire che voi siete i pionieri, il cui feedback ha plasmato il Todorant fin dall\'inizio. Avete tutti i diritti di usare il Todorant quanto volete: non avrete mai limiti, ve lo siete guadagnato. Tuttavia, se avete notato che il Todorant ha drasticamente migliorato la vostra vita — potete comunque acquistare l\'abbonamento dicendo così il miglior tipo di "Grazie". Non perderete mai lo stato di "Early adopter 🦄" — ma potrete sempre annullare l\'abbonamento. Vi ringrazio molto per l\'utilizzo di Todorant — e continuerò ad aggiungere nuove funzionalità che migliorano il prodotto e che hanno un effetto positivo su tutti noi. Buona fortuna!',
-    earlyAdopterTextBonus:
-      "🤗 Accidenti! Sembra che io o Todorant vi abbiamo aiutato abbastanza da farvi acquistare l'abbonamento, anche se potreste usare Todorant gratuitamente per sempre. Sono profondamente commosso e felice di prendere una tazza di caffè con voi o di chiacchierare un po'. Sentitevi liberi di contattarmi su Telegram (@borodutch) o via e-mail — basta cliccare sul mio nome qui sotto. Grazie mille! È difficile immaginare quanto sia importante il vostro contributo!",
-    trialText:
-      "💪 Benvenuti in Todorant! Avete 30 giorni di tempo dopo la registrazione per capire se Todorant funziona bene per voi. Trascorsi i 30 giorni, avrete ancora accesso ai vecchi compiti, ma non potrete aggiungerne di nuovi. Va benissimo acquistare l'abbonamento prima della fine dei 30 giorni. Ritengo che l'utilizzo di Todorant vi porterà nuove vette nella produttività personale!",
     rules: [
       "Non appena ricevi un compito realizzabile (ricevere un'e-mail, una telefonata, un testo o se vedi qualcosa di interessante che deve essere messo nella tua lista delle cose da fare) — crea subito una cosa da fare. Non aspettate, ve ne dimenticherete se non lo togliete.",
       "Le attività dovrebbero essere sempre realizzabili e il più possibile esplicite. Se un'attività richiede meno di 2 minuti, allora fatela subito e registratela come completata.",
@@ -1505,13 +1446,6 @@ export const messages = {
         'Todorant usa una serie di limiti e di elogi accuratamente studiati per punire i cattivi comportamenti e sostenere le buone abitudini. Colpisce la parte primitiva del cervello per fargli desiderare di completare i todos come le persone desiderano lo zucchero.',
       differenceText3:
         'Ho letto e provato più di 20 libri e metodologie di produttività. Quando tutti hanno fallito uno ad uno ho combinato i loro componenti e semplificato il risultato. È così che è stato creato il Todorant.',
-      dealTitle: 'Qual è il motivo?',
-      dealText1:
-        'Il Todorant è gratuito per i primi 30 giorni e poi è di 5 dollari al mese. È più costoso della concorrenza perché funziona. Se non ottenete 5 dollari di produttività nei primi 30 giorni della prova gratuita, siete invitati a non continuare a usare il Todorant.',
-      dealText2:
-        'Nessun vincolo. Non è necessario che ci fornisca alcuna informazione, come una carta di credito, prima della fine della prova. Non avete nemmeno bisogno di un account se installate le app mobili!',
-      dealText3:
-        "L'unica eccezione è che se ti iscrivi su iOS, Apple ci ha obbligato a farti fare una prova gratuita prima che tu possa usare l'app. Il modo per evitare questo limite è quello di creare un account qui, sul sito web, e poi accedere all'app per iOS",
     },
     googleCalendarDisableSuccess: 'Google Calendar disabilitato',
     googleCalendarEnableSuccess: 'Google Calendar abilitato',
@@ -1709,16 +1643,6 @@ export const messages = {
     completed: 'Feito',
     planningText:
       'Parece que vc tem um planejamento a ser feito. Distribua as tarefas pendentes abaixo para desbloquear a guia "Atual" e continuar produtivo. Felicidades!',
-    activeText:
-      '🎉 Muito obrigado por apoiar a Todorant! Espero que a Todorant já tenha melhorado sua vida e que continue a melhorar no futuro! Seu apoio me permite melhorar a Todorant diariamente, acrescentando novas funcionalidades e simplificando os processos de trabalho!',
-    inactiveText:
-      '🐝 Parece que seu julgamento de Todorant chegou ao fim. O Todorant melhorou sua vida em pelo menos $5/mês? Espero bem que sim! Vou direto ao assunto.\n\nOferta comercial. Eu recebo: $5 por mês, $36 por ano (um desconto gritante de 40%) ou $150 uma vez. Você recebe: produtividade ilimitada e Todorant ilimitado como um bônus.\n\nO que você diz?',
-    earlyAdopterText:
-      '👏👏 — este sou eu aplaudindo você; você — o louco que concordou em experimentar o instrumento de produtividade cada vez maior, Todorant, entre os primeiros. Pode-se dizer que você é o milhar de ouro, cujo feedback moldou o Todorant desde o início. Você tem todos os direitos para usar o Todorant o quanto desejar — você nunca experimentará nenhum limite, você o conquistou. No entanto, se você notou que o Todorant melhorou drasticamente sua vida — você ainda pode comprar a assinatura, dizendo o melhor tipo de "obrigado". Você nunca perderá o status de "Early Adopter🦄" mas sempre poderá cancelar a assinatura. Muito obrigado por ainda usar o Todorant — e continuarei adicionando novos recursos para melhorar o produto que afeta positivamente todos nós. Boa sorte!',
-    earlyAdopterTextBonus:
-      '🤗 Santo + *% $! Parece que Todorant ou eu pessoalmente o ajudamos o suficiente para que você tenha adquirido uma assinatura, mesmo que você possa usá-lo gratuitamente para sempre. Estou profundamente emocionado e feliz por tomar uma xícara de café com você ou apenas para conversar um pouco. Sinta-se à vontade para me contactar no Telegram (@borodutch) ou por e-mail — basta clicar no meu nome abaixo. Muito obrigado! É difícil imaginar o quão importante é a sua contribuição!',
-    trialText:
-      '💪Bem-vindo ao Todorant! Você tem 30 dias após o registro para descobrir se o Todorant funciona bem para você. Após 30 dias, você ainda terá acesso às tarefas antigas, mas não poderá adicionar novas. É importante você comprar uma assinatura antes do final de 30 dias. Acredito que o uso da Todorant trará novas alturas na produtividade pessoal!',
     rules: [
       'Assim que você receber uma tarefa acionável (receber um e-mail, uma chamada telefônica, um texto ou se vir algo interessante que deva ser colocado na sua lista de tarefas) — crie uma tarefa para ela imediatamente. Não espere, você o esquecerá se não o fizer.',
       'Tarefas devem ser sempre acionáveis e o mais explícitos possível. Se uma tarefa demorar menos de 2 minutos, faça-a imediatamente e registre-a como concluída.',
@@ -1782,13 +1706,6 @@ export const messages = {
         'Todorant usa um conjunto cuidadosamente elaborado de limites e elogios para punir o mau comportamento e apoiar os bons hábitos. Afeta a parte primitiva do cérebro, fazendo com que anseie por completar todos, como as pessoas anseiam por açúcar.',
       differenceText3:
         'Eu li e experimentei mais de 20 livros e metodologias de produtividade. Quando todos falharam um por um, combinei seus componentes e simplifiquei o resultado. Foi assim que o Todorant foi criado.',
-      dealTitle: 'Qual é o problema?',
-      dealText1:
-        'Todorant é gratuito nos primeiros 30 dias e custa US $ 5/mês. É mais caro que os concorrentes porque funciona.\nSe você não obtiver US$ 5 em produtividade nos primeiros 30 dias da avaliação gratuita, será convidado a não continuar usando o Todorant.',
-      dealText2:
-        'Sem condições ocultas. Você não precisa nos fornecer nenhuma informação como um cartão de crédito antes do término do teste. Você nem precisa de uma conta se instalar os aplicativos móveis!',
-      dealText3:
-        'A única exceção é que, se você se inscrever no iOS, a Apple nos forçará a fazer você se comprometer com uma avaliação gratuita antes de poder usar o aplicativo. A maneira de evitar esse limite é criar uma conta aqui, no site, e depois fazer login no aplicativo iOS.',
     },
     googleCalendarDisableSuccess: 'Google Agenda desativado',
     googleCalendarEnableSuccess: 'Google Agenda ativado',
@@ -2206,16 +2123,6 @@ export const messages = {
     completed: 'Completada',
     planningText:
       '¡Parece que tienes un poco de planeación por hacer! Por favor, redistribuya las tareas pendientes para desbloquear la pestaña "Actual" y para continuar siendo productivo. ¡Bien!',
-    activeText:
-      '🎉 ¡Muchas gracias por apoyar a Todorant! ¡Espero que Todorant haya mejorado tu vida ya y siga haciéndolo mejor en el futuro! ¡Tu apoyo me permite mejorar Todorant diariamente, añadiendo nuevas características y simplificando los procesos de trabajo!',
-    inactiveText:
-      '🐝 Parece que tu prueba de Todorant ha llegado a su fin. ¿Ha mejorado Todorant tu vida en al menos 5$/mes? Espero que sí. Voy a ir al grano.\n\nOferta de intercambio. Recibo: 5$ al mes, 36$ al año (la friolera de un 40% de descuento) o 150$ de una sola vez. Tú recibes: productividad ilimitada y Todorant ilimitado como bono.\n\n¿Qué me dices?',
-    earlyAdopterText:
-      '👏👏 — este soy yo aplaudiéndoles; ustedes — los locos que aceptaron probar el instrumento de productividad cada vez mayor, Todorant, entre los primeros. Se puede decir que ustedes son el millar dorado, de quienes su retroalimentación ha estado formando Todorant desde el principio. Tienen todos los derechos para usar Todorant tanto como lo deseen: nunca experimentarán ningún límite, se lo han ganado. Sin embargo, si notaron que Todorant ha mejorado drásticamente su vida, aún pueden comprar la suscripción y decir el mejor tipo de "Gracias". Nunca perderán el estado "Primer adoptante 🦄 ", pero siempre podrán cancelar la suscripción. Muchas gracias por seguir usando Todorant, seguiré agregando nuevas funciones para mejorar el producto que nos afecta positivamente a todos. ¡Buena suerte!',
-    earlyAdopterTextBonus:
-      '🤗 ¡Diablos! Parece que o Todorant o yo personalmente te hemos ayudado lo suficiente como para que hayas comprado la suscripción, aunque puedas usar Todorant de forma gratuita para siempre. Estoy profundamente conmovido y feliz de tomar una taza de café contigo o simplemente de conversar un poco. No dudes en comunicarte conmigo por Telegram (@borodutch) o por correo electrónico; simplemente haz clic en mi nombre a continuación. ¡Muchas gracias! ¡Es difícil imaginar cuán importante es tu contribución!',
-    trialText:
-      '💪 ¡Bienvenido a Todorant! Tienes 30 días después del registro para decidir si Todorant funciona bien para ti. Después de que pasen 30 días, aún tendrás acceso a las tareas anteriores, pero no podrás agregar otras nuevas. Está perfectamente bien comprar una suscripción antes de que finalicen los 30 días. ¡Creo que usar Todorant te traerá a nuevas alturas en la productividad personal!',
     rules: [
       'Tan pronto como recibas una tarea procesable (recibas un correo electrónico, una llamada telefónica, un mensaje de texto o si ves algo de interés que tengas que incluir en tu lista de tareas pendientes), crea una tarea pendiente de inmediato. No esperes, lo olvidarás si no lo anotas.',
       'Las tareas deben ser siempre accionables y lo más explícitas posible. Si realizar una tarea te toma menos de 2 minutos, hazla de inmediato y regístrala como completada.',
@@ -2268,13 +2175,6 @@ export const messages = {
         'Todorant utiliza un conjunto cuidadosamente elaborado de límites y elogios para castigar el mal comportamiento y apoyar los buenos hábitos. Afecta a la parte primitiva del cerebro para hacer que ansíe completar todos como la gente ansía el azúcar.',
       differenceText3:
         'He leído y probado más de 20 libros y metodologías de productividad. Cuando todos ellos fallaron uno por uno combiné sus componentes y simplifiqué el resultado. Así es como se creó Todorant.',
-      dealTitle: '¿Cuál es el trato?',
-      dealText1:
-        'El Todorant es gratis durante los primeros 30 días y luego son 5 dólares al mes. Es más caro que los competidores porque funciona. Si no obtienes 5 dólares de productividad en los primeros 30 días de la prueba gratuita, eres bienvenido a no seguir usando Todorant.',
-      dealText2:
-        'Sin condiciones. No necesita darnos ninguna información, como una tarjeta de crédito, antes de que termine la prueba. Ni siquiera necesitas una cuenta si instalas las aplicaciones móviles!',
-      dealText3:
-        'La única excepción es si te registras en iOS, Apple nos ha obligado a hacerte una prueba gratuita antes de que puedas usar la aplicación. La manera de evitar este límite es crear una cuenta aquí, en el sitio web, y luego iniciar sesión en la aplicación iOS.',
     },
     googleCalendarDisableSuccess: 'Google Calendar desactivado',
     googleCalendarEnableSuccess: 'Google Calendar activado',
