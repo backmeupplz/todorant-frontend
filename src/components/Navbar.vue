@@ -10,8 +10,6 @@ nav
   )
   // Hero dialog
   HeroProfile(:dialog='heroDialog', :close='closeHero')
-  // Subscription dialog
-  Subscription(:dialog='subscriptionDialog', :close='closeSubscription')
   // Settings dialog
   Settings(
     :dialog='settingsDialog',
@@ -72,9 +70,6 @@ nav
         // Hero
         v-list-item(@click='heroDialog = true', v-if='!!user')
           v-list-item-title {{ $t("heroProfileTitle") }}
-        // Subscription
-        v-list-item(@click='showSubscription', v-if='!!user')
-          v-list-item-title {{ $t("subscription.title") }}
         // Settings
         v-list-item(@click='settingsDialog = true', v-if='!!user')
           v-list-item-title {{ $t("settings.title") }}
@@ -103,7 +98,6 @@ import * as api from '@/utils/api'
 import Rules from '@/components/Rules.vue'
 import Welcome from '@/views/Welcome.vue'
 import HeroProfile from '@/components/HeroProfile.vue'
-import Subscription from '@/views/Subscription.vue'
 import Settings from '@/views/Settings.vue'
 import Hashtags from '@/views/settings/Hashtags.vue'
 import QRCode from '@/components/QRCode.vue'
@@ -115,7 +109,6 @@ import { serverBus } from '@/main'
 import { logEvent } from '@/utils/logEvent'
 import { sockets } from '@/utils/sockets'
 import { namespace } from 'vuex-class'
-import { SubscriptionStatus } from '@/models/SubscriptionStatus'
 import { User } from '@/models/User'
 import { setCookie, deleteCookie } from '../utils/cookie'
 import QRCodeStyling from 'qr-code-styling'
@@ -130,7 +123,6 @@ const SnackbarStore = namespace('SnackbarStore')
   components: {
     Rules,
     HeroProfile,
-    Subscription,
     Settings,
     Support,
     Hashtags,
@@ -142,7 +134,6 @@ const SnackbarStore = namespace('SnackbarStore')
   },
 })
 export default class Navbar extends Vue {
-  @UserStore.State subscriptionStatus!: SubscriptionStatus
   @UserStore.State user!: User
   @UserStore.Mutation setPassword!: (password?: string) => void
   @AppStore.State rulesShown!: boolean
@@ -157,7 +148,6 @@ export default class Navbar extends Vue {
   rulesDialog = false
   welcomeDialog = false
   heroDialog = false
-  subscriptionDialog = false
   settingsDialog = false
   supportDialog = false
   hashtagsDialog = false
@@ -196,7 +186,6 @@ export default class Navbar extends Vue {
       !this.rulesDialog &&
       !this.welcomeDialog &&
       !this.heroDialog &&
-      !this.subscriptionDialog &&
       !this.settingsDialog &&
       !this.supportDialog &&
       !this.hashtagsDialog &&
@@ -254,9 +243,6 @@ export default class Navbar extends Vue {
   closeHero() {
     this.heroDialog = false
   }
-  closeSubscription() {
-    this.subscriptionDialog = false
-  }
   closeSettingsDialog() {
     this.settingsDialog = false
   }
@@ -301,13 +287,6 @@ export default class Navbar extends Vue {
         typedErr.response ? typedErr.response.data : typedErr.message
       )
     }
-  }
-
-  showSubscription() {
-    logEvent('subscription_viewed', {
-      status: this.subscriptionStatus,
-    })
-    this.subscriptionDialog = true
   }
 }
 </script>

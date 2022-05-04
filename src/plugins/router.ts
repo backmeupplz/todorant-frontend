@@ -11,8 +11,6 @@ const Privacy = (resolve: any) =>
   (require as any)(['@/views/static/Privacy.vue'], resolve)
 const Terms = (resolve: any) =>
   (require as any)(['@/views/static/Terms.vue'], resolve)
-const Payment = (resolve: any) =>
-  (require as any)(['@/views/static/Payment.vue'], resolve)
 const LoginTelegram = (resolve: any) =>
   (require as any)(['@/views/LoginTelegram.vue'], resolve)
 const MobileLoginSuccess = (resolve: any) =>
@@ -72,22 +70,6 @@ const router = new Router({
       path: '/superpower',
       name: 'superpower',
       component: Superpower,
-      meta: {
-        requiresAuth: true,
-      },
-    },
-    {
-      path: '/payment_success',
-      name: 'payment_success',
-      component: Payment,
-      meta: {
-        requiresAuth: true,
-      },
-    },
-    {
-      path: '/payment_failure',
-      name: 'payment_failure',
-      component: Payment,
       meta: {
         requiresAuth: true,
       },

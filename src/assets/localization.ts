@@ -237,23 +237,6 @@ export const messages = {
       },
     },
     skipped: 'Skipped',
-    subscription: {
-      title: 'Subscription',
-      statusText: 'Subscription status: {status}',
-      signature: 'Nikita Kolmogorov, Todorant creator',
-      daysLeft: '(days left: {daysLeft})',
-      '5dollars': '$5/month',
-      success: 'You have successfuly subscribed!',
-      payment: {
-        success: '✅ You are all done! Enjoy unlimited Todorant experience 💪',
-        failure: '✋ Wait, something went wrong. Maybe you could retry? 😳',
-        back: 'Head back to productivity!',
-      },
-      cancel: 'Cancel subscription',
-      manage: 'Manage subscription',
-      '36dollars': '$36/year',
-      '150dollars': '$150 once',
-    },
     moveUp: 'Move to today',
     settings: {
       title: 'Settings',
@@ -758,24 +741,6 @@ export const messages = {
       },
     },
     skipped: 'Пропущено',
-    subscription: {
-      title: 'Подписка',
-      statusText: 'Статус подписки: {status}',
-      signature: 'Никита Колмогоров, создатель Тудуранта',
-      daysLeft: '(осталось дней: {daysLeft})',
-      '5dollars': '$5/месяц',
-      success: 'Подписка приобретена успешно!',
-      payment: {
-        success:
-          '✅ У вас получилось! Наслаждайтесь неограниченным Тудурантом 💪',
-        failure: '✋ Ох! Что-то пошло не так. Может, попробуете еще раз? 😳',
-        back: 'Вернуться к продуктивности!',
-      },
-      cancel: 'Отключить подписку',
-      manage: 'Управление подпиской',
-      '36dollars': '$36/год',
-      '150dollars': '$150 один раз',
-    },
     moveUp: 'Перенести на сегодня',
     settings: {
       title: 'Настройки',
@@ -1272,23 +1237,6 @@ export const messages = {
       },
     },
     skipped: 'Пропущено',
-    subscription: {
-      title: 'Підписка',
-      statusText: 'Статус підписки: {status}',
-      signature: 'Никита Колмогоров, творець Тудуранту',
-      daysLeft: '(Залишилося днів: {daysLeft})',
-      '5dollars': '$5/місяць',
-      success: 'Підписку придбано успішно!',
-      payment: {
-        success: '✅ Вам вдалося! Насолоджуйтеся необмеженим Тудурантом 💪',
-        failure: '✋ Йой! Щось пішло не так. Може, спопробуєте ще раз? 😳',
-        back: 'Повернутися до продуктивності!',
-      },
-      cancel: 'Скасувати підписку',
-      manage: 'Управління підпискою',
-      '36dollars': '$36/рік',
-      '150dollars': '$150 один раз',
-    },
     moveUp: 'Перенести на сьогодні',
     settings: {
       title: 'Налаштування',
@@ -1735,24 +1683,6 @@ export const messages = {
       },
     },
     skipped: 'Pular',
-    subscription: {
-      title: 'Inscrição',
-      statusText: 'Status da inscrição: {status}',
-      signature: 'Nikita Kolmogorov, criador do Todorant',
-      daysLeft: '(dias restantes: {daysLeft})',
-      '5dollars': '$5/mês',
-      success: 'Você se inscreveu com sucesso!',
-      payment: {
-        success:
-          '✅ Você está pronto! Desfrute de uma experiência ilimitada com Todorant 💪',
-        failure:
-          '✋ Espere, algo deu errado. Talvez você possa tentar novamente? 😳',
-        back: 'Volte para a produtividade!',
-      },
-      cancel: 'Cancelar assinatura',
-      '36dollars': '$36/ano',
-      '150dollars': '$150 uma vez',
-    },
     moveUp: 'Mover para hoje',
     settings: {
       title: 'Definições',
@@ -2013,13 +1943,6 @@ export const messages = {
       },
     },
     skipped: 'Omis',
-    subscription: {
-      title: 'Abonament',
-      statusText: 'Starea abonamentului: {status}',
-      signature: 'Nichita Kolmogorov, creatorul Todorant',
-      daysLeft: '(au rămas zile: {daysLeft})',
-      '5dollars': '$5/lună',
-    },
     allDoneTitle: 'Felicitări!',
     allDoneText:
       '🥳 Ați reușit! Toate task-urile pentru azi sunt finalizate, vă puteți odihni — fie un pic să dansați 💃',
@@ -2263,23 +2186,6 @@ export const messages = {
       },
     },
     skipped: 'Pospuesta',
-    subscription: {
-      title: 'Suscripción',
-      statusText: 'Estatus de la suscripción: {status}',
-      signature: 'Nikita Kolmogorov, creador de Todorant',
-      daysLeft: '(días restantes: {daysLeft})',
-      '5dollars': '$5/mes',
-      success: '¡Te has suscrito exitosamente!',
-      payment: {
-        success:
-          '✅ ¡Eso es todo! Disfruta de la experiencia de Todorant ilimitada 💪',
-        failure: '✋ Espera, algo salió mal. ¿Puedes reintentarlo? 😳',
-        back: '¡De vuelta a la productividad!',
-      },
-      cancel: 'Cancelar suscripción',
-      '36dollars': '$36/año',
-      '150dollars': '$150 una vez',
-    },
     moveUp: 'Mover al día de hoy',
     settings: {
       title: 'Ajustes',

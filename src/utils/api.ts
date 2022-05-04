@@ -324,31 +324,6 @@ export enum Plan {
   monthly = 'monthly',
   yearly = 'yearly',
 }
-export async function getPlanSession(user: User, plan: Plan) {
-  return (
-    await axios.post(
-      `${base}/subscription/session/${plan}`,
-      { locale: getModule(AppStore, store).language },
-      {
-        headers: getHeaders(user),
-      }
-    )
-  ).data as {
-    session: string
-  }
-}
-
-export async function manageSubscriptionUrl() {
-  const user = (store as any).state.UserStore.user
-  if (!user) {
-    throw new Error('No user')
-  }
-  return (
-    await axios.get<{ url: string }>(`${base}/subscription/manageUrl`, {
-      headers: getHeaders(user),
-    })
-  ).data.url
-}
 
 export async function setSettings(user: User, settings: object) {
   return axios.post(`${base}/settings`, settings, {
