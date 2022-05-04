@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "ACWP4F58HZ.com.todorant.app",
+        "paths": [
+          "*"
+        ]
+      }
+    ]
+  }
+}
