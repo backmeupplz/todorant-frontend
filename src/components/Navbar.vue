@@ -205,6 +205,9 @@ export default class Navbar extends Vue {
         this.setRulesShown(true)
       }
     })
+    serverBus.$on('logout', () => {
+      this.logout()
+    })
   }
 
   toggleMode() {

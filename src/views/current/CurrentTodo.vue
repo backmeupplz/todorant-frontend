@@ -193,6 +193,9 @@ export default class CurrentTodo extends Vue {
       if (typedErr.message.includes('aborted')) {
         return
       }
+      if (typedErr.message.includes('403')) {
+        serverBus.$emit('logout')
+      }
       this.setSnackbarError('errors.loadTodos')
     } finally {
       this.loading = false
