@@ -148,6 +148,7 @@ div(v-if='dialog')
             color='blue'
           ) {{ $t("settings.export") }}
           v-btn(color='blue', text, @click='encryptionTouched') {{ $t("encryption.title") }}
+        v-btn(text, :loading='loading', @click='deleteAccount', color='error') {{ $t("deleteAccount") }}
       v-card-actions.d-flex.flex-column(v-if='this.$vuetify.breakpoint.xsOnly')
         v-btn(
           color='error',
@@ -539,6 +540,21 @@ export default class Settings extends Vue {
       )
     } finally {
       this.loading = false
+    }
+  }
+
+  async deleteAccount() {
+    if (!confirm(i18n.t('deleteAccountText') as string) || !this.user?.token) {
+      return
+    }
+    try {
+      await api.deleteAccount(this.user.token)
+      serverBus.$emit('logout')
+    } catch (err) {
+      const typedErr = err as ResponseError
+      this.setSnackbarError(
+        typedErr.response ? typedErr.response.data : typedErr.message
+      )
     }
   }
 }

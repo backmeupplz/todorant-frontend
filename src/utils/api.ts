@@ -548,3 +548,11 @@ function setSettingsFromServer(state: any) {
   settingsStore.setSettingsStore(settings)
   const appStore = getModule(AppStore, store).setLanguage(settings.language)
 }
+
+export function deleteAccount(token: string) {
+  return axios.delete(`${base}/data/account`, {
+    headers: {
+      token,
+    },
+  })
+}
