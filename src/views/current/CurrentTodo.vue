@@ -194,7 +194,7 @@ export default class CurrentTodo extends Vue {
         return
       }
       if (typedErr.message.includes('403')) {
-        serverBus.$emit('logout')
+        serverBus.$emit('user_deleted')
       }
       this.setSnackbarError('errors.loadTodos')
     } finally {

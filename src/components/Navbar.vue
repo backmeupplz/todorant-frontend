@@ -205,7 +205,7 @@ export default class Navbar extends Vue {
         this.setRulesShown(true)
       }
     })
-    serverBus.$on('logout', () => {
+    serverBus.$on('user_deleted', () => {
       this.logout()
     })
   }

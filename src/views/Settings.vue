@@ -549,7 +549,7 @@ export default class Settings extends Vue {
     }
     try {
       await api.deleteAccount(this.user.token)
-      serverBus.$emit('logout')
+      serverBus.$emit('user_deleted')
     } catch (err) {
       const typedErr = err as ResponseError
       this.setSnackbarError(
