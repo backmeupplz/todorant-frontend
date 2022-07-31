@@ -8,7 +8,8 @@
     "distribute": "vue-cli-service serve --mode development",
     "upload-translations": "node scripts/upload.js",
     "download-translations": "node scripts/download.js && yarn prettier --single-quote --no-semi --write ./src/assets/localization.ts",
-    "increment-version": "versiony public/version.json --minor && versiony package.json --minor && git add . && git commit -m 'new version' && git push"
+    "increment-version": "versiony public/version.json --minor && versiony package.json --minor && git add . && git commit -m 'new version' && git push",
+    "update": "yarn build && rm -rf docs && cp -r dist/ docs && git add . && git commit -m 'update' && git push"
   },
   "dependencies": {
     "@borodutch-labs/v-hotkey": "^0.9.1",
