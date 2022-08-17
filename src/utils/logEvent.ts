@@ -1,5 +1,3 @@
-import { logEventToMicro } from '@/utils/micro'
-
 export function logEvent(eventName: string, meta?: object) {
   try {
     ;(global as any).Countly.q.push([
@@ -10,16 +8,6 @@ export function logEvent(eventName: string, meta?: object) {
         segmentation: meta,
       },
     ])
-    try {
-      logEventToMicro(eventName)
-    } catch {
-      ;(global as any).Countly.q.push([
-        'micro_logging_failed',
-        {
-          count: 1,
-        },
-      ])
-    }
   } catch (err) {
     // Do nothing
   }
