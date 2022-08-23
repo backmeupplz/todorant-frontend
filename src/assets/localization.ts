@@ -497,6 +497,8 @@ export const messages = {
         'This is a repetitive task, do you want to break down it or complete it?',
       complete: 'Complete',
     },
+    deleteAccount: 'Delete account',
+    deleteAccountText: 'Are you sure you want to delete your account?',
   },
   ru: {
     encryption: {
@@ -992,6 +994,8 @@ export const messages = {
       text: 'Это повторяющаяся задача, вы хотите ее разбить или завершить?',
       complete: 'Завершить',
     },
+    deleteAccount: 'Удалить аккаунт',
+    deleteAccountText: 'Вы уверены, что хотите удалить свой аккаунт?',
   },
   ua: {
     encryption: {
